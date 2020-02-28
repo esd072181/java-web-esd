@@ -1,0 +1,168 @@
+package com.drms.model;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+/**
+ * 
+ * @author dward
+ *
+ */
+@Entity
+@Table(name = "useraccount", schema = "drms")
+public class UserAccount implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
+	private Professional prof;
+	private ListValue role;
+	private String userName;
+	private String password;
+	private Integer createdBy;
+	private Timestamp createdOn;
+	private Integer modifiedBy;
+	private Timestamp modifiedOn;
+	private Integer version;
+	private Boolean active;
+	
+	public UserAccount() {}
+	
+	public UserAccount(Integer id) {
+		this.id = id;
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userAccountId_generator")
+	@SequenceGenerator(name="userAccountId_generator", sequenceName = "drms.useraccountseq", allocationSize=1)
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "profid", nullable = false)
+	public Professional getProf() {
+		return prof;
+	}
+	
+	public void setProf(Professional prof) {
+		this.prof = prof;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "roleid", nullable = false)
+	public ListValue getRole() {
+		return role;
+	}
+	
+	public void setRole(ListValue role) {
+		this.role = role;
+	}
+
+	@Column(name = "username", length = 20)
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	@Column(name = "password", length = 50)
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Column(name = "createdby")
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@Column(name = "createdon")
+	public Timestamp getCreatedOn() {
+		return createdOn;
+	}
+
+
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	@Column(name = "modifiedby")
+	public Integer getModifiedBy() {
+		return modifiedBy;
+	}
+
+
+	public void setModifiedBy(Integer modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	@Column(name = "modifiedon")
+	public Timestamp getModifiedOn() {
+		return modifiedOn;
+	}
+
+
+	public void setModifiedOn(Timestamp modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
+
+	@Column(name = "version")
+	public Integer getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	@Column(name = "active")
+	public Boolean getActive() {
+		return active;
+	}
+
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "UserAccount [id=" + id + ", prof=" + (prof!=null ? String.valueOf(prof.getId()) : "null") + ", role=" + (role!=null ? String.valueOf(role.getId()) : "null")
+				+ ", userName=" + userName + ", createdBy=" + createdBy
+				+ ", createdOn=" + createdOn + ", modifiedBy=" + modifiedBy
+				+ ", modifiedOn=" + modifiedOn + ", version=" + version + "]";
+	}
+	
+	
+}
