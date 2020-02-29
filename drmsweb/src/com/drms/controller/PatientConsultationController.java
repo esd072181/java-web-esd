@@ -298,6 +298,7 @@ public class PatientConsultationController {
 		}
 		
 		boolean transactStatus = false;
+		boolean isPaymentDone = false;
 		
 		PatientBill billModel = patientBillBo.getPatientBill(Integer.parseInt(consultId));
 
@@ -339,23 +340,13 @@ public class PatientConsultationController {
 			//consult fee and total Bill
 			model.addAttribute("consultFee", bill.getConsultFee());
 			model.addAttribute("totalBill", bill.getTotalBill());
+			
+			isPaymentDone = true;
+		} 
+		
+		if (isPaymentDone) {
 			model.addAttribute("tenderedAmt", tenderedAmt);
 			model.addAttribute("changeAmt", new BigDecimal(tenderedAmt).subtract(billModel.getTotalBill()));
-		} else {
-			//update to the latest model of consultation
-			patientConsultation = patientConsultationBo.findById(Integer.parseInt(consultId));
-				
-			//get med list
-			List<Medicine> medList = new ArrayList<>(); //pass blank list after payment
-			model.addAttribute("medList", medList);
-			
-			model.addAttribute("isUpdated", transactStatus);
-		
-			PatientBill bill = patientBillBo.getPatientBill(Integer.parseInt(consultId));
-			
-			//consult fee and total Bill
-			model.addAttribute("consultFee", bill.getConsultFee());
-			model.addAttribute("totalBill", bill.getTotalBill());
 		}
 				
 		return new ModelAndView("transaction/patientconsultation/viewPatientConsultation", "patientConsultation", patientConsultation);
