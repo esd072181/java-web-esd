@@ -1,0 +1,183 @@
+//package com.sims.dao.impl;
+//
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//
+//import javax.persistence.criteria.CriteriaBuilder;
+//import javax.persistence.criteria.CriteriaQuery;
+//import javax.persistence.criteria.Predicate;
+//import javax.persistence.criteria.Root;
+//
+//import org.hibernate.query.Query;
+//import org.springframework.stereotype.Repository;
+//
+//import com.sims.dao.PatientConsultationDao;
+//import com.sims.model.PatientConsultation;
+//import com.sims.util.SIMSUtil;
+//import com.sims.util.HibernateDaoUtil;
+//
+///**
+// * 
+// * @author dward
+// *
+// */
+//@Repository
+//public class PatientConsultationDaoImpl extends HibernateDaoUtil implements PatientConsultationDao{
+//
+//	@Override
+//	public boolean save(PatientConsultation entity) {
+//		beginHibernateTransaction();
+//		 try {			 
+//			 session.save(entity);
+//			 tx.commit();
+//			 txnIsSuccess = true;
+//		 } catch (Exception e) {
+//			 tx.rollback();
+//			 e.printStackTrace();
+//		 } finally {
+//			closeHibernateSession(session);
+//		 }
+//		 return txnIsSuccess;
+//	}
+//
+//	@Override
+//	public long getRecordCount() {
+//		long count = 0;
+//		beginHibernateTransaction();
+//		CriteriaBuilder builder = session.getCriteriaBuilder();
+//		CriteriaQuery<Long> queryCount = builder.createQuery(Long.class);
+//		try {
+//			queryCount.select(builder.count(queryCount.from(PatientConsultation.class)));
+//			Query<Long> qCount = session.createQuery(queryCount);
+//			count = qCount.getSingleResult();
+//		 } catch (Exception e) {
+//			 e.printStackTrace();
+//		 } finally {
+//			closeHibernateSession(session);
+//		 }
+//		return count;
+//	}
+//
+//	@Override
+//	public PatientConsultation getPatientConsultation(String consultNo) {
+//		PatientConsultation model = null;
+//		beginHibernateTransaction();
+//		try {
+//			
+//			//Hibernate 5 below...
+//			CriteriaBuilder builder = session.getCriteriaBuilder();
+//			CriteriaQuery<PatientConsultation> query = builder.createQuery(PatientConsultation.class);
+//			Root<PatientConsultation> root = query.from(PatientConsultation.class);
+//			query.select(root);
+//			List<Predicate> predicates = new ArrayList<>();
+//			predicates.add(
+//					builder.equal(builder.upper(root.get("consultNo")), "" + consultNo.toUpperCase() + ""));
+//			query.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+//
+//	
+//			Query<PatientConsultation> q = session.createQuery(query);
+//			List<PatientConsultation> list = q.list();
+//			for (PatientConsultation item: list) {
+//				model = item;
+//				break;
+//			}
+//
+//
+//		 } catch (Exception e) {
+//			 e.printStackTrace();
+//		 } finally {
+//			closeHibernateSession(session);
+//		 }
+//		return model;
+//	}
+//
+//
+//	@Override
+//	public Map<Object, Object> findByName(Map<Object, Object> mapCriteria) {
+//		
+//		Map<Object, Object> mapResult = new HashMap<Object, Object>();
+//		beginHibernateTransaction();
+//		try {
+//			
+//			//Get the search criteria
+//			String searchCriteria = (String) mapCriteria.get("search_criteria");
+//			int recordStart = (Integer) mapCriteria.get("record_start");
+//			int maxResult = (Integer) mapCriteria.get("max_result");
+//			
+//			//Hibernate 5 below...
+//			CriteriaBuilder builder = session.getCriteriaBuilder();
+//			CriteriaQuery<PatientConsultation> query = builder.createQuery(PatientConsultation.class);
+//			Root<PatientConsultation> root = query.from(PatientConsultation.class);
+//			query.select(root);
+//			//query.select(root.get("patientNo")); //This is for selecting specific columns/fields
+////			query.where(builder.and(builder.like(root.get("patientNo"), "%" + criteria + "%"), builder.equal(root.get("active"), true)));
+//			//or can use predicates
+//			List<Predicate> predicates = new ArrayList<>();
+//			predicates.add(
+//					builder.and(
+//							builder.or(builder.like(builder.upper(root.get("patient").get("lastName")), "%" + searchCriteria.toUpperCase() + "%"), builder.like(builder.upper(root.get("patient").get("firstName")), "%" + searchCriteria.toUpperCase() + "%")),
+//							builder.equal(root.get("patient").get("active"), true)));
+//			query.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+//			query.orderBy(builder.desc(root.get("consultDate")), builder.asc(root.get("patient").get("lastName")), builder.asc(root.get("patient").get("firstName")));
+//		
+//			Query<PatientConsultation> q = session.createQuery(query);
+//			q.setFirstResult(recordStart); //Index start at 0 (first record)
+//			q.setMaxResults(maxResult);
+//			List<PatientConsultation> resultList = q.list();
+//		
+//			//Get totalRecordsCount for pagination
+//			CriteriaQuery<Long> queryCount = builder.createQuery(Long.class);
+//			queryCount.select(builder.count(queryCount.from(PatientConsultation.class)));
+//			queryCount.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+//			Query<Long> qCount = session.createQuery(queryCount);
+//			long totalNoOfRecords = qCount.getSingleResult();
+//			
+//			if (!resultList.isEmpty()) {
+//				mapResult.put("resultList", resultList);
+//			}
+//			
+//			mapResult.put("noOfPages", SIMSUtil.getTotalNoOfPages(totalNoOfRecords)); //need to query in hibernate total no of records / pagination size
+//			
+//		 } catch (Exception e) {
+//			 e.printStackTrace();
+//		 } finally {
+//			closeHibernateSession(session);
+//		 }
+//		return mapResult;
+//	}
+//
+//
+//	@Override
+//	public PatientConsultation findById(Integer id) {
+//		PatientConsultation model = null;
+//		beginHibernateTransaction();
+//		try {
+//			model = session.get(PatientConsultation.class, id);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		 } finally {
+//			closeHibernateSession(session);
+//		 }
+//		return model;
+//	}
+//
+//	@Override
+//	public boolean update(PatientConsultation entity) {
+//		beginHibernateTransaction();
+//		 try {
+//			 session.update(entity);
+//			 tx.commit();
+//			 txnIsSuccess = true;
+//		 } catch (Exception e) {
+//			 tx.rollback();
+//			 e.printStackTrace();
+//		 } finally {
+//			closeHibernateSession(session);
+//		 }
+//		 return txnIsSuccess;
+//	}
+//
+//	
+//}
