@@ -1,0 +1,725 @@
+package com.lrms.controller;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.lrms.bo.LabExamBo;
+import com.lrms.bo.PatientBillBo;
+import com.lrms.bo.PatientBillPaymentBo;
+import com.lrms.bo.PatientBloodChemBo;
+import com.lrms.bo.PatientFecalysisBo;
+import com.lrms.bo.PatientHematologyBo;
+import com.lrms.bo.PatientLabExamBo;
+import com.lrms.bo.PatientLabRequestBo;
+import com.lrms.bo.PatientMiscBo;
+import com.lrms.bo.PatientUrinalysisBo;
+import com.lrms.bo.ProfessionalBo;
+import com.lrms.constant.LRMSConstant;
+import com.lrms.model.LabExam;
+import com.lrms.model.ListValue;
+import com.lrms.model.Patient;
+import com.lrms.model.PatientBill;
+import com.lrms.model.PatientBillPayment;
+import com.lrms.model.PatientBloodChem;
+import com.lrms.model.PatientFecalysis;
+import com.lrms.model.PatientHematology;
+import com.lrms.model.PatientLabExam;
+import com.lrms.model.PatientLabRequest;
+import com.lrms.model.PatientMisc;
+import com.lrms.model.PatientUrinalysis;
+import com.lrms.model.UserAccount;
+import com.lrms.propertyeditor.CustomSQLDateEditor;
+import com.lrms.util.LRMSUtil;
+import com.lrms.util.ReportUtils;
+
+@Controller
+@SessionAttributes(value =  {"userid","roleid"})
+public class PatientLabRequestController {
+	
+	private final static Logger logger = Logger.getLogger(PatientLabRequestController.class);
+	
+	@Autowired
+	private PatientLabRequestBo patientLabRequestBo;
+	@Autowired
+	private PatientBillBo patientBillBo;
+	@Autowired
+	private PatientBillPaymentBo patientBillPaymentBo;
+	@Autowired
+	private LabExamBo labExamBo;
+	@Autowired
+	private PatientLabExamBo patientLabExamBo;
+	@Autowired
+	private PatientBloodChemBo patientBloodChemBo;
+	@Autowired
+	private PatientUrinalysisBo patientUrinalysisBo;
+	@Autowired
+	private PatientFecalysisBo patientFecalysisBo;
+	@Autowired
+	private PatientHematologyBo patientHematologyBo;
+	@Autowired
+	private PatientMiscBo patientMiscBo;
+	@Autowired
+	private ProfessionalBo professionalBo;
+	@Autowired
+	private ServletContext context;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		
+        CustomSQLDateEditor dateEditor = new CustomSQLDateEditor(null, true);
+        binder.registerCustomEditor(Date.class, dateEditor);
+	    		
+	}
+		
+	@RequestMapping("/goToSearchPatientLabRequest")
+	public ModelAndView goToSearchPatientLabRequest(ModelMap model) {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		model.addAttribute("searchFlag", false);
+		return new ModelAndView("transaction/patientlabrequest/searchPatientLabRequest", "patient", new Patient());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/searchPatientLabRequest")
+	public ModelAndView searchPatientLabRequest(@RequestParam("page") String page, @ModelAttribute("patient") Patient patient, 
+    			BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		Map<Object,Object> mapCriteria = new HashMap<Object,Object>();
+		
+		mapCriteria.put("search_criteria", patient.getLastName()!=null ? patient.getLastName() : "");
+		mapCriteria.put("record_start", LRMSUtil.getRecordStartIndex(page!=null ? Integer.parseInt(page) : 1));
+		mapCriteria.put("max_result", LRMSConstant.RECORDS_PER_PAGE);
+		
+		Map<Object,Object> resultMap = patientLabRequestBo.findByName(mapCriteria);
+		
+		List<PatientLabRequest> resultList = (List<PatientLabRequest>) resultMap.get("resultList");
+		Integer noOfPages = (Integer) resultMap.get("noOfPages");
+		
+		boolean gotRecords = resultList!=null && resultList.size() > 0 ? true : false;
+		
+		model.addAttribute("resultList", resultList);
+		model.addAttribute("searchFlag", true);
+		model.addAttribute("gotRecords", gotRecords);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("noOfPages", noOfPages);
+		
+		return new ModelAndView("transaction/patientlabrequest/searchPatientLabRequest", "patient", patient);
+	}
+	
+	@RequestMapping("/goToViewPatientLabRequest")
+	public ModelAndView goToViewPatientLabRequest(@RequestParam("labRequestId") String labRequestId, @ModelAttribute("patient") Patient patient,
+    			BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		PatientLabRequest patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+		//get lab exam list
+		List<LabExam> labExamList = labExamBo.getAllEntity();
+		model.addAttribute("labExamList", labExamList);
+		
+		return new ModelAndView("transaction/patientlabrequest/viewPatientLabRequest", "patientLabRequest", patientLabRequest);
+	}
+	
+	@RequestMapping("/goToPayNow")
+	public ModelAndView goToPayNow(@RequestParam("labRequestId") String labRequestId, @ModelAttribute("patientLabRequest") PatientLabRequest patientLabRequest,
+    			BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		boolean transactStatus = false;
+		
+		//Create Payment record in PaymentBillPayment table
+		PatientBill billModel = patientBillBo.getPatientBill(Integer.parseInt(labRequestId)); 
+		PatientBillPayment payment = new PatientBillPayment();
+		payment.setPatientBill(billModel);
+		payment.setAmount(billModel.getTotalBill());//Default to TotalBill
+		payment.setModeOfPayment(401);//Default to Cash
+		payment.setCreatedBy(LRMSUtil.getUserIdFromSession(model));
+			
+		if (patientBillPaymentBo.save(payment)) {
+			//update the Patient Bill cleared to true
+			PatientBill bill = payment.getPatientBill();
+			bill.setCleared(true);
+			bill.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+			if (patientBillBo.update(bill)) {
+				//Update payment status in Patient Lab Request table
+				patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+				patientLabRequest.setPaymentStatus(new ListValue(302));//Paid
+				patientLabRequest.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+				transactStatus = patientLabRequestBo.update(patientLabRequest);
+			}
+		}
+		
+		//update to the latest model of lab request
+		patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+		
+		List<LabExam> labExamList = new ArrayList<>(); //pass blank list after payment
+		model.addAttribute("labExamList", labExamList);
+		model.addAttribute("isUpdated", transactStatus);
+		
+		return new ModelAndView("transaction/patientlabrequest/viewPatientLabRequest", "patientLabRequest", patientLabRequest);
+	}
+
+	@RequestMapping("/addNewLabExam")
+	public ModelAndView addNewLabExam(@RequestParam("labRequestId") String labRequestId, @RequestParam("labExamId") String labExamId,
+			@ModelAttribute("patientLabRequest") PatientLabRequest patientLabRequest, BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		boolean transactStatus = false;
+		
+		LabExam exam = labExamBo.findById(Integer.parseInt(labExamId));
+		
+		PatientLabExam modelLabexam = new PatientLabExam();
+		modelLabexam.setPatientLabRequest(patientLabRequestBo.findById(Integer.parseInt(labRequestId)));
+		modelLabexam.setLabExam(exam);
+		modelLabexam.setQty(1);//default to 1
+		modelLabexam.setFee(exam.getFee());
+		modelLabexam.setAmount(exam.getFee());
+		modelLabexam.setCreatedBy(LRMSUtil.getUserIdFromSession(model));
+				
+		//need to udpate the bill record
+		if (patientLabExamBo.save(modelLabexam)) {
+			
+			//update to the latest model of lab request - to get the new added labexam
+			patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+			
+			//compute total lab exam fee
+			PatientBill billModel = patientBillBo.getPatientBill(Integer.parseInt(labRequestId)); 
+			billModel.setTotalLabExamFee(patientLabRequest.getTotalAmount());
+			billModel.setTotalBill(billModel.getTotalLabExamFee());
+			billModel.setDateProcessed(new java.sql.Timestamp(System.currentTimeMillis()));
+			billModel.setModifiedBy(LRMSUtil.getUserIdFromSession(model)); 
+			
+			transactStatus = patientBillBo.update(billModel);
+		}
+		
+		//get lab exam list
+		List<LabExam> labExamList = labExamBo.getAllEntity();
+		model.addAttribute("labExamList", labExamList);
+		model.addAttribute("isUpdated", transactStatus);
+		
+		return new ModelAndView("transaction/patientlabrequest/viewPatientLabRequest", "patientLabRequest", patientLabRequest);
+	}
+
+	@RequestMapping("/deletePatientLabExam")
+	public ModelAndView deletePatientLabExam(@RequestParam("labRequestId") String labRequestId, @RequestParam("patientLabExamId") String patientLabExamId,
+			@ModelAttribute("patientLabRequest") PatientLabRequest patientLabRequest, BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		boolean transactStatus = false;
+		
+		PatientLabExam pLabExam = patientLabExamBo.findById(Integer.parseInt(patientLabExamId));
+		pLabExam.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+		
+		if (patientLabExamBo.delete(pLabExam)) {
+
+			//need to udpate the bill record
+			//update to the latest model of lab request - to get the new added labexam
+			patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+			
+			//compute total lab exam fee
+			PatientBill billModel = patientBillBo.getPatientBill(Integer.parseInt(labRequestId)); 
+			billModel.setTotalLabExamFee(patientLabRequest.getTotalAmount());
+			billModel.setTotalBill(billModel.getTotalLabExamFee());
+			billModel.setDateProcessed(new java.sql.Timestamp(System.currentTimeMillis()));
+			billModel.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+			
+			transactStatus = patientBillBo.update(billModel);
+		}
+		
+		//get lab exam list
+		List<LabExam> labExamList = labExamBo.getAllEntity();
+		model.addAttribute("labExamList", labExamList);
+		model.addAttribute("isUpdated", transactStatus);
+		
+		return new ModelAndView("transaction/patientlabrequest/viewPatientLabRequest", "patientLabRequest", patientLabRequest);
+	}
+
+	@RequestMapping("/releaseLabExamResult")
+	public ModelAndView releaseLabExamResult(@RequestParam("labRequestId") String labRequestId ,@ModelAttribute("patientLabRequest") PatientLabRequest patientLabRequest, 
+			BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		boolean transactStatus = false;
+		
+		patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+		patientLabRequest.setStatus(new ListValue(202));//Released
+		patientLabRequest.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+			 
+		transactStatus = patientLabRequestBo.update(patientLabRequest);
+		
+		List<LabExam> labExamList = new ArrayList<>(); //pass blank list after releasing
+		model.addAttribute("labExamList", labExamList);
+		model.addAttribute("isUpdated", transactStatus);
+		
+		patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));//get the latest updated status
+		
+		return new ModelAndView("transaction/patientlabrequest/viewPatientLabRequest", "patientLabRequest", patientLabRequest);
+	}
+	
+	//template	
+	@RequestMapping("/goToReportTemplate")
+	public ModelAndView goToReportTemplate(@RequestParam("patientLabExamId") String patientLabExamId, @RequestParam("labRequestId") String labRequestId,
+				@ModelAttribute("patientLabRequest") PatientLabRequest patientLabRequest, @RequestParam("templateId") String templateId,
+    			BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+		
+		PatientLabExam patientLabExam = new PatientLabExam();
+		for (PatientLabExam item: patientLabRequest.getPatientLabExamRecords()) {
+			if (Integer.parseInt(patientLabExamId) == item.getId()) {
+				patientLabExam = item;
+				break;
+			}
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		
+		switch(Integer.parseInt(templateId)) {
+			case 501: //BloodChem 
+				mv.setViewName("transaction/patientlabrequest/template/bloodChem"); 
+				//retrieve data here
+				PatientBloodChem patientBloodChem = patientBloodChemBo.findByPatientLabExamId(patientLabExam.getId());
+				mv.addObject("patientBloodChem", patientBloodChem!=null ? patientBloodChem : new PatientBloodChem());
+				break;
+			case 502: //Urinalysis 
+				mv.setViewName("transaction/patientlabrequest/template/urinalysis"); 
+				//retrieve data here
+				PatientUrinalysis patientUrinalysis = patientUrinalysisBo.findByPatientLabExamId(patientLabExam.getId());
+				mv.addObject("patientUrinalysis", patientUrinalysis!=null ? patientUrinalysis : new PatientUrinalysis());
+				break;
+			case 503: //Fecalysis 
+				mv.setViewName("transaction/patientlabrequest/template/fecalysis"); 
+				//retrieve data here
+				PatientFecalysis patientFecalysis = patientFecalysisBo.findByPatientLabExamId(patientLabExam.getId());
+				mv.addObject("patientFecalysis", patientFecalysis!=null ? patientFecalysis : new PatientFecalysis());
+				break;
+			case 504: //Hematology
+				mv.setViewName("transaction/patientlabrequest/template/hematology"); 
+				//retrieve data here
+				PatientHematology patientHematology = patientHematologyBo.findByPatientLabExamId(patientLabExam.getId());
+				mv.addObject("patientHematology", patientHematology!=null ? patientHematology : new PatientHematology());
+				break;
+			case 505: //Miscellaneous
+				mv.setViewName("transaction/patientlabrequest/template/misc"); 
+				//retrieve data here
+				PatientMisc patientMisc = patientMiscBo.findByPatientLabExamId(patientLabExam.getId());
+				mv.addObject("patientMisc", patientMisc!=null ? patientMisc : new PatientMisc());
+				//get the lab exam name
+				mv.addObject("labExamName", patientLabExam.getLabExam().getDescription());
+				break;				
+			default: ;
+		}
+		
+		mv.addObject("isReleased", patientLabRequest.getStatus().getId()==202 ? true : false);
+		mv.addObject("patientLabExamId", patientLabExamId);
+		mv.addObject("patientLabRequest", patientLabRequest);
+		mv.addObject("professionalList", professionalBo.getAllNonPhysician());
+		
+		return mv;
+	}
+	
+	@RequestMapping("/savePatientBloodChem")
+	public ModelAndView savePatientBloodChem(@RequestParam("patientLabExamIdParam") String patientLabExamIdParam,@RequestParam("labRequestId") String labRequestId,
+				@ModelAttribute("patientBloodChem") PatientBloodChem patientBloodChem, BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		PatientLabRequest patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+	
+		ModelAndView mv = new ModelAndView();
+			
+		boolean transactStatus = false;
+			
+		if (patientBloodChem.getPatientLabExam()==null || (patientBloodChem.getPatientLabExam()!=null 
+			&& patientBloodChem.getPatientLabExam().getId() == null)) {
+			patientBloodChem.setPatientLabExam(new PatientLabExam(Integer.parseInt(patientLabExamIdParam)));
+			patientBloodChem.setCreatedBy(LRMSUtil.getUserIdFromSession(model));
+			patientBloodChem.setCreatedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientBloodChem.setVersion(1);
+			patientBloodChem.setActive(true);
+		} else {
+			patientBloodChem.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+			patientBloodChem.setModifiedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientBloodChem.setVersion(patientBloodChem.getVersion() + 1);
+		}
+		
+		transactStatus = patientBloodChemBo.saveOrUpdate(patientBloodChem);
+		
+		patientBloodChem = patientBloodChemBo.findByPatientLabExamId(Integer.parseInt(patientLabExamIdParam));//get the latest updated
+
+		if (transactStatus) {
+			//generate the report
+			String localPath = context.getRealPath("/") + File.separator + "reports";
+			Path path = Paths.get(LRMSConstant.PDF_REPORT_ORIG_PATH);
+			if (!Files.exists(path)) {
+				Files.createDirectories(path);
+			}
+			String destFile = path + File.separator + LRMSConstant.PDF_BLOODCHEM_REPORT + patientLabRequest.getLabRequestNo() + "_"+ patientBloodChem.getPatientLabExam().getId() + ".pdf";
+			File reportFile = new File(localPath + File.separator + LRMSConstant.RPT_BLOODCHEM_JASPER);
+			
+			boolean isReportGenerated = ReportUtils.generateLabExamReport(LRMSConstant.RPT_BLOODCHEM_TITLE, destFile, reportFile, patientLabRequest, patientBloodChem);
+			if (isReportGenerated) {
+				System.out.println("Report generated..");
+			}
+		}
+		
+		mv.addObject("patientBloodChem", patientBloodChem);
+		mv.addObject("isReleased", patientLabRequest.getStatus().getId()==202 ? true : false);
+		mv.addObject("patientLabExamId", patientLabExamIdParam);
+		mv.addObject("patientLabRequest", patientLabRequest);
+		mv.addObject("professionalList", professionalBo.getAllNonPhysician());
+		mv.addObject("isUpdated", transactStatus);
+		mv.setViewName("transaction/patientlabrequest/template/bloodChem"); 
+					
+		return mv;
+	}
+	
+	@RequestMapping("/savePatientUrinalysis")
+	public ModelAndView saveLabExamResultData(@RequestParam("patientLabExamIdParam") String patientLabExamIdParam,@RequestParam("labRequestId") String labRequestId,
+				@ModelAttribute("patientUrinalysis") PatientUrinalysis patientUrinalysis, BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		PatientLabRequest patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+	
+		ModelAndView mv = new ModelAndView();
+			
+		boolean transactStatus = false;
+			
+		if (patientUrinalysis.getPatientLabExam()==null || (patientUrinalysis.getPatientLabExam()!=null 
+			&& patientUrinalysis.getPatientLabExam().getId() == null)) {
+			patientUrinalysis.setPatientLabExam(new PatientLabExam(Integer.parseInt(patientLabExamIdParam)));
+			patientUrinalysis.setCreatedBy(LRMSUtil.getUserIdFromSession(model));
+			patientUrinalysis.setCreatedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientUrinalysis.setVersion(1);
+			patientUrinalysis.setActive(true);
+		} else {
+			patientUrinalysis.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+			patientUrinalysis.setModifiedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientUrinalysis.setVersion(patientUrinalysis.getVersion() + 1);
+		}
+		
+		transactStatus = patientUrinalysisBo.saveOrUpdate(patientUrinalysis);
+		
+		patientUrinalysis = patientUrinalysisBo.findByPatientLabExamId(Integer.parseInt(patientLabExamIdParam));//get the latest updated
+		
+		if (transactStatus) {
+			//generate the report
+			String localPath = context.getRealPath("/") + File.separator + "reports";
+			Path path = Paths.get(LRMSConstant.PDF_REPORT_ORIG_PATH);
+			if (!Files.exists(path)) {
+				Files.createDirectories(path);
+			}
+			String destFile = path + File.separator + LRMSConstant.PDF_URINALYSIS_REPORT + patientLabRequest.getLabRequestNo() + "_"+ patientUrinalysis.getPatientLabExam().getId() + ".pdf";
+			File reportFile = new File(localPath + File.separator + LRMSConstant.RPT_URINALYSIS_JASPER);
+			
+			boolean isReportGenerated = ReportUtils.generateLabExamReport(LRMSConstant.RPT_URINALYSIS_TITLE, destFile, reportFile, patientLabRequest, patientUrinalysis);
+			if (isReportGenerated) {
+				System.out.println("Report generated..");
+			}
+		}
+		
+		mv.addObject("patientUrinalysis", patientUrinalysis);
+		mv.addObject("isReleased", patientLabRequest.getStatus().getId()==202 ? true : false);
+		mv.addObject("patientLabExamId", patientLabExamIdParam);
+		mv.addObject("patientLabRequest", patientLabRequest);
+		mv.addObject("professionalList", professionalBo.getAllNonPhysician());
+		mv.addObject("isUpdated", transactStatus);
+		mv.setViewName("transaction/patientlabrequest/template/urinalysis"); 
+					
+		return mv;
+	}
+	
+	@RequestMapping("/savePatientFecalysis")
+	public ModelAndView savePatientFecalysis(@RequestParam("patientLabExamIdParam") String patientLabExamIdParam,@RequestParam("labRequestId") String labRequestId,
+				@ModelAttribute("patientFecalysis") PatientFecalysis patientFecalysis, BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		PatientLabRequest patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+	
+		ModelAndView mv = new ModelAndView();
+			
+		boolean transactStatus = false;
+			
+		if (patientFecalysis.getPatientLabExam()==null || (patientFecalysis.getPatientLabExam()!=null 
+			&& patientFecalysis.getPatientLabExam().getId() == null)) {
+			patientFecalysis.setPatientLabExam(new PatientLabExam(Integer.parseInt(patientLabExamIdParam)));
+			patientFecalysis.setCreatedBy(LRMSUtil.getUserIdFromSession(model));
+			patientFecalysis.setCreatedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientFecalysis.setVersion(1);
+			patientFecalysis.setActive(true);
+		} else {
+			patientFecalysis.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+			patientFecalysis.setModifiedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientFecalysis.setVersion(patientFecalysis.getVersion() + 1);
+		}
+		
+		transactStatus = patientFecalysisBo.saveOrUpdate(patientFecalysis);
+
+		patientFecalysis = patientFecalysisBo.findByPatientLabExamId(Integer.parseInt(patientLabExamIdParam));//get the latest updated
+		
+		if (transactStatus) {
+			//generate the report
+			String localPath = context.getRealPath("/") + File.separator + "reports";
+			Path path = Paths.get(LRMSConstant.PDF_REPORT_ORIG_PATH);
+			if (!Files.exists(path)) {
+				Files.createDirectories(path);
+			}
+			String destFile = path + File.separator + LRMSConstant.PDF_FECALYSIS_REPORT + patientLabRequest.getLabRequestNo() + "_"+ patientFecalysis.getPatientLabExam().getId() + ".pdf";
+			File reportFile = new File(localPath + File.separator + LRMSConstant.RPT_FECALYSIS_JASPER);
+			
+			boolean isReportGenerated = ReportUtils.generateLabExamReport(LRMSConstant.RPT_FECALYSIS_TITLE, destFile, reportFile, patientLabRequest, patientFecalysis);
+			if (isReportGenerated) {
+				System.out.println("Report generated..");
+			}
+		}
+
+		mv.addObject("patientFecalysis", patientFecalysis);
+		mv.addObject("isReleased", patientLabRequest.getStatus().getId()==202 ? true : false);
+		mv.addObject("patientLabExamId", patientLabExamIdParam);
+		mv.addObject("patientLabRequest", patientLabRequest);
+		mv.addObject("professionalList", professionalBo.getAllNonPhysician());
+		mv.addObject("isUpdated", transactStatus);
+		mv.setViewName("transaction/patientlabrequest/template/fecalysis"); 
+					
+		return mv;
+	}
+
+	@RequestMapping("/savePatientHematology")
+	public ModelAndView savePatientHematology(@RequestParam("patientLabExamIdParam") String patientLabExamIdParam,@RequestParam("labRequestId") String labRequestId,
+				@ModelAttribute("patientHematology") PatientHematology patientHematology, BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		PatientLabRequest patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+	
+		ModelAndView mv = new ModelAndView();
+			
+		boolean transactStatus = false;
+			
+		if (patientHematology.getPatientLabExam()==null || (patientHematology.getPatientLabExam()!=null 
+			&& patientHematology.getPatientLabExam().getId() == null)) {
+			patientHematology.setPatientLabExam(new PatientLabExam(Integer.parseInt(patientLabExamIdParam)));
+			patientHematology.setCreatedBy(LRMSUtil.getUserIdFromSession(model));
+			patientHematology.setCreatedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientHematology.setVersion(1);
+			patientHematology.setActive(true);
+		} else {
+			patientHematology.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+			patientHematology.setModifiedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientHematology.setVersion(patientHematology.getVersion() + 1);
+		}
+		
+		transactStatus = patientHematologyBo.saveOrUpdate(patientHematology);
+		
+		patientHematology = patientHematologyBo.findByPatientLabExamId(Integer.parseInt(patientLabExamIdParam));//get the latest updated
+
+		if (transactStatus) {
+			//generate the report
+			String localPath = context.getRealPath("/") + File.separator + "reports";
+			Path path = Paths.get(LRMSConstant.PDF_REPORT_ORIG_PATH);
+			if (!Files.exists(path)) {
+				Files.createDirectories(path);
+			}
+			String destFile = path + File.separator + LRMSConstant.PDF_HEMATOLOGY_REPORT+ patientLabRequest.getLabRequestNo() + "_"+ patientHematology.getPatientLabExam().getId() + ".pdf";
+			File reportFile = new File(localPath + File.separator + LRMSConstant.RPT_HEMATOLOGY_JASPER);
+			
+			boolean isReportGenerated = ReportUtils.generateLabExamReport(LRMSConstant.RPT_HEMATOLOGY_TITLE, destFile, reportFile, patientLabRequest, patientHematology);
+			if (isReportGenerated) {
+				System.out.println("Report generated..");
+			}
+		}
+		
+		mv.addObject("patientHematology", patientHematology);
+		mv.addObject("isReleased", patientLabRequest.getStatus().getId()==202 ? true : false);
+		mv.addObject("patientLabExamId", patientLabExamIdParam);
+		mv.addObject("patientLabRequest", patientLabRequest);
+		mv.addObject("professionalList", professionalBo.getAllNonPhysician());
+		mv.addObject("isUpdated", transactStatus);
+		mv.setViewName("transaction/patientlabrequest/template/hematology"); 
+					
+		return mv;
+	}
+
+	@RequestMapping("/savePatientMisc")
+	public ModelAndView savePatientMisc(@RequestParam("patientLabExamIdParam") String patientLabExamIdParam,@RequestParam("labRequestId") String labRequestId,
+				@ModelAttribute("patientMisc") PatientMisc patientMisc, BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		PatientLabRequest patientLabRequest = patientLabRequestBo.findById(Integer.parseInt(labRequestId));
+	
+		ModelAndView mv = new ModelAndView();
+			
+		boolean transactStatus = false;
+			
+		if (patientMisc.getPatientLabExam()==null || (patientMisc.getPatientLabExam()!=null 
+			&& patientMisc.getPatientLabExam().getId() == null)) {
+			patientMisc.setPatientLabExam(new PatientLabExam(Integer.parseInt(patientLabExamIdParam)));
+			patientMisc.setCreatedBy(LRMSUtil.getUserIdFromSession(model));
+			patientMisc.setCreatedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientMisc.setVersion(1);
+			patientMisc.setActive(true);
+		} else {
+			patientMisc.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+			patientMisc.setModifiedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+			patientMisc.setVersion(patientMisc.getVersion() + 1);
+		}
+		
+		transactStatus = patientMiscBo.saveOrUpdate(patientMisc);
+		
+		patientMisc = patientMiscBo.findByPatientLabExamId(Integer.parseInt(patientLabExamIdParam));//get the latest updated
+
+		if (transactStatus) {
+			//generate the report
+			String localPath = context.getRealPath("/") + File.separator + "reports";
+			Path path = Paths.get(LRMSConstant.PDF_REPORT_ORIG_PATH);
+			if (!Files.exists(path)) {
+				Files.createDirectories(path);
+			}
+			String destFile = path + File.separator + LRMSConstant.PDF_MISC_REPORT + patientLabRequest.getLabRequestNo() + "_"+ patientMisc.getPatientLabExam().getId() + ".pdf";
+			File reportFile = new File(localPath + File.separator + LRMSConstant.RPT_MISC_JASPER);
+			
+			boolean isReportGenerated = ReportUtils.generateLabExamReport(LRMSConstant.RPT_MISC_TITLE, destFile, reportFile, patientLabRequest, patientMisc);
+			if (isReportGenerated) {
+				System.out.println("Report generated..");
+			}
+		}
+		
+		mv.addObject("labExamName", patientMisc.getPatientLabExam().getLabExam().getDescription());
+		mv.addObject("patientMisc", patientMisc);
+		mv.addObject("isReleased", patientLabRequest.getStatus().getId()==202 ? true : false);
+		mv.addObject("patientLabExamId", patientLabExamIdParam);
+		mv.addObject("patientLabRequest", patientLabRequest);
+		mv.addObject("professionalList", professionalBo.getAllNonPhysician());
+		mv.addObject("isUpdated", transactStatus);
+		mv.setViewName("transaction/patientlabrequest/template/misc"); 
+					
+		return mv;
+	}
+
+	
+	 @RequestMapping("/showLabExamReport")
+	 public void showLabExamReport(@RequestParam("templateId") String templateId, @RequestParam("patientLabExamIdParam") String patientLabExamIdParam,
+			 @RequestParam("labReqNo") String labReqNo, HttpServletResponse response) throws Exception {
+			
+		StringBuilder fileName = new StringBuilder();
+		fileName.append(LRMSConstant.PDF_REPORT_ORIG_PATH);
+			switch(Integer.parseInt(templateId)) {
+			case 501: //BloodChem 
+				fileName.append(LRMSConstant.PDF_BLOODCHEM_REPORT);
+				break;
+			case 502: //Urinalysis 
+				fileName.append(LRMSConstant.PDF_URINALYSIS_REPORT);
+				break;
+			case 503: //Fecalysis 
+				fileName.append(LRMSConstant.PDF_FECALYSIS_REPORT);
+				break;
+			case 504: //Hematology
+				fileName.append(LRMSConstant.PDF_HEMATOLOGY_REPORT);
+				break;
+			case 505: //Miscellaneous
+				fileName.append(LRMSConstant.PDF_MISC_REPORT);
+				break;
+			default: ;
+		}
+		fileName.append(labReqNo);
+		fileName.append("_");
+		fileName.append(patientLabExamIdParam);
+		fileName.append(".pdf");
+		 
+		File pdfFile = new File(fileName.toString());
+		 
+		try {
+		        OutputStream os = response.getOutputStream();
+		        byte[] buf = new byte[8192];
+		        InputStream is = new FileInputStream(pdfFile);
+		        int c = 0;
+		        while ((c = is.read(buf, 0, buf.length)) > 0) {
+		            os.write(buf, 0, c);
+		            os.flush();
+		        }
+		        os.close();
+		        is.close();
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+	  }
+
+}

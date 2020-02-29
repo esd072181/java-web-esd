@@ -1,0 +1,50 @@
+package com.lrms.propertyeditor;
+
+import java.sql.Date;
+import java.text.DateFormat;
+
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.util.StringUtils;
+
+import com.lrms.util.DateUtils;
+
+public class CustomSQLDateEditor extends CustomDateEditor {
+
+	public CustomSQLDateEditor(DateFormat dateFormat, boolean allowEmpty) {
+		super(dateFormat, allowEmpty);
+	}
+
+	
+	
+	@Override
+	public String getAsText() {
+		// TODO Auto-generated method stub
+		String dateStr = null;
+		try {
+			dateStr = DateUtils.sqlDateToString((Date)getValue());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dateStr;
+	}
+
+
+
+	@Override
+	public void setAsText(String dateStr) throws IllegalArgumentException {
+		if (StringUtils.isEmpty(dateStr)) {
+			setValue(null);
+		} else {
+			try {
+				setValue(DateUtils.strToSQLDate(dateStr));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
+	}
+	
+	
+
+}

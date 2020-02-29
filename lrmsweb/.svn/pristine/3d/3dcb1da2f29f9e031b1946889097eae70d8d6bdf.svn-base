@@ -1,0 +1,271 @@
+package com.lrms.model;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Where;
+
+/**
+ * 
+ * @author dward
+ *
+ */
+@Entity
+@Table(name = "patientlabrequest", schema = "lrms")
+public class PatientLabRequest implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
+	private String labRequestNo;
+	private Patient patient;
+	private Professional professional;
+	private Date requestDate;
+	private Integer age;
+	private ListValue status;
+	private ListValue paymentStatus;
+	private Integer createdBy;
+	private Timestamp createdOn;
+	private Integer modifiedBy;
+	private Timestamp modifiedOn;
+	private Integer version;
+	private Boolean active;
+	
+	private Integer labExamId;//transient
+	private String labExamName;//transient
+	private BigDecimal totalAmount;
+	
+	private List<PatientLabExam> patientLabExamRecords = new ArrayList<>();
+	
+	public PatientLabRequest() {}
+	
+	public PatientLabRequest(Integer id) {
+		this.id = id;
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patientLabRequestId_generator")
+	@SequenceGenerator(name="patientLabRequestId_generator", sequenceName = "lrms.patientlabrequestseq", allocationSize=1)
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Column(name = "labrequestno", length = 20)
+	public String getLabRequestNo() {
+		return labRequestNo;
+	}
+
+	public void setLabRequestNo(String labRequestNo) {
+		this.labRequestNo = labRequestNo;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "patientsystemid", nullable = false)
+	public Patient getPatient() {
+		return patient;
+	}
+	
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "professionalid", nullable = false)
+	public Professional getProfessional() {
+		return professional;
+	}
+	
+	public void setProfessional(Professional professional) {
+		this.professional = professional;
+	}
+	
+	@Column(name = "requestdate")
+	public Date getRequestDate() {
+		return requestDate;
+	}
+
+	public void setRequestDate(Date requestDate) {
+		this.requestDate = requestDate;
+	}
+
+	@Column(name = "age")
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	
+	@Column(name = "createdby")
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@Column(name = "createdon")
+	public Timestamp getCreatedOn() {
+		return createdOn;
+	}
+
+
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	@Column(name = "modifiedby")
+	public Integer getModifiedBy() {
+		return modifiedBy;
+	}
+
+
+	public void setModifiedBy(Integer modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	@Column(name = "modifiedon")
+	public Timestamp getModifiedOn() {
+		return modifiedOn;
+	}
+
+
+	public void setModifiedOn(Timestamp modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
+
+	@Column(name = "version")
+	public Integer getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	@Column(name = "active")
+	public Boolean getActive() {
+		return active;
+	}
+
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	@Transient
+	public Integer getLabExamId() {
+		return labExamId;
+	}
+
+	public void setLabExamId(Integer labExamId) {
+		this.labExamId = labExamId;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "patientLabRequest")
+	@Where(clause = "active = true")
+	public List<PatientLabExam> getPatientLabExamRecords() {
+		return patientLabExamRecords;
+	}
+
+	public void setPatientLabExamRecords(List<PatientLabExam> patientLabExamRecords) {
+		this.patientLabExamRecords = patientLabExamRecords;
+	}
+
+	@Transient
+	public String getLabExamName() {
+		//get the labexams for the list
+		StringBuilder sb = new StringBuilder(20);
+		int i = 0;
+		for (PatientLabExam item : this.patientLabExamRecords) {
+			sb.append(item.getLabExam().getDescription());
+			if (this.patientLabExamRecords.size()>1 && i<this.patientLabExamRecords.size()-1) {
+				sb.append(",");
+			}
+			++i;
+		}
+		return sb.toString();
+	}
+
+	public void setLabExamName(String labExamName) {
+		this.labExamName = labExamName;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "statusid", nullable = false)
+	public ListValue getStatus() {
+		return status;
+	}
+
+	public void setStatus(ListValue status) {
+		this.status = status;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "paymentstatusid", nullable = false)
+	public ListValue getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(ListValue paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+
+	@Transient
+	public BigDecimal getTotalAmount() {
+		double total = 0.00;
+		for (PatientLabExam item : this.patientLabExamRecords) {
+			total += item.getAmount().doubleValue();
+		}
+		return BigDecimal.valueOf(total);
+	}
+
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	@Override
+	public String toString() {
+		return "PatientLabRequest [id=" + id + ", labRequestNo=" + labRequestNo
+				+ ", patient=" + patient + ", professional=" + professional
+				+ ", requestDate=" + requestDate + ", age=" + age + ", status="
+				+ status + ", paymentStatus=" + paymentStatus + ", createdBy="
+				+ createdBy + ", createdOn=" + createdOn + ", modifiedBy="
+				+ modifiedBy + ", modifiedOn=" + modifiedOn + ", version="
+				+ version + ", labExamId=" + labExamId + ", labExamName="
+				+ labExamName + ", totalAmount=" + totalAmount
+				+ ", patientLabExamRecords=" + patientLabExamRecords + "]";
+	}
+	
+	
+	
+	
+}

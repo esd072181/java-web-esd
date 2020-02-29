@@ -1,0 +1,201 @@
+package com.lrms.dao.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+
+import com.lrms.dao.PatientLabRequestDao;
+import com.lrms.model.PatientLabRequest;
+import com.lrms.util.HibernateDaoUtil;
+import com.lrms.util.LRMSUtil;
+
+/**
+ * 
+ * @author dward
+ *
+ */
+@Repository
+public class PatientLabRequestDaoImpl extends HibernateDaoUtil implements PatientLabRequestDao{
+
+	@Override
+	public boolean save(PatientLabRequest entity) {
+		beginHibernateTransaction();
+		 try {			 
+			 session.save(entity);
+			 tx.commit();
+			 txnIsSuccess = true;
+		 } catch (Exception e) {
+			 tx.rollback();
+			 e.printStackTrace();
+		 } finally {
+			closeHibernateSession(session);
+		 }
+		 return txnIsSuccess;
+	}
+
+	@Override
+	public long getRecordCount() {
+		long count = 0;
+		beginHibernateTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Long> queryCount = builder.createQuery(Long.class);
+		try {
+			queryCount.select(builder.count(queryCount.from(PatientLabRequest.class)));
+			Query<Long> qCount = session.createQuery(queryCount);
+			count = qCount.getSingleResult();
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 } finally {
+			closeHibernateSession(session);
+		 }
+		return count;
+	}
+
+	@Override
+	public PatientLabRequest getPatientLabRequest(String labRequestNo) {
+		PatientLabRequest model = null;
+		beginHibernateTransaction();
+		try {
+			
+			//Hibernate 5 below...
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<PatientLabRequest> query = builder.createQuery(PatientLabRequest.class);
+			Root<PatientLabRequest> root = query.from(PatientLabRequest.class);
+			query.select(root);
+			List<Predicate> predicates = new ArrayList<>();
+			predicates.add(
+					builder.like(builder.upper(root.get("labRequestNo")), "" + labRequestNo.toUpperCase() + ""));
+			query.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+
+	
+			Query<PatientLabRequest> q = session.createQuery(query);
+			List<PatientLabRequest> list = q.list();
+			for (PatientLabRequest item: list) {
+				model = item;
+				break;
+			}
+
+
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 } finally {
+			closeHibernateSession(session);
+		 }
+		return model;
+	}
+
+
+	@Override
+	public Map<Object, Object> findByName(Map<Object, Object> mapCriteria) {
+		
+		Map<Object, Object> mapResult = new HashMap<Object, Object>();
+		beginHibernateTransaction();
+		try {
+			
+			//Get the search criteria
+			String searchCriteria = (String) mapCriteria.get("search_criteria");
+			int recordStart = (Integer) mapCriteria.get("record_start");
+			int maxResult = (Integer) mapCriteria.get("max_result");
+			
+			//Hibernate 5 below...
+//			CriteriaBuilder builder = session.getCriteriaBuilder();
+//			CriteriaQuery<Patient> query = builder.createQuery(Patient.class);
+//			Root<Patient> root = query.from(Patient.class);
+//			query.select(root);
+//			//query.select(root.get("patientNo")); //This is for selecting specific columns/fields
+////			query.where(builder.and(builder.like(root.get("patientNo"), "%" + criteria + "%"), builder.equal(root.get("active"), true)));
+//			//or can use predicates
+//			List<Predicate> predicates = new ArrayList<>();
+//			predicates.add(
+//					builder.and(
+//							builder.or(builder.like(builder.upper(root.get("lastName")), "%" + searchCriteria.toUpperCase() + "%"), builder.like(builder.upper(root.get("firstName")), "%" + searchCriteria.toUpperCase() + "%")),
+//							builder.equal(root.get("active"), true)));
+////			predicates.add(builder.and(builder.equal(root.get("lastName"), "David"))); //can add more criteria
+//			query.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+//			query.orderBy(builder.asc(root.get("lastName")), builder.asc(root.get("firstName")), builder.asc(root.get("middleName")));
+//			
+		
+			//test
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<PatientLabRequest> query = builder.createQuery(PatientLabRequest.class);
+			Root<PatientLabRequest> root = query.from(PatientLabRequest.class);
+			query.select(root);
+			//query.select(root.get("patientNo")); //This is for selecting specific columns/fields
+//			query.where(builder.and(builder.like(root.get("patientNo"), "%" + criteria + "%"), builder.equal(root.get("active"), true)));
+			//or can use predicates
+			List<Predicate> predicates = new ArrayList<>();
+			predicates.add(
+					builder.and(
+							builder.or(builder.like(builder.upper(root.get("patient").get("lastName")), "%" + searchCriteria.toUpperCase() + "%"), builder.like(builder.upper(root.get("patient").get("firstName")), "%" + searchCriteria.toUpperCase() + "%")),
+							builder.equal(root.get("patient").get("active"), true)));
+			query.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+			query.orderBy(builder.desc(root.get("requestDate")), builder.asc(root.get("patient").get("lastName")), builder.asc(root.get("patient").get("firstName")));
+		
+			Query<PatientLabRequest> q = session.createQuery(query);
+			q.setFirstResult(recordStart); //Index start at 0 (first record)
+			q.setMaxResults(maxResult);
+			List<PatientLabRequest> resultList = q.list();
+		
+			//Get totalRecordsCount for pagination
+			CriteriaQuery<Long> queryCount = builder.createQuery(Long.class);
+			queryCount.select(builder.count(queryCount.from(PatientLabRequest.class)));
+			queryCount.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+			Query<Long> qCount = session.createQuery(queryCount);
+			long totalNoOfRecords = qCount.getSingleResult();
+			
+			if (!resultList.isEmpty()) {
+				mapResult.put("resultList", resultList);
+			}
+			
+			mapResult.put("noOfPages", LRMSUtil.getTotalNoOfPages(totalNoOfRecords)); //need to query in hibernate total no of records / pagination size
+			
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 } finally {
+			closeHibernateSession(session);
+		 }
+		return mapResult;
+	}
+
+
+	@Override
+	public PatientLabRequest findById(Integer id) {
+		PatientLabRequest model = null;
+		beginHibernateTransaction();
+		try {
+			model = session.get(PatientLabRequest.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		 } finally {
+			closeHibernateSession(session);
+		 }
+		return model;
+	}
+
+	@Override
+	public boolean update(PatientLabRequest entity) {
+		beginHibernateTransaction();
+		 try {
+			 session.update(entity);
+			 tx.commit();
+			 txnIsSuccess = true;
+		 } catch (Exception e) {
+			 tx.rollback();
+			 e.printStackTrace();
+		 } finally {
+			closeHibernateSession(session);
+		 }
+		 return txnIsSuccess;
+	}
+
+	
+}

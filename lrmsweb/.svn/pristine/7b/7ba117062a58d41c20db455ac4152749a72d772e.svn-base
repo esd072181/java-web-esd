@@ -1,0 +1,256 @@
+package com.lrms.controller;
+
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.lrms.bo.PatientBo;
+import com.lrms.constant.LRMSConstant;
+import com.lrms.model.Patient;
+import com.lrms.model.UserAccount;
+import com.lrms.propertyeditor.CustomSQLDateEditor;
+import com.lrms.util.LRMSUtil;
+import com.lrms.validator.PatientValidator;
+
+@Controller
+@SessionAttributes("userid")
+public class PatientController {
+	
+	private final static Logger logger = Logger.getLogger(PatientController.class);
+	
+	@Autowired
+	private PatientBo patientBo;
+	
+	@Autowired
+	private PatientValidator patientValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); //not used because it is a private variable in CustomDateEditor class
+//        dateFormat.setLenient(false);
+        CustomSQLDateEditor dateEditor = new CustomSQLDateEditor(null, true); //dateFormat not used.  DateUtil class is used instead
+        binder.registerCustomEditor(Date.class, dateEditor);
+	    
+        if (binder.getObjectName().equals("patient")) {
+        	binder.addValidators(patientValidator);	
+	    }
+		
+	}
+	
+	@RequestMapping("/goToSearchPatient")
+	public ModelAndView goToSearchPatient(ModelMap model) {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+
+		model.addAttribute("searchFlag", false);
+		return new ModelAndView("masterfile/patient/searchPatient", "patient", new Patient());
+	}
+	
+	@RequestMapping("/goToAddPatient")
+	public ModelAndView goToAddPatient(ModelMap model) {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+
+		return new ModelAndView("masterfile/patient/addPatient", "patient", new Patient());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/searchPatient")
+	public ModelAndView searchPatient(@RequestParam("page") String page, @ModelAttribute("patient") Patient patient, 
+    			BindingResult result, ModelMap model) throws Exception {
+
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+
+		//Note: can use modelattribute in a form in jsp
+		//or can simply pass a parameter
+		
+		Map<Object,Object> mapCriteria = new HashMap<Object,Object>();
+		
+		mapCriteria.put("search_criteria", patient.getLastName()!=null ? patient.getLastName() : "");
+		mapCriteria.put("record_start", LRMSUtil.getRecordStartIndex(page!=null ? Integer.parseInt(page) : 1));
+		mapCriteria.put("max_result", LRMSConstant.RECORDS_PER_PAGE);
+		
+		Map<Object,Object> resultMap = patientBo.findByLastName(mapCriteria);
+		
+		List<Patient> resultList = (List<Patient>) resultMap.get("resultList");
+		Integer noOfPages = (Integer) resultMap.get("noOfPages");
+		
+		boolean gotRecords = resultList!=null && resultList.size() > 0 ? true : false;
+		
+		model.addAttribute("resultList", resultList);
+		model.addAttribute("searchFlag", true);
+		model.addAttribute("gotRecords", gotRecords);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("noOfPages", noOfPages);
+		
+		return new ModelAndView("masterfile/patient/searchPatient", "patient", patient);
+	}
+		
+	@RequestMapping(value = "/savePatient", method = RequestMethod.POST)
+	public ModelAndView savePatient(@ModelAttribute("patient") @Validated Patient patient, 
+		      BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+
+		if (result.hasErrors()) {
+			return new ModelAndView("masterfile/patient/addPatient", "patient", patient);
+		}
+		     
+		patient.setPatientNo(generatePatientNo());
+		patient.setCreatedBy(LRMSUtil.getUserIdFromSession(model));
+		
+		boolean isSuccess = patientBo.save(patient);
+		
+		model.addAttribute("isSuccess", isSuccess);
+		
+		return new ModelAndView("masterfile/patient/addPatient", "patient", patient);
+	}
+	
+	
+	@RequestMapping(value = "/savePatientRegistration", method = RequestMethod.POST)
+	public ModelAndView savePatientRegistration(@ModelAttribute("patient") @Validated Patient patient, 
+		      BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		if (result.hasErrors()) {
+			return new ModelAndView("transaction/labrequest/patientRegistration", "patient", patient);
+		}
+		     
+		patient.setPatientNo(generatePatientNo());
+		patient.setCreatedBy(LRMSUtil.getUserIdFromSession(model));
+		
+		boolean isSuccess = patientBo.save(patient);
+		
+		model.addAttribute("isSuccess", isSuccess);
+		
+		patient = patientBo.findByPatientNo(patient.getPatientNo());
+		
+		return new ModelAndView("transaction/labrequest/patientRegistration", "patient", patient);
+	}
+	
+	@RequestMapping(value = "/editPatient", method=RequestMethod.GET)
+	public ModelAndView editPatient(@RequestParam("id") int patientiId, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		Patient resultEntity = patientBo.findById(patientiId);
+		return new ModelAndView("masterfile/patient/editPatient", "patient", resultEntity);
+	}
+	
+//	@RequestMapping(value = "/editPatient/{id}", method=RequestMethod.GET) //This is used for RESTFUl
+//	public ModelAndView editPatient(@PathVariable("id")int id, Model model) throws Exception {
+//		
+//		PatientEntity resultEntity = patientBo.findById(id);
+//		return new ModelAndView("masterfile/patient/editPatient", "patient", resultEntity);
+//	}
+	
+	@RequestMapping(value = "/updatePatient", method = RequestMethod.POST)
+	public ModelAndView updatePatient(@ModelAttribute("patient" ) @Validated Patient patient, 
+		      BindingResult result, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+	    if (result.hasErrors()) {
+	    	return new ModelAndView("masterfile/patient/editPatient");
+	    }
+	     
+	    patient.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+	    
+		boolean isSuccess = patientBo.update(patient);
+		
+		model.addAttribute("isSuccess", isSuccess);
+		
+		return new ModelAndView("masterfile/patient/editPatient");
+	}
+	
+	@RequestMapping(value = "/deletePatient", method=RequestMethod.GET)
+	public ModelAndView deletePatient(@RequestParam("id") int id, ModelMap model) throws Exception {
+		
+		if (!LRMSUtil.isUserSessionValid(model)) {
+			logger.info(LRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		Patient patient = patientBo.findById(id);
+		patient.setModifiedBy(LRMSUtil.getUserIdFromSession(model));
+		
+		boolean isSuccess =  patientBo.delete(patient);
+		model.addAttribute("isDeleted", isSuccess);
+		
+		return new ModelAndView("masterfile/patient/searchPatient", "patient", new Patient());
+	}
+	
+	public String generatePatientNo() throws Exception {
+		StringBuilder sb = new StringBuilder(15);
+		try {
+			Calendar now = Calendar.getInstance();
+			int currentMonth = now.get(Calendar.MONTH) + 1;//0-11
+			int currentDayOfMonth = now.get(Calendar.DAY_OF_MONTH);
+			sb.append("P");
+			sb.append(now.get(Calendar.YEAR));
+			sb.append(String.format("%02d", currentMonth));
+			sb.append(String.format("%02d", currentDayOfMonth));
+			sb.append(String.format("%06d", patientBo.getPatientCount()+1));//get the patient count
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return sb.toString();
+	}	
+	
+	//test hibernate ORM
+	@RequestMapping("/testHibernate")
+	public ModelAndView testHibernate(ModelMap model) {
+		
+		
+//		Patient patient = patientBo.findById(1);
+//		
+//		Set<PatientHistory> patientrecords = patient.getPatientHistoryRecords();
+//		for (PatientHistory entity : patientrecords) {
+//			System.out.println("Chief Complaint: " + entity.getChiefComplaint());
+//		}
+	
+		return new ModelAndView("masterfile/patient/searchPatient", "patient", new Patient());
+	}
+	
+}

@@ -1,0 +1,5 @@
+lastname.empty = Last Name is required
+firstname.empty = First Name is required
+description.empty = Description is required
+username.empty = User Name is required
+password.empty = Password is required
