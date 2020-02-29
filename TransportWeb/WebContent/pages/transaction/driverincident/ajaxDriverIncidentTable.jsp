@@ -1,0 +1,118 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+	<div class="table-responsive" >
+		<c:choose>
+		  <c:when test="${driverIncidentForm.modelList != null}">
+			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
+				<tr>
+					<th></th>
+					<th></th>
+					<c:if test="${sessionScope.user_role_session=='Admin'}">
+						<th></th>
+					</c:if>
+					<th>Incident Date</th>
+					<th>Driver</th>
+					<th>Safety Officer</th>
+					<th>Acknowledge..</th>
+					<th>Report..</th>
+					<th>Company..</th>
+					<th>INCAB Footages..</th>
+					<th>DWH / PSWM</th>
+					<th>GPS Data</th>
+					<th>EB Button</th>
+					<th>Alcohol..</th>
+					<th>Drivers..</th>
+					<th>Police..</th>
+					<th>Photo Copy of..</th>
+					<th>Pic of Damage..</th>
+					<th>Pic of Plate..</th>
+					<th>Start Discussion..</th>
+					<th>With Investigating..</th>
+					<th>Prior to..</th>
+				</tr>
+				<logic:iterate name="driverIncidentForm" property="modelList" type="com.transport.model.DriverIncident" id="model">
+					<tr>
+						<td align="center"><a href="#" onclick="viewDriverIncidentReport('<bean:write name="model" property="id"/>');">View</a></td>			 
+						<td align="center"><a href="#" onclick="editDriverIncident('<bean:write name="model" property="id"/>');">Edit</a></td>
+						<c:if test="${sessionScope.user_role_session=='Admin'}">
+							<td align="center"><a href="#" onclick="deleteDriverIncident('<bean:write name="model" property="id"/>', '${driverIncidentForm.category}',${driverIncidentForm.currentPage})">Delete</a></td>
+						</c:if>
+						<td><bean:write name="model" property="incidentDate" format='MM/dd/yyyy'/></td>
+						<td style="font-weight: bolder;"><bean:write name="model" property="nameOne"/></td>
+						<td><bean:write name="model" property="nameTwo"/></td>
+						<td><bean:write name="model" property="acknowStat" /> - <bean:write name="model" property="acknowRemarks" /></td>
+						<td><bean:write name="model" property="reportStat" /> - <bean:write name="model" property="reportRemarks" /></td>
+						<td><bean:write name="model" property="companyStat" /> - <bean:write name="model" property="companyRemarks" /></td>
+						<td><bean:write name="model" property="incabStat" /> - <bean:write name="model" property="incabRemarks" /></td>
+						<td><bean:write name="model" property="dwhStat" /> - <bean:write name="model" property="dwhRemarks" /></td>
+						<td><bean:write name="model" property="gpsStat" /> - <bean:write name="model" property="gpsRemarks" /></td>
+						<td><bean:write name="model" property="ebStat" /> - <bean:write name="model" property="ebRemarks" /></td>
+						<td><bean:write name="model" property="alcoholStat" /> - <bean:write name="model" property="alcoholRemarks" /></td>
+						<td><bean:write name="model" property="driversStat" /> - <bean:write name="model" property="driversRemarks" /></td>
+						<td><bean:write name="model" property="policeStat" /> - <bean:write name="model" property="policeRemarks" /></td>
+						<td><bean:write name="model" property="photoStat" /> - <bean:write name="model" property="photoRemarks" /></td>
+						<td><bean:write name="model" property="picDamageStat" /> - <bean:write name="model" property="picDamageRemarks" /></td>
+						<td><bean:write name="model" property="picPlateStat" /> - <bean:write name="model" property="picPlateRemarks" /></td>
+						<td><bean:write name="model" property="startStat" /> - <bean:write name="model" property="startRemarks" /></td>
+						<td><bean:write name="model" property="withInvestStat" /> - <bean:write name="model" property="withInvestRemarks" /></td>
+						<td><bean:write name="model" property="priorStat" /> - <bean:write name="model" property="priorRemarks" /></td>
+					</tr>
+				</logic:iterate>
+			</table>
+		  </c:when>
+		  <c:otherwise>
+		  	<div style="color: blue;">No Record found!</div>
+		  </c:otherwise>
+		</c:choose>
+	</div>
+	
+	<div style="height: 50px; width: 98%;">
+		<div style="position: relative; top: -15px; float: left;">
+			<ul class="pager">
+				<c:if test="${driverIncidentForm.currentPage != 1 && driverIncidentForm.noOfPages > 0}">
+					<li><a href="#" onclick="getDriverIncident(${driverIncidentForm.currentPage - 1},'${driverIncidentForm.category}');">Previous</a></li>
+				</c:if>
+				<c:if test="${driverTrainingForm.currentPage lt driverIncidentForm.noOfPages}">
+				  	<li><a href="#" onclick="getDriverIncident(${driverIncidentForm.currentPage + 1},'${driverIncidentForm.category}');">Next</a></li>
+				</c:if>
+			</ul>
+		</div>
+		<div style="position: relative; top: -15px; float: right;" >
+			<ul class="pagination">
+			
+				<c:if test="${driverIncidentForm.currentPage != 1 && driverIncidentForm.noOfPages > 0}">
+					<li><a href="#" onclick="getDriverIncident(${driverIncidentForm.currentPage - 1},'${driverIncidentForm.category}');">&laquo;</a></li>
+				</c:if>
+					
+				<c:forEach begin="1" end="${driverIncidentForm.noOfPages}" var="i">
+	                <c:choose>
+	                    <c:when test="${driverIncidentForm.currentPage eq i}">
+	                        <li class="active"><a href="#">${i}</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	 <c:choose>
+	                          <c:when test="${driverIncidentForm.currentPage < i && i < driverIncidentForm.currentPage+10}">
+	                          		<li><a href="#" onclick="getDriverIncident(${i},'${driverIncidentForm.category}');">${i}</a></li>
+	                          </c:when>
+	                           <c:otherwise>
+	                           		<!-- none -->
+	                           </c:otherwise>
+	                         </c:choose>
+	                    </c:otherwise>
+	                </c:choose>
+	            </c:forEach>
+	           	<c:if test="${driverTrainingForm.currentPage lt driverIncidentForm.noOfPages}">
+	               	<li><a href="#" onclick="getDriverIncident(${driverIncidentForm.currentPage + 1},'${driverIncidentForm.category}');">&raquo;</a></li>
+	            </c:if>
+
+			</ul>
+		</div>
+	</div>
+	
+	
+

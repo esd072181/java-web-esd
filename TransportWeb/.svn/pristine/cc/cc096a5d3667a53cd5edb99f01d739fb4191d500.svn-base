@@ -1,0 +1,73 @@
+package com.transport.util;
+
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+//import javax.activation.*;
+
+public class EmailUtils {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		// Recipient's email ID needs to be mentioned.
+	      String to = "dwardcang@gmail.com";
+//	      String to = "dward_72181@yahoo.com.ph";
+
+	      // Sender's email ID needs to be mentioned
+	      String from = "itsupport@transportgdc.com";
+	      
+	      String password="Esd072181!@#";//change according
+
+	    //SSL/TLS Settings
+//	      String host = "mapfig21.acuciva.com"; 
+//	      String port = "465";	
+	      
+	      //non-ssl settings
+	      String host = "mail.transportgdc.com";
+	      String port = "25";	
+//	      String port = "587";	
+	      
+	      // Get system properties
+	      Properties props = System.getProperties();
+
+	      // Setup mail server
+	      props.put("mail.smtp.host", host);
+	      props.put("mail.smtp.port", port);
+	      props.put("mail.smtp.auth", "true");  
+
+	      // Get the default Session object.
+//	      Session session = Session.getDefaultInstance(properties);
+	      
+	      Session session = Session.getDefaultInstance(props,  
+	    		    new javax.mail.Authenticator() {  
+	    		      protected PasswordAuthentication getPasswordAuthentication() {  
+	    		    return new PasswordAuthentication(from,password);  
+	    		      }  
+	    		    });  
+
+	      try{
+	         // Create a default MimeMessage object.
+	         MimeMessage message = new MimeMessage(session);
+
+	         // Set From: header field of the header.
+	         message.setFrom(new InternetAddress(from));
+
+	         // Set To: header field of the header.
+	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+	         // Set Subject: header field
+	         message.setSubject("IT Support for GDC");
+
+	         // Now set the actual message
+	         message.setText("unit testing for java mail");
+
+	         // Send message
+	         Transport.send(message);
+	         System.out.println("Sent message successfully....");
+	      }catch (MessagingException mex) {
+	         mex.printStackTrace();
+	      }
+	}
+
+}

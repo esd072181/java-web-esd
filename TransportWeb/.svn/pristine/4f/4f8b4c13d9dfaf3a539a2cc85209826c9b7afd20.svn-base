@@ -1,0 +1,605 @@
+//Verification and Validation Compliance Tracker
+
+function goToVerificationAndValidation() {
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "verificationAndValidation.do?"
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+}
+
+function goToAddVerificationAndValidationRefreshDropdownList() {
+	$.ajax({
+		  type: "GET",
+		  url: "verificationAndValidation.do?",
+		  cache: false,
+		  data: { command: "Add_Refresh_Dropdown_List" }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			$("#descriptionId").focus();
+		});
+}
+function goToAddVerificationAndValidation() {
+	$.ajax({
+		  type: "GET",
+		  url: "verificationAndValidation.do?",
+		  cache: false,
+		  data: { command: "add" }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			$("#descriptionId").focus();
+		});
+}
+
+function getVerificationAndValidation(pageCriteria, category, isDeleted) {
+
+	var searchCriteria = $('#searchCriteriaId').val();
+
+	//validation if search criteria is verificationdate or validationdate
+	if (searchCriteria=='406' || searchCriteria=='413') {
+		var dateFrom = $('#dateFromDatePicker').val();
+		var dateTo = $('#dateToDatePicker').val();
+		//Date From
+		if (dateFrom==null || dateFrom=='') {
+			alert("Date From is required for Date search criteria.");
+			return false;
+		}
+		//Date To
+		if (dateTo==null || dateTo=='') {
+			alert("Date To is required for Date search criteria.");
+			return false;
+		}
+	}
+	
+	
+	//validation for search criteria
+	if (category == 'filter' && searchCriteria!='406' && searchCriteria != '413') {
+		if ( $("#idSearchValue").val().trim() == '') {
+			$("#validationMessageId").show();
+			$("#idSearchValue").focus(); 
+			setTimeout( "$('#validationMessageId').hide();",1500 );
+			return false;
+		}
+
+	}
+
+	$.ajax({
+		  type: "GET",
+		  url: "verificationAndValidation.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+		  cache: false,
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#tablePresentationDIV").html(result);
+			if (isDeleted) {
+				$("#msgDeletedId").show();
+				setTimeout( "$('#msgDeletedId').hide();", 1500 );
+			}
+		});
+}
+
+function saveVerificationAndValidation() {
+	
+	$.ajax({
+		  type: "POST",
+		  url: "saveVerificationAndValidation.do?command=ajaxSave",
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+
+}
+
+function editVerificationAndValidation(id) {
+	$.ajax({
+		  type: "GET",
+		  url: "verificationAndValidation.do?",
+		  cache: false,
+		  data: { command: "ajaxEdit", id: id  }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			//call the isPositive() 
+			isPositiveFindings($("#findingsID").val(), true);
+		});
+
+}
+
+function updateVerificationAndValidation() {
+	
+	bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		 if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "updateVerificationAndValidation.do?command=ajaxUpdate",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIV").html(result);
+				});
+		 } 
+	}); 
+
+}
+
+function deleteVerificationAndValidation(id, category, currentPage) {
+	
+	bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		if (ans) {
+			$.ajax({
+				  type: "POST",
+				  url: "deleteVerificationAndValidation.do?",
+				  data: { command: "ajaxDelete", id: id  }
+				})
+				  .done(function( result ) {
+					 //$("#contentDIV").html(result);
+					getVerificationAndValidation(currentPage,category, true);//show the updated list after delete
+				});		
+		} 
+	}); 
+
+}
+
+//Transport Revision 1 Dec2015
+function getFindingsByItem(itemId){
+	
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "verificationAndValidation.do?command=ajaxPopulateFindingsByItem&itemId="+itemId
+		})
+		  .done(function( result ) {
+			$("#findingsDIVId").html(result);
+			//$("#findingsID").val(0);//default to --Select-- this code should be for Add screen only
+		});	
+}
+
+function getClosureByCorrections(correctionsId){
+	
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "verificationAndValidation.do?command=ajaxPopulateClosureByCorrections&correctionsId="+correctionsId
+		})
+		  .done(function( result ) {
+			$("#closureDIVId").html(result);
+		});
+}
+
+function getCorrectionsByRootCause(rootCauseId){
+	
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "verificationAndValidation.do?command=ajaxPopulateCorrectionsByRootCause&rootCauseId="+rootCauseId
+		})
+		  .done(function( result ) {
+			$("#correctionsDIVId").html(result);
+		});
+}
+
+function isPositiveFindings(findingsId){
+	
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "verificationAndValidation.do?command=ajaxIsPositiveFindings&findingsId="+findingsId
+		})
+		  .done(function( result ) {
+			if (result == 'true') {
+				$("#rootCauseID").prop("disabled", true);
+				$("#correctionsID").prop("disabled", true);
+				$("#remarksID").val(3);
+			} else {
+				$("#rootCauseID").prop("disabled", false);
+				$("#correctionsID").prop("disabled", false);
+				$("#remarksID").val(1);
+			}
+		});
+}
+
+//Work Permit Enhancement
+function goToWorkPermit() {
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "workPermit.do?"
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+}
+
+function goToAddWorkPermit() {
+	$.ajax({
+		  type: "GET",
+		  url: "workPermit.do?",
+		  cache: false,
+		  data: { command: "add" }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			$("#permitNoId").focus();
+		});
+}
+
+function getWorkPermit(pageCriteria, category, isDeleted) {
+
+	var searchCriteria = $('#searchCriteriaId').val();
+
+	//validation if search criteria is date started
+	if (searchCriteria=='809' || searchCriteria=='811') {
+		var dateFrom = $('#dateFromDatePicker').val();
+		var dateTo = $('#dateToDatePicker').val();
+		//Date From
+		if (dateFrom==null || dateFrom=='') {
+			alert("Date From is required for Date search criteria.");
+			return false;
+		}
+		//Date To
+		if (dateTo==null || dateTo=='') {
+			alert("Date To is required for Date search criteria.");
+			return false;
+		}
+	}
+	
+	
+	//validation for search criteria
+	if (category == 'filter' && searchCriteria!='809' && searchCriteria!='811') {
+		if ( $("#idSearchValue").val().trim() == '') {
+			$("#validationMessageId").show();
+			$("#idSearchValue").focus(); 
+			setTimeout( "$('#validationMessageId').hide();",1500 );
+			return false;
+		}
+
+	}
+
+	$.ajax({
+		  type: "GET",
+		  url: "workPermit.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+		  cache: false,
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#tablePresentationDIV").html(result);
+			if (isDeleted) {
+				$("#msgDeletedId").show();
+				setTimeout( "$('#msgDeletedId').hide();", 1500 );
+			}
+		});
+}
+
+function saveWorkPermit() {
+	
+	$.ajax({
+		  type: "POST",
+		  url: "saveWorkPermit.do?command=ajaxSave",
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+
+}
+
+function editWorkPermit(id) {
+	$.ajax({
+		  type: "GET",
+		  url: "workPermit.do?",
+		  cache: false,
+		  data: { command: "ajaxEdit", id: id  }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+
+}
+
+function updateWorkPermit() {
+	
+	bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		 if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "updateWorkPermit.do?command=ajaxUpdate",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIV").html(result);
+				});
+		 } 
+	}); 
+
+}
+
+function deleteWorkPermit(id, category, currentPage) {
+	
+	bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		if (ans) {
+			$.ajax({
+				  type: "POST",
+				  url: "deleteWorkPermit.do?",
+				  data: { command: "ajaxDelete", id: id  }
+				})
+				  .done(function( result ) {
+					 //$("#contentDIV").html(result);
+					getWorkPermit(currentPage,category, true);//show the updated list after delete
+				});		
+		} 
+	}); 
+
+}
+
+function selectPermitIssuer(isHide, permitIssuer) {
+	if (permitIssuer==0) {
+		return false;
+	}
+	
+	if (isHide) {
+		$("#permitIssuerId").css("visibility","visible");
+		$("#permitIssuerId").val(permitIssuer);
+		$("#permitIssuerFullNameId").hide();
+		$("#editPermitIssuerLinkId").show();
+	} else {
+		$("#permitIssuerId").css("visibility","hidden");
+		$("#permitIssuerFullNameId").show();
+		$("#editPermitIssuerLinkId").hide();
+		$("#permitIssuerFullNameId").focus();
+	}
+
+}
+
+function selectLorry(isHide, value) {
+	if (value==0) {
+		return false;
+	}
+	
+	if (isHide) {
+		//$("#lorryAndPlateNoId").css("display","none"); or use hide() for jquery
+		$("#lorryAndPlateNoId").hide();
+		$("#selectLorryLabelId").hide();
+		$("#plateNoId").show();
+		$("#lorryNoId").show();
+		$("#plateNoLabelId").show();
+		$("#lorryNoLabelId").show();
+		//$("#plateNoId").css('visibility','visible');
+		//$("#lorryNoId").css('visibility','visible');
+		//$("#plateNoLabelId").css('visibility','visible');
+		//$("#lorryNoLabelId").css('visibility','visible');
+		$("#editLorryLinkId").show();
+		
+		var lorryArr = value.split("|");
+		$("#plateNoId").val(lorryArr[0]);
+		$("#lorryNoId").val(lorryArr[1]);		
+	} else {
+		$("#lorryAndPlateNoId").show();
+		$("#selectLorryLabelId").show();
+		$("#plateNoId").hide();
+		$("#lorryNoId").hide();
+		$("#plateNoLabelId").hide();
+		$("#lorryNoLabelId").hide();
+		//$("#plateNoId").css('visibility','hidden');
+		//$("#lorryNoId").css('visibility','hidden');
+		//$("#plateNoLabelId").css('visibility','hidden');
+		//$("#lorryNoLabelId").css('visibility','hidden');
+		$("#editLorryLinkId").hide();
+		$("#lorryAndPlateNoId").focus();
+	}
+	
+}  
+  
+function addMechanic(value) {
+	if ($("#mechanicId").val().trim() == '') {
+		$("#mechanicId").val(value);
+	} else {
+		$("#mechanicId").val($("#mechanicId").val() + ",\n" + value);
+	}
+	
+}
+
+//Maintenance Monitoring
+function goToMaintenanceMonitoring() {
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "maintenanceMonitoring.do?"
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+}
+
+function goToAddMaintenanceMonitoring() {
+	$.ajax({
+		  type: "GET",
+		  url: "maintenanceMonitoring.do?",
+		  cache: false,
+		  data: { command: "add" }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			$("#permitNoId").focus();
+		});
+}
+
+function getMaintenanceMonitoring(isGenerateExcelFile) {
+	
+	//isGenerateExcelFile: Values 1 or 0: 1-Yes, 0-No
+
+	var yearCriteria = $('#idYearCriteria').val();
+	var monthCriteria = $('#idMonthCriteria').val();
+	var lorryNoCriteria = $('#idLorryNoCriteria').val();
+
+	$.ajax({
+		type: "GET",
+		url: "maintenanceMonitoring.do?command=ajaxSearch&yearCriteria="+yearCriteria+"&monthCriteria="+monthCriteria+"&lorryNoCriteria="+lorryNoCriteria+"&isGenerateExcelFile="+isGenerateExcelFile,
+		cache: false,
+		data: $("#idForm").serialize() 
+	})
+		.done(function( result ) {
+			if (isGenerateExcelFile == '0') {
+				$("#tablePresentationDIV").html(result);
+			} else {
+				$("#excelReportStatusDIV").html(result);
+			}
+	});
+	
+}
+
+function saveMaintenanceMonitoring() {
+	
+	if ($('#plateNoId').val() == '') {
+		alert("Please select lorry.");
+		return false;
+	} else {
+		$.ajax({
+			  type: "POST",
+			  url: "saveMaintenanceMonitoring.do?command=ajaxSave",
+			  data: $("#idPopupForm").serialize() 
+			})
+			  .done(function( result ) {
+				  alert('Record successfully saved!');
+			});		
+	}
+	
+}
+
+function updateMaintenanceMonitoring(moduleInner) {
+	
+	$.ajax({
+		  type: "POST",
+		  url: "updateMaintenanceMonitoring.do?command=ajaxUpdate&moduleInner="+moduleInner,
+		  data: $("#idPopupForm").serialize() 
+		})
+		  .done(function( result ) {
+			  alert('Record successfully updated!');
+			  window.close();
+	}); 
+	
+}
+
+//Driver Training Enhancement
+function goToDriverTraining() {
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "driverTraining.do?"
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+}
+
+function goToAddDriverTraining() {
+	$.ajax({
+		  type: "GET",
+		  url: "driverTraining.do?",
+		  cache: false,
+		  data: { command: "add" }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			$("#driverId").focus();
+		});
+}
+
+function getDriverTraining(pageCriteria, category, isDeleted) {
+
+	$.ajax({
+		  type: "GET",
+		  url: "driverTraining.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+		  cache: false,
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#tablePresentationDIV").html(result);
+			if (isDeleted) {
+				$("#msgDeletedId").show();
+				setTimeout( "$('#msgDeletedId').hide();", 1500 );
+			}
+		});
+}
+
+function saveDriverTraining() {
+
+	//var form = $("#idForm")[0];
+	//var data = new FormData(form);
+	
+	$.ajax({
+		  type: "POST",
+		  url: "saveDriverTraining.do?command=ajaxSave",
+		  //data: $("#idForm").serialize(),
+		  data: new FormData(document.getElementById("idForm")),
+          enctype: 'multipart/form-data',
+          processData: false, 
+          contentType: false 
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+
+}
+
+function editDriverTraining(id) {
+	$.ajax({
+		  type: "GET",
+		  url: "driverTraining.do?",
+		  cache: false,
+		  data: { command: "ajaxEdit", id: id  }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+
+}
+
+function updateDriverTraining() {
+	
+	bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		 if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "updateDriverTraining.do?command=ajaxUpdate",
+					  data: new FormData(document.getElementById("idForm")),
+			          enctype: 'multipart/form-data',
+			          processData: false, 
+			          contentType: false 
+					})
+					  .done(function( result ) {
+						$("#contentDIV").html(result);
+				});
+		 } 
+	}); 
+
+}
+
+function deleteDriverTraining(id, category, currentPage) {
+	
+	bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		if (ans) {
+			$.ajax({
+				  type: "POST",
+				  url: "deleteDriverTraining.do?",
+				  data: { command: "ajaxDelete", id: id  }
+				})
+				  .done(function( result ) {
+					 //$("#contentDIV").html(result);
+					getDriverTraining(currentPage,category, true);//show the updated list after delete
+				});		
+		} 
+	}); 
+
+}

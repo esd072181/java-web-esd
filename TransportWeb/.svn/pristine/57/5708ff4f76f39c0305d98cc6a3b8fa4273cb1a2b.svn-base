@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd"> 
+ 
+<struts-config>
+ 
+ 	<!-- Struts Config for Reports -->
+ 
+	<form-beans>
+
+		<form-bean name="rptVerificationForm" type="com.transport.form.RptVerificationFormBean" />
+		<form-bean name="rptWorkPermitForm" type="com.transport.form.RptWorkPermitFormBean" />
+
+	</form-beans>
+ 
+	<action-mappings>
+	   
+      <!-- Verification and Validation Report (START) -->
+	   <action 
+	   		path="/rptVerification" 
+	   		type="com.transport.action.RptVerificationAction"
+			name="rptVerificationForm"
+			scope="request"
+			input="/pages/reports/verification/ajaxRptVerification.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/verification/ajaxRptVerification.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/verification/ajaxRptVerificationStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Verification and Validation Report (END) -->	 
+
+      <!-- Work Permit Report (START) -->
+	   <action 
+	   		path="/rptWorkPermit" 
+	   		type="com.transport.action.RptWorkPermitAction"
+			name="rptWorkPermitForm"
+			scope="request"
+			input="/pages/reports/workpermit/ajaxRptWorkPermit.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/workpermit/ajaxRptWorkPermit.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/workpermit/ajaxRptWorkPermitStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Work Permit Report (END) -->
+	   
+	</action-mappings>
+	
+
+</struts-config>

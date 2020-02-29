@@ -1,0 +1,499 @@
+package com.transport.action;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import com.transport.constant.ActionConstant;
+import com.transport.constant.MapConstant;
+import com.transport.constant.MiscConstant;
+import com.transport.constant.ModuleConstant;
+import com.transport.constant.ParamConstant;
+import com.transport.form.MaintenanceMonitoringFormBean;
+import com.transport.model.MaintenanceMonitoring;
+import com.transport.model.MaintenanceMonitoringFleet;
+import com.transport.model.MaintenanceMonitoringPreventive;
+import com.transport.model.MaintenanceMonitoringPreventiveTotal;
+import com.transport.model.MaintenanceMonitoringTotalPending;
+import com.transport.model.User;
+import com.transport.service.ServiceManager;
+import com.transport.service.ServiceManagerImpl;
+import com.transport.util.TransportUtils;
+
+/**
+ * 
+ * @author dward
+ * @since 26Mar2019
+ */
+public class MaintenanceMonitoringAction extends Action {
+
+	private final static Logger logger = Logger.getLogger(MaintenanceMonitoringAction.class);
+	
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		MaintenanceMonitoringFormBean formBean = (MaintenanceMonitoringFormBean) form;
+        String forwardAction = ActionConstant.NONE;
+		String command = request.getParameter("command");
+		
+		//session expired checking
+		if (request.getSession().getAttribute(MiscConstant.USER_SESSION) == null) {
+			forwardAction = ActionConstant.SHOW_AJAX_EXPIRED;
+		} else {
+			if (command!=null) {
+				
+				int module = ModuleConstant.MAINTENANCE_MONITORING;
+				
+				if (command.equalsIgnoreCase(ParamConstant.ADD)) {
+					
+					//get fresh/updated list data from DB for click ADD and EDIT link
+					formBean.populateDropdownListFromSession(request, false);
+					
+					formBean.setTransactionStatus(false);
+					formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_RESET);
+					forwardAction = ActionConstant.SHOW_AJAX_ADD;
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_EDIT)) {
+					//fetch the data
+					
+					String id = (String) (request.getParameter("id"));
+					String plateNo = (String) (request.getParameter("plateNo"));
+					String trailerNo = (String) (request.getParameter("trailerNo"));
+					String lorryNo = (String) (request.getParameter("lorryNo"));
+					String capacity = (String) (request.getParameter("capacity"));
+					String year = (String) (request.getParameter("year"));
+					String month = (String) (request.getParameter("month"));
+					String day = (String) (request.getParameter("day"));
+					String moduleInner = (String) (request.getParameter("moduleInner"));//GPS (241) or Maintenance (242)
+					String idPreventive = (String) (request.getParameter("idPreventive"));
+					String idTotalPending = (String) (request.getParameter("idTotalPending"));
+					
+					formBean.setYear(year);
+					formBean.setMonth(TransportUtils.getStrMonth(Integer.parseInt(month)));
+					formBean.setDay(day);
+					formBean.setModuleInner(Integer.parseInt(moduleInner));
+					
+					if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_GPS || formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_MAINTENANCE) {
+						formBean.setId(Integer.parseInt(id));
+						formBean.setPlateNo(plateNo);
+						formBean.setTrailerNo(trailerNo);
+						formBean.setLorryNo(lorryNo);
+						formBean.setCapacity(capacity);
+						
+						//retrieve the gps and maintenance details here and assign to form
+						MaintenanceMonitoring model = new MaintenanceMonitoring();
+						model.setId(Integer.parseInt(id));
+						
+						HashMap<String,Object> dataMap = new HashMap<String, Object>();
+				        dataMap.put(MapConstant.MODULE, module);
+				        dataMap.put(MapConstant.MODULE_INNER, formBean.getModuleInner());
+				        dataMap.put(MapConstant.CLASS_DATA, model);
+				        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+				        
+				        ServiceManager service = new ServiceManagerImpl();
+				        Map<String, Object> resultMap = service.executeRequest(dataMap);
+						
+				        if (resultMap!=null && !resultMap.isEmpty()) {
+					        model =  (MaintenanceMonitoring) resultMap.get(MapConstant.CLASS_DATA);	
+					        if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_GPS) {
+					        	formBean.populateFormBeanGPS(model);
+					        } else {
+					        	formBean.populateFormBeanMaintenance(model);
+					        }			        	
+				        }
+				        
+				        formBean.populateDropdownListFromSession(request, true);
+				        
+						formBean.setTransactionStatus(false);
+						formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_RESET);
+						
+						if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_GPS) {
+							forwardAction = ActionConstant.SHOW_AJAX_EDIT;//GPS
+						} else {
+							forwardAction = ActionConstant.SHOW_AJAX_EDIT_2;//Maintenance
+						}						
+					} else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_GARAGE || 
+								formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_FBASE ||
+								formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_GARAGE || 
+								formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_FBASE) {
+						formBean.setIdPreventive(Integer.parseInt(idPreventive));
+						//retrieve the preventive garage details here and assign to form
+						MaintenanceMonitoringPreventive model = new MaintenanceMonitoringPreventive();
+						model.setId(formBean.getIdPreventive());
+						
+						HashMap<String,Object> dataMap = new HashMap<String, Object>();
+				        dataMap.put(MapConstant.MODULE, ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE);
+				        dataMap.put(MapConstant.MODULE_INNER, formBean.getModuleInner());
+				        dataMap.put(MapConstant.CLASS_DATA, model);
+				        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+				        
+				        ServiceManager service = new ServiceManagerImpl();
+				        Map<String, Object> resultMap = service.executeRequest(dataMap);
+						
+				        if (resultMap!=null && !resultMap.isEmpty()) {
+					        model =  (MaintenanceMonitoringPreventive) resultMap.get(MapConstant.CLASS_DATA);	
+					        if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_GARAGE) {
+					        	formBean.populateFormBeanPGarage(model);
+					        } else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_FBASE) {
+					        	formBean.populateFormBeanPFbase(model);
+					        } else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_GARAGE) {
+					        	formBean.populateFormBeanBGarage(model);
+					        } else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_FBASE) {
+					        	formBean.populateFormBeanBFbase(model);
+					        }
+				        }
+				        
+				        formBean.populateDropdownListFromSession(request, true);
+				        
+						formBean.setTransactionStatus(false);
+						formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_RESET);
+						
+						if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_GPS) {
+							forwardAction = ActionConstant.SHOW_AJAX_EDIT;//GPS
+						} else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_MAINTENANCE){
+							forwardAction = ActionConstant.SHOW_AJAX_EDIT_2;//Maintenance
+						} else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_GARAGE){
+							forwardAction = ActionConstant.SHOW_AJAX_EDIT_3;//PGarage
+						} else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_FBASE){
+							forwardAction = ActionConstant.SHOW_AJAX_EDIT_4;//PFbase
+						} else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_GARAGE){
+							forwardAction = ActionConstant.SHOW_AJAX_EDIT_5;//BGarage
+						} else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_FBASE){
+							forwardAction = ActionConstant.SHOW_AJAX_EDIT_6;//BFbase
+						}
+					} else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_TOTAL_PENDING) {
+						formBean.setIdTotalPending(Integer.parseInt(idTotalPending));
+						//retrieve the preventive garage details here and assign to form
+						MaintenanceMonitoringTotalPending model = new MaintenanceMonitoringTotalPending();
+						model.setId(formBean.getIdTotalPending());
+						
+						HashMap<String,Object> dataMap = new HashMap<String, Object>();
+				        dataMap.put(MapConstant.MODULE, ModuleConstant.MAINTENANCE_MONITORING_TOTAL_PENDING);
+				        dataMap.put(MapConstant.MODULE_INNER, formBean.getModuleInner());
+				        dataMap.put(MapConstant.CLASS_DATA, model);
+				        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+				        
+				        ServiceManager service = new ServiceManagerImpl();
+				        Map<String, Object> resultMap = service.executeRequest(dataMap);
+						
+				        if (resultMap!=null && !resultMap.isEmpty()) {
+					        model =  (MaintenanceMonitoringTotalPending) resultMap.get(MapConstant.CLASS_DATA);	
+					        formBean.populateFormBeanTotalPending(model);
+
+				        }
+				        
+						formBean.setTransactionStatus(false);
+						formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_RESET);
+						
+						forwardAction = ActionConstant.SHOW_AJAX_EDIT_7;
+							
+					}
+					
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE)) {
+					//Add Lorry for Maintenance
+					
+					User user = (User) request.getSession().getAttribute(MiscConstant.USER_SESSION);
+					
+					MaintenanceMonitoring model = (MaintenanceMonitoring) formBean.populateModel();
+					
+					HashMap<String,Object> dataMap = new HashMap<String, Object>();
+			        dataMap.put(MapConstant.MODULE, module);
+			        dataMap.put(MapConstant.CLASS_DATA, model);
+			        dataMap.put(MapConstant.USER_SESSION_DATA, user);
+			        dataMap.put(MapConstant.ACTION, ActionConstant.SAVE);
+			    
+			        ServiceManager service = new ServiceManagerImpl();
+			        Map<String, Object> resultMap = service.executeRequest(dataMap);
+			        
+			        if (resultMap!=null && !resultMap.isEmpty()) {
+			        	//check resultmap action status
+			        	boolean tranctionStatus = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+	
+			        	formBean.setTransactionStatus(tranctionStatus);
+			        	
+			        	//get the dropdown list from session
+			        	formBean.populateDropdownListFromSession(request, false); 
+			       
+			        	if (tranctionStatus) {
+			        		//show success page
+			        		//add confirmation message
+			        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_SAVED);
+			        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_SAVED+" - "+module);
+			        		//logger.info(MiscConstant.TRANS_MESSSAGE_SAVED);
+			        		forwardAction = ActionConstant.AJAX_SUCCESS;
+			        	} else {
+			        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
+			        		//logger.info(MiscConstant.TRANS_MESSSAGE_ERROR);
+			        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_ERROR+" - "+module);
+			        		forwardAction = ActionConstant.AJAX_FAILED;
+			        	}
+			        }			        
+					
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE)) {
+					
+					User user = (User) request.getSession().getAttribute(MiscConstant.USER_SESSION);
+					String moduleInner = (String) (request.getParameter("moduleInner"));//GPS (241) or Maintenance (242) 					
+					formBean.setModuleInner(Integer.parseInt(moduleInner));
+					
+					if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_GPS || formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_MAINTENANCE) {
+						MaintenanceMonitoring model = null;
+						
+						//populateModel
+						if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_GPS) {
+							model = (MaintenanceMonitoring) formBean.populateModelGPS();
+						} else {
+							model = (MaintenanceMonitoring) formBean.populateModelMaintenance();
+						}
+						
+						HashMap<String,Object> dataMap = new HashMap<String, Object>();
+				        dataMap.put(MapConstant.MODULE, module);
+				        dataMap.put(MapConstant.MODULE_INNER, formBean.getModuleInner());
+				        dataMap.put(MapConstant.CLASS_DATA, model);
+				        dataMap.put(MapConstant.USER_SESSION_DATA, user);
+				        dataMap.put(MapConstant.ACTION, ActionConstant.UPDATE);
+				    
+				        ServiceManager service = new ServiceManagerImpl();
+				        Map<String, Object> resultMap = service.executeRequest(dataMap);
+				        
+				        if (resultMap!=null && !resultMap.isEmpty()) {
+				        	//check resultmap action status
+				        	boolean tranctionStatus = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+		
+				        	formBean.setTransactionStatus(tranctionStatus);
+				        	
+				        	//get the dropdown list from session
+				        	formBean.populateDropdownListFromSession(request, true);  
+		
+				        	if (tranctionStatus) {
+				        		//show success page
+				        		//add confirmation message
+				        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_UPDATED);
+				        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_UPDATED+" - "+module);
+				        		//logger.info(MiscConstant.TRANS_MESSSAGE_UPDATED);
+				        		forwardAction = ActionConstant.AJAX_SUCCESS;
+				        	} else {
+				        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
+				        		//logger.info(MiscConstant.TRANS_MESSSAGE_ERROR);
+				        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_ERROR+" - "+module);
+				        		forwardAction = ActionConstant.AJAX_FAILED;
+				        	}
+				        }						
+					} else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_GARAGE || 
+								formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_FBASE ||
+								formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_GARAGE || 
+								formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_FBASE) {
+						//Preventive/Breakdown update
+						MaintenanceMonitoringPreventive model = null;
+						
+				        if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_GARAGE) {
+				        	model = (MaintenanceMonitoringPreventive) formBean.populateModelPGarage();
+				        } else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE_FBASE) {
+				        	model = (MaintenanceMonitoringPreventive) formBean.populateModelPFbase();
+				        } else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_GARAGE) {
+				        	model = (MaintenanceMonitoringPreventive) formBean.populateModelBGarage();
+				        } else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_BREAKDOWN_FBASE) {
+				        	model = (MaintenanceMonitoringPreventive) formBean.populateModelBFbase();
+				        }
+				        
+						HashMap<String,Object> dataMap = new HashMap<String, Object>();
+				        dataMap.put(MapConstant.MODULE, ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE);
+				        dataMap.put(MapConstant.MODULE_INNER, formBean.getModuleInner());
+				        dataMap.put(MapConstant.CLASS_DATA, model);
+				        dataMap.put(MapConstant.USER_SESSION_DATA, user);
+				        dataMap.put(MapConstant.ACTION, ActionConstant.UPDATE);
+				    
+				        ServiceManager service = new ServiceManagerImpl();
+				        Map<String, Object> resultMap = service.executeRequest(dataMap);
+				        
+				        if (resultMap!=null && !resultMap.isEmpty()) {
+				        	//check resultmap action status
+				        	boolean tranctionStatus = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+		
+				        	formBean.setTransactionStatus(tranctionStatus);
+				        	
+				        	//get the dropdown list from session
+				        	formBean.populateDropdownListFromSession(request, true);  
+		
+				        	if (tranctionStatus) {
+				        		//show success page
+				        		//add confirmation message
+				        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_UPDATED);
+				        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_UPDATED+" - "+module);
+				        		//logger.info(MiscConstant.TRANS_MESSSAGE_UPDATED);
+				        		forwardAction = ActionConstant.AJAX_SUCCESS;
+				        	} else {
+				        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
+				        		//logger.info(MiscConstant.TRANS_MESSSAGE_ERROR);
+				        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_ERROR+" - "+module);
+				        		forwardAction = ActionConstant.AJAX_FAILED;
+				        	}
+				        }
+					} else if (formBean.getModuleInner() == ModuleConstant.MAINTENANCE_MONITORING_TOTAL_PENDING) {
+						//MaintenanceMonitoringTotalPending update
+						MaintenanceMonitoringTotalPending model = (MaintenanceMonitoringTotalPending) formBean.populateModelTotalPending();
+				        
+						HashMap<String,Object> dataMap = new HashMap<String, Object>();
+				        dataMap.put(MapConstant.MODULE, ModuleConstant.MAINTENANCE_MONITORING_TOTAL_PENDING);
+				        dataMap.put(MapConstant.MODULE_INNER, formBean.getModuleInner());
+				        dataMap.put(MapConstant.CLASS_DATA, model);
+				        dataMap.put(MapConstant.USER_SESSION_DATA, user);
+				        dataMap.put(MapConstant.ACTION, ActionConstant.UPDATE);
+				    
+				        ServiceManager service = new ServiceManagerImpl();
+				        Map<String, Object> resultMap = service.executeRequest(dataMap);
+				        
+				        if (resultMap!=null && !resultMap.isEmpty()) {
+				        	//check resultmap action status
+				        	boolean tranctionStatus = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+		
+				        	formBean.setTransactionStatus(tranctionStatus);
+				        			
+				        	if (tranctionStatus) {
+				        		//show success page
+				        		//add confirmation message
+				        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_UPDATED);
+				        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_UPDATED+" - "+module);
+				        		//logger.info(MiscConstant.TRANS_MESSSAGE_UPDATED);
+				        		forwardAction = ActionConstant.AJAX_SUCCESS;
+				        	} else {
+				        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
+				        		//logger.info(MiscConstant.TRANS_MESSSAGE_ERROR);
+				        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_ERROR+" - "+module);
+				        		forwardAction = ActionConstant.AJAX_FAILED;
+				        	}
+				        }
+							
+							
+					}
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_DELETE)) {
+					//No code for now
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_SEARCH)) {
+					  
+					String yearCriteria = (String) request.getParameter("yearCriteria"); 
+					String monthCriteria = (String) request.getParameter("monthCriteria");
+					String lorryNoCriteria = (String) request.getParameter("lorryNoCriteria"); 
+
+					HashMap<String,Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.YEAR_CRITERIA, yearCriteria);
+					dataMap.put(MapConstant.MONTH_CRITERIA, monthCriteria);
+					dataMap.put(MapConstant.SEARCH_CRITERIA, lorryNoCriteria);
+			        dataMap.put(MapConstant.MODULE, module);
+				    dataMap.put(MapConstant.ACTION, ActionConstant.GET_ACTIVE_DATA);
+	
+			        ServiceManager service = new ServiceManagerImpl();
+			        Map<String, Object> resultMap = service.executeRequest(dataMap);
+			        
+			        if (resultMap!=null && !resultMap.isEmpty()) {
+						@SuppressWarnings("unchecked")
+						List<MaintenanceMonitoring> qryList =  (List<MaintenanceMonitoring>) resultMap.get(MapConstant.CLASS_LIST);
+						@SuppressWarnings("unchecked")
+						List<MaintenanceMonitoringFleet> qryListShellFleet =  (List<MaintenanceMonitoringFleet>) resultMap.get(MapConstant.CLASS_LIST_2);
+						@SuppressWarnings("unchecked")
+						List<MaintenanceMonitoringFleet> qryListCaltexFleet =  (List<MaintenanceMonitoringFleet>) resultMap.get(MapConstant.CLASS_LIST_3);
+						@SuppressWarnings("unchecked")
+						List<MaintenanceMonitoringFleet> qryListGrandTotalFleet =  (List<MaintenanceMonitoringFleet>) resultMap.get(MapConstant.CLASS_LIST_4);
+			        	formBean.setModelList(qryList);
+			        	formBean.setModelListShellFleet(qryListShellFleet);
+			        	formBean.setModelListCaltexFleet(qryListCaltexFleet);
+			        	formBean.setModelListGrandTotalFleet(qryListGrandTotalFleet);
+			        	//search for the Preventive data
+			        	dataMap.put(MapConstant.MODULE,  ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE);
+			        	resultMap.clear();
+			        	resultMap = service.executeRequest(dataMap);
+			        	if (resultMap!=null && !resultMap.isEmpty()) {
+							@SuppressWarnings("unchecked")
+							List<MaintenanceMonitoringPreventive> modelListPreventive =  (List<MaintenanceMonitoringPreventive>) resultMap.get(MapConstant.CLASS_LIST);
+							@SuppressWarnings("unchecked")
+							List<MaintenanceMonitoringPreventiveTotal> modelListPreventiveTotal =  (List<MaintenanceMonitoringPreventiveTotal>) resultMap.get(MapConstant.CLASS_LIST_2);
+							formBean.setModelListPreventive(modelListPreventive);
+							formBean.setModelListPreventiveTotal(modelListPreventiveTotal);
+			        	} else {
+			        		formBean.setModelListPreventive(null);
+							formBean.setModelListPreventiveTotal(null);
+			        	}
+			        	//search for the Total Pending data
+			        	dataMap.put(MapConstant.MODULE,  ModuleConstant.MAINTENANCE_MONITORING_TOTAL_PENDING);
+			        	resultMap.clear();
+			        	resultMap = service.executeRequest(dataMap);
+			        	if (resultMap!=null && !resultMap.isEmpty()) {
+							@SuppressWarnings("unchecked")
+							List<MaintenanceMonitoringTotalPending> qryListTotalPending =  (List<MaintenanceMonitoringTotalPending>) resultMap.get(MapConstant.CLASS_LIST);
+							formBean.setModelListTotalPending(qryListTotalPending);
+			        	} else {
+			        		formBean.setModelListTotalPending(null);
+			        	}
+			        	
+			        	
+			        	String isGenerateExcelFile = request.getParameter("isGenerateExcelFile");//value is 1
+
+					    if (isGenerateExcelFile!=null && Integer.parseInt(isGenerateExcelFile) == 1) {
+
+					        		Map<String, Object> reportDataMap = new HashMap<>();
+					        		reportDataMap.put(MapConstant.YEAR_CRITERIA, yearCriteria);
+					        		reportDataMap.put(MapConstant.MONTH_CRITERIA, monthCriteria);
+					        		reportDataMap.put(MapConstant.CLASS_LIST, formBean.getModelList());
+					        		reportDataMap.put(MapConstant.CLASS_LIST_2, formBean.getModelListShellFleet());
+					        		reportDataMap.put(MapConstant.CLASS_LIST_3, formBean.getModelListCaltexFleet());
+					        		reportDataMap.put(MapConstant.CLASS_LIST_4, formBean.getModelListGrandTotalFleet());
+					        		reportDataMap.put(MapConstant.CLASS_LIST_5, formBean.getModelListPreventive());
+					        		reportDataMap.put(MapConstant.CLASS_LIST_6, formBean.getModelListPreventiveTotal());
+					        		reportDataMap.put(MapConstant.CLASS_LIST_7, formBean.getModelListTotalPending());
+					        							        		
+					        		String localPath = TransportUtils.getReportPath(request);
+					        		
+					        		//call the service to generate the excel file
+					        		dataMap.put(MapConstant.MODULE,  ModuleConstant.MAINTENANCE_MONITORING);
+					        		dataMap.put(MapConstant.REPORT_DATA_MAP, reportDataMap);
+					        		dataMap.put(MapConstant.REPORT_LOCALPATH, localPath);
+					        		dataMap.put(MapConstant.ACTION, ActionConstant.GENERATE_EXCEL_FILE);
+					        		Map<String, Object>  resultMapGen = service.executeRequest(dataMap);
+						        	
+							        boolean isReportGenerated = (boolean) resultMapGen.get(MapConstant.BOOLEAN_DATA);
+
+						        	if (isReportGenerated) {
+						        		TransportUtils.writeLogInfo(logger, MiscConstant.RPT_MESSSAGE_GENERATED_SUCCESS + "-" + module);	
+						        	} else {
+						        		//need to add message here if report generation failed, make the message dynamic
+						        		TransportUtils.writeLogInfo(logger, MiscConstant.RPT_MESSSAGE_GENERATED_FAILED + "-" + module);
+						        	}	        	
+					        	forwardAction = ActionConstant.SHOW_AJAX_SEARCH_STATUS;
+					        } else {
+						        forwardAction = ActionConstant.SHOW_AJAX_TABLE;			        	
+					        }
+			        } else {
+			        	formBean.setModelList(null);
+			        	forwardAction = ActionConstant.SHOW_AJAX_TABLE;			        	
+			        }   
+			     } 
+			} else {
+				//show main screen
+				//load the LOV
+//				formBean.populateCriteriaDropdownList(request);
+//				if (request.getSession().getAttribute(MiscConstant.WORK_PERMIT_SEARCH_CRITERIA)!=null) {
+//					formBean.setSearchCriteria((String)request.getSession().getAttribute(MiscConstant.WORK_PERMIT_SEARCH_CRITERIA));
+//				}
+//				if (request.getSession().getAttribute(MiscConstant.TRANSPORT_PROGRAM_CRITERIA)!=null) {
+//					formBean.setTransportId((String)request.getSession().getAttribute(MiscConstant.TRANSPORT_PROGRAM_CRITERIA));
+//				}
+				 forwardAction = ActionConstant.SHOW_AJAX_MAIN;
+			}
+			
+		}
+		
+		return mapping.findForward(forwardAction);
+	}	
+
+	
+	
+	
+}

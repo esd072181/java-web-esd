@@ -1,0 +1,843 @@
+package com.transport.dao.impl;
+
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import com.transport.config.ServerContext;
+import com.transport.constant.ActionConstant;
+import com.transport.constant.MapConstant;
+import com.transport.constant.MiscConstant;
+import com.transport.dao.DriverTrainingProfileDao;
+import com.transport.model.DriverTrainingProfile ;
+import com.transport.model.User;
+import com.transport.util.TransportUtils;
+
+public class DriverTrainingProfileDaoImpl implements DriverTrainingProfileDao {
+	
+	private final static Logger logger = Logger.getLogger(DriverTrainingProfileDaoImpl.class);
+
+	@Override
+	public Map<String, Object> save(HashMap<String, Object> dataMap) throws Exception{
+		
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SAVE);
+
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		DriverTrainingProfile  model = (DriverTrainingProfile ) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setCreatedBy((int) user.getId());	
+		}
+		model.setCreatedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("insert into transport.tran_driver_training_profile (");
+				qry.append("DriverTrainingProfileid ");
+		  		qry.append(",vnv ");
+		  		qry.append(",incab ");
+		  		qry.append(",spotcheck ");
+		  		qry.append(",incident ");
+		  		qry.append(",notes ");
+		  		qry.append(",profiledate ");
+		  		qry.append(",statusid ");
+		  		qry.append(",createdby ");
+		  		qry.append(",createdon ");
+		  		qry.append(",version ");
+		  		qry.append(",active ");
+		  		qry.append(" ) ");
+		  		qry.append(" values ");
+		  		qry.append(" ( ");
+		  		qry.append(" ? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,1 ");
+		  		qry.append(" ,true ");
+		  		qry.append(" ) ");
+
+		StringBuffer qryLog =  new StringBuffer("insert into transport.tran_driver_training_profile (");
+				qryLog.append("DriverTrainingProfileid ");
+		  		qryLog.append(",vnv ");
+		  		qryLog.append(",incab ");
+		  		qryLog.append(",spotcheck ");
+		  		qryLog.append(",incident ");
+		  		qryLog.append(",notes ");
+		  		qryLog.append(",profiledate ");
+		  		qryLog.append(",statusid ");
+		  		qryLog.append(",createdby ");
+		  		qryLog.append(",createdon ");
+		  		qryLog.append(",version ");
+		  		qryLog.append(",active ");
+				qryLog.append(" ) ");
+				qryLog.append(" values ");
+				qryLog.append(" ( ");
+				qryLog.append(model.getDriverTrainingId());
+				qryLog.append(" ,"+model.getVnv());
+				qryLog.append(" ,"+model.getIncab());
+				qryLog.append(" ,"+model.getSpotcheck());
+				qryLog.append(" ,"+model.getIncident());
+				qryLog.append(" ,"+model.getNotes());
+				qryLog.append(" ,"+model.getProfileDate());
+				qryLog.append(" ,"+model.getStatusId());
+				qryLog.append(" ,"+model.getCreatedBy());
+				qryLog.append(" ,"+model.getCreatedOn());
+				qryLog.append(" ,1 ");
+				qryLog.append(" ,true ");
+				qryLog.append(" ) ");
+					
+		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+  		  		
+		  try {
+			  conn = ServerContext.getJDBCHandle();
+			  conn.setAutoCommit(false);
+			  pstmt = conn.prepareStatement(qry.toString());
+			     
+
+			  
+			  pstmt.setInt(1, model.getDriverTrainingId());
+			  pstmt.setString(2, model.getVnv());
+			  pstmt.setString(3, model.getIncab());
+			  pstmt.setString(4, model.getSpotcheck());
+			  pstmt.setString(5, model.getIncident());
+			  pstmt.setString(6, model.getNotes());
+			  pstmt.setDate(7, model.getProfileDate());
+			  pstmt.setInt(8, model.getStatusId());
+			  pstmt.setInt(9, model.getCreatedBy());
+			  pstmt.setTimestamp(10, model.getCreatedOn());
+			     
+			  int statusInt = pstmt.executeUpdate();
+			     
+			  if (statusInt == 1) {
+				  conn.commit();
+				  System.out.println("Inserted into DriverTrainingProfile  table successfully..");
+				  status = true;
+			  }
+		  } catch (Exception e) {
+			  conn.rollback();
+		 	  e.printStackTrace();
+		  } finally {
+			  TransportUtils.closeObjects(rs);
+			  TransportUtils.closeObjects(pstmt);
+			  TransportUtils.closeObjects(conn);
+		  } 		
+
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);
+		     
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> update(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_UPDATE);
+		 
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		DriverTrainingProfile  model = (DriverTrainingProfile ) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		  		
+		StringBuffer qry =  new StringBuffer("update transport.tran_driver_training_profile set ");	
+			qry.append(" drivertrainingid=? ");
+			qry.append(" ,vnv=? ");
+			qry.append(" ,incab=? ");
+			qry.append(" ,spotcheck=? ");
+			qry.append(" ,incident=? ");
+			qry.append(" ,notes=? ");
+			qry.append(" ,profiledate=? ");
+			qry.append(" ,statusid=? ");
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" id = ? ");
+
+		StringBuffer qryLog =  new StringBuffer("update transport.tran_driver_training_profile set ");	
+			qryLog.append(" drivertrainingid="+model.getDriverTrainingId());
+			qryLog.append(" ,vnv="+model.getVnv());
+			qryLog.append(" ,incab="+model.getIncab());
+			qryLog.append(" ,spotcheck="+model.getSpotcheck());
+			qryLog.append(" ,incident="+model.getIncident());
+			qryLog.append(" ,notes="+model.getNotes());
+			qryLog.append(" ,profiledate="+model.getProfileDate());
+			qryLog.append(" ,statusid="+model.getStatusId());
+			qryLog.append(" ,modifiedby="+model.getModifiedBy());
+			qryLog.append(" ,modifiedon="+model.getModifiedOn());
+			qryLog.append(" ,version=(version+1) ");
+			qryLog.append(" where ");
+			qryLog.append(" id = "+model.getId());
+			
+		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setInt(1, model.getDriverTrainingId());
+			pstmt.setString(2, model.getVnv());
+			pstmt.setString(3, model.getIncab());
+			pstmt.setString(4, model.getSpotcheck());
+			pstmt.setString(5, model.getIncident());
+			pstmt.setString(6, model.getNotes());
+			pstmt.setDate(7, model.getProfileDate());
+			pstmt.setInt(8, model.getStatusId());
+			pstmt.setInt(9, model.getModifiedBy());
+			pstmt.setTimestamp(10, model.getModifiedOn());
+			pstmt.setLong(11, model.getId());
+			
+
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("DriverTrainingProfile  record (id: " +model.getId()+") updated successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			TransportUtils.closeObjects(rs);
+			TransportUtils.closeObjects(pstmt);
+			TransportUtils.closeObjects(conn);
+		}
+			 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);	
+		
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> delete(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_DELETE);
+
+		
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		DriverTrainingProfile  model = (DriverTrainingProfile ) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("update transport.tran_driver_training_profile set ");	
+			qry.append(" active=false ");
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" id = ? ");
+
+		StringBuffer qryLog =  new StringBuffer("update transport.tran_driver_training_profile set ");	
+			qryLog.append(" active=false ");
+			qryLog.append(" ,modifiedby="+model.getModifiedBy());
+			qryLog.append(" ,modifiedon="+model.getModifiedOn());
+			qryLog.append(" ,version=(version+1) ");
+			qryLog.append(" where ");
+			qryLog.append(" id = "+model.getId());
+			
+		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setInt(1, model.getModifiedBy());
+			pstmt.setTimestamp(2, model.getModifiedOn());
+			pstmt.setLong(3, model.getId());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("DriverTrainingProfile  record (id: " +model.getId()+") deleted successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			TransportUtils.closeObjects(rs);
+			TransportUtils.closeObjects(pstmt);
+			TransportUtils.closeObjects(conn);
+		}
+			 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);	
+		
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> search(HashMap<String, Object> criteriaMap) throws Exception{
+		 
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		 	//Connection using JNDI DBCP
+			 //get the pagination and offset
+			 int offset = (int) criteriaMap.get(MapConstant.PAGINATION_OFFSET);
+			 int limit = (int) criteriaMap.get(MapConstant.PAGINATION_LIMIT);
+			 
+			 //get the category
+			 String category = (String) criteriaMap.get(MapConstant.ACTION);
+			 String criteria = (String) criteriaMap.get(MapConstant.SEARCH_CRITERIA);
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+			 
+			  List<DriverTrainingProfile> rsList = new ArrayList<DriverTrainingProfile>();
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = null;
+				 if (category.equals(ActionConstant.SEARCHALL)) {
+					 sql = new StringBuffer("select a.id,a.driverid,a.training1expirydate,a.training2expirydate,a.training3expirydate,a.picname,a.pic,a.vnv,a.incab,a.spotcheck,a.terminalid,a.articulated,a.notes,a.incident ");
+					 	sql.append(" ,a.birthday,a.aodt,b.lastname,b.firstname,c.name as terminalname,extract(year from age(birthday)) as age,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+					 	sql.append(" from transport.tran_driver_training_profile a, transport.file_employee b, transport.file_terminal c ");
+					 	sql.append(" where a.driverid = b.id ");
+					 	sql.append(" and a.terminalid = c.id ");
+					 	sql.append(" and a.active = true ");
+					 	sql.append(" order by b.lastname ");
+					 	sql.append(" limit ? ");
+					 	sql.append(" offset ?");		 
+				 } else {
+					 sql = new StringBuffer("select a.id,a.driverid,a.training1expirydate,a.training2expirydate,a.training3expirydate,a.picname,a.pic,a.vnv,a.incab,a.spotcheck,a.terminalid,a.articulated,a.notes,a.incident ");
+					 	sql.append(" ,a.birthday,a.aodt,b.lastname,b.firstname,c.name as terminalname,extract(year from age(birthday)) as age ");
+					 	sql.append(" from transport.tran_driver_training_profile a, transport.file_employee b, transport.file_terminal c ");
+					 	sql.append(" where a.driverid = b.id ");
+					 	sql.append(" and a.terminalid = c.id ");
+					 	sql.append(" and a.active = true ");
+					 	sql.append(" and (b.lastname ilike '%"+criteria+"%' or b.firstname ilike '%"+criteria+"%') " );
+					 	sql.append(" order by b.lastname ");
+					 	sql.append(" limit ? ");
+					 	sql.append(" offset ?");	
+				 }
+
+
+						 
+				TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, limit);
+				 pstmt.setInt(2, offset);
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+//					 DriverTrainingProfile model = new DriverTrainingProfile();  
+//		    		 model.setId(rs.getInt(1));
+//		    		 model.setDriverId(rs.getInt(2));
+//		    		 model.setTraining1ExpiryDate(rs.getDate(3));
+//		    		 model.setTraining2ExpiryDate(rs.getDate(4));
+//		    		 model.setTraining3ExpiryDate(rs.getDate(5));
+//		    		 model.setPicName(rs.getString(6));
+//		    		 if (rs.getBytes(7)!=null){
+//		    			 model.setPicStr(TransportUtils.getPicBase64String(rs.getBytes(7)));
+//		    		 }
+//		    		 model.setVnv(rs.getString(8));
+//		    		 model.setIncab(rs.getString(9));
+//		    		 model.setSpotcheck(rs.getString(10));
+//		    		 model.setTerminalId(rs.getInt(11));
+//		    		 model.setArticulated(rs.getString(12));
+//		    		 model.setNotes(rs.getString(13));
+//		    		 model.setIncident(rs.getString(14));
+//		    		 model.setBirthday(rs.getDate(15));
+//		    		 model.setAodt(rs.getDate(16));
+//		    		 model.setLastName(rs.getString(17));
+//		    		 model.setFirstName(rs.getString(18));
+//		    		 model.setTerminalName(rs.getString(19));
+//		    		 model.setAge(rs.getInt(20));
+//		    		 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+			 }
+			 
+		     //get the total of records
+		     int  totalNoOfRecords = 0;
+		     StringBuffer sqlCount = null;
+			 
+		     try {
+		    	 conn = ServerContext.getJDBCHandle();
+		    	 
+			     if (category.equals(ActionConstant.SEARCHALL)) {
+			    	 sqlCount = new StringBuffer("select count(*) from transport.tran_driver_training_profile a where a.active = true");	 
+			     }else {
+			    	 sqlCount = new StringBuffer("select count(*) from transport.tran_driver_training_profile a, transport.file_employee b where a.driverid = b.id and  (b.lastname ilike '%"+criteria+"%' or b.lastname ilike '%"+criteria+"%') and a.active = true");	 
+			     } 
+					
+				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCount.toString());
+				
+		    	 pstmt = conn.prepareStatement(sqlCount.toString());
+		    	 
+		    	 rs = pstmt.executeQuery();
+		    	 if (rs.next()) {
+		    		 totalNoOfRecords = rs.getInt(1);
+		    	 }
+		    			
+		     } catch (SQLException e) {
+		    	 throw e;
+		     } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+		     }
+		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		    	 returnMap.put(MapConstant.PAGINATION_TOTALRECORDS, totalNoOfRecords);
+		     } 
+	     
+		     
+	    System.out.println("search() - Exit");
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getDataById(HashMap<String, Object> criteriaMap)
+			throws Exception {
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GETDATA_BY_ID);
+		 
+		    //get the model criteria
+		    DriverTrainingProfile  model = (DriverTrainingProfile ) criteriaMap.get(MapConstant.CLASS_DATA);
+
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = null;
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer();				
+				 	sql = new StringBuffer("select a.id,a.driverid,a.training1expirydate,a.training2expirydate,a.training3expirydate,a.picname,a.pic,a.vnv ");
+				 	sql.append(" ,a.incab,a.spotcheck,a.terminalid,a.articulated,a.notes,a.incident,a.birthday,a.aodt ");
+				 	sql.append(" from transport.tran_driver_training_profile a ");
+				 	sql.append(" where a.id = ?");
+			
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, model.getId());
+				 
+				 rs = pstmt.executeQuery();
+
+				 while(rs.next()) {
+//		    		 model.setId(rs.getInt(1));
+//		    		 model.setDriverId(rs.getInt(2));
+//		    		 model.setTraining1ExpiryDate(rs.getDate(3));
+//		    		 model.setTraining2ExpiryDate(rs.getDate(4));
+//		    		 model.setTraining3ExpiryDate(rs.getDate(5));
+//		    		 model.setPicName(rs.getString(6));
+//		    		 if (rs.getBytes(7)!=null){
+//		    			 model.setPicStr(TransportUtils.getPicBase64String(rs.getBytes(7)));
+//		    		 }
+//		    		 model.setVnv(rs.getString(8));
+//		    		 model.setIncab(rs.getString(9));
+//		    		 model.setSpotcheck(rs.getString(10));
+//		    		 model.setTerminalId(rs.getInt(11));
+//		    		 model.setArticulated(rs.getString(12));
+//		    		 model.setNotes(rs.getString(13));
+//		    		 model.setIncident(rs.getString(14));
+//		    		 model.setBirthday(rs.getDate(15));
+//		    		 model.setAodt(rs.getDate(16));
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+			 }	 
+		 		     
+		     if (model!=null) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_DATA, model);
+		     } 
+	     
+	     
+	    System.out.println("getDataById() - Exit");
+		return returnMap;
+	}
+	
+	@Override
+	public Map<String, Object> getActiveData() throws Exception {
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GET_ACTIVE_DATA);
+		 
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = null;
+			 List<DriverTrainingProfile > rsList = new ArrayList<DriverTrainingProfile >();
+			  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer();				
+				 sql = new StringBuffer("select a.id,a.driverid,a.training1expirydate,a.training2expirydate,a.training3expirydate,a.picname,a.pic,a.vnv,a.incab,a.spotcheck,a.terminalid,a.articulated,a.notes,a.incident ");
+				 	sql.append(" ,a.birthday,a.aodt,b.lastname,b.firstname,c.name as terminalname,extract(year from age(birthday)) as age,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sql.append(" from transport.tran_driver_training_profile a, transport.file_employee b, transport.file_terminal c ");
+				 	sql.append(" where a.driverid = b.id ");
+				 	sql.append(" and a.terminalid = c.id ");
+				 	sql.append(" and a.active = true ");
+				 	sql.append(" order by b.lastname ");
+
+			
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 rs = pstmt.executeQuery();
+
+
+				  
+				 while(rs.next()) {
+//					 //get the model criteria
+//					 DriverTrainingProfile model = new DriverTrainingProfile();  
+//		    		 model.setId(rs.getInt(1));
+//		    		 model.setDriverId(rs.getInt(2));
+//		    		 model.setTraining1ExpiryDate(rs.getDate(3));
+//		    		 model.setTraining2ExpiryDate(rs.getDate(4));
+//		    		 model.setTraining3ExpiryDate(rs.getDate(5));
+//		    		 model.setPicName(rs.getString(6));
+//		    		 if (rs.getBytes(7)!=null){
+//		    			 model.setPicStr(TransportUtils.getPicBase64String(rs.getBytes(7)));
+//		    		 }
+//		    		 model.setVnv(rs.getString(8));
+//		    		 model.setIncab(rs.getString(9));
+//		    		 model.setSpotcheck(rs.getString(10));
+//		    		 model.setTerminalId(rs.getInt(11));
+//		    		 model.setArticulated(rs.getString(12));
+//		    		 model.setNotes(rs.getString(13));
+//		    		 model.setIncident(rs.getString(14));
+//		    		 model.setBirthday(rs.getDate(15));
+//		    		 model.setAodt(rs.getDate(16));
+//		    		 model.setLastName(rs.getString(17));
+//		    		 model.setFirstName(rs.getString(18));
+//		    		 model.setTerminalName(rs.getString(19));
+//		    		 model.setAge(rs.getInt(20));
+//		    		 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+			 }	 
+		 		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		     } 
+	     
+		return returnMap;
+	}
+	@Override
+	public Map<String, Object> getInActiveData(HashMap<String, Object> criteriaMap) throws Exception {
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GET_INACTIVE_DATA);
+		 
+		 //get the pagination and offset
+		 int offset = (int) criteriaMap.get(MapConstant.PAGINATION_OFFSET);
+		 int limit = (int) criteriaMap.get(MapConstant.PAGINATION_LIMIT);
+		 
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = null;
+			 List<DriverTrainingProfile > rsList = new ArrayList<DriverTrainingProfile >();
+			  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer();				
+				 sql = new StringBuffer("select a.id,a.driverid,a.training1expirydate,a.training2expirydate,a.training3expirydate,a.picname,a.pic,a.vnv,a.incab,a.spotcheck,a.terminalid,a.articulated,a.notes,a.incident ");
+				 	sql.append(" ,a.birthday,a.aodt,b.lastname,b.firstname,c.name as terminalname,extract(year from age(birthday)) as age,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sql.append(" from transport.tran_driver_training_profile a, transport.file_employee b, transport.file_terminal c ");
+				 	sql.append(" where a.driverid = b.id ");
+				 	sql.append(" and a.terminalid = c.id ");
+				 	sql.append(" and a.active = false ");
+				 	sql.append(" order by b.lastname ");
+				 	sql.append(" limit ? ");
+				 	sql.append(" offset ? ");
+
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, limit);
+				 pstmt.setInt(2, offset);
+				 
+				 rs = pstmt.executeQuery();
+
+				 while(rs.next()) {
+					 //get the model criteria
+//					 DriverTrainingProfile model = new DriverTrainingProfile();  
+//		    		 model.setId(rs.getInt(1));
+//		    		 model.setDriverId(rs.getInt(2));
+//		    		 model.setTraining1ExpiryDate(rs.getDate(3));
+//		    		 model.setTraining2ExpiryDate(rs.getDate(4));
+//		    		 model.setTraining3ExpiryDate(rs.getDate(5));
+//		    		 model.setPicName(rs.getString(6));
+//		    		 if (rs.getBytes(7)!=null){
+//		    			 model.setPicStr(TransportUtils.getPicBase64String(rs.getBytes(7)));
+//		    		 }
+//		    		 model.setVnv(rs.getString(8));
+//		    		 model.setIncab(rs.getString(9));
+//		    		 model.setSpotcheck(rs.getString(10));
+//		    		 model.setTerminalId(rs.getInt(11));
+//		    		 model.setArticulated(rs.getString(12));
+//		    		 model.setNotes(rs.getString(13));
+//		    		 model.setIncident(rs.getString(14));
+//		    		 model.setBirthday(rs.getDate(15));
+//		    		 model.setAodt(rs.getDate(16));
+//		    		 model.setLastName(rs.getString(17));
+//		    		 model.setFirstName(rs.getString(18));
+//		    		 model.setTerminalName(rs.getString(19));
+//		    		 model.setAge(rs.getInt(20));
+//		    		 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+			 }	 
+		 		     
+		     //get the total of records
+		     int  totalNoOfRecords = 0;
+		     StringBuffer sqlCount = null;
+			 
+		     try {
+		    	 conn = ServerContext.getJDBCHandle();
+		    	 
+			    sqlCount = new StringBuffer("select count(*) from transport.tran_driver_training_profile where active = false");	 
+
+				StringBuffer sqlCountLog = null;
+				sqlCountLog = new StringBuffer("select count(*) from transport.tran_driver_training_profile where active = false");	 
+
+				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCountLog.toString());
+				
+		    	 pstmt = conn.prepareStatement(sqlCount.toString());
+		    	 
+		    	 rs = pstmt.executeQuery();
+		    	 if (rs.next()) {
+		    		 totalNoOfRecords = rs.getInt(1);
+		    	 }
+		    			
+		     } catch (SQLException e) {
+		    	 throw e;
+		     } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+		     }
+		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		    	 returnMap.put(MapConstant.PAGINATION_TOTALRECORDS, totalNoOfRecords);
+		     } 
+	     
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> restore(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_RESTORE);
+
+		
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		DriverTrainingProfile  model = (DriverTrainingProfile ) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("update transport.tran_driver_training_profile set ");	
+			qry.append(" active=true ");
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" id = ? ");
+
+		StringBuffer qryLog =  new StringBuffer("update transport.tran_driver_training_profile set ");	
+			qryLog.append(" active=true ");
+			qryLog.append(" ,modifiedby="+model.getModifiedBy());
+			qryLog.append(" ,modifiedon="+model.getModifiedOn());
+			qryLog.append(" ,version=(version+1) ");
+			qryLog.append(" where ");
+			qryLog.append(" id = "+model.getId());
+			
+		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setInt(1, model.getModifiedBy());
+			pstmt.setTimestamp(2, model.getModifiedOn());
+			pstmt.setLong(3, model.getId());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("DriverTrainingProfile  record (id: " +model.getId()+") restored successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			TransportUtils.closeObjects(rs);
+			TransportUtils.closeObjects(pstmt);
+			TransportUtils.closeObjects(conn);
+		}
+			 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);			
+		
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getDataByDriverId(HashMap<String, Object> criteriaMap) throws Exception {
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GETDATA_BY_DRIVER_ID);
+		 
+		    //get the model criteria
+		    DriverTrainingProfile  model = (DriverTrainingProfile ) criteriaMap.get(MapConstant.CLASS_DATA);
+
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = null;
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer();				
+				 	sql = new StringBuffer("select a.id,a.driverid,a.training1expirydate,a.training2expirydate,a.training3expirydate,a.picname,a.pic,a.vnv ");
+				 	sql.append(" ,a.incab,a.spotcheck,a.terminalid,a.articulated,a.notes,a.incident,a.birthday,a.aodt,extract(year from age(birthday)) as age ");
+				 	sql.append(" from transport.tran_driver_training_profile a ");
+				 	sql.append(" where a.driverid = ?");
+			
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+//				 pstmt.setInt(1, model.getDriverId());
+				 
+				 rs = pstmt.executeQuery();
+
+				 while(rs.next()) {
+//		    		 model.setId(rs.getInt(1));
+//		    		 model.setDriverId(rs.getInt(2));
+//		    		 model.setTraining1ExpiryDate(rs.getDate(3));
+//		    		 model.setTraining2ExpiryDate(rs.getDate(4));
+//		    		 model.setTraining3ExpiryDate(rs.getDate(5));
+//		    		 model.setPicName(rs.getString(6));
+//		    		 if (rs.getBytes(7)!=null){
+//		    			 model.setPicStr(TransportUtils.getPicBase64String(rs.getBytes(7)));
+//		    		 }
+//		    		 model.setVnv(rs.getString(8));
+//		    		 model.setIncab(rs.getString(9));
+//		    		 model.setSpotcheck(rs.getString(10));
+//		    		 model.setTerminalId(rs.getInt(11));
+//		    		 model.setArticulated(rs.getString(12));
+//		    		 model.setNotes(rs.getString(13));
+//		    		 model.setIncident(rs.getString(14));
+//		    		 model.setBirthday(rs.getDate(15));
+//		    		 model.setAodt(rs.getDate(16));
+//		    		 model.setAge(rs.getInt(17));
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+			 }	 
+		 		     
+		     if (model!=null) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_DATA, model);
+		     } 
+	     
+	     
+	    System.out.println("getDataByDriverId() - Exit");
+		return returnMap;
+	}
+
+
+}

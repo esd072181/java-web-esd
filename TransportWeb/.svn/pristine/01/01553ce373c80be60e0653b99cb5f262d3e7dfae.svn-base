@@ -1,0 +1,55 @@
+package com.transport.constant;
+
+/**
+ * 
+ * @author dward
+ * @since July2015
+ * Last Date Updated: 25Mar2019
+ */
+public class ModuleConstant {
+
+	//Security
+	public static final int LOGIN = 1;
+	//Master Files
+	public static final int EMPLOYEE = 2;
+	public static final int LORRY = 3;
+	public static final int ITEMS = 4;
+	public static final int CORRECTIONS = 5;
+	public static final int FOLLOW_UP = 6;
+	public static final int REMARKS = 7;
+	public static final int USER = 8;
+	public static final int TERMINAL = 9;
+	public static final int FINDINGS = 10;
+	public static final int LIST_VALUE = 11;//LOV
+	public static final int ROOT_CAUSE = 16; //Update for Revision 1 ESD 20Dec2015
+	public static final int CLOSURE = 17; //Update for Revision 1 ESD 20Dec2015
+	public static final int TIRE_BRAND = 18; //Update for Website Enhancement 1 20Aug2016
+	public static final int TIRE = 19; //Update for Website Enhancement 1 20Aug2016
+	public static final int USER_ACCESS = 23;
+	//Transactions
+	public static final int VERIFICATION_AND_VALIDATION = 12;
+	public static final int TIRE_MANAGEMENT = 20; //Update for Website Enhancement 1 20Aug2016 -- development in progress
+	public static final int WORK_PERMIT = 21;
+	public static final int MAINTENANCE_MONITORING = 24; //Updated for v1.5.2 25Mar2019 
+	public static final int DRIVER_TRAINING = 25; //Updated for v1.5.4 26Aug2019
+	
+	//Reports
+	public static final int RPT_VERIFICATION = 13;
+	public static final int RPT_WORK_PERMIT = 22;
+	//Utilities
+	public static final int ARCHIVE = 14;
+	//Others
+	public static final int CHANGE_USERNAME = 15;
+	
+	//Last number is 25
+	
+	//Module Inner
+	public static final int MAINTENANCE_MONITORING_GPS = 241;
+	public static final int MAINTENANCE_MONITORING_MAINTENANCE = 242;
+	public static final int MAINTENANCE_MONITORING_PREVENTIVE = 243;
+	public static final int MAINTENANCE_MONITORING_PREVENTIVE_GARAGE = 2431;
+	public static final int MAINTENANCE_MONITORING_PREVENTIVE_FBASE= 2432;
+	public static final int MAINTENANCE_MONITORING_BREAKDOWN_GARAGE = 2433;
+	public static final int MAINTENANCE_MONITORING_BREAKDOWN_FBASE = 2434;
+	
+}

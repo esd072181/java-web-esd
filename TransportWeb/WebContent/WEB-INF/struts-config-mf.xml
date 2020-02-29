@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd"> 
+ 
+<struts-config>
+ 
+ 	<!-- Struts Config for Master Files -->
+ 
+	<form-beans>
+
+		<form-bean name="employeeForm" type="com.transport.form.EmployeeFormBean" />
+		<form-bean name="lorryForm" type="com.transport.form.LorryFormBean" />
+		<form-bean name="itemsForm" type="com.transport.form.ItemsFormBean" />
+		<form-bean name="correctionsForm" type="com.transport.form.CorrectionsFormBean" />
+		<form-bean name="followUpForm" type="com.transport.form.FollowUpFormBean" />
+		<form-bean name="remarksForm" type="com.transport.form.RemarksFormBean" />
+		<form-bean name="terminalForm" type="com.transport.form.TerminalFormBean" />
+		<form-bean name="userForm" type="com.transport.form.UserFormBean" />
+		<form-bean name="findingsForm" type="com.transport.form.FindingsFormBean" />
+		<form-bean name="rootcauseForm" type="com.transport.form.RootCauseFormBean" />
+		<form-bean name="closureForm" type="com.transport.form.ClosureFormBean" />
+		<form-bean name="tireBrandForm" type="com.transport.form.TireBrandFormBean" />
+		<form-bean name="tireForm" type="com.transport.form.TireFormBean" />
+		<form-bean name="userAccessForm" type="com.transport.form.UserAccessFormBean" />
+		
+	</form-beans>
+ 
+	<action-mappings>
+	   
+      <!-- Employee (START) -->
+	   <action 
+	   		path="/employee" 
+	   		type="com.transport.action.EmployeeAction"
+			name="employeeForm"
+			scope="request"
+			input="/pages/masterfile/employee/ajaxEmployee.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/employee/ajaxEmployee.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/employee/ajaxEmployeeTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/employee/ajaxEmployeeAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/employee/ajaxEmployee.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/employee/ajaxEmployeeEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveEmployee" 
+	   		type="com.transport.action.EmployeeAction"
+			name="employeeForm"
+			scope="request"
+			input="/pages/masterfile/employee/ajaxEmployeeAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/employee/ajaxEmployeeAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/employee/ajaxEmployeeAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateEmployee" 
+	   		type="com.transport.action.EmployeeAction"
+			name="employeeForm"
+			scope="request"
+			input="/pages/masterfile/employee/ajaxEmployeeEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/employee/ajaxEmployeeEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/employee/ajaxEmployeeEdit.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteEmployee" 
+	   		type="com.transport.action.EmployeeAction"
+			name="employeeForm"
+			scope="request"
+			input="/pages/masterfile/employee/ajaxEmployee.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/employee/ajaxEmployee.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/employee/ajaxEmployee.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Employee (END) -->	 
+
+      <!-- Lorry (START) -->
+	   <action 
+	   		path="/lorry" 
+	   		type="com.transport.action.LorryAction"
+			name="lorryForm"
+			scope="request"
+			input="/pages/masterfile/lorry/ajaxLorry.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/lorry/ajaxLorry.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/lorry/ajaxLorryTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/lorry/ajaxLorryAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/lorry/ajaxLorry.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/lorry/ajaxLorryEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveLorry" 
+	   		type="com.transport.action.LorryAction"
+			name="lorryForm"
+			scope="request"
+			input="/pages/masterfile/lorry/ajaxLorryAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/lorry/ajaxLorryAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/lorry/ajaxLorryAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateLorry" 
+	   		type="com.transport.action.LorryAction"
+			name="lorryForm"
+			scope="request"
+			input="/pages/masterfile/lorry/ajaxLorryEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/lorry/ajaxLorryEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/lorry/ajaxLorryEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteLorry" 
+	   		type="com.transport.action.LorryAction"
+			name="lorryForm"
+			scope="request"
+			input="/pages/masterfile/lorry/ajaxLorry.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/lorry/ajaxLorry.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/lorry/ajaxLorry.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Lorry (END) -->	 	   
+
+     <!-- Items and Findings  (START) -->
+	   <action 
+	   		path="/items" 
+	   		type="com.transport.action.ItemsAction"
+			name="itemsForm"
+			scope="request"
+			input="/pages/masterfile/items/ajaxItems.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/items/ajaxItems.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/items/ajaxItemsTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/items/ajaxItemsAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/items/ajaxItems.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/items/ajaxItemsEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveItems" 
+	   		type="com.transport.action.ItemsAction"
+			name="itemsForm"
+			scope="request"
+			input="/pages/masterfile/items/ajaxItemsAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/items/ajaxItemsAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/items/ajaxItemsAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateItems" 
+	   		type="com.transport.action.ItemsAction"
+			name="itemsForm"
+			scope="request"
+			input="/pages/masterfile/items/ajaxItemsEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/items/ajaxItemsEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/items/ajaxItemsEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteItems" 
+	   		type="com.transport.action.ItemsAction"
+			name="itemsForm"
+			scope="request"
+			input="/pages/masterfile/items/ajaxItems.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/items/ajaxItems.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/items/ajaxItems.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Items and Findings (END) -->	 	   
+
+     <!-- Corrective Actions  (START) -->
+	   <action 
+	   		path="/corrections" 
+	   		type="com.transport.action.CorrectionsAction"
+			name="correctionsForm"
+			scope="request"
+			input="/pages/masterfile/corrections/ajaxCorrections.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/corrections/ajaxCorrections.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/corrections/ajaxCorrectionsTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/corrections/ajaxCorrectionsAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/corrections/ajaxCorrections.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/corrections/ajaxCorrectionsEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveCorrections" 
+	   		type="com.transport.action.CorrectionsAction"
+			name="correctionsForm"
+			scope="request"
+			input="/pages/masterfile/corrections/ajaxCorrectionsAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/corrections/ajaxCorrectionsAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/corrections/ajaxCorrectionsAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateCorrections" 
+	   		type="com.transport.action.CorrectionsAction"
+			name="correctionsForm"
+			scope="request"
+			input="/pages/masterfile/corrections/ajaxCorrectionsEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/corrections/ajaxCorrectionsEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/corrections/ajaxCorrectionsEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteCorrections" 
+	   		type="com.transport.action.CorrectionsAction"
+			name="correctionsForm"
+			scope="request"
+			input="/pages/masterfile/corrections/ajaxCorrections.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/corrections/ajaxCorrections.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/corrections/ajaxCorrections.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Corrective Actions (END) -->	
+
+       <!-- Follow Up  (START) -->
+	   <action 
+	   		path="/followUp" 
+	   		type="com.transport.action.FollowUpAction"
+			name="followUpForm"
+			scope="request"
+			input="/pages/masterfile/followup/ajaxFollowUp.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/followup/ajaxFollowUp.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/followup/ajaxFollowUpTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/followup/ajaxFollowUpAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/followup/ajaxFollowUp.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/followup/ajaxFollowUpEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveFollowUp" 
+	   		type="com.transport.action.FollowUpAction"
+			name="followUpForm"
+			scope="request"
+			input="/pages/masterfile/followup/ajaxFollowUpAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/followup/ajaxFollowUpAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/followup/ajaxFollowUpAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateFollowUp" 
+	   		type="com.transport.action.FollowUpAction"
+			name="followUpForm"
+			scope="request"
+			input="/pages/masterfile/followup/ajaxFollowUpEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/followup/ajaxFollowUpEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/followup/ajaxFollowUpEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteFollowUp" 
+	   		type="com.transport.action.FollowUpAction"
+			name="followUpForm"
+			scope="request"
+			input="/pages/masterfile/followup/ajaxFollowUp.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/followup/ajaxFollowUp.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/followup/ajaxFollowUp.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Follow Up (END) -->
+	   
+       <!-- Remarks  (START) -->
+	   <action 
+	   		path="/remarks" 
+	   		type="com.transport.action.RemarksAction"
+			name="remarksForm"
+			scope="request"
+			input="/pages/masterfile/remarks/ajaxRemarks.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/remarks/ajaxRemarks.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/remarks/ajaxRemarksTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/remarks/ajaxRemarksAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/remarks/ajaxRemarks.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/remarks/ajaxRemarksEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveRemarks" 
+	   		type="com.transport.action.RemarksAction"
+			name="remarksForm"
+			scope="request"
+			input="/pages/masterfile/remarks/ajaxRemarksAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/remarks/ajaxRemarksAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/remarks/ajaxRemarksAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateRemarks" 
+	   		type="com.transport.action.RemarksAction"
+			name="remarksForm"
+			scope="request"
+			input="/pages/masterfile/remarks/ajaxRemarksEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/remarks/ajaxRemarksEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/remarks/ajaxRemarksEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   	
+	   <action 
+	   		path="/deleteRemarks" 
+	   		type="com.transport.action.RemarksAction"
+			name="remarksForm"
+			scope="request"
+			input="/pages/masterfile/remarks/ajaxRemarks.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/remarks/ajaxRemarks.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/remarks/ajaxRemarks.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Remarks (END) -->	
+
+       <!-- Terminal  (START) -->
+	   <action 
+	   		path="/terminal" 
+	   		type="com.transport.action.TerminalAction"
+			name="terminalForm"
+			scope="request"
+			input="/pages/masterfile/terminal/ajaxTerminal.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/terminal/ajaxTerminal.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/terminal/ajaxTerminalTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/terminal/ajaxTerminalAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/terminal/ajaxTerminal.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/terminal/ajaxTerminalEdit.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveTerminal" 
+	   		type="com.transport.action.TerminalAction"
+			name="terminalForm"
+			scope="request"
+			input="/pages/masterfile/terminal/ajaxTerminalAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/terminal/ajaxTerminalAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/terminal/ajaxTerminalAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateTerminal" 
+	   		type="com.transport.action.TerminalAction"
+			name="terminalForm"
+			scope="request"
+			input="/pages/masterfile/terminal/ajaxRemarksEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/terminal/ajaxTerminalEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/terminal/ajaxTerminalEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteTerminal" 
+	   		type="com.transport.action.TerminalAction"
+			name="terminalForm"
+			scope="request"
+			input="/pages/masterfile/terminal/ajaxTerminal.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/terminal/ajaxTerminal.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/terminal/ajaxTerminal.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Terminal (END) -->
+	   
+       <!-- User  (START) -->
+	   <action 
+	   		path="/user" 
+	   		type="com.transport.action.UserAction"
+			name="userForm"
+			scope="request"
+			input="/pages/masterfile/user/ajaxUser.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/user/ajaxUser.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/user/ajaxUserTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/user/ajaxUserAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/user/ajaxUser.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/user/ajaxUserEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveUser" 
+	   		type="com.transport.action.UserAction"
+			name="userForm"
+			scope="request"
+			input="/pages/masterfile/user/ajaxUserAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/user/ajaxUserAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/user/ajaxUserAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateUser" 
+	   		type="com.transport.action.UserAction"
+			name="userForm"
+			scope="request"
+			input="/pages/masterfile/user/ajaxUserEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/user/ajaxUserEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/user/ajaxUserEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteUser" 
+	   		type="com.transport.action.UserAction"
+			name="userForm"
+			scope="request"
+			input="/pages/masterfile/user/ajaxUser.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/user/ajaxUser.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/user/ajaxUser.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- User (END) -->		   
+
+       <!-- Findings  (START) -->
+	   <action 
+	   		path="/findings" 
+	   		type="com.transport.action.FindingsAction"
+			name="findingsForm"
+			scope="request"
+			input="/pages/masterfile/findings/ajaxFindings.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/findings/ajaxFindings.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/findings/ajaxFindingsTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/findings/ajaxFindingsAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/findings/ajaxFindings.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/findings/ajaxFindingsEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveFindings" 
+	   		type="com.transport.action.FindingsAction"
+			name="findingsForm"
+			scope="request"
+			input="/pages/masterfile/findings/ajaxFindingsAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/findings/ajaxFindingsAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/findings/ajaxFindingsAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateFindings" 
+	   		type="com.transport.action.FindingsAction"
+			name="findingsForm"
+			scope="request"
+			input="/pages/masterfile/findings/ajaxFindingsEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/findings/ajaxFindingsEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/findings/ajaxFindingsEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteFindings" 
+	   		type="com.transport.action.FindingsAction"
+			name="findingsForm"
+			scope="request"
+			input="/pages/masterfile/findings/ajaxFindings.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/findings/ajaxFindings.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/findings/ajaxFindings.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Findings (END) -->	 
+	   
+       <!-- Root Cause  (START) -->
+	   <action 
+	   		path="/rootcause" 
+	   		type="com.transport.action.RootCauseAction"
+			name="rootcauseForm"
+			scope="request"
+			input="/pages/masterfile/rootcause/ajaxRootCause.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/rootcause/ajaxRootCause.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/rootcause/ajaxRootCauseTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/rootcause/ajaxRootCauseAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/rootcause/ajaxRootCause.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/rootcause/ajaxRootCauseEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveRootcause" 
+	   		type="com.transport.action.RootCauseAction"
+			name="rootcauseForm"
+			scope="request"
+			input="/pages/masterfile/rootcause/ajaxRootCauseAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/rootcause/ajaxRootCauseAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/rootcause/ajaxRootCauseAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateRootcause" 
+	   		type="com.transport.action.RootCauseAction"
+			name="rootcauseForm"
+			scope="request"
+			input="/pages/masterfile/rootcause/ajaxRootCauseEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/rootcause/ajaxRootCauseEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/rootcause/ajaxRootCauseEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteRootcause" 
+	   		type="com.transport.action.RootCauseAction"
+			name="rootcauseForm"
+			scope="request"
+			input="/pages/masterfile/rootcause/ajaxRootCause.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/rootcause/ajaxRootCause.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/rootcause/ajaxRootCause.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Root Cause (END) -->		   
+
+       <!--  Closure on Corrective Actions (START) -->
+	   <action 
+	   		path="/closure" 
+	   		type="com.transport.action.ClosureAction"
+			name="closureForm"
+			scope="request"
+			input="/pages/masterfile/closure/ajaxClosure.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/closure/ajaxClosure.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/closure/ajaxClosureTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/closure/ajaxClosureAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/closure/ajaxClosure.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/closure/ajaxClosureEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveClosure" 
+	   		type="com.transport.action.ClosureAction"
+			name="closureForm"
+			scope="request"
+			input="/pages/masterfile/closure/ajaxClosureAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/closure/ajaxClosureAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/closure/ajaxClosureAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateClosure" 
+	   		type="com.transport.action.ClosureAction"
+			name="closureForm"
+			scope="request"
+			input="/pages/masterfile/closure/ajaxClosureEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/closure/ajaxClosureEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/closure/ajaxClosureEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteClosure" 
+	   		type="com.transport.action.ClosureAction"
+			name="closureForm"
+			scope="request"
+			input="/pages/masterfile/closure/ajaxClosure.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/closure/ajaxClosure.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/closure/ajaxClosure.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Closure on Corrective Actions (END) -->	     	   
+
+       <!-- Tire Brand (START) -->
+	   <action 
+	   		path="/tirebrand" 
+	   		type="com.transport.action.TireBrandAction"
+			name="tireBrandForm"
+			scope="request"
+			input="/pages/masterfile/tirebrand/ajaxTireBrand.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/tirebrand/ajaxTireBrand.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/tirebrand/ajaxTireBrandTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/tirebrand/ajaxTireBrandAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/tirebrand/ajaxTireBrand.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/tirebrand/ajaxTireBrandEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveTireBrand" 
+	   		type="com.transport.action.TireBrandAction"
+			name="tireBrandForm"
+			scope="request"
+			input="/pages/masterfile/tirebrand/ajaxTireBrandAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/tirebrand/ajaxTireBrandAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/tirebrand/ajaxTireBrandAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateTireBrand" 
+	   		type="com.transport.action.TireBrandAction"
+			name="tireBrandForm"
+			scope="request"
+			input="/pages/masterfile/tirebrand/ajaxTireBrandEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/tirebrand/ajaxTireBrandEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/tirebrand/ajaxTireBrandEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteTireBrand" 
+	   		type="com.transport.action.TireBrandAction"
+			name="tireBrandForm"
+			scope="request"
+			input="/pages/masterfile/tirebrand/ajaxTireBrand.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/tirebrand/ajaxTireBrand.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/tirebrand/ajaxTireBrand.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Tire Brand (END) -->	
+	   
+	   
+	   <!-- Tire (START) -->
+	   <action 
+	   		path="/tire" 
+	   		type="com.transport.action.TireAction"
+			name="tireForm"
+			scope="request"
+			input="/pages/masterfile/tire/ajaxTire.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/tire/ajaxTire.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/tire/ajaxTireTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/tire/ajaxTireAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/tire/ajaxTire.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/tire/ajaxTireEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveTire" 
+	   		type="com.transport.action.TireAction"
+			name="tireForm"
+			scope="request"
+			input="/pages/masterfile/tire/ajaxTireAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/tire/ajaxTireAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/tire/ajaxTireAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateTire" 
+	   		type="com.transport.action.TireAction"
+			name="tireForm"
+			scope="request"
+			input="/pages/masterfile/tire/ajaxTireEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/tire/ajaxTireEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/tire/ajaxTireEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteTire" 
+	   		type="com.transport.action.TireAction"
+			name="tireForm"
+			scope="request"
+			input="/pages/masterfile/tire/ajaxTire.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/tire/ajaxTire.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/tire/ajaxTire.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Tire (END) -->
+	   
+	   <!-- User Access  (START) -->
+	  		<action 
+	   		path="/userAccess" 
+	   		type="com.transport.action.UserAccessAction"
+			name="userAccessForm"
+			scope="request"
+			input="/pages/masterfile/useraccess/ajaxUserAccess.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/useraccess/ajaxUserAccess.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/useraccess/ajaxUserAccessTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/useraccess/ajaxUserAccessAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/useraccess/ajaxUserAccess.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/useraccess/ajaxUserAccessEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveUserAccess" 
+	   		type="com.transport.action.UserAccessAction"
+			name="userAccessForm"
+			scope="request"
+			input="/pages/masterfile/useraccess/ajaxUserAccessAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/useraccess/ajaxUserAccessAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/useraccess/ajaxUserAccessAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteUserAccess" 
+	   		type="com.transport.action.UserAccessAction"
+			name="userAccessForm"
+			scope="request"
+			input="/pages/masterfile/useraccess/ajaxUserAccess.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/useraccess/ajaxUserAccess.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/useraccess/ajaxUserAccess.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <!-- User Access (END) -->		   
+	   
+	</action-mappings>
+	
+
+</struts-config>

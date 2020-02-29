@@ -1,0 +1,1005 @@
+package com.transport.action;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import com.transport.constant.ActionConstant;
+import com.transport.constant.MapConstant;
+import com.transport.constant.MiscConstant;
+import com.transport.constant.ModuleConstant;
+import com.transport.constant.ParamConstant;
+import com.transport.form.DriverTrainingFormBean;
+import com.transport.model.DriverTraining;
+import com.transport.model.DriverTrainingInfo;
+import com.transport.model.DriverTrainingProfile;
+import com.transport.model.DriverTrainingProfileComment;
+import com.transport.model.User;
+import com.transport.service.ServiceManager;
+import com.transport.service.ServiceManagerImpl;
+import com.transport.util.TransportUtils;
+
+public class DriverTrainingAction extends Action {
+
+	private final static Logger logger = Logger
+			.getLogger(DriverTrainingAction.class);
+
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		DriverTrainingFormBean formBean = (DriverTrainingFormBean) form;
+		String forwardAction = ActionConstant.NONE;
+		String command = request.getParameter("command");
+
+		// session expired checking
+		if (request.getSession().getAttribute(MiscConstant.USER_SESSION) == null) {
+			forwardAction = ActionConstant.SHOW_AJAX_EXPIRED;
+		} else {
+			if (command != null) {
+
+				int module = ModuleConstant.DRIVER_TRAINING;
+
+				if (command.equalsIgnoreCase(ParamConstant.ADD)) {
+
+					// get fresh/updated list data from DB for click ADD and
+					// EDIT link
+					formBean.populateDropdownList(request, false);
+
+					formBean.setTransactionStatus(false);
+					formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_RESET);
+					forwardAction = ActionConstant.SHOW_AJAX_ADD;
+				} else if (command.equalsIgnoreCase(ParamConstant.ADD_INNER)) {
+
+					String driverTrainingId = (String) request
+							.getParameter("driverTrainingId");
+					int innerModule = Integer.parseInt(request
+							.getParameter("innerModule"));
+
+					formBean.setDriverTrainingId(driverTrainingId);
+					formBean.setInnerModule(String.valueOf(innerModule));
+
+					formBean.setTransactionStatus(false);
+					formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_RESET);
+
+					if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+						// get fresh/updated list data from DB for click ADD and
+						// EDIT link
+						formBean.populateTrainingDropdownList(request);
+						forwardAction = ActionConstant.SHOW_AJAX_ADD_INNER;
+					} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+						// get fresh/updated list data from DB for click ADD and
+						// EDIT link
+						formBean.populateStatusDropdownList(request);
+						forwardAction = ActionConstant.SHOW_AJAX_ADD_INNER_2;
+					} else if (ModuleConstant.DRIVER_TRAINING_PROFILE_COMMENTS_VNV == innerModule
+							|| ModuleConstant.DRIVER_TRAINING_PROFILE_COMMENTS_INCAB == innerModule
+							|| ModuleConstant.DRIVER_TRAINING_PROFILE_COMMENTS_SPOTCHECK == innerModule
+							|| ModuleConstant.DRIVER_TRAINING_PROFILE_COMMENTS_INCIDENT == innerModule) {
+
+						String driverTrainingProfileId = request
+								.getParameter("driverTrainingProfileId");
+						String remarks = request.getParameter("remarks");
+						formBean.setDriverTrainingProfileId(driverTrainingProfileId);
+						formBean.setRemarks(remarks);
+						
+						if (TransportUtils.isMobile(request.getSession().getAttribute(MiscConstant.IS_MOBILE))) {
+							if (TransportUtils.isUserDriver(request.getSession().getAttribute(MiscConstant.USER_ROLE_SESSION))) {
+								forwardAction = ActionConstant.SHOW_AJAX_ADD_2;
+							} else {
+								forwardAction = ActionConstant.SHOW_AJAX_ADD;
+							}
+							
+						} else {
+							forwardAction = ActionConstant.SHOW_AJAX_ADD;
+						}
+						
+					}
+
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_EDIT)) {
+					// fetch the data
+
+					int id = Integer.parseInt(request.getParameter("id"));
+
+					DriverTraining model = new DriverTraining();
+					model.setId(id);
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.MODULE, module);
+					dataMap.put(MapConstant.CLASS_DATA, model);
+					dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service
+							.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+						model = (DriverTraining) resultMap
+								.get(MapConstant.CLASS_DATA);
+						formBean.populateFormBean(model);
+					}
+
+					// get fresh/updated list data from DB for click ADD and
+					// EDIT link
+					formBean.populateDropdownList(request, true);
+
+					formBean.setTransactionStatus(false);
+					formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_RESET);
+
+					forwardAction = ActionConstant.SHOW_AJAX_EDIT;
+				} else if (command
+						.equalsIgnoreCase(ParamConstant.AJAX_EDIT_INNER)) {
+
+					int innerModule = Integer.parseInt(request
+							.getParameter("innerModule"));
+					String driverName = (String) request
+							.getParameter("driverName");
+					formBean.setDriverName(driverName);
+
+					int id = Integer.parseInt(request.getParameter("id"));
+
+					Object model = null;
+
+					if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+						model = new DriverTrainingInfo();
+						((DriverTrainingInfo) model).setId(id);
+					} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+						model = new DriverTrainingProfile();
+						((DriverTrainingProfile) model).setId(id);
+					} else {
+						// VNV, Incab, Spotcheck or Incident
+						model = new DriverTrainingProfileComment();
+						((DriverTrainingProfileComment) model).setId(id);
+					}
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.MODULE, innerModule);
+					dataMap.put(MapConstant.CLASS_DATA, model);
+					dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service
+							.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+						if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+							model = (DriverTrainingInfo) resultMap
+									.get(MapConstant.CLASS_DATA);
+							formBean.populateFormBeanInfo((DriverTrainingInfo) model);
+						} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+							model = (DriverTrainingProfile) resultMap
+									.get(MapConstant.CLASS_DATA);
+							formBean.populateFormBeanProfile((DriverTrainingProfile) model);
+						} else {
+							// VNV, Incab, Spotcheck or Incident
+							model = (DriverTrainingProfileComment) resultMap
+									.get(MapConstant.CLASS_DATA);
+							formBean.populateFormBeanProfileComment((DriverTrainingProfileComment) model);
+						}
+					}
+
+					if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+						formBean.populateTrainingDropdownList(request);
+					} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+						formBean.populateStatusDropdownList(request);
+					}
+
+					formBean.setTransactionStatus(false);
+					formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_RESET);
+
+					if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+						forwardAction = ActionConstant.SHOW_AJAX_EDIT_2;
+					} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+						forwardAction = ActionConstant.SHOW_AJAX_EDIT_3;
+					} else {
+						// VNV, Incab, Spotcheck or Incident
+						forwardAction = ActionConstant.SHOW_AJAX_EDIT;
+					}
+
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE)
+						|| command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE)) {
+					// populateModel
+					DriverTraining model = (DriverTraining) formBean
+							.populateModel();
+
+					User user = (User) request.getSession().getAttribute(
+							MiscConstant.USER_SESSION);
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.MODULE, module);
+					dataMap.put(MapConstant.CLASS_DATA, model);
+					dataMap.put(MapConstant.USER_SESSION_DATA, user);
+
+					if (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE)) {
+						dataMap.put(MapConstant.ACTION, ActionConstant.SAVE);
+					} else {
+						dataMap.put(MapConstant.ACTION, ActionConstant.UPDATE);
+					}
+
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service
+							.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+						// check resultmap action status
+						boolean tranctionStatus = (boolean) resultMap
+								.get(MapConstant.TRANSACTION_STATUS);
+
+						formBean.setTransactionStatus(tranctionStatus);
+
+						// get the dropdown list from session
+						boolean isEdit = (command
+								.equalsIgnoreCase(ParamConstant.AJAX_UPDATE) ? true
+								: false);
+						formBean.populateDropdownListFromSession(request,
+								isEdit);
+
+						if (tranctionStatus) {
+							// show success page with updated image if necessary
+							if (command
+									.equalsIgnoreCase(ParamConstant.AJAX_SAVE)) {
+								// get the id
+								model.setId((Integer) resultMap
+										.get(MapConstant.FIELD_CRITERIA_ENTITY_ID));
+							}
+							dataMap.clear();
+							resultMap.clear();
+							dataMap.put(MapConstant.MODULE, module);
+							dataMap.put(MapConstant.CLASS_DATA, model);
+							dataMap.put(MapConstant.ACTION,
+									ActionConstant.GET_DATA);
+
+							resultMap = service.executeRequest(dataMap);
+
+							if (resultMap != null && !resultMap.isEmpty()) {
+								model = (DriverTraining) resultMap
+										.get(MapConstant.CLASS_DATA);
+								formBean.populateFormBean(model);
+							}
+							// add confirmation message
+							if (command
+									.equalsIgnoreCase(ParamConstant.AJAX_SAVE)) {
+								formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_SAVED);
+								TransportUtils.writeLogInfo(logger,
+										MiscConstant.TRANS_MESSSAGE_SAVED
+												+ " - " + module);
+								// logger.info(MiscConstant.TRANS_MESSSAGE_SAVED);
+							} else {
+								formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_UPDATED);
+								TransportUtils.writeLogInfo(logger,
+										MiscConstant.TRANS_MESSSAGE_UPDATED
+												+ " - " + module);
+								// logger.info(MiscConstant.TRANS_MESSSAGE_UPDATED);
+							}
+							forwardAction = ActionConstant.AJAX_SUCCESS;
+						} else {
+							formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
+							// logger.info(MiscConstant.TRANS_MESSSAGE_ERROR);
+							TransportUtils.writeLogInfo(logger,
+									MiscConstant.TRANS_MESSSAGE_ERROR + " - "
+											+ module);
+							forwardAction = ActionConstant.AJAX_FAILED;
+						}
+					}
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_DELETE)) {
+					// fetch the data
+					int id = Integer.parseInt(request.getParameter("id"));
+
+					User user = (User) request.getSession().getAttribute(
+							MiscConstant.USER_SESSION);
+
+					DriverTraining model = new DriverTraining();
+					model.setId(id);
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.MODULE, module);
+					dataMap.put(MapConstant.CLASS_DATA, model);
+					dataMap.put(MapConstant.ACTION, ActionConstant.DELETE);
+					dataMap.put(MapConstant.USER_SESSION_DATA, user);
+
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service
+							.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+						// check resultmap action status
+						boolean tranctionStatus = (boolean) resultMap
+								.get(MapConstant.TRANSACTION_STATUS);
+
+						formBean.setTransactionStatus(tranctionStatus);
+
+						if (tranctionStatus) {
+							// show success page
+							// add confirmation message
+							formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_DELETED);
+
+							// logger.info(MiscConstant.TRANS_MESSSAGE_DELETED);
+							TransportUtils.writeLogInfo(logger,
+									MiscConstant.TRANS_MESSSAGE_DELETED + " - "
+											+ module);
+							forwardAction = ActionConstant.AJAX_SUCCESS;
+						} else {
+							formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
+							// logger.info(MiscConstant.TRANS_MESSSAGE_ERROR);
+							TransportUtils.writeLogInfo(logger,
+									MiscConstant.TRANS_MESSSAGE_ERROR + " - "
+											+ module);
+							forwardAction = ActionConstant.AJAX_FAILED;
+						}
+					}
+				} else if (command
+						.equalsIgnoreCase(ParamConstant.AJAX_DELETE_INNER)) {
+					// fetch the data
+					int id = Integer.parseInt(request.getParameter("id"));
+
+					User user = (User) request.getSession().getAttribute(
+							MiscConstant.USER_SESSION);
+
+					int innerModule = Integer.parseInt(request
+							.getParameter("innerModule"));
+					formBean.setInnerModule(String.valueOf(innerModule));
+
+					Object model = null;
+
+					if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+						// populateModel
+						model = new DriverTrainingInfo();
+						((DriverTrainingInfo) model).setId(id);
+					} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+						// populateModel
+						model = new DriverTrainingProfile();
+						((DriverTrainingProfile) model).setId(id);
+					} else {
+						// VNV, Incab, Spotcheck or Incident
+						String driverTrainingProfileId = request
+								.getParameter("driverTrainingProfileId");
+						String remarks = request.getParameter("remarks");
+						formBean.setDriverTrainingProfileId(driverTrainingProfileId);
+						formBean.setRemarks(remarks);
+						// populateModel
+						model = new DriverTrainingProfileComment();
+						((DriverTrainingProfileComment) model).setId(id);
+					}
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.MODULE, innerModule);
+					dataMap.put(MapConstant.CLASS_DATA, model);
+					dataMap.put(MapConstant.ACTION, ActionConstant.DELETE);
+					dataMap.put(MapConstant.USER_SESSION_DATA, user);
+
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service
+							.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+						// check resultmap action status
+						boolean tranctionStatus = (boolean) resultMap
+								.get(MapConstant.TRANSACTION_STATUS);
+
+						formBean.setTransactionStatus(tranctionStatus);
+
+						if (tranctionStatus) {
+							// show success page
+							// add confirmation message
+							formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_DELETED);
+
+							// logger.info(MiscConstant.TRANS_MESSSAGE_DELETED);
+							TransportUtils.writeLogInfo(logger,
+									MiscConstant.TRANS_MESSSAGE_DELETED + " - "
+											+ module);
+							forwardAction = ActionConstant.AJAX_SUCCESS;
+						} else {
+							formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
+							// logger.info(MiscConstant.TRANS_MESSSAGE_ERROR);
+							TransportUtils.writeLogInfo(logger,
+									MiscConstant.TRANS_MESSSAGE_ERROR + " - "
+											+ module);
+							forwardAction = ActionConstant.AJAX_FAILED;
+						}
+					}
+
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_SEARCH)) {
+					// get all the records from DB
+
+					int page = 1;
+					if (request.getParameter("page") != null) {
+						page = Integer.parseInt(request.getParameter("page"));
+					}
+
+					int offset = (page - 1) * MiscConstant.RECORDS_PER_PAGE;
+
+					String category = null;
+					if (request.getParameter("category") != null) {
+						category = (String) request.getParameter("category");
+						formBean.setCategory(category);
+						if (category.equals("filter")) {
+							category = ActionConstant.SEARCHBY;
+						} else {
+							category = ActionConstant.SEARCHALL;
+						}
+					}
+
+					String searchValue = formBean.getSearchValue();
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.SEARCH_CRITERIA, searchValue);
+					dataMap.put(MapConstant.MODULE, module);
+					dataMap.put(MapConstant.ACTION, category);
+					dataMap.put(MapConstant.PAGINATION_LIMIT,
+							MiscConstant.RECORDS_PER_PAGE);
+					dataMap.put(MapConstant.PAGINATION_OFFSET, offset);
+
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service
+							.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+
+						@SuppressWarnings("unchecked")
+						List<DriverTraining> qryList = (List<DriverTraining>) resultMap
+								.get(MapConstant.CLASS_LIST);
+
+						formBean.setModelList(qryList);
+
+						int totalNoOfRecords = (int) resultMap
+								.get(MapConstant.PAGINATION_TOTALRECORDS);
+						int noOfPages = (int) Math.ceil(totalNoOfRecords * 1.0
+								/ MiscConstant.RECORDS_PER_PAGE);
+
+						formBean.setNoOfPages(noOfPages);
+						formBean.setCurrentPage(page);
+
+					} else {
+						formBean.setModelList(null);
+						formBean.setNoOfPages(0);
+						formBean.setCurrentPage(0);
+					}
+
+					forwardAction = ActionConstant.SHOW_AJAX_TABLE;
+
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_VIEW)) {
+					// fetch the data
+					String driverTrainingId = request.getParameter("driverTrainingId");
+					String driverName = request.getParameter("driverName");
+					String empId = request.getParameter("empId");
+					String generateReport = request.getParameter("generateReport");
+					formBean.setDriverTrainingId(driverTrainingId);
+					formBean.setDriverName(driverName);
+
+					// Get the Driver Info
+					DriverTraining modelDriver = new DriverTraining();
+					if (empId != null) {
+						modelDriver.setDriverId(Integer.valueOf(empId.trim()));
+					} else {
+						modelDriver.setId(Integer.valueOf(driverTrainingId.trim()));
+					}
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.MODULE,ModuleConstant.DRIVER_TRAINING);
+					dataMap.put(MapConstant.CLASS_DATA, modelDriver);
+					if (empId != null) {
+						dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_CRITERIA);// get by driver id
+					} else {
+						dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+					}
+
+					// for Terminal Dropdown List
+					formBean.populateDropdownListFromSession(request, false);
+					
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service.executeRequest(dataMap);
+
+					DriverTraining modelData = new DriverTraining();
+					if (resultMap != null && !resultMap.isEmpty()) {
+						modelData = (DriverTraining) resultMap.get(MapConstant.CLASS_DATA);
+						formBean.populateFormBean(modelData);
+					}
+
+					if (empId != null) {
+						formBean.setDriverTrainingId(String.valueOf(modelData.getId()));
+					} else {
+						formBean.setDriverName(driverName);
+					}
+
+					// Get Training List
+					dataMap.clear();
+					resultMap.clear();
+					DriverTrainingInfo modelDriverTraining = new DriverTrainingInfo();
+					modelDriverTraining.setDriverTrainingId(modelData.getId());
+					dataMap.put(MapConstant.MODULE,ModuleConstant.DRIVER_TRAINING_INFO);
+					dataMap.put(MapConstant.CLASS_DATA, modelDriverTraining);
+					dataMap.put(MapConstant.ACTION,ActionConstant.GET_DATA_BY_CRITERIA);
+
+					resultMap = service.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+						@SuppressWarnings("unchecked")
+						List<DriverTrainingInfo> trainingList = (List<DriverTrainingInfo>) resultMap.get(MapConstant.CLASS_LIST);
+						formBean.setTrainingList(trainingList);
+					}
+
+					// Get Profile List
+					dataMap.clear();
+					resultMap.clear();
+					DriverTrainingProfile modelDriverProfile = new DriverTrainingProfile();
+					modelDriverProfile.setDriverTrainingId(modelData.getId());
+
+					dataMap.put(MapConstant.MODULE,ModuleConstant.DRIVER_TRAINING_PROFILE);
+					dataMap.put(MapConstant.CLASS_DATA, modelDriverProfile);
+					dataMap.put(MapConstant.ACTION,ActionConstant.GET_DATA_BY_CRITERIA);
+
+					resultMap = service.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+						@SuppressWarnings("unchecked")
+						List<DriverTrainingProfile> profileList = (List<DriverTrainingProfile>) resultMap.get(MapConstant.CLASS_LIST);
+						formBean.setProfileList(profileList);
+					}
+
+					if (TransportUtils.isMobile(request.getSession().getAttribute(MiscConstant.IS_MOBILE))) {
+						forwardAction = ActionConstant.SHOW_AJAX_VIEW_2;
+					} else {
+						if (generateReport!=null) {
+							//generate report
+				        	
+				        	dataMap.clear();
+				        	resultMap.clear();
+				        	
+				        	//parameters are optional here
+				        	Map<String, Object> parameters = new HashMap<String, Object>();
+					
+				    		parameters.put("DriverName", driverName);
+				    		modelData.setTerminalName(formBean.getTerminalNameById(modelData.getTerminalId()));
+				    		
+							dataMap.put(MapConstant.CLASS_DATA, modelData); //driver info
+							dataMap.put(MapConstant.CLASS_LIST, formBean.getTrainingList()); //driver training
+							dataMap.put(MapConstant.CLASS_LIST_2, formBean.getProfileList()); //driver profile
+							dataMap.put(MapConstant.REPORT_PARAM_MAP, parameters);
+							dataMap.put(MapConstant.REPORT_LOCALPATH, TransportUtils.getReportPath(request));
+					        dataMap.put(MapConstant.MODULE, module);
+						    dataMap.put(MapConstant.ACTION, ActionConstant.GENERATE_REPORT);
+						    dataMap.put(MapConstant.RPT_TITLE, MiscConstant.RPT_DRIVER_TRAINING_SUMMARY_TITLE);
+						    dataMap.put(MapConstant.RPT_JASPER, MiscConstant.RPT_DRIVER_TRAINING_SUMMARY_REPORT);
+						    dataMap.put(MapConstant.RPT_PDF, MiscConstant.PDF_DRIVER_TRAINING_SUMMARY_REPORT);
+						    dataMap.put(MapConstant.RPT_LOGO, TransportUtils.getResourcesPath(request) + File.separator + "gdcLogo.png");
+
+					        resultMap = service.executeRequest(dataMap);
+				        	
+					        boolean isReportGenerated = (boolean) resultMap.get(MapConstant.BOOLEAN_DATA);
+
+				        	if (isReportGenerated) {
+				        		String reportPath = "reports/" + driverName.replace(", ", "_") + "_DriverTrainingSummary.pdf";
+				        		formBean.setDriverNameForReport(reportPath);		
+				        		TransportUtils.writeLogInfo(logger, MiscConstant.RPT_MESSSAGE_GENERATED_SUCCESS + "-" + module);	
+				        	} else {
+				        		//need to add message here if report generation failed, make the message dynamic
+				        		TransportUtils.writeLogInfo(logger, MiscConstant.RPT_MESSSAGE_GENERATED_FAILED + "-" + module);
+				        	}	        	
+							
+							forwardAction = ActionConstant.SHOW_AJAX_VIEW_3;
+						} else {
+							forwardAction = ActionConstant.SHOW_AJAX_VIEW;	
+						}
+							
+					}
+					
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_GO_TO)) {
+					// Check Inner Module
+					// 251 - Driver Info, 252-Driver Profile
+
+					String driverTrainingId = request.getParameter("driverTrainingId");
+					String driverName = request.getParameter("driverName");
+					int innerModule = Integer.parseInt(request.getParameter("innerModule"));
+					String isViewSummary = request.getParameter("isViewSummary");
+
+					if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+						DriverTrainingInfo model = new DriverTrainingInfo();
+						model.setDriverTrainingId(Integer
+								.valueOf(driverTrainingId));
+						model.setDriverName(driverName);
+
+						int page = 1;
+						int offset = (page - 1) * MiscConstant.RECORDS_PER_PAGE;
+						HashMap<String, Object> dataMap = new HashMap<String, Object>();
+						dataMap.put(MapConstant.MODULE, innerModule);
+						dataMap.put(MapConstant.ACTION,
+								ActionConstant.SEARCHALL);
+						dataMap.put(MapConstant.CLASS_DATA, model);
+						dataMap.put(MapConstant.PAGINATION_LIMIT,
+								MiscConstant.RECORDS_PER_PAGE);
+						dataMap.put(MapConstant.PAGINATION_OFFSET, offset);
+
+						ServiceManager service = new ServiceManagerImpl();
+						Map<String, Object> resultMap = service
+								.executeRequest(dataMap);
+
+						if (resultMap != null && !resultMap.isEmpty()) {
+
+							@SuppressWarnings("unchecked")
+							List<DriverTrainingInfo> qryList = (List<DriverTrainingInfo>) resultMap
+									.get(MapConstant.CLASS_LIST);
+
+							formBean.setTrainingList(qryList);
+
+							int totalNoOfRecords = (int) resultMap
+									.get(MapConstant.PAGINATION_TOTALRECORDS);
+							int noOfPages = (int) Math.ceil(totalNoOfRecords
+									* 1.0 / MiscConstant.RECORDS_PER_PAGE);
+
+							formBean.setNoOfPages(noOfPages);
+							formBean.setCurrentPage(1);// default to page 1
+
+						} else {
+							formBean.setTrainingList(null);
+							formBean.setNoOfPages(0);
+							formBean.setCurrentPage(0);
+						}
+
+						forwardAction = ActionConstant.SHOW_AJAX_GO_TO; // For
+																		// 251
+																		// Driver
+																		// Info
+
+					} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+						DriverTrainingProfile model = new DriverTrainingProfile();
+						model.setDriverTrainingId(Integer
+								.valueOf(driverTrainingId));
+						model.setDriverName(driverName);
+
+						int page = 1;
+						int offset = (page - 1) * MiscConstant.RECORDS_PER_PAGE;
+						HashMap<String, Object> dataMap = new HashMap<String, Object>();
+						dataMap.put(MapConstant.MODULE, innerModule);
+						dataMap.put(MapConstant.ACTION,
+								ActionConstant.SEARCHALL);
+						dataMap.put(MapConstant.CLASS_DATA, model);
+						dataMap.put(MapConstant.PAGINATION_LIMIT,
+								MiscConstant.RECORDS_PER_PAGE);
+						dataMap.put(MapConstant.PAGINATION_OFFSET, offset);
+
+						ServiceManager service = new ServiceManagerImpl();
+						Map<String, Object> resultMap = service
+								.executeRequest(dataMap);
+
+						if (resultMap != null && !resultMap.isEmpty()) {
+
+							@SuppressWarnings("unchecked")
+							List<DriverTrainingProfile> qryList = (List<DriverTrainingProfile>) resultMap
+									.get(MapConstant.CLASS_LIST);
+
+							formBean.setProfileList(qryList);
+
+							int totalNoOfRecords = (int) resultMap
+									.get(MapConstant.PAGINATION_TOTALRECORDS);
+							int noOfPages = (int) Math.ceil(totalNoOfRecords
+									* 1.0 / MiscConstant.RECORDS_PER_PAGE);
+
+							formBean.setNoOfPages(noOfPages);
+							formBean.setCurrentPage(1);// default to page 1
+
+						} else {
+							formBean.setProfileList(null);
+							formBean.setNoOfPages(0);
+							formBean.setCurrentPage(0);
+						}
+
+						forwardAction = ActionConstant.SHOW_AJAX_GO_TO_2; // For
+																			// 252
+																			// Driver
+																			// Profile
+
+					} else {
+						// VNV, Incab, Spotcheck or Incident
+						String driverTrainingProfileId = request
+								.getParameter("driverTrainingProfileId");
+						String remarks = request.getParameter("remarks");
+
+						formBean.setDriverTrainingId(driverTrainingId);
+						formBean.setDriverTrainingProfileId(driverTrainingProfileId);
+						formBean.setDriverName(driverName);
+						formBean.setInnerModule(String.valueOf(innerModule));
+						formBean.setRemarks(remarks);
+
+						DriverTrainingProfileComment model = new DriverTrainingProfileComment();
+						model.setDriverTrainingProfileId(Integer
+								.valueOf(driverTrainingProfileId.trim()));
+
+						int page = 1;
+						int offset = (page - 1) * MiscConstant.RECORDS_PER_PAGE;
+						HashMap<String, Object> dataMap = new HashMap<String, Object>();
+						dataMap.put(MapConstant.MODULE, innerModule);
+						dataMap.put(MapConstant.ACTION,
+								ActionConstant.SEARCHALL);
+						dataMap.put(MapConstant.CLASS_DATA, model);
+						if (isViewSummary != null) {
+							dataMap.put(MapConstant.PAGINATION_LIMIT, 100);
+						} else {
+							dataMap.put(MapConstant.PAGINATION_LIMIT,
+									MiscConstant.RECORDS_PER_PAGE);
+						}
+						dataMap.put(MapConstant.PAGINATION_OFFSET, offset);
+
+						ServiceManager service = new ServiceManagerImpl();
+						Map<String, Object> resultMap = service
+								.executeRequest(dataMap);
+
+						if (resultMap != null && !resultMap.isEmpty()) {
+
+							@SuppressWarnings("unchecked")
+							List<DriverTrainingProfileComment> qryList = (List<DriverTrainingProfileComment>) resultMap
+									.get(MapConstant.CLASS_LIST);
+
+							formBean.setCommentList(qryList);
+
+							int totalNoOfRecords = (int) resultMap
+									.get(MapConstant.PAGINATION_TOTALRECORDS);
+							int noOfPages = (int) Math.ceil(totalNoOfRecords
+									* 1.0 / MiscConstant.RECORDS_PER_PAGE);
+
+							formBean.setNoOfPages(noOfPages);
+							formBean.setCurrentPage(1);// default to page 1
+
+						} else {
+							formBean.setCommentList(null);
+							formBean.setNoOfPages(0);
+							formBean.setCurrentPage(0);
+						}
+						if (isViewSummary != null) {
+							forwardAction = ActionConstant.SHOW_AJAX_GO_TO_2;// Viewing
+																				// of
+																				// Comments
+																				// only
+						} else {
+							forwardAction = ActionConstant.SHOW_AJAX_GO_TO; // can
+																			// use
+																			// same
+																			// action
+																			// constant
+																			// coz
+																			// different
+																			// struts
+																			// path
+						}
+						
+						if (TransportUtils.isMobile(request.getSession().getAttribute(MiscConstant.IS_MOBILE))) {
+							forwardAction = ActionConstant.SHOW_AJAX_GO_TO_3;
+						}
+						
+					}
+				} else if (command
+						.equalsIgnoreCase(ParamConstant.AJAX_SAVE_INNER)
+						|| command
+								.equalsIgnoreCase(ParamConstant.AJAX_UPDATE_INNER)) {
+
+					String driverTrainingId = request
+							.getParameter("driverTrainingId");
+					String driverName = request.getParameter("driverName");
+					int innerModule = Integer.parseInt(request
+							.getParameter("innerModule"));
+
+					formBean.setDriverTrainingId(driverTrainingId);
+					formBean.setDriverName(driverName);
+					formBean.setInnerModule(String.valueOf(innerModule));
+
+					User user = (User) request.getSession().getAttribute(
+							MiscConstant.USER_SESSION);
+					Object model = null;
+
+					if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+						// populateModel
+						model = (DriverTrainingInfo) formBean
+								.populateModelInfo();
+					} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+						// populateModel
+						model = (DriverTrainingProfile) formBean
+								.populateModelProfile();
+					} else {
+						// VNV, Incab, Spotcheck or Incident
+						String driverTrainingProfileId = request
+								.getParameter("driverTrainingProfileId");
+						String remarks = request.getParameter("remarks");
+						formBean.setDriverTrainingProfileId(driverTrainingProfileId);
+						formBean.setRemarks(remarks);
+						// populateModel
+						model = (DriverTrainingProfileComment) formBean
+								.populateModelProfileComment();
+					}
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.MODULE, innerModule);
+					dataMap.put(MapConstant.CLASS_DATA, model);
+					dataMap.put(MapConstant.USER_SESSION_DATA, user);
+
+					if (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE_INNER)) {
+						dataMap.put(MapConstant.ACTION, ActionConstant.SAVE);
+					} else {
+						dataMap.put(MapConstant.ACTION, ActionConstant.UPDATE);
+					}
+
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service
+							.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+						// check resultmap action status
+						boolean tranctionStatus = (boolean) resultMap
+								.get(MapConstant.TRANSACTION_STATUS);
+
+						formBean.setTransactionStatus(tranctionStatus);
+
+						if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+							formBean.populateTrainingDropdownList(request);
+						} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+							formBean.populateStatusDropdownList(request);
+						}
+
+						if (tranctionStatus) {
+							// add confirmation message
+							if (command
+									.equalsIgnoreCase(ParamConstant.AJAX_SAVE_INNER)) {
+								formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_SAVED);
+								TransportUtils.writeLogInfo(logger,
+										MiscConstant.TRANS_MESSSAGE_SAVED
+												+ " - " + module);
+								// logger.info(MiscConstant.TRANS_MESSSAGE_SAVED);
+							} else {
+								formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_UPDATED);
+								TransportUtils.writeLogInfo(logger,
+										MiscConstant.TRANS_MESSSAGE_UPDATED
+												+ " - " + module);
+								// logger.info(MiscConstant.TRANS_MESSSAGE_UPDATED);
+							}
+							
+	
+							forwardAction = ActionConstant.AJAX_SUCCESS;
+							
+						} else {
+							formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
+							// logger.info(MiscConstant.TRANS_MESSSAGE_ERROR);
+							TransportUtils.writeLogInfo(logger,
+									MiscConstant.TRANS_MESSSAGE_ERROR + " - "
+											+ module);
+							
+						forwardAction = ActionConstant.AJAX_FAILED;
+
+						}
+					}
+
+				} else if (command
+						.equalsIgnoreCase(ParamConstant.AJAX_SEARCH_INNER)) {
+					// get all the records from DB
+
+					int page = 1;
+					if (request.getParameter("page") != null) {
+						page = Integer.parseInt(request.getParameter("page"));
+					}
+
+					int offset = (page - 1) * MiscConstant.RECORDS_PER_PAGE;
+
+					String category = null;
+					if (request.getParameter("category") != null) {
+						category = (String) request.getParameter("category");
+						formBean.setCategory(category);
+						if (category.equals("filter")) {
+							category = ActionConstant.SEARCHBY;
+						} else {
+							category = ActionConstant.SEARCHALL;
+						}
+					}
+
+					String searchValue = formBean.getSearchValue();
+
+					String driverTrainingId = request
+							.getParameter("driverTrainingId");
+					String driverName = request.getParameter("driverName");
+					int innerModule = Integer.parseInt(request
+							.getParameter("innerModule"));
+
+					Object model = null;
+
+					if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+						model = new DriverTrainingInfo();
+						((DriverTrainingInfo) model)
+								.setDriverTrainingId(Integer
+										.valueOf(driverTrainingId));
+					} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+						model = (DriverTrainingProfile) new DriverTrainingProfile();
+						((DriverTrainingProfile) model)
+								.setDriverTrainingId(Integer
+										.valueOf(driverTrainingId));
+					} else {
+						// For VNV, Incab, Spotcheck and Incident
+						String driverTrainingProfileId = request
+								.getParameter("driverTrainingProfileId");
+						model = (DriverTrainingProfileComment) new DriverTrainingProfileComment();
+						((DriverTrainingProfileComment) model)
+								.setDriverTrainingProfileId(Integer
+										.valueOf(driverTrainingProfileId.trim()));
+					}
+
+					formBean.setDriverTrainingId(driverTrainingId);
+					formBean.setDriverName(driverName);
+					formBean.setInnerModule(String.valueOf(innerModule));
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.SEARCH_CRITERIA, searchValue);
+					dataMap.put(MapConstant.MODULE, innerModule);
+					dataMap.put(MapConstant.ACTION, category);
+					dataMap.put(MapConstant.PAGINATION_LIMIT,
+							MiscConstant.RECORDS_PER_PAGE);
+					dataMap.put(MapConstant.PAGINATION_OFFSET, offset);
+					dataMap.put(MapConstant.CLASS_DATA, model);
+
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service
+							.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+
+						if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+							@SuppressWarnings("unchecked")
+							List<DriverTrainingInfo> qryList = (List<DriverTrainingInfo>) resultMap
+									.get(MapConstant.CLASS_LIST);
+							formBean.setTrainingList(qryList);
+						} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+							@SuppressWarnings("unchecked")
+							List<DriverTrainingProfile> qryList = (List<DriverTrainingProfile>) resultMap
+									.get(MapConstant.CLASS_LIST);
+							formBean.setProfileList(qryList);
+						} else {
+							// For VNV, Incab, Spotcheck and Incident
+							@SuppressWarnings("unchecked")
+							List<DriverTrainingProfileComment> qryList = (List<DriverTrainingProfileComment>) resultMap
+									.get(MapConstant.CLASS_LIST);
+							formBean.setCommentList(qryList);
+						}
+
+						int totalNoOfRecords = (int) resultMap
+								.get(MapConstant.PAGINATION_TOTALRECORDS);
+						int noOfPages = (int) Math.ceil(totalNoOfRecords * 1.0
+								/ MiscConstant.RECORDS_PER_PAGE);
+
+						formBean.setNoOfPages(noOfPages);
+						formBean.setCurrentPage(page);
+
+					} else {
+						if (ModuleConstant.DRIVER_TRAINING_INFO == innerModule) {
+							formBean.setTrainingList(null);
+						} else if (ModuleConstant.DRIVER_TRAINING_PROFILE == innerModule) {
+							formBean.setProfileList(null);
+						} else {
+							// For VNV, Incab, Spotcheck and Incident
+							formBean.setCommentList(null);
+						}
+						formBean.setNoOfPages(0);
+						formBean.setCurrentPage(0);
+					}
+
+					forwardAction = ActionConstant.SHOW_AJAX_TABLE;
+
+				}
+				else if (command.equalsIgnoreCase(ParamConstant.AJAX_MOBILE_MAIN)) {
+					forwardAction = ActionConstant.SHOW_AJAX_VIEW_3;
+				}
+			} else {
+				// show main screen
+				forwardAction = ActionConstant.SHOW_AJAX_MAIN;
+			}
+
+		}
+
+		return mapping.findForward(forwardAction);
+	}
+
+}

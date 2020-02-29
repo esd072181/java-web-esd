@@ -1,0 +1,197 @@
+package com.transport.service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import com.transport.config.SpringConfig;
+import com.transport.constant.BeanConstant;
+import com.transport.constant.MapConstant;
+import com.transport.constant.ModuleConstant;
+import com.transport.module.ClosureModule;
+import com.transport.module.CorrectionsModule;
+import com.transport.module.DriverTrainingInfoModule;
+import com.transport.module.DriverTrainingModule;
+import com.transport.module.DriverTrainingProfileModule;
+import com.transport.module.FindingsModule;
+import com.transport.module.FollowUpModule;
+import com.transport.module.ItemsModule;
+import com.transport.module.ListValueModule;
+import com.transport.module.LoginModule;
+import com.transport.module.MaintenanceMonitoringModule;
+import com.transport.module.MaintenanceMonitoringPreventiveModule;
+import com.transport.module.MaintenanceMonitoringTotalPendingModule;
+import com.transport.module.RemarksModule;
+import com.transport.module.RootCauseModule;
+import com.transport.module.RptVerificationModule;
+import com.transport.module.RptWorkPermitModule;
+import com.transport.module.TerminalModule;
+import com.transport.module.TireBrandModule;
+import com.transport.module.TireManagementModule;
+import com.transport.module.TireModule;
+import com.transport.module.TransportModule;
+import com.transport.module.EmployeeModule;
+import com.transport.module.LorryModule;
+import com.transport.module.UserAccessModule;
+import com.transport.module.UserModule;
+import com.transport.module.VerificationAndValidationModule;
+import com.transport.module.WorkPermitModule;
+import com.transport.util.TransportUtils;
+
+/**
+ * 
+ * @author dward
+ * @since July2016
+ * DateUpdated: 26Aug2019
+ */
+public class ServiceManagerImpl implements ServiceManager {
+	
+	private final static Logger logger = Logger.getLogger(ServiceManagerImpl.class);
+	
+	public Map<String, Object> executeRequest(HashMap<String,Object> dataMap) throws Exception{
+		
+		TransportModule module = null;
+		Object bo = null;
+		int moduleId = 0;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		try {
+			moduleId = (int) dataMap.get(MapConstant.MODULE);
+			
+			bo = SpringConfig.getSpringXMLConfig().getBean(BeanConstant.getBeanId(moduleId));
+			
+			dataMap.put(MapConstant.BEAN, bo); //put object bean into dataMap
+			
+			switch(moduleId) {
+
+				case ModuleConstant.LOGIN : 
+					module = new LoginModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.EMPLOYEE :
+					module = new EmployeeModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.LORRY :
+					module = new LorryModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.ITEMS :
+					module = new ItemsModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.CORRECTIONS :
+					module = new CorrectionsModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.FOLLOW_UP :
+					module = new FollowUpModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.REMARKS :
+					module = new RemarksModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.TERMINAL :
+					module = new TerminalModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.USER :
+					module = new UserModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.LIST_VALUE :
+					module = new ListValueModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.VERIFICATION_AND_VALIDATION :
+					module = new VerificationAndValidationModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.RPT_VERIFICATION :
+					module = new RptVerificationModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.FINDINGS :
+					module = new FindingsModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.ROOT_CAUSE :
+					module = new RootCauseModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.CLOSURE :
+					module = new ClosureModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.TIRE_BRAND :
+					module = new TireBrandModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.TIRE :
+					module = new TireModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.TIRE_MANAGEMENT :
+					module = new TireManagementModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.WORK_PERMIT :
+					module = new WorkPermitModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.RPT_WORK_PERMIT :
+					module = new RptWorkPermitModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.USER_ACCESS :
+					module = new UserAccessModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.MAINTENANCE_MONITORING :
+					module = new MaintenanceMonitoringModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE ://Inner Module
+					module = new MaintenanceMonitoringPreventiveModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.MAINTENANCE_MONITORING_TOTAL_PENDING ://Inner Module
+					module = new MaintenanceMonitoringTotalPendingModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.DRIVER_TRAINING :
+					module = new DriverTrainingModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.DRIVER_TRAINING_INFO : //Inner Module
+					module = new DriverTrainingInfoModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.DRIVER_TRAINING_PROFILE : //Inner Module
+					module = new DriverTrainingProfileModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				default: 
+					TransportUtils.writeLogInfo(logger, "This module ("+module+") is not configured for service!");
+					break;
+			}
+									
+		} catch (Exception e) {
+			TransportUtils.writeLogInfo(logger, e.getMessage());
+		} finally {
+			if (module!=null) {
+				module = null;	
+			}
+			//if (moduleName!=null) {
+			//	moduleName = null;	
+			//}
+			if (bo!=null) {
+				bo = null;
+			}
+		}
+		return returnMap;
+	}
+	
+}

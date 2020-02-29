@@ -1,0 +1,69 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+    
+	$('#idSearchValue').focus();
+	
+    
+  });
+
+</script>
+
+
+<div class="row">
+  <div class="col-sm-2">
+	<!-- Left Menu -->
+	  <div style="padding-top: 15px; padding-left: 12px;">
+	  	<!-- jQuery ui -->
+	  	<ul id="menu" style="width: 150px;">
+		  <li class="ui-widget-header">Options</li>
+		  <li onclick="goToDriverTraining();"><a href="#">Search Record</a></li>
+		  <li onclick="goToAddDriverTraining();"><a href="#">Add New Record</a></li>
+		  <%@ include file="/template/menu_left_trans_reports.jsp" %>
+		</ul>
+	 </div>
+  </div>
+    
+  <div class="col-sm-10">
+	
+	<div style="height: 30%;">
+		<h3 style="font-weight: bolder;">Driver Training and Information</h3>
+		<html:form action="/driverTraining.do" styleId="idForm">
+				<div>
+					<html:errors/>
+				</div>
+				<br>
+				<div>
+					<div>	
+						<div class="controls">
+							 <!-- Search Value -->
+							<label  class="control-label top-spacing" for="searchValue">Search:</label>
+							<html:text property="searchValue" styleId="idSearchValue" size="10" onkeydown="executeSearch(event);"></html:text> 						 													 			
+							<html:button styleId="btnSearchFilter" property="command" onclick="getDriverTraining(1,'filter');" value="Search" styleClass="btn btn-primary"></html:button>
+							<html:button property="command" onclick="getDriverTraining(1,'showall');" value="Show All" styleClass="btn btn-primary"></html:button>
+							<span id="msgDeletedId" style="color: blue; padding-left: 100px; display: none;"><bean:message key="msg.deleted"/></span>
+							<span id="validationMessageId" style="color: blue; display: none;">Enter search value.</span>						
+						</div>
+					</div>
+				</div>			
+		</html:form>
+	</div>
+  
+	
+	<br>
+
+	<!-- using bootstrap -->
+	<div id="tablePresentationDIV">
+		<!-- ajax part of table data -->
+	</div>
+
+  
+  </div>
+
+</div>
+

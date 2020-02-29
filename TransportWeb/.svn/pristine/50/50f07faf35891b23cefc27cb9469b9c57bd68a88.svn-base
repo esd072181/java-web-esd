@@ -1,0 +1,333 @@
+package com.transport.model;
+
+import java.io.File;
+import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
+
+/**
+ * 
+ * @author dward
+ * @since 26August2019
+ */
+public class DriverTraining implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private int id;
+	private int driverId;
+	private Date training1ExpiryDate;
+	private Date training2ExpiryDate;
+	private Date training3ExpiryDate;
+	private String picName;
+	private File pic;
+	private String vnv;
+	private String incab;
+	private String spotcheck;
+	private int terminalId;
+	private String articulated;
+	private String notes;
+	private String incident;
+	private Date birthday;
+	private Date aodt;
+	private int createdBy;
+	private Timestamp createdOn;
+	private int modifiedBy;
+	private Timestamp modifiedOn;
+	private int version;
+	private boolean active;
+	
+	//non-persistent
+	private String lastName;
+	private String firstName;
+	private String terminalName;
+	private int age;
+	private String picStr;
+	
+	
+	public DriverTraining() {}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public int getDriverId() {
+		return driverId;
+	}
+
+
+	public void setDriverId(int driverId) {
+		this.driverId = driverId;
+	}
+
+
+	public Date getTraining1ExpiryDate() {
+		return training1ExpiryDate;
+	}
+
+
+	public void setTraining1ExpiryDate(Date training1ExpiryDate) {
+		this.training1ExpiryDate = training1ExpiryDate;
+	}
+
+
+	public Date getTraining2ExpiryDate() {
+		return training2ExpiryDate;
+	}
+
+
+	public void setTraining2ExpiryDate(Date training2ExpiryDate) {
+		this.training2ExpiryDate = training2ExpiryDate;
+	}
+
+
+	public Date getTraining3ExpiryDate() {
+		return training3ExpiryDate;
+	}
+
+
+	public void setTraining3ExpiryDate(Date training3ExpiryDate) {
+		this.training3ExpiryDate = training3ExpiryDate;
+	}
+
+
+	public String getVnv() {
+		return vnv;
+	}
+
+
+	public void setVnv(String vnv) {
+		this.vnv = vnv;
+	}
+
+
+	public String getIncab() {
+		return incab;
+	}
+
+
+	public void setIncab(String incab) {
+		this.incab = incab;
+	}
+
+
+	public String getSpotcheck() {
+		return spotcheck;
+	}
+
+
+	public void setSpotcheck(String spotcheck) {
+		this.spotcheck = spotcheck;
+	}
+
+
+	public int getTerminalId() {
+		return terminalId;
+	}
+
+
+	public void setTerminalId(int terminalId) {
+		this.terminalId = terminalId;
+	}
+
+
+	public String getArticulated() {
+		return articulated;
+	}
+
+
+	public void setArticulated(String articulated) {
+		this.articulated = articulated;
+	}
+
+
+	public String getNotes() {
+		return notes;
+	}
+
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+
+	public String getIncident() {
+		return incident;
+	}
+
+
+	public void setIncident(String incident) {
+		this.incident = incident;
+	}
+
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+
+	public Date getAodt() {
+		return aodt;
+	}
+
+
+	public void setAodt(Date aodt) {
+		this.aodt = aodt;
+	}
+
+
+	public int getCreatedBy() {
+		return createdBy;
+	}
+
+
+	public void setCreatedBy(int createdBy) {
+		this.createdBy = createdBy;
+	}
+
+
+	public Timestamp getCreatedOn() {
+		return createdOn;
+	}
+
+
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
+	}
+
+
+	public int getModifiedBy() {
+		return modifiedBy;
+	}
+
+
+	public void setModifiedBy(int modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+
+	public Timestamp getModifiedOn() {
+		return modifiedOn;
+	}
+
+
+	public void setModifiedOn(Timestamp modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
+
+
+	public int getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+
+	public boolean isActive() {
+		return active;
+	}
+
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+	public String getTerminalName() {
+		return terminalName;
+	}
+
+
+	public void setTerminalName(String terminalName) {
+		this.terminalName = terminalName;
+	}
+
+	public String getFullName() {
+		return this.getLastName() + ", " + this.getFirstName();
+	}
+
+
+	public int getAge() {
+		return age;
+	}
+
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+
+	public String getPicName() {
+		return picName;
+	}
+
+
+	public void setPicName(String picName) {
+		this.picName = picName;
+	}
+
+
+	public File getPic() {
+		return pic;
+	}
+
+
+	public void setPic(File pic) {
+		this.pic = pic;
+	}
+
+
+	public String getPicStr() {
+		return picStr;
+	}
+
+
+	public void setPicStr(String picStr) {
+		this.picStr = picStr;
+	}
+
+
+
+
+
+	
+	
+}

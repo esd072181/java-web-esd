@@ -1,0 +1,114 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+	<div class="table-responsive" >
+		<c:choose>
+		  <c:when test="${driverTrainingForm.modelList != null}">
+			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
+				<tr>
+					<th></th>
+					<c:if test="${sessionScope.user_role_session=='Admin'}">
+						<th></th>
+					</c:if>
+					<th>Full Name</th>
+					<th>Set A BBS Fatigue Management Mindset Change (2 Years Validity)</th>
+					<th>Set B Product Knowledge Gantry Top and Bottom Emergency Response (1 Year Validity)</th>
+					<th>Set C Defensive Driving Classroom VRIP (1 year Validity)</th>
+					<th>Driver Picture</th>
+					<th>VNV Findings</th>
+					<th>Incab Review Findings</th>
+					<th>Spotcheck Findings</th>
+					<th>Terminal</th>
+					<th>Articulated</th>
+					<th>Notes</th>
+					<th>Incident</th>
+					<th>Age</th>
+					<th>AODT</th>
+				</tr>
+				<logic:iterate name="driverTrainingForm" property="modelList" type="com.transport.model.DriverTraining" id="model">
+					<tr>				 
+						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td align="center"><a href="#" onclick="javascript: editDriverTraining('<bean:write name="model" property="id"/>');">Edit</a></td>
+						<c:if test="${sessionScope.user_role_session=='Admin'}">
+							<td align="center"><a href="#" onclick="javascript: deleteDriverTraining('<bean:write name="model" property="id"/>', '${driverTrainingForm.category}',${driverTrainingForm.currentPage})">Delete</a></td>
+						</c:if>
+						<td><bean:write name="model" property="fullName"/></td>
+						<td align="right"><bean:write name="model" property="training1ExpiryDate" format='MM/dd/yyyy'/></td>
+						<td align="right"><bean:write name="model" property="training2ExpiryDate" format='MM/dd/yyyy'/></td>
+						<td align="right"><bean:write name="model" property="training3ExpiryDate" format='MM/dd/yyyy'/></td>
+						<td><html:image src="data:image/jpeg;base64,${model.picStr}" alt="" style="width: 50px; height: 60px; pointer-events: none;"></html:image></td>	
+						<td><bean:write name="model" property="vnv"/></td>
+						<td><bean:write name="model" property="incab"/></td>
+						<td><bean:write name="model" property="spotcheck"/></td>	
+						<td><bean:write name="model" property="terminalName"/></td>	
+						<td><bean:write name="model" property="articulated"/></td>
+						<td><bean:write name="model" property="notes"/></td>	
+						<td><bean:write name="model" property="incident"/></td>
+						<c:choose>
+							<c:when test="${model.age > 0}">
+								<td align="right"><bean:write name="model" property="age"/></td>	
+							</c:when>
+							<c:otherwise>
+							    <td></td>
+							</c:otherwise>
+						</c:choose>
+						<td align="right"><bean:write name="model" property="aodt" format='MM/dd/yyyy'/></td>	
+					</tr>
+				</logic:iterate>
+			</table>
+		  </c:when>
+		  <c:otherwise>
+		  	<div style="color: blue;">No Record found!</div>
+		  </c:otherwise>
+		</c:choose>
+	</div>
+	
+	<div style="height: 50px; width: 98%;">
+		<div style="position: relative; top: -15px; float: left;">
+			<ul class="pager">
+				<c:if test="${driverTrainingForm.currentPage != 1 && driverTrainingForm.noOfPages > 0}">
+					<li><a href="#" onclick="getDriverTraining(${driverTrainingForm.currentPage - 1},'${driverTrainingForm.category}');">Previous</a></li>
+				</c:if>
+				<c:if test="${driverTrainingForm.currentPage lt driverTrainingForm.noOfPages}">
+				  	<li><a href="#" onclick="getDriverTraining(${driverTrainingForm.currentPage + 1},'${driverTrainingForm.category}');">Next</a></li>
+				</c:if>
+			</ul>
+		</div>
+		<div style="position: relative; top: -15px; float: right;" >
+			<ul class="pagination">
+			
+				<c:if test="${driverTrainingForm.currentPage != 1 && driverTrainingForm.noOfPages > 0}">
+					<li><a href="#" onclick="getDriverTraining(${driverTrainingForm.currentPage - 1},'${driverTrainingForm.category}');">&laquo;</a></li>
+				</c:if>
+					
+				<c:forEach begin="1" end="${driverTrainingForm.noOfPages}" var="i">
+	                <c:choose>
+	                    <c:when test="${driverTrainingForm.currentPage eq i}">
+	                        <li class="active"><a href="#">${i}</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	 <c:choose>
+	                          <c:when test="${driverTrainingForm.currentPage < i && i < driverTrainingForm.currentPage+10}">
+	                          		<li><a href="#" onclick="getDriverTraining(${i},'${driverTrainingForm.category}');">${i}</a></li>
+	                          </c:when>
+	                           <c:otherwise>
+	                           		<!-- none -->
+	                           </c:otherwise>
+	                         </c:choose>
+	                    </c:otherwise>
+	                </c:choose>
+	            </c:forEach>
+	           	<c:if test="${driverTrainingForm.currentPage lt driverTrainingForm.noOfPages}">
+	               	<li><a href="#" onclick="getDriverTraining(${driverTrainingForm.currentPage + 1},'${driverTrainingForm.category}');">&raquo;</a></li>
+	            </c:if>
+
+			</ul>
+		</div>
+	</div>
+	
+	
+

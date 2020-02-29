@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd"> 
+ 
+<struts-config>
+ 
+ 	<!-- Struts Config for Utilities -->
+ 
+	<form-beans>
+
+		<form-bean name="archiveForm" type="com.transport.form.ArchiveFormBean" />
+
+	</form-beans>
+ 
+	<action-mappings>
+	   
+      <!-- Archive (START) -->
+	   <action 
+	   		path="/archive" 
+	   		type="com.transport.action.ArchiveAction"
+			name="archiveForm"
+			scope="request"
+			input="/pages/utilities/archive/ajaxArchive.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/utilities/archive/ajaxArchive.jsp"/>
+			<forward name="ajaxTable" path="/pages/utilities/archive/ajaxArchiveTable.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/utilities/archive/ajaxArchive.jsp"/>
+			<forward name="ajaxFailed" path="/pages/utilities/archive/ajaxArchive.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	
+	   <action 
+	   		path="/restoreEntity" 
+	   		type="com.transport.action.ArchiveAction"
+			name="archiveForm"
+			scope="request"
+			input="/pages/utilities/archive/ajaxArchive.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/utilities/archive/ajaxArchive.jsp"/>
+			<forward name="ajaxFailed" path="/pages/utilities/archive/ajaxArchive.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Archive (END) -->	 
+
+	</action-mappings>
+	
+
+</struts-config>

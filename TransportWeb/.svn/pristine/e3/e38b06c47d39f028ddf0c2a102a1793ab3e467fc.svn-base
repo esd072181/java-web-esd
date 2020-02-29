@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<%@taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="style/page_layout.css">
+	<title>TransportWeb</title>
+	<script src="js/jquery-1.11.1.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="js/transaction.js"></script>
+	<script src="js/global.js"></script>
+	<script src="js/bootbox.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<style type="text/css">
+		[data-role=page]{height: 100% !important; position:relative !important;}
+		[data-role=footer]{bottom:0; position:absolute !important; top: auto !important; width:100%;}
+	</style>
+<script type="text/javascript">
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+});
+$(document).on({
+    ajaxStart: function() { 
+    	$("#ajaxSpinnerId").show();
+    	//$("#ajaxSpinnerId").addClass("modal");
+  	  //alert('ajaxStart');
+  	  //$body.addClass("loading");    
+     },
+     ajaxStop: function() { 
+    	 $("#ajaxSpinnerId").hide();
+    	 //setTimeout(function(){$("#ajaxSpinnerId").removeClass("modal")}, 400);
+  	   //alert('ajaxStop');
+  	  //$body.removeClass("loading"); 
+     }    
+});
+</script>
+</head>
+
+<body>
+		  								
+		 <div id="page" data-role="page" data-theme="" style="width: 100%">
+		  										    
+		  	<div align="left" data-role="header" style="padding-left: 10px;">
+		  		<span style="font-size: 40px; font-family: Tahoma; font-weight: bolder; color: blue;">GDC Transport Web</span>							    
+		  	</div>
+		  										    
+		    <div align="left" style="padding-right: 10px; padding-top: 5px; padding-left: 10px;">
+		    		<span style="font-size: 34px;">User:</span>
+		    		<span style="font-size: 34px; font-weight: bold; font-style: italic;">
+		    			<c:out value="${user_session.name}"></c:out>
+		    		</span>
+		    		&nbsp;
+		    		<span>
+		    			<a style="font-size: 34px; font-weight: bolder; color: blue;" href="logoutMobile.do">LOGOUT&nbsp;</a>
+		    		</span>
+		    		<span>
+		    			<a style="font-size: 25px; font-weight: bolder; font-style: italic;" href="#" onclick="goToChangeUsernameMobile();">(Account Settings)</a>
+		    		</span>
+		    </div>
+		 
+  
+		<div id="ajaxSpinnerId" align="right" style=" display: none; position: fixed; top: 12%; left: 40%; ">
+			<img src="resources/ajax-loader.gif"/>
+		</div>	
+
+			   				    
+		  <div data-role="content" id="contentDIV" style="padding-top: 50px; padding-left: 50px;">
+		  		<jsp:include page="ajaxMobileMain.jsp"></jsp:include>					      
+		  </div>
+		    
+		    <!--  
+		    <div data-role="footer">
+		    	<h1>TransportWebv1.5.7</h1>
+		    </div>
+		  -->
+		    
+		 </div>
+
+</body>
+</html>

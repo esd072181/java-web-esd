@@ -1,0 +1,29 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<div id="contentDIV">
+	<!-- ajax powered content DIV -->
+	<div  align="left" style=" height: 5px;">
+		<!-- space only -->
+	</div>
+	
+	<div align="center">
+		<div id="tablePresentationDIV">
+		<!-- ajax part of table data -->
+		</div>
+	</div>
+
+  <c:choose>
+  	<c:when test="${sessionScope.user_role_session == 'Driver'}">
+  		<div style="padding-left: 5px;">
+	  		<script>
+	  			getDriverTrainingInfo(${sessionScope.user_emp_id_session});
+			</script>
+  		</div>
+  	</c:when>
+  	<c:otherwise>
+  		<script>
+			getReminders(1);
+		</script>
+  	</c:otherwise>
+  </c:choose>
+	
+</div>

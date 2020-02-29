@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd"> 
+ 
+<struts-config>
+ 
+ 	<!-- Struts Config for Transactions -->
+ 
+	<form-beans>
+
+		<form-bean name="verificationAndValidationForm" type="com.transport.form.VerificationAndValidationFormBean" />
+		<form-bean name="workPermitForm" type="com.transport.form.WorkPermitFormBean" />
+		<form-bean name="maintenanceMonitoringForm" type="com.transport.form.MaintenanceMonitoringFormBean" />
+		<form-bean name="driverTrainingForm" type="com.transport.form.DriverTrainingFormBean" />
+
+	</form-beans>
+ 
+	<action-mappings>
+	   
+      <!-- Verification and Validation Compliance Tracker (START) -->
+	   <action 
+	   		path="/verificationAndValidation" 
+	   		type="com.transport.action.VerificationAndValidationAction"
+			name="verificationAndValidationForm"
+			scope="request"
+			input="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidation.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidation.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidationTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidationAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidation.jsp"/>
+			<forward name="ajaxEdit" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidationEdit.jsp"/>
+			<forward name="ajaxPopulateFindingsByItem" path="/pages/transaction/verificationandvalidation/ajaxdata/findingsByItem.jsp"/>
+	  		<forward name="ajaxPopulateClosureByCorrections" path="/pages/transaction/verificationandvalidation/ajaxdata/closureByCorrections.jsp"/>
+	   		<forward name="ajaxPopulateCorrectionsByRootCause" path="/pages/transaction/verificationandvalidation/ajaxdata/correctionsByRootCause.jsp"/>
+	   		<forward name="ajaxPopulateReminders" path="/pages/main/remindersTable.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveVerificationAndValidation" 
+	   		type="com.transport.action.VerificationAndValidationAction"
+			name="verificationAndValidationForm"
+			scope="request"
+			input="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidationAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidationAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidationAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateVerificationAndValidation" 
+	   		type="com.transport.action.VerificationAndValidationAction"
+			name="verificationAndValidationForm"
+			scope="request"
+			input="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidationEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidationEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidationAEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteVerificationAndValidation" 
+	   		type="com.transport.action.VerificationAndValidationAction"
+			name="verificationAndValidationForm"
+			scope="request"
+			input="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidation.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidation.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/verificationandvalidation/ajaxVerificationAndValidation.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Verification and Validation Compliance Tracker (END) -->	 	   	   
+
+      <!-- Work Permit (START) -->
+	   <action 
+	   		path="/workPermit" 
+	   		type="com.transport.action.WorkPermitAction"
+			name="workPermitForm"
+			scope="request"
+			input="/pages/transaction/workpermit/ajaxWorkPermit.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/transaction/workpermit/ajaxWorkPermit.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/workpermit/ajaxWorkPermitTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/workpermit/ajaxWorkPermitAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/workpermit/ajaxWorkPermit.jsp"/>
+			<forward name="ajaxEdit" path="/pages/transaction/workpermit/ajaxWorkPermitEdit.jsp"/>
+			<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveWorkPermit" 
+	   		type="com.transport.action.WorkPermitAction"
+			name="workPermitForm"
+			scope="request"
+			input="/pages/transaction/workpermit/ajaxWorkPermitAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/workpermit/ajaxWorkPermitAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/workpermit/ajaxWorkPermitAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateWorkPermit" 
+	   		type="com.transport.action.WorkPermitAction"
+			name="workPermitForm"
+			scope="request"
+			input="/pages/transaction/workpermit/ajaxWorkPermitEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/workpermit/ajaxWorkPermitEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/workpermit/ajaxWorkPermitAEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteWorkPermit" 
+	   		type="com.transport.action.WorkPermitAction"
+			name="workPermitForm"
+			scope="request"
+			input="/pages/transaction/workpermit/ajaxWorkPermit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/workpermit/ajaxWorkPermit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/workpermit/ajaxWorkPermit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Work Permit (END) -->	 	   	   
+
+      <!-- Maintenance Monitoring (START) -->
+	   <action 
+	   		path="/maintenanceMonitoring" 
+	   		type="com.transport.action.MaintenanceMonitoringAction"
+			name="maintenanceMonitoringForm"
+			scope="request"
+			input="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoring.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoring.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringAdd.jsp"/>
+			<forward name="ajaxEdit" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringUpdateGPS.jsp"/>
+			<forward name="ajaxEdit2" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringUpdateMaintenance.jsp"/>
+			<forward name="ajaxEdit3" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringUpdatePreventiveGarage.jsp"/>
+			<forward name="ajaxEdit4" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringUpdatePreventiveFbase.jsp"/>
+			<forward name="ajaxEdit5" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringUpdateBreakdownGarage.jsp"/>
+			<forward name="ajaxEdit6" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringUpdateBreakdownFbase.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoring.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/transaction/maintenancemonitoring/ajaxExcelFileMaintenanceMonitoringStatus.jsp"/>
+			<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveMaintenanceMonitoring" 
+	   		type="com.transport.action.MaintenanceMonitoringAction"
+			name="maintenanceMonitoringForm"
+			scope="request"
+			input="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateMaintenanceMonitoring" 
+	   		type="com.transport.action.MaintenanceMonitoringAction"
+			name="maintenanceMonitoringForm"
+			scope="request"
+			input="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoring.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/maintenancemonitoring/ajaxMaintenanceMonitoringTable.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Maintenance Monitoring (END) -->	 	   	   
+
+      <!-- Driver Training (START) -->
+	   <action 
+	   		path="/driverTraining" 
+	   		type="com.transport.action.DriverTrainingAction"
+			name="driverTrainingForm"
+			scope="request"
+			input="/pages/transaction/drivertraining/ajaxDriverTraining.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/transaction/drivertraining/ajaxDriverTraining.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/drivertraining/ajaxDriverTrainingTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/drivertraining/ajaxDriverTrainingAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/drivertraining/ajaxDriverTraining.jsp"/>
+			<forward name="ajaxEdit" path="/pages/transaction/drivertraining/ajaxDriverTrainingEdit.jsp"/>
+			<forward name="ajaxView" path="/pages/transaction/drivertraining/ajaxDriverTrainingView.jsp"/>
+			<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveDriverTraining" 
+	   		type="com.transport.action.DriverTrainingAction"
+			name="driverTrainingForm"
+			scope="request"
+			input="/pages/transaction/drivertraining/ajaxDriverTrainingAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/drivertraining/ajaxDriverTrainingAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/drivertraining/ajaxDriverTrainingAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateDriverTraining" 
+	   		type="com.transport.action.DriverTrainingAction"
+			name="driverTrainingForm"
+			scope="request"
+			input="/pages/transaction/drivertraining/ajaxDriverTrainingEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/drivertraining/ajaxDriverTrainingEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/drivertraining/ajaxDriverTrainingAEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteDriverTraining" 
+	   		type="com.transport.action.DriverTrainingAction"
+			name="driverTrainingForm"
+			scope="request"
+			input="/pages/transaction/drivertraining/ajaxDriverTraining.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/drivertraining/ajaxDriverTraining.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/drivertraining/ajaxDriverTraining.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Driver Training (END) -->
+	   
+	</action-mappings>
+	
+
+</struts-config>

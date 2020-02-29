@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+    <!-- Enable Annotation based Declarative Transaction Management -->
+    <tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
+    
+    <!-- PostgreSQL DB DataSource -->
+    <!-- for local testing --> 
+    <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource" scope="singleton">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/transportwebdev" />
+        <property name="username" value="admin" />
+        <property name="password" value="admin" />
+    </bean>
+    
+    <!-- production -->
+    <!--  
+    <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource" scope="singleton">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/dward721_transportgdc" />
+        <property name="username" value="dward721_transportgdc_user" />
+        <property name="password" value="Esd072181" />
+    </bean>
+    -->   
+    
+    <!-- Creating TransactionManager Bean, since JDBC we are creating of type DataSourceTransactionManager -->
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager" scope="singleton">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!-- Global Spring JDBC DataSource -->
+    <bean id="springContext" class="com.transport.config.SpringContext" scope="singleton">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    
+    <!-- Bean Post Processor Service Class -->
+    <bean class="com.transport.service.BeanPostProcessorService"/>
+     
+	<!-- Login -->
+	<bean id="loginDao" class="com.transport.dao.impl.LoginDaoImpl" scope="singleton" init-method="init" destroy-method="destroy">
+        <!--<property name="dataSource" ref="dataSource"></property>-->
+    </bean>
+ 
+    <bean id="loginBo" class="com.transport.bo.impl.LoginBoImpl" scope="singleton">
+        <property name="loginDao" ref="loginDao"></property>
+    </bean>
+    
+    <!-- Master Files START -->
+    
+    <!-- Employee -->
+    <bean id="employeeDao" class="com.transport.dao.impl.EmployeeDaoImpl" scope="singleton" ></bean>
+    <bean id="employeeBo" class="com.transport.bo.impl.EmployeeBoImpl" scope="singleton">
+        <property name="employeeDao" ref="employeeDao"></property>
+    </bean>
+ 
+     <!-- Lorry -->
+    <bean id="lorryDao" class="com.transport.dao.impl.LorryDaoImpl" scope="singleton"></bean>
+    <bean id="lorryBo" class="com.transport.bo.impl.LorryBoImpl" scope="singleton">
+        <property name="lorryDao" ref="lorryDao"></property>
+    </bean>
+
+     <!-- Items -->
+    <bean id="itemsDao" class="com.transport.dao.impl.ItemsDaoImpl" scope="singleton"></bean>
+    <bean id="itemsBo" class="com.transport.bo.impl.ItemsBoImpl" scope="singleton">
+        <property name="itemsDao" ref="itemsDao"></property>
+    </bean>
+    
+     <!-- Corrective Actions -->
+    <bean id="correctionsDao" class="com.transport.dao.impl.CorrectionsDaoImpl" scope="singleton"></bean>
+    <bean id="correctionsBo" class="com.transport.bo.impl.CorrectionsBoImpl" scope="singleton">
+        <property name="correctionsDao" ref="correctionsDao"></property>
+        <!--<property name="dataSource" ref="dataSource"></property> -->
+    </bean>
+    
+    <!-- Follow up-->
+    <bean id="followUpDao" class="com.transport.dao.impl.FollowUpDaoImpl" scope="singleton"></bean>
+    <bean id="followUpBo" class="com.transport.bo.impl.FollowUpBoImpl" scope="singleton">
+        <property name="followUpDao" ref="followUpDao"></property>
+    </bean>
+       
+    <!-- Remarks -->
+    <bean id="remarksDao" class="com.transport.dao.impl.RemarksDaoImpl" scope="singleton"></bean>
+    <bean id="remarksBo" class="com.transport.bo.impl.RemarksBoImpl" scope="singleton">
+        <property name="remarksDao" ref="remarksDao"></property>
+    </bean>        
+ 
+     <!-- Terminal -->
+    <bean id="terminalDao" class="com.transport.dao.impl.TerminalDaoImpl" scope="singleton"></bean>
+    <bean id="terminalBo" class="com.transport.bo.impl.TerminalBoImpl" scope="singleton">
+        <property name="terminalDao" ref="terminalDao"></property>
+    </bean>     
+ 
+     <!-- Findings -->
+    <bean id="findingsDao" class="com.transport.dao.impl.FindingsDaoImpl" scope="singleton"></bean>
+    <bean id="findingsBo" class="com.transport.bo.impl.FindingsBoImpl" scope="singleton">
+        <property name="findingsDao" ref="findingsDao"></property>
+    </bean> 
+          
+     <!-- User -->
+    <bean id="userDao" class="com.transport.dao.impl.UserDaoImpl" scope="singleton"></bean>
+    <bean id="userBo" class="com.transport.bo.impl.UserBoImpl" scope="singleton">
+        <property name="userDao" ref="userDao"></property>
+    </bean>   
+ 
+    <!-- List Value -->
+    <bean id="listValueDao" class="com.transport.dao.impl.ListValueDaoImpl" scope="singleton"></bean>
+    <bean id="listValueBo" class="com.transport.bo.impl.ListValueBoImpl" scope="singleton">
+        <property name="listValueDao" ref="listValueDao"></property>
+    </bean>      
+    
+    <!-- START Update for Revision 1 ESD 20Dec2015 -->
+    <!-- Root Cause -->
+    <bean id="rootCauseDao" class="com.transport.dao.impl.RootCauseDaoImpl" scope="singleton"></bean>
+    <bean id="rootCauseBo" class="com.transport.bo.impl.RootCauseBoImpl" scope="singleton">
+        <property name="rootCauseDao" ref="rootCauseDao"></property>
+    </bean> 
+    <!-- Closure -->
+    <bean id="closureDao" class="com.transport.dao.impl.ClosureDaoImpl" scope="singleton"></bean>
+    <bean id="closureBo" class="com.transport.bo.impl.ClosureBoImpl" scope="singleton">
+        <property name="closureDao" ref="closureDao"></property>
+    </bean>
+    <!-- END Update for Revision 1 ESD 20Dec2015 --> 
+    
+    <!-- START Added for Website Enhancement 1 20Aug2016 -->
+     <!-- Tire Brand -->
+    <bean id="tireBrandDao" class="com.transport.dao.impl.TireBrandDaoImpl" scope="singleton"></bean>
+    <bean id="tireBrandBo" class="com.transport.bo.impl.TireBrandBoImpl" scope="singleton">
+        <property name="tireBrandDao" ref="tireBrandDao"></property>
+    </bean> 
+     <!-- Tire  -->  
+    <bean id="tireDao" class="com.transport.dao.impl.TireDaoImpl" scope="singleton"></bean>
+    <bean id="tireBo" class="com.transport.bo.impl.TireBoImpl" scope="singleton">
+        <property name="tireDao" ref="tireDao"></property>
+    </bean>
+    <!-- END Added for Website Enhancement 1 20Aug2016 --> 
+    
+    <!-- User Access -->
+    <bean id="userAccessDao" class="com.transport.dao.impl.UserAccessDaoImpl" scope="singleton"></bean>
+    <bean id="userAccessBo" class="com.transport.bo.impl.UserAccessBoImpl" scope="singleton">
+        <property name="userAccessDao" ref="userAccessDao"></property>
+    </bean> 
+    
+    <!-- Master Files END -->
+   	
+   	<!-- Transactions START -->
+   	
+     <!-- Verification and Validation Compliance of Tracker -->
+    <bean id="verificationAndValidationDao" class="com.transport.dao.impl.VerificationAndValidationDaoImpl" scope="singleton"></bean>
+    <bean id="verificationAndValidationBo" class="com.transport.bo.impl.VerificationAndValidationBoImpl" scope="singleton">
+        <property name="verificationAndValidationDao" ref="verificationAndValidationDao"></property>
+    </bean>
+
+     <!-- Work Permit Enhancement -->
+    <bean id="workPermitDao" class="com.transport.dao.impl.WorkPermitDaoImpl" scope="singleton"></bean>
+    <bean id="workPermitBo" class="com.transport.bo.impl.WorkPermitBoImpl" scope="singleton">
+        <property name="workPermitDao" ref="workPermitDao"></property>
+    </bean>
+
+     <!-- Maintenance Monitoring -->
+    <bean id="maintenanceMonitoringDao" class="com.transport.dao.impl.MaintenanceMonitoringDaoImpl" scope="singleton"></bean>
+    <bean id="maintenanceMonitoringBo" class="com.transport.bo.impl.MaintenanceMonitoringBoImpl" scope="singleton">
+        <property name="maintenanceMonitoringDao" ref="maintenanceMonitoringDao"></property>
+    </bean>
+    
+    <!-- Maintenance Monitoring Preventive -->
+    <bean id="maintenanceMonitoringPreventiveDao" class="com.transport.dao.impl.MaintenanceMonitoringPreventiveDaoImpl" scope="singleton"></bean>
+    <bean id="maintenanceMonitoringPreventiveBo" class="com.transport.bo.impl.MaintenanceMonitoringPreventiveBoImpl" scope="singleton">
+        <property name="maintenanceMonitoringPreventiveDao" ref="maintenanceMonitoringPreventiveDao"></property>
+    </bean>
+
+    <!-- Maintenance Monitoring Total Pending -->
+    <bean id="maintenanceMonitoringTotalPendingDao" class="com.transport.dao.impl.MaintenanceMonitoringTotalPendingDaoImpl" scope="singleton"></bean>
+    <bean id="maintenanceMonitoringTotalPendingBo" class="com.transport.bo.impl.MaintenanceMonitoringTotalPendingBoImpl" scope="singleton">
+        <property name="maintenanceMonitoringTotalPendingDao" ref="maintenanceMonitoringTotalPendingDao"></property>
+    </bean>
+
+    <!-- Driver Training -->
+    <bean id="driverTrainingDao" class="com.transport.dao.impl.DriverTrainingDaoImpl" scope="singleton"></bean>
+    <bean id="driverTrainingBo" class="com.transport.bo.impl.DriverTrainingBoImpl" scope="singleton">
+        <property name="driverTrainingDao" ref="driverTrainingDao"></property>
+    </bean>
+ 
+     <!-- Driver Training Info -->
+    <bean id="driverTrainingInfoDao" class="com.transport.dao.impl.DriverTrainingInfoDaoImpl" scope="singleton"></bean>
+    <bean id="driverTrainingInfoBo" class="com.transport.bo.impl.DriverTrainingInfoBoImpl" scope="singleton">
+        <property name="driverTrainingInfoDao" ref="driverTrainingInfoDao"></property>
+    </bean>
+    
+    <!-- Driver Training Profile -->
+    <bean id="driverTrainingProfileDao" class="com.transport.dao.impl.DriverTrainingProfileDaoImpl" scope="singleton"></bean>
+    <bean id="driverTrainingProfileBo" class="com.transport.bo.impl.DriverTrainingProfileBoImpl" scope="singleton">
+        <property name="driverTrainingProfileDao" ref="driverTrainingProfileDao"></property>
+    </bean>
+            
+     <!-- START Added for Website Enhancement 1 20Aug2016 -->
+    <!-- Tire Management -->
+    <!--  
+    <bean id="tireManagementDao" class="com.transport.dao.impl.TireManagementDaoImpl" scope="singleton"></bean>
+    <bean id="tireManagementBo" class="com.transport.bo.impl.TireManagementBoImpl" scope="singleton">
+        <property name="tireManagementDao" ref="tireManagementDao"></property>
+    </bean>-->
+     <!-- END Added for Website Enhancement 1 20Aug2016 --> 
+    
+   	<!-- Transactions END -->
+   	
+   	<!-- Utilities START -->
+   	
+   	<!-- Archive -->
+   	<!-- Note: Only Action and FormBean, No Module, Bo and Dao --> 
+    
+   	<!-- Utilities END -->
+   	
+   	<!-- Reports START -->
+   	
+   	<!-- Report Verification -->
+   	<bean id="rptVerificationDao" class="com.transport.dao.impl.RptVerificationDaoImpl" scope="singleton"></bean>
+    	<bean id="rptVerificationBo" class="com.transport.bo.impl.RptVerificationBoImpl" scope="singleton">
+        <property name="rptVerificationDao" ref="rptVerificationDao"></property>
+    </bean> 
+    
+    <!-- Report Work Permit -->
+   	<bean id="rptWorkPermitDao" class="com.transport.dao.impl.RptWorkPermitDaoImpl" scope="singleton"></bean>
+    	<bean id="rptWorkPermitBo" class="com.transport.bo.impl.RptWorkPermitBoImpl" scope="singleton">
+        <property name="rptWorkPermitDao" ref="rptWorkPermitDao"></property>
+    </bean> 
+   	
+   	<!-- Reports END -->
+   	
+   	<!-- Others START -->
+   	
+   	<!-- Change Username and Password -->
+	<!-- Note: Only Action and FormBean, No Module, Bo and Dao -->
+   	
+   	<!-- Others END -->
+   	
+   	
+</beans>

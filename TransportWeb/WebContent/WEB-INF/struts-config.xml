@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+ 
+<struts-config>
+
+	<!-- Struts Config for Global process -->
+ 
+	<form-beans>
+	
+	   <form-bean name="dynaUserListForm"   
+		      type="org.apache.struts.action.DynaActionForm">
+		      <form-property name="customList" type="java.util.List"/>
+	   </form-bean>
+		
+	   <form-bean name="loginForm" type="com.transport.form.LoginFormBean" />
+	   <form-bean name="changeUsernameForm" type="com.transport.form.ChangeUsernameFormBean" />
+	   		
+	</form-beans>
+ 
+	<action-mappings>
+
+		<action
+			path="/redirectLogin"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/login/login_form.jsp"/>
+			
+		<action
+			path="/main"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/main/main_form.jsp"/>
+			
+		<action 
+	   		path="/navigate" 
+	   		type="com.transport.action.NavigateAction"
+			name="loginForm"
+			scope="request">
+			<forward name="ajaxMain" path="/template/body_content.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/login" 
+	   		type="com.transport.action.LoginAction"
+			name="loginForm"
+			scope="request">
+			<forward name="success" path="/pages/login/login_form.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/loginValidate" 
+	   		type="com.transport.action.LoginValidateAction"
+			name="loginForm"
+			scope="request">
+			<forward name="success" path="/template/body_form.jsp"/>
+			<forward name="success2" path="/pages/main/main_form_mobile.jsp"/>
+			<forward name="failed" path="/pages/login/login_form.jsp"/>
+			<forward name="failed2" path="/pages/login/mobile_login_form.jsp"/>
+	   </action>
+
+	   <action 
+	   		path="/mobileLogin" 
+	   		type="com.transport.action.LoginAction"
+			name="loginForm"
+			scope="request">
+			<forward name="success" path="/pages/login/mobile_login_form.jsp"/>
+	   </action>
+
+	   <action 
+	   		path="/mobileMain" 
+	   		type="com.transport.action.LoginAction"
+			name="loginForm"
+			scope="request">
+			<forward name="success" path="/pages/main/main_form_mobile.jsp"/>
+	   </action>
+	   	   
+	   <action 
+	   		path="/logout" 
+	   		type="com.transport.action.LogoutAction"
+			name="loginForm"
+			scope="request">
+			<forward name="success" path="/pages/login/index.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/logoutMobile" 
+	   		type="com.transport.action.LogoutAction"
+			name="loginForm"
+			scope="request">
+			<forward name="success" path="/pages/login/mobile_login_form.jsp"/>
+	   </action>
+	   
+	   <!-- Change Username and Password -->
+	   <action 
+	   		path="/changeUsername" 
+	   		type="com.transport.action.ChangeUsernameAction"
+			name="changeUsernameForm"
+			scope="request"
+			input="/pages/others/changeusername/ajaxChangeUsernameAuthentication.jsp"
+			validate="true">
+			<forward name="ajaxGoTo" path="/pages/others/changeusername/ajaxChangeUsernameAuthentication.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+
+	   <action 
+	   		path="/changeUsernameMobile" 
+	   		type="com.transport.action.ChangeUsernameAction"
+			name="changeUsernameForm"
+			scope="request"
+			input="/pages/others/changeusername/ajaxChangeUsernameAuthenticationMobile.jsp"
+			validate="true">
+			<forward name="ajaxGoTo" path="/pages/others/changeusername/ajaxChangeUsernameAuthenticationMobile.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/checkUsername" 
+	   		type="com.transport.action.ChangeUsernameAction"
+			name="changeUsernameForm"
+			scope="request"
+			input="/pages/others/changeusername/ajaxChangeUsernameAuthentication.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/others/changeusername/ajaxChangeUsername.jsp"/>
+			<forward name="ajaxFailed" path="/pages/others/changeusername/ajaxChangeUsernameAuthentication.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/checkUsernameMobile" 
+	   		type="com.transport.action.ChangeUsernameAction"
+			name="changeUsernameForm"
+			scope="request"
+			input="/pages/others/changeusername/ajaxChangeUsernameAuthenticationMobile.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/others/changeusername/ajaxChangeUsernameMobile.jsp"/>
+			<forward name="ajaxFailed" path="/pages/others/changeusername/ajaxChangeUsernameAuthenticationMobile.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+
+	   <action 
+	   		path="/updateChangeUsername" 
+	   		type="com.transport.action.ChangeUsernameAction"
+			name="changeUsernameForm"
+			scope="request"
+			input="/pages/others/changeusername/ajaxChangeUsername.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/others/changeusername/ajaxChangeUsername.jsp"/>
+			<forward name="ajaxFailed" path="/pages/others/changeusername/ajaxChangeUsername.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   	   	   
+	   <action 
+	   		path="/updateChangeUsernameMobile" 
+	   		type="com.transport.action.ChangeUsernameAction"
+			name="changeUsernameForm"
+			scope="request"
+			input="/pages/others/changeusername/ajaxChangeUsernameMobile.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/others/changeusername/ajaxChangeUsernameMobile.jsp"/>
+			<forward name="ajaxFailed" path="/pages/others/changeusername/ajaxChangeUsernameMobile.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+		
+	</action-mappings>
+	
+	
+	<message-resources parameter="ApplicationResources" null="false" />
+	
+ 
+ 	<!-- Spring Struts plugin -->
+ 	
+ 	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+		<set-property property="contextConfigLocation"
+		value="/WEB-INF/classes/Spring.xml" />
+  	</plug-in>
+  	
+	<!-- Struts Tiles plugin -->
+
+	<plug-in className="org.apache.struts.tiles.TilesPlugin" >
+		<set-property property="definitions-config"
+		value="/WEB-INF/tiles-defs.xml"/>
+	</plug-in>
+	
+	<!-- Struts Validator plugin -->
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn" >
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml, /WEB-INF/validator-mf.xml"/>
+	</plug-in>
+  
+</struts-config>

@@ -1,0 +1,220 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+    
+    $('#dtVerificationDatePicker').datepicker({}); 
+    $('#dtValidationDatePicker').datepicker({}); 
+    
+    $('#dtVerificationDatePicker').attr('placeholder','mm/dd/yyyy');
+    $('#dtValidationDatePicker').attr('placeholder','mm/dd/yyyy');
+    
+  });
+  
+</script>
+
+<div style="height: 30%; padding-left: 10px;">
+			<h3 style="font-weight: bolder;">Verification and Validation Compliance Tracker - Add New Record</h3>
+			<html:form action="/verificationAndValidation.do" styleId="idForm">
+			
+				<fieldset>
+				
+				<div>
+					<html:errors/>
+				</div>
+				<div>
+					<h4 style="color: blue;"><c:out value="${verificationAndValidationForm.transactionMessage}"></c:out></h4>
+				</div> 
+				
+					<div style="width: 100%; font-size: small;" > <!-- table -->
+						
+							<!-- VERIFICATION -->
+							<h4 style="color: blue;"><b>VERIFICATION</b></h4>
+							
+							
+							<table>
+								<!-- Item  -->
+								<tr>
+									<td><label for="itemId">Item:</label></td>
+									<td>		 
+								 		<html:select styleClass="vAndVText" name="verificationAndValidationForm" property="itemId" disabled="${verificationAndValidationForm.transactionStatus}" onchange="getFindingsByItem(this.value);">
+								 			<html:option value="0">--Select--</html:option>
+								 			<html:optionsCollection name="verificationAndValidationForm" property="itemList" label="description" value="id"/>				 		
+								 		</html:select>									 			
+									</td>
+								</tr>
+								
+								<!-- Findings  -->
+								<tr>
+									<td><label for="findingsId">Findings:</label></td>
+									<td>
+										<div id="findingsDIVId">
+											<html:select styleClass="vAndVText"  styleId="findingsID" name="verificationAndValidationForm" property="findingsId" disabled="${verificationAndValidationForm.transactionStatus}" onchange="isPositiveFindings(this.value);">
+								 				<html:option value="0">--Select--</html:option>
+								 				<html:optionsCollection name="verificationAndValidationForm" property="findingsList" label="description" value="id"/>				 		
+								 			</html:select>										
+										</div>
+									</td>
+								</tr>
+								
+								<!-- Driver  -->
+								<tr>
+									<td><label  for="driverId">Driver:</label></td>
+									<td>
+										<html:select styleClass="vAndVText"  name="verificationAndValidationForm" property="driverId" disabled="${verificationAndValidationForm.transactionStatus}">
+								 			<html:option value="0">--Select--</html:option>
+								 			<html:optionsCollection name="verificationAndValidationForm" property="driverList" label="name" value="empId"/>				 		
+								 		</html:select>	
+									</td>
+								</tr>
+								
+								<!-- Terminal  -->
+								<tr>
+									<td><label  for="terminalId">Terminal:</label></td>
+									<td>
+										<html:select styleClass="vAndVText"  name="verificationAndValidationForm" property="terminalId" disabled="${verificationAndValidationForm.transactionStatus}">
+								 			<html:option value="0">--Select--</html:option>
+								 			<html:optionsCollection name="verificationAndValidationForm" property="terminalList" label="name" value="id"/>				 		
+								 		</html:select>	
+									</td>
+								</tr>
+
+								<!-- Lorry  -->	
+								<tr>
+									<td><label for="lorryId">Lorry No:</label></td>
+									<td>
+										<html:select styleClass="vAndVText"  name="verificationAndValidationForm" property="lorryId" disabled="${verificationAndValidationForm.transactionStatus}">
+								 			<html:option value="0">--Select--</html:option>
+								 			<html:optionsCollection name="verificationAndValidationForm" property="lorryList" label="lorryNo" value="id"/>				 		
+								 		</html:select>	
+									</td>
+								</tr>
+								
+								<!-- Date (Verification)  -->							
+								<tr>
+									<td><label for="verificationDate">Verification Date:</label></td>
+									<td>
+										<html:text styleClass="vAndVText"  property="verificationDate" styleId="dtVerificationDatePicker"></html:text>
+									</td>
+								</tr>
+								
+								<!-- Root Cause  -->	
+								<tr>
+									<td><label for="rootCauseId">Root Cause:</label></td>
+									<td>
+										<html:select styleId="rootCauseID" name="verificationAndValidationForm" property="rootCauseId" disabled="${verificationAndValidationForm.transactionStatus}" onchange="getCorrectionsByRootCause(this.value);">
+								 			<html:option value="0">--Select--</html:option>
+								 			<html:optionsCollection name="verificationAndValidationForm" property="rootCauseList" label="description" value="id"/>				 		
+								 		</html:select>
+									</td>
+								</tr>
+								
+								<!-- Corrective Actions  -->
+								<tr>
+									<td><label for="correctionsId">Corrective Actions:</label></td>
+									<td>	
+								 		<div id="correctionsDIVId">
+								 			<html:select styleClass="vAndVText"  styleId="correctionsID" name="verificationAndValidationForm" property="correctionsId" disabled="${verificationAndValidationForm.transactionStatus}" onchange="getClosureByCorrections(this.value);">
+								 				<html:option value="0">--Select--</html:option>
+								 				<html:optionsCollection name="verificationAndValidationForm" property="correctionsList" label="description" value="id"/>				 		
+								 			</html:select>									 			
+								 		</div>	
+									</td>
+								</tr>
+								
+								<!-- Checked By  -->
+								<tr>
+									<td><label for="verificationCheckedById">Verified By:</label></td>
+									<td>
+										<html:select  styleClass="vAndVText"  name="verificationAndValidationForm" property="verificationCheckedById" disabled="${verificationAndValidationForm.transactionStatus}">
+								 			<html:option value="0">--Select--</html:option>
+								 			<html:optionsCollection name="verificationAndValidationForm" property="checkedByList" label="name" value="empId"/>				 		
+								 		</html:select>	
+									</td>
+								</tr>
+								
+							</table>																				
+						
+							<br>
+							<!-- VALIDATION -->
+							<h4 style="color: blue;"><b>VALIDATION</b></h4>
+							
+							
+							<table>
+								<!-- Closure on Corrective Actions -->
+								<tr>
+									<td><label for="closureId">Closure on Corrective Actions:</label></td>
+									<td>
+								 		<div id="closureDIVId">
+								 			<html:select styleClass="vAndVText"  name="verificationAndValidationForm" property="closureId" disabled="${verificationAndValidationForm.transactionStatus}">
+								 				<html:option value="0">--Select--</html:option>
+								 				<html:optionsCollection name="verificationAndValidationForm" property="closureList" label="description" value="id"/>				 		
+								 			</html:select>									 			
+								 		</div>
+									</td>
+								</tr>
+								
+								<!-- Date (Validation)  -->	
+								<tr>
+									<td><label for="validationDate">Closure Date:</label></td>
+									<td>
+										<html:text styleClass="vAndVText"  property="validationDate" styleId="dtValidationDatePicker"></html:text>
+									</td>
+								</tr>
+								
+								<!-- Checked By  -->
+								<tr>
+									<td><label for="validationCheckedById">Checked By:</label></td>
+									<td>
+										<html:select styleClass="vAndVText"  name="verificationAndValidationForm" property="validationCheckedById" disabled="${verificationAndValidationForm.transactionStatus}">
+								 			<html:option value="0">--Select--</html:option>
+								 			<html:optionsCollection name="verificationAndValidationForm" property="checkedByList" label="name" value="empId"/>				 		
+								 		</html:select>	
+									</td>
+								</tr>
+								
+								<!-- Remarks / Status -->
+								<tr>
+									<td><label for="remarksId">Status:</label></td>
+									<td>
+										<html:select styleClass="vAndVText"  styleId="remarksID" name="verificationAndValidationForm" property="remarksId" disabled="${verificationAndValidationForm.transactionStatus}">
+								 			<html:option value="0">--Select--</html:option>
+								 			<html:optionsCollection name="verificationAndValidationForm" property="remarksList" label="description" value="id"/>				 		
+								 		</html:select>	
+									</td>
+								</tr>
+								
+							</table>							
+							
+							<!-- buttons -->
+							<br>
+							<div class="control-group">
+							 	 <div class="controls">
+									<c:choose>  
+										<c:when test="${verificationAndValidationForm.transactionStatus == true}">
+											<html:button property="btnAddNew" styleClass="btn btn-primary" onclick="goToAddVerificationAndValidation();" value="Add New Record"></html:button>
+											<html:button property="btnClose" styleClass="btn btn-primary" onclick="goToVerificationAndValidation();" value="Close"></html:button>
+										</c:when>
+										<c:otherwise>
+											<html:button property="btnSave" styleClass="btn btn-primary" onclick="saveVerificationAndValidation();" value="Save"></html:button>
+											<html:button property="btnCancel" styleClass="btn btn-primary" onclick="goToVerificationAndValidation();" value="Cancel"></html:button>
+										</c:otherwise>
+									</c:choose>								 	 
+							 	 </div>
+							 	
+							 </div>
+							 <br>
+
+					</div> <!-- table -->
+				</fieldset>	
+				
+			</html:form>
+</div>
+	
+<script type="text/javascript">document.forms[0].elements['itemId'].focus();</script>
+
+	

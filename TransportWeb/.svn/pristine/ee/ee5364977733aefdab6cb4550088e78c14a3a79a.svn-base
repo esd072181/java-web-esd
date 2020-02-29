@@ -1,0 +1,137 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+        
+  });
+  
+</script>
+
+			<html:form action="/driverTraining.do" styleId="idForm" >
+				<fieldset>
+				
+				<div> 
+                           	<table style="font-size: 13px;">
+                           	        <tr align="center"><td colspan="2"><h4 style="font-weight: bold; font-family: Tahoma;">GDC Driver's Training and Information</h4></td></tr>
+
+                            		<!-- Driver  -->
+                                    <tr>
+                                    	<td>Full Name</td>
+  								 		<td style="padding-left: 5px;">
+  								 			<html:select  styleId="driverIdId" style="width: 200px; height: 22px;"  name="driverTrainingForm" property="driverId" disabled="${driverTrainingForm.transactionStatus}">
+								 				<html:option value="0">--Select--</html:option>
+								 				<html:optionsCollection name="driverTrainingForm" property="driverList" label="fullName2" value="id"/>				 		
+								 			</html:select>
+								 		</td>
+								 		<td></td>
+								 		<c:if test="${driverTrainingForm.picStr!=null}">
+								 			<td><html:image src="data:image/jpeg;base64,${driverTrainingForm.picStr}" alt="" style="width: 50px; height: 60px; pointer-events: none;" border="1px"></html:image></td>	
+								 		</c:if>	
+								 	</tr>
+								 	<tr style="height: 5px;" ></tr>
+								 	<tr>
+                                        <td>Terminal</td>
+                                        <td colspan="5" style="padding-left: 5px;">
+  								 			<html:select  styleId="terminalIdId" style="width: 200px; height: 22px;"  name="driverTrainingForm" property="terminalId" disabled="${driverTrainingForm.transactionStatus}">
+								 				<html:option value="0">--Select--</html:option>
+								 				<html:optionsCollection name="driverTrainingForm" property="terminalList" label="name" value="id"/>				 		
+								 			</html:select>
+								 		</td>
+                                    </tr>
+                                    <tr style="height: 5px;" ></tr>
+									<tr>
+                                        <td>Articulated</td>
+                                        <td style="padding-left: 5px;">
+                                       		<html:select  styleId="articulatedId" style="width: 200px; height: 22px;"  name="driverTrainingForm" property="articulated" disabled="${driverTrainingForm.transactionStatus}">
+								 				<html:option value="">--Select--</html:option>
+								 				<html:option value="Rigid">Rigid</html:option>
+								 				<html:option value="Trailer">Trailer</html:option>
+								 				<html:option value="Rigid/Trailer">Rigid/Trailer</html:option>				 		
+								 			</html:select>
+								 		</td>
+                                    </tr>
+                                    <tr style="height: 5px;" ></tr>
+                                    <tr>
+                                        <td>Age</td>
+                                        <td style="padding-left: 5px;"><html:text  property="age" style="width: 200px; text-align: right;" styleId="ageId" disabled="${driverTrainingForm.transactionStatus}"></html:text></td>
+                                    </tr>
+								 	<tr style="height: 5px;" ></tr>
+								 	<tr>
+								 		<td><h5 style="font-weight: bold;">Driver Trainings</h5></td>
+								 	</tr>
+								 	<tr style="height: 5px;" ></tr>
+									<tr>
+										<td colspan="3">Set A BBS Fatigue Management Mindset Change (2 Years Validity)</td>	
+										<td></td>									
+									</tr>
+									<tr>
+										<td>Date Expiry:</td>
+										<td style="padding-left: 5px;"><html:text  property="training1ExpiryDate" style="width: 200px; text-align: right;" styleId="dtTraining1ExpiryDateId" disabled="${driverTrainingForm.transactionStatus}"></html:text>&nbsp;<label style="font-size: 10px; font-style: italic; color: blue;">(mm/dd/yyyy)</label></td>
+									</tr>
+									<tr style="height: 5px;" ></tr>
+									<tr>
+										<td colspan="3">Set B Product Knowledge Gantry Top and Bottom Emergency Response (1 Year Validity)</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>Date Expiry:</td>
+										<td style="padding-left: 5px;"><html:text  property="training2ExpiryDate"  style="width: 200px; text-align: right;" styleId="dtTraining2ExpiryDateId" disabled="${driverTrainingForm.transactionStatus}"></html:text>&nbsp;<label style="font-size: 10px; font-style: italic; color: blue;">(mm/dd/yyyy)</label></td>
+									</tr>
+									<tr style="height: 5px;" ></tr>
+									<tr>
+										<td colspan="3">Set C Defensive Driving Classroom VRIP (1 year Validity)</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>Date Expiry:</td>
+										<td style="padding-left: 5px;"><html:text  property="training3ExpiryDate"  style="width: 200px; text-align: right;" styleId="dtTraining3ExpiryDateId" disabled="${driverTrainingForm.transactionStatus}"></html:text>&nbsp;<label style="font-size: 10px; font-style: italic; color: blue;">(mm/dd/yyyy)</label></td>
+									</tr>
+									<tr style="height: 5px;" ></tr>
+								 	<tr>
+								 		<td><h5 style="font-weight: bold;">Driver Profile</h5></td>
+								 	</tr>
+								 	<tr style="height: 5px;" ></tr>
+								 	<tr>
+                                        <td>VNV Findings</td>
+                                        <td style="padding-left: 5px;"><html:text styleId="vnvId" property="vnv" style="fmargin-right: 10px; width: 700px;" value="${driverTrainingForm.vnv}" disabled="${driverTrainingForm.transactionStatus}"></html:text></td>
+                                    </tr>
+									<tr style="height: 5px;" ></tr>
+								 	<tr>
+                                        <td>Incab Review Findings</td>
+                                        <td style="padding-left: 5px;"><html:text styleId="incabId" property="incab" style="fmargin-right: 10px; width: 700px;" value="${driverTrainingForm.incab}" disabled="${driverTrainingForm.transactionStatus}"></html:text></td>
+                                    </tr>
+                                    <tr style="height: 5px;" ></tr>
+									<tr>
+                                        <td>Spotcheck Findings</td>
+                                        <td style="padding-left: 5px;"><html:text styleId="spotcheckId" property="spotcheck" style="fmargin-right: 10px; width: 700px;" value="${driverTrainingForm.spotcheck}" disabled="${driverTrainingForm.transactionStatus}"></html:text></td>
+                                    </tr>
+									<tr style="height: 5px;" ></tr>
+									<tr>
+                                        <td>Incident</td>
+                                        <td style="padding-left: 5px;"><html:text styleId="incidentId" property="incident" style="fmargin-right: 10px; width: 700px;" value="${driverTrainingForm.incident}" disabled="${driverTrainingForm.transactionStatus}"></html:text></td>
+                                    </tr>                   
+								 	<tr style="height: 5px;" ></tr>
+									<tr>
+                                        <td>Notes</td>
+                                        <td style="padding-left: 5px;"><html:text styleId="notesId" property="notes" style="fmargin-right: 10px; width: 700px;" value="${driverTrainingForm.notes}" disabled="${driverTrainingForm.transactionStatus}"></html:text></td>
+                                    </tr>
+                                    <tr style="height: 5px;" ></tr>
+									<tr>
+										<td>AODT</td>
+										<td style="padding-left: 5px;"><html:text  property="aodt" style="width: 200px; text-align: right;" styleId="dtAodtId" disabled="${driverTrainingForm.transactionStatus}"></html:text>&nbsp;<label style="font-size: 10px; font-style: italic; color: blue;">(mm/dd/yyyy)</label></td>
+									</tr>
+																			
+                                </table>
+																	 
+							 <br>
+		
+					</div>
+				</fieldset>				
+
+			</html:form>
+
+	

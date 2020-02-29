@@ -1,0 +1,106 @@
+package com.transport.constant;
+
+/**
+ * This file defines the names of Spring beans in Spring.xml
+ * 
+ * @author dward
+ * @since 01Mar2015
+ * Last Date Updated: 21Aug2016
+ */
+public class BeanConstant {
+
+	//Security
+	private static final String LOGIN_BEAN_ID = "loginBo";
+	//Master Files
+	private static final String EMPLOYEE_BEAN_ID = "employeeBo";//Employee
+	private static final String LORRY_BEAN_ID = "lorryBo";//Lorry
+	private static final String ITEMS_BEAN_ID = "itemsBo";//Items and Findings
+	private static final String CORRECTIONS_BEAN_ID = "correctionsBo";//Corrective Actions
+	private static final String FOLLOWUP_BEAN_ID = "followUpBo";//Follow up
+	private static final String REMARKS_BEAN_ID = "remarksBo";//Remarks
+	private static final String USER_BEAN_ID = "userBo";//User
+	private static final String TERMINAL_BEAN_ID = "terminalBo";//Terminal
+	private static final String FINDINGS_BEAN_ID = "findingsBo";//Findings
+	private static final String LIST_VALUE_BEAN_ID = "listValueBo";//List Value //LOV
+	private static final String ROOT_CAUSE_BEAN_ID = "rootCauseBo";//RootCause - Update for Revision 1 ESD 20Dec2015
+	private static final String CLOSURE_BEAN_ID = "closureBo";//Closure - Update for Revision 1 ESD 20Dec2015
+	private static final String TIRE_BRAND_BEAN_ID = "tireBrandBo";//Tire Brand - Website Enhancement 1 ESD 20Aug2016
+	private static final String TIRE_BEAN_ID = "tireBo";//Tire - Website Enhancement 1 ESD 20Aug2016
+	private static final String USER_ACCESS_BEAN_ID = "userAccessBo";//User Access
+	//Transactions
+	private static final String VERIFICATION_AND_VALIDATION_BEAN_ID = "verificationAndValidationBo";//Verification and Validation Compliance of Tracker
+	private static final String TIRE_MANAGEMENT_BEAN_ID = "tireManagementBo";//Tire Management - Website Enhancement 1 ESD 20Aug2016
+	private static final String WORK_PERMIT_BEAN_ID = "workPermitBo";
+	private static final String MAINTENANCE_MONITORING_BEAN_ID = "maintenanceMonitoringBo";
+	private static final String MAINTENANCE_MONITORING_PREVENTIVE_BEAN_ID = "maintenanceMonitoringPreventiveBo";
+	private static final String DRIVER_TRAINING_BEAN_ID = "driverTrainingBo";
+	//Reports
+	private static final String RPT_VERIFICATION_BEAN_ID = "rptVerificationBo";//Report Verification
+	private static final String RPT_WORK_PERMIT_BEAN_ID = "rptWorkPermitBo";//Report Work Permit
+	//Utilities
+	private static final String ARCHIVE_BEAN_ID = "archiveBo";//Archive
+	//Others
+	private static final String CHANGE_USERNAME_BEAN_ID = "changeUsernameBo";//Change Username or Password
+	
+
+	public static String getBeanId(int module) {
+		String beanId=null;
+		switch(module) {
+			case ModuleConstant.LOGIN: beanId = LOGIN_BEAN_ID;
+			  break;
+			case ModuleConstant.EMPLOYEE: beanId = EMPLOYEE_BEAN_ID;
+			  break;
+			case ModuleConstant.LORRY: beanId = LORRY_BEAN_ID;
+			  break;
+			case ModuleConstant.ITEMS: beanId = ITEMS_BEAN_ID;
+			  break;
+			case ModuleConstant.CORRECTIONS: beanId = CORRECTIONS_BEAN_ID;
+			  break;
+			case ModuleConstant.FOLLOW_UP: beanId = FOLLOWUP_BEAN_ID;
+			  break;
+			case ModuleConstant.REMARKS: beanId = REMARKS_BEAN_ID;
+			  break;
+			case ModuleConstant.USER: beanId = USER_BEAN_ID;
+			  break;
+			case ModuleConstant.TERMINAL: beanId = TERMINAL_BEAN_ID;
+			  break;
+			case ModuleConstant.LIST_VALUE: beanId = LIST_VALUE_BEAN_ID;
+			  break;
+			case ModuleConstant.VERIFICATION_AND_VALIDATION: beanId = VERIFICATION_AND_VALIDATION_BEAN_ID;
+			  break;
+			case ModuleConstant.ARCHIVE: beanId = ARCHIVE_BEAN_ID;
+			  break;
+			case ModuleConstant.RPT_VERIFICATION: beanId = RPT_VERIFICATION_BEAN_ID;
+			  break;
+			case ModuleConstant.FINDINGS: beanId = FINDINGS_BEAN_ID;
+			  break;
+			case ModuleConstant.CHANGE_USERNAME : beanId = CHANGE_USERNAME_BEAN_ID;
+			  break;
+			case ModuleConstant.ROOT_CAUSE : beanId = ROOT_CAUSE_BEAN_ID;
+			  break;
+			case ModuleConstant.CLOSURE : beanId = CLOSURE_BEAN_ID;
+			  break;
+			case ModuleConstant.TIRE_BRAND : beanId = TIRE_BRAND_BEAN_ID;
+			  break;
+			case ModuleConstant.TIRE : beanId = TIRE_BEAN_ID;
+			  break;
+			case ModuleConstant.TIRE_MANAGEMENT : beanId = TIRE_MANAGEMENT_BEAN_ID;
+			  break;
+			case ModuleConstant.WORK_PERMIT : beanId = WORK_PERMIT_BEAN_ID;
+			  break;
+			case ModuleConstant.RPT_WORK_PERMIT: beanId = RPT_WORK_PERMIT_BEAN_ID;
+			  break;
+			case ModuleConstant.USER_ACCESS: beanId = USER_ACCESS_BEAN_ID;
+			  break;
+			case ModuleConstant.MAINTENANCE_MONITORING: beanId = MAINTENANCE_MONITORING_BEAN_ID;
+			  break;
+			case ModuleConstant.MAINTENANCE_MONITORING_PREVENTIVE: beanId = MAINTENANCE_MONITORING_PREVENTIVE_BEAN_ID;
+			  break;
+			case ModuleConstant.DRIVER_TRAINING: beanId = DRIVER_TRAINING_BEAN_ID;
+			  break;
+			default: break;
+		} 
+		return beanId;
+	}
+	
+}

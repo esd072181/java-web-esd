@@ -1,0 +1,58 @@
+<%@taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<div id="contentDIVLogin">
+
+<html:form action="/loginValidate.do" >
+	
+<div style="width: 100%; height: 100%; padding-top: 25px;">
+
+	<!-- column 1 left -->
+	<div style="width: 36%; height: 150px; float: left;"></div>
+
+	<!-- column 2 center -->
+	<div style="width: 305px; height: 150px; float: left; ">
+		<!-- border -->
+		<div style="width: 100%; height: 100%; border: 3px solid; border-radius: 20px; position:relative; top: 47px; padding: 30px; box-shadow: 10px 10px 5px #888888;">
+			
+		  
+			<div style="width: 300px; height: 25px;">
+				<c:if test="${loginForm.userAccountValidated == 'invalid'}">
+					<div align="center">
+						<span id="validationMessageId" style="color: red; font-size: 12px; font-family: cursive;">Invalid User Name and Password!</span>
+					</div>				
+				</c:if>
+			</div>
+			
+			
+			<div style="width: 100px; height: 50px; float: left;">
+				<div>
+					<label>User Name: </label>
+				</div>
+				<div style="padding-top: 15px;">
+					<label>Password: </label>
+				</div>
+			</div>
+			<div style="width: 200px; height: 100px; float: left;">
+				<div>
+					<html:text property="userName" size="24px"></html:text>
+				 </div>
+				 <!--  <div style="padding-top: 20px; box-shadow: 8px 8px 5px #888888;">-->
+				 <div style="padding-top: 15px;">
+				 	<html:password property="password"  size="24px"></html:password>
+				 </div>
+				 <div align="right" style="padding-top: 25px;">
+				 	<html:submit value="Submit"></html:submit>
+				 </div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- column 3 right -->
+	<div style="width: 30%; height: 150px; float: left;"></div>
+
+</div>
+
+</html:form>
+
+</div>

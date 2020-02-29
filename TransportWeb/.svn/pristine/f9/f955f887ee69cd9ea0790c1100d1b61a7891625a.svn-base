@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<%@taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="style/page_layout.css">
+	<title>TransportWeb</title>
+	<script src="js/jquery-1.11.1.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/jquery.mobile-1.4.5.min.css">
+<script>
+function submitCredentials(){
+	$("#loginFormId").submit();
+}
+</script>
+</head>
+
+<body>
+
+		 <div id="page" data-role="page" data-theme="b">
+		    <div data-role="content">
+		      <h2 align="center">Transport Management System</h2>
+		      
+		      <c:if test="${loginForm.userAccountValidated == 'invalid'}">
+					<div align="center">
+						<span id="validationMessageId" style="color: red; font-size: 7px; font-family: cursive;">Invalid User Name and Password!</span>
+					</div>				
+				</c:if>
+				<form action="/TransportWeb/loginValidate.do" method="post" id="loginFormId">		
+			        <label for="username">User Name:</label> 
+			        <input class="required" type="text" name="userName" placeholder="username@server.com"> 
+			        <label for="password">Password:</label>
+			        <input class="required" type="password" name="password"  placeholder="password"> 
+			        <input type="button"  value="Submit" onClick="submitCredentials();"/>
+		        </form>
+		        
+		    </div>
+		 </div>
+	
+</body>
+</html>

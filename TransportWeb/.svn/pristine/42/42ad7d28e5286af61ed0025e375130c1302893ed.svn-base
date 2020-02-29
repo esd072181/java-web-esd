@@ -1,0 +1,151 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<script>
+	$(function() {
+
+		$('#dtProfileDateId').datepicker({});
+		$('#dtProfileDateId').attr('placeholder', 'mm/dd/yyyy');
+
+		$('#vnvId').focus();
+	});
+</script>
+
+<div>
+
+	<div class="col-sm-10">
+
+		<div style="height: 30%;">
+			<h3 style="font-weight: bolder;">Driver Training Profile - Add
+				New Record</h3>
+			<html:form action="/driverTrainingProfile.do" styleId="idForm">
+
+				<fieldset>
+
+					<div>
+						<html:errors />
+					</div>
+					<div>
+						<h4 style="color: blue;">
+							<c:out value="${driverTrainingForm.transactionMessage}"></c:out>
+						</h4>
+					</div>
+
+					<div style="width: 100%; font-size: small;">
+						<!-- table -->
+						<html:hidden property="driverTrainingId"
+							value="${driverTrainingForm.driverTrainingId}" />
+						<html:hidden property="driverName"
+							value="${driverTrainingForm.driverName}" />
+						<table>
+
+							<tr>
+								<td><label style="font-size: 12px; font: Tahoma;">Name:
+								</label></td>
+								<td>&nbsp;&nbsp;<label
+									style="font-size: 16px; font-weight: bolder; font: Tahoma; color: blue;">${driverTrainingForm.driverName}</label>
+								</td>
+							</tr>
+							<tr style="height: 5px;"></tr>
+							<tr>
+								<td><label style="font-size: 12px; font: Tahoma;">VNV:</label></td>
+								<td style="padding-left: 5px;"><html:text property="vnv"
+										style="width: 600px; text-align: left;" styleId="vnvId"
+										disabled="${driverTrainingForm.transactionStatus}"></html:text>
+								</td>
+							</tr>
+							<tr style="height: 5px;"></tr>
+							<tr>
+								<td><label style="font-size: 12px; font: Tahoma;">Incab</label></td>
+								<td style="padding-left: 5px;"><html:text property="incab"
+										style="width: 600px; text-align: left;" styleId="incabId"
+										disabled="${driverTrainingForm.transactionStatus}"></html:text>
+								</td>
+							</tr>
+							<tr style="height: 5px;"></tr>
+							<tr>
+								<td><label style="font-size: 12px; font: Tahoma;">Spotcheck</label></td>
+								<td style="padding-left: 5px;"><html:text
+										property="spotcheck" style="width: 600px; text-align: left;"
+										styleId="spotcheckId"
+										disabled="${driverTrainingForm.transactionStatus}"></html:text>
+								</td>
+							</tr>
+							<tr style="height: 5px;"></tr>
+							<tr>
+								<td><label style="font-size: 12px; font: Tahoma;">Incident</label></td>
+								<td style="padding-left: 5px;"><html:text
+										property="incident" style="width: 600px; text-align: left;"
+										styleId="incidentId"
+										disabled="${driverTrainingForm.transactionStatus}"></html:text>
+								</td>
+							</tr>
+							<tr style="height: 5px;"></tr>
+							<tr>
+								<td><label style="font-size: 12px; font: Tahoma;">Notes</label></td>
+								<td style="padding-left: 5px;"><html:text property="notes"
+										style="width: 600px; text-align: left;" styleId="notesId"
+										disabled="${driverTrainingForm.transactionStatus}"></html:text>
+								</td>
+							</tr>
+							<tr style="height: 5px;"></tr>
+							<tr>
+								<td><label style="font-size: 12px; font: Tahoma;">Profile Date</label></td>
+								<td style="padding-left: 5px;"><html:text
+										property="profileDate"
+										style="width: 100px; text-align: right;"
+										styleId="dtProfileDateId"
+										disabled="${driverTrainingForm.transactionStatus}"></html:text></td>
+							</tr>
+							<tr style="height: 5px;"></tr>
+							<tr>
+								<td><label style="font-size: 12px; font: Tahoma;">Status</label></td>
+								<td style="padding-left: 5px;"><html:select
+										styleId="statusIdId" style="width: 100px; height: 22px;"
+										name="driverTrainingForm" property="statusId"
+										disabled="${driverTrainingForm.transactionStatus}">
+										<html:option value="1">Open</html:option>
+										<html:optionsCollection name="driverTrainingForm" property="statusList" label="description" value="id" />
+									</html:select></td>
+							</tr>
+
+						</table>
+
+						<!-- buttons -->
+						<br>
+						<div class="control-group">
+							<div class="controls">
+								<c:choose>
+									<c:when test="${driverTrainingForm.transactionStatus == true}">
+										<html:button property="btnAddNew" styleClass="btn btn-primary"
+											onclick="goToAddDriverTrainingProfile('${driverTrainingForm.driverTrainingId}','${driverTrainingForm.driverName}');"
+											value="Add New Record"></html:button>
+											&nbsp;&nbsp;<html:button property="btnClose"
+											styleClass="btn btn-primary"
+											onclick="goToDriverTrainingProfile('${driverTrainingForm.driverTrainingId}','${driverTrainingForm.driverName}');"
+											value="Close"></html:button>
+									</c:when>
+									<c:otherwise>
+										<html:button property="btnSave" styleClass="btn btn-primary"
+											onclick="saveDriverTrainingProfile('${driverTrainingForm.driverTrainingId}','${driverTrainingForm.driverName}');"
+											value="Save"></html:button>
+											&nbsp;&nbsp;<html:button property="btnCancel"
+											styleClass="btn btn-primary"
+											onclick="goToDriverTrainingProfile('${driverTrainingForm.driverTrainingId}','${driverTrainingForm.driverName}');"
+											value="Cancel"></html:button>
+									</c:otherwise>
+								</c:choose>
+							</div>
+
+						</div>
+						<br>
+
+					</div>
+					<!-- table -->
+				</fieldset>
+
+			</html:form>
+		</div>
+
+	</div>
+</div>
