@@ -1,0 +1,8 @@
+package com.crms.constant;
+
+public class CRMSConstant {
+
+	//pagination
+	public static final int RECORDS_PER_PAGE = 10;
+	
+}

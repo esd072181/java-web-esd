@@ -1,0 +1,5 @@
+patientno.empty = Patient number is required
+lastname.empty = Last Name is required
+firstname.empty = First Name is required
+itemcode.empty = Item code is required
+description.empty = Description is required

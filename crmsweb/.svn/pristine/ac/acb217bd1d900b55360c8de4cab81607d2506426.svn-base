@@ -1,0 +1,54 @@
+package com.crms.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "patient_history", schema = "crms")
+public class PatientHistory {
+
+
+	private int id;
+	private Patient patient;
+	private String chiefComplaint;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patienthistoryid_generator")
+	@SequenceGenerator(name="patienthistoryid_generator", sequenceName = "crms.patienthistoryidseq", allocationSize=1)	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "patientid", nullable = false)
+	public Patient getPatient() {
+		return patient;
+	}
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+	
+	@Column(name = "chiefcomplaint")
+	public String getChiefComplaint() {
+		return chiefComplaint;
+	}
+	public void setChiefComplaint(String chiefComplaint) {
+		this.chiefComplaint = chiefComplaint;
+	}
+	
+	
+	
+	
+	
+}

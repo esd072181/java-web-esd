@@ -1,0 +1,142 @@
+package com.crms.controller;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.crms.bo.MedicineBo;
+import com.crms.constant.CRMSConstant;
+import com.crms.model.Medicine;
+import com.crms.util.CRMSUtil;
+import com.crms.validator.MedicineValidator;
+
+/**
+ * 
+ * @author dward
+ *
+ */
+@Controller
+public class MedicineController {
+	
+	@Autowired
+	private MedicineBo bo;
+	
+	@Autowired
+	private MedicineValidator medicineValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+ 
+		binder.addValidators(medicineValidator);
+	}
+	
+	@RequestMapping("/goToSearchMedicine")
+	public ModelAndView goToSearchMedicine(ModelMap model) {
+		model.addAttribute("searchFlag", false);
+		return new ModelAndView("masterfile/medicine/searchMedicine", "medicine", new Medicine());
+	}
+	
+	@RequestMapping("/goToAddMedicine")
+	public ModelAndView goToAddMedicine(ModelMap model) {
+		return new ModelAndView("masterfile/medicine/addMedicine", "medicine", new Medicine());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/searchMedicine")
+	public ModelAndView searchMedicine(@RequestParam("page") String page, @ModelAttribute("medicine") Medicine medicine, 
+    			BindingResult result, ModelMap model) throws Exception {
+		
+		//Note: can use modelattribute in a form in jsp
+		//or can simply pass a parameter
+		
+		Map<Object,Object> mapCriteria = new HashMap<Object,Object>();
+		
+		mapCriteria.put("search_criteria", medicine.getDescription()!=null ? medicine.getDescription() : "");
+		mapCriteria.put("record_start", CRMSUtil.getRecordStartIndex(page!=null ? Integer.parseInt(page) : 1));
+		mapCriteria.put("max_result", CRMSConstant.RECORDS_PER_PAGE);
+		
+		Map<Object,Object> resultMap = bo.findByDescription(mapCriteria);
+		
+		List<Medicine> resultList = (List<Medicine>) resultMap.get("resultList");
+		Integer noOfPages = (Integer) resultMap.get("noOfPages");
+		
+		boolean gotRecords = resultList!=null && resultList.size() > 0 ? true : false;
+		
+		model.addAttribute("resultList", resultList);
+		model.addAttribute("searchFlag", true);
+		model.addAttribute("gotRecords", gotRecords);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("noOfPages", noOfPages);
+		
+		return new ModelAndView("masterfile/medicine/searchMedicine", "Medicine", medicine);
+	}
+		
+	@RequestMapping(value = "/saveMedicine", method = RequestMethod.POST)
+	public String saveMedicine(@ModelAttribute("medicine") @Validated Medicine medicine, 
+		      BindingResult result, ModelMap model) throws Exception {
+				
+		if (result.hasErrors()) {
+			return "masterfile/medicine/addMedicine";
+		}
+		     
+		boolean isSuccess = bo.save(medicine);
+		
+		model.addAttribute("isSuccess", isSuccess);
+		
+		return "masterfile/medicine/addMedicine";
+	}
+	
+	@RequestMapping(value = "/editMedicine", method=RequestMethod.GET)
+	public ModelAndView editMedicine(@RequestParam("id") int id, Model model) throws Exception {
+		
+		Medicine resultEntity = bo.findById(id);
+		return new ModelAndView("masterfile/medicine/editMedicine", "medicine", resultEntity);
+	}
+	
+	@RequestMapping(value = "/updateMedicine", method = RequestMethod.POST)
+	public String updateMedicine(@ModelAttribute("medicine" ) @Validated Medicine medicine, 
+		      BindingResult result, ModelMap model) throws Exception {
+		
+	    if (result.hasErrors()) {
+	    	return "masterfile/medicine/editMedicine";
+	    }
+	          
+		boolean isSuccess = bo.update(medicine);
+		
+		model.addAttribute("isSuccess", isSuccess);
+		
+		return "masterfile/medicine/editMedicine";
+	}
+	
+	@RequestMapping(value = "/deleteMedicine", method=RequestMethod.GET)
+	public ModelAndView deleteMedicine(@RequestParam("id") int id, Model model) throws Exception {
+		
+		boolean isSuccess =  bo.delete(id);
+		model.addAttribute("isDeleted", isSuccess);
+		
+		return new ModelAndView("masterfile/medicine/searchMedicine", "medicine", new Medicine());
+	}
+	
+
+}

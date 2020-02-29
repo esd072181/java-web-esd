@@ -1,0 +1,15 @@
+package com.crms.util;
+
+import com.crms.constant.CRMSConstant;
+
+public class CRMSUtil {
+	
+	public static int getRecordStartIndex(int page) {
+		return (page-1) * CRMSConstant.RECORDS_PER_PAGE; 	
+	}
+	
+	public static int getTotalNoOfPages(long totalNoOfRecords) {
+		return (int) Math.ceil(totalNoOfRecords * 1.0 / CRMSConstant.RECORDS_PER_PAGE);
+	}
+
+}

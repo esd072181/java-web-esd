@@ -1,0 +1,17 @@
+package com.crms.bo;
+
+import java.util.List;
+import java.util.Map;
+
+import com.crms.model.Patient;
+
+public interface PatientBo {
+
+	boolean save(Patient entity);
+	boolean update(Patient entity);
+	boolean delete(int criteria);
+	Patient findById(int criteria);
+	Map<Object, Object> findByPatientNo(Map<Object,Object> mapCriteria);
+	List<Patient> getAllEntity();
+}
+

@@ -1,0 +1,31 @@
+package com.crms.validator;
+
+import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+
+import com.crms.model.Patient;
+
+@Component
+public class PatientValidator implements Validator {
+
+	@Override
+	public boolean supports(Class<?> arg0) {
+		// TODO Auto-generated method stub
+		return Patient.class.equals(arg0);
+	}
+
+	@Override
+	public void validate(Object obj, Errors err) {
+		// TODO Auto-generated method stub
+		ValidationUtils.rejectIfEmpty(err, "patientNo", "patientno.empty");
+		ValidationUtils.rejectIfEmpty(err, "lastName", "lastname.empty");
+		ValidationUtils.rejectIfEmpty(err, "firstName", "firstname.empty");
+		
+//		PatientEntity patient  = (PatientEntity) obj;
+		
+		
+	}
+
+}

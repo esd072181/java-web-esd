@@ -1,0 +1,59 @@
+<project name="crmsweb" default="deploy" basedir=".">
+
+			
+	<path id="classpath">
+        <fileset dir="C:\MyProgrammingStuffs\Servers\apache-tomcat-8.0.15\lib">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="C:\Program Files\Java\jre1.8.0_161\lib">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="WebContent/WEB-INF/lib">
+             <include name="*.jar"/>
+        </fileset>
+    </path>
+
+
+	<target name="clean">
+		<delete dir="build" />
+		<echo message="Done" />
+	</target>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="build"/>
+		<mkdir dir="build/classes"/>
+		<echo message="Done" />
+	</target>
+	
+    <target name="compile" depends="init">
+        <echo message="Compiling Java source..." />
+        <javac includeantruntime="false" classpathref="classpath" srcdir="src" destdir="build/classes" />
+		<echo message="Done" />
+    </target>
+
+    <target name="war" depends="compile">
+        <echo message="WAR file" />
+        <delete file="C:\MyFiles\JavaFiles\CRMSWeb\WAR\fromAntBuild\crmsweb.war" />
+       	<echo message="Done" />
+       	<war webxml="WebContent/WEB-INF/web.xml" destfile="C:\MyFiles\JavaFiles\CRMSWeb\WAR\fromAntBuild\crmsweb.war" >
+			<classes dir="build/classes"/>
+			<fileset dir = "WebContent">
+				<include name = "**/*.*"/>
+			</fileset>
+       		<metainf dir="WebContent/META-INF"  includes="**/*.xml" />  
+       	</war>
+		<echo message="Done. WAR file created." />
+    </target>
+	
+	<target name="deploy" depends="war">
+		 <echo message="Remove current war in App Server.." />
+		 <delete file="C:\Tomcat 8.5\webapps\crmsweb.war" />
+		 <delete dir="C:\Tomcat 8.5\webapps\crmsweb" />
+		 <echo message="Done." />
+		 <echo message="Deploy to Tomcat8 Localhost..." />
+		 <copy file="C:\MyFiles\JavaFiles\CRMSWeb\WAR\fromAntBuild\crmsweb.war"
+		 	todir="C:\Tomcat 8.5\webapps"/>
+		 <echo message="Done. WAR file deployed to App Server (Tomcat8)." />
+	</target>
+	
+</project>

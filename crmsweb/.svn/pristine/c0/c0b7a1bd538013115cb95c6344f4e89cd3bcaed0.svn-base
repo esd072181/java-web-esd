@@ -1,0 +1,34 @@
+package com.crms.dao.impl;
+
+
+import org.springframework.stereotype.Repository;
+
+import com.crms.dao.PatientBillPaymentDao;
+import com.crms.model.PatientBillPayment;
+import com.crms.util.HibernateDaoUtil;
+
+/**
+ * 
+ * @author dward
+ *
+ */
+@Repository
+public class PatientBillPaymentDaoImpl extends HibernateDaoUtil implements PatientBillPaymentDao{
+
+	@Override
+	public boolean save(PatientBillPayment entity) {
+		beginHibernateTransaction();
+		 try {			 
+			 session.save(entity);
+			 tx.commit();
+			 txnIsSuccess = true;
+		 } catch (Exception e) {
+			 tx.rollback();
+			 e.printStackTrace();
+		 } finally {
+			closeHibernateSession(session);
+		 }
+		 return txnIsSuccess;
+	}
+	
+}

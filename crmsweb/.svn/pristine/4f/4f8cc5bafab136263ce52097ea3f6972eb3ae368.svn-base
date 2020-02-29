@@ -1,0 +1,170 @@
+package com.crms.controller;
+
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyEditor;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.crms.bo.PatientBo;
+import com.crms.constant.CRMSConstant;
+import com.crms.model.Patient;
+import com.crms.model.PatientHistory;
+import com.crms.util.CRMSUtil;
+import com.crms.validator.PatientValidator;
+
+@Controller
+public class PatientController {
+	
+	@Autowired
+	private PatientBo patientBo;
+	
+	@Autowired
+	private PatientValidator patientValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+ 
+		binder.addValidators(patientValidator);
+	}
+	
+	@RequestMapping("/goToSearchPatient")
+	public ModelAndView goToSearchPatient(ModelMap model) {
+		model.addAttribute("searchFlag", false);
+		return new ModelAndView("masterfile/patient/searchPatient", "patient", new Patient());
+	}
+	
+	@RequestMapping("/goToAddPatient")
+	public ModelAndView goToAddPatient(ModelMap model) {
+		return new ModelAndView("masterfile/patient/addPatient", "patient", new Patient());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/searchPatient")
+	public ModelAndView searchPatient(@RequestParam("page") String page, @ModelAttribute("patient") Patient patient, 
+    			BindingResult result, ModelMap model) throws Exception {
+		
+		//Note: can use modelattribute in a form in jsp
+		//or can simply pass a parameter
+		
+		Map<Object,Object> mapCriteria = new HashMap<Object,Object>();
+		
+		mapCriteria.put("search_criteria", patient.getPatientNo()!=null ? patient.getPatientNo() : "");
+		mapCriteria.put("record_start", CRMSUtil.getRecordStartIndex(page!=null ? Integer.parseInt(page) : 1));
+		mapCriteria.put("max_result", CRMSConstant.RECORDS_PER_PAGE);
+		
+		Map<Object,Object> resultMap = patientBo.findByPatientNo(mapCriteria);
+		
+		List<Patient> resultList = (List<Patient>) resultMap.get("resultList");
+		Integer noOfPages = (Integer) resultMap.get("noOfPages");
+		
+		boolean gotRecords = resultList!=null && resultList.size() > 0 ? true : false;
+		
+		model.addAttribute("resultList", resultList);
+		model.addAttribute("searchFlag", true);
+		model.addAttribute("gotRecords", gotRecords);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("noOfPages", noOfPages);
+		
+		return new ModelAndView("masterfile/patient/searchPatient", "patient", patient);
+	}
+		
+	@RequestMapping(value = "/savePatient", method = RequestMethod.POST)
+	public String savePatient(@ModelAttribute("patient") @Validated Patient patient, 
+		      BindingResult result, ModelMap model) throws Exception {
+				
+		if (result.hasErrors()) {
+			return "masterfile/patient/addPatient";
+		}
+		     
+		boolean isSuccess = patientBo.save(patient);
+		
+		model.addAttribute("isSuccess", isSuccess);
+		
+		return "masterfile/patient/addPatient";
+	}
+	
+	@RequestMapping(value = "/editPatient", method=RequestMethod.GET)
+	public ModelAndView editPatient(@RequestParam("id") int patientiId, Model model) throws Exception {
+		
+		Patient resultEntity = patientBo.findById(patientiId);
+		return new ModelAndView("masterfile/patient/editPatient", "patient", resultEntity);
+	}
+	
+//	@RequestMapping(value = "/editPatient/{id}", method=RequestMethod.GET) //This is used for RESTFUl
+//	public ModelAndView editPatient(@PathVariable("id")int id, Model model) throws Exception {
+//		
+//		PatientEntity resultEntity = patientBo.findById(id);
+//		return new ModelAndView("masterfile/patient/editPatient", "patient", resultEntity);
+//	}
+	
+	@RequestMapping(value = "/updatePatient", method = RequestMethod.POST)
+	public String updatePatient(@ModelAttribute("patient" ) @Validated Patient patient, 
+		      BindingResult result, ModelMap model) throws Exception {
+		
+	    if (result.hasErrors()) {
+	    	return "masterfile/patient/editPatient";
+	    }
+	          
+		boolean isSuccess = patientBo.update(patient);
+		
+		model.addAttribute("isSuccess", isSuccess);
+		
+		return "masterfile/patient/editPatient";
+	}
+	
+	@RequestMapping(value = "/deletePatient", method=RequestMethod.GET)
+	public ModelAndView deletePatient(@RequestParam("id") int id, Model model) throws Exception {
+		
+		boolean isSuccess =  patientBo.delete(id);
+		model.addAttribute("isDeleted", isSuccess);
+		
+		return new ModelAndView("masterfile/patient/searchPatient", "patient", new Patient());
+	}
+	
+	//test hibernate ORM
+	@RequestMapping("/testHibernate")
+	public ModelAndView testHibernate(ModelMap model) {
+		
+		
+		Patient patient = patientBo.findById(1);
+		
+		Set<PatientHistory> patientrecords = patient.getPatientHistoryRecords();
+		for (PatientHistory entity : patientrecords) {
+			System.out.println("Chief Complaint: " + entity.getChiefComplaint());
+		}
+		
+		
+		return new ModelAndView("masterfile/patient/searchPatient", "patient", new Patient());
+	}
+	
+}

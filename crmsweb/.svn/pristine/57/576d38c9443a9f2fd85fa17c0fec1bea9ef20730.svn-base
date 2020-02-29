@@ -1,0 +1,95 @@
+package com.crms.bo.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.crms.bo.PatientBo;
+import com.crms.dao.PatientDao;
+import com.crms.model.Patient;
+
+@Service
+public class PatientBoImpl implements PatientBo {
+
+	@Autowired
+	PatientDao patientDao;
+	
+	public void setPatientDao(PatientDao patientDao){
+		this.patientDao = patientDao;
+	}
+
+	@Override
+	@Transactional
+	public boolean save(Patient entity) {
+		 
+		 entity.setDateRegistered(new java.sql.Date(System.currentTimeMillis()));
+		 entity.setCreatedBy(1);//test code
+		 entity.setCreatedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+		 entity.setVersion(1);
+		 entity.setActive(true);
+		 
+		return patientDao.save(entity);
+	}
+
+	@Override
+	@Transactional
+	public boolean update(Patient entity) {
+		
+		 Patient model = patientDao.findById(entity.getId());	
+		 //update the fields of the model
+		 model.setPatientNo(entity.getPatientNo());
+		 model.setLastName(entity.getLastName());
+		 model.setFirstName(entity.getFirstName());
+		 model.setMiddleName(entity.getMiddleName());
+		 model.setGender(entity.getGender());
+		 model.setBirthday(entity.getBirthday());
+		 model.setContactNo(entity.getContactNo());
+		 model.setAddressLine1(entity.getAddressLine1());
+		 model.setAddressLine2(entity.getAddressLine2());
+		 model.setTown(entity.getTown());
+		 model.setProvince(entity.getProvince());
+		 model.setZipCode(entity.getZipCode());
+		 model.setContactPerson(entity.getContactPerson());
+		 model.setContactPersonNo(entity.getContactPersonNo());
+		 model.setModifiedBy(1);//test code
+		 model.setModifiedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+		 model.setVersion(model.getVersion() + 1);
+		 
+		return patientDao.update(model);
+	}
+	
+	@Override
+	@Transactional
+	public boolean delete(int criteria) {
+		
+		Patient model = patientDao.findById(criteria);
+		 model.setActive(false);
+		 model.setModifiedBy(1);//test code
+		 model.setModifiedOn(new java.sql.Timestamp(System.currentTimeMillis()));
+		 model.setVersion(model.getVersion() + 1);	
+		
+		return patientDao.delete(model);
+	}
+
+	@Override
+	@Transactional
+	public Map<Object, Object> findByPatientNo(Map<Object,Object> mapCriteria) {
+		return patientDao.findByPatientNo(mapCriteria);
+	}
+	
+	@Override
+	@Transactional
+    public List<Patient> getAllEntity() {
+        return patientDao.getAllEntity();
+    }
+
+	@Override
+	@Transactional
+	public Patient findById(int criteria) {
+		return patientDao.findById(criteria);
+	}
+
+}
