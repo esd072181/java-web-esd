@@ -1,0 +1,333 @@
+package com.pibs.form;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.model.ListValue;
+import com.pibs.model.Patient;
+import com.pibs.model.ProfessionalType;
+import com.pibs.util.DateUtils;
+
+public class PatientFormBean extends PIBSFormBean {
+
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private String patientId;
+	private String lastName;
+	private String firstName;
+	private String middleName;
+	private String gender;
+	private String birthday;
+	private String contactNo;
+	private String address;
+	private String contactPerson;
+	private String contactPersonNo;
+	private String dateRegistered;
+	private int patientStatusId;
+	
+	private String criteria;
+	private String category;
+	private int noOfPages;
+	private int currentPage;
+	private List<Patient> modelList;
+	
+	private List<ListValue> genderLOV;
+	private List<ListValue> patientStatusLOV;
+	
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	public PatientFormBean() {}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(String patientId) {
+		this.patientId = patientId;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getDateRegistered() {
+		return dateRegistered;
+	}
+
+	public void setDateRegistered(String dateRegistered) {
+		this.dateRegistered = dateRegistered;
+	}
+
+	public int getPatientStatusId() {
+		return patientStatusId;
+	}
+
+	public void setPatientStatusId(int patientStatusId) {
+		this.patientStatusId = patientStatusId;
+	}
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+	
+	public void populateFormBean(Patient model) throws Exception {
+		setId(model.getId());
+		setPatientId(model.getPatientId());
+		setLastName(model.getLastName());
+		setFirstName(model.getFirstName());
+		setMiddleName(model.getMiddleName());
+		setGender(model.getGender());
+		if (model.getBirthday()!=null) {
+			setBirthday(DateUtils.sqlDateToString(model.getBirthday()));
+		}
+		setContactNo(model.getContactNo());
+		setAddress(model.getAddress());
+		setContactPerson(model.getContactPerson());
+		setContactPersonNo(model.getContactPersonNo());
+		if (model.getDateRegistered()!=null) {
+			setDateRegistered(DateUtils.sqlDateToString(model.getDateRegistered()));
+		}
+		setPatientStatusId(model.getPatientStatusId());
+	}
+	
+	public Patient populateModel (PatientFormBean formbean) throws Exception {
+		Patient model = new Patient();
+		model.setId(formbean.getId());
+		model.setPatientId(formbean.getPatientId());
+		model.setLastName(formbean.getLastName());
+		model.setFirstName(formbean.getFirstName());
+		model.setMiddleName(formbean.getMiddleName());
+		model.setGender(formbean.getGender());
+		if (formbean.getBirthday()!=null && formbean.getBirthday().trim().length() > 0) {
+			model.setBirthday(DateUtils.strToSQLDate(formbean.getBirthday()));	
+		}
+		model.setContactNo(formbean.getContactNo());
+		model.setAddress(formbean.getAddress());
+		model.setContactPerson(formbean.getContactPerson());
+		model.setContactPersonNo(formbean.getContactPersonNo());
+		if (formbean.getDateRegistered()!=null && formbean.getDateRegistered().trim().length() > 0) {
+			model.setDateRegistered(DateUtils.strToSQLDate(formbean.getDateRegistered()));	
+		}
+		model.setPatientStatusId(formbean.getPatientStatusId());
+		return model;
+	}
+	
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		ActionErrors errors = new ActionErrors();
+		
+		String command = (String) request.getParameter("command"); 
+		
+		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) || command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE))) {
+			boolean flag = false;
+			if (this.getLastName()==null || this.getLastName().trim().length() < 1) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("mf.lastname.req"));
+				flag = true;
+			}
+			if (this.getFirstName()==null || this.getFirstName().trim().length() < 1) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("mf.firstname.req"));
+				flag = true;
+			}
+			if (this.getGender()==null || this.getGender().equals("0")) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("mf.gender.req"));
+				flag = true;
+			}
+			
+			if (flag) {
+				try {
+					//get list from session
+					populateDropdownListFromSession(request);		
+							
+				} catch(Exception e) {}				
+			}
+		} 
+
+		return errors;
+	}
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getNoOfPages() {
+		return noOfPages;
+	}
+
+	public void setNoOfPages(int noOfPages) {
+		this.noOfPages = noOfPages;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public List<Patient> getModelList() {
+		return modelList;
+	}
+
+	public void setModelList(List<Patient> modelList) {
+		this.modelList = modelList;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void populateDropdownListFromSession(HttpServletRequest request) throws Exception{		
+		List<ProfessionalType> qryList = (List<ProfessionalType>) request.getSession().getAttribute(MiscConstant.MF_PROFESSIONAL_TYPE_LIST);
+		if (qryList!=null) {
+			setGenderLOV((ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOVTYPE_GENDER_TYPE_SESSION));
+			setPatientStatusLOV((ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOVTYPE_PATIENT_STATUS_TYPE_SESSION));
+		} else {
+			populateDropdownList(request);
+		}		
+	}
+
+    @SuppressWarnings("unchecked")
+	public void populateDropdownList(HttpServletRequest request) throws Exception{
+    	//Gender
+		List<ListValue> lovListGender = (ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOVTYPE_GENDER_TYPE_SESSION);
+    	if (lovListGender!=null) {
+    		setGenderLOV(lovListGender);
+    	}
+    	//Patient Status
+    	List<ListValue> lovListPatientStatus= (ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOVTYPE_PATIENT_STATUS_TYPE_SESSION);
+    	if (lovListPatientStatus!=null) {
+    	    setPatientStatusLOV(lovListPatientStatus);
+    	}
+        
+	}
+    
+	public List<ListValue> getGenderLOV() {
+		return genderLOV;
+	}
+
+	public void setGenderLOV(List<ListValue> genderLOV) {
+		this.genderLOV = genderLOV;
+	}
+
+	public List<ListValue> getPatientStatusLOV() {
+		return patientStatusLOV;
+	}
+
+	public void setPatientStatusLOV(List<ListValue> patientStatusLOV) {
+		this.patientStatusLOV = patientStatusLOV;
+	}
+	
+	public String getContactNo() {
+		return contactNo;
+	}
+
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getContactPerson() {
+		return contactPerson;
+	}
+
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
+	}
+
+	public String getContactPersonNo() {
+		return contactPersonNo;
+	}
+
+	public void setContactPersonNo(String contactPersonNo) {
+		this.contactPersonNo = contactPersonNo;
+	}
+
+
+	
+	
+	
+}

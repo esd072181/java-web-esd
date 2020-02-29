@@ -1,0 +1,20 @@
+ 
+		  <li class="ui-widget-header">Master File</li>
+		  <li onclick="goToPatient();"><a href="#">Patient</a></li>
+		  <li onclick="goToMedicalSupply();"><a href="#">Medical Supply</a></li>
+		  <li onclick="goToEquipment();"><a href="#">Equipment</a></li>
+		  <li onclick="goToLaboratoryExamination();"><a href="#">Laboratory Examination</a></li>
+		  <li onclick="goToRadiology();"><a href="#">Radiology</a></li>
+		  <li onclick="goToSurgery();"><a href="#">Surgery</a></li>
+		  <li onclick="goToAdditionalServices();"><a href="#">Additional Services</a></li>
+		  <li onclick="goToAdditionalServicesCategory();"><a href="#">Additional Services Category</a></li>
+		  <li onclick="goToDiscount();"><a href="#">Discount</a></li>
+		  <li onclick="goToProfessional();"><a href="#">Professional/Doctor</a></li>
+		  <li onclick="goToProfessionalType();"><a href="#">Professional Type</a></li>
+		  <li onclick="goToSpecialization();"><a href="#">Specialization</a></li>
+		  <li onclick="goToRoom();"><a href="#">Room</a></li>
+		  <li onclick="goToRoomCategory();"><a href="#">Room Category</a></li>
+		  <li onclick="goToBuilding();"><a href="#">Building</a></li>
+		
+  
+ 

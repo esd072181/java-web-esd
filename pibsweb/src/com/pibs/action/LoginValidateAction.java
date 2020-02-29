@@ -1,0 +1,124 @@
+package com.pibs.action;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.form.LoginFormBean;
+import com.pibs.model.User;
+import com.pibs.model.UserAccess;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+import com.pibs.util.EncryptUtil;
+import com.pibs.util.PIBSUtils;
+
+public class LoginValidateAction extends Action{
+	
+	private final static Logger logger = Logger.getLogger(LoginValidateAction.class);
+
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		//logger.info("Enter Login validate class....");
+		PIBSUtils.writeLogInfo(logger, "Enter Login validate class......");
+		
+		//set the default locale
+		if (!Locale.getDefault().getDisplayCountry().equalsIgnoreCase("Philippines")) {
+			Locale locale = new Locale("en", "PH");
+			Locale.setDefault(locale);
+			//Sample Currency code below:
+//			Currency c = Currency.getInstance(locale);
+//			NumberFormat.getCurrencyInstance().format(new BigDecimal("1,000.89"));
+		}
+		
+		LoginFormBean formBean = (LoginFormBean) form;
+		
+		User user = new User();
+		user.setUserName(formBean.getUserName());
+		user.setPassword(EncryptUtil.encrypt(formBean.getPassword()));
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.LOGIN);
+        dataMap.put(MapConstant.ACTION, ActionConstant.VALIDATEUSER);
+        dataMap.put(MapConstant.CLASS_DATA, user);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+        
+        String forwardAction = ActionConstant.NONE;
+        
+        if (resultMap!=null && !resultMap.isEmpty()) {
+        	if ((Boolean)resultMap.get(MapConstant.BOOLEAN_DATA) == MapConstant.TRUE) {
+        		user = (User) resultMap.get(MapConstant.CLASS_DATA);
+        		//START put the user details in session
+        		request.getSession().setAttribute(MiscConstant.USER_SESSION, user);
+        		request.getSession().setAttribute(MiscConstant.USER_ROLE_SESSION, user.getRole());
+           		//Get User Access
+        		List<Integer> accessList = getUserAccess(user.getId());
+        		request.getSession().setAttribute(MiscConstant.USER_ACCESS_LIST, accessList);
+        		PIBSUtils.storeLOVToSession(request);//enhanced code
+        		//END
+        		//START Get the config details
+        		String[] configArr = PIBSUtils.readConfigFile(request);
+        		MapConstant.setReportParamValues(configArr);
+        		MiscConstant.setConfigValues(configArr);
+        		//END
+        		formBean.setUserAccountValidated("true");
+        		forwardAction = ActionConstant.SUCCESS;
+        		//logger.info("User account confirmed valid...go to main screen..");
+        		PIBSUtils.writeLogInfo(logger, "User account confirmed valid...go to main screen......");
+        	} else {
+        		//logger.info("User account invalid!");
+        		formBean.setUserAccountValidated("invalid");
+        		PIBSUtils.writeLogInfo(logger, "Invalid user account......");
+        		forwardAction = ActionConstant.FAILED;
+        	}
+        }
+        
+        //logger.info("Exit Login validate class...");
+        PIBSUtils.writeLogInfo(logger, "Exit Login validate class.......");
+        
+        return mapping.findForward(forwardAction);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<Integer> getUserAccess(int userId) throws Exception {
+	     
+		List<Integer> accessList = new ArrayList<>();
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+		dataMap.put(MapConstant.MODULE, ModuleConstant.USER_ACCESS);
+		dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+		dataMap.put(MapConstant.SEARCH_CRITERIA, userId);
+		
+		ServiceManager service = new ServiceManagerImpl();
+		Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+		if (resultMap!=null && !resultMap.isEmpty()) {
+			List<UserAccess> qryList =  (ArrayList<UserAccess>) resultMap.get(MapConstant.CLASS_LIST);
+			for (UserAccess item: qryList)  {
+				accessList.add(item.getAccessId());
+			}
+		}
+		
+		return accessList;
+	}
+	
+}

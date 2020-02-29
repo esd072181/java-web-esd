@@ -1,0 +1,110 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+    
+    $('#dtBirthdayPicker').datepicker({}); 
+    $('#dtDateRegisteredPicker').datepicker({});
+    
+    $('#lastNameId').focus();
+    
+  });
+</script>
+
+<div class="row">
+	 
+	
+ 	<div class="col-sm-10" style="padding-left: 40px;">
+
+		<div style="height: 30%; padding-top: 0px;" align="left">
+			<h3 style="font-style: bold;">Admission</h3>
+			<html:form action="/admission.do" styleId="idForm">
+			
+				<fieldset>
+					<!--<legend></legend>--><!-- leave this as blank to show the line separator -->
+				
+				<div>
+					<html:errors/>
+				</div>
+				<div>
+					<h5 style="color: blue;"><c:out value="${patientForm.transactionMessage}"></c:out></h5>
+				</div> 
+						<div>
+							
+                            	<table>
+                                	<tr>
+                                    	<td>Patient ID:</td>
+                                        <td><input type="text"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Admission ID:</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+									<tr style="height: 10px;"></tr>
+                                    <tr>
+                                    	<td>Last Name:</td>
+                                        <td><input type="text" style="margin-right: 10px;"></td>
+                                        <td>First Name:</td>
+                                        <td><input type="text" style="margin-right: 10px;"></td>
+                                        <td>Middle Name:</td>
+                                        <td><input type="text" style="margin-right: 10px;"></td>
+                                    </tr>
+                                    <tr style="height: 10px;"></tr>
+                                    <tr>
+                                        <td valign="top">Suspected Diagnosis:</td>
+                                        <td colspan="5"><textarea rows="3" cols="59"></textarea><td>
+                                    </tr>
+                                    <tr style="height: 10px;"></tr>
+                                    <tr>
+                                        <td>Select Room:</td>
+                                        <td>
+                                        	<select style="width: 180px; height: 25px;">
+                                            	<option value="1">101-Ordinary</option>
+                                                <option value="2">102-Ordinary</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 10px;"></tr>
+                                    <tr>
+                                    	<td></td>
+                                        <td>Room Rate:<input type="text" style="width: 60px;">
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 10px;"></tr>
+                                    <tr>
+                                        <td>Select Doctor:</td>
+                                        <td>
+                                            <select style="width: 180px;height: 25px;">
+                                            	<option value="1">Dr. One</option>
+                                                <option value="2">Dr. Two</option>
+                                            </select>
+                                       </td>
+                                    </tr>
+                                    <tr style="height: 10px;"></tr>
+                                    <tr>
+                                    	<td></td>
+                                        <td>Doctor Rate:<input type="text" style="width: 60px;"></td>
+                                    </tr>
+                                    <tr style="height: 30px;"></tr>
+                                    <tr>
+                                        <td colspan="2">
+											<html:button property="btnSave" styleClass="btn btn-primary btnSaveUpdate" onclick="saveAdmission();" value="Save"></html:button>
+											<html:button property="btnCancel" styleClass="btn btn-primary btnCancelClose" onclick="cancelAdmission();" value="Cancel"></html:button>										
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+						</div>
+				</fieldset>	
+				
+			</html:form>
+		</div>
+	
+	</div>
+	
+</div>	
+	

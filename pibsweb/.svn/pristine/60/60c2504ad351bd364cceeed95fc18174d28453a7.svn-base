@@ -1,0 +1,10 @@
+package com.pibs.dao;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public interface RptPatientDao {
+	
+	Map<String, Object> search(HashMap<String, Object> criteriaMap) throws Exception;
+
+}

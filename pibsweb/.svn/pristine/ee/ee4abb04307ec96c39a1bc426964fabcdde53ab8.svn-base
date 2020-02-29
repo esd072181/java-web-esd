@@ -1,0 +1,31 @@
+package com.pibs.constant;
+
+public class ModuleConstant {
+
+	//Security
+	public static final int LOGIN = 1;
+	
+	//Master Files
+	public static final int BUILDING = 2;
+	public static final int ROOM_CATEGORY = 3;
+	public static final int ROOM = 4;
+	public static final int EQUIPMENT = 5;
+	public static final int SPECIALIZATION = 6;
+	public static final int ADDITIONAL_SERVICES = 7;
+	public static final int ADDITIONAL_SERVICES_CATEGORY = 8;
+	public static final int DELIVERY = 9;
+	public static final int RADIOLOGY = 10;
+	public static final int LABORATORY_EXAMINATION = 11;
+	public static final int SURGERY = 12;
+	public static final int MEDICAL_SUPPLY = 13;
+	public static final int PROFESSIONAL_TYPE = 14;
+	public static final int PROFESSIONAL = 15;
+	public static final int LIST_VALUE = 16;
+	public static final int LIST_TYPE = 17;
+	public static final int DISCOUNT = 18;
+	public static final int PATIENT = 19;//Patient and Patient Registration
+	//Transaction
+
+	
+		
+}

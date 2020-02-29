@@ -1,0 +1,36 @@
+//Patient Registration
+   function goToAddPatient() {
+		$.ajax({
+			  type: "GET",
+			  url: "patientRegistration.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function savePatient() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "savePatient.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+	
+	function cancelPatientRegistration() {
+		
+		bootbox.confirm("Are you sure you want to cancel Patient Registration?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+				 goToMainByAjax();
+			 } 
+		}); 
+	}

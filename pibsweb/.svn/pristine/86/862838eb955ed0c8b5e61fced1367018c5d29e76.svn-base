@@ -1,0 +1,69 @@
+package com.pibs.constant;
+
+public class MiscConstant {
+
+	//pagination
+	public static final int RECORDS_PER_PAGE = 10;
+	
+	//session
+	public static final String USER_SESSION = "user_session";
+	public static final String USER_ROLE_SESSION = "1";
+	public static final String TRANS_MESSAGE_SESSION = "2";
+	public static final String MF_ROOM_CATEGORY_LIST = "3";
+	public static final String MF_BUILDING_LIST = "4";
+	public static final String NO_FLOOR_LIST = "5";
+	public static final String MF_ADDITIONAL_SERVICES_CATEGORY_LIST = "6";
+	public static final String MF_PROFESSIONAL_TYPE_LIST = "7";
+	public static final String MF_SPECIALIZATION_LIST = "8";
+	public static final String MF_ROOM_LIST = "19";
+	public static final String MF_DOCTOR_LIST = "20";
+	
+	//session-lov
+	public static final String LOVTYPE_PATIENT_TYPE_SESSION = "9";
+	public static final String LOVTYPE_MEDICAL_SUPPLY_TYPE_SESSION = "10";
+	public static final String LOVTYPE_SURGERY_TYPE_SESSION = "11";
+	public static final String LOVTYPE_ENTITY_TYPE_SESSION = "12";
+	public static final String LOVTYPE_PATIENT_STATUS_TYPE_SESSION = "13";
+	public static final String LOVTYPE_PROFESSIONAL_STATUS_TYPE_SESSION = "14";
+	public static final String LOVTYPE_PATIENT_CASE_STATUS_TYPE_SESSION = "15";
+	public static final String LOVTYPE_PROFESSIONAL_DESIGNATION_TYPE_SESSION = "16";
+	public static final String LOVTYPE_RADIOLOGY_TYPE_SESSION = "17";
+	public static final String LOVTYPE_GENDER_TYPE_SESSION = "18";
+//	public static final String LOV_USER_ROLE_SESSION = "lov_user_role_session";
+	
+	//confirmation messages
+	public static final String TRANS_MESSSAGE_SAVED = "Record successfully saved!";
+	public static final String TRANS_MESSSAGE_UPDATED = "Record successfully updated!";
+	public static final String TRANS_MESSSAGE_DELETED = "Record successfully deleted!";
+	public static final String TRANS_MESSSAGE_ERROR = "There was an error in processing.. Please contact System Administrator.";
+	public static final String TRANS_MESSSAGE_RESET = "";
+	public static final String TRANS_MESSSAGE_RESTORED = "Record successfully restored to Master File!";
+	public static final String RPT_MESSSAGE_GENERATED_SUCCESS= "Report generated successfully!";
+	public static final String RPT_MESSSAGE_GENERATED_FAILED = "Report generation failed!";
+	
+	//logging messages
+	public static final String LOGGING_MESSSAGE_SAVE = "Entered save()...";
+	public static final String LOGGING_MESSSAGE_UPDATE = "Entered update()...";
+	public static final String LOGGING_MESSSAGE_DELETE = "Entered delete()...";
+	public static final String LOGGING_MESSSAGE_SEARCH = "Entered search()...";
+	public static final String LOGGING_MESSSAGE_GETDATA_BY_ID = "Entered getDataById()...";
+	public static final String LOGGING_MESSSAGE_GET_ACTIVE_DATA = "Entered getActiveData()...";
+	public static final String LOGGING_MESSSAGE_GET_INACTIVE_DATA = "Entered getInActiveData()...";
+	public static final String LOGGING_MESSSAGE_GET_DATA_BY_LIST_TYPE = "Entered getDataByListType()...";
+	public static final String LOGGING_MESSSAGE_RESTORE = "Entered restore()...";
+	public static final String LOGGING_MESSSAGE_UPDATE_USERNAME_PASSWORD = "Entered updateUsernamePassword()...";
+	
+	//list type = list type Id
+	public static final int LOVTYPE_PATIENT_TYPE = 1;
+	public static final int LOVTYPE_MEDICAL_SUPPLY_TYPE = 2;
+	public static final int LOVTYPE_SURGERY_TYPE = 3;
+	public static final int LOVTYPE_ENTITY_TYPE = 4;
+	public static final int LOVTYPE_PATIENT_STATUS_TYPE = 5;
+	public static final int LOVTYPE_PROFESSIONAL_STATUS_TYPE = 6;
+	public static final int LOVTYPE_PATIENT_CASE_STATUS_TYPE = 7;
+	public static final int LOVTYPE_PROFESSIONAL_DESIGNATION_TYPE = 8;
+	public static final int LOVTYPE_RADIOLOGY_TYPE = 9;
+	public static final int LOVTYPE_GENDER_TYPE = 10;
+	
+	
+}

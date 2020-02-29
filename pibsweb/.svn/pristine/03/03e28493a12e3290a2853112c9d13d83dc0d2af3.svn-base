@@ -1,0 +1,149 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+    
+    $('#dtBirthdayPicker').datepicker({}); 
+    $('#dtDateRegisteredPicker').datepicker({});
+    
+    $('#lastNameId').focus();
+    
+  });
+</script>
+
+<div class="row">
+	 
+	
+ 	<div class="col-sm-10" style="padding-left: 40px;">
+
+		<div style="height: 30%; padding-top: 0px;" align="left">
+			<h3 style="font-style: bold;">Patient Registration</h3>
+			<html:form action="/patient.do" styleId="idForm">
+			
+				<fieldset>
+					<!--<legend></legend>--><!-- leave this as blank to show the line separator -->
+				
+				<div>
+					<html:errors/>
+				</div>
+				<div>
+					<h5 style="color: blue;"><c:out value="${patientForm.transactionMessage}"></c:out></h5>
+				</div> 
+						<div>
+							<html:hidden property="id" value="${patientForm.id}"/>	
+							<div class="control-group">
+								<div class="divLabelCol1"><label class="control-label labelCol1" for="patientId">Patient Id:</label></div>
+									<div><html:text styleId="patientIdId" property="patientId" styleClass="input-xlarge textboxCol1"  size="30" maxlength="30" value="${patientForm.patientId}" disabled="${patientForm.transactionStatus}" readonly="true"></html:text></div>	
+						   	</div>
+							
+						    <div class="divMarginV"></div>
+						    
+						    <div class="control-group">
+						    	<div class="divLabelCol1"><label class="control-label labelCol1" for="lastName">Last Name:</label></div>
+						    		<div class="divTextboxCol1"><html:text styleId="lastNameId" property="lastName" styleClass="input-xlarge textboxCol1"  size="30" maxlength="30" value="${patientForm.lastName}" disabled="${patientForm.transactionStatus}"></html:text></div>
+						    			<div class="divLabelCol2"><label class="control-label labelCol2" for="contactPerson">Contact Person:</label></div>
+						   					<div><html:text styleId="contactPersonId" property="contactPerson" styleClass="input-xlarge textboxCol2"  size="30" maxlength="30" value="${patientForm.contactPerson}" disabled="${patientForm.transactionStatus}"></html:text></div>
+						    </div>
+						    				
+							<div class="divMarginV"></div>
+							
+							<div class="control-group">
+						    	<div class="divLabelCol1"><label class="control-label labelCol1" for="firstName">First Name:</label></div>
+						    		<div class="divTextboxCol1"><html:text styleId="firstNameId" property="firstName" styleClass="input-xlarge textboxCol1"  size="30" maxlength="30" value="${patientForm.firstName}" disabled="${patientForm.transactionStatus}"></html:text></div>
+						    			<div class="divLabelCol2"><label class="control-label labelCol2" for="contactPersonNo">Contact Person No:</label></div>
+						   					<div><html:text styleId="contactPersonNoId" property="contactPersonNo" styleClass="input-xlarge textboxCol2"  size="30" maxlength="30" value="${patientForm.contactPersonNo}" disabled="${patientForm.transactionStatus}"></html:text></div>
+						    </div>
+						 
+							<div class="divMarginV"></div>
+
+							<div class="control-group">
+						    	<div class="divLabelCol1"><label class="control-label labelCol1" for="middleName">Middle Name:</label></div>
+						  			<div class="divTextboxCol1"><html:text  styleId="middleNameId" property="middleName" styleClass="input-xlarge textboxCol1"  size="30" maxlength="30" value="${patientForm.middleName}" disabled="${patientForm.transactionStatus}"></html:text></div>
+						    </div>
+						    							
+							<div class="divMarginV"></div>
+
+							<div class="control-group">
+						    	<div class="divLabelCol1"><label  class="control-label labelCol1" for="gender">Gender:</label></div>
+						    	<div>
+						    		<html:select styleClass="dropdownCol1" name="patientForm" property="gender" disabled="${patientForm.transactionStatus}" value="Male">
+								 		<html:option value="0">--Select--</html:option>
+								 		<html:optionsCollection name="patientForm" property="genderLOV" label="listValue" value="listValue"/>				 		
+								 	</html:select>		
+						    	</div>
+						    </div>
+
+							<div class="divMarginV"></div>
+							
+							<div class="control-group">
+						    	<div class="divLabelCol1"><label class="control-label labelCol1" for="birthday">Birthday:</label></div>
+						  			<div><html:text styleClass="textboxCol1" property="birthday" styleId="dtBirthdayPicker"></html:text><label style="padding-left: 5px;">(mm/dd/yyyy)</label></div>
+						    </div>
+						   
+							<div class="divMarginV"></div>
+
+							<div class="control-group">
+						    	<div class="divLabelCol1"><label class="control-label labelCol1" for="contactNo">Contact No:</label></div>
+						  			<div><html:text styleId="contactNoId" property="contactNo" styleClass="input-xlarge textboxCol1"  size="30" maxlength="30" value="${patientForm.contactNo}" disabled="${patientForm.transactionStatus}"></html:text></div>
+						    </div>
+
+							<div class="divMarginV"></div>
+
+							<div class="control-group">
+						    	<div class="divLabelCol1"><label class="control-label labelCol1" for="address">Address:</label>	</div>
+						  			<div><html:textarea styleId="addressId" rows="3" property="address" cols="40" styleClass="input-xlarge"  value="${patientForm.address}" disabled="${patientForm.transactionStatus}"></html:textarea></div>
+						    </div>
+						    												
+							<div class="divMarginV"></div>
+						    							
+							<html:hidden property="patientStatusId" value="501"/><!-- Default to Active -->
+							
+									
+															
+							<div class="control-group">
+							 	 <div class="controls">
+									<c:choose>
+										<c:when test="${patientForm.transactionStatus == true}">	
+											<table>
+												<tr>
+													<td>
+														<html:button property="btnAddNew" styleClass="btn btn-primary btnAddNew" onclick="goToAddPatient();" value="Add New Record"></html:button>
+													</td>
+													<td>
+														<html:button property="btnClose" styleClass="btn btn-primary btnCancelClose" onclick="goToMainByAjax();" value="Close"></html:button>
+													</td>
+													<td>
+														<html:button property="btnGoTo" styleClass="btn btn-primary btnMonitoringLong" onclick="goToAdmission('${patientForm.id}');" value="Go to Admission"></html:button>
+													</td>
+												</tr>
+											</table>
+										</c:when>
+										<c:otherwise>
+											<table>
+												<tr>
+													<td>
+														<html:button property="btnSave" styleClass="btn btn-primary btnSaveUpdate" onclick="savePatient();" value="Save"></html:button>	
+													</td>
+													<td>
+														<html:button property="btnCancel" styleClass="btn btn-primary btnCancelClose" onclick="cancelPatientRegistration();" value="Cancel"></html:button>
+													</td>
+												</tr>
+											</table>
+										</c:otherwise>
+									</c:choose>								 	 
+							 	 </div>
+							 </div>
+						</div>
+				</fieldset>	
+				
+			</html:form>
+		</div>
+	
+	</div>
+	
+</div>	
+	

@@ -1,0 +1,91 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+			<script>
+		    
+			$("#tableId tr").mouseover(function(){ 
+				$('#selectedId').val( $(this).find(".classId").html());
+			});
+			
+			$('#categoryId').val('${nurseryForm.category}');
+			$('#currentPageId').val('${nurseryForm.currentPage}');
+			</script>
+						
+						
+	<div class="table-responsive" align="left" >
+		<c:choose>
+			<c:when test="${nurseryForm.modelList != null}">
+			<table  id="tableId" class="table table-bordered table-striped table-condensed table-hover context-menu-table" style="width: 98%;">  
+				<tr>
+					<th>Last Name</th>
+					<th>First Name</th>
+					<th>Date Of Birth</th>
+					<th>Time Of Birth</th>
+					<th>Gender</th>
+					<th>Weight</th>
+					<th>Remarks</th>
+				</tr>
+				<logic:iterate name="nurseryForm" property="modelList" type="com.pibs.model.MonitorNursery" id="model">
+					<tr>
+						<td><bean:write name="model" property="lastName"/></td>				 
+						<td><bean:write name="model" property="firstName"/></td>
+						<td><bean:write name="model" property="dateOfBirth"/></td>
+						<td><bean:write name="model" property="timeOfBirth"/></td>
+						<td><bean:write name="model" property="gender"/></td>
+						<td><bean:write name="model" property="weight"/></td>						
+						<td><bean:write name="model" property="remarks"/></td>
+					</tr>
+				</logic:iterate>
+			</table>
+		</c:when>
+		<c:otherwise>
+		 	<div style="color: blue;">No Record found!</div>
+		</c:otherwise>
+		</c:choose>
+	</div>
+	
+	<div style="height: 50px; width: 98%;">
+		<div style="position: relative; top: -15px; float: left;">
+			<ul class="pager">
+				<c:if test="${nurseryForm.currentPage != 1 && nurseryForm.noOfPages > 0}">
+					<li><a href="#" onclick="getPatientForMedicalAbstract(${nurseryForm.currentPage - 1},'${nurseryForm.category}');">Previous</a></li>
+				</c:if>
+				<c:if test="${nurseryForm.currentPage lt nurseryForm.noOfPages}">
+				  	<li><a href="#" onclick="getPatientForMedicalAbstract(${nurseryForm.currentPage + 1},'${nurseryForm.category}');">Next</a></li>
+				</c:if>
+			</ul>
+		</div>
+		<div style="position: relative; top: -15px; float: right;" >
+			<ul class="pagination">
+			
+				<c:if test="${nurseryForm.currentPage != 1 && nurseryForm.noOfPages > 0}">
+					<li><a href="#" onclick="getPatientForMedicalAbstract(${nurseryForm.currentPage - 1},'${nurseryForm.category}');">&laquo;</a></li>
+				</c:if>
+					
+				<c:forEach begin="1" end="${nurseryForm.noOfPages}" var="i">
+	                <c:choose>
+	                    <c:when test="${nurseryForm.currentPage eq i}">
+	                        <li class="active"><a href="#">${i}</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                         <li><a href="#" onclick="getPatientForMedicalAbstract(${i},'${nurseryForm.category}');">${i}</a></li>
+	                    </c:otherwise>
+	                </c:choose>
+	            </c:forEach>
+	           	<c:if test="${nurseryForm.currentPage lt nurseryForm.noOfPages}">
+	               	<li><a href="#" onclick="getPatientForMedicalAbstract(${nurseryForm.currentPage + 1},'${nurseryForm.category}');">&raquo;</a></li>
+	            </c:if>
+
+			</ul>
+		</div>
+	</div>
+
+<!-- 
+	<div id="msgDeletedId" align="center">
+		<span style="color: blue;"><c:out value="${roomCategoryForm.transactionMessage}"></c:out></span>
+	</div> 
+	 -->

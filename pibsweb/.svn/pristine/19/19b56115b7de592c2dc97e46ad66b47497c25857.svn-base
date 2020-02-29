@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+ 
+<struts-config>
+ 
+ 	<!-- Struts Config for Transactions -->
+ 
+	<form-beans>
+	    <!--  <form-bean name="patientForm" type="com.pibs.form.PatientFormBean" />--> <!-- This is already declared in struts-config-mf -->
+		<form-bean name="admissionForm" type="com.pibs.form.AdmissionFormBean" />
+	</form-beans>
+ 
+	<action-mappings>
+	
+	   
+	   <!-- Patient Registration (START) -->
+	   <action 
+	   		path="/patientRegistration" 
+	   		type="com.pibs.action.PatientAction"
+			name="patientForm"
+			scope="request"
+			input="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/savePatient" 
+	   		type="com.pibs.action.PatientAction"
+			name="patientForm"
+			scope="request"
+			input="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+	   </action>
+	   <!-- Patient Registration (END) -->
+
+	   <!-- Admission (START) -->
+	   <action 
+	   		path="/admission" 
+	   		type="com.pibs.action.AdmissionAction"
+			name="admissionForm"
+			scope="request"
+			input="/pages/transaction/admission/ajaxAdmission.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveAdmission" 
+	   		type="com.pibs.action.AdmissionAction"
+			name="admissionForm"
+			scope="request"
+			input="/pages/transaction/admission/ajaxAdmission.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+	   </action>
+	   <!-- Admission (END) -->
+	   	   	   	   	
+	</action-mappings>
+	
+
+</struts-config>

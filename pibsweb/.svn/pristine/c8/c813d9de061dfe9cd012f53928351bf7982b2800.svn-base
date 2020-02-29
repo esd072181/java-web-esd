@@ -1,0 +1,381 @@
+/*
+ * Created on Jan 28, 2015
+ *
+ * To change the template for this generated file go to
+ * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
+ */
+package com.pibs.util;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Currency;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.model.ListType;
+import com.pibs.model.ListValue;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+
+/**
+ * @author Edward.David
+ * LastDateUpdated: 09Apr2018
+ */
+public class PIBSUtils {
+	
+	static String OS = System.getProperty("os.name").toLowerCase();
+	
+	/**
+	 * This method is used for generic logging INFO  in console and a log file
+	 * 
+	 * @author dward
+	 * @since 04Mar2015
+	 * @exception
+	 * @param log (Log4J Logger)
+	 * @param message (String)
+	 */
+	public static void writeLogInfo(Logger log, String message) {
+		if (log!=null) {
+			log.info(message);
+		}
+		System.out.println(message);
+	}
+	
+	/**
+	 * This method is used for generic logging DEBUG  in console and a log file
+	 * 
+	 * @author dward
+	 * @since 04Mar2015
+	 * @exception
+	 * @param log (Log4J Logger)
+	 * @param message (String)
+	 */
+	public static void writeLogDebug(Logger log, String message) {
+		if (log!=null && log.isDebugEnabled()) {
+			log.debug(message);
+			System.out.println(message);
+		}
+	}
+	
+	
+	/**
+	 * Checks whether the obj param is null
+	 * @param Obj
+	 * @return boolean true if obj param is null
+	 */	
+	public static boolean isNull(Object obj){
+		return (obj==null);
+	}
+	/**
+	 * To compare two non-primitive (object) values whether they are meaningfully equals.
+	 * This will invoke the object's equals method and also handles null checking.
+	 * @param obj1 - object1 
+	 * @param obj2 - object2
+	 * @return boolean true if both param are equals		 
+	 */
+	public static boolean isEqual(Object obj1, Object obj2){			
+		return (
+			(isNull(obj1) && isNull(obj2) && obj1==obj2) || 
+			(!isNull(obj1) && !isNull(obj2) && obj1.equals(obj2))
+		);//this formula already handles all (5) case scenarios.
+	}
+	
+	/**
+	 * To compare two numeric primitives values whether they are equals.
+	 * This is also for char types since char is convertible to int. 
+	 * @param v1 - value1
+	 * @param v2 - value2
+	 * @return boolean true if both param are equals		
+	 */		
+	public static boolean isEqual(double v1, double v2){
+		return (v1==v2);
+	}
+
+	/**
+	 * To compare two boolean values whether they are equals.	 
+	 * @param v1 - value1
+	 * @param v2 - value2
+	 * @return boolean true if both param are equals		
+	 */		
+	public static boolean isEqual(boolean v1, boolean v2){
+		return (v1==v2);
+	}			
+	
+	//sample override equals in DTO below
+//	//overrided equals()
+//	public boolean equals(Object obj) {
+//		boolean isEqual = true;
+//		if(obj instanceof Building){
+//			Building objDTO = (Building) obj;
+//			PIBSUtilities util = new PIBSUtilities(); 
+//			isEqual = (
+//				util.isEqual(this.id, objDTO.getId()) && 
+//				util.isEqual(this.description, objDTO.getDescription()) && 
+//				util.isEqual(this.noOfFloor, objDTO.getNoOfFloor()) && 
+//				util.isEqual(this.remarks, objDTO.getRemarks())  
+//			);
+//		}else{
+//			isEqual = false;
+//		}
+//		return isEqual;
+//	}
+	
+	public static void closeObjects(Object obj) throws Exception{
+		if (obj instanceof ResultSet) {
+			((ResultSet) obj).close();
+		}
+		if (obj instanceof Statement) {
+			((Statement) obj).close();
+		}
+		if (obj instanceof Connection) {
+			((Connection) obj).close();
+		}
+	}
+
+	
+	/**
+	 * Enhanced storeLOVToSession
+	 * 
+	 * @param request
+	 * @throws Exception
+	 * @since 29May2017
+	 * @updated 23July2017
+	 */
+	public static void storeLOVToSession(HttpServletRequest request) throws Exception{
+		
+        ServiceManager service = new ServiceManagerImpl();
+        
+		//Get All List Type (Enhancement)
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+		dataMap.put(MapConstant.MODULE, ModuleConstant.LIST_TYPE);
+		dataMap.put(MapConstant.ACTION, ActionConstant.GET_ACTIVE_DATA);
+		Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+		List<?> lovTypeList = (ArrayList<?>) resultMap.get(MapConstant.CLASS_LIST);
+		
+		//Get All List Value
+		dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.LIST_VALUE);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_ACTIVE_DATA);
+        
+        Map<String, Object> resultMapListvalue = service.executeRequest(dataMap);
+        
+		List<?> lovValueList = (ArrayList<?>) resultMapListvalue.get(MapConstant.CLASS_LIST);
+		
+		for (Object obj: lovTypeList) {
+			ListType listType = (ListType) obj;
+			List<ListValue> lovListPerType = new ArrayList<ListValue>();
+			for (Object lov: lovValueList) {
+				if (((ListValue)lov).getListTypeId()==listType.getId()) {
+					lovListPerType.add((ListValue)lov);
+				}
+			}
+			//Added for Sorting
+			Collections.sort((ArrayList<ListValue>)lovListPerType, new Comparator<ListValue>() {
+				@Override
+				public int compare(ListValue arg0, ListValue arg1) {
+					return arg0.getListValue().compareTo(arg1.getListValue());
+				}
+			});
+			
+			if (listType.getId()==MiscConstant.LOVTYPE_PATIENT_TYPE) {
+				//PatientType
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_PATIENT_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_MEDICAL_SUPPLY_TYPE) {
+				//MedicalSupply
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_MEDICAL_SUPPLY_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_SURGERY_TYPE) {
+				//Surgery
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_SURGERY_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_ENTITY_TYPE) {
+				//Entity
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_ENTITY_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_PATIENT_STATUS_TYPE) {
+				//PatientStatus
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_PATIENT_STATUS_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_PROFESSIONAL_STATUS_TYPE) {
+				//ProfessionalStatus
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_PROFESSIONAL_STATUS_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_PATIENT_CASE_STATUS_TYPE) {
+				//PatientCaseStatus
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_PATIENT_CASE_STATUS_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_PROFESSIONAL_DESIGNATION_TYPE) {
+				//ProfessionalDesignation
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_PROFESSIONAL_DESIGNATION_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_RADIOLOGY_TYPE) {
+				//Radiology
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_RADIOLOGY_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_GENDER_TYPE) {
+				//Gender
+				request.getSession().setAttribute(MiscConstant.LOVTYPE_GENDER_TYPE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_EMP_CATEGORY) {
+				//EmpCategory
+				request.getSession().setAttribute(MiscConstant.LOV_EMPLOYEE_CATEGORY_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_USER_ROLE) {
+				//User Role
+				request.getSession().setAttribute(MiscConstant.LOV_USER_ROLE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_USER_ACCESS_MODULE) {
+				//User Access Module
+				request.getSession().setAttribute(MiscConstant.LOV_USER_ACCESS_MODULE_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_PATIENT_REPORT_SEARCH_CRITERIA) {
+				//Patient Report Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_PATIENT_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA) {
+				//Medical Supply Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_EQUIPMENT_REPORT_SEARCH_CRITERIA) {
+				//Equipment Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_EQUIPMENT_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_LABORATORY_EXAMINATION_REPORT_SEARCH_CRITERIA) {
+				//Lab Exam Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_LABORATORY_EXAMINATION_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_RADIOLOGY_REPORT_SEARCH_CRITERIA) {
+				//Radiology Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_RADIOLOGY_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_SURGERY_REPORT_SEARCH_CRITERIA) {
+				//Surgery Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_SURGERY_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_ADDITIONAL_SERVICES_REPORT_SEARCH_CRITERIA) {
+				//Additional Services Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_ADDITIONAL_SERVICES_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_DISCOUNT_REPORT_SEARCH_CRITERIA) {
+				//Discount Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_DISCOUNT_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_PROFESSIONAL_REPORT_SEARCH_CRITERIA) {
+				//Professional Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_ROOM_REPORT_SEARCH_CRITERIA) {
+				//Room Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_ROOM_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_EMPLOYEE_REPORT_SEARCH_CRITERIA) {
+				//Employee Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_EMPLOYEE_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			} else if (listType.getId()==MiscConstant.LOVTYPE_NURSERY_REPORT_SEARCH_CRITERIA) {
+				//Nursery Search Criteria
+				request.getSession().setAttribute(MiscConstant.LOV_NURSERY_REPORT_SEARCH_CRITERIA_SESSION, lovListPerType);	
+			}
+			
+		}
+		
+	}
+	
+
+	
+	public static MathContext roundingPrecision() {
+		MathContext mc = new MathContext(3); // 3 precision
+		return mc;
+	}
+	
+	public static String getPhpSymbol() {
+		Currency c = Currency.getInstance(Locale.getDefault());
+		return c.getSymbol();
+	}
+
+	/* 
+	* Java Method to find number of days between two dates 
+	* in Java using JodaTime library. To find difference 
+	* we first need to convert java.util.Date to LocalDate 
+	* in JodaTime. (yyyy/MM/dd)*/ 
+	public static int daysBetweenUsingJoda(Date d1, Date d2){ 
+		return Days.daysBetween( 
+				new LocalDate(d1.getTime()), 
+				new LocalDate(d2.getTime())).getDays();
+	}
+	
+	public static Double convertStrToDouble(String amountStr) {
+		return Double.valueOf(!amountStr.isEmpty() ? amountStr.substring(4,amountStr.length()).replaceAll(",", "") : "");//remove the Php symbol
+	}
+	
+	public static String convertDoubleToStr(Double amount) {
+		DecimalFormat f = new DecimalFormat("###,###.00");
+		return  PIBSUtils.getPhpSymbol() + " " + f.format(BigDecimal.valueOf(amount).setScale(2, BigDecimal.ROUND_HALF_UP));
+	}
+	
+	public static String convertDoubleToStrNegative(Double amount) {
+		DecimalFormat f = new DecimalFormat("###,###.00");
+		return  "(" + PIBSUtils.getPhpSymbol() + " " + f.format(BigDecimal.valueOf(amount).setScale(2, BigDecimal.ROUND_HALF_UP)) + ")";
+	}
+
+	public static String convertDoubleToStrNoPhp(Double amount) {
+		DecimalFormat f = new DecimalFormat("###,###.00");
+		return  f.format(BigDecimal.valueOf(amount).setScale(2, BigDecimal.ROUND_HALF_UP));
+	}
+	
+	public static String getReportPath(HttpServletRequest request) {
+		String path = null;
+		if (OS.indexOf("win") >= 0) {
+			//Windows
+			//Not same behavior as TransportWeb, need to add File separator for PIBSWeb for Windows, need to check Why?
+			path = request.getSession().getServletContext().getRealPath("/") + File.separator + "reports";//for local testing - Windows
+		} else {
+			path = request.getSession().getServletContext().getRealPath("/") + "/reports";//for production - /reports - UNIX
+		}
+        // Note: path when debugging
+		//C:\eclipse\workspace_pibsweb\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\pibsweb\reports
+		return path;
+	}
+	
+	private static String getConfigFilePath(HttpServletRequest request) {
+		String path = null;
+		if (OS.indexOf("win") >= 0) {
+			//Windows
+			//Not same behavior as TransportWeb, need to add File separator for PIBSWeb for Windows, need to check Why?
+			path = request.getSession().getServletContext().getRealPath("/") + File.separator + "config/pibsconfig.txt";//for local testing - Windows
+		} else {
+			path = request.getSession().getServletContext().getRealPath("/") + "/config/pibsconfig.txt";//for production - /reports - UNIX
+		}
+        // Note: path when debugging
+		//C:\eclipse\workspace_pibsweb\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\pibsweb\reports
+		return path;
+	}
+	
+	public static String[] readConfigFile(HttpServletRequest request) throws Exception {
+		String[] configArr = null;
+		try (BufferedReader br = new BufferedReader(new FileReader(getConfigFilePath(request)))) {
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				configArr = line.split(",");
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+//			br.close(); //no need to close if user try-resources
+		}
+		return configArr;
+	}
+	
+	/**
+	 * 
+	 * @param dob
+	 * @return
+	 */
+	public static int getAge(java.time.LocalDate dob) {
+		java.time.LocalDate curDate = java.time.LocalDate.now();
+		return Period.between(dob, curDate).getYears();
+	}
+	
+}

@@ -1,0 +1,1524 @@
+//Patient Registration
+   function goToAddPatient() {
+		$.ajax({
+			  type: "GET",
+			  url: "patientRegistration.do?",
+			  cache: false,
+			  data: { command: "ajaxAdd" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function savePatient() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "savePatient.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+	
+	function cancelPatientRegistration() {
+		
+		bootbox.confirm("Are you sure you want to cancel Patient Registration?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+				 goToMainByAjax();
+			 } 
+		}); 
+	}
+	
+	//Admission
+	function goToAdmissionSearch() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "admission.do?",
+			  data: { command: "ajaxGoToSearch" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+	function getPatientForAdmission(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "admission.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+		
+	function goToAdmission(patientSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "admission.do?",
+			  data: { command: "ajaxGoToAdmission", 
+				  patientSystemId: patientSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function saveAdmission() {
+		
+				 $.ajax({
+					  type: "POST",
+					  url: "saveAdmission.do?command=ajaxSave",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIV").html(result);
+					});
+	}
+	
+	function cancelAdmission() {
+		
+		bootbox.confirm("Are you sure you want to cancel Admission?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "GET",
+						  cache: false,
+						  url: "admission.do?",
+						  data: { command: "ajaxGoToSearch" }
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+						});
+			 } 
+		}); 
+	}
+
+	function closeAdmission() {
+		 goToMainByAjax();
+	}
+	
+	function backToAdmissionSearch() {
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "admission.do?",
+			  data: { command: "ajaxGoToSearch" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+	//MonitorPatient
+	function goToMonitorPatientSearch() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorPatient.do?",
+			  data: { command: "ajaxGoToSearch" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+	function getPatientForMonitorPatient(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorPatient.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorPatient(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorPatient.do?",
+			  data: { command: "ajaxGoToMonitorPatient", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+	function backToMonitorPatientSearch() {
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorPatient.do?",
+			  data: { command: "ajaxGoToSearch" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+	//Diagnosis
+	function goToDiagnosis(patientSystemCaseId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "diagnosis.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				  		patientSystemCaseId: patientSystemCaseId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function saveDiagnosis() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveDiagnosis.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function closeDiagnosis() {
+		$("#childDIV").html("");
+	}
+
+	//Medication Statement
+	function goToMedicationStatement(patientSystemCaseId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "medicationStatement.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				  		patientSystemCaseId: patientSystemCaseId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function saveMedicationStatement() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMedicationStatement.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function closeMedicationStatement() {
+		$("#childDIV").html("");
+	}
+
+	//Prognosis
+	function goToPrognosis(patientSystemCaseId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "prognosis.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				  		patientSystemCaseId: patientSystemCaseId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function savePrognosis() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "savePrognosis.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function closePrognosis() {
+		$("#childDIV").html("");
+	}
+	
+	//Monitor Laboratory Examination
+	function goToMonitorLaboratoryExamination(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorLaboratoryExamination.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorLaboratoryExaminationSearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorLaboratoryExamination.do?",
+			  data: { command: "ajaxGoToMonitorPatientChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getLabExamForMonitorPatient(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorLaboratoryExamination.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToMonitorLaboratoryExaminationAdd(laboratoryexaminationid, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorLaboratoryExamination.do?",
+			  data: { command: "ajaxAdd", 
+				  	  laboratoryexaminationid: laboratoryexaminationid,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorLaboratoryExamination() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorLaboratoryExamination.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorLaboratoryExamination(patientCaseSystemId) {
+		goToMonitorLaboratoryExamination(patientCaseSystemId);
+	}
+	
+	function deleteMonitorLaboratoryExamination(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorLaboratoryExamination.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorLaboratoryExamination(patientCaseSystemId);
+			});
+	}
+	
+	//Monitor Medical Supply
+	function goToMonitorMedicalSupply(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorMedicalSupply.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorMedicalSupplySearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorMedicalSupply.do?",
+			  data: { command: "ajaxGoToMonitorPatientChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getMedicalSupplyForMonitorPatient(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorMedicalSupply.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToMonitorMedicalSupplyAdd(medicalSupplyId, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorMedicalSupply.do?",
+			  data: { command: "ajaxAdd", 
+				      medicalSupplyId: medicalSupplyId,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorMedicalSupply() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorMedicalSupply.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorMedicalSupply(patientCaseSystemId) {
+		goToMonitorMedicalSupply(patientCaseSystemId);
+	}
+	
+	function deleteMonitorMedicalSupply(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorMedicalSupply.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorMedicalSupply(patientCaseSystemId);
+			});
+	}
+	
+	//Monitor Radiology
+	function goToMonitorRadiology(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRadiology.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorRadiologySearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRadiology.do?",
+			  data: { command: "ajaxGoToMonitorPatientChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getRadiologyForMonitorPatient(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorRadiology.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToMonitorRadiologyAdd(radiologyId, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRadiology.do?",
+			  data: { command: "ajaxAdd", 
+				      radiologyId: radiologyId,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorRadiology() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorRadiology.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorRadiology(patientCaseSystemId) {
+		goToMonitorRadiology(patientCaseSystemId);
+	}
+	
+	function deleteMonitorRadiology(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRadiology.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorRadiology(patientCaseSystemId);
+			});
+	}
+	
+	//Monitor Surgery
+	function goToMonitorSurgery(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorSurgery.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorSurgerySearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorSurgery.do?",
+			  data: { command: "ajaxGoToMonitorPatientChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getSurgeryForMonitorPatient(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorSurgery.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToMonitorSurgeryAdd(surgeryId, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorSurgery.do?",
+			  data: { command: "ajaxAdd", 
+				      surgeryId: surgeryId,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorSurgery() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorSurgery.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorSurgery(patientCaseSystemId) {
+		goToMonitorSurgery(patientCaseSystemId);
+	}
+	
+	function deleteMonitorSurgery(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorSurgery.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorSurgery(patientCaseSystemId);
+			});
+	}
+
+	//Monitor Additional Services
+	function goToMonitorAdditionalServices(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorAdditionalServices.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorAdditionalServicesSearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorAdditionalServices.do?",
+			  data: { command: "ajaxGoToMonitorPatientChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getAdditionalServicesForMonitorPatient(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorAdditionalServices.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToMonitorAdditionalServicesAdd(additionalServicesId, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorAdditionalServices.do?",
+			  data: { command: "ajaxAdd", 
+				      additionalServicesId: additionalServicesId,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorAdditionalServices() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorAdditionalServices.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorAdditionalServices(patientCaseSystemId) {
+		goToMonitorAdditionalServices(patientCaseSystemId);
+	}
+	
+	function deleteMonitorAdditionalServices(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorAdditionalServices.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorAdditionalServices(patientCaseSystemId);
+			});
+	}
+
+	
+	//Monitor Equipment
+	function goToMonitorEquipment(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorEquipment.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorEquipmentSearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorEquipment.do?",
+			  data: { command: "ajaxGoToMonitorPatientChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getEquipmentForMonitorPatient(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorEquipment.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToMonitorEquipmentAdd(equipmentId, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorEquipment.do?",
+			  data: { command: "ajaxAdd", 
+				      equipmentId: equipmentId,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorEquipment() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorEquipment.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorEquipment(patientCaseSystemId) {
+		goToMonitorEquipment(patientCaseSystemId);
+	}
+	
+	function deleteMonitorEquipment(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorEquipment.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorEquipment(patientCaseSystemId);
+			});
+	}
+
+	//Monitor PhysicalExamination
+	function goToMonitorPhysicalExamination(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorPhysicalExamination.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorPhysicalExaminationAdd(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorPhysicalExamination.do?",
+			  data: { command: "ajaxAdd", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorPhysicalExamination() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorPhysicalExamination.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorPhysicalExamination(patientCaseSystemId) {
+		goToMonitorPhysicalExamination(patientCaseSystemId);
+	}
+	
+	function deleteMonitorPhysicalExamination(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorPhysicalExamination.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorPhysicalExamination(patientCaseSystemId);
+			});
+	}
+
+	//Monitor Doctor
+	function goToMonitorDoctor(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorDoctor.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorDoctorSearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorDoctor.do?",
+			  data: { command: "ajaxGoToMonitorPatientChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getDoctorForMonitorPatient(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorDoctor.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToMonitorDoctorAdd(doctorId, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorDoctor.do?",
+			  data: { command: "ajaxAdd", 
+				      doctorId: doctorId,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorDoctor() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorDoctor.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorDoctor(patientCaseSystemId) {
+		goToMonitorDoctor(patientCaseSystemId);
+	}
+	
+	function deleteMonitorDoctor(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorDoctor.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorDoctor(patientCaseSystemId);
+			});
+	}
+
+	//Monitor Room
+	function goToMonitorRoom(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRoom.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorRoomSearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRoom.do?",
+			  data: { command: "ajaxGoToMonitorPatientChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getRoomForMonitorPatient(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorRoom.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToMonitorRoomAdd(roomId, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRoom.do?",
+			  data: { command: "ajaxAdd", 
+				      roomId: roomId,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorRoom() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorRoom.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorRoom(patientCaseSystemId) {
+		goToMonitorRoom(patientCaseSystemId);
+	}
+	
+	function deleteMonitorRoom(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRoom.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorRoom(patientCaseSystemId);
+			});
+	}
+
+	//Monitor Room Transfer
+	function goToMonitorRoomTransfer(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRoomTransfer.do?",
+			  data: { command: "ajaxGoToMonitorPatientChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToMonitorRoomTransferSearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRoomTransfer.do?",
+			  data: { command: "ajaxGoToMonitorPatientChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getRoomTransferForMonitorPatient(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "monitorRoomTransfer.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToMonitorRoomTransferAdd(roomTransferId, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRoomTransfer.do?",
+			  data: { command: "ajaxAdd", 
+				      roomTransferId: roomTransferId,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveMonitorRoomTransfer() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMonitorRoomTransfer.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelMonitorRoomTransfer(patientCaseSystemId) {
+		goToMonitorRoomTransfer(patientCaseSystemId);
+	}
+	
+	function deleteMonitorRoomTransfer(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "monitorRoomTransfer.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToMonitorRoomTransfer(patientCaseSystemId);
+			});
+	}
+
+	
+	//Billing
+	function goToBillingSearch() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "billing.do?",
+			  data: { command: "ajaxGoToSearch" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+	function getPatientForBilling(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "billing.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	
+	function goToBilling(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "billing.do?",
+			  data: { command: "ajaxGoToBilling", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+	function backToBillingSearch() {
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "billing.do?",
+			  data: { command: "ajaxGoToSearch" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+
+	//Billing Discount
+	function goToBillingDiscount(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "billingDiscount.do?",
+			  data: { command: "ajaxGoToBillingChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function goToBillingDiscountSearch(patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "billingDiscount.do?",
+			  data: { command: "ajaxGoToBillingChildSearch", 
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function getDiscountForBilling(pageCriteria, category, patientCaseSystemId) {
+		
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "billingDiscount.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+	
+	function goToBillingDiscountAdd(discountId, patientCaseSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "billingDiscount.do?",
+			  data: { command: "ajaxAdd", 
+				      discountId: discountId,
+				  	  patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	
+	function saveBillingDiscount() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveBillingDiscount.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+
+	}
+	
+	function cancelBillingDiscount(patientCaseSystemId) {
+		goToBillingDiscount(patientCaseSystemId);
+	}
+	
+	function deleteBillingDiscount(id, patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "billingDiscount.do?",
+			  data: { command: "ajaxDelete", 
+				  	  id: id
+			  		}
+			})
+			  .done(function( result ) {
+				  goToBillingDiscount(patientCaseSystemId);
+			});
+	}
+
+	//Billing Details
+	function goToBillingDetails(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "billingDetails.do?",
+			  data: { command: "ajaxGoToBillingChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+
+	//Billing Payment
+	function goToBillingPayment(patientCaseSystemId) {
+				
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "billingPayment.do?",
+			  data: { command: "ajaxGoToBillingChild", 
+				      patientCaseSystemId: patientCaseSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+	function saveBillingPayment() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "saveBillingPayment.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#childDIV").html(result);
+			});
+	}
+	
+    //Billing Details Report
+	function  viewBillingDetailsReport (caseNo) {
+		var filename="Bill_" + caseNo + ".pdf"
+		document.getElementById("billReportId").href= "reports/"+filename; 
+	}
+	
+	

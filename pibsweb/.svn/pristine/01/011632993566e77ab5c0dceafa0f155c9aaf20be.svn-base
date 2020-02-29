@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+    <!-- Enable Annotation based Declarative Transaction Management -->
+    <tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
+    
+    <!-- PostgreSQL DB DataSource -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/pibswebdev" />
+        <property name="username" value="admin" />
+        <property name="password" value="admin" />
+    </bean> 
+
+    <!-- Creating TransactionManager Bean, since JDBC we are creating of type DataSourceTransactionManager -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!-- Global Spring JDBC DataSource -->
+    <bean id="springContext" class="com.pibs.config.SpringContext">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+     
+     
+	<!-- Login -->
+	<bean id="loginDao" class="com.pibs.dao.impl.LoginDaoImpl">
+        <!--<property name="dataSource" ref="dataSource"></property>-->
+    </bean>
+ 
+    <bean id="loginBo" class="com.pibs.bo.impl.LoginBoImpl">
+        <property name="loginDao" ref="loginDao"></property>
+    </bean>
+    
+    <!-- Master Files START -->
+    
+    <!-- Building includes sample for datasource config SPRING JDBC -->
+    <bean id="buildingDao" class="com.pibs.dao.impl.BuildingDaoImpl">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <bean id="buildingBo" class="com.pibs.bo.impl.BuildingBoImpl">
+        <property name="buildingDao" ref="buildingDao"></property>
+    </bean>
+    
+    <!-- Room Category -->
+    <bean id="roomCategoryDao" class="com.pibs.dao.impl.RoomCategoryDaoImpl"></bean>
+    <bean id="roomCategoryBo" class="com.pibs.bo.impl.RoomCategoryBoImpl">
+        <property name="roomCategoryDao" ref="roomCategoryDao"></property>
+    </bean>
+
+    <!-- Room -->
+    <bean id="roomDao" class="com.pibs.dao.impl.RoomDaoImpl"></bean>
+    <bean id="roomBo" class="com.pibs.bo.impl.RoomBoImpl">
+        <property name="roomDao" ref="roomDao"></property>
+    </bean>
+
+    <!-- Equipment -->
+    <bean id="equipmentDao" class="com.pibs.dao.impl.EquipmentDaoImpl"></bean>
+    <bean id="equipmentBo" class="com.pibs.bo.impl.EquipmentBoImpl">
+        <property name="equipmentDao" ref="equipmentDao"></property>
+    </bean>
+
+    <!-- Specialization -->
+    <bean id="specializationDao" class="com.pibs.dao.impl.SpecializationDaoImpl"></bean>
+    <bean id="specializationBo" class="com.pibs.bo.impl.SpecializationBoImpl">
+        <property name="specializationDao" ref="specializationDao"></property>
+    </bean>   
+     
+    <!-- Surgery --> 
+    <bean id="surgeryDao" class="com.pibs.dao.impl.SurgeryDaoImpl"></bean>
+    <bean id="surgeryBo" class="com.pibs.bo.impl.SurgeryBoImpl">
+        <property name="surgeryDao" ref="surgeryDao"></property>
+    </bean>
+ 
+     <!-- Radiology -->
+    <bean id="radiologyDao" class="com.pibs.dao.impl.RadiologyDaoImpl"></bean>
+    <bean id="radiologyBo" class="com.pibs.bo.impl.RadiologyBoImpl">
+        <property name="radiologyDao" ref="radiologyDao"></property>
+    </bean> 
+ 
+    <!-- Additional Services -->
+    <bean id="additionalServicesDao" class="com.pibs.dao.impl.AdditionalServicesDaoImpl"></bean>
+    <bean id="additionalServicesBo" class="com.pibs.bo.impl.AdditionalServicesBoImpl">
+        <property name="additionalServicesDao" ref="additionalServicesDao"></property>
+    </bean>   
+
+    <!-- Additional Services Category -->
+    <bean id="additionalServicesCategoryDao" class="com.pibs.dao.impl.AdditionalServicesCategoryDaoImpl"></bean>
+    <bean id="additionalServicesCategoryBo" class="com.pibs.bo.impl.AdditionalServicesCategoryBoImpl">
+        <property name="additionalServicesCategoryDao" ref="additionalServicesCategoryDao"></property>
+    </bean>    
+
+     <!-- Laboratory Examination -->
+    <bean id="laboratoryExaminationDao" class="com.pibs.dao.impl.LaboratoryExaminationDaoImpl"></bean>
+    <bean id="laboratoryExaminationBo" class="com.pibs.bo.impl.LaboratoryExaminationBoImpl">
+        <property name="laboratoryExaminationDao" ref="laboratoryExaminationDao"></property>
+    </bean>   
+
+    <!-- Medical Supply -->
+    <bean id="medicalSupplyDao" class="com.pibs.dao.impl.MedicalSupplyDaoImpl"></bean>
+    <bean id="medicalSupplyBo" class="com.pibs.bo.impl.MedicalSupplyBoImpl">
+        <property name="medicalSupplyDao" ref="medicalSupplyDao"></property>
+    </bean>
+
+    <!-- Professional Type -->
+    <bean id="professionalTypeDao" class="com.pibs.dao.impl.ProfessionalTypeDaoImpl"></bean>
+    <bean id="professionalTypeBo" class="com.pibs.bo.impl.ProfessionalTypeBoImpl">
+        <property name="professionalTypeDao" ref="professionalTypeDao"></property>
+    </bean>
+    
+    <!-- Professional -->
+    <bean id="professionalDao" class="com.pibs.dao.impl.ProfessionalDaoImpl"></bean>
+    <bean id="professionalBo" class="com.pibs.bo.impl.ProfessionalBoImpl">
+        <property name="professionalDao" ref="professionalDao"></property>
+    </bean>
+                     
+    <!-- List Type -->
+    <bean id="listTypeDao" class="com.pibs.dao.impl.ListTypeDaoImpl" scope="singleton"></bean>
+    <bean id="listTypeBo" class="com.pibs.bo.impl.ListTypeBoImpl" scope="singleton">
+        <property name="listTypeDao" ref="listTypeDao"></property>
+    </bean> 
+    
+    <!-- List Value -->
+    <bean id="listValueDao" class="com.pibs.dao.impl.ListValueDaoImpl" scope="singleton"></bean>
+    <bean id="listValueBo" class="com.pibs.bo.impl.ListValueBoImpl" scope="singleton">
+        <property name="listValueDao" ref="listValueDao"></property>
+    </bean>   
+    
+    <!-- Discount -->
+    <bean id="discountDao" class="com.pibs.dao.impl.DiscountDaoImpl"></bean>
+    <bean id="discountBo" class="com.pibs.bo.impl.DiscountBoImpl">
+        <property name="discountDao" ref="discountDao"></property>
+    </bean>
+    
+    <!-- Patient -->
+    <bean id="patientDao" class="com.pibs.dao.impl.PatientDaoImpl"></bean>
+    <bean id="patientBo" class="com.pibs.bo.impl.PatientBoImpl">
+        <property name="patientDao" ref="patientDao"></property>
+    </bean>
+  
+      <!-- Employee -->
+    <bean id="employeeDao" class="com.pibs.dao.impl.EmployeeDaoImpl" scope="singleton" ></bean>
+    <bean id="employeeBo" class="com.pibs.bo.impl.EmployeeBoImpl" scope="singleton">
+        <property name="employeeDao" ref="employeeDao"></property>
+    </bean>
+    
+     <!-- User -->
+    <bean id="userDao" class="com.pibs.dao.impl.UserDaoImpl" scope="singleton"></bean>
+    <bean id="userBo" class="com.pibs.bo.impl.UserBoImpl" scope="singleton">
+        <property name="userDao" ref="userDao"></property>
+    </bean>   
+    
+        <!-- User Access -->
+    <bean id="userAccessDao" class="com.pibs.dao.impl.UserAccessDaoImpl" scope="singleton"></bean>
+    <bean id="userAccessBo" class="com.pibs.bo.impl.UserAccessBoImpl" scope="singleton">
+        <property name="userAccessDao" ref="userAccessDao"></property>
+    </bean> 
+      
+    <!-- Master Files END -->
+    
+    <!-- Transaction START -->
+    
+    <!-- Patient Registration : uses the beanid = patientDao-->
+
+    <!-- Admission -->
+    <bean id="admissionDao" class="com.pibs.dao.impl.AdmissionDaoImpl"></bean>
+    <bean id="admissionBo" class="com.pibs.bo.impl.AdmissionBoImpl">
+        <property name="admissionDao" ref="admissionDao"></property>
+    </bean>
+    
+    <!-- Diagnosis -->
+    <bean id="diagnosisDao" class="com.pibs.dao.impl.DiagnosisDaoImpl"></bean>
+    <bean id="diagnosisBo" class="com.pibs.bo.impl.DiagnosisBoImpl">
+        <property name="diagnosisDao" ref="diagnosisDao"></property>
+    </bean>
+
+    <!-- Medication Statement -->
+    <bean id="medicationStatementDao" class="com.pibs.dao.impl.MedicationStatementDaoImpl"></bean>
+    <bean id="medicationStatementBo" class="com.pibs.bo.impl.MedicationStatementBoImpl">
+        <property name="medicationStatementDao" ref="medicationStatementDao"></property>
+    </bean>
+
+    <!-- Prognosis -->
+    <bean id="prognosisDao" class="com.pibs.dao.impl.PrognosisDaoImpl"></bean>
+    <bean id="prognosisBo" class="com.pibs.bo.impl.PrognosisBoImpl">
+        <property name="prognosisDao" ref="prognosisDao"></property>
+    </bean>   
+    
+    <!-- Monitor Laboratory Examination -->
+    <bean id="monitorLaboratoryExaminationDao" class="com.pibs.dao.impl.MonitorLaboratoryExaminationDaoImpl"></bean>
+    <bean id="monitorLaboratoryExaminationBo" class="com.pibs.bo.impl.MonitorLaboratoryExaminationBoImpl">
+        <property name="monitorLaboratoryExaminationDao" ref="monitorLaboratoryExaminationDao"></property>
+    </bean>        
+
+    <!-- Monitor Medical Supply -->
+    <bean id="monitorMedicalSupplyDao" class="com.pibs.dao.impl.MonitorMedicalSupplyDaoImpl"></bean>
+    <bean id="monitorMedicalSupplyBo" class="com.pibs.bo.impl.MonitorMedicalSupplyBoImpl">
+        <property name="monitorMedicalSupplyDao" ref="monitorMedicalSupplyDao"></property>
+    </bean>      
+
+    <!-- Monitor Radiology -->
+    <bean id="monitorRadiologyDao" class="com.pibs.dao.impl.MonitorRadiologyDaoImpl"></bean>
+    <bean id="monitorRadiologyBo" class="com.pibs.bo.impl.MonitorRadiologyBoImpl">
+        <property name="monitorRadiologyDao" ref="monitorRadiologyDao"></property>
+    </bean> 
+
+    <!-- Monitor Surgery -->
+    <bean id="monitorSurgeryDao" class="com.pibs.dao.impl.MonitorSurgeryDaoImpl"></bean>
+    <bean id="monitorSurgeryBo" class="com.pibs.bo.impl.MonitorSurgeryBoImpl">
+        <property name="monitorSurgeryDao" ref="monitorSurgeryDao"></property>
+    </bean>         
+    
+    <!-- Monitor AdditionalServices -->
+    <bean id="monitorAdditionalServicesDao" class="com.pibs.dao.impl.MonitorAdditionalServicesDaoImpl"></bean>
+    <bean id="monitorAdditionalServicesBo" class="com.pibs.bo.impl.MonitorAdditionalServicesBoImpl">
+        <property name="monitorAdditionalServicesDao" ref="monitorAdditionalServicesDao"></property>
+    </bean>         
+ 
+     <!-- Monitor Equipment -->
+    <bean id="monitorEquipmentDao" class="com.pibs.dao.impl.MonitorEquipmentDaoImpl"></bean>
+    <bean id="monitorEquipmentBo" class="com.pibs.bo.impl.MonitorEquipmentBoImpl">
+        <property name="monitorEquipmentDao" ref="monitorEquipmentDao"></property>
+    </bean>
+
+     <!-- Monitor PhysicalExamination -->
+    <bean id="monitorPhysicalExaminationDao" class="com.pibs.dao.impl.MonitorPhysicalExaminationDaoImpl"></bean>
+    <bean id="monitorPhysicalExaminationBo" class="com.pibs.bo.impl.MonitorPhysicalExaminationBoImpl">
+        <property name="monitorPhysicalExaminationDao" ref="monitorPhysicalExaminationDao"></property>
+    </bean>
+
+     <!-- Monitor Doctor -->
+    <bean id="monitorDoctorDao" class="com.pibs.dao.impl.MonitorDoctorDaoImpl"></bean>
+    <bean id="monitorDoctorBo" class="com.pibs.bo.impl.MonitorDoctorBoImpl">
+        <property name="monitorDoctorDao" ref="monitorDoctorDao"></property>
+    </bean>
+ 
+    <!-- Monitor Room -->
+    <bean id="monitorRoomDao" class="com.pibs.dao.impl.MonitorRoomDaoImpl"></bean>
+    <bean id="monitorRoomBo" class="com.pibs.bo.impl.MonitorRoomBoImpl">
+        <property name="monitorRoomDao" ref="monitorRoomDao"></property>
+    </bean>
+
+    <!-- Monitor Room Transfer -->
+    <bean id="monitorRoomTransferDao" class="com.pibs.dao.impl.MonitorRoomTransferDaoImpl"></bean>
+    <bean id="monitorRoomTransferBo" class="com.pibs.bo.impl.MonitorRoomTransferBoImpl">
+        <property name="monitorRoomTransferDao" ref="monitorRoomTransferDao"></property>
+    </bean>
+    
+    <!-- Monitor Nursery -->
+    <bean id="monitorNurseryDao" class="com.pibs.dao.impl.MonitorNurseryDaoImpl"></bean>
+    <bean id="monitorNurseryBo" class="com.pibs.bo.impl.MonitorNurseryBoImpl">
+        <property name="monitorNurseryDao" ref="monitorNurseryDao"></property>
+    </bean>
+           
+     <!-- Billing -->
+    <bean id="billingDao" class="com.pibs.dao.impl.BillingDaoImpl"></bean>
+    <bean id="billingBo" class="com.pibs.bo.impl.BillingBoImpl">
+        <property name="billingDao" ref="billingDao"></property>
+    </bean>
+    
+    <!-- Billing Discount -->
+    <bean id="billingDiscountDao" class="com.pibs.dao.impl.BillingDiscountDaoImpl"></bean>
+    <bean id="billingDiscountBo" class="com.pibs.bo.impl.BillingDiscountBoImpl">
+        <property name="billingDiscountDao" ref="billingDiscountDao"></property>
+    </bean>
+    
+    <!-- Billing Details -->
+    <bean id="billingDetailsDao" class="com.pibs.dao.impl.BillingDetailsDaoImpl"></bean>
+    <bean id="billingDetailsBo" class="com.pibs.bo.impl.BillingDetailsBoImpl">
+        <property name="billingDetailsDao" ref="billingDetailsDao"></property>
+    </bean>
+
+    <!-- Billing Payment -->
+    <bean id="billingPaymentDao" class="com.pibs.dao.impl.BillingPaymentDaoImpl"></bean>
+    <bean id="billingPaymentBo" class="com.pibs.bo.impl.BillingPaymentBoImpl">
+        <property name="billingPaymentDao" ref="billingPaymentDao"></property>
+    </bean>
+                   
+     <!-- Patient Inquiry -->
+    <bean id="patientInquiryBo" class="com.pibs.bo.impl.PatientInquiryBoImpl">
+        <property name="patientDao" ref="patientDao"></property>
+    </bean>
+ 
+    <!-- Room Inquiry -->
+    <bean id="roomInquiryBo" class="com.pibs.bo.impl.RoomInquiryBoImpl">
+        <property name="roomDao" ref="roomDao"></property>
+    </bean>
+    
+    <!-- Patient History -->
+    <bean id="patientHistoryBo" class="com.pibs.bo.impl.PatientHistoryBoImpl">
+        <property name="patientDao" ref="patientDao"></property>
+    </bean>
+
+    <!-- Medical Abstract -->
+    <bean id="medicalAbstractBo" class="com.pibs.bo.impl.MedicalAbstractBoImpl">
+        <property name="patientDao" ref="patientDao"></property>
+    </bean>
+          
+     <!-- Nursery - uses the existing MonitorNursery DAO/BO -->
+ 
+     <!-- Patient Bill History -->
+    <bean id="patientBillHistoryBo" class="com.pibs.bo.impl.PatientBillHistoryBoImpl">
+        <property name="patientDao" ref="patientDao"></property>
+    </bean>    
+            
+    <!-- Transaction END -->
+
+    <!-- Reports START -->
+    
+    <!-- Generic Report Bo -->
+     <bean id="reportBo" class="com.pibs.bo.impl.ReportBoImpl"></bean>
+    
+    <!-- Patient List Report -->
+    <bean id="rptPatientBo" class="com.pibs.bo.impl.RptPatientBoImpl">
+        <property name="patientDao" ref="patientDao"></property>
+    </bean>
+    
+    <!-- Medical Supply List Report -->
+    <bean id="rptMedicalSupplyBo" class="com.pibs.bo.impl.RptMedicalSupplyBoImpl">
+        <property name="medicalSupplyDao" ref="medicalSupplyDao"></property>
+    </bean>
+    
+    <!-- Equipment List Report -->
+    <bean id="rptEquipmentBo" class="com.pibs.bo.impl.RptEquipmentBoImpl">
+        <property name="equipmentDao" ref="equipmentDao"></property>
+    </bean>
+    
+    <!-- Laboratory Examination List Report -->
+    <bean id="rptLaboratoryExaminationBo" class="com.pibs.bo.impl.RptLaboratoryExaminationBoImpl">
+        <property name="laboratoryExaminationDao" ref="laboratoryExaminationDao"></property>
+    </bean>
+    
+    <!-- Radiology List Report -->
+    <bean id="rptRadiologyBo" class="com.pibs.bo.impl.RptRadiologyBoImpl">
+        <property name="radiologyDao" ref="radiologyDao"></property>
+    </bean>
+    
+    <!-- Surgery List Report -->
+    <bean id="rptSurgeryBo" class="com.pibs.bo.impl.RptSurgeryBoImpl">
+        <property name="surgeryDao" ref="surgeryDao"></property>
+    </bean>   
+ 
+     <!-- AdditionalServices List Report -->
+    <bean id="rptAdditionalServicesBo" class="com.pibs.bo.impl.RptAdditionalServicesBoImpl">
+        <property name="additionalServicesDao" ref="additionalServicesDao"></property>
+    </bean>   
+
+     <!-- Discount List Report -->
+    <bean id="rptDiscountBo" class="com.pibs.bo.impl.RptDiscountBoImpl">
+        <property name="discountDao" ref="discountDao"></property>
+    </bean>  
+ 
+    <!-- Professional List Report -->
+    <bean id="rptProfessionalBo" class="com.pibs.bo.impl.RptProfessionalBoImpl">
+        <property name="professionalDao" ref="professionalDao"></property>
+    </bean> 
+
+    <!-- Room List Report -->
+    <bean id="rptRoomBo" class="com.pibs.bo.impl.RptRoomBoImpl">
+        <property name="roomDao" ref="roomDao"></property>
+    </bean> 
+    
+    <!-- Employee List Report -->
+    <bean id="rptEmployeeBo" class="com.pibs.bo.impl.RptEmployeeBoImpl">
+        <property name="employeeDao" ref="employeeDao"></property>
+    </bean>            
+
+    <!-- Nursery List Report -->
+    <bean id="rptNurseryBo" class="com.pibs.bo.impl.RptNurseryBoImpl">
+        <property name="monitorNurseryDao" ref="monitorNurseryDao"></property>
+    </bean> 
+          
+    <!-- Patient History Report -->
+    <bean id="rptPatientHistoryBo" class="com.pibs.bo.impl.RptPatientHistoryBoImpl">
+        <property name="patientDao" ref="patientDao"></property>
+    </bean> 
+    
+    <!-- Reports END -->
+   	
+</beans>

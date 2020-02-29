@@ -1,0 +1,663 @@
+package com.pibs.form;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.sql.Timestamp;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Currency;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.config.FormBeanConfig;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.model.Admission;
+import com.pibs.model.BillingDiscount;
+import com.pibs.model.MonitorAdditionalServices;
+import com.pibs.model.MonitorEquipment;
+import com.pibs.model.MonitorLaboratoryExamination;
+import com.pibs.model.MonitorMedicalSupply;
+import com.pibs.model.MonitorRadiology;
+import com.pibs.model.MonitorSurgery;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+import com.pibs.util.PIBSUtils;
+
+public class BillingDetailsFormBean extends PIBSFormBean {
+
+	private static final long serialVersionUID = 1L;
+	
+	private int patientCaseSystemId;
+	private List<MonitorLaboratoryExamination> labExamList;
+	private List<MonitorMedicalSupply> medSupplyList;
+	private List<MonitorRadiology> radiologyList;
+	private List<MonitorSurgery> surgeryList;
+	private List<MonitorAdditionalServices> additionalServicesList;
+	private List<MonitorEquipment> equipmentList;
+	private List<BillingDiscount> discountList;
+	
+	//total
+	private String totalAmtLabExam;
+	private String totalAmtMedSupply;
+	private String totalAmtRadiology;
+	private String totalAmtSurgery;
+	private String totalAmtAddServices;
+	private String totalAmtEquip;
+	private String totalAmtDiscount;
+	private String totalAmtRoom;
+	private String totalAmtDoctor;
+	
+	//room and doctor details
+	private String daysAdmitted;
+	private String roomRate;
+	private String doctorFee;
+	
+	public BillingDetailsFormBean() {}
+
+	
+	
+	
+	public String getDaysAdmitted() {
+		return daysAdmitted;
+	}
+
+
+
+
+	public void setDaysAdmitted(String daysAdmitted) {
+		this.daysAdmitted = daysAdmitted;
+	}
+
+
+
+
+	public String getRoomRate() {
+		return roomRate;
+	}
+
+
+
+
+	public void setRoomRate(String roomRate) {
+		this.roomRate = roomRate;
+	}
+
+
+
+
+	public String getDoctorFee() {
+		return doctorFee;
+	}
+
+
+
+
+	public void setDoctorFee(String doctorFee) {
+		this.doctorFee = doctorFee;
+	}
+
+
+
+
+	public String getTotalAmtLabExam() {
+		return totalAmtLabExam;
+	}
+
+
+
+
+	public String getTotalAmtRoom() {
+		return totalAmtRoom;
+	}
+
+
+	public void setTotalAmtRoom(String totalAmtRoom) {
+		this.totalAmtRoom = totalAmtRoom;
+	}
+
+
+	public String getTotalAmtDoctor() {
+		return totalAmtDoctor;
+	}
+
+
+	public void setTotalAmtDoctor(String totalAmtDoctor) {
+		this.totalAmtDoctor = totalAmtDoctor;
+	}
+
+
+	public void setTotalAmtLabExam(String totalAmtLabExam) {
+		this.totalAmtLabExam = totalAmtLabExam;
+	}
+
+
+
+
+	public List<BillingDiscount> getDiscountList() {
+		return discountList;
+	}
+
+
+
+
+	public void setDiscountList(List<BillingDiscount> discountList) {
+		this.discountList = discountList;
+	}
+
+
+
+
+	public String getTotalAmtDiscount() {
+		return totalAmtDiscount;
+	}
+
+
+
+
+	public void setTotalAmtDiscount(String totalAmtDiscount) {
+		this.totalAmtDiscount = totalAmtDiscount;
+	}
+
+	
+	public int getPatientCaseSystemId() {
+		return patientCaseSystemId;
+	}
+
+
+
+
+	public void setPatientCaseSystemId(int patientCaseSystemId) {
+		this.patientCaseSystemId = patientCaseSystemId;
+	}
+
+
+
+
+	public List<MonitorLaboratoryExamination> getLabExamList() {
+		return labExamList;
+	}
+
+
+
+
+	public void setLabExamList(List<MonitorLaboratoryExamination> labExamList) {
+		this.labExamList = labExamList;
+	}
+
+
+
+
+	public List<MonitorMedicalSupply> getMedSupplyList() {
+		return medSupplyList;
+	}
+
+
+
+
+	public void setMedSupplyList(List<MonitorMedicalSupply> medSupplyList) {
+		this.medSupplyList = medSupplyList;
+	}
+
+
+
+
+	public List<MonitorRadiology> getRadiologyList() {
+		return radiologyList;
+	}
+
+
+
+
+	public void setRadiologyList(List<MonitorRadiology> radiologyList) {
+		this.radiologyList = radiologyList;
+	}
+
+
+
+
+	public List<MonitorSurgery> getSurgeryList() {
+		return surgeryList;
+	}
+
+
+
+
+	public void setSurgeryList(List<MonitorSurgery> surgeryList) {
+		this.surgeryList = surgeryList;
+	}
+
+
+
+
+	public List<MonitorAdditionalServices> getAdditionalServicesList() {
+		return additionalServicesList;
+	}
+
+
+
+
+	public void setAdditionalServicesList(
+			List<MonitorAdditionalServices> additionalServicesList) {
+		this.additionalServicesList = additionalServicesList;
+	}
+
+
+
+
+	public List<MonitorEquipment> getEquipmentList() {
+		return equipmentList;
+	}
+
+
+
+
+	public void setEquipmentList(List<MonitorEquipment> equipmentList) {
+		this.equipmentList = equipmentList;
+	}	
+	
+
+	
+	public String getTotalAmtMedSupply() {
+		return totalAmtMedSupply;
+	}
+
+
+
+
+	public void setTotalAmtMedSupply(String totalAmtMedSupply) {
+		this.totalAmtMedSupply = totalAmtMedSupply;
+	}
+
+
+
+
+	public String getTotalAmtRadiology() {
+		return totalAmtRadiology;
+	}
+
+
+
+
+	public void setTotalAmtRadiology(String totalAmtRadiology) {
+		this.totalAmtRadiology = totalAmtRadiology;
+	}
+
+
+
+
+	public String getTotalAmtSurgery() {
+		return totalAmtSurgery;
+	}
+
+
+
+
+	public void setTotalAmtSurgery(String totalAmtSurgery) {
+		this.totalAmtSurgery = totalAmtSurgery;
+	}
+
+
+
+
+	public String getTotalAmtAddServices() {
+		return totalAmtAddServices;
+	}
+
+
+
+
+	public void setTotalAmtAddServices(String totalAmtAddServices) {
+		this.totalAmtAddServices = totalAmtAddServices;
+	}
+
+
+
+
+	public String getTotalAmtEquip() {
+		return totalAmtEquip;
+	}
+
+
+
+
+	public void setTotalAmtEquip(String totalAmtEquip) {
+		this.totalAmtEquip = totalAmtEquip;
+	}
+
+
+
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		ActionErrors errors = new ActionErrors();
+
+
+
+		return errors;
+	}
+
+
+	public void getLaboratoryExaminationDetails() throws Exception {	
+		
+		MonitorLaboratoryExamination model = new MonitorLaboratoryExamination();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_LABORATORY_EXAMINATION);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorLaboratoryExamination> rsList = (List<MonitorLaboratoryExamination>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setLabExamList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorLaboratoryExamination item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        	}
+	        	setTotalAmtLabExam(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(totalAmt).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        }
+        }
+	}
+
+	public void getMedicalSupplyDetails() throws Exception {	
+		
+		MonitorMedicalSupply model = new MonitorMedicalSupply();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_MEDICAL_SUPPLY);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorMedicalSupply> rsList = (List<MonitorMedicalSupply>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setMedSupplyList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorMedicalSupply item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        	}
+	        	setTotalAmtMedSupply(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(totalAmt).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        }
+        }
+	}
+
+	public void getRadiologyDetails() throws Exception {	
+		
+		MonitorRadiology model = new MonitorRadiology();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_RADIOLOGY);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorRadiology> rsList = (List<MonitorRadiology>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setRadiologyList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorRadiology item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        	}
+	        	setTotalAmtRadiology(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(totalAmt).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        }
+        }
+	}
+
+	public void getSurgeryDetails() throws Exception {	
+		
+		MonitorSurgery model = new MonitorSurgery();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_SURGERY);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorSurgery> rsList = (List<MonitorSurgery>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setSurgeryList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorSurgery item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        	}
+	        	setTotalAmtSurgery(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(totalAmt).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        }
+        }
+	}
+
+	public void getAdditionalServicesDetails() throws Exception {	
+		
+		MonitorAdditionalServices model = new MonitorAdditionalServices();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_ADDITIONAL_SERVICES);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorAdditionalServices> rsList = (List<MonitorAdditionalServices>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setAdditionalServicesList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorAdditionalServices item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        	}
+	        	setTotalAmtAddServices(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(totalAmt).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        }
+        }
+	}
+
+	public void getEquipmentDetails() throws Exception {	
+		
+		MonitorEquipment model = new MonitorEquipment();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_EQUIPMENT);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorEquipment> rsList = (List<MonitorEquipment>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setEquipmentList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorEquipment item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        	}
+	        	setTotalAmtEquip(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(totalAmt).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        }
+        }
+	}
+	
+	public void getDiscountDetails() throws Exception {	
+		
+		BillingDiscount model = new BillingDiscount();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.BILLING_DISCOUNT);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<BillingDiscount> rsList = (List<BillingDiscount>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setDiscountList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (BillingDiscount item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        	}
+	        	setTotalAmtDiscount(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(totalAmt).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        }
+        }
+	}
+	
+	//room and doctor's fee
+	public void computeRoomAndDoctorFee() throws Exception {	
+		//fetch the patient admission details
+		Admission model = new Admission();
+		model.setId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.ADMISSION);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_PATIENT_CASE_SYS_ID);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        model = (Admission) resultMap.get(MapConstant.CLASS_DATA);	
+	        //get the admission date
+	        Timestamp dateFromTs = new Timestamp(model.getDateOfCase().getTime());
+	        java.util.Date dateFrom = PIBSUtils.getUtilDateFromSQLTimestamp(dateFromTs);
+	        //get current date
+	        Timestamp dateToTs = new Timestamp(System.currentTimeMillis());
+	        java.util.Date dateTo = PIBSUtils.getUtilDateFromSQLTimestamp(dateToTs);
+	        int daysAdmitted = daysBetweenUsingJoda(dateFrom,dateTo);
+	        //get the room rate and compute room fee
+	        double totalAmtRoomFee = daysAdmitted * model.getRoomFee().doubleValue();
+	        setTotalAmtRoom(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(totalAmtRoomFee).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        //get the doctor rate and compute doctor fee
+	        double totalAmtDoctorFee = daysAdmitted * model.getDoctorFee().doubleValue();
+	        setTotalAmtDoctor(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(totalAmtDoctorFee).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        //set the details
+	        setDaysAdmitted(String.valueOf(daysAdmitted));
+	        setRoomRate(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(model.getRoomFee().doubleValue()).setScale(2, BigDecimal.ROUND_HALF_UP)));
+	        setDoctorFee(PIBSUtils.getPhpSymbol() + " " + String.valueOf(BigDecimal.valueOf(model.getDoctorFee().doubleValue()).setScale(2, BigDecimal.ROUND_HALF_UP)));
+        }
+		
+	}
+
+
+
+
+	//test code samples
+	public static void main(String args[]) {
+
+		java.util.Date dateFrom = new java.util.Date("2018/02/15");
+		java.util.Date dateTo = new java.util.Date("2018/02/17");
+		System.out.println(daysBetweenUsingJoda(dateFrom,dateTo));
+		
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		System.out.println(getUtilDateFromSQLTimestamp(ts));
+		
+		//get date MM/dd/yyyy in timestamp
+		 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");  
+		 String strDate= formatter.format(getUtilDateFromSQLTimestamp(ts));  
+		 System.out.println(strDate);
+		 
+		 //get time using joda-time 
+		 org.joda.time.LocalTime today = new org.joda.time.LocalTime(System.currentTimeMillis());
+		 DateTimeFormatter f = DateTimeFormat.forPattern("HHmmss");
+		 System.out.println(today);
+		 
+			SimpleDateFormat g = new SimpleDateFormat("hh:mm:ss a");  
+			String strTime = g.format(System.currentTimeMillis()); 
+			 System.out.println(strTime);
+	
+			 //compare time
+			 // Get calendar set to the current date and time
+			 Calendar cal = Calendar.getInstance();
+			 
+			 // Set time of calendar to 18:00
+			 cal.set(Calendar.HOUR_OF_DAY, 20);
+			 cal.set(Calendar.MINUTE, 0);
+			 cal.set(Calendar.SECOND, 0);
+			 cal.set(Calendar.MILLISECOND, 0);
+		  
+			 // Check if current time is after 18:00 today
+			 boolean afterSix = Calendar.getInstance().after(cal);
+			  
+			 if (afterSix) {
+			     System.out.println("Go home, it's after 6 PM!");
+			 }
+			 else {
+			     System.out.println("Hello!");
+			 }
+			 
+			 //check locale
+			 Locale locale = new Locale("en", "PH");
+			 Locale.setDefault(locale);
+			 NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
+			 Currency c = Currency.getInstance(Locale.getDefault());
+			 System.out.println(c.getSymbol());
+			 System.out.println(c.getSymbol() + " " +  nf.format(107.789));
+	}
+	
+	
+	
+	public static Date getUtilDateFromSQLTimestamp(java.sql.Timestamp timestamp) {
+	    Date date = new Date(timestamp.getTime());
+	    return date;
+	}
+	
+	/* 
+	* Java Method to find number of days between two dates 
+	* in Java using JodaTime library. To find difference 
+	* we first need to convert java.util.Date to LocalDate 
+	* in JodaTime. (yyyy/MM/dd)*/ 
+	public static int daysBetweenUsingJoda(Date d1, Date d2){ 
+		return Days.daysBetween( 
+				new LocalDate(d1.getTime()), 
+				new LocalDate(d2.getTime())).getDays();
+	}
+	
+}

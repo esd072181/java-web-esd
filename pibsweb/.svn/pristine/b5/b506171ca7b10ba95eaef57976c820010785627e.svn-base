@@ -1,0 +1,67 @@
+/*
+ * Created on Jan 28, 2015
+ *
+ * To change the template for this generated file go to
+ * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
+ */
+package com.pibs.util;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
+/**
+ * @author Edward.David
+ *
+ * To change the template for this generated type comment go to
+ * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
+ */
+public class DateUtils {
+	
+	/**
+	 * format: MM/dd/yyyy (String)
+	 * @param sqlDate
+	 * @return
+	 * @throws Exception
+	 */
+	public static String sqlDateToString(Date sqlDate) throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		return sdf.format(sqlDate);
+	}
+	
+	/**
+	 * format: yyyy-MM-dd (String)
+	 * @param sqlDate
+	 * @return
+	 * @throws Exception
+	 */
+	public static String sqlDateToStringSQL(Date sqlDate) throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(sqlDate);
+	}
+	
+	/**
+	 * format: SQL Date
+	 * @param strDate
+	 * @return
+	 * @throws Exception
+	 */
+	public static Date strToSQLDate(String strDate) throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		java.util.Date utilDate = sdf.parse(strDate);	
+		Date sqlDate = new Date(utilDate.getTime());
+		return sqlDate;
+	}
+
+	/**
+	 * format: yyyy-MM-dd (String)
+	 * @param sqlDate
+	 * @return
+	 * @throws Exception
+	 */
+	public static String sqlTimestampToStringDate(Timestamp sqlTimestamp) throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(new Date(sqlTimestamp.getTime()));
+	}
+	
+}

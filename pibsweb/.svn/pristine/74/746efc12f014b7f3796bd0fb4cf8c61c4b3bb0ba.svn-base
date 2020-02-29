@@ -1,0 +1,86 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+     
+
+  });
+</script>
+
+<div class="row">
+	   
+ 	<div class="col-sm-10" style="padding-left: 40px;">
+
+		<div style="height: 30%; padding-top: 0px;" align="left">
+			<h3 style="font-style: bold;">Monitor Patient</h3>
+			<html:form action="/monitorPatient.do" styleId="idForm">
+			
+				<fieldset>
+					<!--<legend></legend>--><!-- leave this as blank to show the line separator -->
+				
+				<div>
+					<html:errors/>
+				</div>
+				<div>
+					<h5 style="color: blue;"><c:out value="${monitorPatientForm.transactionMessage}"></c:out></h5>
+				</div> 
+
+						<div>
+								<html:hidden property="id" value="${monitorPatientForm.id}"/>
+                            	<table>
+                                	<tr>
+                                    	<td>Patient ID:</td>
+                                        <td><input type="text" value="${monitorPatientForm.admission.patientId}" readonly="readonly"></td>
+                                        <td>Case No:</td>
+                                        <td><input type="text" value="${monitorPatientForm.admission.caseNo}" readonly="readonly"></td>
+                                        <td>Date Admitted:</td>
+                                        <td><input type="text" value="${monitorPatientForm.admission.dateOfCase}" readonly="readonly"></td>
+                                        <td><html:button property="btnBack" styleClass="btn btn-primary btnBackToSearch" onclick="backToMonitorPatientSearch();" value="Back to Search"></html:button>	</td>
+                                    </tr>
+									<tr style="height: 10px;"></tr>
+                                    <tr>
+                                    	<td>Last Name:</td>
+                                        <td><input type="text" style="margin-right: 10px;" value="${monitorPatientForm.admission.lastName}" readonly="readonly"></td>
+                                        <td>First Name:</td>
+                                        <td><input type="text" style="margin-right: 10px;" value="${monitorPatientForm.admission.firstName}" readonly="readonly"></td>
+                                        <td>Middle Name:</td>
+                                        <td><input type="text" style="margin-right: 10px;" value="${monitorPatientForm.admission.middleName}" readonly="readonly"></td>
+                                     </tr>
+                                    <tr style="height: 10px;"></tr>
+                                    <tr>
+                                        <td valign="top">Suspected Diagnosis:</td>
+                                        <td colspan="5"><html:textarea  readonly="true" rows="2" cols="59" styleId="suspectedDiagnosisId" property="chiefComplaint" value="${monitorPatientForm.admission.chiefComplaint}" disabled="${monitorPatientForm.transactionStatus}"></html:textarea></td>
+                                    </tr>
+                                </table>
+						</div>
+						<br>
+						<div>
+							<table>
+								<tr>
+									<td><html:button property="btnDiagnosis" styleClass="btn btn-primary btnMonitoringMed" onclick="goToDiagnosis('${monitorPatientForm.id}');" value="Diagnosis"></html:button></td>
+									<td><html:button property="btnMedicationStatement" styleClass="btn btn-primary btnMonitoringLong" onclick="goToMedicationStatement('${monitorPatientForm.id}');" value="Medication Statement"></html:button></td>
+									<td><html:button property="btnPrognosis" styleClass="btn btn-primary btnMonitoringMed" onclick="goToPrognosis('${monitorPatientForm.id}');" value="Prognosis"></html:button></td>
+									<td><html:button property="btnLaboratoryExamination" styleClass="btn btn-primary btnMonitoringLong" onclick="goToMonitorLaboratoryExamination('${monitorPatientForm.id}');" value="Laboratory Examination"></html:button></td>
+									<td><html:button property="btnMedicalSupply" styleClass="btn btn-primary btnMonitoringMed" onclick="goToMonitorMedicalSupply('${monitorPatientForm.id}');" value="Medical Supply"></html:button></td>
+									<td><html:button property="btnRadiology" styleClass="btn btn-primary btnMonitoringMed" onclick="" value="Radiology"></html:button></td>
+									<td><html:button property="btnSurgery" styleClass="btn btn-primary btnMonitoringMed" onclick="" value="Surgery"></html:button></td>
+									<td><html:button property="btnAdditional Services" styleClass="btn btn-primary btnMonitoringLong" onclick="" value="Additional Services"></html:button></td>
+									<td><html:button property="btnEquipment" styleClass="btn btn-primary btnMonitoringMed" onclick="" value="Equipment"></html:button></td>
+									<td><html:button property="btnPhysicalExamination" styleClass="btn btn-primary btnMonitoringLong" onclick="" value="Physical Examination"></html:button></td>
+								</tr>
+							</table>
+						</div>
+				</fieldset>	
+			</html:form>
+		</div>
+	
+		<div id="childDIV">
+			<!-- ajax part of child module data of monitor patient -->
+		</div>
+	
+	
+	</div>
+	
+</div>	
+	

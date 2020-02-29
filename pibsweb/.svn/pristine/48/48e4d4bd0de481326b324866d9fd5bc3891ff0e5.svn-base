@@ -1,0 +1,948 @@
+package com.pibs.dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import com.pibs.config.ServerContext;
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.MiscConstant;
+import com.pibs.dao.ProfessionalDao;
+import com.pibs.model.Professional;
+import com.pibs.model.User;
+import com.pibs.util.PIBSUtils;
+
+public class ProfessionalDaoImpl implements ProfessionalDao {
+	
+	private final static Logger logger = Logger.getLogger(ProfessionalDaoImpl.class);
+
+	@Override
+	public Map<String, Object> save(HashMap<String, Object> dataMap) throws Exception{
+		
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SAVE);
+		
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		Professional model = (Professional) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setCreatedBy((int) user.getId());	
+		}
+		model.setCreatedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("insert into pibs.file_professional (");
+				qry.append("professionaltypeid ");  		
+				qry.append(",specializationid ");
+		  		qry.append(",designation ");
+		  		qry.append(",lastname ");
+		  		qry.append(",firstname ");
+		  		qry.append(",middlename ");
+		  		qry.append(",gender ");
+		  		qry.append(",birthday ");
+		  		qry.append(",datehired ");
+		  		qry.append(",licenseno ");
+		  		qry.append(",professionalstatusid ");
+		  		qry.append(",standardconsultationfee ");
+		  		qry.append(",standardadmissionfee ");
+		  		qry.append(",createdby ");
+		  		qry.append(",createdon ");
+		  		qry.append(",version ");
+		  		qry.append(",active ");
+		  		qry.append(" ) ");
+		  		qry.append(" values ");
+		  		qry.append(" ( ");
+		  		qry.append(" ? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,1 ");
+		  		qry.append(" ,true ");
+		  		qry.append(" ) ");
+
+		StringBuffer qryLog =  new StringBuffer("insert into pibs.file_professional (");
+				qryLog.append("professionaltypeid ");  		
+				qryLog.append(",specializationid ");
+				qryLog.append(",designation ");
+		  		qryLog.append(",lastname ");
+		  		qryLog.append(",firstname ");
+		  		qryLog.append(",middlename ");
+		  		qryLog.append(",gender ");
+		  		qryLog.append(",birthday ");
+		  		qryLog.append(",datehired ");
+		  		qryLog.append(",licenseno ");
+		  		qryLog.append(",professionalstatusid ");
+		  		qryLog.append(",standardconsultationfee ");
+		  		qryLog.append(",standardadmissionfee ");
+		  		qryLog.append(",createdby ");
+				qryLog.append(",createdon ");
+				qryLog.append(",version ");
+				qryLog.append(",active ");
+				qryLog.append(" ) ");
+				qryLog.append(" values ");
+				qryLog.append(" ( ");
+				qryLog.append(model.getProfessionalTypeId());
+				qryLog.append(" ,"+model.getSpecializationId());
+				qryLog.append(" ,"+model.getDesignation());
+				qryLog.append(" ,"+model.getLastName());
+				qryLog.append(" ,"+model.getFirstName());
+				qryLog.append(" ,"+model.getMiddleName());
+				qryLog.append(" ,"+model.getGender());
+				qryLog.append(" ,"+model.getBirthday());
+				qryLog.append(" ,"+model.getDateHired());
+				qryLog.append(" ,"+model.getLicenseNo());
+				qryLog.append(" ,"+model.getProfessionalStatusId());
+				qryLog.append(" ,"+model.getStandardConsultationFee());
+				qryLog.append(" ,"+model.getStandardAdmissionFee());
+				qryLog.append(" ,"+model.getCreatedBy());
+				qryLog.append(" ,"+model.getCreatedOn());
+				qryLog.append(" ,1 ");
+				qryLog.append(" ,true ");
+				qryLog.append(" ) ");
+					
+		PIBSUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+  		  		
+		  try {
+			  conn = ServerContext.getJDBCHandle();
+			  conn.setAutoCommit(false);
+			  pstmt = conn.prepareStatement(qry.toString());
+			     
+			  pstmt.setInt(1, model.getProfessionalTypeId());
+			  pstmt.setInt(2, model.getSpecializationId());
+			  pstmt.setString(3, model.getDesignation());
+			  pstmt.setString(4, model.getLastName());
+			  pstmt.setString(5, model.getFirstName());
+			  pstmt.setString(6, model.getMiddleName());
+			  pstmt.setString(7, model.getGender());
+			  pstmt.setDate(8, model.getBirthday());
+			  pstmt.setDate(9, model.getDateHired());
+			  pstmt.setString(10, model.getLicenseNo());
+			  pstmt.setInt(11, model.getProfessionalStatusId());
+			  pstmt.setBigDecimal(12, model.getStandardConsultationFee());
+			  pstmt.setBigDecimal(13, model.getStandardAdmissionFee());
+			  pstmt.setInt(14, model.getCreatedBy());
+			  pstmt.setTimestamp(15, model.getCreatedOn());
+			     
+			  int statusInt = pstmt.executeUpdate();
+			     
+			  if (statusInt == 1) {
+				  conn.commit();
+				  System.out.println("Inserted into Professional table successfully..");
+				  status = true;
+			  }
+		  } catch (Exception e) {
+			  conn.rollback();
+		 	  e.printStackTrace();
+		  } finally {
+			  PIBSUtils.closeObjects(rs);
+			  PIBSUtils.closeObjects(pstmt);
+			  PIBSUtils.closeObjects(conn);
+		  }
+		 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);
+		     
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> update(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_UPDATE);
+		 
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		Professional model = (Professional) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("update pibs.file_professional set ");	
+			qry.append(" professionaltypeid=? ");	
+			qry.append(" ,specializationid=? ");
+			qry.append(" ,designation=? ");
+			qry.append(" ,lastname=? ");
+			qry.append(" ,firstname=? ");
+			qry.append(" ,middlename=? ");
+			qry.append(" ,gender=? ");
+			qry.append(" ,birthday=? ");
+			qry.append(" ,datehired=? ");
+			qry.append(" ,licenseno=? ");
+			qry.append(" ,professionalstatusid=? ");
+			qry.append(" ,standardconsultationfee=? ");
+			qry.append(" ,standardadmissionfee=? ");
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" id = ? ");
+
+		StringBuffer qryLog =  new StringBuffer("update pibs.file_professional set ");	
+			qryLog.append(" professionaltypeid="+model.getProfessionalTypeId());	
+			qryLog.append(" ,specializationid="+model.getSpecializationId());
+			qryLog.append(" ,designation="+model.getDesignation());
+			qryLog.append(" ,lastname="+model.getLastName());
+			qryLog.append(" ,firstname="+model.getFirstName());
+			qryLog.append(" ,middlename="+model.getMiddleName());
+			qryLog.append(" ,gender="+model.getGender());
+			qryLog.append(" ,birthday="+model.getBirthday());
+			qryLog.append(" ,datehired="+model.getDateHired());
+			qryLog.append(" ,licenseno="+model.getLicenseNo());
+			qryLog.append(" ,professionalstatusid="+model.getProfessionalStatusId());
+			qryLog.append(" ,standardconsultationfee="+model.getStandardConsultationFee());
+			qryLog.append(" ,standardadmissionfee="+model.getStandardAdmissionFee());
+			qryLog.append(" ,modifiedby="+model.getModifiedBy());
+			qryLog.append(" ,modifiedon="+model.getModifiedOn());
+			qryLog.append(" ,version=(version+1) ");
+			qryLog.append(" where ");
+			qryLog.append(" id = "+model.getId());
+			
+		PIBSUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setInt(1, model.getProfessionalTypeId());
+			pstmt.setInt(2, model.getSpecializationId());
+			pstmt.setString(3, model.getDesignation());
+			pstmt.setString(4, model.getLastName());
+			pstmt.setString(5, model.getFirstName());
+			pstmt.setString(6, model.getMiddleName());
+			pstmt.setString(7, model.getGender());
+			pstmt.setDate(8, model.getBirthday());
+			pstmt.setDate(9, model.getDateHired());
+			pstmt.setString(10, model.getLicenseNo());
+			pstmt.setInt(11, model.getProfessionalStatusId());
+			pstmt.setBigDecimal(12, model.getStandardConsultationFee());
+			pstmt.setBigDecimal(13, model.getStandardAdmissionFee());
+			pstmt.setInt(14, model.getModifiedBy());
+			pstmt.setTimestamp(15, model.getModifiedOn());
+			pstmt.setLong(16, model.getId());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("Professional record (id: " +model.getId()+") updated successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			PIBSUtils.closeObjects(rs);
+			PIBSUtils.closeObjects(pstmt);
+			PIBSUtils.closeObjects(conn);
+		}
+			 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);	
+		
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> delete(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_DELETE);
+
+		
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		Professional model = (Professional) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("update pibs.file_professional set ");	
+			qry.append(" active=false ");
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" id = ? ");
+
+		StringBuffer qryLog =  new StringBuffer("update pibs.file_professional set ");	
+			qryLog.append(" active=false ");
+			qryLog.append(" ,modifiedby="+model.getModifiedBy());
+			qryLog.append(" ,modifiedon="+model.getModifiedOn());
+			qryLog.append(" ,version=(version+1) ");
+			qryLog.append(" where ");
+			qryLog.append(" id = "+model.getId());
+			
+		PIBSUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setInt(1, model.getModifiedBy());
+			pstmt.setTimestamp(2, model.getModifiedOn());
+			pstmt.setLong(3, model.getId());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("Professional record (id: " +model.getId()+") deleted successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			PIBSUtils.closeObjects(rs);
+			PIBSUtils.closeObjects(pstmt);
+			PIBSUtils.closeObjects(conn);
+		}
+			 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);			
+		
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> search(HashMap<String, Object> criteriaMap) throws Exception{
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		 	//Connection using JNDI DBCP
+			 //get the pagination and offset
+			 int offset = (int) criteriaMap.get(MapConstant.PAGINATION_OFFSET);
+			 int limit = (int) criteriaMap.get(MapConstant.PAGINATION_LIMIT);
+			 
+			 //get the category
+			 String category = (String) criteriaMap.get(MapConstant.ACTION);
+			 String criteria = (String) criteriaMap.get(MapConstant.SEARCH_CRITERIA);
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+			 
+			  List<Professional> rsList = new ArrayList<Professional>();
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = null;
+				 if (category.equals(ActionConstant.SEARCHALL)) {
+					 	sql = new StringBuffer("select a.id,a.professionaltypeid,a.specializationid,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,a.professionalstatusid,b.listvalue,c.description,d.entityname,a.standardconsultationfee,a.standardadmissionfee,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+					 	sql.append(" from pibs.file_professional a, pibs.list_value b, pibs.file_professional_type c, pibs.file_specialization d");
+					 	sql.append(" where a.professionalstatusid = b.id and a.professionaltypeid = c.id and a.specializationid = d.id");
+					 	sql.append(" and a.active = true ");
+					 	sql.append(" order by a.lastname ");
+					 	sql.append(" limit ? ");
+					 	sql.append(" offset ?");		 
+				 } else {
+					 	sql = new StringBuffer("select a.id,a.professionaltypeid,a.specializationid,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,a.professionalstatusid,b.listvalue,c.description,d.entityname,a.standardconsultationfee,a.standardadmissionfee,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+					 	sql.append(" from pibs.file_professional a, pibs.list_value b, pibs.file_professional_type c, pibs.file_specialization d");
+					 	sql.append(" where a.professionalstatusid = b.id and a.professionaltypeid = c.id and a.specializationid = d.id");
+					 	sql.append(" and (a.lastname ilike '%"+criteria+"%' or a.firstname ilike '%"+criteria+"%')" );
+					 	sql.append(" and a.active = true ");
+					 	sql.append(" order by a.lastname ");
+					 	sql.append(" limit ? ");
+					 	sql.append(" offset ?");	
+				 }
+						 
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, limit);
+				 pstmt.setInt(2, offset);
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+					 Professional model=new Professional();  
+		    		 model.setId(rs.getInt(1));
+		    		 model.setProfessionalTypeId(rs.getInt(2));
+		    		 model.setSpecializationId(rs.getInt(3));
+		    		 model.setDesignation(rs.getString(4));
+		    		 model.setLastName(rs.getString(5));
+		    		 model.setFirstName(rs.getString(6));
+		    		 model.setMiddleName(rs.getString(7));
+		    		 model.setGender(rs.getString(8));
+		    		 model.setBirthday(rs.getDate(9));
+		    		 model.setDateHired(rs.getDate(10));
+		    		 model.setLicenseNo(rs.getString(11));
+		    		 model.setProfessionalStatusId(rs.getInt(12));
+		    		 model.setStatus(rs.getString(13));
+		    		 model.setProfessionalType(rs.getString(14));
+		    		 model.setSpecialization(rs.getString(15));
+		    		 model.setStandardConsultationFee(rs.getBigDecimal(16));
+		    		 model.setStandardAdmissionFee(rs.getBigDecimal(17));
+		    		 model.setFullName();
+		    		 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+			 
+		     //get the total of records
+		     int  totalNoOfRecords = 0;
+		     StringBuffer sqlCount = null;
+			 
+		     try {
+		    	 conn = ServerContext.getJDBCHandle();
+		    	 
+			     if (category.equals(ActionConstant.SEARCHALL)) {
+			    	 sqlCount = new StringBuffer("select count(*) from pibs.file_professional where active = true");	 
+			     }else {
+			    	 sqlCount = new StringBuffer("select count(*) from pibs.file_professional where  (lastname ilike '%"+criteria+"%' or firstname ilike '%"+criteria+"%') and active = true");	 
+			     } 
+
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sqlCount.toString());
+				
+		    	 pstmt = conn.prepareStatement(sqlCount.toString());
+		    	 
+		    	 rs = pstmt.executeQuery();
+		    	 if (rs.next()) {
+		    		 totalNoOfRecords = rs.getInt(1);
+		    	 }
+		    			
+		     } catch (SQLException e) {
+		    	 throw e;
+		     } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+		     }
+		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		    	 returnMap.put(MapConstant.PAGINATION_TOTALRECORDS, totalNoOfRecords);
+		     } 
+	     
+	    System.out.println("searchAll() - Exit");
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getDataById(HashMap<String, Object> criteriaMap)
+			throws Exception {
+		// TODO Auto-generated method stub
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GETDATA_BY_ID);
+		 
+		    //get the model criteria
+		    Professional model = (Professional) criteriaMap.get(MapConstant.CLASS_DATA);
+
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = null;
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer();				
+				 	sql.append("select a.id,a.professionaltypeid,a.specializationid,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,a.professionalstatusid,a.standardconsultationfee,a.standardadmissionfee,b.entityname as specialization,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sql.append("from pibs.file_professional a, pibs.file_specialization b ");
+				 	sql.append("where a.specializationid = b.id ");
+				 	sql.append("and a.id = ?");
+				 	
+				 StringBuffer sqlLog = new StringBuffer();				
+				 	sqlLog.append("select a.id,a.professionaltypeid,a.specializationid,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,a.professionalstatusid,a.standardconsultationfee,a.standardadmissionfee,b.entityname as specialization,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sqlLog.append("from pibs.file_professional a, pibs.file_specialization b ");
+				 	sqlLog.append("where a.specializationid = b.id ");
+				 	sqlLog.append("and a.id = "+ model.getId());
+			
+				 PIBSUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, model.getId());
+				 
+				 rs = pstmt.executeQuery();
+
+				 while(rs.next()) {
+		    		 model.setId(rs.getInt(1));
+		    		 model.setProfessionalTypeId(rs.getInt(2));
+		    		 model.setSpecializationId(rs.getInt(3));
+		    		 model.setDesignation(rs.getString(4));
+		    		 model.setLastName(rs.getString(5));
+		    		 model.setFirstName(rs.getString(6));
+		    		 model.setMiddleName(rs.getString(7));
+		    		 model.setGender(rs.getString(8));
+		    		 model.setBirthday(rs.getDate(9));
+		    		 model.setDateHired(rs.getDate(10));
+		    		 model.setLicenseNo(rs.getString(11));
+		    		 model.setProfessionalStatusId(rs.getInt(12));
+		    		 model.setStandardConsultationFee(rs.getBigDecimal(13));
+		    		 model.setStandardAdmissionFee(rs.getBigDecimal(14));
+		    		 model.setSpecialization(rs.getString(15));
+		    		 model.setFullName();
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }	 
+		 		     
+		     if (model!=null) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_DATA, model);
+		     } 
+	     
+	    System.out.println("getDataById() - Exit");
+		return returnMap;
+	}
+	
+	@Override
+	public Map<String, Object> getActiveData() throws Exception {
+		// TODO Auto-generated method stub
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GET_ACTIVE_DATA);
+		 
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = null;
+			 List<Professional> rsList = new ArrayList<Professional>();
+			  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer();				
+				 	sql = new StringBuffer("select a.id,a.professionaltypeid,a.specializationid,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,a.professionalstatusid,b.listvalue,c.description,d.entityname,a.standardconsultationfee,a.standardadmissionfee,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sql.append(" from pibs.file_professional a, pibs.list_value b, pibs.file_professional_type c, pibs.file_specialization d ");
+				 	sql.append(" where a.professionalstatusid = b.id and a.professionaltypeid = c.id and a.specializationid = d.id ");
+				 	sql.append(" and a.active = true ");
+				 	sql.append(" order by a.lastname,c.description");
+
+				 StringBuffer sqlLog = new StringBuffer();				
+				 sqlLog = new StringBuffer("select a.id,a.professionaltypeid,a.specializationid,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,a.professionalstatusid,b.listvalue,c.description,d.entityname,a.standardconsultationfee,a.standardadmissionfee,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sqlLog.append(" from pibs.file_professional a, pibs.list_value b, pibs.file_professional_type c, pibs.file_specialization d ");
+				 	sqlLog.append(" where a.professionalstatusid = b.id and a.professionaltypeid = c.id and a.specializationid = d.id ");
+				 	sqlLog.append(" and active = true ");
+				 	sqlLog.append(" order by a.lastname,c.description");
+			
+				 PIBSUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 rs = pstmt.executeQuery();
+
+				 while(rs.next()) {
+					 //get the model criteria
+					 Professional model = new Professional();
+		    		 model.setId(rs.getInt(1));
+		    		 model.setProfessionalTypeId(rs.getInt(2));
+		    		 model.setSpecializationId(rs.getInt(3));
+		    		 model.setDesignation(rs.getString(4));
+		    		 model.setLastName(rs.getString(5));
+		    		 model.setFirstName(rs.getString(6));
+		    		 model.setMiddleName(rs.getString(7));
+		    		 model.setGender(rs.getString(8));
+		    		 model.setBirthday(rs.getDate(9));
+		    		 model.setDateHired(rs.getDate(10));
+		    		 model.setLicenseNo(rs.getString(11));
+		    		 model.setProfessionalStatusId(rs.getInt(12));
+		    		 model.setStatus(rs.getString(13));
+		    		 model.setProfessionalType(rs.getString(14));
+		    		 model.setSpecialization(rs.getString(15));
+		    		 model.setStandardConsultationFee(rs.getBigDecimal(16));
+		    		 model.setStandardAdmissionFee(rs.getBigDecimal(17));
+		    		 model.setFullName();
+		    		 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }	 
+		 		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		     } 
+	     
+		return returnMap;
+	}
+
+
+	@Override
+	public Map<String, Object> getActiveDataByIdType(HashMap<String, Object> criteriaMap) throws Exception {
+		// TODO Auto-generated method stub
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GET_ACTIVE_DATA);
+		 
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = null;
+			 List<Professional> rsList = new ArrayList<Professional>();
+			 
+			 //get the model criteria
+			 Professional modelCriteria = (Professional) criteriaMap.get(MapConstant.CLASS_DATA);
+ 
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer();				
+				 	sql = new StringBuffer("select a.id,a.professionaltypeid,a.specializationid,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,a.professionalstatusid,b.listvalue,c.description,d.entityname,a.standardconsultationfee,a.standardadmissionfee,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sql.append(" from pibs.file_professional a, pibs.list_value b, pibs.file_professional_type c, pibs.file_specialization d ");
+				 	sql.append(" where a.professionalstatusid = b.id and a.professionaltypeid = c.id and a.specializationid = d.id ");
+				 	sql.append(" and a.active = true ");
+				 	sql.append(" and a.professionaltypeid = ? ");
+				 	sql.append(" order by a.lastname,c.description");
+
+				 StringBuffer sqlLog = new StringBuffer();				
+				 sqlLog = new StringBuffer("select a.id,a.professionaltypeid,a.specializationid,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,a.professionalstatusid,b.listvalue,c.description,d.entityname,a.standardconsultationfee,a.standardadmissionfee,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sqlLog.append(" from pibs.file_professional a, pibs.list_value b, pibs.file_professional_type c, pibs.file_specialization d ");
+				 	sqlLog.append(" where a.professionalstatusid = b.id and a.professionaltypeid = c.id and a.specializationid = d.id ");
+				 	sqlLog.append(" and active = true ");
+				 	sqlLog.append(" and a.professionaltypeid = ? ");
+				 	sqlLog.append(" order by a.lastname,c.description");
+			
+				 PIBSUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, modelCriteria.getProfessionalTypeId());
+				 
+				 rs = pstmt.executeQuery();
+
+				 while(rs.next()) {
+					 //get the model criteria
+					 Professional model = new Professional();
+		    		 model.setId(rs.getInt(1));
+		    		 model.setProfessionalTypeId(rs.getInt(2));
+		    		 model.setSpecializationId(rs.getInt(3));
+		    		 model.setDesignation(rs.getString(4));
+		    		 model.setLastName(rs.getString(5));
+		    		 model.setFirstName(rs.getString(6));
+		    		 model.setMiddleName(rs.getString(7));
+		    		 model.setGender(rs.getString(8));
+		    		 model.setBirthday(rs.getDate(9));
+		    		 model.setDateHired(rs.getDate(10));
+		    		 model.setLicenseNo(rs.getString(11));
+		    		 model.setProfessionalStatusId(rs.getInt(12));
+		    		 model.setStatus(rs.getString(13));
+		    		 model.setProfessionalType(rs.getString(14));
+		    		 model.setSpecialization(rs.getString(15));
+		    		 model.setStandardConsultationFee(rs.getBigDecimal(16));
+		    		 model.setStandardAdmissionFee(rs.getBigDecimal(17));
+		    		 model.setFullName();
+		    		 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }	 
+		 		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		     } 
+	     
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getInActiveData(HashMap<String, Object> criteriaMap) throws Exception {
+		// TODO Auto-generated method stub
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GET_INACTIVE_DATA);
+		
+		 //get the pagination and offset
+		 int offset = (int) criteriaMap.get(MapConstant.PAGINATION_OFFSET);
+		 int limit = (int) criteriaMap.get(MapConstant.PAGINATION_LIMIT);
+		 
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = null;
+			 List<Professional> rsList = new ArrayList<>();
+			  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer();				
+				 	sql = new StringBuffer("select a.id,a.professionaltypeid,a.specializationid,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,a.professionalstatusid,b.listvalue,c.description,d.entityname,a.standardconsultationfee,a.standardadmissionfee,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sql.append(" from pibs.file_professional a, pibs.list_value b, pibs.file_professional_type c, pibs.file_specialization d ");
+				 	sql.append(" where a.professionalstatusid = b.id and a.professionaltypeid = c.id and a.specializationid = d.id ");
+				 	sql.append(" and a.active = false ");
+				 	sql.append(" order by a.lastname,c.description ");
+				 	sql.append(" limit ? ");
+				 	sql.append(" offset ? ");
+			
+				 PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 pstmt.setInt(1, limit);
+				 pstmt.setInt(2, offset);
+				 
+				 rs = pstmt.executeQuery();
+
+				 while(rs.next()) {
+					 //get the model criteria
+					 Professional model = new Professional();
+		    		 model.setId(rs.getInt(1));
+		    		 model.setProfessionalTypeId(rs.getInt(2));
+		    		 model.setSpecializationId(rs.getInt(3));
+		    		 model.setDesignation(rs.getString(4));
+		    		 model.setLastName(rs.getString(5));
+		    		 model.setFirstName(rs.getString(6));
+		    		 model.setMiddleName(rs.getString(7));
+		    		 model.setGender(rs.getString(8));
+		    		 model.setBirthday(rs.getDate(9));
+		    		 model.setDateHired(rs.getDate(10));
+		    		 model.setLicenseNo(rs.getString(11));
+		    		 model.setProfessionalStatusId(rs.getInt(12));
+		    		 model.setStatus(rs.getString(13));
+		    		 model.setProfessionalType(rs.getString(14));
+		    		 model.setSpecialization(rs.getString(15));
+		    		 model.setStandardConsultationFee(rs.getBigDecimal(16));
+		    		 model.setStandardAdmissionFee(rs.getBigDecimal(17));
+		    		 model.setFullName();
+		    		 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }	 
+			 
+		     //get the total of records
+		     int  totalNoOfRecords = 0;
+		     StringBuffer sqlCount = null;
+			 
+		     try {
+		    	 conn = ServerContext.getJDBCHandle();
+		    	 
+			    sqlCount = new StringBuffer("select count(*) from pibs.file_professional where active = false");	 
+	
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sqlCount.toString());
+				
+		    	 pstmt = conn.prepareStatement(sqlCount.toString());
+		    	 
+		    	 rs = pstmt.executeQuery();
+		    	 if (rs.next()) {
+		    		 totalNoOfRecords = rs.getInt(1);
+		    	 }
+		    			
+		     } catch (SQLException e) {
+		    	 throw e;
+		     } finally {
+		    	 PIBSUtils.closeObjects(rs);
+		    	 PIBSUtils.closeObjects(pstmt);
+		    	 PIBSUtils.closeObjects(conn);
+		     }
+
+		 		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		    	 returnMap.put(MapConstant.PAGINATION_TOTALRECORDS, totalNoOfRecords);
+		     } 
+	     
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> restore(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_RESTORE);
+
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		Professional model = (Professional) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("update pibs.file_professional set ");	
+			qry.append(" active=true ");
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" id = ? ");
+
+			PIBSUtils.writeLogDebug(logger, "SQL: "+qry.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setInt(1, model.getModifiedBy());
+			pstmt.setTimestamp(2, model.getModifiedOn());
+			pstmt.setLong(3, model.getId());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("Professional record (id: " +model.getId()+") restored successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			PIBSUtils.closeObjects(rs);
+			PIBSUtils.closeObjects(pstmt);
+			PIBSUtils.closeObjects(conn);
+		}
+			 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);			
+		
+		return returnMap;
+	}
+	
+	@Override
+	public Map<String, Object> searchForListReport(HashMap<String, Object> criteriaMap) throws Exception {
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		 	 //Connection using JNDI DBCP
+			 //get the criteria and value
+		 	 int searchCriteria = Integer.parseInt((String)criteriaMap.get(MapConstant.SEARCH_CRITERIA));
+			 String searchValue = (String) criteriaMap.get(MapConstant.SEARCH_VALUE);
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;
+			 PreparedStatement pstmt = null;
+			 
+			 List<Professional> rsList = new ArrayList<>();
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = null;
+				 		
+				 sql = new StringBuffer("select a.id,a.designation,a.lastname,a.firstname,a.middlename,a.gender,a.birthday,a.datehired,a.licenseno,b.description as type,c.entityname as specialization,d.listvalue as status,a.standardconsultationfee,a.standardadmissionfee,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sql.append(" from pibs.file_professional a, pibs.file_professional_type b, pibs.file_specialization c, pibs.list_value d ");
+				 	sql.append(" where a.professionaltypeid = b.id ");
+				 	sql.append(" and a.specializationid = c.id ");
+				 	sql.append(" and a.professionalstatusid = d.id ");
+				 	sql.append(" and a.active = true ");
+			    	if (MiscConstant.LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_TYPE == searchCriteria) {
+			    		sql.append(" and b.description ilike '%"+searchValue+"%' ");
+			    	}
+			    	if (MiscConstant.LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_SPECIALIZATION == searchCriteria) {
+			    		sql.append(" and c.entityname ilike '%"+searchValue+"%' ");
+			    	}
+			    	if (MiscConstant.LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_LAST_NAME == searchCriteria) {
+			    		sql.append(" and a.lastname ilike '%"+searchValue+"%' ");
+			    	}
+			    	if (MiscConstant.LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_FIRST_NAME == searchCriteria) {
+			    		sql.append(" and a.firstname ilike '%"+searchValue+"%' ");
+			    	}
+				 	sql.append(" order by a.lastname ");
+						
+						 
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+					 Professional model=new Professional();  
+		    		 model.setId(rs.getInt(1));
+		    		 model.setDesignation(rs.getString(2));
+		    		 model.setLastName(rs.getString(3));
+		    		 model.setFirstName(rs.getString(4));
+		    		 model.setMiddleName(rs.getString(5));
+		    		 model.setGender(rs.getString(6));
+		    		 model.setBirthday(rs.getDate(7));
+		    		 model.setDateHired(rs.getDate(8));
+		    		 model.setLicenseNo(rs.getString(9));
+		    		 model.setProfessionalType(rs.getString(10));
+		    		 model.setSpecialization(rs.getString(11));
+		    		 model.setStatus(rs.getString(12));
+		    		 model.setStandardConsultationFee(rs.getBigDecimal(13));
+		    		 model.setStandardAdmissionFee(rs.getBigDecimal(14));
+		    		 model.setFullName();
+			    	 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+			 
+		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		     } 
+	     
+	    System.out.println("searchForListReport() - Exit");
+		return returnMap;
+	}
+}

@@ -1,0 +1,102 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+
+  //limit the characters in textarea Remarks field
+    $("#remarksId").keyup(function(){
+        if($(this).val().length > remarksLength){
+            $(this).val($(this).val().substr(0, remarksLength));
+    	}
+    });
+
+    $("#descriptionId").focus();
+
+});
+  
+
+</script>
+
+<div class="row">
+	<div class="col-sm-2">
+	
+		<!-- Left Menu -->
+		<div style="padding-top: 15px; padding-left: 12px;">
+		  	<!-- jQuery ui -->
+		  	<ul id="menu">
+			  <li class="ui-widget-header">Menu</li>
+			  <li onclick="goToAddSurgery();"><a href="#">Add New Record</a></li>s
+			  <li onclick="goToSurgery();"><a href="#">Search/Update Record</a></li>
+			  <%@ include file="/template/menu_left_masterfile.jsp" %>
+			</ul>
+		</div>
+	</div>
+	
+ 	<div class="col-sm-10 divSpace">
+
+		<div style="height: 30%; padding-top: 0px;" align="left">
+			<h3>Surgery - Add New Record</h3>
+			<html:form action="/surgery.do" styleId="idForm">
+			
+				<fieldset>
+				
+				<div>
+					<html:errors/>
+				</div>
+				<div>
+					<h4 style="color: blue;"><c:out value="${surgeryForm.transactionMessage}"></c:out></h4>
+				</div> 
+						<div>
+						
+							<div class="control-group">
+								<label  class="control-label top-spacing" for="roleId">Type:</label>	
+								 <div class="controls">
+								 	<html:select  name="surgeryForm" property="surgeryTypeId" disabled="${surgeryForm.transactionStatus}">
+								 		<html:option value="0">--Select--</html:option>
+								 		<html:optionsCollection name="surgeryForm" property="surgeryTypeLOV" label="listValue" value="id"/>				 		
+								 	</html:select>									 			
+								 </div>						
+							</div>
+						
+							<div class="control-group">
+								<label  class="control-label" for="description">Description:</label>	
+								 <div class="controls">
+										<html:text styleId="descriptionId" property="description" styleClass="input-xlarge"  size="20" maxlength="20" value="${surgeryForm.description}" disabled="${surgeryForm.transactionStatus}"></html:text><br>
+								 </div>						
+							</div>
+
+							<div class="control-group">
+								<label  class="control-label" for="remarks">Remarks:</label>
+								<div class="controls">
+									<html:textarea styleId="remarksId" rows="3" property="remarks" cols="40" styleClass="input-xlarge"  value="${surgeryForm.remarks}" disabled="${surgeryForm.transactionStatus}"></html:textarea><br>
+								</div>
+							</div>							
+							<br>
+							 <div class="control-group">
+							 	 <div class="controls">
+									<c:choose>
+										<c:when test="${surgeryForm.transactionStatus == true}">
+											<html:button property="btnAddNew" styleClass="btn btn-primary" onclick="goToAddSurgery();" value="Add New Record"></html:button>
+											<html:button property="btnClose" styleClass="btn btn-primary" onclick="goToSurgery();" value="Close"></html:button>
+										</c:when>
+										<c:otherwise>
+											<html:button property="btnSave" styleClass="btn btn-primary" onclick="saveSurgery();" value="Save"></html:button>
+											<html:button property="btnCancel" styleClass="btn btn-primary" onclick="goToSurgery();" value="Cancel"></html:button>
+										</c:otherwise>
+									</c:choose>								 	 
+							 	 </div>
+							 </div>
+						</div>
+				</fieldset>	
+				
+			</html:form>
+		</div>
+	
+	</div>
+	
+</div>	
+	

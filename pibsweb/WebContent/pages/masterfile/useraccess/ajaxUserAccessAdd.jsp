@@ -1,0 +1,95 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+    
+    $('#idEmployee').focus();
+  });
+  
+</script>
+
+<div class="row">
+	<div class="col-sm-2">
+	
+		<!-- Left Menu -->
+		<div style="padding-top: 15px; padding-left: 12px;">
+		  	<!-- jQuery ui -->
+		  	<ul id="menu">
+			  <li class="ui-widget-header">Options</li>
+			  <li onclick="goToUserAccess();"><a href="#">Search Record</a></li>
+		 	  <%@ include file="/template/menu_left_masterfile.jsp" %>
+			</ul>
+		</div>
+	</div>
+	
+ 	<div class="col-sm-10" style="padding-left: 40px;">
+
+		<div style="height: 30%;">
+			<h3 style="font-weight: bolder;">User Access - Add New Record</h3>
+			<html:form action="/userAccess.do" styleId="idForm">
+			
+				<fieldset>
+				
+					<div>
+						<html:errors/>
+					</div>
+					<div>
+						<h4 style="color: blue;"><c:out value="${userAccessForm.transactionMessage}"></c:out></h4>
+					</div> 
+					
+					<html:hidden property="userId" value="${userAccessForm.userId}"/>
+					<table>
+						<tr>
+							<td><label  class="control-label" for="employeeId">User</label></td>
+							<td style="padding-left: 5px;">
+								<html:select  styleId="userIdId" name="userAccessForm" property="userId" disabled="true">
+									 <html:optionsCollection name="userAccessForm" property="userList" label="name" value="id"/>				 		
+								</html:select>	
+							</td>
+						</tr>
+						<tr height="5px;" ></tr>
+						<tr>
+							<td><label  class="control-label top-spacing" for="accessId">Module</label></td>
+							<td style="padding-left: 5px;">
+								<html:select  name="userAccessForm" property="accessId" disabled="${userAccessForm.transactionStatus}">
+									 <html:option value="0">--Select--</html:option>
+									 <html:optionsCollection name="userAccessForm" property="userAccessLOV" label="listValue" value="id"/>				 		
+								</html:select>
+							</td>
+						</tr>
+						<tr height="15px"></tr>
+						<tr>
+							<td></td>
+							<td style="padding-left: 5px;">
+								<div class="control-group">
+									<div class="controls">
+										<c:choose>
+											<c:when test="${userAccessForm.transactionStatus == true}">
+												<html:button property="btnAddNew" styleClass="btn btn-primary" onclick="goToAddUserAccess($('#userIdId').val());" value="Add New Record"></html:button>
+												&nbsp;&nbsp;
+												<html:button property="btnClose" styleClass="btn btn-primary" style="width: 100px;" onclick="goToUserAccess();" value="Close"></html:button>
+											</c:when>
+											<c:otherwise>
+												<html:button property="btnSave" styleClass="btn btn-primary" style="width: 100px;" onclick="saveUserAccess();" value="Save"></html:button>
+												&nbsp;&nbsp;
+												<html:button property="btnCancel" styleClass="btn btn-primary" style="width: 100px;" onclick="goToUserAccess();" value="Cancel"></html:button>
+											</c:otherwise>
+										</c:choose>						
+									</div>							
+								</div>
+							</td>
+						</tr>														
+					</table>
+
+				</fieldset>	
+				
+			</html:form>
+		</div>
+	
+	</div>
+</div>	
+	

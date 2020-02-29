@@ -1,0 +1,960 @@
+package com.pibs.util;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.model.Admission;
+import com.pibs.model.BillingDiscount;
+import com.pibs.model.BillingReport;
+import com.pibs.model.MonitorAdditionalServices;
+import com.pibs.model.MonitorDoctor;
+import com.pibs.model.MonitorEquipment;
+import com.pibs.model.MonitorLaboratoryExamination;
+import com.pibs.model.MonitorMedicalSupply;
+import com.pibs.model.MonitorRadiology;
+import com.pibs.model.MonitorRoom;
+import com.pibs.model.MonitorRoomTransfer;
+import com.pibs.model.MonitorSurgery;
+import com.pibs.model.User;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+
+/**
+ * 
+ * @author dward
+ * @since 20Apr2018
+ */
+public class BillingUtils {
+	
+	private final static Logger logger = Logger.getLogger(BillingUtils.class);
+
+	private int patientCaseSystemId;
+	
+	//model list
+	private List<MonitorLaboratoryExamination> labExamList;
+	private List<MonitorMedicalSupply> medSupplyList;
+	private List<MonitorRadiology> radiologyList;
+	private List<MonitorSurgery> surgeryList;
+	private List<MonitorAdditionalServices> additionalServicesList;
+	private List<MonitorEquipment> equipmentList;
+	private List<MonitorDoctor> otherDoctorList;
+	private List<MonitorRoom> otherRoomList;
+	private List<BillingDiscount> discountList;
+		
+	//total
+	private String totalAmtLabExam;
+	private String totalAmtMedSupply;
+	private String totalAmtRadiology;
+	private String totalAmtSurgery;
+	private String totalAmtAddServices;
+	private String totalAmtEquip;
+	private String totalAmtOtherDoctor;
+	private String totalAmtOtherRoom;
+	private String totalAmtDiscount;
+	private String totalAmtRoom;
+	private String totalAmtDoctor;
+	private String totalAmtFee;
+	private String totalAmtDue;
+	
+	//room and doctor details
+	private String daysAdmitted;
+	private String roomRate;
+	private String doctorFee;
+		
+	private List<Double> totalList = new ArrayList<>();
+	private List<Double> deductList = new ArrayList<>();
+		
+	//report
+	List<BillingReport> billingReportList = new ArrayList<>();
+	
+	public BillingUtils(){}
+	
+	
+
+	public void getLaboratoryExaminationDetails() throws Exception {	
+		
+		MonitorLaboratoryExamination model = new MonitorLaboratoryExamination();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_LABORATORY_EXAMINATION);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorLaboratoryExamination> rsList = (List<MonitorLaboratoryExamination>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setLabExamList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorLaboratoryExamination item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        		//for report
+	        		billingReportList.add(new BillingReport(item.getItemDescription(), "Lab Exam", 
+	        				String.valueOf(item.getQty()), PIBSUtils.convertDoubleToStrNoPhp(item.getFee().doubleValue()), PIBSUtils.convertDoubleToStrNoPhp(item.getAmount().doubleValue())));
+	        	}
+	        	getTotalList().add(totalAmt);
+	        	setTotalAmtLabExam(PIBSUtils.convertDoubleToStr(totalAmt));
+	        }
+        }
+	}
+
+	public void getMedicalSupplyDetails() throws Exception {	
+		
+		MonitorMedicalSupply model = new MonitorMedicalSupply();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_MEDICAL_SUPPLY);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorMedicalSupply> rsList = (List<MonitorMedicalSupply>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setMedSupplyList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorMedicalSupply item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        		//for report
+	        		billingReportList.add(new BillingReport(item.getItemDescription(), "Medical Supply", 
+	        				String.valueOf(item.getQty()), PIBSUtils.convertDoubleToStrNoPhp(item.getPrice().doubleValue()), PIBSUtils.convertDoubleToStrNoPhp(item.getAmount().doubleValue())));
+	        	}
+	        	getTotalList().add(totalAmt);
+	        	setTotalAmtMedSupply(PIBSUtils.convertDoubleToStr(totalAmt));
+	        }
+        }
+	}
+
+	public void getRadiologyDetails() throws Exception {	
+		
+		MonitorRadiology model = new MonitorRadiology();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_RADIOLOGY);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorRadiology> rsList = (List<MonitorRadiology>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setRadiologyList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorRadiology item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        		//for report
+	        		billingReportList.add(new BillingReport(item.getItemDescription(), "Radiology", 
+	        				String.valueOf(item.getQty()), PIBSUtils.convertDoubleToStrNoPhp(item.getFee().doubleValue()), PIBSUtils.convertDoubleToStrNoPhp(item.getAmount().doubleValue())));
+	        	}
+	        	getTotalList().add(totalAmt);
+	        	setTotalAmtRadiology(PIBSUtils.convertDoubleToStr(totalAmt));
+	        }
+        }
+	}
+
+	public void getSurgeryDetails() throws Exception {	
+		
+		MonitorSurgery model = new MonitorSurgery();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_SURGERY);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorSurgery> rsList = (List<MonitorSurgery>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setSurgeryList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorSurgery item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        		//for report
+	        		billingReportList.add(new BillingReport(item.getItemDescription(), "Surgery", 
+	        				String.valueOf(item.getQty()), PIBSUtils.convertDoubleToStrNoPhp(item.getFee().doubleValue()), PIBSUtils.convertDoubleToStrNoPhp(item.getAmount().doubleValue())));
+	        	}
+	        	getTotalList().add(totalAmt);
+	        	setTotalAmtSurgery(PIBSUtils.convertDoubleToStr(totalAmt));
+	        }
+        }
+	}
+
+	public void getAdditionalServicesDetails() throws Exception {	
+		
+		MonitorAdditionalServices model = new MonitorAdditionalServices();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_ADDITIONAL_SERVICES);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorAdditionalServices> rsList = (List<MonitorAdditionalServices>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setAdditionalServicesList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorAdditionalServices item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        		//for report
+	        		billingReportList.add(new BillingReport(item.getItemDescription(), "Additional Services", 
+	        				String.valueOf(item.getQty()), PIBSUtils.convertDoubleToStrNoPhp(item.getFee().doubleValue()), PIBSUtils.convertDoubleToStrNoPhp(item.getAmount().doubleValue())));
+
+	        	}
+	        	getTotalList().add(totalAmt);
+	        	setTotalAmtAddServices(PIBSUtils.convertDoubleToStr(totalAmt));
+	        }
+        }
+	}
+
+	public void getEquipmentDetails() throws Exception {	
+		
+		MonitorEquipment model = new MonitorEquipment();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_EQUIPMENT);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorEquipment> rsList = (List<MonitorEquipment>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setEquipmentList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorEquipment item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        		//for report
+	        		billingReportList.add(new BillingReport(item.getItemName(), "Equipment", 
+	        				String.valueOf(item.getQty()), PIBSUtils.convertDoubleToStrNoPhp(item.getFee().doubleValue()), PIBSUtils.convertDoubleToStrNoPhp(item.getAmount().doubleValue())));
+	        	}
+	        	getTotalList().add(totalAmt);
+	        	setTotalAmtEquip(PIBSUtils.convertDoubleToStr(totalAmt));
+	        }
+        }
+	}
+	
+	public void getDiscountDetails() throws Exception {	
+		
+		BillingDiscount model = new BillingDiscount();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.BILLING_DISCOUNT);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<BillingDiscount> rsList = (List<BillingDiscount>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setDiscountList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	billingReportList.add(new BillingReport("","","","",""));//Add Space
+	        	for (BillingDiscount item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        		//for report
+	        		billingReportList.add(new BillingReport(item.getDiscountDescription(), "", "", "", "-" + PIBSUtils.convertDoubleToStrNoPhp(item.getAmount().doubleValue())));
+	        	}
+	        	getDeductList().add(totalAmt);//add total amt to the list, List is used in case there are other deduction such as tax etc...
+	        	setTotalAmtDiscount(PIBSUtils.convertDoubleToStrNegative(totalAmt));
+	        }
+        }
+	}
+	
+	//room fee
+	public void computeRoomFee() throws Exception {	
+		//fetch the patient admission details
+		Admission model = new Admission();
+		model.setId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.ADMISSION);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_PATIENT_CASE_SYS_ID);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+        	
+	        model = (Admission) resultMap.get(MapConstant.CLASS_DATA);
+	        
+	        MonitorRoomTransfer modelInner = new MonitorRoomTransfer();
+	        modelInner.setPatientCaseSystemId(model.getId());
+        	
+        	//check first if got room transfer
+        	dataMap.clear();
+        	dataMap = null;
+        	dataMap = new HashMap<String, Object>();
+            dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_ROOM_TRANSFER);
+            dataMap.put(MapConstant.CLASS_DATA, modelInner);
+            dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_PATIENT_CASE_SYS_ID);
+            
+            Map<String, Object> resultMapInner = service.executeRequest(dataMap);
+        	
+            if (resultMapInner!=null && !resultMapInner.isEmpty()) {
+            	double totalAmtRoomFee = 0.00;
+            	int daysAdmittedTotal = 0;
+            	//With Room Transfer data (multiple allowed)
+            	@SuppressWarnings("unchecked")
+				List<MonitorRoomTransfer> rsList = (List<MonitorRoomTransfer>) resultMapInner.get(MapConstant.CLASS_LIST); 
+            	for (int x=0;x<rsList.size();x++) {
+            		MonitorRoomTransfer modelItem = (MonitorRoomTransfer) rsList.get(x);
+            		if (x==0) {
+            	        //compute 2 data, first one and room transfer
+            			//get the admission date
+            			//First Data
+            			Timestamp dateFromTs = new Timestamp(modelItem.getDateAdmitted().getTime());
+            			java.util.Date dateFrom = DateUtils.getUtilDateFromSQLTimestamp(dateFromTs); 
+            	        Timestamp dateToTs = new Timestamp(modelItem.getDateTransferred().getTime());
+            	        java.util.Date dateTo = DateUtils.getUtilDateFromSQLTimestamp(dateToTs); 
+            	        int daysAdmitted = PIBSUtils.daysBetweenUsingJoda(dateFrom,dateTo);
+            	        //get the room rate and compute room fee
+            	        double totalAmtRoomFeeOriginal = daysAdmitted * modelItem.getRoomRate().doubleValue();
+            	       	billingReportList.add(new BillingReport("","","Days","Rate",""));//Add Header
+                    	billingReportList.add(new BillingReport("Room",model.getRoomNo(),String.valueOf(daysAdmitted),PIBSUtils.convertDoubleToStrNoPhp(modelItem.getRoomRate().doubleValue()),PIBSUtils.convertDoubleToStrNoPhp(totalAmtRoomFeeOriginal)));//Room
+            	        //Second data (transferred room)
+            	        dateFromTs = new Timestamp(modelItem.getDateTransferred().getTime());
+            	        dateFrom = DateUtils.getUtilDateFromSQLTimestamp(dateFromTs); 
+            	        //check if last record
+            	        Timestamp dateToTsTransfer = null;
+            	        java.util.Date dateToTransfer = null;
+            	        if (x+1 < rsList.size()) {
+            	        	MonitorRoomTransfer modelItemNext = (MonitorRoomTransfer) rsList.get(x+1);
+            	        	dateToTsTransfer = new Timestamp(modelItemNext.getDateTransferred().getTime());
+            	        	dateToTransfer = DateUtils.getUtilDateFromSQLTimestamp(dateToTsTransfer);
+            	        } else {
+                        	//get current date
+            	        	dateToTsTransfer = new Timestamp(System.currentTimeMillis());
+                	        dateToTransfer = DateUtils.getUtilDateFromSQLTimestamp(dateToTsTransfer);
+            	        }
+            	        int daysAdmittedTransfer = PIBSUtils.daysBetweenUsingJoda(dateFrom,dateToTransfer);
+            	      //get the room rate and compute room fee
+            	        double totalAmtRoomFeeTransfer = daysAdmittedTransfer * modelItem.getRate().doubleValue();
+                    	billingReportList.add(new BillingReport("Room Transfer",modelItem.getRoomNoTransfer(),String.valueOf(daysAdmittedTransfer),PIBSUtils.convertDoubleToStrNoPhp(modelItem.getRate().doubleValue()),PIBSUtils.convertDoubleToStrNoPhp(totalAmtRoomFeeTransfer)));//Room
+            	        totalAmtRoomFee = totalAmtRoomFeeOriginal + totalAmtRoomFeeTransfer;
+            	        daysAdmittedTotal = daysAdmitted + daysAdmittedTransfer;
+            		} else {
+            			//compute the transfer only
+               	        //Second data (transferred room)
+            			Timestamp dateFromTs = new Timestamp(modelItem.getDateTransferred().getTime());
+            			java.util.Date dateFrom = DateUtils.getUtilDateFromSQLTimestamp(dateFromTs); 
+            	        //check if last record
+            	        Timestamp dateToTsTransfer = null;
+            	        java.util.Date dateToTransfer = null;
+            	        if (x+1 < rsList.size()) {
+            	        	MonitorRoomTransfer modelItemNext = (MonitorRoomTransfer) rsList.get(x+1);
+            	        	dateToTsTransfer = new Timestamp(modelItemNext.getDateTransferred().getTime());
+            	        	dateToTransfer = DateUtils.getUtilDateFromSQLTimestamp(dateToTsTransfer);
+            	        } else {
+                        	//get current date
+            	        	dateToTsTransfer = new Timestamp(System.currentTimeMillis());
+                	        dateToTransfer = DateUtils.getUtilDateFromSQLTimestamp(dateToTsTransfer);
+            	        }
+            	        int daysAdmittedTransfer = PIBSUtils.daysBetweenUsingJoda(dateFrom,dateToTransfer);
+            	        //get the room rate and compute room fee
+            	        double totalAmtRoomFeeTransfer = daysAdmittedTransfer * modelItem.getRate().doubleValue();
+                    	billingReportList.add(new BillingReport("Room Transfer",modelItem.getRoomNoTransfer(),String.valueOf(daysAdmittedTransfer),PIBSUtils.convertDoubleToStrNoPhp(modelItem.getRate().doubleValue()),PIBSUtils.convertDoubleToStrNoPhp(totalAmtRoomFeeTransfer)));//Room
+            	        totalAmtRoomFee += totalAmtRoomFeeTransfer;
+            	        daysAdmittedTotal += daysAdmittedTransfer;
+            		}
+            	}
+            	setTotalAmtRoom(PIBSUtils.convertDoubleToStr(totalAmtRoomFee));
+    	        //set the details
+    	        getTotalList().add(totalAmtRoomFee);
+    	        setDaysAdmitted(String.valueOf(daysAdmittedTotal));
+    	        setRoomRate(PIBSUtils.convertDoubleToStr(model.getRoomFee().doubleValue()));
+            } else {
+            	//For No Room Transfer data
+    	        //get the admission date
+    	        Timestamp dateFromTs = new Timestamp(model.getDateOfCase().getTime());
+    	        java.util.Date dateFrom = DateUtils.getUtilDateFromSQLTimestamp(dateFromTs);
+    	        //get current date
+    	        Timestamp dateToTs = new Timestamp(System.currentTimeMillis());
+    	        java.util.Date dateTo = DateUtils.getUtilDateFromSQLTimestamp(dateToTs);
+    	        int daysAdmitted = PIBSUtils.daysBetweenUsingJoda(dateFrom,dateTo);
+    	        //get the room rate and compute room fee
+    	        double totalAmtRoomFee = daysAdmitted * model.getRoomFee().doubleValue();
+    	        setTotalAmtRoom(PIBSUtils.convertDoubleToStr(totalAmtRoomFee));
+    	        //set the details
+    	        getTotalList().add(totalAmtRoomFee);
+    	        setDaysAdmitted(String.valueOf(daysAdmitted));
+    	        setRoomRate(PIBSUtils.convertDoubleToStr(model.getRoomFee().doubleValue()));
+    	       	billingReportList.add(new BillingReport("","","Days","Rate",""));//Add Header
+            	billingReportList.add(new BillingReport("Room",model.getRoomNo(),getDaysAdmitted(),PIBSUtils.convertDoubleToStrNoPhp(model.getRoomFee().doubleValue()),PIBSUtils.convertDoubleToStrNoPhp(totalAmtRoomFee)));//Room
+            }
+        	
+       }
+		
+	}
+
+	
+	//doctor's fee
+	public void computeDoctorFee() throws Exception {	
+		//fetch the patient admission details
+		Admission model = new Admission();
+		model.setId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.ADMISSION);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_PATIENT_CASE_SYS_ID);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        model = (Admission) resultMap.get(MapConstant.CLASS_DATA);	
+	        //get the doctor rate and compute doctor fee
+	        double totalAmtDoctorFee = Integer.parseInt(getDaysAdmitted()) * model.getDoctorFee().doubleValue();
+	        setTotalAmtDoctor(PIBSUtils.convertDoubleToStr(totalAmtDoctorFee));
+	        //set the details
+	        getTotalList().add(totalAmtDoctorFee);
+	        setDoctorFee(PIBSUtils.convertDoubleToStr(model.getDoctorFee().doubleValue()));
+        	billingReportList.add(new BillingReport("Doctor",model.getDoctor(),getDaysAdmitted(),PIBSUtils.convertDoubleToStrNoPhp(model.getDoctorFee().doubleValue()),PIBSUtils.convertDoubleToStrNoPhp(totalAmtDoctorFee)));//Doctor       	
+         }
+		
+	}
+
+	public void getOtherDoctorDetails() throws Exception {	
+		
+		MonitorDoctor model = new MonitorDoctor();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_DOCTOR);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorDoctor> rsList = (List<MonitorDoctor>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setOtherDoctorList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorDoctor item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        		//for report
+	        		billingReportList.add(new BillingReport("Other Doctor", item.getName(), 
+	        				String.valueOf(item.getDays()), PIBSUtils.convertDoubleToStrNoPhp(item.getFee().doubleValue()), PIBSUtils.convertDoubleToStrNoPhp(item.getAmount().doubleValue())));
+	        	}
+	        	getTotalList().add(totalAmt);
+	        	setTotalAmtOtherDoctor(PIBSUtils.convertDoubleToStr(totalAmt));
+	        }
+        }
+	}
+
+	public void getOtherRoomDetails() throws Exception {	
+		
+		MonitorRoom model = new MonitorRoom();
+		model.setPatientCaseSystemId(getPatientCaseSystemId());
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_ROOM);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.SEARCHBY);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        @SuppressWarnings("unchecked")
+			List<MonitorRoom> rsList = (List<MonitorRoom>) resultMap.get(MapConstant.CLASS_LIST);
+	        if (rsList!=null && !rsList.isEmpty()) {
+	        	setOtherRoomList(rsList);
+	        	//get the total amount
+	        	double totalAmt = 0;
+	        	for (MonitorRoom item: rsList) {
+	        		totalAmt += item.getAmount().doubleValue();
+	        		//for report
+	        		billingReportList.add(new BillingReport("Other Room", item.getRoomNo(), 
+	        				String.valueOf(item.getDays()), PIBSUtils.convertDoubleToStrNoPhp(item.getFee().doubleValue()), PIBSUtils.convertDoubleToStrNoPhp(item.getAmount().doubleValue())));
+	        	}
+	        	getTotalList().add(totalAmt);
+	        	setTotalAmtOtherRoom(PIBSUtils.convertDoubleToStr(totalAmt));
+	        }
+        }
+	}
+	
+	public void computeTotalAmtFee() {
+  		//compute the total amount fee
+		double totalAmt = 0;
+		for (Double item: getTotalList()) {
+			totalAmt += item;
+		}
+		setTotalAmtFee(PIBSUtils.convertDoubleToStr(totalAmt));
+    	billingReportList.add(new BillingReport("","","","",""));//Add Space
+    	billingReportList.add(new BillingReport("Total Fee","","","",getTotalAmtFee()));//Total amount fee
+
+	}
+	
+	
+	//Total Amt Due
+	public void computeTotalAmtDue() throws Exception {	
+
+		//compute the total deductions
+		double totalAmtDeduct = 0;
+		for (Double item: getDeductList()) {
+			totalAmtDeduct += item;
+		}//need to study this if need to create a new variable like totalAmtFee
+		
+		//compute the tax here
+		//and subtract to the amount due --- pending
+		
+		if (totalAmtDeduct>0) {
+           	billingReportList.add(new BillingReport("","","","",""));//Add Space
+        	billingReportList.add(new BillingReport("Total Discount","","","",PIBSUtils.convertDoubleToStrNegative(totalAmtDeduct)));//Total discount
+		}
+		
+		setTotalAmtDue(PIBSUtils.convertDoubleToStr(PIBSUtils.convertStrToDouble(getTotalAmtFee())-totalAmtDeduct));
+		
+		//for billing report
+      	billingReportList.add(new BillingReport("","","","",""));//Add Space
+    	billingReportList.add(new BillingReport("Total Due","","","",getTotalAmtDue()));//Total amount due
+		
+	}
+
+	/**
+	 * 
+	 * @param request
+	 * @throws Exception
+	 */
+	public void generateReport(HttpServletRequest request, String caseNo) throws Exception {
+	    
+		String localPath = PIBSUtils.getReportPath(request);
+
+		//Get the Report header Details
+		Admission modelAdmission = new Admission();
+		modelAdmission.setId(getPatientCaseSystemId());
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.ADMISSION);
+        dataMap.put(MapConstant.CLASS_DATA, modelAdmission);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_PATIENT_CASE_SYS_ID_FOR_BILLING_REPORT);
+	
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+    
+        modelAdmission = (Admission) resultMap.get(MapConstant.CLASS_DATA);
+        
+	    Map<String, Object> parameters = new HashMap<>();
+		
+	    parameters.put("HospitalName", MapConstant.HOSPITAL_NAME);
+		parameters.put("HospitalAddress", MapConstant.HOSPITAL_ADDRESS);
+		parameters.put("CaseNo", modelAdmission.getCaseNo());
+		parameters.put("Patient", modelAdmission.getPatientFullName());
+		parameters.put("Doctor", modelAdmission.getDoctor());
+		parameters.put("DateAdmitted", DateUtils.getStrDateTimeFromSQLTimestamp(modelAdmission.getDateOfCase()));
+		parameters.put("PatientNo", modelAdmission.getPatientId());
+		parameters.put("RoomNo", modelAdmission.getRoomNoTransfer()!=null ?  modelAdmission.getRoomNoTransfer() : modelAdmission.getRoomNo());
+		parameters.put("PreparedBy", ((User)request.getSession().getAttribute(MiscConstant.USER_SESSION)).getName());
+		parameters.put("DatePrepared", DateUtils.getCurrentDate());
+		  
+		boolean isReportGenerated = ReportUtils.generateBillingReport(billingReportList, parameters, localPath, caseNo) ;
+		if (isReportGenerated) {
+			PIBSUtils.writeLogInfo(logger, "Billing report successfully generated for " + modelAdmission.getCaseNo());
+		} else {
+			PIBSUtils.writeLogInfo(logger, "Billing report was NOT generated for " + modelAdmission.getCaseNo());
+		}
+	}
+
+	public int getPatientCaseSystemId() {
+		return patientCaseSystemId;
+	}
+
+
+
+	public void setPatientCaseSystemId(int patientCaseSystemId) {
+		this.patientCaseSystemId = patientCaseSystemId;
+	}
+
+
+
+	public List<MonitorLaboratoryExamination> getLabExamList() {
+		return labExamList;
+	}
+
+
+
+	public void setLabExamList(List<MonitorLaboratoryExamination> labExamList) {
+		this.labExamList = labExamList;
+	}
+
+
+
+	public List<MonitorMedicalSupply> getMedSupplyList() {
+		return medSupplyList;
+	}
+
+
+
+	public void setMedSupplyList(List<MonitorMedicalSupply> medSupplyList) {
+		this.medSupplyList = medSupplyList;
+	}
+
+
+
+	public List<MonitorRadiology> getRadiologyList() {
+		return radiologyList;
+	}
+
+
+
+	public void setRadiologyList(List<MonitorRadiology> radiologyList) {
+		this.radiologyList = radiologyList;
+	}
+
+
+
+	public List<MonitorSurgery> getSurgeryList() {
+		return surgeryList;
+	}
+
+
+
+	public void setSurgeryList(List<MonitorSurgery> surgeryList) {
+		this.surgeryList = surgeryList;
+	}
+
+
+
+	public List<MonitorAdditionalServices> getAdditionalServicesList() {
+		return additionalServicesList;
+	}
+
+
+
+	public void setAdditionalServicesList(
+			List<MonitorAdditionalServices> additionalServicesList) {
+		this.additionalServicesList = additionalServicesList;
+	}
+
+
+
+	public List<MonitorEquipment> getEquipmentList() {
+		return equipmentList;
+	}
+
+
+
+	public void setEquipmentList(List<MonitorEquipment> equipmentList) {
+		this.equipmentList = equipmentList;
+	}
+
+
+
+	public List<MonitorDoctor> getOtherDoctorList() {
+		return otherDoctorList;
+	}
+
+
+
+	public void setOtherDoctorList(List<MonitorDoctor> otherDoctorList) {
+		this.otherDoctorList = otherDoctorList;
+	}
+
+
+
+	public List<MonitorRoom> getOtherRoomList() {
+		return otherRoomList;
+	}
+
+
+
+	public void setOtherRoomList(List<MonitorRoom> otherRoomList) {
+		this.otherRoomList = otherRoomList;
+	}
+
+
+
+	public List<BillingDiscount> getDiscountList() {
+		return discountList;
+	}
+
+
+
+	public void setDiscountList(List<BillingDiscount> discountList) {
+		this.discountList = discountList;
+	}
+
+
+
+	public String getTotalAmtLabExam() {
+		return totalAmtLabExam;
+	}
+
+
+
+	public void setTotalAmtLabExam(String totalAmtLabExam) {
+		this.totalAmtLabExam = totalAmtLabExam;
+	}
+
+
+
+	public String getTotalAmtMedSupply() {
+		return totalAmtMedSupply;
+	}
+
+
+
+	public void setTotalAmtMedSupply(String totalAmtMedSupply) {
+		this.totalAmtMedSupply = totalAmtMedSupply;
+	}
+
+
+
+	public String getTotalAmtRadiology() {
+		return totalAmtRadiology;
+	}
+
+
+
+	public void setTotalAmtRadiology(String totalAmtRadiology) {
+		this.totalAmtRadiology = totalAmtRadiology;
+	}
+
+
+
+	public String getTotalAmtSurgery() {
+		return totalAmtSurgery;
+	}
+
+
+
+	public void setTotalAmtSurgery(String totalAmtSurgery) {
+		this.totalAmtSurgery = totalAmtSurgery;
+	}
+
+
+
+	public String getTotalAmtAddServices() {
+		return totalAmtAddServices;
+	}
+
+
+
+	public void setTotalAmtAddServices(String totalAmtAddServices) {
+		this.totalAmtAddServices = totalAmtAddServices;
+	}
+
+
+
+	public String getTotalAmtEquip() {
+		return totalAmtEquip;
+	}
+
+
+
+	public void setTotalAmtEquip(String totalAmtEquip) {
+		this.totalAmtEquip = totalAmtEquip;
+	}
+
+
+
+	public String getTotalAmtOtherDoctor() {
+		return totalAmtOtherDoctor;
+	}
+
+
+
+	public void setTotalAmtOtherDoctor(String totalAmtOtherDoctor) {
+		this.totalAmtOtherDoctor = totalAmtOtherDoctor;
+	}
+
+
+
+	public String getTotalAmtOtherRoom() {
+		return totalAmtOtherRoom;
+	}
+
+
+
+	public void setTotalAmtOtherRoom(String totalAmtOtherRoom) {
+		this.totalAmtOtherRoom = totalAmtOtherRoom;
+	}
+
+
+
+	public String getTotalAmtDiscount() {
+		return totalAmtDiscount;
+	}
+
+
+
+	public void setTotalAmtDiscount(String totalAmtDiscount) {
+		this.totalAmtDiscount = totalAmtDiscount;
+	}
+
+
+
+	public String getTotalAmtRoom() {
+		return totalAmtRoom;
+	}
+
+
+
+	public void setTotalAmtRoom(String totalAmtRoom) {
+		this.totalAmtRoom = totalAmtRoom;
+	}
+
+
+
+	public String getTotalAmtDoctor() {
+		return totalAmtDoctor;
+	}
+
+
+
+	public void setTotalAmtDoctor(String totalAmtDoctor) {
+		this.totalAmtDoctor = totalAmtDoctor;
+	}
+
+
+
+	public String getTotalAmtFee() {
+		return totalAmtFee;
+	}
+
+
+
+	public void setTotalAmtFee(String totalAmtFee) {
+		this.totalAmtFee = totalAmtFee;
+	}
+
+
+
+	public String getTotalAmtDue() {
+		return totalAmtDue;
+	}
+
+
+
+	public void setTotalAmtDue(String totalAmtDue) {
+		this.totalAmtDue = totalAmtDue;
+	}
+
+
+
+	public List<BillingReport> getBillingReportList() {
+		return billingReportList;
+	}
+
+
+
+	public void setBillingReportList(List<BillingReport> billingReportList) {
+		this.billingReportList = billingReportList;
+	}
+
+
+
+	public String getDaysAdmitted() {
+		return daysAdmitted;
+	}
+
+
+
+	public void setDaysAdmitted(String daysAdmitted) {
+		this.daysAdmitted = daysAdmitted;
+	}
+
+
+
+	public String getRoomRate() {
+		return roomRate;
+	}
+
+
+
+	public void setRoomRate(String roomRate) {
+		this.roomRate = roomRate;
+	}
+
+
+
+	public String getDoctorFee() {
+		return doctorFee;
+	}
+
+
+
+	public void setDoctorFee(String doctorFee) {
+		this.doctorFee = doctorFee;
+	}
+
+
+
+	public List<Double> getTotalList() {
+		return totalList;
+	}
+
+
+
+	public void setTotalList(List<Double> totalList) {
+		this.totalList = totalList;
+	}
+
+
+
+	public List<Double> getDeductList() {
+		return deductList;
+	}
+
+
+
+	public void setDeductList(List<Double> deductList) {
+		this.deductList = deductList;
+	}
+	
+	
+	
+	
+}

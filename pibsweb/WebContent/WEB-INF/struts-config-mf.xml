@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+ 
+<struts-config>
+ 
+ 	<!-- Struts Config for Master Files -->
+ 
+	<form-beans>
+
+	   <!-- START Used for testing of Validator XML, will work with ajax but should have OWN formbean, no sharing with other functionality  -->
+	   <form-bean name="testValidatorXMLForm" type="com.pibs.form.TestValidatorXMLFormBean" />
+		<!-- END Used for testing of Validator XML, will work with ajax but should have OWN formbean, no sharing with other functionality  -->
+
+	    <form-bean name="buildingForm" type="com.pibs.form.BuildingFormBean" />
+	    <form-bean name="roomCategoryForm" type="com.pibs.form.RoomCategoryFormBean" />
+		<form-bean name="roomForm" type="com.pibs.form.RoomFormBean" />
+		<form-bean name="equipmentForm" type="com.pibs.form.EquipmentFormBean" />
+		<form-bean name="specializationForm" type="com.pibs.form.SpecializationFormBean" />
+		<form-bean name="additionalServicesForm" type="com.pibs.form.AdditionalServicesFormBean" />
+		<form-bean name="additionalServicesCategoryForm" type="com.pibs.form.AdditionalServicesCategoryFormBean" />
+		<form-bean name="radiologyForm" type="com.pibs.form.RadiologyFormBean" />
+		<form-bean name="laboratoryExaminationForm" type="com.pibs.form.LaboratoryExaminationFormBean" />
+		<form-bean name="medicalSupplyForm" type="com.pibs.form.MedicalSupplyFormBean" />
+		<form-bean name="professionalTypeForm" type="com.pibs.form.ProfessionalTypeFormBean" />
+		<form-bean name="surgeryForm" type="com.pibs.form.SurgeryFormBean" />
+		<form-bean name="professionalForm" type="com.pibs.form.ProfessionalFormBean" />
+		<form-bean name="discountForm" type="com.pibs.form.DiscountFormBean" />
+		<form-bean name="patientForm" type="com.pibs.form.PatientFormBean" />
+		<form-bean name="employeeForm" type="com.pibs.form.EmployeeFormBean" />
+		<form-bean name="userForm" type="com.pibs.form.UserFormBean" />
+		<form-bean name="userAccessForm" type="com.pibs.form.UserAccessFormBean" />
+
+	</form-beans>
+ 
+	<action-mappings>
+	
+	   <!-- START Used for testing of Validator XML, will work with ajax but should have OWN formbean, no sharing with other functionality  -->
+	   <action 
+	   		path="/testValidatorXML" 
+	   		type="com.pibs.action.TestValidatorXMLAction"
+			name="testValidatorXMLForm"
+			scope="request"
+			input="/pages/masterfile/building/testValidatorXMLAjax.jsp"
+			validate="true">
+			<forward name="success" path="/main.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- END Used for testing of Validator XML, will work with ajax but should have OWN formbean, no sharing with other functionality  -->
+	   
+   
+   	   <!-- Building (START) -->
+	   <action 
+	   		path="/building" 
+	   		type="com.pibs.action.BuildingAction"
+			name="buildingForm"
+			scope="request"
+			input="/pages/masterfile/building/ajaxBuilding.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/building/ajaxBuilding.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/building/ajaxBuildingTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/building/ajaxBuildingAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/building/ajaxBuilding.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/building/ajaxBuildingEdit.jsp"/>
+	 		<forward name="expired" path="/template/expired_page.jsp"/>  
+	   </action>
+	   
+	   <action 
+	   		path="/saveBuilding" 
+	   		type="com.pibs.action.BuildingAction"
+			name="buildingForm"
+			scope="request"
+			input="/pages/masterfile/building/ajaxBuildingAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/building/ajaxBuildingAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/building/ajaxBuildingAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateBuilding" 
+	   		type="com.pibs.action.BuildingAction"
+			name="buildingForm"
+			scope="request"
+			input="/pages/masterfile/building/ajaxBuildingEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/building/ajaxBuildingEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/building/ajaxBuildingEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteBuilding" 
+	   		type="com.pibs.action.BuildingAction"
+			name="buildingForm"
+			scope="request"
+			input="/pages/masterfile/building/ajaxBuilding.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/building/ajaxBuilding.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/building/ajaxBuilding.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Building (END) -->
+	   
+
+   	   <!-- Room Category (START) -->
+	   <action 
+	   		path="/roomCategory" 
+	   		type="com.pibs.action.RoomCategoryAction"
+			name="roomCategoryForm"
+			scope="request"
+			input="/pages/masterfile/roomcategory/ajaxRoomCategory.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/roomcategory/ajaxRoomCategory.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/roomcategory/ajaxRoomCategoryTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/roomcategory/ajaxRoomCategoryAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/roomcategory/ajaxRoomCategory.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/roomcategory/ajaxRoomCategoryEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveRoomCategory" 
+	   		type="com.pibs.action.RoomCategoryAction"
+			name="roomCategoryForm"
+			scope="request"
+			input="/pages/masterfile/roomcategory/ajaxRoomCategoryAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/roomcategory/ajaxRoomCategoryAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/roomcategory/ajaxRoomCategoryAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateRoomCategory" 
+	   		type="com.pibs.action.RoomCategoryAction"
+			name="roomCategoryForm"
+			scope="request"
+			input="/pages/masterfile/roomcategory/ajaxRoomCategoryEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/roomcategory/ajaxRoomCategoryEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/roomcategory/ajaxRoomCategoryEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteRoomCategory" 
+	   		type="com.pibs.action.RoomCategoryAction"
+			name="roomCategoryForm"
+			scope="request"
+			input="/pages/masterfile/roomcategory/ajaxRoomCategory.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/roomcategory/ajaxRoomCategory.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/roomcategory/ajaxRoomCategory.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Room Category (END) -->
+	   
+   	   <!-- Room (START) -->
+	   <action 
+	   		path="/room" 
+	   		type="com.pibs.action.RoomAction"
+			name="roomForm"
+			scope="request"
+			input="/pages/masterfile/room/ajaxRoom.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/room/ajaxRoom.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/room/ajaxRoomTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/room/ajaxRoomAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/room/ajaxRoom.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/room/ajaxRoomEdit.jsp"/>
+			<forward name="ajaxBuildingNoOfFloor" path="/pages/masterfile/room/ajaxBuildingNoOfFloor.jsp"/>		
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveRoom" 
+	   		type="com.pibs.action.RoomAction"
+			name="roomForm"
+			scope="request"
+			input="/pages/masterfile/room/ajaxRoomAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/room/ajaxRoomAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/room/ajaxRoomAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>	
+	   </action>
+	   
+	   <action 
+	   		path="/updateRoom" 
+	   		type="com.pibs.action.RoomAction"
+			name="roomForm"
+			scope="request"
+			input="/pages/masterfile/room/ajaxRoomEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/room/ajaxRoomEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/room/ajaxRoomEdit.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteRoom" 
+	   		type="com.pibs.action.RoomAction"
+			name="roomForm"
+			scope="request"
+			input="/pages/masterfile/room/ajaxRoom.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/room/ajaxRoom.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/room/ajaxRoom.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Room (END) -->
+
+  	   <!-- Equipment (START) -->
+	   <action 
+	   		path="/equipment" 
+	   		type="com.pibs.action.EquipmentAction"
+			name="equipmentForm"
+			scope="request"
+			input="/pages/masterfile/equipment/ajaxEquipment.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/equipment/ajaxEquipment.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/equipment/ajaxEquipmentTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/equipment/ajaxEquipmentAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/equipment/ajaxEquipment.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/equipment/ajaxEquipmentEdit.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveEquipment" 
+	   		type="com.pibs.action.EquipmentAction"
+			name="equipmentForm"
+			scope="request"
+			input="/pages/masterfile/equipment/ajaxEquipmentAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/equipment/ajaxEquipmentAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/equipment/ajaxEquipmentAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateEquipment" 
+	   		type="com.pibs.action.EquipmentAction"
+			name="equipmentForm"
+			scope="request"
+			input="/pages/masterfile/equipment/ajaxEquipmentEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/equipment/ajaxEquipmentEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/equipment/ajaxEquipmentEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteEquipment" 
+	   		type="com.pibs.action.EquipmentAction"
+			name="equipmentForm"
+			scope="request"
+			input="/pages/masterfile/equipment/ajaxEquipment.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/equipment/ajaxEquipment.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/equipment/ajaxEquipment.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Equipment (END) -->
+
+  	   <!-- Specialization (START) -->
+	   <action 
+	   		path="/specialization" 
+	   		type="com.pibs.action.SpecializationAction"
+			name="specializationForm"
+			scope="request"
+			input="/pages/masterfile/specialization/ajaxSpecialization.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/specialization/ajaxSpecialization.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/specialization/ajaxSpecializationTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/specialization/ajaxSpecializationAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/specialization/ajaxSpecialization.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/specialization/ajaxSpecializationEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveSpecialization" 
+	   		type="com.pibs.action.SpecializationAction"
+			name="specializationForm"
+			scope="request"
+			input="/pages/masterfile/specialization/ajaxSpecializationAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/specialization/ajaxSpecializationAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/specialization/ajaxSpecializationAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateSpecialization" 
+	   		type="com.pibs.action.SpecializationAction"
+			name="specializationForm"
+			scope="request"
+			input="/pages/masterfile/specialization/ajaxSpecializationEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/specialization/ajaxSpecializationEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/specialization/ajaxSpecializationEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteSpecialization" 
+	   		type="com.pibs.action.SpecializationAction"
+			name="specializationForm"
+			scope="request"
+			input="/pages/masterfile/specialization/ajaxSpecialization.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/specialization/ajaxSpecialization.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/specialization/ajaxSpecialization.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Specialization (END) -->
+
+  	   <!-- Additional Services (START) -->
+	   <action 
+	   		path="/additionalServices" 
+	   		type="com.pibs.action.AdditionalServicesAction"
+			name="additionalServicesForm"
+			scope="request"
+			input="/pages/masterfile/additionalservices/ajaxAdditionalServices.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/additionalservices/ajaxAdditionalServices.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/additionalservices/ajaxAdditionalServicesTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/additionalservices/ajaxAdditionalServicesAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/additionalservices/ajaxAdditionalServices.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/additionalservices/ajaxAdditionalServicesEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveAdditionalServices" 
+	   		type="com.pibs.action.AdditionalServicesAction"
+			name="additionalServicesForm"
+			scope="request"
+			input="/pages/masterfile/additionalservices/ajaxAdditionalServicesAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/additionalservices/ajaxAdditionalServicesAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/additionalservices/ajaxAdditionalServicesAdd.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateAdditionalServices" 
+	   		type="com.pibs.action.AdditionalServicesAction"
+			name="additionalServicesForm"
+			scope="request"
+			input="/pages/masterfile/additionalservices/ajaxAdditionalServicesEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/additionalservices/ajaxAdditionalServicesEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/additionalservices/ajaxAdditionalServicesEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteAdditionalServices" 
+	   		type="com.pibs.action.AdditionalServicesAction"
+			name="additionalServicesForm"
+			scope="request"
+			input="/pages/masterfile/additionalservices/ajaxAdditionalServices.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/additionalservices/ajaxAdditionalServices.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/additionalservices/ajaxAdditionalServices.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Additional Services (END) -->
+	   
+  	   <!-- Additional Services Category (START) -->
+	   <action 
+	   		path="/additionalServicesCategory" 
+	   		type="com.pibs.action.AdditionalServicesCategoryAction"
+			name="additionalServicesCategoryForm"
+			scope="request"
+			input="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategory.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategory.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategoryTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategoryAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategory.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategoryEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveAdditionalServicesCategory" 
+	   		type="com.pibs.action.AdditionalServicesCategoryAction"
+			name="additionalServicesCategoryForm"
+			scope="request"
+			input="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategoryAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategoryAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategoryAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateAdditionalServicesCategory" 
+	   		type="com.pibs.action.AdditionalServicesCategoryAction"
+			name="additionalServicesCategoryForm"
+			scope="request"
+			input="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategoryEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategoryEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategoryEdit.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteAdditionalServicesCategory" 
+	   		type="com.pibs.action.AdditionalServicesCategoryAction"
+			name="additionalServicesCategoryForm"
+			scope="request"
+			input="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategory.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategory.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/additionalservicescategory/ajaxAdditionalServicesCategory.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Additional Services Category (END) -->
+
+	   <!-- Radiology (START) -->
+	   <action 
+	   		path="/radiology" 
+	   		type="com.pibs.action.RadiologyAction"
+			name="radiologyForm"
+			scope="request"
+			input="/pages/masterfile/radiology/ajaxRadiology.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/radiology/ajaxRadiology.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/radiology/ajaxRadiologyTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/radiology/ajaxRadiologyAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/radiology/ajaxRadiology.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/radiology/ajaxRadiologyEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveRadiology" 
+	   		type="com.pibs.action.RadiologyAction"
+			name="radiologyForm"
+			scope="request"
+			input="/pages/masterfile/radiology/ajaxRadiologyAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/radiology/ajaxRadiologyAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/radiology/ajaxRadiologyAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateRadiology" 
+	   		type="com.pibs.action.RadiologyAction"
+			name="radiologyForm"
+			scope="request"
+			input="/pages/masterfile/radiology/ajaxRadiologyEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/radiology/ajaxRadiologyEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/radiology/ajaxRadiologyEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteRadiology" 
+	   		type="com.pibs.action.RadiologyAction"
+			name="radiologyForm"
+			scope="request"
+			input="/pages/masterfile/radiology/ajaxRadiology.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/radiology/ajaxRadiology.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/radiology/ajaxRadiology.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Radiology (END) -->
+	   
+	   <!-- Laboratory Examination (START) -->
+	   <action 
+	   		path="/laboratoryExamination" 
+	   		type="com.pibs.action.LaboratoryExaminationAction"
+			name="laboratoryExaminationForm"
+			scope="request"
+			input="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExamination.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExamination.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExaminationTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExaminationAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExamination.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExaminationEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveLaboratoryExamination" 
+	   		type="com.pibs.action.LaboratoryExaminationAction"
+			name="laboratoryExaminationForm"
+			scope="request"
+			input="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExaminationAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExaminationAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExaminationAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateLaboratoryExamination" 
+	   		type="com.pibs.action.LaboratoryExaminationAction"
+			name="laboratoryExaminationForm"
+			scope="request"
+			input="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExaminationEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExaminationEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExaminationEdit.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteLaboratoryExamination" 
+	   		type="com.pibs.action.LaboratoryExaminationAction"
+			name="laboratoryExaminationForm"
+			scope="request"
+			input="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExamination.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExamination.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/laboratoryexamination/ajaxLaboratoryExamination.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Laboratory Examination (END) -->
+
+	   <!-- Medical Supply (START) -->
+	   <action 
+	   		path="/medicalSupply" 
+	   		type="com.pibs.action.MedicalSupplyAction"
+			name="medicalSupplyForm"
+			scope="request"
+			input="/pages/masterfile/medicalsupply/ajaxMedicalSupply.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/medicalsupply/ajaxMedicalSupply.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/medicalsupply/ajaxMedicalSupplyTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/medicalsupply/ajaxMedicalSupplyAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/medicalsupply/ajaxMedicalSupply.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/medicalsupply/ajaxMedicalSupplyEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveMedicalSupply" 
+	   		type="com.pibs.action.MedicalSupplyAction"
+			name="medicalSupplyForm"
+			scope="request"
+			input="/pages/masterfile/medicalsupply/ajaxMedicalSupplyAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/medicalsupply/ajaxMedicalSupplyAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/medicalsupply/ajaxMedicalSupplyAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateMedicalSupply" 
+	   		type="com.pibs.action.MedicalSupplyAction"
+			name="medicalSupplyForm"
+			scope="request"
+			input="/pages/masterfile/medicalsupply/ajaxMedicalSupplyEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/medicalsupply/ajaxMedicalSupplyEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/medicalsupply/ajaxMedicalSupplyEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteMedicalSupply" 
+	   		type="com.pibs.action.MedicalSupplyAction"
+			name="medicalSupplyForm"
+			scope="request"
+			input="/pages/masterfile/medicalsupply/ajaxMedicalSupply.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/medicalsupply/ajaxMedicalSupply.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/medicalsupply/ajaxMedicalSupply.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Medical Supply (END) -->
+	   
+	   <!-- Professional Type (START) -->
+	   <action 
+	   		path="/professionalType" 
+	   		type="com.pibs.action.ProfessionalTypeAction"
+			name="professionalTypeForm"
+			scope="request"
+			input="/pages/masterfile/professionaltype/ajaxProfessionalType.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/professionaltype/ajaxProfessionalType.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/professionaltype/ajaxProfessionalTypeTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/professionaltype/ajaxProfessionalTypeAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/professionaltype/ajaxProfessionalType.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/professionaltype/ajaxProfessionalTypeEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveProfessionalType" 
+	   		type="com.pibs.action.ProfessionalTypeAction"
+			name="professionalTypeForm"
+			scope="request"
+			input="/pages/masterfile/professionaltype/ajaxProfessionalTypeAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/professionaltype/ajaxProfessionalTypeAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/professionaltype/ajaxProfessionalTypeAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateProfessionalType" 
+	   		type="com.pibs.action.ProfessionalTypeAction"
+			name="professionalTypeForm"
+			scope="request"
+			input="/pages/masterfile/professionaltype/ajaxProfessionalTypeEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/professionaltype/ajaxProfessionalTypeEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/professionaltype/ajaxProfessionalTypeEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteProfessionalType" 
+	   		type="com.pibs.action.ProfessionalTypeAction"
+			name="professionalTypeForm"
+			scope="request"
+			input="/pages/masterfile/professionaltype/ajaxProfessionalType.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/professionaltype/ajaxProfessionalType.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/professionaltype/ajaxProfessionalType.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Professional Type (END) -->
+	   	   	   	
+	   <!-- Surgery (START) -->
+	   <action 
+	   		path="/surgery" 
+	   		type="com.pibs.action.SurgeryAction"
+			name="surgeryForm"
+			scope="request"
+			input="/pages/masterfile/surgery/ajaxSurgery.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/surgery/ajaxSurgery.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/surgery/ajaxSurgeryTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/surgery/ajaxSurgeryAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/surgery/ajaxSurgery.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/surgery/ajaxSurgeryEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveSurgery" 
+	   		type="com.pibs.action.SurgeryAction"
+			name="surgeryForm"
+			scope="request"
+			input="/pages/masterfile/surgery/ajaxSurgeryAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/surgery/ajaxSurgeryAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/surgery/ajaxSurgeryAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateSurgery" 
+	   		type="com.pibs.action.SurgeryAction"
+			name="surgeryForm"
+			scope="request"
+			input="/pages/masterfile/surgery/ajaxSurgeryEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/surgery/ajaxSurgeryEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/surgery/ajaxSurgeryEdit.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteSurgery" 
+	   		type="com.pibs.action.SurgeryAction"
+			name="surgeryForm"
+			scope="request"
+			input="/pages/masterfile/surgery/ajaxSurgery.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/surgery/ajaxSurgery.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/surgery/ajaxSurgery.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Surgery (END) -->
+	   
+	    <!-- Professional (START) -->
+	   <action 
+	   		path="/professional" 
+	   		type="com.pibs.action.ProfessionalAction"
+			name="professionalForm"
+			scope="request"
+			input="/pages/masterfile/professional/ajaxProfessional.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/professional/ajaxProfessional.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/professional/ajaxProfessionalTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/professional/ajaxProfessionalAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/professional/ajaxProfessional.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/professional/ajaxProfessionalEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveProfessional" 
+	   		type="com.pibs.action.ProfessionalAction"
+			name="professionalForm"
+			scope="request"
+			input="/pages/masterfile/professional/ajaxProfessionalAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/professional/ajaxProfessionalAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/professional/ajaxProfessionalAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateProfessional" 
+	   		type="com.pibs.action.ProfessionalAction"
+			name="professionalForm"
+			scope="request"
+			input="/pages/masterfile/professional/ajaxProfessionalEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/professional/ajaxProfessionalEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/professional/ajaxProfessionalEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteProfessional" 
+	   		type="com.pibs.action.ProfessionalAction"
+			name="professionalForm"
+			scope="request"
+			input="/pages/masterfile/professional/ajaxProfessional.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/professional/ajaxProfessional.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/professional/ajaxProfessional.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Professional (END) -->
+	   
+	   <!-- Discount (START) -->
+	   <action 
+	   		path="/discount" 
+	   		type="com.pibs.action.DiscountAction"
+			name="discountForm"
+			scope="request"
+			input="/pages/masterfile/discount/ajaxDiscount.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/discount/ajaxDiscount.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/discount/ajaxDiscountTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/discount/ajaxDiscountAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/discount/ajaxDiscount.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/discount/ajaxDiscountEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveDiscount" 
+	   		type="com.pibs.action.DiscountAction"
+			name="discountForm"
+			scope="request"
+			input="/pages/masterfile/discount/ajaxDiscountAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/discount/ajaxDiscountAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/discount/ajaxDiscountAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateDiscount" 
+	   		type="com.pibs.action.DiscountAction"
+			name="discountForm"
+			scope="request"
+			input="/pages/masterfile/discount/ajaxDiscountEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/discount/ajaxDiscountEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/discount/ajaxDiscountEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteDiscount" 
+	   		type="com.pibs.action.DiscountAction"
+			name="discountForm"
+			scope="request"
+			input="/pages/masterfile/discount/ajaxDiscount.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/discount/ajaxDiscount.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/discount/ajaxDiscount.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Discount (END) -->
+
+ 	   <!-- Patient (START) -->
+	   <action 
+	   		path="/patient" 
+	   		type="com.pibs.action.PatientAction"
+			name="patientForm"
+			scope="request"
+			input="/pages/masterfile/patient/ajaxPatient.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/patient/ajaxPatient.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/patient/ajaxPatientTable.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/patient/ajaxPatientEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updatePatient" 
+	   		type="com.pibs.action.PatientAction"
+			name="patientForm"
+			scope="request"
+			input="/pages/masterfile/patient/ajaxPatientEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/patient/ajaxPatientEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/patient/ajaxPatientEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deletePatient" 
+	   		type="com.pibs.action.PatientAction"
+			name="patientForm"
+			scope="request"
+			input="/pages/masterfile/patient/ajaxPatient.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/patient/ajaxPatient.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/patient/ajaxPatient.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Patient (END) -->
+
+     <!-- Employee (START) -->
+	   <action 
+	   		path="/employee" 
+	   		type="com.pibs.action.EmployeeAction"
+			name="employeeForm"
+			scope="request"
+			input="/pages/masterfile/employee/ajaxEmployee.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/employee/ajaxEmployee.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/employee/ajaxEmployeeTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/employee/ajaxEmployeeAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/employee/ajaxEmployee.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/employee/ajaxEmployeeEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveEmployee" 
+	   		type="com.pibs.action.EmployeeAction"
+			name="employeeForm"
+			scope="request"
+			input="/pages/masterfile/employee/ajaxEmployeeAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/employee/ajaxEmployeeAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/employee/ajaxEmployeeAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateEmployee" 
+	   		type="com.pibs.action.EmployeeAction"
+			name="employeeForm"
+			scope="request"
+			input="/pages/masterfile/employee/ajaxEmployeeEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/employee/ajaxEmployeeEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/employee/ajaxEmployeeEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteEmployee" 
+	   		type="com.pibs.action.EmployeeAction"
+			name="employeeForm"
+			scope="request"
+			input="/pages/masterfile/employee/ajaxEmployee.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/employee/ajaxEmployee.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/employee/ajaxEmployee.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Employee (END) -->	
+	   
+	         <!-- User  (START) -->
+	   <action 
+	   		path="/user" 
+	   		type="com.pibs.action.UserAction"
+			name="userForm"
+			scope="request"
+			input="/pages/masterfile/user/ajaxUser.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/user/ajaxUser.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/user/ajaxUserTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/user/ajaxUserAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/user/ajaxUser.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/user/ajaxUserEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveUser" 
+	   		type="com.pibs.action.UserAction"
+			name="userForm"
+			scope="request"
+			input="/pages/masterfile/user/ajaxUserAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/user/ajaxUserAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/user/ajaxUserAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateUser" 
+	   		type="com.pibs.action.UserAction"
+			name="userForm"
+			scope="request"
+			input="/pages/masterfile/user/ajaxUserEdit.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/user/ajaxUserEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/user/ajaxUserEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteUser" 
+	   		type="com.pibs.action.UserAction"
+			name="userForm"
+			scope="request"
+			input="/pages/masterfile/user/ajaxUser.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/user/ajaxUser.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/user/ajaxUser.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- User (END) -->	
+	   
+	   	<!-- User Access  (START) -->
+	  	<action 
+	   		path="/userAccess" 
+	   		type="com.pibs.action.UserAccessAction"
+			name="userAccessForm"
+			scope="request"
+			input="/pages/masterfile/useraccess/ajaxUserAccess.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/masterfile/useraccess/ajaxUserAccess.jsp"/>
+			<forward name="ajaxTable" path="/pages/masterfile/useraccess/ajaxUserAccessTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/masterfile/useraccess/ajaxUserAccessAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/masterfile/useraccess/ajaxUserAccess.jsp"/>
+			<forward name="ajaxEdit" path="/pages/masterfile/useraccess/ajaxUserAccessEdit.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveUserAccess" 
+	   		type="com.pibs.action.UserAccessAction"
+			name="userAccessForm"
+			scope="request"
+			input="/pages/masterfile/useraccess/ajaxUserAccessAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/useraccess/ajaxUserAccessAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/useraccess/ajaxUserAccessAdd.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/deleteUserAccess" 
+	   		type="com.pibs.action.UserAccessAction"
+			name="userAccessForm"
+			scope="request"
+			input="/pages/masterfile/useraccess/ajaxUserAccess.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/masterfile/useraccess/ajaxUserAccess.jsp"/>
+			<forward name="ajaxFailed" path="/pages/masterfile/useraccess/ajaxUserAccess.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <!-- User Access (END) -->		   
+	   	   	   	
+	</action-mappings>
+	
+
+</struts-config>

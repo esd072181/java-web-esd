@@ -1,0 +1,313 @@
+package com.pibs.dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import com.pibs.config.ServerContext;
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.dao.BillingPaymentDao;
+import com.pibs.model.Admission;
+import com.pibs.model.Billing;
+import com.pibs.model.BillingDetails;
+import com.pibs.model.BillingPayment;
+import com.pibs.model.Patient;
+import com.pibs.model.Room;
+import com.pibs.model.User;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+import com.pibs.util.PIBSUtils;
+
+public class BillingPaymentDaoImpl implements BillingPaymentDao {
+	
+	private final static Logger logger = Logger.getLogger(BillingPaymentDaoImpl.class);
+
+	@Override
+	public Map<String, Object> save(HashMap<String, Object> dataMap) throws Exception{
+		
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SAVE);
+		
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		BillingPayment model = (BillingPayment) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setCreatedBy((int) user.getId());	
+		}
+		model.setCreatedOn(new Timestamp(new java.util.Date().getTime()));
+		model.setDateOfPayment(model.getCreatedOn());
+		
+		StringBuffer qry =  new StringBuffer("insert into pibs.tran_patient_billing_payment (");
+		  		qry.append(" billingid ");
+		  		qry.append(",amount ");
+		  		qry.append(",modeofpayment ");
+		  		qry.append(",dateofpayment ");
+		  		qry.append(",createdby ");
+		  		qry.append(",createdon ");
+		  		qry.append(",version ");
+		  		qry.append(",active ");
+		  		qry.append(" ) ");
+		  		qry.append(" values ");
+		  		qry.append(" ( ");
+		  		qry.append(" ? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,1 ");
+		  		qry.append(" ,true ");
+		  		qry.append(" ) ");
+		  		
+		PIBSUtils.writeLogDebug(logger, "SQL: "+qry.toString());
+  		  		
+		  try {
+			  //initialization of connection only once
+			  conn = ServerContext.getJDBCHandle();
+			  conn.setAutoCommit(false);
+			  pstmt = conn.prepareStatement(qry.toString());
+			     
+			  pstmt.setInt(1, model.getBillingId());
+			  pstmt.setBigDecimal(2, model.getAmount());
+			  pstmt.setInt(3, model.getModeOfPayment());
+			  pstmt.setTimestamp(4, model.getDateOfPayment());
+			  pstmt.setInt(5, model.getCreatedBy());
+			  pstmt.setTimestamp(6, model.getCreatedOn());
+			     
+			  int statusInt = pstmt.executeUpdate();
+			  
+			  pstmt.close();
+			     
+			  if (statusInt == 1) {
+				  System.out.println("Inserted into Billing Payment table successfully..");
+
+	    			//get first the roomid and patient system id
+					HashMap<String,Object> admissionDataMap1 = new HashMap<String, Object>();
+					admissionDataMap1.put(MapConstant.MODULE, ModuleConstant.ADMISSION);
+					admissionDataMap1.put(MapConstant.USER_SESSION_DATA, user);
+					admissionDataMap1.put(MapConstant.JDBC_CONNECTION, conn);
+					admissionDataMap1.put(MapConstant.SEARCH_CRITERIA, model.getBillingId());
+					admissionDataMap1.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_BILLING_ID);
+					
+			        ServiceManager service = new ServiceManagerImpl();
+			        Map<String, Object> resultMap = service.executeRequest(admissionDataMap1);
+				    
+				    Admission admissionModel = (Admission) resultMap.get(MapConstant.CLASS_DATA);
+				    
+	    			service = null;
+	    			resultMap = null;
+	    			
+	        		//update the Patient status to Active = 501
+	        		Patient patientModel = new Patient();
+	        		patientModel.setId(admissionModel.getPatientSystemId());
+	        		patientModel.setPatientStatusId(501);
+	        		
+					HashMap<String,Object> patientDataMap = new HashMap<String, Object>();
+					patientDataMap.put(MapConstant.MODULE, ModuleConstant.PATIENT);
+					patientDataMap.put(MapConstant.CLASS_DATA, patientModel);
+					patientDataMap.put(MapConstant.USER_SESSION_DATA, user);
+					patientDataMap.put(MapConstant.JDBC_CONNECTION, conn);
+					patientDataMap.put(MapConstant.ACTION, ActionConstant.UPDATE_TO_ACTIVE);
+					
+			        service = new ServiceManagerImpl();
+			        resultMap = service.executeRequest(patientDataMap);
+				    
+				    if (resultMap!=null && !resultMap.isEmpty()) {
+				    	boolean transactionStatusforPatientUpdate = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+				    	if (transactionStatusforPatientUpdate) {
+				    		logger.info("Patient System Id successfully updated.");
+				    				     
+				    		if (statusInt == 1) {
+				    			service = null;
+				    			resultMap = null;
+
+				    			//update the admission status - 703 - Admission details
+				    			//update the date discharged here
+				    			//continue update patient info
+				    			service = null;
+				    			resultMap = null;
+
+				    			HashMap<String, Object> admissionDataMap = new HashMap<String, Object>();
+				    			admissionDataMap.put(MapConstant.MODULE, ModuleConstant.ADMISSION);
+				    			admissionDataMap.put(MapConstant.CLASS_DATA, admissionModel);
+				    			admissionDataMap.put(MapConstant.USER_SESSION_DATA, user);
+				    			admissionDataMap.put(MapConstant.JDBC_CONNECTION, conn);
+				    			admissionDataMap.put(MapConstant.ACTION, ActionConstant.UPDATE_TO_DISCHARGED);
+
+				    			service = new ServiceManagerImpl();
+				    			resultMap = service.executeRequest(admissionDataMap);
+				    			        
+				    			if (resultMap!=null && !resultMap.isEmpty()) {
+				    			    boolean transactionStatusforUpdate = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+				    				   if (transactionStatusforUpdate) {
+				    				    	System.out.println("Admission record (id: " +admissionModel.getId()+") updated successfully..");
+				    						//update the available beds of room
+				    						service = null;
+				    						resultMap = null;
+				    						Room roomModel = new Room();
+				    						roomModel.setId(admissionModel.getRoomId());
+				    						HashMap<String, Object> roomDataMap = new HashMap<String, Object>();
+				    						roomDataMap.put(MapConstant.MODULE, ModuleConstant.ROOM);
+				    						roomDataMap.put(MapConstant.CLASS_DATA, roomModel);
+				    						roomDataMap.put(MapConstant.USER_SESSION_DATA, user);
+				    						roomDataMap.put(MapConstant.JDBC_CONNECTION, conn);
+				    						roomDataMap.put(MapConstant.ACTION, ActionConstant.UPDATE_AVAILABLE_BEDS_AFTER_PAYMENT);
+
+				    						service = new ServiceManagerImpl();
+				    						resultMap = service.executeRequest(roomDataMap);
+				    						        
+				    						if (resultMap!=null && !resultMap.isEmpty()) {
+				    						    boolean transactionStatusforRoomUpdate = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+				    							if (transactionStatusforRoomUpdate) {
+					    							//update cleared = true in billing 
+					    							service = null;
+					    							resultMap = null;
+					    							
+					    							Billing billingModel = new Billing();
+					    							billingModel.setId(model.getBillingId());
+					    							HashMap<String, Object> billingDataMap = new HashMap<String, Object>();
+					    							billingDataMap.put(MapConstant.MODULE, ModuleConstant.BILLING);
+					    							billingDataMap.put(MapConstant.CLASS_DATA, billingModel);
+					    							billingDataMap.put(MapConstant.USER_SESSION_DATA, user);
+					    							billingDataMap.put(MapConstant.JDBC_CONNECTION, conn);
+					    							billingDataMap.put(MapConstant.ACTION, ActionConstant.UPDATE_TO_CLEARED);
+					    							    		
+					    							service = new ServiceManagerImpl();
+					    							resultMap = service.executeRequest(billingDataMap);
+					    									     
+					    							if (resultMap!=null && !resultMap.isEmpty()) {
+					    								boolean transactionStatusforBillingUpdate = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+					    								if (transactionStatusforBillingUpdate) {
+					    									conn.commit(); //commit here after all related transactions are successfull
+					    									System.out.println("Billing record (id: " +billingModel.getId()+") updated successfully..");
+					    									status = true;											    		
+					    								} else {
+					    									conn.rollback();
+					    									logger.error("Error in Billing update to cleared.");
+					    								}
+					    							}
+				    							}
+				    						} else {
+				    						    conn.rollback();
+				    						    logger.error("Error in Room update available beds.");
+				    						}
+				    						        	    		
+				    				   } else {
+				    				    	conn.rollback();
+				    				    	logger.error("Error in Admission update to Discharge.");
+				    				   }
+				    				    	
+				    			   }	
+				    			} else {
+				    				conn.rollback();
+				    				logger.error("Error in updating data.. (Patient info update to Active)");
+				    			}		    		
+				    	} else {
+				    		conn.rollback();
+				    		logger.error("Error in updating patient status of Patient.");
+				    	}
+				    } else {
+						conn.rollback();
+						logger.error("ResultMap is null in updating Patient to Active status.");				    	
+				    } 
+			  } else {
+				  conn.rollback();
+				  logger.error("Error in saving Billing Payment.");
+			  }
+		  } catch (Exception e) {
+			  conn.rollback();
+		 	  e.printStackTrace();
+		  } finally {
+			  PIBSUtils.closeObjects(rs);
+			  PIBSUtils.closeObjects(pstmt);
+			  PIBSUtils.closeObjects(conn);
+		  }
+		 		 
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);
+		
+		return returnMap;
+	}
+	
+	@Override
+	public Map<String, Object> search(HashMap<String, Object> criteriaMap) throws Exception{
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		 	BillingDetails modelCriteria = (BillingDetails) criteriaMap.get(MapConstant.CLASS_DATA);
+		 	
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+			 
+			 List<BillingDetails> rsList = new ArrayList<BillingDetails>();
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer();
+				 		sql.append("select a.id,a.patientcasesystemid,a.discountid,a.amount,b.description ");
+				 		sql.append(" from pibs.tran_patient_discount a, pibs.file_discount b ");
+					 	sql.append(" where a.discountid = b.id ");
+				 		sql.append(" and a.patientcasesystemid = ? ");
+				 		sql.append(" and a.active = true ");
+					 	sql.append(" order by b.description ");
+				 						 
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, modelCriteria.getPatientCaseSystemId());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+					 BillingDetails model = new BillingDetails();  
+		    		 model.setId(rs.getInt(1));
+		    		 model.setPatientCaseSystemId(rs.getInt(2));
+//		    		 model.setDetailsId(rs.getInt(3));
+//		    		 model.setAmount(rs.getBigDecimal(4));
+//		    		 model.setDetailsDescription(rs.getString(5));
+		    		 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+			 
+		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		     } 
+	     
+	    System.out.println("search() - Exit");
+		return returnMap;
+	}
+
+
+	
+
+}

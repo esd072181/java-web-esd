@@ -1,0 +1,19 @@
+package com.pibs.constant;
+
+public class ParamConstant {
+
+	public static final String SEARCH = "Search";
+	public static final String SHOW_ALL = "Show All";
+	public static final String ADD = "Add";
+	public static final String EDIT = "Edit";
+	public static final String UPDATE = "Update";
+	public static final String SAVE = "Save";
+	
+	public static final String AJAX_SEARCH = "ajaxSearch";
+	public static final String AJAX_SEARCH_BY_CRITERIA = "ajaxSearchByCriteria";
+	public static final String AJAX_SAVE = "ajaxSave";
+	public static final String AJAX_EDIT = "ajaxEdit";
+	public static final String AJAX_UPDATE = "ajaxUpdate";
+	public static final String AJAX_DELETE = "ajaxDelete";
+		
+}

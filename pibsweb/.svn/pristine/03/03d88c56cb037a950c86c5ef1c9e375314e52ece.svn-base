@@ -1,0 +1,84 @@
+package com.pibs.bo.impl;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.pibs.bo.RoomBo;
+import com.pibs.dao.RoomDao;
+
+public class RoomBoImpl implements RoomBo {
+	
+	private RoomDao dao;
+	
+	public RoomDao getRoomDao() {
+		return dao;
+	}
+
+	public void setRoomDao(RoomDao dao) {
+		this.dao = dao;
+	}
+
+	@Override
+	public Map<String, Object> addNewRecord(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		return dao.save(dataMap);
+	}
+
+	@Override
+	public Map<String, Object> updateRecord(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		return dao.update(dataMap);
+	}
+
+	@Override
+	public Map<String, Object> deleteRecord(HashMap<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.delete(dataMap);
+	}
+
+	@Override
+	public Map<String, Object> getRecords(HashMap<String, Object> criteriaMap) throws Exception{
+		// TODO Auto-generated method stub
+		return dao.search(criteriaMap);
+	}
+
+	@Override
+	public Map<String, Object> getDataById(HashMap<String, Object> criteriaMap)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getDataById(criteriaMap);
+	}
+
+	@Override
+	public Map<String, Object> getActiveData()
+			throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getActiveData();
+	}	
+
+	@Override
+	public Map<String, Object> getAvailableRooms()
+			throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getAvailableRooms();
+	}	
+	
+	@Override
+	public Map<String, Object> searchAvailableRooms(HashMap<String, Object> criteriaMap) throws Exception{
+		// TODO Auto-generated method stub
+		return dao.searchAvailableRooms(criteriaMap);
+	}
+	
+	@Override
+	public Map<String, Object> updateAvailableBeds(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		return dao.updateAvailableBeds(dataMap);
+	}
+	
+	@Override
+	public Map<String, Object> updateAvailableBedsAfterPaymentOrRoomTransfer(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		return dao.updateAvailableBedsAfterPaymentOrRoomTransfer(dataMap);
+	}
+	
+}

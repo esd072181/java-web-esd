@@ -1,0 +1,118 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+    
+  });
+  
+ 
+</script>
+
+
+
+<div class="row">
+	<div class="col-sm-2">
+	
+		<!-- Left Menu -->
+		<div style="padding-top: 15px; padding-left: 12px;">
+		  	<!-- jQuery ui -->
+		  	<ul id="menu">
+			  <li class="ui-widget-header">Options</li>
+			  <li onclick="goToAddEmployee();"><a href="#">Add New Record</a></li>
+			  <li onclick="goToEmployee();"><a href="#">Search Record</a></li>
+			  <%@ include file="/template/menu_left_masterfile.jsp" %>	
+			</ul>
+		</div>
+	</div>
+	
+ 	<div class="col-sm-10" style="padding-left: 40px;">
+
+		<div style="height: 30%;">
+		<h3 style="font-weight: bolder;">Employee - Edit Record</h3>
+			<html:form action="/employee.do" styleId="idForm" >
+				<fieldset>
+				
+					<div>
+						<html:errors/>
+					</div>
+					<div>
+						<h4 style="color: blue;"><c:out value="${employeeForm.transactionMessage}"></c:out></h4>
+					</div>
+					
+					<html:hidden property="id" value="${employeeForm.id}"/>
+					<table>
+						<tr>
+							<td><label  class="control-label" for="lastName">Last Name</label></td>
+							<td style="padding-left: 5px;">
+								<html:text styleId="lastNameId" property="lastName" styleClass="input-xlarge"  size="20" maxlength="30" value="${employeeForm.lastName}" disabled="${employeeForm.transactionStatus}"></html:text><br>
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label top-spacing" for="firstName">First Name</label></td>
+							<td style="padding-left: 5px;">
+								<html:text styleId="firstNameId" property="firstName" styleClass="input-xlarge"  size="20" maxlength="30" value="${employeeForm.firstName}" disabled="${employeeForm.transactionStatus}"></html:text><br>
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label top-spacing" for="middleName">Middle Name</label></td>
+							<td style="padding-left: 5px;">
+								<html:text styleId="middleNameId" property="middleName" styleClass="input-xlarge"  size="20" maxlength="30" value="${employeeForm.middleName}" disabled="${employeeForm.transactionStatus}"></html:text><br>
+							</td>
+						</tr>	
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label top-spacing" for="roleId">Category</label></td>
+							<td style="padding-left: 5px;">
+								<html:select  name="employeeForm" property="empCategoryId" disabled="${employeeForm.transactionStatus}">
+									 <html:option value="0">--Select--</html:option>
+									 <html:optionsCollection name="employeeForm" property="empCategoryLOV" label="listValue" value="id"/>				 		
+								</html:select>	
+							</td>
+						</tr>	
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label top-spacing" for="empPositionId">Position</label></td>
+							<td style="padding-left: 5px;">
+								<html:select  name="employeeForm" property="empPositionId" disabled="${employeeForm.transactionStatus}">
+									 <html:option value="0">--Select--</html:option>
+									 <html:optionsCollection name="employeeForm" property="empPositionLOV" label="listValue" value="id"/>				 		
+								</html:select>	
+							</td>
+						</tr>				
+						<tr height="15px"></tr>				
+						<tr>
+							<td></td>
+							<td style="padding-left: 5px;">
+								<div class="control-group">
+									<div class="controls">
+										<c:choose>
+											<c:when test="${employeeForm.transactionStatus == true}">
+												<html:button property="btnClose" styleClass="btn btn-primary" style="width: 100px;" onclick="goToEmployee();" value="Close"></html:button>
+											</c:when>
+											<c:otherwise>
+												<html:button property="btnUpdate" styleClass="btn btn-primary" style="width: 100px;" onclick="updateEmployee();" value="Update"></html:button>
+												&nbsp;&nbsp;
+												<html:button property="btnCancel" styleClass="btn btn-primary" style="width: 100px;" onclick="goToEmployee();" value="Cancel"></html:button>
+											</c:otherwise>
+										</c:choose>						
+									</div>							
+								</div>
+							</td>
+						</tr>
+					</table>
+						
+				</fieldset>				
+
+			</html:form>
+		</div>
+	
+	</div>
+	<script type="text/javascript">document.forms[0].elements['lastName'].focus();</script>
+</div>	
+	

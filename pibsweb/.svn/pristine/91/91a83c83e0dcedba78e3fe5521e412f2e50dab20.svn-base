@@ -1,0 +1,1563 @@
+//JS of Master files
+
+//constants
+var remarksLength = 50;
+
+
+//functions
+function goToMain(){
+	 window.location = '/PIBSweb/main.do';
+}
+
+function goToMainByAjax(){
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "navigate.do?"
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+}
+
+//Building
+function goToBuilding() {
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "building.do?"
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+}
+
+function goToAddBuilding() {
+	$.ajax({
+		  type: "GET",
+		  url: "building.do?",
+		  cache: false,
+		  data: { command: "add" }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			$("#descriptionId").focus();
+		});
+}
+
+function getBuilding(pageCriteria, category, isDeleted) {
+
+	//validation for search criteria
+	if (category == 'filter') {
+		if ( $("#idSearchCriteria").val().trim() == '') {
+			$("#validationMessageId").show();
+			$("#idSearchCriteria").focus(); 
+			setTimeout( "$('#validationMessageId').hide();",1500 );
+			return false;
+		}
+
+	}
+
+	$.ajax({
+		  type: "GET",
+		  url: "building.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+		  cache: false,
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#tablePresentationDIV").html(result);
+			if (isDeleted) {
+				$("#msgDeletedId").show();
+				setTimeout( "$('#msgDeletedId').hide();", 1500 );
+			}
+		});
+}
+
+function saveBuilding() {
+	
+	$.ajax({
+		  type: "POST",
+		  url: "saveBuilding.do?command=ajaxSave",
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+
+}
+
+function editBuilding(id) {
+	$.ajax({
+		  type: "GET",
+		  url: "building.do?",
+		  cache: false,
+		  data: { command: "ajaxEdit", id: id  }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+
+}
+
+function updateBuilding() {
+	
+	bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		 if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "updateBuilding.do?command=ajaxUpdate",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIV").html(result);
+				});
+		 } 
+	}); 
+
+}
+
+function deleteBuilding(id, category, currentPage) {
+	
+	bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		if (ans) {
+			$.ajax({
+				  type: "POST",
+				  url: "deleteBuilding.do?",
+				  data: { command: "ajaxDelete", id: id  }
+				})
+				  .done(function( result ) {
+					 //$("#contentDIV").html(result);
+					getBuilding(currentPage,category, true);//show the updated list after delete
+				});		
+		} 
+	}); 
+
+}
+
+//Room Category
+	function goToRoomCategory() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "roomCategory.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddRoomCategory() {
+		$.ajax({
+			  type: "GET",
+			  url: "roomCategory.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function getRoomCategory(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "roomCategory.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveRoomCategory() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveRoomCategory.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editRoomCategory(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "roomCategory.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateRoomCategory() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateRoomCategory.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteRoomCategory(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteRoomCategory.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getRoomCategory(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+
+
+	//Room 
+	function goToRoom() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "room.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddRoom() {
+		$.ajax({
+			  type: "GET",
+			  url: "room.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				//$("#descriptionId").focus();
+			});
+	}
+
+	function getRoom(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "room.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveRoom() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveRoom.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editRoom(id, buildingId) {
+		$.ajax({
+			  type: "GET",
+			  url: "room.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id, buildingId: buildingId }
+			})
+			  .done(function( result ) {
+				//populate the noOffLoor
+				$('#contentDIV').html(result);
+				//populateNoOfFloorByBuilding				//set the floorNo in the dropdown -- problem here
+				//$('#floorNoId').val(floorNo);Id(buildingId);
+
+			});
+
+	}
+
+	function updateRoom() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateRoom.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteRoom(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteRoom.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getRoom(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+
+	function populateNoOfFloorByBuildingId(id) {
+	
+		$.ajax({
+			  type: "GET",
+			  url: "room.do?command=ajaxGetNoOfFloorByBuildingId&buildingId="+id,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#noOfFloorDIVId").html(result);
+			});
+		
+	}
+	
+	
+	//Equipment
+	function goToEquipment() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "equipment.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddEquipment() {
+		$.ajax({
+			  type: "GET",
+			  url: "equipment.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#entityNameId").focus();
+			});
+	}
+
+	function getEquipment(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "equipment.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveEquipment() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveEquipment.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editEquipment(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "equipment.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateEquipment() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateEquipment.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteEquipment(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteEquipment.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getEquipment(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+
+	//Specialization
+	function goToSpecialization() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "specialization.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddSpecialization() {
+		$.ajax({
+			  type: "GET",
+			  url: "specialization.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#entityNameId").focus();
+			});
+	}
+
+	function getSpecialization(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "specialization.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveSpecialization() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveSpecialization.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editSpecialization(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "specialization.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateSpecialization() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateSpecialization.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteSpecialization(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteSpecialization.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getSpecialization(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+	
+	//Other Services
+	function goToOtherServices() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "otherServices.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddOtherServices() {
+		$.ajax({
+			  type: "GET",
+			  url: "otherServices.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function getOtherServices(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "otherServices.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveOtherServices() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveOtherServices.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editOtherServices(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "otherServices.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateOtherServices() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateOtherServices.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteOtherServices(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteOtherServices.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getOtherServices(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+		
+	//Additional Services
+	function goToAdditionalServices() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "additionalServices.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddAdditionalServices() {
+		$.ajax({
+			  type: "GET",
+			  url: "additionalServices.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function getAdditionalServices(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "additionalServices.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveAdditionalServices() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveAdditionalServices.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editAdditionalServices(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "additionalServices.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateAdditionalServices() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateAdditionalServices.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteAdditionalServices(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteAdditionalServices.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getAdditionalServices(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+	
+	//Additional Services Category
+	function goToAdditionalServicesCategory() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "additionalServicesCategory.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddAdditionalServicesCategory() {
+		$.ajax({
+			  type: "GET",
+			  url: "additionalServicesCategory.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function getAdditionalServicesCategory(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "additionalServicesCategory.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveAdditionalServicesCategory() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveAdditionalServicesCategory.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editAdditionalServicesCategory(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "additionalServicesCategory.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateAdditionalServicesCategory() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateAdditionalServicesCategory.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteAdditionalServicesCategory(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteAdditionalServicesCategory.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getAdditionalServicesCategory(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+	
+	//Radiology
+	function goToRadiology() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "radiology.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddRadiology() {
+		$.ajax({
+			  type: "GET",
+			  url: "radiology.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function getRadiology(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "radiology.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveRadiology() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveRadiology.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editRadiology(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "radiology.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateRadiology() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateRadiology.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteRadiology(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteRadiology.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getRadiology(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+	
+	//Medical Supply
+	function goToMedicalSupply() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "medicalSupply.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddMedicalSupply() {
+		$.ajax({
+			  type: "GET",
+			  url: "medicalSupply.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function getMedicalSupply(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "medicalSupply.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveMedicalSupply() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveMedicalSupply.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editMedicalSupply(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "medicalSupply.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateMedicalSupply() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateMedicalSupply.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteMedicalSupply(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteMedicalSupply.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getMedicalSupply(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+			
+	//Laboratory Examination
+	function goToLaboratoryExamination() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "laboratoryExamination.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddLaboratoryExamination() {
+		$.ajax({
+			  type: "GET",
+			  url: "laboratoryExamination.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function getLaboratoryExamination(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "laboratoryExamination.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveLaboratoryExamination() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveLaboratoryExamination.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editLaboratoryExamination(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "laboratoryExamination.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateLaboratoryExamination() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateLaboratoryExamination.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteLaboratoryExamination(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteLaboratoryExamination.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getLaboratoryExamination(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+	
+	
+	
+	//Professional Type
+	function goToProfessionalType() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "professionalType.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddProfessionalType() {
+		$.ajax({
+			  type: "GET",
+			  url: "professionalType.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function getProfessionalType(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "professionalType.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveProfessionalType() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveProfessionalType.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editProfessionalType(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "professionalType.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateProfessionalType() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateProfessionalType.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteProfessionalType(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteProfessionalType.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getProfessionalType(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}
+
+	//Surgery
+	function goToSurgery() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "surgery.do?"
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function goToAddSurgery() {
+		$.ajax({
+			  type: "GET",
+			  url: "surgery.do?",
+			  cache: false,
+			  data: { command: "add" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function getSurgery(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "surgery.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+				if (isDeleted) {
+					$("#msgDeletedId").show();
+					setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				}
+			});
+	}
+
+	function saveSurgery() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "saveSurgery.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function editSurgery(id) {
+		$.ajax({
+			  type: "GET",
+			  url: "surgery.do?",
+			  cache: false,
+			  data: { command: "ajaxEdit", id: id  }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+
+	function updateSurgery() {
+		
+		bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "POST",
+						  url: "updateSurgery.do?command=ajaxUpdate",
+						  data: $("#idForm").serialize() 
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+					});
+			 } 
+		}); 
+
+	}
+
+	function deleteSurgery(id, category, currentPage) {
+		
+		bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "deleteSurgery.do?",
+					  data: { command: "ajaxDelete", id: id  }
+					})
+					  .done(function( result ) {
+						 //$("#contentDIV").html(result);
+						getSurgery(currentPage,category, true);//show the updated list after delete
+					});		
+			} 
+		}); 
+		
+	}

@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+ 
+<struts-config>
+ 
+ 	<!-- Struts Config for Transactions -->
+ 
+	<form-beans>
+	    <!--  <form-bean name="patientForm" type="com.pibs.form.PatientFormBean" />--> <!-- This is already declared in struts-config-mf -->
+		<form-bean name="admissionForm" type="com.pibs.form.AdmissionFormBean" />
+		<form-bean name="monitorPatientForm" type="com.pibs.form.MonitorPatientFormBean" />
+		<form-bean name="diagnosisForm" type="com.pibs.form.DiagnosisFormBean" />
+		<form-bean name="medicationStatementForm" type="com.pibs.form.MedicationStatementFormBean" />
+		<form-bean name="prognosisForm" type="com.pibs.form.PrognosisFormBean" />
+		<form-bean name="monitorLaboratoryExaminationForm" type="com.pibs.form.MonitorLaboratoryExaminationFormBean" />
+		<form-bean name="monitorMedicalSupplyForm" type="com.pibs.form.MonitorMedicalSupplyFormBean" />
+		<form-bean name="monitorRadiologyForm" type="com.pibs.form.MonitorRadiologyFormBean" />
+		<form-bean name="monitorSurgeryForm" type="com.pibs.form.MonitorSurgeryFormBean" />
+		<form-bean name="monitorAdditionalServicesForm" type="com.pibs.form.MonitorAdditionalServicesFormBean" />
+		<form-bean name="monitorEquipmentForm" type="com.pibs.form.MonitorEquipmentFormBean" />
+		<form-bean name="monitorPhysicalExaminationForm" type="com.pibs.form.MonitorPhysicalExaminationFormBean" />
+		<form-bean name="monitorDoctorForm" type="com.pibs.form.MonitorDoctorFormBean" />
+		<form-bean name="monitorRoomForm" type="com.pibs.form.MonitorRoomFormBean" />
+		<form-bean name="monitorRoomTransferForm" type="com.pibs.form.MonitorRoomTransferFormBean" />
+		<form-bean name="monitorNurseryForm" type="com.pibs.form.MonitorNurseryFormBean" />
+		<form-bean name="billingForm" type="com.pibs.form.BillingFormBean" />
+		<form-bean name="billingDiscountForm" type="com.pibs.form.BillingDiscountFormBean" />
+		<form-bean name="billingDetailsForm" type="com.pibs.form.BillingDetailsFormBean" />
+		<form-bean name="billingPaymentForm" type="com.pibs.form.BillingPaymentFormBean" />
+		<form-bean name="patientInquiryForm" type="com.pibs.form.PatientInquiryFormBean" />
+		<form-bean name="roomInquiryForm" type="com.pibs.form.RoomInquiryFormBean" />
+		<form-bean name="patientHistoryForm" type="com.pibs.form.PatientHistoryFormBean" />
+		<form-bean name="medicalAbstractForm" type="com.pibs.form.MedicalAbstractFormBean" />
+		<form-bean name="nurseryForm" type="com.pibs.form.NurseryFormBean" />
+		<form-bean name="patientBillHistoryForm" type="com.pibs.form.PatientBillHistoryFormBean" />
+	</form-beans>
+ 
+	<action-mappings>
+	
+	   
+	   <!-- Patient Registration (START) -->
+	   <action 
+	   		path="/patientRegistration" 
+	   		type="com.pibs.action.PatientAction"
+			name="patientForm"
+			scope="request"
+			input="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+			<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/savePatient" 
+	   		type="com.pibs.action.PatientAction"
+			name="patientForm"
+			scope="request"
+			input="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Patient Registration (END) -->
+
+	   <!-- Admission (START) -->
+	   <action 
+	   		path="/admission" 
+	   		type="com.pibs.action.AdmissionAction"
+			name="admissionForm"
+			scope="request"
+			input="/pages/transaction/admission/ajaxAdmissionSearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/admission/ajaxAdmissionSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/admission/ajaxAdmissionSearchTable.jsp"/>
+			<forward name="ajaxGoToAdmission" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveAdmission" 
+	   		type="com.pibs.action.AdmissionAction"
+			name="admissionForm"
+			scope="request"
+			input="/pages/transaction/admission/ajaxAdmission.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Admission (END) -->
+
+	   <!-- Monitor Patient (START) -->
+	   <action 
+	   		path="/monitorPatient" 
+	   		type="com.pibs.action.MonitorPatientAction"
+			name="monitorPatientForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/ajaxMonitorPatientSearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/monitorpatient/ajaxMonitorPatientSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/ajaxMonitorPatientSearchTable.jsp"/>
+			<forward name="ajaxGoToMonitorPatient" path="/pages/transaction/monitorpatient/ajaxMonitorPatient.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/ajaxMonitorPatient.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   
+	   <!-- Diagnosis -->
+	   <action 
+	   		path="/diagnosis" 
+	   		type="com.pibs.action.DiagnosisAction"
+			name="diagnosisForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveDiagnosis" 
+	   		type="com.pibs.action.DiagnosisAction"
+			name="diagnosisForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <!-- Medication Statement -->
+	   <action 
+	   		path="/medicationStatement" 
+	   		type="com.pibs.action.MedicationStatementAction"
+			name="medicationStatementForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMedicationStatement" 
+	   		type="com.pibs.action.MedicationStatementAction"
+			name="medicationStatementForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/> 
+	   </action>
+	   
+	   <!-- Prognosis-->
+	   <action 
+	   		path="/prognosis" 
+	   		type="com.pibs.action.PrognosisAction"
+			name="prognosisForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/savePrognosis" 
+	   		type="com.pibs.action.PrognosisAction"
+			name="prognosisForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	
+	   
+	   <!-- Monitor Laboratory Examination -->
+	   <action 
+	   		path="/monitorLaboratoryExamination" 
+	   		type="com.pibs.action.MonitorLaboratoryExaminationAction"
+			name="monitorLaboratoryExaminationForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationSearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorLaboratoryExamination" 
+	   		type="com.pibs.action.MonitorLaboratoryExaminationAction"
+			name="monitorLaboratoryExaminationForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationAdd.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	   
+	   
+	   <!-- Monitor Medical Supply -->
+	   <action 
+	   		path="/monitorMedicalSupply" 
+	   		type="com.pibs.action.MonitorMedicalSupplyAction"
+			name="monitorMedicalSupplyForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupply.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupply.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupplySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupplySearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupplyAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupply.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupply.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorMedicalSupply" 
+	   		type="com.pibs.action.MonitorMedicalSupplyAction"
+			name="monitorMedicalSupplyForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupplyAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupply.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/medicalsupply/ajaxMonitorMedicalSupplyAdd.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	   
+
+	   <!-- Monitor Radiology -->
+	   <action 
+	   		path="/monitorRadiology" 
+	   		type="com.pibs.action.MonitorRadiologyAction"
+			name="monitorRadiologyForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiology.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiology.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiologySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiologySearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiologyAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiology.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiology.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorRadiology" 
+	   		type="com.pibs.action.MonitorRadiologyAction"
+			name="monitorRadiologyForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiologyAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiology.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/radiology/ajaxMonitorRadiologyAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+
+	   <!-- Monitor Surgery -->
+	   <action 
+	   		path="/monitorSurgery" 
+	   		type="com.pibs.action.MonitorSurgeryAction"
+			name="monitorSurgeryForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgery.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgery.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgerySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgerySearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgeryAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgery.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgery.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorSurgery" 
+	   		type="com.pibs.action.MonitorSurgeryAction"
+			name="monitorSurgeryForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgeryAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgery.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/surgery/ajaxMonitorSurgeryAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	      
+
+	   <!-- Monitor AdditionalServices -->
+	   <action 
+	   		path="/monitorAdditionalServices" 
+	   		type="com.pibs.action.MonitorAdditionalServicesAction"
+			name="monitorAdditionalServicesForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServices.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServices.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServicesSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServicesSearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServicesAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServices.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServices.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorAdditionalServices" 
+	   		type="com.pibs.action.MonitorAdditionalServicesAction"
+			name="monitorAdditionalServicesForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServicesAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServices.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/additionalservices/ajaxMonitorAdditionalServicesAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	      
+
+	   <!-- Monitor Equipment -->
+	   <action 
+	   		path="/monitorEquipment" 
+	   		type="com.pibs.action.MonitorEquipmentAction"
+			name="monitorEquipmentForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipment.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipment.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipmentSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipmentSearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipmentAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipment.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipment.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorEquipment" 
+	   		type="com.pibs.action.MonitorEquipmentAction"
+			name="monitorEquipmentForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipmentAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipment.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/equipment/ajaxMonitorEquipmentAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	
+
+	   <!-- Monitor PhysicalExamination -->
+	   <action 
+	   		path="/monitorPhysicalExamination" 
+	   		type="com.pibs.action.MonitorPhysicalExaminationAction"
+			name="monitorPhysicalExaminationForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/physicalexamination/ajaxMonitorPhysicalExamination.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/physicalexamination/ajaxMonitorPhysicalExamination.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/physicalexamination/ajaxMonitorPhysicalExaminationAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/physicalexamination/ajaxMonitorPhysicalExamination.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/physicalexamination/ajaxMonitorPhysicalExamination.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorPhysicalExamination" 
+	   		type="com.pibs.action.MonitorPhysicalExaminationAction"
+			name="monitorPhysicalExaminationForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/physicalexamination/ajaxMonitorPhysicalExaminationAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/physicalexamination/ajaxMonitorPhysicalExamination.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/physicalexamination/ajaxMonitorPhysicalExaminationAdd.jsp"/>
+	  		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <!-- Monitor Doctor -->
+	   <action 
+	   		path="/monitorDoctor" 
+	   		type="com.pibs.action.MonitorDoctorAction"
+			name="monitorDoctorForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctor.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctor.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctorSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctorSearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctorAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctor.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctor.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorDoctor" 
+	   		type="com.pibs.action.MonitorDoctorAction"
+			name="monitorDoctorForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctorAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctor.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/doctor/ajaxMonitorDoctorAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	      
+
+   <!-- Monitor Room -->
+	   <action 
+	   		path="/monitorRoom" 
+	   		type="com.pibs.action.MonitorRoomAction"
+			name="monitorRoomForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/room/ajaxMonitorRoom.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/room/ajaxMonitorRoom.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/room/ajaxMonitorRoomSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/room/ajaxMonitorRoomSearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/room/ajaxMonitorRoomAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/room/ajaxMonitorRoom.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/room/ajaxMonitorRoom.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorRoom" 
+	   		type="com.pibs.action.MonitorRoomAction"
+			name="monitorRoomForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/room/ajaxMonitorRoomAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/room/ajaxMonitorRoom.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/room/ajaxMonitorRoomAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	      
+
+   <!-- Monitor Room Transfer-->
+	   <action 
+	   		path="/monitorRoomTransfer" 
+	   		type="com.pibs.action.MonitorRoomTransferAction"
+			name="monitorRoomTransferForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransfer.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransfer.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransferSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransferSearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransferAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransfer.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransfer.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorRoomTransfer" 
+	   		type="com.pibs.action.MonitorRoomTransferAction"
+			name="monitorRoomTransferForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransferAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransfer.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/roomtransfer/ajaxMonitorRoomTransferAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	      
+
+   <!-- Monitor Nursery -->
+	   <action 
+	   		path="/monitorNursery" 
+	   		type="com.pibs.action.MonitorNurseryAction"
+			name="monitorNurseryForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/nursery/ajaxMonitorNursery.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/nursery/ajaxMonitorNursery.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/nursery/ajaxMonitorNurserySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/nursery/ajaxMonitorNurserySearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/nursery/ajaxMonitorNurseryAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/nursery/ajaxMonitorNursery.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/nursery/ajaxMonitorNursery.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorNursery" 
+	   		type="com.pibs.action.MonitorNurseryAction"
+			name="monitorNurseryForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/nursery/ajaxMonitorNurseryAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/nursery/ajaxMonitorNursery.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/nursery/ajaxMonitorNurseryAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	      
+	
+	   <!-- Monitor Patient (END) -->
+
+	   <!-- Billing (START) -->
+	   <action 
+	   		path="/billing" 
+	   		type="com.pibs.action.BillingAction"
+			name="billingForm"
+			scope="request"
+			input="/pages/transaction/billing/ajaxBillingSearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/billing/ajaxBillingSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/billing/ajaxBillingSearchTable.jsp"/>
+			<forward name="ajaxGoToBilling" path="/pages/transaction/billing/ajaxBilling.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/billing/ajaxBilling.jsp"/>
+	 		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <!-- Billing Discount -->
+	   <action 
+	   		path="/billingDiscount" 
+	   		type="com.pibs.action.BillingDiscountAction"
+			name="billingDiscountForm"
+			scope="request"
+			input="/pages/transaction/billing/discount/ajaxBillingDiscount.jsp"
+			validate="true">
+			<forward name="ajaxGoToBillingChild" path="/pages/transaction/billing/discount/ajaxBillingDiscount.jsp"/>
+			<forward name="ajaxGoToBillingChildSearch" path="/pages/transaction/billing/discount/ajaxBillingDiscountSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/billing/discount/ajaxBillingDiscountSearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/billing/discount/ajaxBillingDiscountAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/billing/discount/ajaxBillingDiscount.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/billing/discount/ajaxBillingDiscount.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveBillingDiscount" 
+	   		type="com.pibs.action.BillingDiscountAction"
+			name="billingDiscountForm"
+			scope="request"
+			input="/pages/transaction/billing/discount/ajaxBillingDiscountAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/billing/discount/ajaxBillingDiscount.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/billing/discount/ajaxBillingDiscountAdd.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	
+
+	   <!-- Billing Details -->
+	   <action
+	   		path="/billingDetails" 
+	   		type="com.pibs.action.BillingDetailsAction"
+			name="billingDetailsForm"
+			scope="request"
+			input="/pages/transaction/billing/details/ajaxBillingDetails.jsp"
+			validate="true">
+			<forward name="ajaxGoToBillingChild" path="/pages/transaction/billing/details/ajaxBillingDetails.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/billing/details/ajaxBillingDetails.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/billing/details/ajaxBillingDetails.jsp"/>
+	   </action>
+	 
+	   <!-- Billing Payment -->
+	   <action
+	   		path="/billingPayment" 
+	   		type="com.pibs.action.BillingPaymentAction"
+			name="billingPaymentForm"
+			scope="request"
+			input="/pages/transaction/billing/payment/ajaxBillingPayment.jsp"
+			validate="true">
+			<forward name="ajaxGoToBillingChild" path="/pages/transaction/billing/payment/ajaxBillingPayment.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/billing/payment/ajaxBillingPayment.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/billing/payment/ajaxBillingPayment.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>	   
+	   
+	   <action
+	   		path="/saveBillingPayment" 
+	   		type="com.pibs.action.BillingPaymentAction"
+			name="billingPaymentForm"
+			scope="request"
+			input="/pages/transaction/billing/payment/ajaxBillingPayment.jsp"
+			validate="true">
+			<forward name="ajaxFailed" path="/pages/transaction/billing/payment/ajaxBillingPayment.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/billing/payment/ajaxBillingPayment.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   	   
+	   <!-- Billing (END) -->
+
+	   <!-- Patient Inquiry (START) -->
+	   <action 
+	   		path="/patientInquiry" 
+	   		type="com.pibs.action.PatientInquiryAction"
+			name="patientInquiryForm"
+			scope="request"
+			input="/pages/transaction/patientinquiry/ajaxPatientInquirySearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/patientinquiry/ajaxPatientInquirySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/patientinquiry/ajaxPatientInquirySearchTable.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Patient Inquiry  (END) -->	   	   	   	   	
+
+	   <!-- Room Inquiry (START) -->
+	   <action 
+	   		path="/roomInquiry" 
+	   		type="com.pibs.action.RoomInquiryAction"
+			name="roomInquiryForm"
+			scope="request"
+			input="/pages/transaction/roominquiry/ajaxRoomInquirySearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/roominquiry/ajaxRoomInquirySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/roominquiry/ajaxRoomInquirySearchTable.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Room Inquiry  (END) -->	 	   	   	   	   	
+	   	   	   	   	
+	   <!-- Patient History (START) -->
+	   <action 
+	   		path="/patientHistory" 
+	   		type="com.pibs.action.PatientHistoryAction"
+			name="patientHistoryForm"
+			scope="request"
+			input="/pages/transaction/patienthistory/ajaxPatientHistorySearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/patienthistory/ajaxPatientHistorySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/patienthistory/ajaxPatientHistorySearchTable.jsp"/>
+			<forward name="ajaxGoTo" path="/pages/transaction/patienthistory/ajaxPatientHistory.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Patient History (END) -->
+
+	   <!-- Medical Abstract (START) -->
+	   <action 
+	   		path="/medicalAbstract" 
+	   		type="com.pibs.action.MedicalAbstractAction"
+			name="medicalAbstractForm"
+			scope="request"
+			input="/pages/transaction/medicalabstract/ajaxMedicalAbstract.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/medicalabstract/ajaxMedicalAbstractSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/medicalabstract/ajaxMedicalAbstractSearchTable.jsp"/>
+			<forward name="ajaxGoTo" path="/pages/transaction/medicalabstract/ajaxMedicalAbstract.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Medical Abstract (END) -->
+
+	   <!-- Nursery (START) -->
+	   <action 
+	   		path="/nursery" 
+	   		type="com.pibs.action.NurseryAction"
+			name="nurseryForm"
+			scope="request"
+			input="/pages/transaction/nursery/ajaxNurserySearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/nursery/ajaxNurserySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/nursery/ajaxNurserySearchTable.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Nursery (END) -->
+	   
+	   <!-- Patient Bill History (START) -->
+	   <action 
+	   		path="/patientBillHistory" 
+	   		type="com.pibs.action.PatientBillHistoryAction"
+			name="patientBillHistoryForm"
+			scope="request"
+			input="/pages/transaction/patientbillhistory/ajaxPatientBillHistorySearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/patientbillhistory/ajaxPatientBillHistorySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/patientbillhistory/ajaxPatientBillHistorySearchTable.jsp"/>
+			<forward name="ajaxGoTo" path="/pages/transaction/patientbillhistory/ajaxPatientBillHistoryTable.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Patient History (END) -->
+	   
+	   	   	   	   	   	   	   	
+	</action-mappings>
+	
+
+</struts-config>

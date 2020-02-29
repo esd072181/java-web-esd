@@ -1,0 +1,157 @@
+package com.pibs.form;
+
+import java.util.List;
+
+import com.pibs.model.ListValue;
+import com.pibs.model.Surgery;
+
+public class SurgeryFormBean extends PIBSFormBean {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private int id;
+	private int surgeryTypeId;
+	private String description;
+	private String remarks;
+	
+	private String surgeryTypeName;
+	
+	private String criteria;
+	private String category;
+	private int noOfPages;
+	private int currentPage;
+	private List<Surgery> modelList;
+	private List<ListValue> surgeryTypeList;
+	
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	
+	public SurgeryFormBean() {}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public int getSurgeryTypeId() {
+		return surgeryTypeId;
+	}
+
+
+	public void setSurgeryTypeId(int surgeryTypeId) {
+		this.surgeryTypeId = surgeryTypeId;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+
+	public String getSurgeryTypeName() {
+		return surgeryTypeName;
+	}
+
+
+	public void setSurgeryTypeName(String surgeryTypeName) {
+		this.surgeryTypeName = surgeryTypeName;
+	}
+
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+	public int getNoOfPages() {
+		return noOfPages;
+	}
+
+
+	public void setNoOfPages(int noOfPages) {
+		this.noOfPages = noOfPages;
+	}
+
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+
+	public List<Surgery> getModelList() {
+		return modelList;
+	}
+
+
+	public void setModelList(List<Surgery> modelList) {
+		this.modelList = modelList;
+	}
+
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+	
+	
+
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE form-validation PUBLIC
+        "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.3.0//EN"
+        "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+<form-validation>
+   <formset>
+   
+    <!-- This is used for Master File Modules validation -->
+   
+      <form name="buildingForm">
+		 <field property="description" depends="required">
+		 	<msg name="required" key="mf.building.decription.req" />
+		 </field>
+		 <field property="nooffloor" depends="required">
+		 	<msg name="required" key="mf.building.nooffloor.req" />
+		 </field>
+		 
+		 
+     </form>
+     
+     
+     <form name="testValidatorXMLForm">
+		 <field property="name" depends="required">
+		 	<msg name="required" key="mf.building.decription.req" />
+		 </field>
+     </form>
+     
+     
+     
+  </formset>
+</form-validation>

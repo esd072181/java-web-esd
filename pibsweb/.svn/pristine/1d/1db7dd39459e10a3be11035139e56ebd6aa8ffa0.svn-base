@@ -1,0 +1,259 @@
+package com.pibs.form;
+
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.model.BillingDiscount;
+import com.pibs.model.Discount;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+
+public class BillingDiscountFormBean extends PIBSFormBean {
+
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private int patientCaseSystemId;
+	private int discountId;
+	private String amount;
+	
+	//discount field
+	private String discountDescription;
+
+	
+	private List<Discount> modelList;
+	private List<BillingDiscount> entityList;
+	
+	private String criteria;
+	private String category;
+	private int noOfPages;
+	private int currentPage;
+	
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	public BillingDiscountFormBean() {}
+
+
+
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getNoOfPages() {
+		return noOfPages;
+	}
+
+	public void setNoOfPages(int noOfPages) {
+		this.noOfPages = noOfPages;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+	
+
+	public int getPatientCaseSystemId() {
+		return patientCaseSystemId;
+	}
+
+	public void setPatientCaseSystemId(int patientCaseSystemId) {
+		this.patientCaseSystemId = patientCaseSystemId;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getAmount() {
+		return amount;
+	}
+
+
+
+
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+
+
+
+
+
+
+
+	public int getDiscountId() {
+		return discountId;
+	}
+
+
+
+
+	public void setDiscountId(int discountId) {
+		this.discountId = discountId;
+	}
+
+
+
+
+	public String getDiscountDescription() {
+		return discountDescription;
+	}
+
+
+
+
+	public void setDiscountDescription(String discountDescription) {
+		this.discountDescription = discountDescription;
+	}
+
+
+
+
+	public List<Discount> getModelList() {
+		return modelList;
+	}
+
+
+
+
+	public void setModelList(List<Discount> modelList) {
+		this.modelList = modelList;
+	}
+
+
+
+
+	public List<BillingDiscount> getEntityList() {
+		return entityList;
+	}
+
+
+
+
+	public void setEntityList(List<BillingDiscount> entityList) {
+		this.entityList = entityList;
+	}
+
+
+
+
+	public void populateFormBean(BillingDiscount model) throws Exception {
+		setId(model.getId());
+		setPatientCaseSystemId(model.getPatientCaseSystemId());
+		setDiscountId(model.getDiscountId());
+		setAmount(model.getAmount()!=null ? model.getAmount().toPlainString() : "0.00");
+		setDiscountDescription(model.getDiscountDescription());
+	}
+	
+	public void populateBillingDiscountEntityList(List<BillingDiscount> rsList) throws Exception {
+		setEntityList(rsList);
+	}
+	
+	public BillingDiscount populateModel (BillingDiscountFormBean formbean) throws Exception {
+		BillingDiscount model = new BillingDiscount();
+		model.setId(formbean.getId());
+		model.setPatientCaseSystemId(formbean.getPatientCaseSystemId());
+		model.setDiscountId(formbean.getDiscountId());
+		if (formbean.getAmount()!=null || formbean.getAmount().trim().length()>0) {
+			model.setAmount(BigDecimal.valueOf(Double.valueOf(formbean.getAmount())));	
+		}
+		return model;
+	}
+	
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		ActionErrors errors = new ActionErrors();
+		
+		String command = (String) request.getParameter("command"); 
+		
+		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) || command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE))) {
+			if (this.getAmount() == null || this.getAmount().trim().length()<1) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("tran.amount.req"));
+			}
+		} 
+
+		return errors;
+	}
+
+
+	public void getDiscountDetails(HttpServletRequest request) throws Exception {
+		//fetch the details
+		int id = Integer.parseInt(request.getParameter("discountId"));
+		
+		Discount model = new Discount();
+		model.setId(id);
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.DISCOUNT);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        model = (Discount) resultMap.get(MapConstant.CLASS_DATA);
+        	setDiscountId(model.getId());
+        	setDiscountDescription(model.getDescription());
+        	setAmount(model.getStandardAmount()!=null ? model.getStandardAmount().toPlainString() : "0.00");	
+        }
+	}	
+	
+}

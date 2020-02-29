@@ -1,0 +1,65 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 
+		  <li class="ui-widget-header">Master File</li>
+        	<c:forEach items="${sessionScope.user_access_list}" var="item">
+        		<c:if test="${item == 1401}">
+        			<li onclick="javascript:goToPatient();"><a href="#" >Patient</a></li>
+        		</c:if>
+				<c:if test="${item == 1402}">
+					<li onclick="javascript:goToMedicalSupply();"><a href="#" >Medical Supply</a></li>	
+				</c:if>
+				<c:if test="${item == 1403}">
+					<li onclick="javascript:goToEquipment();"><a href="#" >Equipment</a></li>	
+				</c:if>
+				<c:if test="${item == 1404}">
+					<li onclick="javascript:goToLaboratoryExamination();"><a href="#" >Laboratory Examination</a></li>	
+				</c:if>
+				<c:if test="${item == 1405}">
+					<li onclick="javascript:goToRadiology();"><a href="#" >Radiology</a></li>	
+				</c:if>
+				<c:if test="${item == 1406}">
+					<li onclick="javascript:goToSurgery();"><a href="#" >Surgery</a></li>	
+				</c:if>
+				<c:if test="${item == 1407}">
+					<li onclick="javascript:goToAdditionalServices();"><a href="#" >Additional Services</a></li>	
+				</c:if>			
+				
+				<c:if test="${item == 1408}">
+					<li onclick="javascript:goToAdditionalServicesCategory();"><a href="#" >Additional Services Category</a></li>	
+				</c:if>
+				<c:if test="${item == 1409}">
+					<li onclick="javascript:goToDiscount();"><a href="#" >Discount</a></li>	
+				</c:if>
+				<c:if test="${item == 1410}">
+					<li onclick="javascript:goToProfessional();"><a href="#" >Professional/Doctor</a></li>	
+				</c:if>								
+				<c:if test="${item == 1411}">
+					<li onclick="javascript:goToProfessionalType();"><a href="#" >Professional Type</a></li>
+				</c:if>	
+				<c:if test="${item == 1412}">
+					<li onclick="javascript:goToSpecialization();"><a href="#" >Specialization</a></li>	
+				</c:if>	
+				<c:if test="${item == 1413}">
+					<li onclick="javascript:goToRoom();"><a href="#" >Room</a></li>	
+				</c:if>	
+				<c:if test="${item == 1414}">
+					<li onclick="javascript:goToRoomCategory();"><a href="#" >Room Category</a></li>
+				</c:if>	
+				<c:if test="${item == 1415}">
+					<li onclick="javascript:goToBuilding();"><a href="#" >Building</a></li>	
+				</c:if>	
+				<c:if test="${item == 1416}">
+					<li class="divider"></li>
+					<li onclick="javascript:goToEmployee();"><a href="#" >Employee</a></li>
+				</c:if>				
+				<c:if test="${item == 1417}">
+	             		<li onclick="javascript:goToUser();"><a href="#" >User</a></li>
+        			</c:if>	 
+        		<c:if test="${item == 1418}">
+	             	<li onclick="javascript:goToUserAccess();"><a href="#" >User Access</a></li>
+        		</c:if>	 
+	        </c:forEach>
+
+		
+  
+ 

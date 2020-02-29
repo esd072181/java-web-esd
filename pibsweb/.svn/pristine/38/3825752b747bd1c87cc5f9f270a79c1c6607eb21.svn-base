@@ -1,0 +1,126 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+    
+  //limit the characters in textarea Remarks field
+    $("#remarksId").keyup(function(){
+        if($(this).val().length > remarksLength){
+            $(this).val($(this).val().substr(0, remarksLength));
+    	}
+    });
+
+    $("#descriptionId").focus();
+
+    
+  });
+  
+ 
+//limit the characters in textarea Remarks field
+$("#remarksId").keyup(function(){
+    if($(this).val().length > remarksLength){
+        $(this).val($(this).val().substr(0, remarksLength));
+	}
+});
+</script>
+
+
+
+<div class="row">
+	<div class="col-sm-2">
+	
+		<!-- Left Menu -->
+		<div style="padding-top: 15px; padding-left: 12px;">
+		  	<!-- jQuery ui -->
+		  	<ul id="menu">
+			  <li class="ui-widget-header">Menu</li>
+			  <li onclick="goToAddRadiology();"><a href="#">Add New Record</a></li>
+			  <li onclick="goToRadiology();"><a href="#">Search/Update Record</a></li>
+			  <%@ include file="/template/menu_left_masterfile.jsp" %>
+			</ul>
+		</div>
+	</div>
+	
+ 	<div class="col-sm-10 divSpace">
+
+		<div style="height: 30%; padding-top: 0px;" align="left">
+		<h3>Radiology - Edit Record</h3>
+			<html:form action="/radiology.do" styleId="idForm" >
+				<fieldset>
+				
+				<div>
+					<html:errors/>
+				</div>
+				<div>
+					<h4 style="color: blue;"><c:out value="${radiologyForm.transactionMessage}"></c:out></h4>
+				</div> 
+						<div>
+													
+							<div class="control-group">
+								<!--  <label  class="control-label" for="id">Id:</label>-->	
+								 <div class="controls">
+								 		<html:hidden property="id" value="${radiologyForm.id}"/><!-- need to add hidden because the the text property for id is disabled -->
+										<!--<html:text property="id" styleClass="input-xlarge"  style="text-align: right;" size="2" value="${radiologyForm.id}" disabled="true"></html:text><br>-->
+								 </div>						
+							</div>
+							
+							<div class="control-group">
+								<label  class="control-label top-spacing" for="roleId">Type:</label>	
+								 <div class="controls">
+								 	<html:select  name="radiologyForm" property="radiologyTypeId" disabled="${radiologyForm.transactionStatus}">
+								 		<html:option value="0">--Select--</html:option>
+								 		<html:optionsCollection name="radiologyForm" property="radiologyTypeLOV" label="listValue" value="id"/>				 		
+								 	</html:select>									 			
+								 </div>						
+							</div>
+							
+							<div class="control-group">
+								<label  class="control-label" for="description">Description:</label>	
+								 <div class="controls">
+										<html:text property="description" styleClass="input-xlarge"  size="20" maxlength="20" value="${radiologyForm.description}" disabled="${radiologyForm.transactionStatus}"></html:text><br>
+								 </div>						
+							</div>
+
+							<div class="control-group">
+								<label  class="control-label" for="remarks">Remarks:</label>
+								<div class="controls">
+									<html:textarea styleId="remarksId" rows="3" property="remarks" cols="40" styleClass="input-xlarge"  value="${radiologyForm.remarks}" disabled="${radiologyForm.transactionStatus}"></html:textarea><br>
+								</div>
+							</div>	
+							
+							<div class="control-group">
+								<label  class="control-label" for="fee">Fee (Php):</label>	
+								 <div class="controls">
+										<html:text styleId="feeId" property="fee" styleClass="input-xlarge"  size="20" maxlength="20" value="${radiologyForm.fee}" disabled="${radiologyForm.transactionStatus}"></html:text><br>
+								 </div>						
+							</div>
+													
+							<br>
+							 <div class="control-group">
+							 	 <div class="controls">
+									<c:choose>
+										<c:when test="${radiologyForm.transactionStatus == true}">
+											<html:button property="btnClose" styleClass="btn btn-primary" onclick="goToRadiology();" value="Close"></html:button>
+										</c:when>
+										<c:otherwise>
+											<html:button property="btnUpdate" styleClass="btn btn-primary" onclick="updateRadiology();" value="Update"></html:button>
+											<html:button property="btnCancel" styleClass="btn btn-primary" onclick="goToRadiology();" value="Cancel"></html:button>
+										</c:otherwise>
+									</c:choose>								 	 
+							 	 </div>
+							 </div>
+						</div>
+						
+				</fieldset>				
+
+			</html:form>
+		</div>
+	
+	</div>
+	
+</div>	
+	

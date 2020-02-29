@@ -1,0 +1,56 @@
+package com.pibs.constant;
+
+public class ActionConstant {
+
+	public static final String VALIDATEUSER = "validate_user";
+	public static final String SAVE = "save";
+	public static final String GET_DATA = "getData";
+	public static final String UPDATE = "update";
+	public static final String DELETE = "delete";
+	public static final String SEARCHBY = "searchby";
+	public static final String SEARCHALL = "searchall";
+	public static final String GET_ACTIVE_DATA = "getActiveData";
+	public static final String GET_INACTIVE_DATA = "getInActiveData";
+	public static final String GET_NO_USER_ACCOUNT_DATA = "getNoUserAccountData";
+	public static final String GET_DATA_BY_LIST_TYPE= "getDataByListType";
+	public static final String RESTORE = "restore";
+	public static final String GENERATE_REPORT = "generateReport";
+	public static final String UPDATE_USERNAME_PASSWORD = "update_username_password";
+	public static final String GET_ACTIVE_DATA_BY_ID_TYPE = "getActiveDataByIdType";
+
+	//common mapping forward action
+	public static final String SUCCESS = "success";
+	public static final String FAILED = "failed";
+//	public static final String ERROR = "error";
+	public static final String NONE = "none";
+//	public static final String FWD_MAIN = "main";
+//	public static final String FWD_ADD = "add";
+//	public static final String FWD_EDIT = "edit";
+	
+	public static final String SHOW_AJAX_MAIN = "ajaxMain";
+	public static final String SHOW_AJAX_ADD = "ajaxAdd";
+	public static final String SHOW_AJAX_EDIT = "ajaxEdit";
+	public static final String SHOW_AJAX_TABLE = "ajaxTable";
+	public static final String SHOW_AJAX_GO_TO_SEARCH = "ajaxGoToSearch";
+	public static final String SHOW_AJAX_GO_TO_ADMISSION = "ajaxGoToAdmission";
+	public static final String SHOW_AJAX_GO_TO_BILLING = "ajaxGoToBilling";
+	public static final String SHOW_AJAX_GO_TO_BILLING_CHILD = "ajaxGoToBillingChild";
+	public static final String SHOW_AJAX_GO_TO_BILLING_CHILD_SEARCH = "ajaxGoToBillingChildSearch";
+	public static final String SHOW_AJAX_GO_TO_MONITOR_PATIENT = "ajaxGoToMonitorPatient";
+	public static final String SHOW_AJAX_GO_TO_MONITOR_PATIENT_CHILD = "ajaxGoToMonitorPatientChild";
+	public static final String SHOW_AJAX_GO_TO_MONITOR_PATIENT_CHILD_SEARCH = "ajaxGoToMonitorPatientChildSearch";
+
+	
+	public static final String SHOW_AJAX_BUILDING_NO_OF_FLOOR = "ajaxBuildingNoOfFloor";
+	
+	public static final String AJAX_SUCCESS = "ajaxSuccess";
+	public static final String AJAX_FAILED = "ajaxFailed";
+	
+	//for Admission
+	public static final String SEARCH_PATIENT_FOR_ADMISSION = "searchPatientForAdmission";
+	//for Monitor Patient/Billing
+	public static final String SEARCH_PATIENT_ADMITTED = "searchPatientAdmitted";
+	public static final String SEARCH_ALL_PATIENT_ADMITTED = "searchAllPatientAdmitted";
+
+	
+}

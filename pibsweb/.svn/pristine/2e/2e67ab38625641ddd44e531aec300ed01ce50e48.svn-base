@@ -1,0 +1,10 @@
+package com.pibs.bo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public interface AdmissionBo {
+
+	Map<String, Object> addNewRecord(HashMap<String, Object> dataMap) throws Exception;
+
+}

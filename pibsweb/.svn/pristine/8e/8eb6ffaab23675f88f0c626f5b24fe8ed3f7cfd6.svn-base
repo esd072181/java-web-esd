@@ -1,0 +1,685 @@
+package com.pibs.dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import com.pibs.config.ServerContext;
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.dao.AdmissionDao;
+import com.pibs.model.Admission;
+import com.pibs.model.Patient;
+import com.pibs.model.Room;
+import com.pibs.model.User;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+import com.pibs.util.PIBSUtils;
+
+public class AdmissionDaoImpl implements AdmissionDao {
+
+	private final static Logger logger = Logger.getLogger(AdmissionDaoImpl.class);
+	
+	@Override
+	public Map<String, Object> save(HashMap<String, Object> dataMap) throws Exception{
+		
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SAVE);
+		
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		Admission model = (Admission) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setCreatedBy((int) user.getId());	
+		}
+		model.setCreatedOn(new Timestamp(new java.util.Date().getTime()));
+		model.setDateOfCase(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("insert into pibs.tran_patient_case (");
+		  		qry.append("caseno ");
+		  		qry.append(",chiefcomplaint ");
+		  		qry.append(",patientsystemid ");
+		  		qry.append(",professionalid ");
+		  		qry.append(",roomid ");
+		  		qry.append(",patienttypeid ");
+		  		qry.append(",dateofcase ");
+		  		qry.append(",patientcasestatusid ");
+		  		qry.append(",createdby ");
+		  		qry.append(",createdon ");
+		  		qry.append(",version ");
+		  		qry.append(",active ");
+		  		qry.append(" ) ");
+		  		qry.append(" values ");
+		  		qry.append(" ( ");
+		  		qry.append(" ? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,1 ");
+		  		qry.append(" ,true ");
+		  		qry.append(" ) ");
+		  		
+		StringBuffer qryLog =  new StringBuffer("insert into pibs.tran_patient_case (");
+				qryLog.append("caseno ");
+				qryLog.append(",chiefcomplaint ");
+				qryLog.append(",patientsystemid ");
+				qryLog.append(",professionalid ");
+				qryLog.append(",roomid ");
+				qryLog.append(",patienttypeid ");
+				qryLog.append(",dateofcase ");
+				qryLog.append(",patientcasestatusid ");
+				qryLog.append(",createdby ");
+				qryLog.append(",createdon ");
+				qryLog.append(",version ");
+				qryLog.append(",active ");
+				qryLog.append(" ) ");
+				qryLog.append(" values ");
+				qryLog.append(" ( ");
+				qryLog.append(model.getCaseNo());
+				qryLog.append(" ,"+model.getChiefComplaint());
+				qryLog.append(" ,"+model.getPatientSystemId());
+				qryLog.append(" ,"+model.getProfessionalId());
+				qryLog.append(" ,"+model.getRoomId());
+				qryLog.append(" ,"+model.getPatientTypeId());
+				qryLog.append(" ,"+model.getDateOfCase());
+				qryLog.append(" ,"+model.getPatientCaseStatusId());
+				qryLog.append(" ,"+model.getCreatedBy());
+				qryLog.append(" ,"+model.getCreatedOn());
+				qryLog.append(" ,1 ");
+				qryLog.append(" ,true ");
+				qryLog.append(" ) ");
+					
+		PIBSUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+  		  		
+		  try {
+			  //initialize conn here once only
+			  conn = ServerContext.getJDBCHandle();
+			  conn.setAutoCommit(false);
+			  pstmt = conn.prepareStatement(qry.toString());
+			     
+			  pstmt.setString(1, model.getCaseNo());
+			  pstmt.setString(2, model.getChiefComplaint());
+			  pstmt.setInt(3, model.getPatientSystemId());
+			  pstmt.setInt(4, model.getProfessionalId());
+			  pstmt.setInt(5, model.getRoomId());
+			  pstmt.setInt(6, model.getPatientTypeId());
+			  pstmt.setTimestamp(7, model.getDateOfCase());
+			  pstmt.setInt(8, model.getPatientCaseStatusId());
+			  pstmt.setInt(9, model.getCreatedBy());
+			  pstmt.setTimestamp(10, model.getCreatedOn());
+			     
+			  int statusInt = pstmt.executeUpdate();
+			     
+			  if (statusInt == 1) {
+				  
+	        		//update the Patient status to admitted = 502
+	        		Patient patientModel = new Patient();
+	        		patientModel.setId(model.getPatientSystemId());
+	        		patientModel.setPatientStatusId(502);
+	        		patientModel.setRoomId(model.getRoomId());
+	        		
+					HashMap<String,Object> patientDataMap = new HashMap<String, Object>();
+					patientDataMap.put(MapConstant.MODULE, ModuleConstant.PATIENT);
+					patientDataMap.put(MapConstant.CLASS_DATA, patientModel);
+					patientDataMap.put(MapConstant.USER_SESSION_DATA, user);
+					patientDataMap.put(MapConstant.JDBC_CONNECTION, conn);
+					patientDataMap.put(MapConstant.ACTION, ActionConstant.UPDATE_TO_ADMITTED);
+					
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service.executeRequest(patientDataMap);
+				    
+				    if (resultMap!=null && !resultMap.isEmpty()) {
+				    	boolean transactionStatusforPatientUpdate = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+				    	if (transactionStatusforPatientUpdate) {
+				    		logger.info("Patient System Id successfully Admitted: " + patientModel.getId());
+				    		
+				    		service = null;
+				    		resultMap = null;
+				    		//update the available beds of room
+								Room roomModel = new Room();
+								roomModel.setId(model.getRoomId());
+								HashMap<String,Object> roomDataMap = new HashMap<String, Object>();
+								roomDataMap.put(MapConstant.MODULE, ModuleConstant.ROOM);
+								roomDataMap.put(MapConstant.CLASS_DATA, roomModel);
+								roomDataMap.put(MapConstant.USER_SESSION_DATA, user);
+								roomDataMap.put(MapConstant.JDBC_CONNECTION, conn);
+								roomDataMap.put(MapConstant.ACTION, ActionConstant.UPDATE_AVAILABLE_BEDS);
+
+						        service = new ServiceManagerImpl();
+						        resultMap = service.executeRequest(roomDataMap);
+						        
+						        if (resultMap!=null && !resultMap.isEmpty()) {
+						        	boolean transactionStatusforUpdate = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+							    	if (transactionStatusforUpdate) {
+										conn.commit();
+										logger.info("Room record (id: " +model.getId()+") available beds updated successfully..");
+										status = true;				    		
+							    	}
+						        } else {
+						        	conn.rollback();
+						        	logger.error("ResultMap is empty for Room update available beds:" + roomModel.getId());
+						        }
+						        							
+				    	} else {
+				    		conn.rollback();
+				    		logger.error("Error in updating patient status of Patient System Id: " + model.getPatientSystemId());
+				    	}
+				    }
+			  } else {
+				  conn.rollback();
+				  logger.error("Error in saving Admission data: " + model.getPatientSystemId());
+			  }
+		  } catch (Exception e) {
+			  conn.rollback();
+		 	  e.printStackTrace();
+		  } finally {
+			  PIBSUtils.closeObjects(rs);
+			  PIBSUtils.closeObjects(pstmt);
+			  PIBSUtils.closeObjects(conn);
+		  }
+		 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);
+		
+		return returnMap;
+	}
+	
+	public static int getAdmissionCount() throws Exception{
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+			 
+			 int totalNoOfRecords = 0;
+					  
+			 try {
+			 	 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer("select id from pibs.tran_patient_case order by id desc limit 1");
+		 			 
+				 PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 if (rs.next()) {
+					 totalNoOfRecords = rs.getInt(1);
+				 } else {
+					 totalNoOfRecords = 0;
+				 }
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+			 
+	    System.out.println("getAdmissionCount() - Exit");
+		return totalNoOfRecords;
+	}
+	
+	@Override
+	public Map<String, Object> getDataById(HashMap<String, Object> criteriaMap) throws Exception{
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		    //get the model criteria
+		    Admission model = (Admission) criteriaMap.get(MapConstant.CLASS_DATA);
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = null;
+					sql = new StringBuffer(" select a.id,a.patientid,a.lastname,a.firstname,a.middlename,a.gender,b.listvalue as patientstatus, ");
+					    sql.append(" d.listvalue as patienttype,c.caseno,c.chiefcomplaint,e.roomno,f.lastname||', '||f.firstname||' '||f.middlename as doctor,c.dateofcase, h.roomno as roomnotransfer ");
+					 	sql.append(" from pibs.file_patient_info a  ");  
+					 	sql.append(" inner join pibs.list_value b on a.patientstatusid = b.id ");
+					 	sql.append(" inner join pibs.tran_patient_case c on a.id=c.patientsystemid  ");
+					 	sql.append(" inner join pibs.list_value d on c.patienttypeid=d.id ");
+					 	sql.append(" inner join pibs.file_room e  on c.roomid = e.id ");
+					 	sql.append(" inner join pibs.file_professional f on c.professionalid = f.id ");
+					 	sql.append(" left join (select * from pibs.tran_patient_room_transfer where active = true order by datetransferred desc limit 1) g on c.id = g.patientcasesystemid ");
+					 	sql.append(" left join pibs.file_room h on g.roomidtransfer = h.id ");
+					 	sql.append(" where c.patientcasestatusid = 702 ");//admitted status
+//					 	sql.append(" and a.patientstatusid = 502 ");//admitted status
+					 	sql.append(" and c.id = ?");
+
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, model.getId());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+		    		 model.setPatientId(rs.getString(2));
+		    		 model.setLastName(rs.getString(3));
+		    		 model.setFirstName(rs.getString(4));
+		    		 model.setMiddleName(rs.getString(5));
+		    		 model.setGender(rs.getString(6));
+		    		 model.setPatientStatus(rs.getString(7));
+		    		 model.setPatientType(rs.getString(8));
+		    		 model.setCaseNo(rs.getString(9));
+		    		 model.setChiefComplaint(rs.getString(10));
+		    		 model.setRoomNo(rs.getString(11));
+		    		 model.setDoctor(rs.getString(12));
+		    		 model.setDateOfCase(rs.getTimestamp(13));
+		    		 model.setRoomNoTransfer(rs.getString(14));
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+		
+		     if (model!=null) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_DATA, model);
+		     } 
+		     
+	    System.out.println("getDataById() - Exit");
+		return returnMap;
+
+	}
+	
+	@Override
+	public Map<String, Object> getDataByCaseNo(HashMap<String, Object> criteriaMap) throws Exception{
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		    //get the model criteria
+		    Admission model = (Admission) criteriaMap.get(MapConstant.CLASS_DATA);
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = null;
+					sql = new StringBuffer(" select a.id,a.patientid,a.lastname,a.firstname,a.middlename,a.gender,b.listvalue as patientstatus, ");
+					    sql.append(" d.listvalue as patienttype,c.caseno,c.chiefcomplaint,e.roomno,f.lastname||', '||f.firstname||' '||f.middlename as doctor,c.dateofcase, c.id as patientcasesystemid ");
+					 	sql.append(" from pibs.file_patient_info a, pibs.list_value b, pibs.tran_patient_case c, pibs.list_value d, pibs.file_room e, pibs.file_professional f ");  
+					 	sql.append(" where a.patientstatusid = b.id ");
+					 	sql.append(" and a.id=c.patientsystemid ");
+					 	sql.append(" and c.patienttypeid=d.id ");
+					 	sql.append(" and c.roomid = e.id ");
+					 	sql.append(" and c.professionalid = f.id ");
+					 	sql.append(" and c.caseNo = ?");
+
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setString(1, model.getCaseNo());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+		    		 model.setPatientId(rs.getString(2));
+		    		 model.setLastName(rs.getString(3));
+		    		 model.setFirstName(rs.getString(4));
+		    		 model.setMiddleName(rs.getString(5));
+		    		 model.setGender(rs.getString(6));
+		    		 model.setPatientStatus(rs.getString(7));
+		    		 model.setPatientType(rs.getString(8));
+		    		 model.setCaseNo(rs.getString(9));
+		    		 model.setChiefComplaint(rs.getString(10));
+		    		 model.setRoomNo(rs.getString(11));
+		    		 model.setDoctor(rs.getString(12));
+		    		 model.setDateOfCase(rs.getTimestamp(13));
+		    		 model.setId(rs.getInt(14));
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+		
+		     if (model!=null) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_DATA, model);
+		     } 
+		     
+	    System.out.println("getDataByCaseNo() - Exit");
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getDataByPatientCaseSysId(HashMap<String, Object> criteriaMap) throws Exception{
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		    //get the model criteria
+		    Admission model = (Admission) criteriaMap.get(MapConstant.CLASS_DATA);
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = null;
+					sql = new StringBuffer(" select a.id,a.dateofcase,c.rate as roomrate,d.standardadmissionfee as doctorfee, d.lastname || ', ' || d.firstname as doctor, b.roomno, b.id as roomid");
+						sql.append(" from pibs.tran_patient_case a, pibs.file_room b, pibs.file_room_category c, pibs.file_professional d ");  
+					 	sql.append(" where a.roomid = b.id ");
+					 	sql.append(" and b.roomcategoryid = c.id ");
+					 	sql.append(" and a.professionalid=d.id ");
+					 	sql.append(" and a.id = ?");
+
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, model.getId());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+		    		 model.setId(rs.getInt(1));
+		    		 model.setDateOfCase(rs.getTimestamp(2));
+		    		 model.setRoomFee(rs.getBigDecimal(3));
+		    		 model.setDoctorFee(rs.getBigDecimal(4));
+		    		 model.setDoctor(rs.getString(5));
+		    		 model.setRoomNo(rs.getString(6));
+		    		 model.setRoomId(rs.getInt(7));
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+		
+		     if (model!=null) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_DATA, model);
+		     } 
+		     
+	    System.out.println("getDataByPatientCaseSysId() - Exit");
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getDataByBillingId(HashMap<String, Object> dataMap) throws Exception{
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		    //get the model criteria
+		    Admission model = new Admission();
+			
+		    int billingId = (Integer) dataMap.get(MapConstant.SEARCH_CRITERIA);
+		    
+		    Connection conn = (Connection) dataMap.get(MapConstant.JDBC_CONNECTION);
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer qry =  new StringBuffer("select a.patientsystemid,a.roomid,a.id as patientcasesystemid ");	
+		    		qry.append(" from pibs.tran_patient_case a, pibs.tran_patient_billing b ");
+		    		qry.append(" where a.id = b.patientcasesystemid ");
+		    		qry.append(" and b.id = ?");
+		    		
+		    		PIBSUtils.writeLogDebug(logger, "SQL: "+qry.toString());
+		    		
+		    		pstmt = conn.prepareStatement(qry.toString());
+		    				     
+		    		pstmt.setInt(1, billingId);
+		    			 
+		    		rs = pstmt.executeQuery();
+		    			
+		    		if (rs.next()) {
+		    			model.setPatientSystemId(rs.getInt(1));
+		    			model.setRoomId(rs.getInt(2));
+		    			model.setId(rs.getInt(3));
+		    		}				 
+			 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+//				 PIBSUtils.closeObjects(conn);//do not close here
+			 }
+		
+		     if (model!=null) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_DATA, model);
+		     } 
+		     
+	    System.out.println("getDataByBillingId() - Exit");
+		return returnMap;
+	}
+	
+	@Override
+	public Map<String, Object> updateToDischarged(HashMap<String, Object> dataMap) throws Exception{
+		// TODO Auto-generated method stub
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_UPDATE);
+		 
+		//DBCP JNDI
+		Connection conn = (Connection) dataMap.get(MapConstant.JDBC_CONNECTION);
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		Admission model = (Admission) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		model.setDateDischarged(model.getModifiedOn());
+		
+		StringBuffer  qry =  new StringBuffer("update pibs.tran_patient_case set ");	
+			qry.append(" datedischarged=? ");
+			qry.append(" ,patientcasestatusid=703 ");
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" id = ? ");
+			
+		PIBSUtils.writeLogDebug(logger, "SQL: "+qry.toString());
+	
+		 try {
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setTimestamp(1, model.getDateDischarged());
+			pstmt.setInt(2, model.getModifiedBy());
+			pstmt.setTimestamp(3, model.getModifiedOn());
+			pstmt.setLong(4, model.getId());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+//				conn.commit(); //no commit here
+				System.out.println("Admission record (id: " +model.getId()+") updated successfully..");
+				status = true;
+			}
+				
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			PIBSUtils.closeObjects(rs);
+			PIBSUtils.closeObjects(pstmt);
+//			PIBSUtils.closeObjects(conn); //do not close here
+		}
+			 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);	
+		returnMap.put(MapConstant.JDBC_CONNECTION, conn);	
+		
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getDataByPatientCaseSysIdForBillingReport(HashMap<String, Object> criteriaMap) throws Exception{
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		    //get the model criteria
+		    Admission model = (Admission) criteriaMap.get(MapConstant.CLASS_DATA);
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = null;
+					sql = new StringBuffer(" select a.caseno, b.lastname || ', ' || b.firstname as doctor, c.roomno, a.dateofcase, d.lastname || ', ' || d.firstname || ' ' || d.middlename  as patientfullname, d.patientid, f.roomno as roomnotransfer ");
+						sql.append(" from pibs.tran_patient_case a ");  
+					 	sql.append(" inner join pibs.file_professional b on a.professionalid = b.id ");
+					 	sql.append(" inner join pibs.file_room c on a.roomid = c.id ");
+					 	sql.append(" inner join pibs.file_patient_info d  on a.patientsystemid = d.id ");
+					 	sql.append(" left join (select * from pibs.tran_patient_room_transfer where active = true order by datetransferred desc limit 1) e on a.id = e.patientcasesystemid ");
+					 	sql.append(" left join pibs.file_room f on f.id = e.roomidtransfer ");
+					 	sql.append(" where a.id = ?");
+
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, model.getId());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+		    		 model.setCaseNo(rs.getString(1));
+		    		 model.setDoctor(rs.getString(2));
+		    		 model.setRoomNo(rs.getString(3));
+		    		 model.setDateOfCase(rs.getTimestamp(4));
+		    		 model.setPatientFullName(rs.getString(5));
+		    		 model.setPatientId(rs.getString(6));
+		    		 model.setRoomNoTransfer(rs.getString(7));
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+		
+		     if (model!=null) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_DATA, model);
+		     } 
+		     
+	    System.out.println("getDataByPatientCaseSysIdForBillingReport() - Exit");
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getDataByPatientSysId(HashMap<String, Object> criteriaMap) throws Exception {
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = null;
+
+		    //get the model criteria
+		    Admission model = (Admission) criteriaMap.get(MapConstant.CLASS_DATA);
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = null;
+					sql = new StringBuffer(" select a.id,a.chiefcomplaint,a.dateofcase,a.datedischarged,d.lastname || ', ' || d.firstname as doctor, b.roomno ");
+						sql.append(" from pibs.tran_patient_case a, pibs.file_room b, pibs.file_room_category c, pibs.file_professional d, pibs.file_patient_info e  ");  
+					 	sql.append(" where a.roomid = b.id ");
+					 	sql.append(" and b.roomcategoryid = c.id ");
+					 	sql.append(" and a.professionalid=d.id ");
+					 	sql.append(" and a.patientsystemid = e.id ");
+					 	sql.append(" and a.patientcasestatusid = 703 ");
+					 	sql.append(" and e.id = ?");
+
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, model.getPatientSystemId());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+		    		 model.setId(rs.getInt(1));
+		    		 model.setDateOfCase(rs.getTimestamp(2));
+		    		 model.setRoomFee(rs.getBigDecimal(3));
+		    		 model.setDoctorFee(rs.getBigDecimal(4));
+		    		 model.setDoctor(rs.getString(5));
+		    		 model.setRoomNo(rs.getString(6));
+		    		 model.setRoomId(rs.getInt(7));
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+		
+		     if (model!=null) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_DATA, model);
+		     } 
+		     
+	    System.out.println("getDataByPatientSysId() - Exit");
+		return returnMap;
+	}
+
+	
+}

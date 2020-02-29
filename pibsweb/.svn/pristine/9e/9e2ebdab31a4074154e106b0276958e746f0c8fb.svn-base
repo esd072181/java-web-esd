@@ -1,0 +1,10 @@
+package com.pibs.dao;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public interface AdmissionDao {
+
+	public Map<String, Object> save(HashMap<String, Object> dataMap) throws Exception;
+
+}

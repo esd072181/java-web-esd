@@ -1,0 +1,227 @@
+package com.pibs.model;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
+public class Billing implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private int id;
+	private int patientCaseSystemid;
+	private BigDecimal totalLaboratoryExamFee;
+	private BigDecimal totalMedsupplyFee;
+	private BigDecimal totalRadiologyFee;
+	private BigDecimal totalSurgeryFee;
+	private BigDecimal totalAdditionalServicesFee;
+	private BigDecimal totalEquipmentFee;
+	private BigDecimal totalRoomFee;
+	private BigDecimal totalDoctorFee;
+	private BigDecimal totalFee;
+	private BigDecimal totalDiscountAmt;
+	private BigDecimal totalTaxAmt;
+	private BigDecimal totalBill;
+	private Timestamp dateProcessed;
+	private String remarks;
+	private boolean cleared;
+	
+	private int createdBy;
+	private Timestamp createdOn;
+	private int modifiedBy;
+	private Timestamp modifiedOn;
+	private int version;
+	private boolean active;
+		
+	public Billing() {}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getPatientCaseSystemid() {
+		return patientCaseSystemid;
+	}
+
+	public void setPatientCaseSystemid(int patientCaseSystemid) {
+		this.patientCaseSystemid = patientCaseSystemid;
+	}
+
+	public BigDecimal getTotalLaboratoryExamFee() {
+		return totalLaboratoryExamFee;
+	}
+
+	public void setTotalLaboratoryExamFee(BigDecimal totalLaboratoryExamFee) {
+		this.totalLaboratoryExamFee = totalLaboratoryExamFee;
+	}
+
+	public BigDecimal getTotalMedsupplyFee() {
+		return totalMedsupplyFee;
+	}
+
+	public void setTotalMedsupplyFee(BigDecimal totalMedsupplyFee) {
+		this.totalMedsupplyFee = totalMedsupplyFee;
+	}
+
+	public BigDecimal getTotalRadiologyFee() {
+		return totalRadiologyFee;
+	}
+
+	public void setTotalRadiologyFee(BigDecimal totalRadiologyFee) {
+		this.totalRadiologyFee = totalRadiologyFee;
+	}
+
+	public BigDecimal getTotalSurgeryFee() {
+		return totalSurgeryFee;
+	}
+
+	public void setTotalSurgeryFee(BigDecimal totalSurgeryFee) {
+		this.totalSurgeryFee = totalSurgeryFee;
+	}
+
+	public BigDecimal getTotalAdditionalServicesFee() {
+		return totalAdditionalServicesFee;
+	}
+
+	public void setTotalAdditionalServicesFee(BigDecimal totalAdditionalServicesFee) {
+		this.totalAdditionalServicesFee = totalAdditionalServicesFee;
+	}
+
+	public BigDecimal getTotalEquipmentFee() {
+		return totalEquipmentFee;
+	}
+
+	public void setTotalEquipmentFee(BigDecimal totalEquipmentFee) {
+		this.totalEquipmentFee = totalEquipmentFee;
+	}
+
+	public BigDecimal getTotalRoomFee() {
+		return totalRoomFee;
+	}
+
+	public void setTotalRoomFee(BigDecimal totalRoomFee) {
+		this.totalRoomFee = totalRoomFee;
+	}
+
+	public BigDecimal getTotalDoctorFee() {
+		return totalDoctorFee;
+	}
+
+	public void setTotalDoctorFee(BigDecimal totalDoctorFee) {
+		this.totalDoctorFee = totalDoctorFee;
+	}
+
+	public BigDecimal getTotalDiscountAmt() {
+		return totalDiscountAmt;
+	}
+
+	public void setTotalDiscountAmt(BigDecimal totalDiscountAmt) {
+		this.totalDiscountAmt = totalDiscountAmt;
+	}
+
+	public BigDecimal getTotalTaxAmt() {
+		return totalTaxAmt;
+	}
+
+	public void setTotalTaxAmt(BigDecimal totalTaxAmt) {
+		this.totalTaxAmt = totalTaxAmt;
+	}
+
+	public BigDecimal getTotalBill() {
+		return totalBill;
+	}
+
+	public void setTotalBill(BigDecimal totalBill) {
+		this.totalBill = totalBill;
+	}
+
+	public Timestamp getDateProcessed() {
+		return dateProcessed;
+	}
+
+	public void setDateProcessed(Timestamp dateProcessed) {
+		this.dateProcessed = dateProcessed;
+	}
+
+	public boolean isCleared() {
+		return cleared;
+	}
+
+	public void setCleared(boolean cleared) {
+		this.cleared = cleared;
+	}
+
+	public int getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(int createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Timestamp getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public int getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(int modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public Timestamp getModifiedOn() {
+		return modifiedOn;
+	}
+
+	public void setModifiedOn(Timestamp modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public BigDecimal getTotalFee() {
+		return totalFee;
+	}
+
+	public void setTotalFee(BigDecimal totalFee) {
+		this.totalFee = totalFee;
+	}
+
+	
+	
+}

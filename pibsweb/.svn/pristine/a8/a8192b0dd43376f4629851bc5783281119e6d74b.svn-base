@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+ 
+<struts-config>
+ 
+ 	<!-- Struts Config for Transactions -->
+ 
+	<form-beans>
+	    <!--  <form-bean name="patientForm" type="com.pibs.form.PatientFormBean" />--> <!-- This is already declared in struts-config-mf -->
+		<form-bean name="admissionForm" type="com.pibs.form.AdmissionFormBean" />
+		<form-bean name="monitorPatientForm" type="com.pibs.form.MonitorPatientFormBean" />
+		<form-bean name="diagnosisForm" type="com.pibs.form.DiagnosisFormBean" />
+		<form-bean name="medicationStatementForm" type="com.pibs.form.MedicationStatementFormBean" />
+		<form-bean name="prognosisForm" type="com.pibs.form.PrognosisFormBean" />
+		<form-bean name="monitorLaboratoryExaminationForm" type="com.pibs.form.MonitorLaboratoryExaminationFormBean" />
+	</form-beans>
+ 
+	<action-mappings>
+	
+	   
+	   <!-- Patient Registration (START) -->
+	   <action 
+	   		path="/patientRegistration" 
+	   		type="com.pibs.action.PatientAction"
+			name="patientForm"
+			scope="request"
+			input="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/savePatient" 
+	   		type="com.pibs.action.PatientAction"
+			name="patientForm"
+			scope="request"
+			input="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/patientregistration/ajaxPatientAdd.jsp"/>
+	   </action>
+	   <!-- Patient Registration (END) -->
+
+	   <!-- Admission (START) -->
+	   <action 
+	   		path="/admission" 
+	   		type="com.pibs.action.AdmissionAction"
+			name="admissionForm"
+			scope="request"
+			input="/pages/transaction/admission/ajaxAdmissionSearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/admission/ajaxAdmissionSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/admission/ajaxAdmissionSearchTable.jsp"/>
+			<forward name="ajaxGoToAdmission" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveAdmission" 
+	   		type="com.pibs.action.AdmissionAction"
+			name="admissionForm"
+			scope="request"
+			input="/pages/transaction/admission/ajaxAdmission.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/admission/ajaxAdmission.jsp"/>
+	   </action>
+	   <!-- Admission (END) -->
+
+	   <!-- Monitor Patient (START) -->
+	   <action 
+	   		path="/monitorPatient" 
+	   		type="com.pibs.action.MonitorPatientAction"
+			name="monitorPatientForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/ajaxMonitorPatientSearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/transaction/monitorpatient/ajaxMonitorPatientSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/ajaxMonitorPatientSearchTable.jsp"/>
+			<forward name="ajaxGoToMonitorPatient" path="/pages/transaction/monitorpatient/ajaxMonitorPatient.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/ajaxMonitorPatient.jsp"/>
+	   </action>
+	   
+	   
+	   <!-- Diagnosis -->
+	   <action 
+	   		path="/diagnosis" 
+	   		type="com.pibs.action.DiagnosisAction"
+			name="diagnosisForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveDiagnosis" 
+	   		type="com.pibs.action.DiagnosisAction"
+			name="diagnosisForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/diagnosis/ajaxDiagnosis.jsp"/>
+	   </action>
+	   
+	   <!-- Medication Statement -->
+	   <action 
+	   		path="/medicationStatement" 
+	   		type="com.pibs.action.MedicationStatementAction"
+			name="medicationStatementForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMedicationStatement" 
+	   		type="com.pibs.action.MedicationStatementAction"
+			name="medicationStatementForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/medicationstatement/ajaxMedicationStatement.jsp"/>
+	   </action>
+	   
+	   <!-- Prognosis-->
+	   <action 
+	   		path="/prognosis" 
+	   		type="com.pibs.action.PrognosisAction"
+			name="prognosisForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"
+			validate="true">
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+	   </action>
+	   <action 
+	   		path="/savePrognosis" 
+	   		type="com.pibs.action.PrognosisAction"
+			name="prognosisForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/prognosis/ajaxPrognosis.jsp"/>
+	   </action>	
+	   
+	   <!-- Monitor Laboratory Examination -->
+	   <action 
+	   		path="/monitorLaboratoryExamination" 
+	   		type="com.pibs.action.MonitorLaboratoryExaminationAction"
+			name="monitorLaboratoryExaminationForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"
+			validate="true">
+			<forward name="ajaxGoToMonitorPatientChild" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"/>
+			<forward name="ajaxGoToMonitorPatientChildSearch" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationSearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationSearchTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationAdd.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"/>
+	   </action>
+	   <action 
+	   		path="/saveMonitorLaboratoryExamination" 
+	   		type="com.pibs.action.MonitorLaboratoryExaminationAction"
+			name="monitorLaboratoryExaminationForm"
+			scope="request"
+			input="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationAdd.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExamination.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/monitorpatient/laboratoryexamination/ajaxMonitorLaboratoryExaminationAdd.jsp"/>
+	   </action>	   
+	      
+	   <!-- Monitor Patient (END) -->
+
+	   	   	   	   	
+	</action-mappings>
+	
+
+</struts-config>

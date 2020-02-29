@@ -1,0 +1,269 @@
+package com.pibs.form;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.model.Billing;
+import com.pibs.model.BillingPayment;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+import com.pibs.util.BillingUtils;
+import com.pibs.util.PIBSUtils;
+
+public class BillingPaymentFormBean extends PIBSFormBean {
+
+	private static final long serialVersionUID = 1L;
+	
+	private int patientCaseSystemId;
+	private int billingId; //id in Patient Bill table
+
+	//total
+	private String totalAmtDue;
+	
+	private Billing modelBilling;
+	
+	private String totalAmtCash;
+	private String totalAmtChange;
+	private BillingPayment model;
+	
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	
+	public BillingPaymentFormBean() {}
+
+
+
+	public BillingPayment getModel() {
+		return model;
+	}
+
+
+	public void setModel(BillingPayment model) {
+		this.model = model;
+	}
+
+
+
+
+	public String getTotalAmtCash() {
+		return totalAmtCash;
+	}
+
+
+
+
+	public void setTotalAmtCash(String totalAmtCash) {
+		this.totalAmtCash = totalAmtCash;
+	}
+
+
+
+
+	public String getTotalAmtChange() {
+		return totalAmtChange;
+	}
+
+
+
+
+	public void setTotalAmtChange(String totalAmtChange) {
+		this.totalAmtChange = totalAmtChange;
+	}
+
+
+
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+
+
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+
+
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+
+
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+
+
+
+
+	public int getBillingId() {
+		return billingId;
+	}
+
+
+
+
+	public void setBillingId(int billingId) {
+		this.billingId = billingId;
+	}
+
+
+
+
+	public Billing getModelBilling() {
+		return modelBilling;
+	}
+
+
+
+
+	public void setModelBilling(Billing modelBilling) {
+		this.modelBilling = modelBilling;
+	}
+
+
+
+	public String getTotalAmtDue() {
+		return totalAmtDue;
+	}
+
+
+
+
+	public void setTotalAmtDue(String totalAmtDue) {
+		this.totalAmtDue = totalAmtDue;
+	}
+
+
+
+	public int getPatientCaseSystemId() {
+		return patientCaseSystemId;
+	}
+
+
+	public void setPatientCaseSystemId(int patientCaseSystemId) {
+		this.patientCaseSystemId = patientCaseSystemId;
+	}
+
+
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+		String command = (String) request.getParameter("command"); 
+		
+		ActionErrors errors = new ActionErrors();
+		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE))) {
+			
+			double totalAmtDue = PIBSUtils.convertStrToDouble(this.getTotalAmtDue());
+			double totalAmtcash = Double.valueOf(this.getTotalAmtCash());
+			
+			if (totalAmtDue>totalAmtcash) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("tran.paymentinsufficient.req"));
+			} else {
+				setTotalAmtChange(PIBSUtils.convertDoubleToStr(totalAmtcash-totalAmtDue));
+			}
+			
+		}
+
+
+		return errors;
+	}
+
+
+		
+	public void populateModel(BillingPaymentFormBean formbean) throws Exception {
+		BillingPayment model = new BillingPayment();
+		model.setBillingId(formbean.getBillingId());
+		if (formbean.getTotalAmtDue()!=null) {
+			model.setAmount(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(formbean.getTotalAmtDue())));		
+		}
+		model.setModeOfPayment(1101);//default to cash code
+		setModel(model);
+	}
+	
+	
+	public void populateModelBilling (BillingUtils bill) throws Exception {
+		Billing model = new Billing();
+		model.setPatientCaseSystemid(bill.getPatientCaseSystemId());
+		if (bill.getTotalAmtLabExam()!=null) {
+			model.setTotalLaboratoryExamFee(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtLabExam())));		
+		}
+		if (bill.getTotalAmtMedSupply()!=null) {
+			model.setTotalMedsupplyFee(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtMedSupply())));
+		}
+		if (bill.getTotalAmtRadiology()!=null) {
+			model.setTotalRadiologyFee(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtRadiology())));
+		}
+		if (bill.getTotalAmtSurgery()!=null) {
+			model.setTotalSurgeryFee(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtSurgery())));
+		}
+		if (bill.getTotalAmtAddServices()!=null) {
+			model.setTotalAdditionalServicesFee(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtAddServices())));
+		}
+		if (bill.getTotalAmtEquip()!=null) {
+			model.setTotalEquipmentFee(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtEquip())));
+		}
+		if (bill.getTotalAmtRoom()!=null) {
+			model.setTotalRoomFee(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtRoom())));		
+		}
+		if (bill.getTotalAmtDoctor()!=null) {
+			model.setTotalDoctorFee(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtDoctor())));
+		}
+		if (bill.getTotalAmtFee()!=null) {
+			model.setTotalFee(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtFee())));
+		}
+		if (bill.getTotalAmtDiscount()!=null) {
+			model.setTotalDiscountAmt(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtDiscount())));
+		}
+		//pending total tax amount
+		if (bill.getTotalAmtDiscount()!=null) {
+			model.setTotalBill(BigDecimal.valueOf(PIBSUtils.convertStrToDouble(bill.getTotalAmtDue())));
+		}
+		setModelBilling(model);
+	}
+	
+	public void updateFormBeanForBillingId () throws Exception {
+		HashMap<String, Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.BILLING);
+        dataMap.put(MapConstant.CLASS_DATA, getModelBilling());
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+	
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+        
+        if (resultMap!=null && !resultMap.isEmpty()) {
+        	Billing modelUpdated = (Billing) resultMap.get(MapConstant.CLASS_DATA);
+        	if (modelUpdated.getId()>0) {
+	        	populateFormBeanBilling(modelUpdated);
+        	}
+        }
+	}
+	
+	public void populateFormBeanBilling (Billing model) throws Exception {
+		setBillingId(model.getId()); //id in patient bill table
+		setPatientCaseSystemId(model.getPatientCaseSystemid());
+		if (model.getTotalBill()!=null) {
+			setTotalAmtDue(PIBSUtils.convertDoubleToStr(model.getTotalBill().doubleValue()));
+		}
+	}
+		
+}

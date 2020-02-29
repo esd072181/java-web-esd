@@ -1,0 +1,106 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+     
+    $('#suspectedDiagnosisId').focus();
+    
+    
+    
+  });
+</script>
+
+<div class="row">
+	 
+	
+ 	<div class="col-sm-10" style="padding-left: 40px;">
+
+		<div style="height: 30%; padding-top: 0px;" align="left">
+			<h3 style="font-style: bold;">Admission</h3>
+			<html:form action="/admission.do" styleId="idForm">
+			
+				<fieldset>
+					<!--<legend></legend>--><!-- leave this as blank to show the line separator -->
+				
+				<div>
+					<html:errors/>
+				</div>
+				<div>
+					<h5 style="color: blue;"><c:out value="${admissionForm.transactionMessage}"></c:out></h5>
+				</div> 
+
+						<div>
+								<html:hidden property="patientSystemId" value="${admissionForm.patient.id}"/>
+								<html:hidden property="id" value="${admissionForm.id}"/>
+                            	<table>
+                                	<tr>
+                                    	<td>Patient ID:</td>
+                                        <td><input type="text" value="${admissionForm.patient.patientId}" readonly="readonly"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Admission ID:</td>
+                                        <td><input type="text" value="${admissionForm.caseNo}" readonly="readonly" placeholder="auto-generated"></td>
+                                    </tr>
+									<tr style="height: 10px;"></tr>
+                                    <tr>
+                                    	<td>Last Name:</td>
+                                        <td><input type="text" style="margin-right: 10px;" value="${admissionForm.patient.lastName}" readonly="readonly"></td>
+                                        <td>First Name:</td>
+                                        <td><input type="text" style="margin-right: 10px;" value="${admissionForm.patient.firstName}" readonly="readonly"></td>
+                                        <td>Middle Name:</td>
+                                        <td><input type="text" style="margin-right: 10px;" value="${admissionForm.patient.middleName}" readonly="readonly"></td>
+                                    </tr>
+                                    <tr style="height: 10px;"></tr>
+                                    <tr>
+                                        <td valign="top">Suspected Diagnosis:</td>
+                                        <td colspan="5"><html:textarea  rows="2" cols="59" styleId="suspectedDiagnosisId" property="chiefComplaint" value="${admissionForm.chiefComplaint}" disabled="${admissionForm.transactionStatus}"></html:textarea></td>
+                                    </tr>
+                                    <tr style="height: 10px;"></tr>
+                                    <tr>
+                                        <td>Select Room:</td>
+                                        <td>                    
+                                        	<html:select  style="width: 180px; height: 25px;" name="admissionForm" property="roomId" disabled="${admissionForm.transactionStatus}">
+								 				<html:option value="0">--Select--</html:option>
+								 				<html:optionsCollection name="admissionForm" property="roomList" label="roomFullName" value="id"/>					 		
+								 			</html:select>              									 	
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 10px;"></tr>
+                                    <tr>
+                                        <td>Select Doctor:</td>
+                                        <td>
+                                        	<html:select  style="width: 180px; height: 25px;" name="admissionForm" property="professionalId" disabled="${admissionForm.transactionStatus}">
+								 				<html:option value="0">--Select--</html:option>
+								 				<html:optionsCollection name="admissionForm" property="doctorList" label="fullName" value="id"/>					 		
+								 			</html:select>
+                                       </td>
+                                    </tr>
+                                    <tr style="height: 30px;"></tr>
+                                    <tr>
+                                        <td colspan="2">
+	                                        <c:choose>
+											  <c:when test="${admissionForm.transactionStatus == true}">
+											     <html:button property="btnClose" styleClass="btn btn-primary btnCancelClose" onclick="closeAdmission();" value="Close"></html:button>	
+											     <html:button property="btnBack" styleClass="btn btn-primary btnBackToSearch" onclick="backToAdmissionSearch();" value="Back to Search"></html:button>	
+												 <html:button property="btnGoTo" styleClass="btn btn-primary btnGoTo" onclick="goToMonitorPatient('${admissionForm.id}');" value="Go To Monitor Patient"></html:button>
+											  </c:when>
+											  <c:otherwise>
+											  	<html:button property="btnSave" styleClass="btn btn-primary btnSaveUpdate" onclick="saveAdmission();" value="Save"></html:button>
+												<html:button property="btnCancel" styleClass="btn btn-primary btnCancelClose" onclick="cancelAdmission();" value="Cancel"></html:button>	
+											  </c:otherwise>
+										  </c:choose>										
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+						</div>
+				</fieldset>	
+				
+			</html:form>
+		</div>
+	
+	</div>
+	
+</div>	
+	

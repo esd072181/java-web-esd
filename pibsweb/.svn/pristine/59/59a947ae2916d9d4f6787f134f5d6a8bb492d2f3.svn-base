@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd"> 
+ 
+<struts-config>
+ 
+ 	<!-- Struts Config for Reports -->
+ 
+	<form-beans>
+
+		<form-bean name="rptPatientForm" type="com.pibs.form.RptPatientFormBean" />
+		<form-bean name="rptMedicalSupplyForm" type="com.pibs.form.RptMedicalSupplyFormBean" />
+		<form-bean name="rptEquipmentForm" type="com.pibs.form.RptEquipmentFormBean" />
+		<form-bean name="rptLaboratoryExaminationForm" type="com.pibs.form.RptLaboratoryExaminationFormBean" />
+		<form-bean name="rptRadiologyForm" type="com.pibs.form.RptRadiologyFormBean" />
+		<form-bean name="rptSurgeryForm" type="com.pibs.form.RptSurgeryFormBean" />
+		<form-bean name="rptAdditionalServicesForm" type="com.pibs.form.RptAdditionalServicesFormBean" />
+		<form-bean name="rptDiscountForm" type="com.pibs.form.RptDiscountFormBean" />
+		<form-bean name="rptProfessionalForm" type="com.pibs.form.RptProfessionalFormBean" />
+		<form-bean name="rptRoomForm" type="com.pibs.form.RptRoomFormBean" />
+		<form-bean name="rptEmployeeForm" type="com.pibs.form.RptEmployeeFormBean" />
+		<form-bean name="rptNurseryForm" type="com.pibs.form.RptNurseryFormBean" />
+		<form-bean name="rptPatientHistoryForm" type="com.pibs.form.RptPatientHistoryFormBean" />
+		
+	</form-beans>
+ 
+	<action-mappings>
+
+      <!-- Patient List Report (START) -->
+	   <action 
+	   		path="/rptPatient" 
+	   		type="com.pibs.action.RptPatientAction"
+			name="rptPatientForm"
+			scope="request"
+			input="/pages/reports/patient/ajaxRptPatient.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/patient/ajaxRptPatient.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/patient/ajaxRptPatientStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Patient List Report (END) -->
+
+      <!-- Medical Supply List Report (START) -->
+	   <action 
+	   		path="/rptMedicalSupply" 
+	   		type="com.pibs.action.RptMedicalSupplyAction"
+			name="rptMedicalSupplyForm"
+			scope="request"
+			input="/pages/reports/medicalsupply/ajaxRptMedicalSupply.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/medicalsupply/ajaxRptMedicalSupply.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/medicalsupply/ajaxRptMedicalSupplyStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Medical Supply List Report (END) -->
+
+      <!-- Equipment List Report (START) -->
+	   <action 
+	   		path="/rptEquipment" 
+	   		type="com.pibs.action.RptEquipmentAction"
+			name="rptEquipmentForm"
+			scope="request"
+			input="/pages/reports/equipment/ajaxRptEquipment.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/equipment/ajaxRptEquipment.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/equipment/ajaxRptEquipmentStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Equipment List Report (END) -->
+	   
+	   <!-- Laboratory Examination List Report (START) -->
+	   <action 
+	   		path="/rptLaboratoryExamination" 
+	   		type="com.pibs.action.RptLaboratoryExaminationAction"
+			name="rptLaboratoryExaminationForm"
+			scope="request"
+			input="/pages/reports/laboratoryexamination/ajaxRptLaboratoryExamination.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/laboratoryexamination/ajaxRptLaboratoryExamination.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/laboratoryexamination/ajaxRptLaboratoryExaminationStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Laboratory Examination List Report (END) -->
+
+	   <!-- Radiology List Report (START) -->
+	   <action 
+	   		path="/rptRadiology" 
+	   		type="com.pibs.action.RptRadiologyAction"
+			name="rptRadiologyForm"
+			scope="request"
+			input="/pages/reports/radiology/ajaxRptRadiology.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/radiology/ajaxRptRadiology.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/radiology/ajaxRptRadiologyStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Laboratory Examination List Report (END) -->
+
+	   <!-- Surgery List Report (START) -->
+	   <action 
+	   		path="/rptSurgery" 
+	   		type="com.pibs.action.RptSurgeryAction"
+			name="rptSurgeryForm"
+			scope="request"
+			input="/pages/reports/surgery/ajaxRptSurgery.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/surgery/ajaxRptSurgery.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/surgery/ajaxRptSurgeryStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Laboratory Examination List Report (END) -->
+
+	   <!-- Additional Services List Report (START) -->
+	   <action 
+	   		path="/rptAdditionalServices" 
+	   		type="com.pibs.action.RptAdditionalServicesAction"
+			name="rptAdditionalServicesForm"
+			scope="request"
+			input="/pages/reports/additionalservices/ajaxRptAdditionalServices.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/additionalservices/ajaxRptAdditionalServices.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/additionalservices/ajaxRptAdditionalServicesStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Additional Services List Report (END) -->
+	   
+	   <!-- Discount List Report (START) -->
+	   <action 
+	   		path="/rptDiscount" 
+	   		type="com.pibs.action.RptDiscountAction"
+			name="rptDiscountForm"
+			scope="request"
+			input="/pages/reports/discount/ajaxRptDiscount.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/discount/ajaxRptDiscount.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/discount/ajaxRptDiscountStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Discount List Report (END) -->
+
+	   <!-- Professional List Report (START) -->
+	   <action 
+	   		path="/rptProfessional" 
+	   		type="com.pibs.action.RptProfessionalAction"
+			name="rptProfessionalForm"
+			scope="request"
+			input="/pages/reports/professional/ajaxRptProfessional.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/professional/ajaxRptProfessional.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/professional/ajaxRptProfessionalStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Professional List Report (END) -->
+
+	   <!-- Room List Report (START) -->
+	   <action 
+	   		path="/rptRoom" 
+	   		type="com.pibs.action.RptRoomAction"
+			name="rptRoomForm"
+			scope="request"
+			input="/pages/reports/room/ajaxRptRoom.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/room/ajaxRptRoom.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/room/ajaxRptRoomStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Room List Report (END) -->
+	   
+	   <!-- Employee List Report (START) -->
+	   <action 
+	   		path="/rptEmployee" 
+	   		type="com.pibs.action.RptEmployeeAction"
+			name="rptEmployeeForm"
+			scope="request"
+			input="/pages/reports/employee/ajaxRptEmployee.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/employee/ajaxRptEmployee.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/employee/ajaxRptEmployeeStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Employee List Report (END) -->
+
+	   <!-- Nursery List Report (START) -->
+	   <action 
+	   		path="/rptNursery" 
+	   		type="com.pibs.action.RptNurseryAction"
+			name="rptNurseryForm"
+			scope="request"
+			input="/pages/reports/nursery/ajaxRptNursery.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/nursery/ajaxRptNursery.jsp"/>
+			<forward name="ajaxSearchStatus" path="/pages/reports/nursery/ajaxRptNurseryStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Nursery List Report (END) -->
+	   
+	   <!-- Patient History Report (START) -->
+	   <action 
+	   		path="/rptPatientHistory" 
+	   		type="com.pibs.action.RptPatientHistoryAction"
+			name="rptPatientHistoryForm"
+			scope="request"
+			input="/pages/reports/patienthistory/ajaxRptPatientHistorySearch.jsp"
+			validate="true">
+			<forward name="ajaxGoToSearch" path="/pages/reports/patienthistory/ajaxRptPatientHistorySearch.jsp"/>
+			<forward name="ajaxTable" path="/pages/reports/patienthistory/ajaxRptPatientHistorySearchTable.jsp"/>
+			<forward name="ajaxGoTo" path="/pages/reports/patienthistory/ajaxRptPatientHistory.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Patient History  Report (END) -->	
+	   	   	   	   	   	   	   	   	   	   	   
+	</action-mappings>
+	
+
+</struts-config>

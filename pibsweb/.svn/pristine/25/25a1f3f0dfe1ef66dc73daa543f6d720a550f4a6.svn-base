@@ -1,0 +1,421 @@
+package com.pibs.form;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.model.MonitorPhysicalExamination;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+import com.pibs.util.DateUtils;
+
+public class MonitorPhysicalExaminationFormBean extends PIBSFormBean {
+
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private int patientCaseSystemId;
+	private String bp;
+	private String temp;	
+	private String cr;
+	private String rr;
+	private String weight;
+	private String heent;
+	private String chest;
+	private String heart;
+	private String abdomen;
+	private String extrimities;
+	private String skin;
+	private String remarks;
+	private String dateRecorded;
+	private String timeRecorded;
+
+	private List<MonitorPhysicalExamination> entityList;
+	
+	private String criteria;
+	private String category;
+	private int noOfPages;
+	private int currentPage;
+	
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	public MonitorPhysicalExaminationFormBean() {}
+
+
+
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getNoOfPages() {
+		return noOfPages;
+	}
+
+	public void setNoOfPages(int noOfPages) {
+		this.noOfPages = noOfPages;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+	
+
+	public int getPatientCaseSystemId() {
+		return patientCaseSystemId;
+	}
+
+	public void setPatientCaseSystemId(int patientCaseSystemId) {
+		this.patientCaseSystemId = patientCaseSystemId;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+
+	public String getBp() {
+		return bp;
+	}
+
+
+
+
+	public void setBp(String bp) {
+		this.bp = bp;
+	}
+
+
+
+
+	public String getTemp() {
+		return temp;
+	}
+
+
+
+
+	public void setTemp(String temp) {
+		this.temp = temp;
+	}
+
+
+
+
+	public String getCr() {
+		return cr;
+	}
+
+
+
+
+	public void setCr(String cr) {
+		this.cr = cr;
+	}
+
+
+
+
+	public String getRr() {
+		return rr;
+	}
+
+
+
+
+	public void setRr(String rr) {
+		this.rr = rr;
+	}
+
+
+
+
+	public String getWeight() {
+		return weight;
+	}
+
+
+
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
+
+
+
+	public String getHeent() {
+		return heent;
+	}
+
+
+
+
+	public void setHeent(String heent) {
+		this.heent = heent;
+	}
+
+
+
+
+	public String getChest() {
+		return chest;
+	}
+
+
+
+
+	public void setChest(String chest) {
+		this.chest = chest;
+	}
+
+
+
+
+	public String getHeart() {
+		return heart;
+	}
+
+
+
+
+	public void setHeart(String heart) {
+		this.heart = heart;
+	}
+
+
+
+
+	public String getAbdomen() {
+		return abdomen;
+	}
+
+
+
+
+	public void setAbdomen(String abdomen) {
+		this.abdomen = abdomen;
+	}
+
+
+
+
+	public String getExtrimities() {
+		return extrimities;
+	}
+
+
+
+
+	public void setExtrimities(String extrimities) {
+		this.extrimities = extrimities;
+	}
+
+
+
+
+	public String getSkin() {
+		return skin;
+	}
+
+
+
+
+	public void setSkin(String skin) {
+		this.skin = skin;
+	}
+
+
+
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+
+
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+
+
+
+	public String getDateRecorded() {
+		return dateRecorded;
+	}
+
+
+
+
+	public void setDateRecorded(String dateRecorded) {
+		this.dateRecorded = dateRecorded;
+	}
+
+
+
+
+	public String getTimeRecorded() {
+		return timeRecorded;
+	}
+
+
+
+
+	public void setTimeRecorded(String timeRecorded) {
+		this.timeRecorded = timeRecorded;
+	}
+
+
+
+
+	public List<MonitorPhysicalExamination> getEntityList() {
+		return entityList;
+	}
+
+
+
+
+	public void setEntityList(List<MonitorPhysicalExamination> entityList) {
+		this.entityList = entityList;
+	}
+	
+
+	public void populateFormBean(MonitorPhysicalExamination model) throws Exception {
+		setId(model.getId());
+		setPatientCaseSystemId(model.getPatientCaseSystemId());
+		setBp(model.getBp());
+		setTemp(model.getTemp());
+		setCr(model.getCr());
+		setRr(model.getRr());
+		setWeight(model.getWeight());
+		setHeent(model.getHeent());
+		setChest(model.getChest());
+		setHeart(model.getHeart());
+		setAbdomen(model.getAbdomen());
+		setExtrimities(model.getExtrimities());
+		setSkin(model.getSkin());
+		setRemarks(model.getRemarks());
+		if (model.getDateRecorded()!=null) {
+			setDateRecorded(DateUtils.sqlDateToString(model.getDateRecorded()));
+		}
+		setTimeRecorded(model.getTimeRecorded());
+	}
+	
+	public void populateEntityList(List<MonitorPhysicalExamination> rsList) throws Exception {
+		setEntityList(rsList);
+	}
+	
+	public MonitorPhysicalExamination populateModel (MonitorPhysicalExaminationFormBean formbean) throws Exception {
+		MonitorPhysicalExamination model = new MonitorPhysicalExamination();
+		model.setId(formbean.getId());
+		model.setPatientCaseSystemId(formbean.getPatientCaseSystemId());
+		model.setBp(formbean.getBp());
+		model.setTemp(formbean.getTemp());
+		model.setCr(formbean.getCr());
+		model.setRr(formbean.getRr());
+		model.setWeight(formbean.getWeight());
+		model.setHeent(formbean.getHeent());
+		model.setChest(formbean.getChest());
+		model.setHeart(formbean.getHeart());
+		model.setAbdomen(formbean.getAbdomen());
+		model.setExtrimities(formbean.getExtrimities());
+		model.setSkin(formbean.getSkin());
+		model.setRemarks(formbean.getRemarks());
+		if (formbean.getDateRecorded()!=null && formbean.getDateRecorded().trim().length() > 0) {
+			model.setDateRecorded(DateUtils.strToSQLDate(formbean.getDateRecorded()));	
+		}
+		model.setTimeRecorded(formbean.getTimeRecorded());
+		return model;
+	}
+	
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		ActionErrors errors = new ActionErrors();
+		
+		String command = (String) request.getParameter("command"); 
+		
+		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) || command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE))) {
+
+		} 
+
+		return errors;
+	}
+
+
+	public void getPhysicalExaminationDetails(HttpServletRequest request) throws Exception {
+		//fetch the details
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		MonitorPhysicalExamination model = new MonitorPhysicalExamination();
+		model.setId(id);
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MONITOR_PHYSICAL_EXAMINATION);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        model = (MonitorPhysicalExamination) resultMap.get(MapConstant.CLASS_DATA);
+	        populateFormBean(model);
+        }
+	}	
+	
+}

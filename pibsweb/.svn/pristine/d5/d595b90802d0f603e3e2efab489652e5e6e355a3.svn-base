@@ -1,0 +1,137 @@
+package com.pibs.dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import com.pibs.config.ServerContext;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.MiscConstant;
+import com.pibs.dao.AdmissionDao;
+import com.pibs.model.Admission;
+import com.pibs.model.User;
+import com.pibs.util.PIBSUtils;
+
+public class AdmissionDaoImpl implements AdmissionDao {
+
+	private final static Logger logger = Logger.getLogger(AdmissionDaoImpl.class);
+	
+	@Override
+	public Map<String, Object> save(HashMap<String, Object> dataMap) throws Exception{
+		
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SAVE);
+		
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		Admission model = (Admission) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setCreatedBy((int) user.getId());	
+		}
+		model.setCreatedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("insert into pibs.tran_patient_case (");
+		  		qry.append("caseno ");
+		  		qry.append(",chiefcomplaint ");
+		  		qry.append(",patientsystemid ");
+		  		qry.append(",patienttypeid ");
+		  		qry.append(",dateofcase ");
+		  		qry.append(",datedischarged ");
+		  		qry.append(",patientcasestatusid ");
+		  		qry.append(",createdby ");
+		  		qry.append(",createdon ");
+		  		qry.append(",version ");
+		  		qry.append(",active ");
+		  		qry.append(" ) ");
+		  		qry.append(" values ");
+		  		qry.append(" ( ");
+		  		qry.append(" ? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,1 ");
+		  		qry.append(" ,true ");
+		  		qry.append(" ) ");
+		  		
+		StringBuffer qryLog =  new StringBuffer("insert into pibs.tran_patient_case (");
+				qryLog.append("caseno ");
+				qryLog.append(",chiefcomplaint ");
+				qryLog.append(",patientsystemid ");
+				qryLog.append(",patienttypeid ");
+				qryLog.append(",dateofcase ");
+				qryLog.append(",datedischarged ");
+				qryLog.append(",patientcasestatusid ");
+				qryLog.append(",createdby ");
+				qryLog.append(",createdon ");
+				qryLog.append(",version ");
+				qryLog.append(",active ");
+				qryLog.append(" ) ");
+				qryLog.append(" values ");
+				qryLog.append(" ( ");
+				qryLog.append(model.getCaseNo());
+				qryLog.append(" ,"+model.getChiefComplaint());
+				qryLog.append(" ,"+model.getPatientSystemId());
+				qryLog.append(" ,"+model.getPatientTypeId());
+				qryLog.append(" ,"+model.getDateOfCase());
+				qryLog.append(" ,"+model.getDateDischarged());
+				qryLog.append(" ,"+model.getPatientCaseStatusId());
+				qryLog.append(" ,"+model.getCreatedBy());
+				qryLog.append(" ,"+model.getCreatedOn());
+				qryLog.append(" ,1 ");
+				qryLog.append(" ,true ");
+				qryLog.append(" ) ");
+					
+		PIBSUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+  		  		
+		  try {
+			  conn = ServerContext.getJDBCHandle();
+			  conn.setAutoCommit(false);
+			  pstmt = conn.prepareStatement(qry.toString());
+			     
+			  pstmt.setString(1, model.getCaseNo());
+			  pstmt.setString(2, model.getChiefComplaint());
+			  pstmt.setInt(3, model.getPatientSystemId());
+			  pstmt.setInt(4, model.getPatientTypeId());
+			  pstmt.setDate(5, model.getDateOfCase());
+			  pstmt.setDate(6, model.getDateDischarged());
+			  pstmt.setInt(7, model.getPatientCaseStatusId());
+			  pstmt.setInt(8, model.getCreatedBy());
+			  pstmt.setTimestamp(9, model.getCreatedOn());
+			     
+			  int statusInt = pstmt.executeUpdate();
+			     
+			  if (statusInt == 1) {
+				  conn.commit();
+				  System.out.println("Inserted into Admission table successfully..");
+				  status = true;
+			  }
+		  } catch (Exception e) {
+			  conn.rollback();
+		 	  e.printStackTrace();
+		  } finally {
+			  PIBSUtils.closeObjects(rs);
+			  PIBSUtils.closeObjects(pstmt);
+			  PIBSUtils.closeObjects(conn);
+		  }
+		 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);
+		
+		return returnMap;
+	}
+}

@@ -1,0 +1,12 @@
+package com.pibs.bo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public interface BillingBo {
+
+	Map<String, Object> addNewRecord(HashMap<String, Object> dataMap) throws Exception;
+	Map<String, Object> updateRecord(HashMap<String, Object> dataMap) throws Exception;
+	Map<String, Object> getDataByPatientCaseSystemId(HashMap<String, Object> criteriaMap) throws Exception;
+	Map<String, Object> updateToCleared(HashMap<String, Object> criteriaMap) throws Exception;
+}

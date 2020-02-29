@@ -1,0 +1,18 @@
+package com.pibs.dao;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public interface RoomDao {
+
+	 Map<String, Object> save(HashMap<String, Object> dataMap) throws Exception;
+	 Map<String, Object> update(HashMap<String, Object> dataMap) throws Exception;
+	 Map<String, Object> delete(HashMap<String, Object> dataMap) throws Exception;
+	 Map<String, Object> search(HashMap<String, Object> criteriaMap) throws Exception;
+	 Map<String, Object> getDataById(HashMap<String, Object> criteriaMap) throws Exception;
+	 Map<String, Object> getActiveData() throws Exception;
+	 Map<String, Object> getAvailableRooms() throws Exception;
+	 Map<String, Object> searchAvailableRooms(HashMap<String, Object> criteriaMap) throws Exception;
+	 Map<String, Object> updateAvailableBeds(HashMap<String, Object> dataMap) throws Exception;
+	 Map<String, Object> updateAvailableBedsAfterPayment(HashMap<String, Object> dataMap) throws Exception;
+}

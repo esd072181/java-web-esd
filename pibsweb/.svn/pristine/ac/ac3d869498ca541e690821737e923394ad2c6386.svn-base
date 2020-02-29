@@ -1,0 +1,27 @@
+package com.pibs.constant;
+
+public class MapConstant {
+
+	//bean object
+	public static final String BEAN = "bean_object";
+	
+	//map 
+	public static final String MODULE = "module";
+	public static final String ACTION = "action";
+	public static final String SEARCH_CRITERIA = "search_criteria";
+	public static final String CLASS_DATA = "class_data";
+	public static final String CLASS_LIST = "class_list";
+	public static final String BOOLEAN_DATA = "boolean_data";
+	public static final String USER_SESSION_DATA = "user_session_data";
+	public static final String TRANSACTION_STATUS = "transaction_status";
+		
+	//boolean
+	public static final String TRUE = "true";
+	public static final String FALSE = "false";
+	
+	//pagination
+	public static final String PAGINATION_LIMIT = "pagination_limit";
+	public static final String PAGINATION_OFFSET = "pagination_offset";
+	public static final String PAGINATION_TOTALRECORDS = "pagination_totalrecords";
+		
+}

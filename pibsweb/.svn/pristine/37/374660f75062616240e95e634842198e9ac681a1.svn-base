@@ -1,0 +1,343 @@
+package com.pibs.form;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.model.Admission;
+import com.pibs.model.ListValue;
+import com.pibs.model.Patient;
+import com.pibs.util.DateUtils;
+
+public class AdmissionFormBean extends PIBSFormBean {
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private String caseNo;
+	private String chiefComplaint;
+	private int patientSystemId;
+	private int patientTypeId;
+	private String dateOfCase;
+	private String dateDischarged;
+	private int patientCaseStatusId;
+	private int createdBy;
+	private Timestamp createdOn;
+	private int modifiedBy;
+	private Timestamp modifiedOn;
+	private int version;
+	private boolean active;
+	
+	private String criteria;
+	private String category;
+	private int noOfPages;
+	private int currentPage;
+	private List<Patient> modelList;
+	
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	private List<ListValue> patientTypeLOV;
+	private List<ListValue> patientCaseStatusTypeLOV;
+	
+	private Patient patient;
+	
+	public AdmissionFormBean() {}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCaseNo() {
+		return caseNo;
+	}
+
+	public void setCaseNo(String caseNo) {
+		this.caseNo = caseNo;
+	}
+
+	public String getChiefComplaint() {
+		return chiefComplaint;
+	}
+
+	public void setChiefComplaint(String chiefComplaint) {
+		this.chiefComplaint = chiefComplaint;
+	}
+
+	public int getPatientSystemId() {
+		return patientSystemId;
+	}
+
+	public void setPatientSystemId(int patientSystemId) {
+		this.patientSystemId = patientSystemId;
+	}
+
+	public int getPatientTypeId() {
+		return patientTypeId;
+	}
+
+	public void setPatientTypeId(int patientTypeId) {
+		this.patientTypeId = patientTypeId;
+	}
+
+	public String getDateOfCase() {
+		return dateOfCase;
+	}
+
+	public void setDateOfCase(String dateOfCase) {
+		this.dateOfCase = dateOfCase;
+	}
+
+	public String getDateDischarged() {
+		return dateDischarged;
+	}
+
+	public void setDateDischarged(String dateDischarged) {
+		this.dateDischarged = dateDischarged;
+	}
+
+	public int getPatientCaseStatusId() {
+		return patientCaseStatusId;
+	}
+
+	public void setPatientCaseStatusId(int patientCaseStatusId) {
+		this.patientCaseStatusId = patientCaseStatusId;
+	}
+
+	public int getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(int createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Timestamp getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public int getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(int modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public Timestamp getModifiedOn() {
+		return modifiedOn;
+	}
+
+	public void setModifiedOn(Timestamp modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getNoOfPages() {
+		return noOfPages;
+	}
+
+	public void setNoOfPages(int noOfPages) {
+		this.noOfPages = noOfPages;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public List<Patient> getModelList() {
+		return modelList;
+	}
+
+	public void setModelList(List<Patient> modelList) {
+		this.modelList = modelList;
+	}
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+
+	public List<ListValue> getPatientTypeLOV() {
+		return patientTypeLOV;
+	}
+
+	public void setPatientTypeLOV(List<ListValue> patientTypeLOV) {
+		this.patientTypeLOV = patientTypeLOV;
+	}
+
+	public List<ListValue> getPatientCaseStatusTypeLOV() {
+		return patientCaseStatusTypeLOV;
+	}
+
+	public void setPatientCaseStatusTypeLOV(List<ListValue> patientCaseStatusTypeLOV) {
+		this.patientCaseStatusTypeLOV = patientCaseStatusTypeLOV;
+	}
+	
+	public void populatePatientDetails(Patient model) throws Exception {
+		patient = new Patient();
+		patient.setId(model.getId());
+		patient.setPatientId(model.getPatientId());
+		patient.setLastName(model.getLastName());
+		patient.setFirstName(model.getFirstName());
+		patient.setMiddleName(model.getMiddleName());
+		patient.setGender(model.getGender());
+//		if (model.getBirthday()!=null) {
+//			patient.setBirthday(DateUtils.sqlDateToString(model.getBirthday()));
+//		}
+		patient.setContactNo(model.getContactNo());
+		patient.setAddress(model.getAddress());
+		patient.setContactPerson(model.getContactPerson());
+		patient.setContactPersonNo(model.getContactPersonNo());
+//		if (model.getDateRegistered()!=null) {
+//			patient.setDateRegistered(DateUtils.sqlDateToString(model.getDateRegistered()));
+//		}
+		patient.setPatientStatusId(model.getPatientStatusId());
+	}
+
+	public void populateFormBean(Admission model)  throws Exception  {
+		setId(model.getId());
+		setCaseNo(model.getCaseNo());
+		setChiefComplaint(model.getChiefComplaint());
+		setPatientSystemId(model.getPatientSystemId());
+		setPatientTypeId(model.getPatientTypeId());
+		if (model.getDateOfCase()!=null) {
+			setDateOfCase(DateUtils.sqlDateToString(model.getDateOfCase()));
+		}
+		if (model.getDateDischarged()!=null) {
+			setDateDischarged(DateUtils.sqlDateToString(model.getDateDischarged()));
+		}
+		setPatientCaseStatusId(model.getPatientCaseStatusId());
+	}
+	
+	public Admission populateModel (AdmissionFormBean formbean) throws Exception {
+		Admission model = new Admission();
+		model.setId(formbean.getId());
+		model.setCaseNo(formbean.getCaseNo());
+		model.setChiefComplaint(formbean.getChiefComplaint());
+		model.setPatientSystemId(formbean.getPatientSystemId());
+		model.setPatientTypeId(formbean.getPatientTypeId());
+		if (formbean.getDateOfCase()!=null && formbean.getDateOfCase().trim().length() > 0) {
+			model.setDateOfCase(DateUtils.strToSQLDate(formbean.getDateOfCase()));	
+		}
+		if (formbean.getDateDischarged()!=null && formbean.getDateDischarged().trim().length() > 0) {
+			model.setDateDischarged(DateUtils.strToSQLDate(formbean.getDateDischarged()));	
+		}
+		model.setPatientCaseStatusId(formbean.getPatientCaseStatusId());
+		return model;
+	}
+	
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		ActionErrors errors = new ActionErrors();
+		
+		String command = (String) request.getParameter("command"); 
+		boolean flag = false;
+		
+		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) || command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE))) {
+			if (this.getChiefComplaint()==null || this.getChiefComplaint().trim().length() < 1) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("tran.chiefcomplaint.req "));
+				flag = true;
+			}
+			
+			if (flag) {
+				try {
+					populateDropdownListFromSession(request, this, false);
+				} catch(Exception e) {}					
+			}
+		} 
+
+		return errors;
+	}
+	
+	public void populateDropdownListFromSession(HttpServletRequest request, AdmissionFormBean formBean, boolean isEdit) throws Exception{
+		populateDropdownList(request, formBean);//this is the fix for the issue of Failed to obtain Collection in JspException
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void populateDropdownList(HttpServletRequest request, AdmissionFormBean formBean) throws Exception{
+		List<ListValue> lovList = (ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOVTYPE_PATIENT_TYPE_SESSION);
+    	if (lovList!=null) {
+    		formBean.setPatientTypeLOV(lovList);
+    		formBean.setPatientCaseStatusTypeLOV((ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOVTYPE_PATIENT_CASE_STATUS_TYPE_SESSION));
+    	}
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	
+	
+}

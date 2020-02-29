@@ -1,0 +1,251 @@
+package com.pibs.form;
+
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.model.LaboratoryExamination;
+import com.pibs.model.MonitorLaboratoryExamination;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+import com.pibs.util.DateUtils;
+
+public class MonitorLaboratoryExaminationFormBean extends PIBSFormBean {
+
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private int patientCaseSystemId;
+	private int laboratoryExaminationId;
+	private String dateTaken;
+	
+	private String labExam;
+	
+	private List<LaboratoryExamination> modelList;
+	private List<MonitorLaboratoryExamination> entityList;
+	
+	private String criteria;
+	private String category;
+	private int noOfPages;
+	private int currentPage;
+	
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	public MonitorLaboratoryExaminationFormBean() {}
+
+
+
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getNoOfPages() {
+		return noOfPages;
+	}
+
+	public void setNoOfPages(int noOfPages) {
+		this.noOfPages = noOfPages;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+	
+	public void populateFormBean(MonitorLaboratoryExamination model) throws Exception {
+		setPatientCaseSystemId(model.getPatientCaseSystemId());
+		setLaboratoryExaminationId(model.getLaboratoryExaminationId());
+		if (model.getDateTaken()!=null) {
+			setDateTaken(DateUtils.sqlDateToString(model.getDateTaken()));
+		}
+	}
+	
+	public void populatePatientLabExamList(List<MonitorLaboratoryExamination> rsList) throws Exception {
+		setEntityList(rsList);
+	}
+	
+	public MonitorLaboratoryExamination populateModel (MonitorLaboratoryExaminationFormBean formbean) throws Exception {
+		MonitorLaboratoryExamination model = new MonitorLaboratoryExamination();
+		model.setPatientCaseSystemId(formbean.getPatientCaseSystemId());
+		model.setLaboratoryExaminationId(formbean.getLaboratoryExaminationId());
+		if (formbean.getDateTaken()!=null && formbean.getDateTaken().trim().length() > 0) {
+			model.setDateTaken(DateUtils.strToSQLDate(formbean.getDateTaken()));	
+		}
+		return model;
+	}
+	
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		ActionErrors errors = new ActionErrors();
+		
+		String command = (String) request.getParameter("command"); 
+		
+		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) || command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE))) {
+//			if (this.getStatementOfDiagnosis()==null || this.getStatementOfDiagnosis().trim().length() < 1) {
+//				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("tran.statement.req"));
+//			}
+//			if (this.getDateOfDiagnosis()==null || this.getDateOfDiagnosis().trim().length() < 1) {
+//				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("tran.dateofstatement.req"));
+//			}
+		} 
+
+		return errors;
+	}
+
+	public int getPatientCaseSystemId() {
+		return patientCaseSystemId;
+	}
+
+	public void setPatientCaseSystemId(int patientCaseSystemId) {
+		this.patientCaseSystemId = patientCaseSystemId;
+	}
+
+
+
+
+	public int getLaboratoryExaminationId() {
+		return laboratoryExaminationId;
+	}
+
+
+
+
+	public void setLaboratoryExaminationId(int laboratoryExaminationId) {
+		this.laboratoryExaminationId = laboratoryExaminationId;
+	}
+
+
+
+
+	public String getDateTaken() {
+		return dateTaken;
+	}
+
+
+
+
+	public void setDateTaken(String dateTaken) {
+		this.dateTaken = dateTaken;
+	}
+
+
+
+
+	public List<LaboratoryExamination> getModelList() {
+		return modelList;
+	}
+
+
+
+
+	public void setModelList(List<LaboratoryExamination> modelList) {
+		this.modelList = modelList;
+	}
+
+
+
+
+	public List<MonitorLaboratoryExamination> getEntityList() {
+		return entityList;
+	}
+
+
+
+
+	public void setEntityList(List<MonitorLaboratoryExamination> entityList) {
+		this.entityList = entityList;
+	}
+
+
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
+	
+	
+	public String getLabExam() {
+		return labExam;
+	}
+
+
+
+
+	public void setLabExam(String labExam) {
+		this.labExam = labExam;
+	}
+
+
+	public void getLabExamDetails(HttpServletRequest request) throws Exception {
+		//fetch the patient details
+		int id = Integer.parseInt(request.getParameter("labExamId"));
+		
+		LaboratoryExamination model = new LaboratoryExamination();
+		model.setId(id);
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.LABORATORY_EXAMINATION);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        model = (LaboratoryExamination) resultMap.get(MapConstant.CLASS_DATA);		        		
+        	setLaboratoryExaminationId(model.getId());
+        	setLabExam(model.getDescription());
+        }
+	}
+	
+}

@@ -1,0 +1,382 @@
+package com.pibs.form;
+
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.model.MedicalSupply;
+import com.pibs.model.MonitorMedicalSupply;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+import com.pibs.util.DateUtils;
+
+public class MonitorMedicalSupplyFormBean extends PIBSFormBean {
+
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private int patientCaseSystemId;
+	private int medicalSupplyId;
+	private int qty;
+	private String price;
+	private String amount;
+	private String dateTaken;
+	private String timeTaken;
+	
+	//medical supply fields
+	private String itemType;
+	private String itemCode;
+	private String itemDescription;
+	private String itemGenericName;
+	
+	private List<MedicalSupply> modelList;
+	private List<MonitorMedicalSupply> entityList;
+	
+	private String criteria;
+	private String category;
+	private int noOfPages;
+	private int currentPage;
+	
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	public MonitorMedicalSupplyFormBean() {}
+
+
+
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getNoOfPages() {
+		return noOfPages;
+	}
+
+	public void setNoOfPages(int noOfPages) {
+		this.noOfPages = noOfPages;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+	
+
+	public int getPatientCaseSystemId() {
+		return patientCaseSystemId;
+	}
+
+	public void setPatientCaseSystemId(int patientCaseSystemId) {
+		this.patientCaseSystemId = patientCaseSystemId;
+	}
+
+
+
+
+
+
+
+
+	public String getDateTaken() {
+		return dateTaken;
+	}
+
+
+
+
+	public void setDateTaken(String dateTaken) {
+		this.dateTaken = dateTaken;
+	}
+
+
+
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+
+	public int getMedicalSupplyId() {
+		return medicalSupplyId;
+	}
+
+
+
+
+	public void setMedicalSupplyId(int medicalSupplyId) {
+		this.medicalSupplyId = medicalSupplyId;
+	}
+
+
+
+
+	public int getQty() {
+		return qty;
+	}
+
+
+
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
+
+
+
+	public String getPrice() {
+		return price;
+	}
+
+
+
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+
+
+
+	public String getAmount() {
+		return amount;
+	}
+
+
+
+
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+
+
+
+
+	public String getTimeTaken() {
+		return timeTaken;
+	}
+
+
+
+
+	public void setTimeTaken(String timeTaken) {
+		this.timeTaken = timeTaken;
+	}
+
+
+
+
+
+
+
+
+	public String getItemType() {
+		return itemType;
+	}
+
+
+
+
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
+	}
+
+
+
+
+	public String getItemCode() {
+		return itemCode;
+	}
+
+
+
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+
+
+
+
+	public String getItemDescription() {
+		return itemDescription;
+	}
+
+
+
+
+	public void setItemDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
+	}
+
+
+
+
+	public String getItemGenericName() {
+		return itemGenericName;
+	}
+
+
+
+
+	public void setItemGenericName(String itemGenericName) {
+		this.itemGenericName = itemGenericName;
+	}
+
+
+
+
+	public List<MedicalSupply> getModelList() {
+		return modelList;
+	}
+
+
+
+
+	public void setModelList(List<MedicalSupply> modelList) {
+		this.modelList = modelList;
+	}
+
+
+
+
+	public List<MonitorMedicalSupply> getEntityList() {
+		return entityList;
+	}
+
+
+
+
+	public void setEntityList(List<MonitorMedicalSupply> entityList) {
+		this.entityList = entityList;
+	}
+
+
+	public void populateFormBean(MonitorMedicalSupply model) throws Exception {
+		setPatientCaseSystemId(model.getPatientCaseSystemId());
+		setPrice(model.getPrice()!=null ? model.getPrice().toPlainString() : "0.00");
+		setMedicalSupplyId(model.getMedicalSupplyId());
+		if (model.getDateTaken()!=null) {
+			setDateTaken(DateUtils.sqlDateToString(model.getDateTaken()));
+		}
+		setTimeTaken(model.getTimeTaken());
+	}
+	
+	public void populatePatientEntityList(List<MonitorMedicalSupply> rsList) throws Exception {
+		setEntityList(rsList);
+	}
+	
+	public MonitorMedicalSupply populateModel (MonitorMedicalSupplyFormBean formbean) throws Exception {
+		MonitorMedicalSupply model = new MonitorMedicalSupply();
+		model.setPatientCaseSystemId(formbean.getPatientCaseSystemId());
+		model.setMedicalSupplyId(formbean.getMedicalSupplyId());
+		model.setQty(formbean.getQty());
+		model.setPrice(formbean.getPrice()!=null && formbean.getPrice().trim().length()>0  ? new BigDecimal(formbean.getPrice()).setScale(2, BigDecimal.ROUND_HALF_UP) : new BigDecimal("0.00"));//2 decimal place
+		double amount = model.getQty() * model.getPrice().doubleValue();
+		model.setAmount(BigDecimal.valueOf(amount));
+		if (formbean.getDateTaken()!=null && formbean.getDateTaken().trim().length() > 0) {
+			model.setDateTaken(DateUtils.strToSQLDate(formbean.getDateTaken()));	
+		}
+		model.setTimeTaken(formbean.getTimeTaken());
+		return model;
+	}
+	
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		ActionErrors errors = new ActionErrors();
+		
+		String command = (String) request.getParameter("command"); 
+		
+		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) || command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE))) {
+			if (this.getQty() == 0) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("tran.qty.req"));
+			}
+		} 
+
+		return errors;
+	}
+
+
+	public void getMedicalSupplyDetails(HttpServletRequest request) throws Exception {
+		//fetch the lab exam details
+		int id = Integer.parseInt(request.getParameter("medicalSupplyId"));
+		
+		MedicalSupply model = new MedicalSupply();
+		model.setId(id);
+		
+		HashMap<String,Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.MEDICAL_SUPPLY);
+        dataMap.put(MapConstant.CLASS_DATA, model);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+        
+        ServiceManager service = new ServiceManagerImpl();
+        Map<String, Object> resultMap = service.executeRequest(dataMap);
+		
+        if (resultMap!=null && !resultMap.isEmpty()) {
+	        model = (MedicalSupply) resultMap.get(MapConstant.CLASS_DATA);
+        	setMedicalSupplyId(model.getId());
+        	setItemType(model.getMedicalSupplyTypeName());
+        	setItemCode(model.getItemCode());
+        	setItemDescription(model.getDescription());
+        	setItemGenericName(model.getGenericName());
+        	setPrice(model.getRetailSellingPrice()!=null ? model.getRetailSellingPrice().toPlainString() : "0.00");	
+        }
+	}	
+	
+}

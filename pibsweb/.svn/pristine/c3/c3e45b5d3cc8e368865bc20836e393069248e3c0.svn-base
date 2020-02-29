@@ -1,0 +1,256 @@
+package com.pibs.form;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.model.ListValue;
+import com.pibs.model.MonitorNursery;
+import com.pibs.util.DateUtils;
+
+public class NurseryInquiryFormBean extends PIBSFormBean {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private int id;
+	private String lastName;
+	private String firstName;
+	private String dateOfBirth;
+	private String timeOfBirth;
+	private String gender;
+	private String weight;
+	private String remarks;
+	
+	private String criteria;
+	private String category;
+	private int noOfPages;
+	private int currentPage;
+	
+	private List<ListValue> genderLOV;
+	private List<MonitorNursery> modelList;
+
+	private MonitorNursery model;
+
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	public NurseryInquiryFormBean() {}
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getNoOfPages() {
+		return noOfPages;
+	}
+
+	public void setNoOfPages(int noOfPages) {
+		this.noOfPages = noOfPages;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+	
+	public List<MonitorNursery> getModelList() {
+		return modelList;
+	}
+
+	public void setModelList(List<MonitorNursery> modelList) {
+		this.modelList = modelList;
+	}
+	
+	public MonitorNursery getModel() {
+		return model;
+	}
+
+	public void setModel(MonitorNursery model) {
+		this.model = model;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getTimeOfBirth() {
+		return timeOfBirth;
+	}
+
+	public void setTimeOfBirth(String timeOfBirth) {
+		this.timeOfBirth = timeOfBirth;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public List<ListValue> getGenderLOV() {
+		return genderLOV;
+	}
+
+	public void setGenderLOV(List<ListValue> genderLOV) {
+		this.genderLOV = genderLOV;
+	}
+
+	public void populateFormBean(MonitorNursery model) throws Exception {
+		setId(model.getId());
+		setLastName(model.getLastName());
+		setFirstName(model.getFirstName());
+		if (model.getDateOfBirth()!=null) {
+			setDateOfBirth(DateUtils.sqlDateToString(model.getDateOfBirth()));
+		}
+		setTimeOfBirth(model.getTimeOfBirth());
+		setGender(model.getGender());
+		setWeight(model.getWeight());
+		setRemarks(model.getRemarks());
+	}
+	
+	public MonitorNursery populateModel (NurseryInquiryFormBean formbean) throws Exception {
+		MonitorNursery model = new MonitorNursery();
+		model.setId(formbean.getId());
+		model.setLastName(formbean.getLastName());
+		model.setFirstName(formbean.getFirstName());
+		if (formbean.getDateOfBirth()!=null && formbean.getDateOfBirth().trim().length() > 0) {
+			model.setDateOfBirth(DateUtils.strToSQLDate(formbean.getDateOfBirth()));	
+		}
+		model.setTimeOfBirth(formbean.getTimeOfBirth());
+		model.setGender(formbean.getGender());
+		model.setWeight(formbean.getWeight());
+		model.setRemarks(formbean.getRemarks());
+		return model;
+	}
+
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		ActionErrors errors = new ActionErrors();
+		
+		String command = (String) request.getParameter("command"); 
+		
+		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) || command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE))) {
+			boolean flag = false;
+			if (this.getLastName()==null || this.getLastName().trim().length() == 0) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("mf.lastname.req"));
+				flag = true;
+			}
+			if (this.getFirstName()==null || this.getLastName().trim().length() == 0) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("mf.firstname.req"));
+				flag = true;
+			}
+			
+			if (flag) {
+				try {
+					//get list from session
+					populateDropdownListFromSession(request);			
+				} catch(Exception e) {}				
+			}
+		
+		} 
+		return errors;
+	}
+	
+	public void populateDropdownList(HttpServletRequest request) throws Exception{
+        @SuppressWarnings("unchecked")
+		List<ListValue> lovList = (ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOVTYPE_GENDER_TYPE_SESSION);
+    	if (lovList!=null) {
+    		setGenderLOV(lovList);
+    	}
+	}
+		
+	public void populateDropdownListFromSession(HttpServletRequest request) throws Exception{
+		populateDropdownList(request);//this is the fix for the issue of Failed to obtain Collection in JspException
+	}
+}

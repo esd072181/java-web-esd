@@ -1,0 +1,266 @@
+package com.pibs.form;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.model.ListValue;
+import com.pibs.model.MedicalSupply;
+import com.pibs.util.DateUtils;
+
+public class MedicalSupplyFormBean extends PIBSFormBean {
+
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private int medicalSupplyTypeId;
+	private String itemCode;
+	private String description;
+	private String genericName;
+	private String remarks;
+	private String lotNo;
+	private String dateManufactured;
+	private String expirationDate;
+	private double fee;
+	
+	private String criteria;
+	private String category;
+	private int noOfPages;
+	private int currentPage;
+	private List<MedicalSupply> modelList;
+	
+	private boolean transactionStatus;
+	private String transactionMessage;
+	
+	private List<ListValue> medicalSupplyTypeLOV;
+	
+	public MedicalSupplyFormBean() {}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getNoOfPages() {
+		return noOfPages;
+	}
+
+	public void setNoOfPages(int noOfPages) {
+		this.noOfPages = noOfPages;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public boolean isTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(boolean transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+	public String getTransactionMessage() {
+		return transactionMessage;
+	}
+
+	public void setTransactionMessage(String transactionMessage) {
+		this.transactionMessage = transactionMessage;
+	}
+	
+	public void populateFormBean(MedicalSupply model)  throws Exception  {
+		setId(model.getId());
+		setMedicalSupplyTypeId(model.getMedicalSupplyTypeId());
+		setItemCode(model.getItemCode());
+		setDescription(model.getDescription());
+		setGenericName(model.getGenericName());
+		setRemarks(model.getRemarks());
+		setLotNo(model.getLotNo());
+		if (model.getDateManufactured()!=null) {
+			setDateManufactured(DateUtils.sqlDateToString(model.getDateManufactured()));
+		}
+		if (model.getExpirationDate()!=null) {
+			setExpirationDate(DateUtils.sqlDateToString(model.getExpirationDate()));
+		}
+		setFee(model.getFee());
+	}
+	
+	public MedicalSupply populateModel (MedicalSupplyFormBean formbean) throws Exception {
+		MedicalSupply model = new MedicalSupply();
+		model.setId(formbean.getId());
+		model.setMedicalSupplyTypeId(formbean.getMedicalSupplyTypeId());
+		model.setItemCode(formbean.getItemCode());
+		model.setDescription(formbean.getDescription());
+		model.setGenericName(formbean.getGenericName());
+		model.setRemarks(formbean.getRemarks());
+		model.setLotNo(formbean.getLotNo());
+		if (formbean.getDateManufactured()!=null && formbean.getDateManufactured().trim().length() > 0) {
+			model.setDateManufactured(DateUtils.strToSQLDate(formbean.getDateManufactured()));	
+		}
+		if (formbean.getExpirationDate()!=null && formbean.getExpirationDate().trim().length() > 0) {
+			model.setExpirationDate(DateUtils.strToSQLDate(formbean.getExpirationDate()));	
+		}
+		model.setFee(BigDecimal.valueOf(formbean.getFee()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());//2 decimal place
+		formbean.setFee(model.getFee());
+		return model;
+	}
+	
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		ActionErrors errors = new ActionErrors();
+		
+		String command = (String) request.getParameter("command"); 
+		boolean flag = false;
+		
+		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) || command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE))) {
+			if (this.getDescription()==null || this.getDescription().trim().length() < 1) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("mf.description.req"));
+				flag = true;
+			}
+			
+			if (flag) {
+				try {
+					populateDropdownListFromSession(request, this);
+				} catch(Exception e) {}					
+			}
+		} 
+
+		return errors;
+	}
+	
+	public void populateDropdownListFromSession(HttpServletRequest request, MedicalSupplyFormBean formBean) throws Exception{
+		populateDropdownList(request, formBean);//this is the fix for the issue of Failed to obtain Collection in JspException
+	}
+	
+	public void populateDropdownList(HttpServletRequest request, MedicalSupplyFormBean formBean) throws Exception{
+        @SuppressWarnings("unchecked")
+		List<ListValue> lovList = (ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOVTYPE_MEDICAL_SUPPLY_TYPE_SESSION);
+    	if (lovList!=null) {
+    		formBean.setMedicalSupplyTypeLOV(lovList);
+    	}
+	}
+	public int getMedicalSupplyTypeId() {
+		return medicalSupplyTypeId;
+	}
+
+	public void setMedicalSupplyTypeId(int medicalSupplyTypeId) {
+		this.medicalSupplyTypeId = medicalSupplyTypeId;
+	}
+
+	public String getGenericName() {
+		return genericName;
+	}
+
+	public void setGenericName(String genericName) {
+		this.genericName = genericName;
+	}
+
+	public String getLotNo() {
+		return lotNo;
+	}
+
+	public void setLotNo(String lotNo) {
+		this.lotNo = lotNo;
+	}
+
+	public String getDateManufactured() {
+		return dateManufactured;
+	}
+
+	public void setDateManufactured(String dateManufactured) {
+		this.dateManufactured = dateManufactured;
+	}
+
+	public String getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(String expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public List<ListValue> getMedicalSupplyTypeLOV() {
+		return medicalSupplyTypeLOV;
+	}
+
+	public void setMedicalSupplyTypeLOV(List<ListValue> medicalSupplyTypeLOV) {
+		this.medicalSupplyTypeLOV = medicalSupplyTypeLOV;
+	}
+
+	public List<MedicalSupply> getModelList() {
+		return modelList;
+	}
+
+	public void setModelList(List<MedicalSupply> modelList) {
+		this.modelList = modelList;
+	}
+
+	public String getItemCode() {
+		return itemCode;
+	}
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+
+	public double getFee() {
+		return fee;
+	}
+
+	public void setFee(double fee) {
+		this.fee = fee;
+	}
+
+		
+	
+	
+}

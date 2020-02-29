@@ -1,0 +1,96 @@
+package com.pibs.constant;
+
+/**
+ * This file defines the names of Spring beans in Spring.xml
+ * 
+ * @author dward
+ * @since 01Mar2015
+ *
+ *
+ */
+public class BeanConstant {
+
+	//Security
+	private static final String LoginBeanId = "loginBo";
+	//Master Files
+	private static final String BuildingBeanId = "buildingBo";//Building
+	private static final String RoomCategoryBeanId = "roomCategoryBo";//Room Category
+	private static final String RoomBeanId = "roomBo";//Room
+	private static final String EquipmentBeanId = "equipmentBo";//Equipment
+	private static final String SpecializationBeanId = "specializationBo";//Specialization
+	private static final String AdditionalServicesBeanId = "additionalServicesBo";//Additional Services
+	private static final String AdditionalServicesCategoryBeanId = "additionalServicesCategoryBo";//Additional Services Category
+	private static final String RadiologyBeanId = "radiologyBo";//Radiology
+	private static final String ListValueBeanId = "listValueBo";//List Value //LOV
+	private static final String ListTypeBeanId = "listTypeBo";//List Value //LOV
+	private static final String SurgeryBeanId = "surgeryBo";//Surgery
+	private static final String LaboratoryExaminationBeanId = "laboratoryExaminationBo";//Laboratory Examination
+	private static final String MedicalSupplyBeanId = "medicalSupplyBo";//Medical Supply
+	private static final String ProfessionalTypeBeanId = "professionalTypeBo";//Professional Type
+	private static final String ProfessionalBeanId = "professionalBo";//Professional
+	private static final String DiscountBeanId = "discountBo";//Discount
+	private static final String PatientBeanId = "patientBo";//Patient and Patient Registration
+	//Transaction
+	private static final String AdmissionBeanId = "admissionBo";
+	
+	//Child bean for MonitorPatient
+	private static final String DiagnosisBeanId = "diagnosisBo";
+	private static final String MedicationStatementBeanId = "medicationStatementBo";
+	private static final String PrognosisBeanId = "prognosisBo";
+	private static final String MonitorLaboratoryExaminationBeanId = "monitorLaboratoryExaminationBo";
+	
+	public static String getBeanId(int module) {
+		String beanId=null;
+		switch(module) {
+			case ModuleConstant.LOGIN: beanId = LoginBeanId;
+			  break;
+			case ModuleConstant.BUILDING: beanId = BuildingBeanId;
+			  break;
+			case ModuleConstant.ROOM_CATEGORY: beanId = RoomCategoryBeanId;
+			  break;
+			case ModuleConstant.ROOM: beanId = RoomBeanId;
+			  break;
+			case ModuleConstant.EQUIPMENT: beanId = EquipmentBeanId;
+			  break;
+			case ModuleConstant.SPECIALIZATION: beanId = SpecializationBeanId;
+			  break;
+			case ModuleConstant.ADDITIONAL_SERVICES: beanId = AdditionalServicesBeanId;
+			  break;
+			case ModuleConstant.ADDITIONAL_SERVICES_CATEGORY: beanId = AdditionalServicesCategoryBeanId;
+			  break;
+			case ModuleConstant.RADIOLOGY: beanId = RadiologyBeanId;
+			  break;
+			case ModuleConstant.LIST_VALUE: beanId = ListValueBeanId;
+			  break;
+			case ModuleConstant.LIST_TYPE: beanId = ListTypeBeanId;
+			  break;
+			case ModuleConstant.SURGERY: beanId = SurgeryBeanId;
+			  break;
+			case ModuleConstant.MEDICAL_SUPPLY: beanId = MedicalSupplyBeanId;
+			  break;
+			case ModuleConstant.LABORATORY_EXAMINATION: beanId = LaboratoryExaminationBeanId;
+			  break;
+			case ModuleConstant.PROFESSIONAL_TYPE: beanId = ProfessionalTypeBeanId;
+			  break;
+			case ModuleConstant.PROFESSIONAL: beanId = ProfessionalBeanId;
+			  break;
+			case ModuleConstant.DISCOUNT: beanId = DiscountBeanId;
+			  break;
+			case ModuleConstant.PATIENT: beanId = PatientBeanId;
+			  break;
+			case ModuleConstant.ADMISSION: beanId = AdmissionBeanId;
+			  break;
+			case ModuleConstant.DIAGNOSIS: beanId = DiagnosisBeanId;
+			  break;
+			case ModuleConstant.MEDICATION_STATEMENT: beanId = MedicationStatementBeanId;
+			  break;
+			case ModuleConstant.PROGNOSIS: beanId = PrognosisBeanId;
+			  break;
+			case ModuleConstant.MONITOR_LABORATORY_EXAMINATION: beanId = MonitorLaboratoryExaminationBeanId;
+			  break;
+			default: break;
+		} 
+		return beanId;
+	}
+	
+}

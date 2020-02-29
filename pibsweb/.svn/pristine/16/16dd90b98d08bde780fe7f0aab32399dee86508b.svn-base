@@ -1,0 +1,234 @@
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+    
+  //limit the characters in textarea Remarks field
+    $("#remarksId").keyup(function(){
+        if($(this).val().length > remarksLength){
+            $(this).val($(this).val().substr(0, remarksLength));
+    	}
+    });
+  
+    $('#dtBirthdayPicker').datepicker({}); 
+    $('#dtDateHiredPicker').datepicker({}); 
+
+    $("#standardConsultationFeeId").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ( (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || (e.keyCode > 105)) ) {
+            e.preventDefault();
+        }   
+    });
+    
+    $("#standardAdmissionFeeId").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ( (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || (e.keyCode > 105)) ) {
+            e.preventDefault();
+        }   
+    });
+    
+    $('#professionalTypeIdId').focus();
+    
+  });
+  
+</script>
+
+
+
+<div class="row">
+	<div class="col-sm-2">
+	
+		<!-- Left Menu -->
+		<div style="padding-top: 15px; padding-left: 12px;">
+		  	<!-- jQuery ui -->
+		  	<ul id="menu">
+			  <li class="ui-widget-header">Menu</li>
+			  <li onclick="goToAddProfessional();"><a href="#">Add New Record</a></li>
+			  <li onclick="goToProfessional();"><a href="#">Search/Update Record</a></li>
+			  <%@ include file="/template/menu_left_masterfile.jsp" %>
+			</ul>
+		</div>
+	</div>
+	
+ 	<div class="col-sm-10 divSpace">
+
+		<div style="height: 30%; padding-top: 0px;" align="left">
+		<h3>Professional/Doctor - Edit Record</h3>
+			<html:form action="/professional.do" styleId="idForm" >
+				<fieldset>
+				
+					<div>
+						<html:errors/>
+					</div>
+					<div>
+						<h4 style="color: blue;"><c:out value="${professionalForm.transactionMessage}"></c:out></h4>
+					</div> 
+					
+					<html:hidden property="id" value="${professionalForm.id}"/>
+					<table>
+						<tr>
+							<td><label  class="control-label" for="professionalTypeId">Type</label></td>
+							<td style="padding-left: 5px;">
+								<html:select  styleId="professionalTypeIdId" name="professionalForm" property="professionalTypeId" disabled="${professionalForm.transactionStatus}">
+									 <html:option value="0">--Select--</html:option>
+									 <html:optionsCollection name="professionalForm" property="professionalTypeList" label="description" value="id"/>					 		
+								</html:select>	
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label top-spacing" for="designation">Designation</label></td>
+							<td style="padding-left: 5px;">
+								<html:select  styleId="designationId" name="professionalForm" property="designation" disabled="${professionalForm.transactionStatus}">
+									 <html:option value="0">--Select--</html:option>
+									 <html:optionsCollection name="professionalForm" property="professionalDesignationLOV" label="listValue" value="listValue"/>				 		
+								</html:select>	
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label" for="lastName">Last Name</label>	</td>
+							<td style="padding-left: 5px;">
+								<html:text styleId="lastNameId" property="lastName" styleClass="input-xlarge"  size="20" maxlength="20" value="${professionalForm.lastName}" disabled="${professionalForm.transactionStatus}"></html:text><br>
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label" for="firstName">First Name</label></td>
+							<td style="padding-left: 5px;">
+								<html:text styleId="firstNameId" property="firstName" styleClass="input-xlarge"  size="20" maxlength="20" value="${professionalForm.firstName}" disabled="${professionalForm.transactionStatus}"></html:text><br>
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label" for="middleName">Middle Name</label></td>
+							<td style="padding-left: 5px;">
+								<html:text styleId="middleNameId" property="middleName" styleClass="input-xlarge"  size="20" maxlength="20" value="${professionalForm.middleName}" disabled="${professionalForm.transactionStatus}"></html:text><br>
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label top-spacing" for="specializationId">Specialization</label></td>
+							<td style="padding-left: 5px;">
+								<html:select  name="professionalForm" property="specializationId" disabled="${professionalForm.transactionStatus}">
+									 <html:option value="0">--Select--</html:option>
+									 <html:optionsCollection name="professionalForm" property="specializationList" label="entityName" value="id"/>				 		
+								</html:select>	
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label top-spacing" for="gender">Gender</label></td>
+							<td style="padding-left: 5px;">
+								<html:select  name="professionalForm" property="gender" disabled="${professionalForm.transactionStatus}">
+									 <html:option value="0">--Select--</html:option>
+									 <html:optionsCollection name="professionalForm" property="genderLOV" label="listValue" value="listValue"/>				 		
+								</html:select>	
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label class="control-label top-spacing" for="birthday">Birthday</label></td>
+							<td style="padding-left: 5px;">
+								<input style="text-align: right;" type="text" name="birthday" id="dtBirthdayPicker" value="${professionalForm.birthday}" placeholder="mm/dd/yyyy" />
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label class="control-label top-spacing" for="dateHired">Date Hired</label></td>
+							<td style="padding-left: 5px;">
+								<input style="text-align: right;" type="text" name="dateHired" id="dtDateHiredPicker" value="${professionalForm.dateHired}" placeholder="mm/dd/yyyy" />
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label" for="licenseNo">License No</label></td>
+							<td style="padding-left: 5px;">
+								<html:text styleId="licenseNoId" property="licenseNo" styleClass="input-xlarge"  size="20" maxlength="20" value="${professionalForm.licenseNo}" disabled="${professionalForm.transactionStatus}"></html:text><br>
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label top-spacing" for="professionalStatusId">Status</label></td>
+							<td style="padding-left: 5px;">
+								<html:select  name="professionalForm" property="professionalStatusId" disabled="${professionalForm.transactionStatus}">
+									 <html:option value="0">--Select--</html:option>
+									 <html:optionsCollection name="professionalForm" property="professionalStatusLOV" label="listValue" value="id"/>				 		
+								</html:select>	
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label" for="standardConsultationFee">Consultation Fee (Php)</label></td>
+							<td style="padding-left: 5px;">
+								<html:text style="text-align: right;" styleId="standardConsultationFeeId" property="standardConsultationFee" styleClass="input-xlarge"  size="20" maxlength="20" value="${professionalForm.standardConsultationFee}" disabled="${professionalForm.transactionStatus}"></html:text><br>
+							</td>
+						</tr>
+						<tr height="5px"></tr>
+						<tr>
+							<td><label  class="control-label" for="standardAdmissionFee">Admission Fee (Php)</label></td>
+							<td style="padding-left: 5px;">
+								<html:text style="text-align: right;" styleId="standardAdmissionFeeId" property="standardAdmissionFee" styleClass="input-xlarge"  size="20" maxlength="20" value="${professionalForm.standardAdmissionFee}" disabled="${professionalForm.transactionStatus}"></html:text><br>
+							</td>
+						</tr>
+						<tr height="15px"></tr>
+						<tr>
+							<td></td>
+							<td style="padding-left: 5px;">
+								<div class="control-group">
+									<div class="controls">
+										<c:choose>
+											<c:when test="${professionalForm.transactionStatus == true}">
+												<html:button property="btnClose" styleClass="btn btn-primary" style="width: 100px;" onclick="goToProfessional();" value="Close"></html:button>
+											</c:when>
+											<c:otherwise>
+												<html:button property="btnUpdate" styleClass="btn btn-primary" style="width: 100px;" onclick="updateProfessional();" value="Update"></html:button>
+												&nbsp;&nbsp;
+												<html:button property="btnCancel" styleClass="btn btn-primary" style="width: 100px;" onclick="goToProfessional();" value="Cancel"></html:button>
+											</c:otherwise>
+										</c:choose>						
+									</div>							
+								</div>
+							</td>
+						</tr>
+					</table>				
+				
+				</fieldset>				
+
+			</html:form>
+		</div>
+	
+	</div>
+	
+</div>	
+	

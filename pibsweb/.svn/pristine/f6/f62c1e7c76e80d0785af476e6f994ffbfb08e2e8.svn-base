@@ -1,0 +1,181 @@
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   speak for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modal {
+    display:    block;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 0, 0, 0, 0 ) 
+                url('../resources/ajax-loader_mid.gif')
+				50% 50% 
+                no-repeat;
+}
+
+
+div#mainDIV {
+	height: 100%;
+	width: 100%;
+}
+
+div#headerDIV {
+	height:10%;
+	width: 100%;
+	background-color:#b6ff93;
+	text-align: center;
+	float: left;
+}
+
+div#contentDIVLogin {
+	height: 85%;
+	width: 100%;
+	background-color: white;
+	float: left;
+}
+
+div#contentDIV {
+	height: 80%;
+	width: 98%;
+	background-color: white;
+	float: left;
+}
+
+div#footerDIV {
+	height: 1%;
+	width: 100%;
+	/*padding-top: 4px;*/
+	background-color: white;
+	text-align: center;
+	float: left;
+}
+
+div.headerLabel {
+	height: 50%;
+	width: 100%; 
+	padding-top: 9px;
+	font-size: 20px;
+	font-family: sans-serif;
+}
+
+div.footerLabel {
+	font-size: 10px;
+	font-family: sans-serif;
+}
+
+/*Global*/
+.divMarginV {
+	margin-bottom: 10px;
+}
+
+
+/*Patient Registration*/
+.divLabelCol1{
+	float: left;
+	width: 120px;
+	
+}
+
+.divLabelCol2{
+	float: left;
+	width: 150px;
+}
+
+.divTextboxCol1{
+	float: left;
+	margin-right: 200px;
+}
+
+.divTextboxCol2{
+	float: left;
+	margin-right: 200px;
+}
+
+.labelCol1 {
+	float: left;
+}
+
+.labelCol2 {
+	float: left;
+}
+
+.textboxColId {
+	width: 50px;
+	text-align: right;
+}
+.textboxCol1 {
+	width: 150px;
+	text-align: left;
+}
+
+.textboxCol2 {
+	width: 150px;
+}
+
+.dropdownCol1 {
+	width: 150px;
+	height: 25px;
+}
+
+.dropdownCol2 {
+	width: 150px;
+	height: 25px;
+}
+
+.btnSaveUpdate {
+	float: left;
+	width: 100px;
+	height: 40px;
+}
+
+.btnSaveAndUpdate {
+	float: left;
+	width: 130px;
+	height: 40px;
+}
+
+.btnAddNew {
+	float: left;
+	width: 150px;
+	height: 40px;
+}
+
+.btnCancelClose {
+	margin-left: 20px;
+	width: 100px;
+	height: 40px;
+}
+
+.divSpace {
+	padding-left: 30px;
+}
+
+.btnBackToSearch {
+	margin-left: 20px;
+	width: 150px;
+	height: 40px;
+}
+
+.btnMonitoringMed {
+	margin-left: 5px;
+	width: 73x;
+	height: 40px;
+}
+
+.btnMonitoringLong {
+	margin-left: 5px;
+	width: 167px;
+	height: 40px;
+}
+

@@ -1,0 +1,191 @@
+package com.pibs.action;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import com.pibs.constant.ActionConstant;
+import com.pibs.constant.MapConstant;
+import com.pibs.constant.MiscConstant;
+import com.pibs.constant.ModuleConstant;
+import com.pibs.constant.ParamConstant;
+import com.pibs.form.BillingPaymentFormBean;
+import com.pibs.model.Billing;
+import com.pibs.model.User;
+import com.pibs.service.ServiceManager;
+import com.pibs.service.ServiceManagerImpl;
+import com.pibs.util.BillingUtils;
+
+
+public class BillingPaymentAction extends Action {
+	
+	private final static Logger logger = Logger.getLogger(BillingPaymentAction.class);
+	
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		// TODO Auto-generated method stub
+		
+		BillingPaymentFormBean formBean = (BillingPaymentFormBean) form;
+        String forwardAction = ActionConstant.NONE;
+		String command = request.getParameter("command");
+		
+		User user = (User) request.getSession().getAttribute(MiscConstant.USER_SESSION);
+
+		//session expired checking
+		if (request.getSession().getAttribute(MiscConstant.USER_SESSION) == null) {
+			forwardAction = ActionConstant.SHOW_AJAX_EXPIRED;
+		} else {
+			if (command!=null) {
+				
+//				int module = ModuleConstant.BILLING_PAYMENT;
+				
+				if (command.equalsIgnoreCase(ParamConstant.AJAX_GO_TO_CHILD)) {		
+					//fetch the data
+					
+					int patientCaseSystemId = Integer.parseInt(request.getParameter("patientCaseSystemId"));
+					
+					BillingUtils bill = new BillingUtils();
+					bill.setPatientCaseSystemId(patientCaseSystemId);
+					bill.getLaboratoryExaminationDetails();
+					bill.getMedicalSupplyDetails();
+					bill.getRadiologyDetails();
+					bill.getSurgeryDetails();
+					bill.getAdditionalServicesDetails();
+					bill.getEquipmentDetails();
+					bill.computeRoomFee();
+					bill.getOtherRoomDetails();
+					bill.computeDoctorFee();
+					bill.getOtherDoctorDetails();
+					bill.computeTotalAmtFee();
+					bill.getDiscountDetails();
+					bill.computeTotalAmtDue();
+					
+					//set total amt due
+					formBean.setTotalAmtDue(bill.getTotalAmtDue());
+					
+					//check first if record exists in Patient bill table
+					Billing modelCheck = new Billing();
+					modelCheck.setPatientCaseSystemid(patientCaseSystemId);
+					HashMap<String,Object> dataMap = new HashMap<String, Object>();
+			        dataMap.put(MapConstant.MODULE, ModuleConstant.BILLING);
+			        dataMap.put(MapConstant.CLASS_DATA, modelCheck);
+			        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+				
+			        ServiceManager service = new ServiceManagerImpl();
+			        Map<String, Object> resultMap = service.executeRequest(dataMap);
+			        
+			        if (resultMap!=null && !resultMap.isEmpty()) {
+			        	Billing model = (Billing) resultMap.get(MapConstant.CLASS_DATA);
+				        dataMap = null;
+				        service = null;
+				        resultMap = null;
+
+		        		formBean.populateModelBilling(bill);//need to get the latest computation from BillingUtils
+			        	if (model.getId()>0) {
+			        		formBean.getModelBilling().setId(model.getId());//update the billing id for update
+				        	//code here for update
+							dataMap = new HashMap<String, Object>();
+					        dataMap.put(MapConstant.MODULE, ModuleConstant.BILLING);
+					        dataMap.put(MapConstant.CLASS_DATA, formBean.getModelBilling());
+					        dataMap.put(MapConstant.USER_SESSION_DATA, user);
+					        dataMap.put(MapConstant.ACTION, ActionConstant.UPDATE);
+					        
+					        service = new ServiceManagerImpl();
+					        resultMap = service.executeRequest(dataMap);
+					        
+					        if (resultMap!=null && !resultMap.isEmpty()) {
+					        	boolean transactionStatus = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+					        	if (transactionStatus) {
+						        	formBean.setTransactionStatus(transactionStatus);
+						        	//need to update the formbean for Billing Id
+						        	formBean.updateFormBeanForBillingId();
+						        	logger.info("Patient Bill successfully updated (Patient case system ID): " + formBean.getPatientCaseSystemId());//Patient Case System Id
+					        	}
+					        }
+			        	} else {
+							//save totals to patient bill table
+							dataMap = new HashMap<String, Object>();
+					        dataMap.put(MapConstant.MODULE, ModuleConstant.BILLING);
+					        dataMap.put(MapConstant.CLASS_DATA, formBean.getModelBilling());
+					        dataMap.put(MapConstant.USER_SESSION_DATA, user);
+					        dataMap.put(MapConstant.ACTION, ActionConstant.SAVE);
+					        
+					        service = new ServiceManagerImpl();
+					        resultMap = service.executeRequest(dataMap);
+					        
+					        if (resultMap!=null && !resultMap.isEmpty()) {
+					        	boolean transactionStatus = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+					        	if (transactionStatus) {
+						        	//need to update the formbean for Billing Id
+						        	formBean.updateFormBeanForBillingId();
+						        	logger.info("Patient Bill successfully saved (Patient case system ID): " + formBean.getPatientCaseSystemId());//Patient Case System Id
+					        	}
+					        }
+				        
+			        	}
+			        	
+			        	String caseNo = request.getParameter("caseNo");
+			        	
+			        	//generate pdf bill report
+			        	bill.generateReport(request, caseNo);
+			        	
+			        } else {
+			        	logger.info("Resultmap is empty...");
+			        }
+					
+			        formBean.setTransactionStatus(false);
+					forwardAction = ActionConstant.SHOW_AJAX_GO_TO_CHILD;
+					
+				}  else if (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE)) {	
+							
+					formBean.populateModel(formBean);
+
+					HashMap<String,Object> dataMap = new HashMap<String, Object>();
+			        dataMap.put(MapConstant.MODULE, ModuleConstant.BILLING_PAYMENT);
+			        dataMap.put(MapConstant.CLASS_DATA, formBean.getModel());
+			        dataMap.put(MapConstant.USER_SESSION_DATA, user);
+			        dataMap.put(MapConstant.ACTION, ActionConstant.SAVE);
+				
+			        ServiceManager service = new ServiceManagerImpl();
+			        Map<String, Object> resultMap = service.executeRequest(dataMap);
+			        
+			        if (resultMap!=null && !resultMap.isEmpty()) {
+			        	boolean transactionStatus = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
+			        	if (transactionStatus) {
+							formBean.setTransactionStatus(transactionStatus);
+							formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_SAVED);
+							forwardAction = ActionConstant.AJAX_SUCCESS;
+			        	} else {
+			        		formBean.setTransactionStatus(transactionStatus);
+			        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
+			        		forwardAction = ActionConstant.AJAX_FAILED;
+			        	}
+			        } else {
+			        	formBean.setTransactionStatus(false);
+						forwardAction = ActionConstant.AJAX_FAILED;
+			        }
+			        
+				}
+			} else {
+				//show main screen
+				 forwardAction = ActionConstant.SHOW_AJAX_MAIN;
+			}
+			
+		}
+		
+		return mapping.findForward(forwardAction);
+	}	
+	
+
+
+}

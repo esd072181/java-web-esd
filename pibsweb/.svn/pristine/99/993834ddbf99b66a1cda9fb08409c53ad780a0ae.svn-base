@@ -1,0 +1,17 @@
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+"http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+
+   <definition name="pibs-login-template" path="/template/login_layout.jsp">
+	 <put name="header" value="/template/header_login.jsp" />
+	 <put name="footer" value="/template/footer.jsp" />
+   </definition>
+ 
+   <definition name="pibs-template" path="/template/common_layout.jsp">
+	 <put name="header" value="/template/header.jsp" />
+	 <put name="menu" value="/template/menu.jsp" />
+	 <put name="footer" value="/template/footer.jsp" />
+   </definition>
+ 
+</tiles-definitions>

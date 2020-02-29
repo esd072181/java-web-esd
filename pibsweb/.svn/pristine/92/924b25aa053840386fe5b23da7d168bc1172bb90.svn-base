@@ -1,0 +1,235 @@
+package com.pibs.constant;
+
+public class MiscConstant {
+
+	//pagination
+	public static final int RECORDS_PER_PAGE = 10;
+	
+	//session
+	public static final String USER_SESSION = "user_session";
+	public static final String USER_ROLE_SESSION = "user_role_session";
+	public static final String TRANS_MESSAGE_SESSION = "2";
+	public static final String MF_ROOM_CATEGORY_LIST = "3";
+	public static final String MF_BUILDING_LIST = "4";
+	public static final String NO_FLOOR_LIST = "5";
+	public static final String MF_ADDITIONAL_SERVICES_CATEGORY_LIST = "6";
+	public static final String MF_PROFESSIONAL_TYPE_LIST = "7";
+	public static final String MF_SPECIALIZATION_LIST = "8";
+	public static final String LOVTYPE_PATIENT_TYPE_SESSION = "9";
+	public static final String LOVTYPE_MEDICAL_SUPPLY_TYPE_SESSION = "10";
+	public static final String LOVTYPE_SURGERY_TYPE_SESSION = "11";
+	public static final String LOVTYPE_ENTITY_TYPE_SESSION = "12";
+	public static final String LOVTYPE_PATIENT_STATUS_TYPE_SESSION = "13";
+	public static final String LOVTYPE_PROFESSIONAL_STATUS_TYPE_SESSION = "14";
+	public static final String LOVTYPE_PATIENT_CASE_STATUS_TYPE_SESSION = "15";
+	public static final String LOVTYPE_PROFESSIONAL_DESIGNATION_TYPE_SESSION = "16";
+	public static final String LOVTYPE_RADIOLOGY_TYPE_SESSION = "17";
+	public static final String LOVTYPE_GENDER_TYPE_SESSION = "18";
+	public static final String MF_ROOM_LIST = "19";
+	public static final String MF_DOCTOR_LIST = "20";
+	public static final String LOV_EMPLOYEE_CATEGORY_SESSION = "21";
+	public static final String LOV_USER_ROLE_SESSION = "22";
+	public static final String LOV_USER_ACCESS_MODULE_SESSION = "23";
+	public static final String MF_EMPLOYEE_CUSTOM_LIST = "24";
+	public static final String MF_USER_CUSTOM_LIST = "25";
+	public static final String UTILS_ENTITY_TYPE_CRITERIA = "26";
+	public static final String LOV_PATIENT_REPORT_SEARCH_CRITERIA_SESSION = "27";
+	public static final String LOV_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA_SESSION = "28";
+	public static final String LOV_EQUIPMENT_REPORT_SEARCH_CRITERIA_SESSION = "29";
+	public static final String LOV_LABORATORY_EXAMINATION_REPORT_SEARCH_CRITERIA_SESSION = "30";
+	public static final String LOV_RADIOLOGY_REPORT_SEARCH_CRITERIA_SESSION = "31";
+	public static final String LOV_SURGERY_REPORT_SEARCH_CRITERIA_SESSION = "32";
+	public static final String LOV_ADDITIONAL_SERVICES_REPORT_SEARCH_CRITERIA_SESSION = "33";
+	public static final String LOV_DISCOUNT_REPORT_SEARCH_CRITERIA_SESSION = "34";
+	public static final String LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_SESSION = "35";
+	public static final String LOV_ROOM_REPORT_SEARCH_CRITERIA_SESSION = "36";
+	public static final String LOV_EMPLOYEE_REPORT_SEARCH_CRITERIA_SESSION = "37";
+	public static final String LOV_NURSERY_REPORT_SEARCH_CRITERIA_SESSION = "38";
+	public static final String LOV_EMPLOYEE_POSITION_SESSION = "39";
+	
+	public static final String USER_ACCESS_LIST = "user_access_list";//string used in jsp
+	
+	//confirmation messages
+	public static final String TRANS_MESSSAGE_SAVED = "Record successfully saved!";
+	public static final String TRANS_MESSSAGE_UPDATED = "Record successfully updated!";
+	public static final String TRANS_MESSSAGE_DELETED = "Record successfully deleted!";
+	public static final String TRANS_MESSSAGE_VALID_USERNAME = "Please proceed to change your username and password.";
+	public static final String TRANS_MESSSAGE_INVALID_USERNAME = "Invalid username or password!";
+	public static final String TRANS_MESSSAGE_ERROR = "There was an error in processing.. Please contact System Administrator.";
+	public static final String TRANS_MESSSAGE_RESET = "";
+	public static final String TRANS_MESSSAGE_RESTORED = "Record successfully restored to Master File!";
+	public static final String RPT_MESSSAGE_GENERATED_SUCCESS= "Report generated successfully!";
+	public static final String RPT_MESSSAGE_GENERATED_FAILED = "Report generation failed!";
+	
+	//logging messages
+	public static final String LOGGING_MESSSAGE_SAVE = "Entered save()...";
+	public static final String LOGGING_MESSSAGE_UPDATE = "Entered update()...";
+	public static final String LOGGING_MESSSAGE_DELETE = "Entered delete()...";
+	public static final String LOGGING_MESSSAGE_SEARCH = "Entered search()...";
+	public static final String LOGGING_MESSSAGE_GETDATA_BY_ID = "Entered getDataById()...";
+	public static final String LOGGING_MESSSAGE_GETDATA_BY_USER_ID = "Entered getDataByUserId()...";
+	public static final String LOGGING_MESSSAGE_GET_ACTIVE_DATA = "Entered getActiveData()...";
+	public static final String LOGGING_MESSSAGE_GET_INACTIVE_DATA = "Entered getInActiveData()...";
+	public static final String LOGGING_MESSSAGE_GET_DATA_BY_LIST_TYPE = "Entered getDataByListType()...";
+	public static final String LOGGING_MESSSAGE_RESTORE = "Entered restore()...";
+	public static final String LOGGING_MESSSAGE_UPDATE_USERNAME_PASSWORD = "Entered updateUsernamePassword()...";
+	public static final String LOGGING_MESSSAGE_GETDATA_BY_CRITERIA = "Entered getDataByCriteria()...";
+	
+	//list type = list type Id
+	public static final int LOVTYPE_PATIENT_TYPE = 1;
+	public static final int LOVTYPE_MEDICAL_SUPPLY_TYPE = 2;
+	public static final int LOVTYPE_SURGERY_TYPE = 3;
+	public static final int LOVTYPE_ENTITY_TYPE = 4;
+	public static final int LOVTYPE_PATIENT_STATUS_TYPE = 5;
+	public static final int LOVTYPE_PROFESSIONAL_STATUS_TYPE = 6;
+	public static final int LOVTYPE_PATIENT_CASE_STATUS_TYPE = 7;
+	public static final int LOVTYPE_PROFESSIONAL_DESIGNATION_TYPE = 8;
+	public static final int LOVTYPE_RADIOLOGY_TYPE = 9;
+	public static final int LOVTYPE_GENDER_TYPE = 10;
+	public static final int LOVTYPE_PAYMENT_MODE = 11;
+	public static final int LOVTYPE_EMP_CATEGORY = 12;
+	public static final int LOVTYPE_USER_ROLE= 13;
+	public static final int LOVTYPE_USER_ACCESS_MODULE = 14;
+	public static final int LOVTYPE_PATIENT_REPORT_SEARCH_CRITERIA = 15;
+	public static final int LOVTYPE_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA = 16;
+	public static final int LOVTYPE_EQUIPMENT_REPORT_SEARCH_CRITERIA = 17;
+	public static final int LOVTYPE_LABORATORY_EXAMINATION_REPORT_SEARCH_CRITERIA = 18;
+	public static final int LOVTYPE_RADIOLOGY_REPORT_SEARCH_CRITERIA = 19;
+	public static final int LOVTYPE_SURGERY_REPORT_SEARCH_CRITERIA = 20;
+	public static final int LOVTYPE_ADDITIONAL_SERVICES_REPORT_SEARCH_CRITERIA = 21;
+	public static final int LOVTYPE_DISCOUNT_REPORT_SEARCH_CRITERIA = 22;
+	public static final int LOVTYPE_PROFESSIONAL_REPORT_SEARCH_CRITERIA = 23;
+	public static final int LOVTYPE_ROOM_REPORT_SEARCH_CRITERIA = 24;
+	public static final int LOVTYPE_EMPLOYEE_REPORT_SEARCH_CRITERIA = 25;
+	public static final int LOVTYPE_NURSERY_REPORT_SEARCH_CRITERIA = 26;
+	public static final int LOVTYPE_EMP_POSITION = 27;
+	
+	//Reports - jasper
+	public static final String RPT_BILLING_DETAILS_TITLE = "Billing Details Report";
+	public static final String RPT_BILLING_REPORT = "billing.jasper";
+	public static final String RPT_MEDICAL_ABSTRACT_TITLE = "Medical Abstract";
+	public static final String RPT_MEDICAL_ABSTRACT = "medicalabstract.jasper";
+
+	//Reports - pdf
+	public static final String PDF_BILLING_REPORT = "Bill_";
+	public static final String PDF_MEDICAL_ABSTRACT = "MedicalAbstract_";
+	
+	//Reports - folder
+	public static final String FOLDER_PDF_BILLING_REPORT = "billing";
+	public static final String FOLDER_PDF_MEDICAL_ABSTRACT = "medicalabstract";
+	
+	//Reports - search criteria
+	public static final String RPT_SEARCH_CRITERIA = "rpt_search_criteria";
+	
+	//Reports
+	public static final String RPT_PATIENT_REPORT = "patientlist.jasper";//Patient
+	public static final String PDF_PATIENT_REPORT = "patientlist.pdf";
+	public static final String RPT_MEDICAL_SUPPLY_REPORT = "medicalsupplylist.jasper";//Medical Supply
+	public static final String PDF_MEDICAL_SUPPLY_REPORT = "medicalsupplylist.pdf";
+	public static final String RPT_EQUIPMENT_REPORT = "equipmentlist.jasper";//Equipment
+	public static final String PDF_EQUIPMENT_REPORT = "equipmentlist.pdf";
+	public static final String RPT_LABORATORY_EXAMINATION_REPORT = "labexamlist.jasper";//Laboratory Examination
+	public static final String PDF_LABORATORY_EXAMINATION_SUPPLY_REPORT = "labexamlist.pdf";
+	public static final String RPT_RADIOLOGY_REPORT = "radiologylist.jasper";//Radiology
+	public static final String PDF_RADIOLOGY_SUPPLY_REPORT = "radiologylist.pdf";
+	public static final String RPT_SURGERY_REPORT = "surgerylist.jasper";//Surgery
+	public static final String PDF_SURGERY_REPORT = "surgerylist.pdf";
+	public static final String RPT_ADDITIONAL_SERVICES_REPORT = "additionalserviceslist.jasper";//Additional Services
+	public static final String PDF_ADDITIONAL_SERVICES_REPORT = "additionalserviceslist.pdf";
+	public static final String RPT_DISCOUNT_REPORT = "discountlist.jasper";//Discount
+	public static final String PDF_DISCOUNT_REPORT = "discountlist.pdf";
+	public static final String RPT_PROFESSIONAL_REPORT = "professionallist.jasper";//Professional
+	public static final String PDF_PROFESSIONAL_REPORT = "professionallist.pdf";
+	public static final String RPT_ROOM_REPORT = "roomlist.jasper";//Room
+	public static final String PDF_ROOM_REPORT = "roomlist.pdf";
+	public static final String RPT_EMPLOYEE_REPORT = "employeelist.jasper";//Employee
+	public static final String PDF_EMPLOYEE_REPORT = "employeelist.pdf";
+	public static final String RPT_NURSERY_REPORT = "nurserylist.jasper";//Nursery
+	public static final String PDF_NURSERY_REPORT = "nurserylist.pdf";
+	public static final String RPT_PATIENT_HISTORY_REPORT = "patienthistory.jasper";//Patient History 
+	public static final String PDF_PATIENT_HISTORY_REPORT = "patienthistory.pdf";
+	
+	//LOV for EntityType
+	public static final int LOV_ENTITY_TYPE_PROFESSIONAL = 401;
+	public static final int LOV_ENTITY_TYPE_SURGERY = 402;
+	public static final int LOV_ENTITY_TYPE_ROOM = 403;
+	public static final int LOV_ENTITY_TYPE_ROOM_CATEGORY = 404;
+	public static final int LOV_ENTITY_TYPE_EQUIPMENT = 405;
+	public static final int LOV_ENTITY_TYPE_DISCOUNT = 406;
+	public static final int LOV_ENTITY_TYPE_ADDITIONAL_SERVICES = 407;
+	public static final int LOV_ENTITY_TYPE_ADDITIONAL_SERVICES_CATEGORY = 408;
+	public static final int LOV_ENTITY_TYPE_RADIOLOGY = 409;
+	public static final int LOV_ENTITY_TYPE_MEDICAL_SUPPLY = 410;
+	public static final int LOV_ENTITY_TYPE_SPECIALIZATION = 411;
+	public static final int LOV_ENTITY_TYPE_BUILDING = 412;
+	public static final int LOV_ENTITY_TYPE_LABORATORY_EXAMINATION = 413;
+	public static final int LOV_ENTITY_TYPE_PATIENT = 414;
+	public static final int LOV_ENTITY_TYPE_NURSERY = 415;
+	public static final int LOV_ENTITY_TYPE_EMPLOYEE = 416;
+	public static final int LOV_ENTITY_TYPE_USER = 417;
+	
+	//LOV for LOVTYPE_PATIENT_REPORT_SEARCH_CRITERIA
+	public static final int LOV_PATIENT_REPORT_SEARCH_CRITERIA_PATIENT_NO = 1501;
+	public static final int LOV_PATIENT_REPORT_SEARCH_CRITERIA_LAST_NAME = 1502;
+	public static final int LOV_PATIENT_REPORT_SEARCH_CRITERIA_FIRST_NAME = 1503;
+	public static final int LOV_PATIENT_REPORT_SEARCH_CRITERIA_ADDRESS = 1504;
+	public static final int LOV_PATIENT_REPORT_SEARCH_CRITERIA_STATUS = 1505;
+	public static final int LOV_PATIENT_REPORT_SEARCH_CRITERIA_DATE_REGISTERED = 1506;
+	
+	//LOV for LOVTYPE_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA
+	public static final int LOV_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA_TYPE = 1601;
+	public static final int LOV_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA_ITEM_CODE= 1602;
+	public static final int LOV_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA_DESCRIPTION = 1603;
+	public static final int LOV_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA_GENERIC_NAME = 1604;
+	public static final int LOV_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA_DATE_MANUFACTURED = 1605;
+	public static final int LOV_MEDICAL_SUPPLY_REPORT_SEARCH_CRITERIA_EXPIRATION_DATE = 1606;
+
+	//LOV for LOVTYPE_EQUIPMENT_REPORT_SEARCH_CRITERIA
+	public static final int LOV_EQUIPMENT_REPORT_SEARCH_CRITERIA_ENTITY_NAME = 1701;
+	public static final int LOV_EQUIPMENT_REPORT_SEARCH_CRITERIA_DESCRIPTION = 1702;
+
+	//LOV for LOVTYPE_LABORATORY_EXAMINATION_REPORT_SEARCH_CRITERIA
+	public static final int LOV_LABORATORY_EXAMINATION_REPORT_SEARCH_CRITERIA_DESCRIPTION = 1801;
+	public static final int LOV_LABORATORY_EXAMINATION_REPORT_SEARCH_CRITERIA_REMARKS = 1802;
+
+	//LOV for LOVTYPE_RADIOLOGY_REPORT_SEARCH_CRITERIA
+	public static final int LOV_RADIOLOGY_REPORT_SEARCH_CRITERIA_TYPE = 1901;
+	public static final int LOV_RADIOLOGY_REPORT_SEARCH_CRITERIA_DESCRIPTION = 1902;
+	public static final int LOV_RADIOLOGY_REPORT_SEARCH_CRITERIA_REMARKS = 1903;
+
+	//LOV for LOVTYPE_SURGERY_REPORT_SEARCH_CRITERIA
+	public static final int LOV_SURGERY_REPORT_SEARCH_CRITERIA_TYPE = 2001;
+	public static final int LOV_SURGERY_REPORT_SEARCH_CRITERIA_DESCRIPTION = 2002;
+	public static final int LOV_SURGERY_REPORT_SEARCH_CRITERIA_REMARKS = 2003;	
+	
+	//LOV for LOVTYPE_ADDITIONAL_SERVICES_REPORT_SEARCH_CRITERIA
+	public static final int LOV_ADDITIONAL_SERVICES_REPORT_SEARCH_CRITERIA_CATEGORY= 2101;
+	public static final int LOV_ADDITIONAL_SERVICES_REPORT_SEARCH_CRITERIA_DESCRIPTION = 2102;
+	public static final int LOV_ADDITIONAL_SERVICES_REPORT_SEARCH_CRITERIA_REMARKS = 2103;
+	
+	//LOV for LOVTYPE_DISCOUNT_REPORT_SEARCH_CRITERIA
+	public static final int LOV_DISCOUNT_REPORT_SEARCH_CRITERIA_DESCRIPTION = 2201;
+	public static final int LOV_DISCOUNT_REPORT_SEARCH_CRITERIA_REMARKS = 2202;	
+	
+	//LOV for LOVTYPE_PROFESSIONAL_REPORT_SEARCH_CRITERIA
+	public static final int LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_TYPE = 2301;
+	public static final int LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_SPECIALIZATION = 2302;	
+	public static final int LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_LAST_NAME = 2303;
+	public static final int LOV_PROFESSIONAL_REPORT_SEARCH_CRITERIA_FIRST_NAME = 2304;
+	
+	//LOV for LOVTYPE_ROOM_REPORT_SEARCH_CRITERIA
+	public static final int LOV_ROOM_REPORT_SEARCH_CRITERIA_ROOM_NO = 2401;
+	public static final int LOV_ROOM_REPORT_SEARCH_CRITERIA_CATEGORY = 2402;	
+	public static final int LOV_ROOM_REPORT_SEARCH_CRITERIA_BUILDING = 2403;	
+
+	//LOV for LOVTYPE_EMPLOYEE_REPORT_SEARCH_CRITERIA
+	public static final int LOV_EMPLOYEE_REPORT_SEARCH_CRITERIA_CATEGORY = 2501;
+	public static final int LOV_EMPLOYEE_REPORT_SEARCH_CRITERIA_LAST_NAME = 2502;	
+	public static final int LOV_EMPLOYEE_REPORT_SEARCH_CRITERIA_FIRST_NAME = 2503;
+	public static final int LOV_EMPLOYEE_REPORT_SEARCH_CRITERIA_POSITION = 2504;
+	
+	//LOV for LOVTYPE_NURSERY_REPORT_SEARCH_CRITERIA
+	public static final int LOV_NURSERY_REPORT_SEARCH_CRITERIA_DATE_OF_BIRTH = 2601;
+	public static final int LOV_NURSERY_REPORT_SEARCH_CRITERIA_LAST_NAME = 2602;	
+	public static final int LOV_NURSERY_REPORT_SEARCH_CRITERIA_FIRST_NAME = 2603;
+}

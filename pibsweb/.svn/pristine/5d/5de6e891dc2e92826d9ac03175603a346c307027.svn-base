@@ -1,0 +1,318 @@
+package com.pibs.util;
+
+import java.io.File;
+//import java.io.FileOutputStream;
+import java.util.List;
+import java.util.Map;
+
+//import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.ss.usermodel.Row;
+//import org.apache.poi.xssf.usermodel.XSSFSheet;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+
+
+import com.pibs.model.BillingReport;
+import com.pibs.constant.MiscConstant;
+
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRRuntimeException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
+public class ReportUtils {
+	
+	/**
+	 * Creates a pdf file in the server, then the client browser will show the report in a new tab
+	 * @param jasperReport
+	 * @param parameters
+	 * @param ds
+	 * @param reportTitle
+	 * @param localPath
+	 * @return
+	 * @throws Exception
+	 */
+	private static boolean generatePDFViaJasperReportsEngine(JasperReport jasperReport, Map<String, Object> parameters, JRBeanCollectionDataSource ds, String reportTitle, String destFile) throws Exception{
+		boolean isReportGenerated = false;
+		
+		JasperPrint jasperPrint = null;
+			
+		try {		 
+			// fills compiled report with parameters and a connection
+			jasperPrint = JasperFillManager.fillReport (jasperReport, parameters, ds);
+
+			//create pdf file
+			JasperExportManager.exportReportToPdfFile(jasperPrint,destFile);
+			 
+			isReportGenerated = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (jasperPrint!=null) {
+				jasperPrint = null;	
+			}
+		}
+
+		return isReportGenerated;
+	}
+	
+	private static boolean generatePDFViaJasperReportsEngine(JasperReport jasperReport, Map<String, Object> parameters, String reportTitle, String destFile) throws Exception{
+		boolean isReportGenerated = false;
+		
+		JasperPrint jasperPrint = null;
+			
+		try {		 
+			// fills compiled report with parameters and a connection
+			jasperPrint = JasperFillManager.fillReport (jasperReport, parameters, new JREmptyDataSource());
+
+			//create pdf file
+			JasperExportManager.exportReportToPdfFile(jasperPrint,destFile);
+			 
+			isReportGenerated = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (jasperPrint!=null) {
+				jasperPrint = null;	
+			}
+		}
+
+		return isReportGenerated;
+	}
+	
+	
+	/**
+	 *  Uses Viewer and will show only in the Server
+	 * @param jasperReport
+	 * @param parameters
+	 * @param ds
+	 * @param reportTitle
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unused")
+	private static boolean generateViaJasperReportsEngine(JasperReport jasperReport, Map<String, Object> parameters, JRBeanCollectionDataSource ds, String reportTitle) throws Exception{
+		boolean isReportGenerated = false;
+		
+		JasperPrint jasperPrint = null;
+		
+		try {
+			 //fill the report
+			 jasperPrint = JasperFillManager.fillReport (jasperReport, parameters, ds);
+			 //allow export to pdf
+			 JasperExportManager.exportReportToPdf(jasperPrint);
+			 //show the report via viewer
+			 JasperViewer jViewer = new JasperViewer(jasperPrint, false);
+			 jViewer.setTitle(reportTitle);
+			 jViewer.setVisible(true);	
+			 isReportGenerated = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (jasperPrint!=null) {
+				jasperPrint = null;	
+			}
+		}
+
+		return isReportGenerated;
+	}
+	
+
+	/**
+	 * 
+	 * 
+	 * @param dataList
+	 * @param parameters
+	 * @param localPath
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean generateBillingReport (List<BillingReport> dataList, Map<String, Object> parameters, String localPath, String caseNo) throws Exception{
+				
+		String reportTitle = MiscConstant.RPT_BILLING_DETAILS_TITLE;
+		boolean isReportGenerated = false;
+		
+		String destFile = localPath + File.separator + MiscConstant.PDF_BILLING_REPORT + caseNo + ".pdf";
+		File reportFile = new File(localPath + File.separator + MiscConstant.RPT_BILLING_REPORT);
+
+
+		if (!reportFile.exists()) {
+			System.out.println("Destination File:" + destFile);
+			System.out.println("Report File:" + reportFile);
+			throw new JRRuntimeException(MiscConstant.RPT_BILLING_REPORT + " not found!");
+		}
+		
+		JasperReport jasperReport = null;
+		JRBeanCollectionDataSource  ds = null;
+		
+		try {
+			//load the report
+			jasperReport = (JasperReport) JRLoader.loadObject(reportFile);
+			//load the data
+			ds = new JRBeanCollectionDataSource(dataList);
+			//generate and view the report	
+			isReportGenerated = ReportUtils.generatePDFViaJasperReportsEngine(jasperReport, parameters, ds, reportTitle, destFile);
+		
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			if (reportFile!=null) {
+				reportFile = null;
+			}
+			if (jasperReport!=null) {
+				jasperReport = null;
+			}
+			if (ds!=null) {
+				ds = null;
+			}
+		}
+
+		return isReportGenerated;
+	}
+	
+	/**
+	 *  Export report to excel file
+	 *  (Transport Revision 1)
+	 * 
+	 * @throws Exception
+	 */
+//	private static void generateXLS(List<BillingPayment> dataList, String localPath) throws Exception {
+//		
+//        //Blank workbook
+//        XSSFWorkbook workbook = new XSSFWorkbook(); 
+//         
+//        //Create a blank sheet
+//        XSSFSheet sheet = workbook.createSheet("VandV_Data");
+//          
+//        //insert the column header first
+//        Row rowHeader = sheet.createRow(0);
+//        int cellHeaderNum = 0;
+//        Cell cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("ITEM");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("FINDINGS");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("DRIVER");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("TERMINAL");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("LORRY");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("TRAILER");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("VERIFICATION DATE");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("ROOT CAUSE");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("CORRECTIVE ACTIONS");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("VERIFIED BY");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("CLOSURE ON CORRECTIVE ACTIONS");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("CLOSURE DATE");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("CHECKED BY");
+//        cellHeader = rowHeader.createCell(cellHeaderNum++);
+//        cellHeader.setCellValue("STATUS");
+//        
+//        //insert the data
+//        int rownum = 1;
+//        for (int i=0; i<dataList.size();i++) {
+//        	Row row = sheet.createRow(rownum++);
+//        	BillingPayment rowData = dataList.get(i);
+//        	int cellnum = 0;
+////            Cell cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getItem());
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getFindings());
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getDriver()); 
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getTerminal()); 
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getLorry()); 
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getTrailer()); 
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getVerificationDateStr()); 
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getRootCause()); 
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getCorrections());
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getVerificationCheckedBy()); 
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getClosure()); 
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getValidationDateStr());
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getValidationCheckedBy());
+////            cell = row.createCell(cellnum++);
+////            cell.setCellValue(rowData.getRemarks()); 
+//        }
+//        
+//        try
+//        {
+//            //Write the workbook in file system
+//        	String xlsFile = localPath + File.separator + MiscConstant.XLS_VERIFICATION_AND_VALIDATION_REPORT;
+//            FileOutputStream out = new FileOutputStream(new File(xlsFile)); 
+//            workbook.write(out);
+//            out.close();
+//            System.out.println("verification.xlsx written successfully on disk.");
+//        } 
+//        catch (Exception e) 
+//        {
+//            e.printStackTrace();
+//        }
+//    }
+		
+	/**
+	 * 
+	 * @param parameters
+	 * @param localPath
+	 * @param patientId
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean generateMedicalAbstractReport (Map<String, Object> parameters, String localPath, String patientId) throws Exception{
+		
+		String reportTitle = MiscConstant.RPT_MEDICAL_ABSTRACT_TITLE;
+		boolean isReportGenerated = false;
+		
+		String destFile = localPath + File.separator + MiscConstant.PDF_MEDICAL_ABSTRACT + patientId + ".pdf";
+		File reportFile = new File(localPath + File.separator + MiscConstant.RPT_MEDICAL_ABSTRACT);
+
+
+		if (!reportFile.exists()) {
+			System.out.println("Destination File:" + destFile);
+			System.out.println("Report File:" + reportFile);
+			throw new JRRuntimeException(MiscConstant.RPT_MEDICAL_ABSTRACT + " not found!");
+		}
+		
+		JasperReport jasperReport = null;
+		
+		try {
+			//load the report
+			jasperReport = (JasperReport) JRLoader.loadObject(reportFile);
+			//generate and view the report	
+			isReportGenerated = ReportUtils.generatePDFViaJasperReportsEngine(jasperReport, parameters, reportTitle, destFile);	
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			if (reportFile!=null) {
+				reportFile = null;
+			}
+			if (jasperReport!=null) {
+				jasperReport = null;
+			}
+		}
+
+		return isReportGenerated;
+	}
+}

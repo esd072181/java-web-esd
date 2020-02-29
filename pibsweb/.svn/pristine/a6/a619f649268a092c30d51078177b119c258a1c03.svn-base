@@ -1,0 +1,146 @@
+package com.pibs.model;
+
+import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
+
+public class Admission implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private int id;
+	private String caseNo;
+	private String chiefComplaint;
+	private int patientSystemId;
+	private int patientTypeId;
+	private Date dateOfCase;
+	private Date dateDischarged;
+	private int patientCaseStatusId;
+	private int createdBy;
+	private Timestamp createdOn;
+	private int modifiedBy;
+	private Timestamp modifiedOn;
+	private int version;
+	private boolean active;
+	
+	public Admission() {}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCaseNo() {
+		return caseNo;
+	}
+
+	public void setCaseNo(String caseNo) {
+		this.caseNo = caseNo;
+	}
+
+	public String getChiefComplaint() {
+		return chiefComplaint;
+	}
+
+	public void setChiefComplaint(String chiefComplaint) {
+		this.chiefComplaint = chiefComplaint;
+	}
+
+	public int getPatientSystemId() {
+		return patientSystemId;
+	}
+
+	public void setPatientSystemId(int patientSystemId) {
+		this.patientSystemId = patientSystemId;
+	}
+
+
+	public Date getDateOfCase() {
+		return dateOfCase;
+	}
+
+	public void setDateOfCase(Date dateOfCase) {
+		this.dateOfCase = dateOfCase;
+	}
+
+	public Date getDateDischarged() {
+		return dateDischarged;
+	}
+
+	public void setDateDischarged(Date dateDischarged) {
+		this.dateDischarged = dateDischarged;
+	}
+
+
+	public int getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(int createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Timestamp getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public int getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(int modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public Timestamp getModifiedOn() {
+		return modifiedOn;
+	}
+
+	public void setModifiedOn(Timestamp modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public int getPatientTypeId() {
+		return patientTypeId;
+	}
+
+	public void setPatientTypeId(int patientTypeId) {
+		this.patientTypeId = patientTypeId;
+	}
+
+	public int getPatientCaseStatusId() {
+		return patientCaseStatusId;
+	}
+
+	public void setPatientCaseStatusId(int patientCaseStatusId) {
+		this.patientCaseStatusId = patientCaseStatusId;
+	}
+	
+	
+}

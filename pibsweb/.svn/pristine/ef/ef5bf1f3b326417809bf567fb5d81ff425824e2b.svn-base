@@ -1,0 +1,137 @@
+//Patient Registration
+   function goToAddPatient() {
+		$.ajax({
+			  type: "GET",
+			  url: "patientRegistration.do?",
+			  cache: false,
+			  data: { command: "ajaxAdd" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+				$("#descriptionId").focus();
+			});
+	}
+
+	function savePatient() {
+		
+		$.ajax({
+			  type: "POST",
+			  url: "savePatient.do?command=ajaxSave",
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+
+	}
+	
+	function cancelPatientRegistration() {
+		
+		bootbox.confirm("Are you sure you want to cancel Patient Registration?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+				 goToMainByAjax();
+			 } 
+		}); 
+	}
+	
+	//Admission
+	function goToAdmissionSearch() {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "admission.do?",
+			  data: { command: "ajaxGoToSearch" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+	function getPatientForAdmission(pageCriteria, category, isDeleted) {
+
+		//validation for search criteria
+		if (category == 'filter') {
+			if ( $("#idSearchCriteria").val().trim() == '') {
+				$("#validationMessageId").show();
+				$("#idSearchCriteria").focus(); 
+				setTimeout( "$('#validationMessageId').hide();",1500 );
+				return false;
+			}
+		}
+
+		$.ajax({
+			  type: "GET",
+			  url: "admission.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+			  cache: false,
+			  data: $("#idForm").serialize() 
+			})
+			  .done(function( result ) {
+				$("#tablePresentationDIV").html(result);
+			});
+	}
+		
+	function goToAdmission(patientSystemId) {
+		
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "admission.do?",
+			  data: { command: "ajaxGoToAdmission", 
+				  patientSystemId: patientSystemId
+			  		}
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+
+	function saveAdmission() {
+		
+				 $.ajax({
+					  type: "POST",
+					  url: "saveAdmission.do?command=ajaxSave",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIV").html(result);
+					});
+	}
+	
+	function cancelAdmission() {
+		
+		bootbox.confirm("Are you sure you want to cancel Admission?", function(ans) {
+			  //Example.show("Confirm result: "+result);
+			 if (ans) {
+					$.ajax({
+						  type: "GET",
+						  cache: false,
+						  url: "admission.do?",
+						  data: { command: "ajaxGoToSearch" }
+						})
+						  .done(function( result ) {
+							$("#contentDIV").html(result);
+						});
+			 } 
+		}); 
+	}
+
+	function closeAdmission() {
+		 goToMainByAjax();
+	}
+	
+	function backToAdmissionSearch() {
+		$.ajax({
+			  type: "GET",
+			  cache: false,
+			  url: "admission.do?",
+			  data: { command: "ajaxGoToSearch" }
+			})
+			  .done(function( result ) {
+				$("#contentDIV").html(result);
+			});
+	}
+	
+	
+	
