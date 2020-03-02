@@ -29,9 +29,11 @@
 
 		<form:form action="/lrmsweb/saveProfessional" method="post" modelAttribute="professional" cssClass="form-horizontal">
 				
-			<div align="left" style="padding: 10px 10px 0px 30px;">
-		    	<a href="./goToMain" >Back to Home</a>
-		    </div>			
+			<div style="overflow:hidden;">
+				<div style="float:left; padding: 5px 0px 0px 10px;">
+					<a href="./goToMain" >Back to Home</a><br>					
+				</div>			
+			</div>			
 		
 		    <div align="center">
 		    	<img src="resources/img/prof.png" alt="Professional" height="50" width="50">

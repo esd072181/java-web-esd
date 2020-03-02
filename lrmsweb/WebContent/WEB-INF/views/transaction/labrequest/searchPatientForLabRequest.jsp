@@ -34,8 +34,10 @@
 	
 		<form:form action="/lrmsweb/searchPatientForLabRequest" method="GET"  modelAttribute="patient" cssClass="form-horizontal" >
 					
-			<div align="left" style="padding: 10px 10px 0px 30px;">
-			   	<a href="./goToMain" >Back to Home</a>
+			<div style="overflow:hidden;">
+				<div style="float:left; padding: 5px 0px 0px 10px;">
+					<a href="./goToMain" >Back to Home</a><br>					
+				</div>			
 			</div>
 			    
 			<div align="center">
@@ -50,7 +52,7 @@
 		
 			<div align="center">
 				<div>
-					<form:label path="lastName">First/Last Name:</form:label>
+					<form:label path="lastName">Name:</form:label>
 		      		<form:input id="lastNameId" path="lastName"/>	    		
 		      		<input class="btn btn-default " type="submit" value="Search">
 		      		<input class="btn btn-default" type="button" id="closeButton" value="Add New Patient" onclick="window.location.href = '/lrmsweb/goToPatientRegistration';">	
@@ -72,12 +74,8 @@
 					<div  class="table-responsive" style="width: 99%; padding-left: 10px;">
 						<table class="table table-striped table-hover table-bordered table-responsive" style="font-size: 11px;">
 							<tr>
-								<td></td>
 								<td>No</td>
-								<td>LastName</td>
-								<td>FirstName</td>
-								<td>MiddleName</td>
-								<td>PatientNo</td>
+								<td>Name</td>
 								<td>Gender</td>
 								<td>Birthday</td>
 								<td>ContactNo</td>
@@ -89,16 +87,13 @@
 								<td>ContactPerson</td>
 								<td>ContactNo</td>
 								<td>DateRegistered</td>
+								<td>PatientNo</td>
 							</tr>
 							<!-- loop here -->
 							<c:forEach items="${resultList}" var="model" varStatus = "row">
 							    <tr>
-							    	<td align="center"><a href="#" onclick="goToLabRequest(${model.id});" >Select</a></td>
 							    	<td>${row.count + ((currentPage - 1) * 10)}</td>
-									<td>${model.lastName}</td>
-									<td>${model.firstName}</td>
-									<td>${model.middleName}</td>
-									<td>${model.patientNo}</td>	
+									<td><a href="#" onclick="goToLabRequest(${model.id});" >${model.fullName}</a></td>
 									<td>${model.gender}</td>	
 									<td><fmt:formatDate pattern="MM/dd/yyyy" value="${model.birthday}"/></td>	
 									<td>${model.contactNo}</td>	
@@ -109,7 +104,8 @@
 									<td>${model.zipCode}</td>
 									<td>${model.contactPerson}</td>	
 									<td>${model.contactPersonNo}</td>	
-									<td><fmt:formatDate pattern="MM/dd/yyyy" value="${model.dateRegistered}"/></td>	
+									<td><fmt:formatDate pattern="MM/dd/yyyy" value="${model.dateRegistered}"/></td>
+									<td><a href="#" onclick="goToLabRequest(${model.id});" >${model.patientNo}</a></td>	
 							    </tr>
 							</c:forEach>
 							

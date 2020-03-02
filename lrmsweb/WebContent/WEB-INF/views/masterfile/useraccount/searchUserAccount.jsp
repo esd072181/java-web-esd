@@ -41,9 +41,11 @@
 
 	<div style="width: 100%;">
 	
-		<div align="left" style="padding: 10px 10px 0px 30px;">
-	    	<a href="./goToMain" >Back to Home</a>
-	    </div>
+		<div style="overflow:hidden;">
+				<div style="float:left; padding: 5px 0px 0px 10px;">
+					<a href="./goToMain" >Back to Home</a><br>					
+				</div>			
+			</div>
 	    
 		<div align="center">
 		    <img src="resources/img/login.jpg" alt="UserAccount" height="50" width="50">
@@ -60,7 +62,7 @@
 			<div align="center">
 		
 				<div>
-					<form:label path="prof.lastName" >Last/First Name:</form:label>
+					<form:label path="prof.lastName" >Name:</form:label>
 		      		<form:input id="lastNameId" path="prof.lastName"/>	    		
 		    		<input class="btn btn-default " type="submit" value="Search">
 		      		<input class="btn btn-default" type="button" id="closeButton" value="Add New" onclick="window.location.href = '/lrmsweb/goToAddUserAccount';">
@@ -90,26 +92,21 @@
 						<table class="table table-striped table-hover table-bordered table-responsive" style="font-size: 11px;">
 							<tr>
 								<td>No</td>
+								<td></td>
 								<td>Name</td>
 								<td>UserName</td>
-								<td>Password</td>
 								<td>Role</td>
-								<td></td>
-								<td></td>
 							</tr>
 							<!-- loop here -->
 							<c:forEach items="${resultList}" var="model" varStatus = "row">
 							    <tr>
 							    	<td>${row.count + ((currentPage - 1) * 10)}</td>
-									<td>${model.prof.fullName}</td>
-									<td>${model.userName}</td>
-									<td>*********</td>	
+							    	<td align="center"><a href="#" onclick="deleteUserAccount(${model.id});" >Delete</a></td>
+									<td><a href="#" onclick="goToEdit(${model.id});" >${model.prof.fullName}</a></td>
+									<td>***</td>
 									<td>${model.role.listValue}</td>
-									<td align="center"><a href="#" onclick="goToEdit(${model.id});" >Edit</a></td>
-									<td align="center"><a href="#" onclick="deleteUserAccount(${model.id});" >Delete</a></td>
 							    </tr>
 							</c:forEach>
-							
 						</table>
 					</div>
 				</c:otherwise>

@@ -33,12 +33,13 @@
 	<div style="width: 100%;">
 
 		<form:form action="/lrmsweb/updatePatient" method="post" modelAttribute="patient"  cssClass="form-horizontal">
-		
-		
+			
 			<form:hidden path="id"/>
 				
-			<div align="left" style="padding: 10px 10px 0px 30px;">
-			   	<a href="./goToMain" >Back to Home</a>
+			<div style="overflow:hidden;">
+				<div style="float:left; padding: 5px 0px 0px 10px;">
+					<a href="./goToMain" >Back to Home</a><br>					
+				</div>			
 			</div>
 
 		    <div align="center">

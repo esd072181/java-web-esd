@@ -43,9 +43,11 @@
 	
 		<form:form action="/lrmsweb/searchProfessional" method="GET"  modelAttribute="professional" cssClass="form-horizontal" >
 			
-			<div align="left" style="padding: 10px 10px 0px 30px;">
-		    	<a href="./goToMain" >Back to Home</a>
-		    </div>
+			<div style="overflow:hidden;">
+				<div style="float:left; padding: 5px 0px 0px 10px;">
+					<a href="./goToMain" >Back to Home</a><br>					
+				</div>			
+			</div>
 		    
 		    <div align="center">
 		    	<img src="resources/img/prof.png" alt="Professional" height="50" width="50">
@@ -59,7 +61,7 @@
 		
 			<div align="center">
 				<div>	
-					<form:label path="lastName">Last Name:</form:label>
+					<form:label path="lastName">Name:</form:label>
 			    	<form:input id="lastNameId" path="lastName"/>	    		
 	    			<input class="btn btn-default " type="submit" value="Search">
 	      			<input class="btn btn-default" type="button" id="closeButton" value="Add New" onclick="window.location.href = '/lrmsweb/goToAddProfessional';">
@@ -88,33 +90,25 @@
 						<table class="table table-striped table-hover table-bordered table-responsive" style="font-size: 11px;">
 							<tr>
 								<td>No</td>
-								<td>Designation</td>
-								<td>LastName</td>
-								<td>FirstName</td>
-								<td>MiddleName</td>
-								<td>Gender</td>
-								<td>Type</td>
-								<td></td>
 								<!-- Below for Admin only -->
 								<c:if test="${roleid == 601}">
 									<td></td>
 								</c:if>
+								<td>Name</td>
+								<td>Gender</td>
+								<td>Type</td>
 							</tr>
 							<!-- loop here -->
 							<c:forEach items="${resultList}" var="model" varStatus = "row">
 							    <tr>
 							    	<td>${row.count + ((currentPage - 1) * 10)}</td>
-									<td>${model.designation}</td>
-									<td>${model.lastName}</td>
-									<td>${model.firstName}</td>
-									<td>${model.middleName}</td>	
-									<td>${model.gender}</td>	
-									<td>${model.professionalType.listValue}</td>
-									<td align="center"><a href="#" onclick="goToEdit(${model.id});" >Edit</a></td>
-									<!-- Below for Admin only -->
+							    	<!-- Below for Admin only -->
 									<c:if test="${roleid == 601}">
 										<td align="center"><a href="#" onclick="deleteProfessional(${model.id});" >Delete</a></td>
 									</c:if>
+									<td><a href="#" onclick="goToEdit(${model.id});" >${model.fullName}</a></td>
+									<td>${model.gender}</td>	
+									<td>${model.professionalType.listValue}</td>
 							    </tr>
 							</c:forEach>
 							

@@ -43,9 +43,11 @@
 	
 		<form:form action="/lrmsweb/searchLabExam" method="GET"  modelAttribute="labExam" cssClass="form-horizontal" >
 		
-			<div align="left" style="padding: 10px 10px 0px 30px;">
-		    	<a href="./goToMain" >Back to Home</a>
-		    </div>
+			<div style="overflow:hidden;">
+				<div style="float:left; padding: 5px 0px 0px 10px;">
+					<a href="./goToMain" >Back to Home</a><br>					
+				</div>			
+			</div>
 		    
 		    <div align="center">
 		    	<img src="resources/img/lab01.jpg" alt="LabExam" height="50" width="50">
@@ -87,29 +89,27 @@
 						<table class="table table-striped table-hover table-bordered table-responsive" style="font-size: 11px;">
 							<tr>
 								<td>No</td>
-								<td>Description</td>
-								<td>Remarks</td>
-								<td>Fee</td>
-								<td>ReportTemplate</td>
-								<td></td>
 								<!-- Below for Admin only -->
 								<c:if test="${roleid == 601}">
 									<td></td>
 								</c:if>
+								<td>Description</td>
+								<td>Remarks</td>
+								<td>Fee</td>
+								<td>ReportTemplate</td>
 							</tr>
 							<!-- loop here -->
 							<c:forEach items="${resultList}" var="model" varStatus = "row">
 							    <tr>
 							    	<td>${row.count + ((currentPage - 1) * 10)}</td>
-									<td>${model.description}</td>
-									<td>${model.remarks}</td>		
-									<td>${model.fee}</td>	
-									<td>${model.reportTemplate.listValue}</td>		
-									<td align="center"><a href="#" onclick="goToEdit(${model.id});" >Edit</a></td>
-									<!-- Below for Admin only -->
+							    	<!-- Below for Admin only -->
 									<c:if test="${roleid == 601}">
 										<td align="center"><a href="#" onclick="deleteLabExam(${model.id});" >Delete</a></td>
 									</c:if>
+									<td><a href="#" onclick="goToEdit(${model.id});" >${model.description}</a></td>
+									<td>${model.remarks}</td>		
+									<td>${model.fee}</td>	
+									<td>${model.reportTemplate.listValue}</td>		
 							    </tr>
 							</c:forEach>
 						</table>

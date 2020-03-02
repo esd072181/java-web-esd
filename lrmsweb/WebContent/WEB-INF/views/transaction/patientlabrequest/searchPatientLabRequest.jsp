@@ -35,8 +35,10 @@
 	
 		<form:form action="/lrmsweb/searchPatientLabRequest" method="GET"  modelAttribute="patient" cssClass="form-horizontal" >
 			
-			<div align="left" style="padding: 10px 10px 0px 30px;">
-			   	<a href="./goToMain" >Back to Home</a>
+			<div style="overflow:hidden;">
+				<div style="float:left; padding: 5px 0px 0px 10px;">
+					<a href="./goToMain" >Back to Home</a><br>					
+				</div>			
 			</div>
 
 			<div align="center">
@@ -51,7 +53,7 @@
 		
 			<div align="center">
 				<div>
-					<form:label path="lastName">First/Last Name:</form:label>
+					<form:label path="lastName">Name:</form:label>
 		      		<form:input id="lastNameId" path="lastName"/>	    		
 		    		<input class="btn btn-default " type="submit" value="Search">		
 		    	</div>		
@@ -72,44 +74,68 @@
 					<div  class="table-responsive" style="width: 99%; padding-left: 10px;">
 						<table class="table table-striped table-hover table-bordered table-responsive" style="font-size: 11px;">
 							<tr style="font-weight: bold;">
-								<td></td>
+								<td>No</td>
 								<td>RequestDate</td>
-								<td>Name - PatientNo</td>
+								<td>Name</td>
 								<td>LabExam</td>
-								<td>RequestingPhysician</td>
 								<td>Gender</td>
 								<td>Age</td>
+								<td>RequestingPhysician</td>
 								<td>LabRequestNo</td>
+								<td>PatientNo</td>
 								<td>PaymentStatus</td>
 								<td>RequestStatus</td>
 							</tr>
 							<!-- loop here -->
 							<c:forEach items="${resultList}" var="model" varStatus = "row">
 							    <tr>
-							    	<td align="center"><a href="#" onclick="viewLabRequest(${model.id});" >View</a></td>
+							    	<td>${row.count + ((currentPage - 1) * 10)}</td>
 							    	<td><fmt:formatDate pattern="MM/dd/yyyy" value="${model.requestDate}"/></td>	
-									<td>${model.patient.fullName} - (${model.patient.patientNo})</td>
+									<td>
+										<c:choose>
+											<c:when test="${model.status.listValue == 'Released' && model.paymentStatus.listValue == 'Paid'}" >
+												<a href="#" onclick="viewLabRequest(${model.id});" >${model.patient.fullName}</a>
+											</c:when>
+											<c:otherwise>
+												<a href="#" onclick="viewLabRequest(${model.id});" ><span style="color:red;">${model.patient.fullName}</span></a>
+											</c:otherwise>
+										</c:choose>
+									</td>
 									<td>${model.labExamName}</td>	
-									<td>${model.professional.fullName}</td>			
 									<td>${model.patient.gender}</td>	
 									<td>${model.age}</td>
-									<td>${model.labRequestNo}</td>
-							    	<c:choose>
-							    		<c:when test="${model.paymentStatus.listValue == 'Paid'}">	    						
-							    			<td style="color: blue;">${model.paymentStatus.listValue}</td>			
-							    		</c:when>
-							    		<c:otherwise>
-							    			<td style="color: red;">${model.paymentStatus.listValue}</td>
-							    		</c:otherwise>		    	
-							    	</c:choose>										
-									<c:choose>
-							    		<c:when test="${model.status.listValue == 'Released'}">	    						
-							    			<td style="color: blue;">${model.status.listValue}</td>			
-							    		</c:when>
-							    		<c:otherwise>
-							    			<td style="color: red;">${model.status.listValue}</td>
-							    		</c:otherwise>		    	
-							    	</c:choose>
+									<td>${model.professional.fullName}</td>
+									<td>
+										<c:choose>
+											<c:when test="${model.status.listValue == 'Released' && model.paymentStatus.listValue == 'Paid'}" >
+												<a href="#" onclick="viewLabRequest(${model.id});" >${model.labRequestNo}</a>
+											</c:when>
+											<c:otherwise>
+												<a href="#" onclick="viewLabRequest(${model.id});" ><span style="color:red;">${model.labRequestNo}</span></a>
+											</c:otherwise>
+										</c:choose>
+									</td>
+									<td>${model.patient.patientNo}</td>
+									<td>
+								    	<c:choose>
+								    		<c:when test="${model.paymentStatus.listValue == 'Paid'}">	    						
+								    			<a href="#" onclick="viewLabRequest(${model.id});" >${model.paymentStatus.listValue}</a>			
+								    		</c:when>
+								    		<c:otherwise>
+								    			<a href="#" onclick="viewLabRequest(${model.id});" ><span style="color:red;">${model.paymentStatus.listValue}</span></a>
+								    		</c:otherwise>		    	
+								    	</c:choose>										
+									</td>
+									<td>
+										<c:choose>
+								    		<c:when test="${model.status.listValue == 'Released'}">	    						
+								    			<a href="#" onclick="viewLabRequest(${model.id});" >${model.status.listValue}</a>			
+								    		</c:when>
+								    		<c:otherwise>
+								    			<a href="#" onclick="viewLabRequest(${model.id});" ><span style="color:red;">${model.status.listValue}</span></a>
+								    		</c:otherwise>		    	
+								    	</c:choose>
+							    	</td>
 							    </tr>
 							</c:forEach>
 							

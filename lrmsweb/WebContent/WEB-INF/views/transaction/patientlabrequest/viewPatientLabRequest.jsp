@@ -77,12 +77,16 @@
 	<div style="width: 100%;">
 
 		<form:form action="/lrmsweb/releaseLabExamResult" method="post" modelAttribute="patientLabRequest" cssClass="form-horizontal">
-		
-			<div align="left" style="padding: 10px 0px 0px 30px;">
-	    		<a href="./goToMain" >Back to Home</a><br>
-	    		<a href="./goToSearchPatientLabRequest" >Back to Search</a>
-	    	</div>
 
+			<div style="overflow:hidden;">
+				<div style="float:left; padding: 5px 0px 0px 10px;">
+					<a href="./goToMain" >Back to Home</a><br>					
+				</div>
+				<div style="float:right; padding: 5px 10px 0px 0px;">
+					<a href="./goToSearchPatientLabRequest" >Back to Search</a>
+				</div>			
+			</div>
+			
 			<div align="center">
 				<img src="resources/img/browse_labreq.jpg" alt="PatientLabRequest" height="50" width="50">
 				<label style="font-size: 24px;">Patient Laboratory Examination Request Details</label>		
