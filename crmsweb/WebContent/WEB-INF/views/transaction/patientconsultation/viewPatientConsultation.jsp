@@ -228,6 +228,26 @@
 						</div>					
 					</td>
 				</tr>
+				<!-- Add new Med for Medication Statement -->
+				<c:if test="${patientConsultation.paymentStatus.id == 301}">
+					<c:if test="${roleid == 601}">
+						<tr>
+							<td width="2%"></td>
+							<td>
+								<div class="form-group">
+									<!-- Put it in the Medication Statement only for Admin/Doctor -->
+									<form:label path="medId" cssClass="col-sm-2 control-label">Select Medicine:</form:label>
+									<div class="col-xs-3">
+										<form:select id="medSelectedId" path="medId" items="${medList}"  itemValue="description"   itemLabel="description" cssClass="form-control input-sm">
+										</form:select>
+									</div>
+									<input class="btn btn-default" type="button" value="Add Selected Medicine in Medication Statement" onclick="putToMedStatement(document.getElementById('medSelectedId').value);">								
+								</div>
+							</td>
+						</tr>
+					
+					</c:if>
+				</c:if>	
 				<tr>
 					<td width="2%"></td>
 					<td>
@@ -245,7 +265,7 @@
 			    			</div>
 						</div>					
 					</td>
-				</tr>
+				</tr>			
 				<tr>
 					<td width="2%"></td>
 					<td>
@@ -294,35 +314,24 @@
 
 			<hr>
 
-			<!-- Add new Med -->
+			<!-- Add new Med for Staff -->
 			<c:if test="${patientConsultation.paymentStatus.id == 301}">
-				<div>
+				<c:if test="${roleid != 601}">
 					<div class="form-group">
+						<!-- Purchase Medicine -->
 						<form:label path="medId" cssClass="col-sm-2 control-label">Select Medicine:</form:label>
-				    	<c:choose>
-							<c:when test="${roleid == 601}">
-								<!-- Put it in the Medication Statement only for Admin/Doctor -->
-								<div class="col-xs-3">
-									<form:select id="medSelectedId" path="medId" items="${medList}"  itemValue="description"   itemLabel="description" cssClass="form-control input-sm">
-									</form:select>
-						    	</div>
-								<input class="btn btn-default" type="button" value="Add New Medicine in Medication Statement" onclick="putToMedStatement(document.getElementById('medSelectedId').value);">
-							</c:when>
-							<c:otherwise>
-								<!-- Purchase Medicine -->
-								<div class="col-xs-3">
-									<form:select id="medSelectedId" path="medId" items="${medList}"  itemValue="id"   itemLabel="description" cssClass="form-control input-sm">
-									</form:select>
-						    	</div>
-						    	<label>Qty</label>
-						    	<input type="text" id="qtyId" name="qty" style="width: 30px;"/>
-								<input class="btn btn-default" type="button" value="Purchase Medicine" onclick="addNewMed(${patientConsultation.id},document.getElementById('medSelectedId').value,document.getElementById('qtyId').value);">
-							</c:otherwise>
-						</c:choose>
+						<div class="col-xs-3">
+							<form:select id="medSelectedId" path="medId" items="${medList}"  itemValue="id"   itemLabel="description" cssClass="form-control input-sm">
+							</form:select>
+						</div>
+						<label>Qty</label>
+						<input type="text" id="qtyId" name="qty" style="width: 30px;"/>
+						<input class="btn btn-default" type="button" value="Purchase Medicine" onclick="addNewMed(${patientConsultation.id},document.getElementById('medSelectedId').value,document.getElementById('qtyId').value);">				
 					</div>
-				</div>
+				</c:if>
 			</c:if>
-						
+				
+			<!-- Purchased Medicines -->			
 			<c:if test="${patientConsultation.patientMedRecords.size() > 0}">
 				<!-- Medicine -->		
 				<div align="left" style="padding-left: 20px;">
@@ -367,8 +376,7 @@
 				</div>	
 			</c:if>	
 
-				
-								
+			<!-- Fees below -->						
 			<div class="form-group">
 				<!-- Consultation Fee -->		
 				<form:label path="" cssClass="col-sm-2 control-label">Consultation Fee (Php):</form:label>
