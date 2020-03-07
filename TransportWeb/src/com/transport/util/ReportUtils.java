@@ -821,7 +821,8 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(114, i+4, String.valueOf(sumVolWeek5), wcfYellow);
                            excelSheet.addCell(label);
-                           label = new Label(115, i+4, "", wcfYellow);
+                           int monthVol = sumVolWeek1 + sumVolWeek2 + sumVolWeek3 + sumVolWeek4 + sumVolWeek5;
+                           label = new Label(115, i+4, String.valueOf(monthVol), wcfYellow);
                            excelSheet.addCell(label);
                            label = new Label(116, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
@@ -1841,7 +1842,8 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(114, i+4, String.valueOf(sumVolWeek5), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(115, i+4, "", wcfBorder);
+           int monthVol = sumVolWeek1 + sumVolWeek2 + sumVolWeek3 + sumVolWeek4 + sumVolWeek5;
+           label = new Label(115, i+4, String.valueOf(monthVol), wcfYellow);
            excelSheet.addCell(label);
            label = new Label(116, i+4, "", wcfBorder);
            excelSheet.addCell(label);
@@ -2697,7 +2699,8 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(114, i+4, String.valueOf(sumVolWeek5), wcfYellow);
                            excelSheet.addCell(label);
-                           label = new Label(115, i+4, "", wcfYellow);
+                           int monthVolCaltex = sumVolWeek1 + sumVolWeek2 + sumVolWeek3 + sumVolWeek4 + sumVolWeek5;
+                           label = new Label(115, i+4, String.valueOf(monthVolCaltex), wcfYellow);
                            excelSheet.addCell(label);
                            label = new Label(116, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
@@ -3718,7 +3721,8 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(114, i+4, String.valueOf(sumVolWeek5), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(115, i+4, "", wcfYellow);
+           int monthVolCaltex = sumVolWeek1 + sumVolWeek2 + sumVolWeek3 + sumVolWeek4 + sumVolWeek5;
+           label = new Label(115, i+4, String.valueOf(monthVolCaltex), wcfYellow);
            excelSheet.addCell(label);
            label = new Label(116, i+4, "", wcfBorder);
            excelSheet.addCell(label);

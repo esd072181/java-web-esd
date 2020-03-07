@@ -341,7 +341,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance7}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol7}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip8}" ></td>
@@ -366,7 +366,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance14}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol14}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip15}" ></td>
@@ -391,7 +391,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance21}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol21}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip22}" ></td>
@@ -416,7 +416,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance28}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol28}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip29}" ></td>
@@ -429,8 +429,8 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance31}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol31}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
-									<td></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -6582,7 +6582,7 @@
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance7}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol7}" ></td>
 						<td></td>
-						<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
+						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
 						<td></td>
 						<td></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip8}" ></td>
@@ -6607,7 +6607,7 @@
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance14}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol14}" ></td>
 						<td></td>
-						<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
+						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
 						<td></td>
 						<td></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip15}" ></td>
@@ -6632,7 +6632,7 @@
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance21}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol21}" ></td>
 						<td></td>
-						<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
+						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
 						<td></td>
 						<td></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip22}" ></td>
@@ -6657,7 +6657,7 @@
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance28}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol28}" ></td>
 						<td></td>
-						<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
+						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
 						<td></td>
 						<td></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip29}" ></td>
@@ -6670,8 +6670,8 @@
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance31}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol31}" ></td>
 						<td></td>
-						<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
-						<td></td>
+						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
+						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -7213,7 +7213,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance7}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol7}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip8}" ></td>
@@ -7238,7 +7238,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance14}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol14}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip15}" ></td>
@@ -7263,7 +7263,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance21}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol21}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip22}" ></td>
@@ -7288,7 +7288,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance28}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol28}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip29}" ></td>
@@ -7301,8 +7301,8 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance31}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol31}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
-									<td></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -13450,7 +13450,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance7}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol7}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip8}" ></td>
@@ -13475,7 +13475,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance14}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol14}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip15}" ></td>
@@ -13500,7 +13500,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance21}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol21}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip22}" ></td>
@@ -13525,7 +13525,7 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance28}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol28}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
 									<td></td>
 									<td></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip29}" ></td>
@@ -13538,8 +13538,8 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance31}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol31}" ></td>
 									<td></td>
-									<td><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
-									<td></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
 						<td></td>
 						<td></td>
 						<td></td>
