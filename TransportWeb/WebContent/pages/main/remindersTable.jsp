@@ -10,8 +10,7 @@
 </div>
 	
 <c:forEach items="${sessionScope.user_access_list}" var="item">
-  <c:if test="${item == 901}">
-   <div   height: 2%;">   			
+  <c:if test="${item == 901}"> 			
 	<div class="table-responsive" >
 		<c:choose>
 		  <c:when test="${verificationAndValidationForm.modelList != null}">
