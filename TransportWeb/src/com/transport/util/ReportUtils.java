@@ -442,6 +442,19 @@ public class ReportUtils {
 	       wcfYellow.setAlignment(Alignment.CENTRE);
 	       wcfYellow.setBorder(Border.ALL, BorderLineStyle.THIN);
 	       
+	       //For Committed Volume Row
+	       WritableFont arialRed = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);
+	       arialRed.setColour(jxl.format.Colour.RED);
+	       WritableCellFormat wcfCv = new WritableCellFormat(arialRed);
+	       wcfCv.setBackground(Colour.LIGHT_GREEN);
+	       wcfCv.setAlignment(Alignment.CENTRE);
+	       wcfCv.setBorder(Border.ALL, BorderLineStyle.THIN);
+	       
+	       WritableCellFormat wcfCv2 = new WritableCellFormat();
+	       wcfCv2.setBackground(Colour.LIGHT_GREEN);
+	       wcfCv2.setAlignment(Alignment.CENTRE);
+	       wcfCv2.setBorder(Border.ALL, BorderLineStyle.THIN);
+	       
            setDays(excelSheet, wcfBorder, wcfRed, wcfCyan, wcfGray, wcfDarkGreen, wcfBlack, wcfViolet, wcfOrange, wcfYellow);
            setHeaders(excelSheet, wcfBorder, wcfRed, wcfCyan, wcfGray, wcfDarkGreen, wcfBlack, wcfViolet, wcfOrange, wcfYellow);
 
@@ -587,6 +600,8 @@ public class ReportUtils {
            int grandTotalPending29 = 0;
            int grandTotalPending30 = 0;
            int grandTotalPending31 = 0;
+           int committedVolume = 0;
+           int capacityOfTerminal = 0;
            String category = "";
            String gpsRemarks = null;
            String maintenanceRemarks = null;
@@ -859,6 +874,279 @@ public class ReportUtils {
                            label = new Label(132, i+4, "", wcfOrange);
                            excelSheet.addCell(label);
                            i += 1;
+                           //Committed Volume
+                           excelSheet.mergeCells(0, i+4, 1, i+4);
+                           label = new Label(0, i+4, "Committed Volume", wcfCv);
+                           excelSheet.addCell(label);
+                           label = new Label(2, i+4, String.valueOf(committedVolume), wcfCv);
+                           excelSheet.addCell(label);
+                           if (category.equalsIgnoreCase("BATANGAS BLACK")) {
+                        	   capacityOfTerminal = capacityOfTerminal * 1000; // Single Shift
+                           } else {
+                        	   capacityOfTerminal = capacityOfTerminal * 1000 * 2; // Double Shift
+                           }
+                           label = new Label(3, i+4, String.valueOf(capacityOfTerminal), wcfCv);
+                           excelSheet.addCell(label);
+                           label = new Label(4, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(5, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(6, i+4, String.valueOf((sumVol1-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(7, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(8, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(9, i+4, String.valueOf((sumVol2-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(10, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(11, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(12, i+4, String.valueOf((sumVol3-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(13, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(14, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(15, i+4, String.valueOf((sumVol4-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(16, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(17, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(18, i+4, String.valueOf((sumVol5-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(19, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(20, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(21, i+4, String.valueOf((sumVol6-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(22, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(23, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(24, i+4, String.valueOf((sumVol7-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(25, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(26, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(27, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(28, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(29, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(30, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(31, i+4, String.valueOf((sumVol8-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(32, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(33, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(34, i+4, String.valueOf((sumVol9-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(35, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(36, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(37, i+4, String.valueOf((sumVol10-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(38, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(39, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(40, i+4, String.valueOf((sumVol11-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(41, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(42, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(43, i+4, String.valueOf((sumVol12-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(44, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(45, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(46, i+4, String.valueOf((sumVol13-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(47, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(48, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(49, i+4, String.valueOf((sumVol14-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(50, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(51, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(52, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(53, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(54, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(55, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(56, i+4, String.valueOf((sumVol15-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(57, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(58, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(59, i+4, String.valueOf((sumVol16-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(60, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(61, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(62, i+4, String.valueOf((sumVol17-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(63, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(64, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(65, i+4, String.valueOf((sumVol18-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(66, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(67, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(68, i+4, String.valueOf((sumVol19-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(69, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(70, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(71, i+4, String.valueOf((sumVol20-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(72, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(73, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(74, i+4, String.valueOf((sumVol21-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(75, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(76, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(77, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(78, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(79, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(80, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(81, i+4, String.valueOf((sumVol22-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(82, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(83, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(84, i+4, String.valueOf((sumVol23-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(85, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(86, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(87, i+4, String.valueOf((sumVol24-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(88, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(89, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(90, i+4, String.valueOf((sumVol25-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(91, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(92, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(93, i+4, String.valueOf((sumVol26-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(94, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(95, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(96, i+4, String.valueOf((sumVol27-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(97, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(98, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(99, i+4, String.valueOf((sumVol28-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(100, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(101, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(102, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(103, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(104, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(105, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(106, i+4, String.valueOf((sumVol29-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(107, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(108, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(109, i+4, String.valueOf((sumVol30-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(110, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(111, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(112, i+4, String.valueOf((sumVol31-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(113, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(114, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(115, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(116, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(117, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(118, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(119, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(120, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(121, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(122, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(123, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(124, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(125, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(126, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(127, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(128, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(129, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(130, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(131, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(132, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           
+                           i += 1;
                            excelSheet.mergeCells(0, i+4, 3, i+4);
                            label = new Label(0, i+4, "Daily Percentage " + category, wcf2);
                            excelSheet.addCell(label);
@@ -1127,6 +1415,7 @@ public class ReportUtils {
                        label = new Label(0, i+4, item.getCategory(), wcf2);
                        excelSheet.addCell(label);
                        category = item.getCategory();
+                       committedVolume = item.getCommittedVolume();
                        i += 1;
                        sumTrip1 = 0;
                        sumTrip2 = 0;
@@ -1227,8 +1516,10 @@ public class ReportUtils {
                        sumVolWeek4 = 0;
                        sumVolWeek5 = 0;
                        totalLorryCountPerCategory = 0;
+                       capacityOfTerminal = 0;
                    }
                    totalLorryCountPerCategory += 1;
+                   capacityOfTerminal = capacityOfTerminal + item.getCapacity();
                    sumTrip1 = sumTrip1 + (item.getGps1()!=null ? Integer.parseInt(item.getGps1()) : 0 );
                    sumTrip2 = sumTrip2 + (item.getGps2()!=null ? Integer.parseInt(item.getGps2()) : 0 );
                    sumTrip3 = sumTrip3 + (item.getGps3()!=null ? Integer.parseInt(item.getGps3()) : 0 );
@@ -1879,6 +2170,280 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(132, i+4, "", wcfOrange);
            excelSheet.addCell(label);
+           
+           i += 1;
+           //Committed Volume
+           excelSheet.mergeCells(0, i+4, 1, i+4);
+           label = new Label(0, i+4, "Committed Volume", wcfCv);
+           excelSheet.addCell(label);
+           label = new Label(2, i+4, String.valueOf(committedVolume), wcfCv);
+           excelSheet.addCell(label);
+           if (category.equalsIgnoreCase("BATANGAS BLACK")) {
+        	   capacityOfTerminal = capacityOfTerminal * 1000; // Single Shift
+           } else {
+        	   capacityOfTerminal = capacityOfTerminal * 1000 * 2; // Double Shift
+           }
+           label = new Label(3, i+4, String.valueOf(capacityOfTerminal), wcfCv);
+           excelSheet.addCell(label);
+           label = new Label(4, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(5, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(6, i+4, String.valueOf((sumVol1-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(7, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(8, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(9, i+4, String.valueOf((sumVol2-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(10, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(11, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(12, i+4, String.valueOf((sumVol3-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(13, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(14, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(15, i+4, String.valueOf((sumVol4-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(16, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(17, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(18, i+4, String.valueOf((sumVol5-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(19, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(20, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(21, i+4, String.valueOf((sumVol6-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(22, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(23, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(24, i+4, String.valueOf((sumVol7-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(25, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(26, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(27, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(28, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(29, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(30, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(31, i+4, String.valueOf((sumVol8-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(32, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(33, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(34, i+4, String.valueOf((sumVol9-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(35, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(36, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(37, i+4, String.valueOf((sumVol10-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(38, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(39, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(40, i+4, String.valueOf((sumVol11-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(41, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(42, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(43, i+4, String.valueOf((sumVol12-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(44, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(45, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(46, i+4, String.valueOf((sumVol13-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(47, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(48, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(49, i+4, String.valueOf((sumVol14-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(50, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(51, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(52, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(53, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(54, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(55, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(56, i+4, String.valueOf((sumVol15-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(57, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(58, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(59, i+4, String.valueOf((sumVol16-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(60, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(61, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(62, i+4, String.valueOf((sumVol17-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(63, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(64, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(65, i+4, String.valueOf((sumVol18-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(66, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(67, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(68, i+4, String.valueOf((sumVol19-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(69, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(70, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(71, i+4, String.valueOf((sumVol20-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(72, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(73, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(74, i+4, String.valueOf((sumVol21-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(75, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(76, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(77, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(78, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(79, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(80, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(81, i+4, String.valueOf((sumVol22-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(82, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(83, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(84, i+4, String.valueOf((sumVol23-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(85, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(86, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(87, i+4, String.valueOf((sumVol24-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(88, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(89, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(90, i+4, String.valueOf((sumVol25-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(91, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(92, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(93, i+4, String.valueOf((sumVol26-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(94, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(95, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(96, i+4, String.valueOf((sumVol27-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(97, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(98, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(99, i+4, String.valueOf((sumVol28-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(100, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(101, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(102, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(103, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(104, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(105, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(106, i+4, String.valueOf((sumVol29-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(107, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(108, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(109, i+4, String.valueOf((sumVol30-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(110, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(111, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(112, i+4, String.valueOf((sumVol31-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(113, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(114, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(115, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(116, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(117, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(118, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(119, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(120, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(121, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(122, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(123, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(124, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(125, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(126, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(127, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(128, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(129, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(130, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(131, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(132, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+        
            i += 1;
            excelSheet.mergeCells(0, i+4, 3, i+4);
            label = new Label(0, i+4, "Daily Percentage " + category, wcf2);
@@ -2468,6 +3033,8 @@ public class ReportUtils {
            
            //for Caltex/Chevron: trasportId = 602
            category = "";
+           committedVolume = 0;
+           capacityOfTerminal = 0;
            i += 1;
            for(MaintenanceMonitoring item : qryList) {
         	   if (item.getTransportId() == 602) {
@@ -2736,7 +3303,281 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(132, i+4, "", wcfOrange);
                            excelSheet.addCell(label);
+                           
                            i += 1;
+                           //Committed Volume
+                           excelSheet.mergeCells(0, i+4, 1, i+4);
+                           label = new Label(0, i+4, "Committed Volume", wcfCv);
+                           excelSheet.addCell(label);
+                           label = new Label(2, i+4, String.valueOf(committedVolume), wcfCv);
+                           excelSheet.addCell(label);
+                           if (category.equalsIgnoreCase("BATANGAS BLACK")) {
+                        	   capacityOfTerminal = capacityOfTerminal * 1000; // Single Shift
+                           } else {
+                        	   capacityOfTerminal = capacityOfTerminal * 1000 * 2; // Double Shift
+                           }
+                           label = new Label(3, i+4, String.valueOf(capacityOfTerminal), wcfCv);
+                           excelSheet.addCell(label);
+                           label = new Label(4, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(5, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(6, i+4, String.valueOf((sumVol1-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(7, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(8, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(9, i+4, String.valueOf((sumVol2-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(10, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(11, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(12, i+4, String.valueOf((sumVol3-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(13, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(14, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(15, i+4, String.valueOf((sumVol4-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(16, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(17, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(18, i+4, String.valueOf((sumVol5-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(19, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(20, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(21, i+4, String.valueOf((sumVol6-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(22, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(23, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(24, i+4, String.valueOf((sumVol7-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(25, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(26, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(27, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(28, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(29, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(30, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(31, i+4, String.valueOf((sumVol8-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(32, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(33, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(34, i+4, String.valueOf((sumVol9-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(35, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(36, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(37, i+4, String.valueOf((sumVol10-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(38, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(39, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(40, i+4, String.valueOf((sumVol11-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(41, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(42, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(43, i+4, String.valueOf((sumVol12-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(44, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(45, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(46, i+4, String.valueOf((sumVol13-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(47, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(48, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(49, i+4, String.valueOf((sumVol14-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(50, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(51, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(52, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(53, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(54, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(55, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(56, i+4, String.valueOf((sumVol15-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(57, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(58, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(59, i+4, String.valueOf((sumVol16-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(60, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(61, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(62, i+4, String.valueOf((sumVol17-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(63, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(64, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(65, i+4, String.valueOf((sumVol18-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(66, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(67, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(68, i+4, String.valueOf((sumVol19-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(69, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(70, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(71, i+4, String.valueOf((sumVol20-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(72, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(73, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(74, i+4, String.valueOf((sumVol21-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(75, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(76, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(77, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(78, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(79, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(80, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(81, i+4, String.valueOf((sumVol22-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(82, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(83, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(84, i+4, String.valueOf((sumVol23-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(85, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(86, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(87, i+4, String.valueOf((sumVol24-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(88, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(89, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(90, i+4, String.valueOf((sumVol25-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(91, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(92, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(93, i+4, String.valueOf((sumVol26-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(94, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(95, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(96, i+4, String.valueOf((sumVol27-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(97, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(98, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(99, i+4, String.valueOf((sumVol28-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(100, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(101, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(102, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(103, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(104, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(105, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(106, i+4, String.valueOf((sumVol29-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(107, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(108, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(109, i+4, String.valueOf((sumVol30-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(110, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(111, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(112, i+4, String.valueOf((sumVol31-committedVolume)) , wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(113, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(114, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(115, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(116, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(117, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(118, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(119, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(120, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(121, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(122, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(123, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(124, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(125, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(126, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(127, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(128, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(129, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(130, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(131, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                           label = new Label(132, i+4, "", wcfCv2);
+                           excelSheet.addCell(label);
+                        
+                           i += 1;                      
                            excelSheet.mergeCells(0, i+4, 3, i+4);
                            label = new Label(0, i+4, "Daily Percentage " + category, wcf2);
                            excelSheet.addCell(label);
@@ -3005,6 +3846,7 @@ public class ReportUtils {
                        label = new Label(0, i+4, item.getCategory(), wcf2);
                        excelSheet.addCell(label);
                        category = item.getCategory();
+                       committedVolume = item.getCommittedVolume();
                        i += 1;   
                        sumTrip1 = 0;
                        sumTrip2 = 0;
@@ -3105,8 +3947,10 @@ public class ReportUtils {
                        sumVolWeek4 = 0;
                        sumVolWeek5 = 0;
                        totalLorryCountPerCategory = 0;
+                       capacityOfTerminal = 0;
                    }
                    totalLorryCountPerCategory += 1;
+                   capacityOfTerminal = capacityOfTerminal + item.getCapacity();
                    sumTrip1 = sumTrip1 + (item.getGps1()!=null ? Integer.parseInt(item.getGps1()) : 0 );
                    sumTrip2 = sumTrip2 + (item.getGps2()!=null ? Integer.parseInt(item.getGps2()) : 0 );
                    sumTrip3 = sumTrip3 + (item.getGps3()!=null ? Integer.parseInt(item.getGps3()) : 0 );
@@ -3496,7 +4340,139 @@ public class ReportUtils {
            }
 
            //Total Available and Daily Percentage of the Last Category of Caltex
-   		   excelSheet.mergeCells(0, i+4, 3, i+4);
+           createTotalAvailableAndDailyPercentageOfLastCategoryOfCaltex(i, excelSheet, category, label, sumTrip1, wcf2, wcfBorder, wcfOrange, wcfYellow, wcfRed,
+        		   wcfCyan, wcfGray, wcfBlack, wcfViolet, wcfDarkGreen, wcfLimeGreen, wcfCv, wcfCv2, sumMaintenance1, sumVol1, sumTrip2, sumMaintenance2, sumVol2,
+        		   sumTrip3, sumMaintenance3, sumVol3, sumTrip4, sumMaintenance4, sumVol4, sumTrip5, sumMaintenance5, sumVol5, sumTrip6, sumMaintenance6, sumVol6,
+        		   sumTrip7, sumMaintenance7, sumVol7, sumVolWeek1, sumVolWeek2, sumVolWeek3, sumVolWeek4, sumVolWeek5, sumTrip8, sumTrip9, sumTrip10, sumTrip11,
+        		   sumTrip12, sumTrip13, sumTrip14, sumTrip15, sumTrip16, sumTrip17, sumTrip18, sumTrip19, sumTrip20, sumTrip21, sumTrip22, sumTrip23, sumTrip24,
+        		   sumTrip25, sumTrip26, sumTrip27, sumTrip28, sumTrip29, sumTrip30, sumTrip31, sumMaintenance8, sumMaintenance9, sumMaintenance10, sumMaintenance11,
+        		   sumMaintenance12, sumMaintenance13, sumMaintenance14, sumMaintenance15, sumMaintenance16, sumMaintenance17, sumMaintenance18, sumMaintenance19,
+        		   sumMaintenance20, sumMaintenance21, sumMaintenance22, sumMaintenance23, sumMaintenance24, sumMaintenance25, sumMaintenance26, sumMaintenance27,
+        		   sumMaintenance28, sumMaintenance29, sumMaintenance30, sumMaintenance31, sumVol8, sumVol9, sumVol10, sumVol11, sumVol12, sumVol13, sumVol14,
+        		   sumVol15, sumVol16, sumVol17, sumVol18,sumVol19, sumVol20, sumVol21, sumVol22, sumVol23, sumVol24, sumVol25, sumVol26, sumVol27, sumVol28, sumVol29,
+        		   sumVol30, sumVol31, committedVolume, capacityOfTerminal, totalLorryCountPerCategory);
+        		   
+           /**
+            * NOTE:
+            * need to update the variable i (row) because it is twice incremented by 1 
+            * inside the createTotalAvailableAndDailyPercentageOfLastCategoryOfCaltex()
+            */
+           i += 1; //For Committed Volume Row inside createTotalAvailableAndDailyPercentageOfLastCategoryOfCaltex()
+           i += 1; //For Daily Percentage Row inside createTotalAvailableAndDailyPercentageOfLastCategoryOfCaltex()
+           
+           //Chevron Daily Availability
+           //Merge col[0-3]
+   		   i += 1;
+           createChevronDailyAvailabilityRow(i, excelSheet, label, qryListCaltexFleet, wcf2, wcf3, y, z, wcfBorder, cf, wcfOrange, wcfYellow, wcfRed, wcfCyan, wcfGray, wcfDarkGreen, wcfBlack, wcfViolet);
+           
+           /**
+            * NOTE:
+            * need to update the variable i (row) because it is twice incremented by 1 
+            * inside the createChevronDailyAvailabilityRow()
+            */
+           i += 1; //For Total Chevron Fleet inside createChevronDailyAvailabilityRow()
+           i += 1; //For Chevron Unavailable inside createChevronDailyAvailabilityRow()
+           
+           //Grand Total label
+           i += 1;
+           excelSheet.mergeCells(0, i+4, 3, i+4);
+           label = new Label(0, i+4, "Grand Total", wcf2);
+           excelSheet.addCell(label);
+           
+           //Total for Shell and Chevron Availability
+           i += 1;
+           createTotalAvailabilityRow(i, excelSheet, label, qryListGrandTotalFleet, wcf2, wcf3, y, z, wcfBorder, cf, wcfOrange, wcfYellow, wcfRed, wcfCyan, wcfGray, wcfDarkGreen, wcfBlack, wcfViolet);
+           
+           /**
+            * NOTE:
+            * need to update the variable i (row) because it was incremented by 1 
+            * inside the createTotalAvailabilityRow()
+            */
+           i += 1; //For //Total of Shell and Chevron Unavailableinside createTotalAvailabilityRow()
+           
+           
+           String remarks = null;
+           
+           //consolidate total pending 
+           totalPendingMap.put(1, grandTotalPending1);
+           totalPendingMap.put(2, grandTotalPending2);
+           totalPendingMap.put(3, grandTotalPending3);
+           totalPendingMap.put(4, grandTotalPending4);
+           totalPendingMap.put(5, grandTotalPending5);
+           totalPendingMap.put(6, grandTotalPending6);
+           totalPendingMap.put(7, grandTotalPending7);
+           totalPendingMap.put(8, grandTotalPending8);
+           totalPendingMap.put(9, grandTotalPending9);
+           totalPendingMap.put(10, grandTotalPending10);
+           totalPendingMap.put(11, grandTotalPending11);
+           totalPendingMap.put(12, grandTotalPending12);
+           totalPendingMap.put(13, grandTotalPending13);
+           totalPendingMap.put(14, grandTotalPending14);
+           totalPendingMap.put(15, grandTotalPending15);
+           totalPendingMap.put(16, grandTotalPending16);
+           totalPendingMap.put(17, grandTotalPending17);
+           totalPendingMap.put(18, grandTotalPending18);
+           totalPendingMap.put(19, grandTotalPending19);
+           totalPendingMap.put(20, grandTotalPending20);
+           totalPendingMap.put(21, grandTotalPending21);
+           totalPendingMap.put(22, grandTotalPending22);
+           totalPendingMap.put(23, grandTotalPending23);
+           totalPendingMap.put(24, grandTotalPending24);
+           totalPendingMap.put(25, grandTotalPending25);
+           totalPendingMap.put(26, grandTotalPending26);
+           totalPendingMap.put(27, grandTotalPending27);
+           totalPendingMap.put(28, grandTotalPending28);
+           totalPendingMap.put(29, grandTotalPending29);
+           totalPendingMap.put(30, grandTotalPending30);
+           totalPendingMap.put(31, grandTotalPending31);
+
+           
+           //continue on next method to avoid 64Kb limit of capacity of each method...
+           i += 1;
+           continueToGenerateMaintenanceMonitoringReport(i, excelSheet, wcf2, wcf3, label, modelListPreventive, z, cellFeatures2, wcfGray, wcfBorder, wcfOrange, wcfYellow, wcfRed, wcfCyan, wcfDarkGreen, wcfBlack, wcfViolet, y, cf, remarks, totalPendingMap, modelListPreventiveTotal, modelListTotalPending);
+           
+           
+           workBook.write();
+           isFileGenerated = true;
+
+       } catch (IOException e) {
+           e.printStackTrace();
+       } catch (WriteException e) {
+           e.printStackTrace();
+       } finally {
+           if (workBook != null) {
+               try {
+            	   workBook.close();
+               } catch (IOException e) {
+                   e.printStackTrace();
+               } catch (WriteException e) {
+                   e.printStackTrace();
+               }
+           }
+           System.out.println("Done.");
+       }
+
+		return isFileGenerated;
+	
+	}
+	
+	private static void createTotalAvailableAndDailyPercentageOfLastCategoryOfCaltex(int i, WritableSheet excelSheet, String category, Label label,
+			int sumTrip1, WritableCellFormat wcf2, WritableCellFormat wcfBorder, WritableCellFormat wcfOrange, WritableCellFormat wcfYellow, WritableCellFormat wcfRed, 
+			WritableCellFormat wcfCyan, WritableCellFormat wcfGray, WritableCellFormat wcfBlack, WritableCellFormat wcfViolet, WritableCellFormat wcfDarkGreen, WritableCellFormat wcfLimeGreen, 
+			WritableCellFormat wcfCv, WritableCellFormat wcfCv2, int sumMaintenance1, int sumVol1, int  sumTrip2, int sumMaintenance2, int sumVol2, int  sumTrip3,
+			int sumMaintenance3, int sumVol3, int  sumTrip4, int sumMaintenance4, int sumVol4, int  sumTrip5, int sumMaintenance5, int sumVol5, int  sumTrip6,
+			int sumMaintenance6, int sumVol6, int  sumTrip7, int sumMaintenance7, int sumVol7, int sumVolWeek1, int sumVolWeek2, int sumVolWeek3, int sumVolWeek4,
+			int sumVolWeek5, int  sumTrip8, int  sumTrip9, int  sumTrip10, int  sumTrip11, int  sumTrip12, int  sumTrip13, int  sumTrip14, int  sumTrip15,
+			int  sumTrip16, int  sumTrip17, int  sumTrip18, int  sumTrip19, int  sumTrip20, int  sumTrip21, int  sumTrip22, int  sumTrip23, int  sumTrip24,
+			int  sumTrip25, int  sumTrip26, int  sumTrip27, int  sumTrip28, int  sumTrip29, int  sumTrip30, int  sumTrip31, int sumMaintenance8, int sumMaintenance9,
+			int sumMaintenance10, int sumMaintenance11, int sumMaintenance12, int sumMaintenance13, int sumMaintenance14, int sumMaintenance15, int sumMaintenance16,
+			int sumMaintenance17, int sumMaintenance18, int sumMaintenance19, int sumMaintenance20, int sumMaintenance21, int sumMaintenance22, int sumMaintenance23,
+			int sumMaintenance24, int sumMaintenance25, int sumMaintenance26, int sumMaintenance27, int sumMaintenance28, int sumMaintenance29, int sumMaintenance30,
+			int sumMaintenance31, int sumVol8, int sumVol9, int sumVol10, int sumVol11, int sumVol12, int sumVol13, int sumVol14, int sumVol15, int sumVol16,
+			int sumVol17, int sumVol18, int sumVol19, int sumVol20, int sumVol21, int sumVol22, int sumVol23, int sumVol24, int sumVol25, int sumVol26, int sumVol27,
+			int sumVol28, int sumVol29, int sumVol30, int sumVol31, int committedVolume, int capacityOfTerminal, int totalLorryCountPerCategory) throws RowsExceededException, WriteException {
+		
+		   excelSheet.mergeCells(0, i+4, 3, i+4);
            label = new Label(0, i+4, "Total Available " + category + " in Maintenance", wcf2);
            excelSheet.addCell(label);
            label = new Label(4, i+4, String.valueOf(sumTrip1), wcfBorder);
@@ -3758,6 +4734,280 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(132, i+4, "", wcfOrange);
            excelSheet.addCell(label);
+           
+           i += 1;
+           //Committed Volume
+           excelSheet.mergeCells(0, i+4, 1, i+4);
+           label = new Label(0, i+4, "Committed Volume", wcfCv);
+           excelSheet.addCell(label);
+           label = new Label(2, i+4, String.valueOf(committedVolume), wcfCv);
+           excelSheet.addCell(label);
+           if (category.equalsIgnoreCase("BATANGAS BLACK")) {
+        	   capacityOfTerminal = capacityOfTerminal * 1000; // Single Shift
+           } else {
+        	   capacityOfTerminal = capacityOfTerminal * 1000 * 2; // Double Shift
+           }
+           label = new Label(3, i+4, String.valueOf(capacityOfTerminal), wcfCv);
+           excelSheet.addCell(label);
+           label = new Label(4, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(5, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(6, i+4, String.valueOf((sumVol1-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(7, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(8, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(9, i+4, String.valueOf((sumVol2-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(10, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(11, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(12, i+4, String.valueOf((sumVol3-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(13, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(14, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(15, i+4, String.valueOf((sumVol4-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(16, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(17, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(18, i+4, String.valueOf((sumVol5-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(19, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(20, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(21, i+4, String.valueOf((sumVol6-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(22, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(23, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(24, i+4, String.valueOf((sumVol7-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(25, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(26, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(27, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(28, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(29, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(30, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(31, i+4, String.valueOf((sumVol8-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(32, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(33, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(34, i+4, String.valueOf((sumVol9-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(35, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(36, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(37, i+4, String.valueOf((sumVol10-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(38, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(39, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(40, i+4, String.valueOf((sumVol11-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(41, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(42, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(43, i+4, String.valueOf((sumVol12-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(44, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(45, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(46, i+4, String.valueOf((sumVol13-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(47, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(48, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(49, i+4, String.valueOf((sumVol14-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(50, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(51, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(52, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(53, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(54, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(55, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(56, i+4, String.valueOf((sumVol15-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(57, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(58, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(59, i+4, String.valueOf((sumVol16-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(60, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(61, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(62, i+4, String.valueOf((sumVol17-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(63, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(64, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(65, i+4, String.valueOf((sumVol18-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(66, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(67, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(68, i+4, String.valueOf((sumVol19-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(69, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(70, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(71, i+4, String.valueOf((sumVol20-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(72, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(73, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(74, i+4, String.valueOf((sumVol21-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(75, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(76, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(77, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(78, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(79, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(80, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(81, i+4, String.valueOf((sumVol22-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(82, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(83, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(84, i+4, String.valueOf((sumVol23-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(85, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(86, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(87, i+4, String.valueOf((sumVol24-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(88, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(89, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(90, i+4, String.valueOf((sumVol25-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(91, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(92, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(93, i+4, String.valueOf((sumVol26-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(94, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(95, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(96, i+4, String.valueOf((sumVol27-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(97, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(98, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(99, i+4, String.valueOf((sumVol28-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(100, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(101, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(102, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(103, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(104, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(105, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(106, i+4, String.valueOf((sumVol29-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(107, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(108, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(109, i+4, String.valueOf((sumVol30-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(110, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(111, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(112, i+4, String.valueOf((sumVol31-committedVolume)) , wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(113, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(114, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(115, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(116, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(117, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(118, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(119, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(120, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(121, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(122, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(123, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(124, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(125, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(126, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(127, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(128, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(129, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(130, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(131, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+           label = new Label(132, i+4, "", wcfCv2);
+           excelSheet.addCell(label);
+                  
            i += 1;
            excelSheet.mergeCells(0, i+4, 3, i+4);
            label = new Label(0, i+4, "Daily Percentage " + category, wcf2);
@@ -4020,81 +5270,83 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(132, i+4, "", wcfBorder);
            excelSheet.addCell(label);
-           i += 1;
 
-           
-           //Chevron Daily Availability
-           //Merge col[0-3]
-           excelSheet.mergeCells(0, i+4, 3, i+4);
-           label = new Label(0, i+4, "Chevron Daily Availability", wcf2);
-           excelSheet.addCell(label);
-           for(MaintenanceMonitoringFleet item : qryListCaltexFleet) {
-               z = 0;
-               for (y=1;y<=31;y++) {
-            	   label = new Label(z+4, i+4, getGPSDailyTotal(y, item), wcfBlack);
-            	   excelSheet.addCell(label);
-                   wcf3 = null;
-                   wcf3 = new WritableCellFormat(cf);
-                   wcf3.setAlignment(Alignment.CENTRE);
-                   wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
-                   wcf3.setBackground(Colour.BROWN);
-                   label = new Label(z+5, i+4, getFleetAvailability(y, item), wcf3);
-                   excelSheet.addCell(label);
-                   label = new Label(z+6, i+4, "", wcfBorder);
-                   excelSheet.addCell(label);
-                   if (y==7) {
-                	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek1()), wcfBlack);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==14) {
-                	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek2()), wcfBlack);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==21) {
-                	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek3()), wcfBlack);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==28) {
-                	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek4()), wcfBlack);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-  	               if (y == 31) {
-                	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek5()), wcfBlack);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfBorder);
-  	            	   excelSheet.addCell(label);
-  	            	   label = new Label(z+9, i+4, "", wcfBorder);
+	}
+	
+	private static void createChevronDailyAvailabilityRow(int i, WritableSheet excelSheet, Label label, List<MaintenanceMonitoringFleet> qryListCaltexFleet,
+			WritableCellFormat wcf2, WritableCellFormat wcf3, int y, int z, WritableCellFormat wcfBorder, WritableFont cf, WritableCellFormat wcfOrange,
+			WritableCellFormat wcfYellow, WritableCellFormat wcfRed, WritableCellFormat wcfCyan, WritableCellFormat wcfGray, WritableCellFormat wcfDarkGreen,
+			WritableCellFormat wcfBlack, WritableCellFormat wcfViolet) throws RowsExceededException, WriteException {
+        excelSheet.mergeCells(0, i+4, 3, i+4);
+        label = new Label(0, i+4, "Chevron Daily Availability", wcf2);
+        excelSheet.addCell(label);
+        for(MaintenanceMonitoringFleet item : qryListCaltexFleet) {
+            z = 0;
+            for (y=1;y<=31;y++) {
+         	   label = new Label(z+4, i+4, getGPSDailyTotal(y, item), wcfBlack);
+         	   excelSheet.addCell(label);
+                wcf3 = null;
+                wcf3 = new WritableCellFormat(cf);
+                wcf3.setAlignment(Alignment.CENTRE);
+                wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
+                wcf3.setBackground(Colour.BROWN);
+                label = new Label(z+5, i+4, getFleetAvailability(y, item), wcf3);
+                excelSheet.addCell(label);
+                label = new Label(z+6, i+4, "", wcfBorder);
+                excelSheet.addCell(label);
+                if (y==7) {
+             	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek1()), wcfBlack);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==14) {
+             	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek2()), wcfBlack);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==21) {
+             	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek3()), wcfBlack);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==28) {
+             	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek4()), wcfBlack);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+	               if (y == 31) {
+             	   label = new Label(z+7, i+4, String.valueOf(item.getGPSTotalWeek5()), wcfBlack);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfBorder);
 	            	   excelSheet.addCell(label);
-  	            	   label = new Label(z+10, i+4, "", wcfBorder);
-  	            	   excelSheet.addCell(label);
+	            	   label = new Label(z+9, i+4, "", wcfBorder);
+	            	   excelSheet.addCell(label);
+	            	   label = new Label(z+10, i+4, "", wcfBorder);
+	            	   excelSheet.addCell(label);
 	               	   label = new Label(z+11, i+4, "", wcfRed);
 	               	   excelSheet.addCell(label);
 	               	   label = new Label(z+12, i+4, "", wcfCyan);
@@ -4128,79 +5380,79 @@ public class ReportUtils {
 	               	   label = new Label(z+26, i+4, "", wcfOrange);
 	               	   excelSheet.addCell(label);
 	               }
-                   z += 3;
-               }
-               //Total Chevron Fleet 
-               i += 1;
-               excelSheet.mergeCells(0, i+4, 3, i+4);
-               label = new Label(0, i+4, "Total Chevron Fleet", wcf2);
-               excelSheet.addCell(label);
-               z = 0;
-               for (y=1;y<=31;y++) {
-            	   label = new Label(z+4, i+4, "", wcfBorder);
-            	   excelSheet.addCell(label);
-                   wcf3 = null;
-                   wcf3 = new WritableCellFormat(cf);
-                   wcf3.setAlignment(Alignment.CENTRE);
-                   wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
-                   wcf3.setBackground(Colour.WHITE);
-                   label = new Label(z+5, i+4, String.valueOf(item.getTotalLorry()), wcf3);
-                   excelSheet.addCell(label);
-                   label = new Label(z+6, i+4, "", wcfBorder);
-                   excelSheet.addCell(label);
-                   if (y==7) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==14) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==21) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==28) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-  	               if (y == 31) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-  	            	   label = new Label(z+10, i+4, "", wcfBorder);
-  	            	   excelSheet.addCell(label);
+                z += 3;
+            }
+            //Total Chevron Fleet 
+            i += 1;
+            excelSheet.mergeCells(0, i+4, 3, i+4);
+            label = new Label(0, i+4, "Total Chevron Fleet", wcf2);
+            excelSheet.addCell(label);
+            z = 0;
+            for (y=1;y<=31;y++) {
+         	   label = new Label(z+4, i+4, "", wcfBorder);
+         	   excelSheet.addCell(label);
+                wcf3 = null;
+                wcf3 = new WritableCellFormat(cf);
+                wcf3.setAlignment(Alignment.CENTRE);
+                wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
+                wcf3.setBackground(Colour.WHITE);
+                label = new Label(z+5, i+4, String.valueOf(item.getTotalLorry()), wcf3);
+                excelSheet.addCell(label);
+                label = new Label(z+6, i+4, "", wcfBorder);
+                excelSheet.addCell(label);
+                if (y==7) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==14) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==21) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==28) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+	               if (y == 31) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+	            	   label = new Label(z+10, i+4, "", wcfBorder);
+	            	   excelSheet.addCell(label);
 	               	   label = new Label(z+11, i+4, "", wcfRed);
 	               	   excelSheet.addCell(label);
 	               	   label = new Label(z+12, i+4, "", wcfCyan);
@@ -4234,80 +5486,80 @@ public class ReportUtils {
 	               	   label = new Label(z+26, i+4, "", wcfOrange);
 	               	   excelSheet.addCell(label);
 	               }
-                   z += 3;
-               }
-               
-               //Chevron Unavailable
-               i += 1;
-               excelSheet.mergeCells(0, i+4, 3, i+4);
-               label = new Label(0, i+4, "Chevron Unavailable", wcf2);
-               excelSheet.addCell(label);
-               z = 0;
-               for (y=1;y<=31;y++) {
-            	   label = new Label(z+4, i+4, "", wcfBorder);
-            	   excelSheet.addCell(label);
-                   wcf3 = null;
-                   wcf3 = new WritableCellFormat(cf);
-                   wcf3.setAlignment(Alignment.CENTRE);
-                   wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
-                   wcf3.setBackground(Colour.RED);
-                   label = new Label(z+5, i+4, getFleetUnavailable(y, item), wcf3);
-                   excelSheet.addCell(label);
-                   label = new Label(z+6, i+4, "", wcfBorder);
-                   excelSheet.addCell(label);
-                   if (y==7) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==14) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==21) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==28) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-  	               if (y == 31) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-  	              	   label = new Label(z+10, i+4, "", wcfBorder);
-  	            	   excelSheet.addCell(label);
+                z += 3;
+            }
+            
+            //Chevron Unavailable
+            i += 1;
+            excelSheet.mergeCells(0, i+4, 3, i+4);
+            label = new Label(0, i+4, "Chevron Unavailable", wcf2);
+            excelSheet.addCell(label);
+            z = 0;
+            for (y=1;y<=31;y++) {
+         	   label = new Label(z+4, i+4, "", wcfBorder);
+         	   excelSheet.addCell(label);
+                wcf3 = null;
+                wcf3 = new WritableCellFormat(cf);
+                wcf3.setAlignment(Alignment.CENTRE);
+                wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
+                wcf3.setBackground(Colour.RED);
+                label = new Label(z+5, i+4, getFleetUnavailable(y, item), wcf3);
+                excelSheet.addCell(label);
+                label = new Label(z+6, i+4, "", wcfBorder);
+                excelSheet.addCell(label);
+                if (y==7) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==14) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==21) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==28) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+	               if (y == 31) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+	              	   label = new Label(z+10, i+4, "", wcfBorder);
+	            	   excelSheet.addCell(label);
 	               	   label = new Label(z+11, i+4, "", wcfRed);
 	               	   excelSheet.addCell(label);
 	               	   label = new Label(z+12, i+4, "", wcfCyan);
@@ -4341,295 +5593,230 @@ public class ReportUtils {
 	               	   label = new Label(z+26, i+4, "", wcfOrange);
 	               	   excelSheet.addCell(label);
 	               }
-                   z += 3;
-               }
-           }
-           
-           //Grand Total label
-           i += 1;
-           excelSheet.mergeCells(0, i+4, 3, i+4);
-           label = new Label(0, i+4, "Grand Total", wcf2);
-           excelSheet.addCell(label);
-           
-           //Total for Shell and Chevron Availability
-           i += 1;
-           excelSheet.mergeCells(0, i+4, 3, i+4);
-           label = new Label(0, i+4, "Total for Shell and Chevron Availability", wcf2);
-           excelSheet.addCell(label);
-           for(MaintenanceMonitoringFleet item : qryListGrandTotalFleet) {
-               z = 0;
-               for (y=1;y<=31;y++) {
-            	   label = new Label(z+4, i+4, "", wcfBorder);
-            	   excelSheet.addCell(label);
-                   wcf3 = null;
-                   wcf3 = new WritableCellFormat(cf);
-                   wcf3.setAlignment(Alignment.CENTRE);
-                   wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
-                   wcf3.setBackground(Colour.YELLOW);
-                   label = new Label(z+5, i+4, getFleetAvailability(y, item), wcf3);
-                   excelSheet.addCell(label);
-                   label = new Label(z+6, i+4, "", wcfBorder);
-                   excelSheet.addCell(label);
-                   if (y==7) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==14) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==21) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==28) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-  	               if (y == 31) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-  	            	   label = new Label(z+10, i+4, "", wcfBorder);
-  	            	   excelSheet.addCell(label);
-	               	   label = new Label(z+11, i+4, "", wcfRed);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+12, i+4, "", wcfCyan);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+13, i+4, "", wcfGray);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+14, i+4, "", wcfDarkGreen);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+15, i+4, "", wcfBlack);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+16, i+4, "", wcfViolet);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+17, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+18, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+19, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+20, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+21, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+22, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+23, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+24, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+25, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+26, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               }
-                   z += 3;
-               }
-               
-               //Total of Shell and Chevron Unavailable
-               i += 1;
-               excelSheet.mergeCells(0, i+4, 3, i+4);
-               label = new Label(0, i+4, "Total of Shell and Chevron Unavailable", wcf2);
-               excelSheet.addCell(label);
-               z = 0;
-               for (y=1;y<=31;y++) {
-            	   label = new Label(z+4, i+4, "", wcfBorder);
-            	   excelSheet.addCell(label);
-                   wcf3 = null;
-                   wcf3 = new WritableCellFormat(cf);
-                   wcf3.setAlignment(Alignment.CENTRE);
-                   wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
-                   wcf3.setBackground(Colour.RED);
-                   label = new Label(z+5, i+4, getFleetUnavailable(y, item), wcf3);
-                   excelSheet.addCell(label);
-                   label = new Label(z+6, i+4, "", wcfBorder);
-                   excelSheet.addCell(label);
-                   if (y==7) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==14) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==21) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-                   if (y==28) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+10, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   z += 4;
-                   }
-  	               if (y == 31) {
-                	   label = new Label(z+7, i+4, "", wcfOrange);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+8, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-                	   label = new Label(z+9, i+4, "", wcfYellow);
-                	   excelSheet.addCell(label);
-  	            	   label = new Label(z+10, i+4, "", wcfBorder);
-  	            	   excelSheet.addCell(label);
-	               	   label = new Label(z+11, i+4, "", wcfRed);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+12, i+4, "", wcfCyan);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+13, i+4, "", wcfGray);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+14, i+4, "", wcfDarkGreen);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+15, i+4, "", wcfBlack);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+16, i+4, "", wcfViolet);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+17, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+18, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+19, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+20, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+21, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+22, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+23, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+24, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+25, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               	   label = new Label(z+26, i+4, "", wcfOrange);
-	               	   excelSheet.addCell(label);
-	               }
-                   z += 3;
-               }
-           }
-           
-           String remarks = null;
-           
-           //consolidate total pending 
-           totalPendingMap.put(1, grandTotalPending1);
-           totalPendingMap.put(2, grandTotalPending2);
-           totalPendingMap.put(3, grandTotalPending3);
-           totalPendingMap.put(4, grandTotalPending4);
-           totalPendingMap.put(5, grandTotalPending5);
-           totalPendingMap.put(6, grandTotalPending6);
-           totalPendingMap.put(7, grandTotalPending7);
-           totalPendingMap.put(8, grandTotalPending8);
-           totalPendingMap.put(9, grandTotalPending9);
-           totalPendingMap.put(10, grandTotalPending10);
-           totalPendingMap.put(11, grandTotalPending11);
-           totalPendingMap.put(12, grandTotalPending12);
-           totalPendingMap.put(13, grandTotalPending13);
-           totalPendingMap.put(14, grandTotalPending14);
-           totalPendingMap.put(15, grandTotalPending15);
-           totalPendingMap.put(16, grandTotalPending16);
-           totalPendingMap.put(17, grandTotalPending17);
-           totalPendingMap.put(18, grandTotalPending18);
-           totalPendingMap.put(19, grandTotalPending19);
-           totalPendingMap.put(20, grandTotalPending20);
-           totalPendingMap.put(21, grandTotalPending21);
-           totalPendingMap.put(22, grandTotalPending22);
-           totalPendingMap.put(23, grandTotalPending23);
-           totalPendingMap.put(24, grandTotalPending24);
-           totalPendingMap.put(25, grandTotalPending25);
-           totalPendingMap.put(26, grandTotalPending26);
-           totalPendingMap.put(27, grandTotalPending27);
-           totalPendingMap.put(28, grandTotalPending28);
-           totalPendingMap.put(29, grandTotalPending29);
-           totalPendingMap.put(30, grandTotalPending30);
-           totalPendingMap.put(31, grandTotalPending31);
-
-           
-           
-           //continue on next method to avoid 64Kb limit of capacity of each method...
-           continueToGenerateMaintenanceMonitoringReport(i, excelSheet, wcf2, wcf3, label, modelListPreventive, z, cellFeatures2, wcfGray, wcfBorder, wcfOrange, wcfYellow, wcfRed, wcfCyan, wcfDarkGreen, wcfBlack, wcfViolet, y, cf, remarks, totalPendingMap, modelListPreventiveTotal, modelListTotalPending);
-           
-           
-           workBook.write();
-           isFileGenerated = true;
-
-       } catch (IOException e) {
-           e.printStackTrace();
-       } catch (WriteException e) {
-           e.printStackTrace();
-       } finally {
-           if (workBook != null) {
-               try {
-            	   workBook.close();
-               } catch (IOException e) {
-                   e.printStackTrace();
-               } catch (WriteException e) {
-                   e.printStackTrace();
-               }
-           }
-           System.out.println("Done.");
-       }
-
-		return isFileGenerated;
+                z += 3;
+            }
+        }
+	}
 	
+	private static void createTotalAvailabilityRow(int i, WritableSheet excelSheet, Label label, List<MaintenanceMonitoringFleet> qryListGrandTotalFleet,
+			WritableCellFormat wcf2, WritableCellFormat wcf3, int y, int z, WritableCellFormat wcfBorder, WritableFont cf, WritableCellFormat wcfOrange,
+			WritableCellFormat wcfYellow, WritableCellFormat wcfRed, WritableCellFormat wcfCyan, WritableCellFormat wcfGray, WritableCellFormat wcfDarkGreen,
+			WritableCellFormat wcfBlack, WritableCellFormat wcfViolet) throws RowsExceededException, WriteException {
+		
+        excelSheet.mergeCells(0, i+4, 3, i+4);
+        label = new Label(0, i+4, "Total for Shell and Chevron Availability", wcf2);
+        excelSheet.addCell(label);
+        for(MaintenanceMonitoringFleet item : qryListGrandTotalFleet) {
+            z = 0;
+            for (y=1;y<=31;y++) {
+         	   label = new Label(z+4, i+4, "", wcfBorder);
+         	   excelSheet.addCell(label);
+                wcf3 = null;
+                wcf3 = new WritableCellFormat(cf);
+                wcf3.setAlignment(Alignment.CENTRE);
+                wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
+                wcf3.setBackground(Colour.YELLOW);
+                label = new Label(z+5, i+4, getFleetAvailability(y, item), wcf3);
+                excelSheet.addCell(label);
+                label = new Label(z+6, i+4, "", wcfBorder);
+                excelSheet.addCell(label);
+                if (y==7) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==14) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==21) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==28) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+	               if (y == 31) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+	            	   label = new Label(z+10, i+4, "", wcfBorder);
+	            	   excelSheet.addCell(label);
+	               	   label = new Label(z+11, i+4, "", wcfRed);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+12, i+4, "", wcfCyan);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+13, i+4, "", wcfGray);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+14, i+4, "", wcfDarkGreen);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+15, i+4, "", wcfBlack);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+16, i+4, "", wcfViolet);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+17, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+18, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+19, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+20, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+21, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+22, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+23, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+24, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+25, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+26, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               }
+                z += 3;
+            }
+            
+            //Total of Shell and Chevron Unavailable
+            i += 1;
+            excelSheet.mergeCells(0, i+4, 3, i+4);
+            label = new Label(0, i+4, "Total of Shell and Chevron Unavailable", wcf2);
+            excelSheet.addCell(label);
+            z = 0;
+            for (y=1;y<=31;y++) {
+         	   label = new Label(z+4, i+4, "", wcfBorder);
+         	   excelSheet.addCell(label);
+                wcf3 = null;
+                wcf3 = new WritableCellFormat(cf);
+                wcf3.setAlignment(Alignment.CENTRE);
+                wcf3.setBorder(Border.ALL, BorderLineStyle.THIN);
+                wcf3.setBackground(Colour.RED);
+                label = new Label(z+5, i+4, getFleetUnavailable(y, item), wcf3);
+                excelSheet.addCell(label);
+                label = new Label(z+6, i+4, "", wcfBorder);
+                excelSheet.addCell(label);
+                if (y==7) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==14) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==21) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+                if (y==28) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+10, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   z += 4;
+                }
+	               if (y == 31) {
+             	   label = new Label(z+7, i+4, "", wcfOrange);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+8, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+             	   label = new Label(z+9, i+4, "", wcfYellow);
+             	   excelSheet.addCell(label);
+	            	   label = new Label(z+10, i+4, "", wcfBorder);
+	            	   excelSheet.addCell(label);
+	               	   label = new Label(z+11, i+4, "", wcfRed);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+12, i+4, "", wcfCyan);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+13, i+4, "", wcfGray);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+14, i+4, "", wcfDarkGreen);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+15, i+4, "", wcfBlack);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+16, i+4, "", wcfViolet);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+17, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+18, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+19, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+20, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+21, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+22, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+23, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+24, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+25, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               	   label = new Label(z+26, i+4, "", wcfOrange);
+	               	   excelSheet.addCell(label);
+	               }
+                z += 3;
+            }
+        }
+
 	}
 	
 	/**
@@ -6084,7 +7271,6 @@ public class ReportUtils {
 			List<MaintenanceMonitoringTotalPending> modelListTotalPending) throws RowsExceededException, WriteException{
 		
 		//Preventive and Breakdown
-        i += 1;
         excelSheet.mergeCells(0, i+4, 1, i+4);
         label = new Label(0, i+4, "PREVENTIVE MAINTENANCE", wcf2);
         excelSheet.addCell(label);

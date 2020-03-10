@@ -11,7 +11,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 25Mar2019
- * DateUpdated: 18Nov2019
+ * DateUpdated: 08Mar2020
  */
 public class MaintenanceMonitoring implements Serializable {
 
@@ -284,6 +284,7 @@ public class MaintenanceMonitoring implements Serializable {
 	private int gpsTripIssue29;
 	private int gpsTripIssue30;
 	private int gpsTripIssue31;
+	private int committedVolume;
 	
 	//non-persistent
 	private int day;
@@ -3195,6 +3196,16 @@ public class MaintenanceMonitoring implements Serializable {
 
 	public void setGpsMonthVol(int gpsMonthVol) {
 		this.gpsMonthVol = gpsMonthVol;
+	}
+
+
+	public int getCommittedVolume() {
+		return committedVolume;
+	}
+
+
+	public void setCommittedVolume(int committedVolume) {
+		this.committedVolume = committedVolume;
 	}
 	
 	

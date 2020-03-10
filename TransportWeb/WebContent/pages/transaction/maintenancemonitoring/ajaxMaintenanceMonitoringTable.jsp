@@ -180,6 +180,8 @@
 					<td style="background-color: #FF8C00;"></td><!-- dark orange -->
 				</tr>
 				<c:set var="category" value=""></c:set>
+				<c:set var="committedVolume" value=""></c:set>
+				<c:set var="capacityOfTerminal" value=""></c:set>
 				<c:set var="sumTrip1" value="0"></c:set>
 				<c:set var="sumTrip2" value="0"></c:set>
 				<c:set var="sumTrip3" value="0"></c:set>
@@ -430,7 +432,7 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol31}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
-									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
+									<td align="center"><input type="text" size="8px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -449,6 +451,150 @@
 									<td></td>
 									<td></td>
 								</tr>
+								<!-- Committed Volume -->
+								<tr>
+									<td colspan="2" style="color:red; background-color:lightgreen;">COMMITED VOLUME</td>
+									<td style="color:red; background-color:lightgreen;">${committedVolume}</td>
+									<!-- Batangas Black is Single Shift only -->
+									<c:choose>
+										<c:when test="${category=='BATANGAS BLACK'}">
+											<td style="color:red; background-color:lightgreen;">${capacityOfTerminal*1000}</td>
+										</c:when>
+										<c:otherwise>
+											<td style="color:red; background-color:lightgreen;">${capacityOfTerminal*1000*2}</td>
+										</c:otherwise>
+									</c:choose>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol1-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol2-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol3-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol4-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol5-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol6-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol7-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol8-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol9-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol10-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol11-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol12-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol13-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol14-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol15-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol16-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol17-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol18-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol19-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol20-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol21-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol22-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol23-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol24-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol25-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol26-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol27-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol28-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol29-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol30-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol31-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>	
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+								</tr>			
+
 								<tr>
 									<td colspan="4" align="center"><span style="font-weight: bold;">Daily Percentages &nbsp; <c:out value="${category}"></c:out> &nbsp;</span></td>
 									<td style="background-color: #32CD32;"></td>
@@ -652,12 +798,15 @@
 							
 							<c:set var="totalLorryCountPerCategory" value="0"></c:set>
 							<c:set var="category" value="${model.category}"></c:set>
+							<c:set var="committedVolume" value="${model.committedVolume}"></c:set>
+							<c:set var="capacityOfTerminal" value="0"></c:set>
 							<tr>
 								<td colspan="4" align="center"><span style="font-weight: bold;"><bean:write name="model" property="category"/></span></td>
 								<td colspan="129"></td>
 							</tr>	
 						</c:if>							
 						<c:set var="totalLorryCountPerCategory" value="${totalLorryCountPerCategory + 1}"></c:set>
+						<c:set var="capacityOfTerminal" value="${capacityOfTerminal + model.capacity}"></c:set>
 						<c:set var="sumTrip1" value="${sumTrip1 + model.gps1}"></c:set>
 						<c:set var="sumTrip2" value="${sumTrip2 + model.gps2}"></c:set>
 						<c:set var="sumTrip3" value="${sumTrip3 + model.gps3}"></c:set>
@@ -6671,7 +6820,7 @@
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol31}" ></td>
 						<td></td>
 						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
-						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
+						<td align="center"><input type="text" size="8px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -6690,6 +6839,149 @@
 						<td></td>
 						<td></td>
 					</tr>
+					<!-- Committed Volume -->
+					<tr>
+						<td colspan="2" style="color:red; background-color:lightgreen;">COMMITED VOLUME</td>
+						<td style="color:red; background-color:lightgreen;">${committedVolume}</td>
+						<!-- Batangas Black is Single Shift only -->
+						<c:choose>
+							<c:when test="${category=='BATANGAS BLACK'}">
+								<td style="color:red; background-color:lightgreen;">${capacityOfTerminal*1000}</td>
+							</c:when>
+							<c:otherwise>
+								<td style="color:red; background-color:lightgreen;">${capacityOfTerminal*1000*2}</td>
+							</c:otherwise>
+						</c:choose>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol1-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol2-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol3-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol4-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol5-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol6-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol7-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol8-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol9-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol10-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol11-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol12-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol13-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol14-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol15-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol16-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol17-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol18-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol19-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol20-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol21-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol22-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol23-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol24-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol25-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol26-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol27-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol28-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol29-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol30-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol31-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>	
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+					</tr>			
 					<!-- Row for Daily Percentage Per category -->
 					<tr>
 						<td colspan="4" align="center"><span style="font-weight: bold;">Daily Percentages &nbsp; <c:out value="${category}"></c:out> &nbsp;</span></td>
@@ -7184,6 +7476,7 @@
 				<c:set var="sumVolWeek4" value="0"></c:set>
 				<c:set var="sumVolWeek5" value="0"></c:set>
 				<c:set var="totalLorryCountPerCategory" value="0"></c:set>
+				<c:set var="capacityOfTerminal" value="0"></c:set>
 				<logic:iterate name="maintenanceMonitoringForm" property="modelList" type="com.transport.model.MaintenanceMonitoring" id="model">
 					<!-- filter for chevron lorry only -->
 					<c:if test="${model.transportId == 602}">
@@ -7302,7 +7595,7 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol31}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
-									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
+									<td align="center"><input type="text" size="8px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -7320,6 +7613,150 @@
 									<td></td>
 									<td></td>
 								</tr>
+								<!-- Committed Volume -->
+								<tr>
+									<td colspan="2" style="color:red; background-color:lightgreen;">COMMITED VOLUME</td>
+									<td style="color:red; background-color:lightgreen;">${committedVolume}</td>
+									<!-- Batangas Black is Single Shift only -->
+									<c:choose>
+										<c:when test="${category=='BATANGAS BLACK'}">
+											<td style="color:red; background-color:lightgreen;">${capacityOfTerminal*1000}</td>
+										</c:when>
+										<c:otherwise>
+											<td style="color:red; background-color:lightgreen;">${capacityOfTerminal*1000*2}</td>
+										</c:otherwise>
+									</c:choose>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol1-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol2-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol3-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol4-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol5-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol6-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol7-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol8-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol9-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol10-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol11-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol12-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol13-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol14-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol15-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol16-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol17-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol18-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol19-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol20-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol21-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol22-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol23-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol24-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol25-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol26-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol27-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol28-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol29-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol30-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol31-committedVolume}" ></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>	
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+									<td style="background-color:lightgreen;"></td>
+								</tr>			
+
 								<tr>
 									<td colspan="4" align="center"><span style="font-weight: bold;">Daily Percentages &nbsp; <c:out value="${category}"></c:out> &nbsp;</span></td>
 									<td style="background-color: #32CD32;"></td><!-- lime green -->
@@ -7520,12 +7957,14 @@
 							<c:set var="sumVolWeek5" value="0"></c:set>
 							<c:set var="totalLorryCountPerCategory" value="0"></c:set>
 							<c:set var="category" value="${model.category}"></c:set>
+							<c:set var="capacityOfTerminal" value="0"></c:set>
 							<tr>
 								<td colspan="4" align="center"><span style="font-weight: bold;"><bean:write name="model" property="category"/></span></td>
 								<td colspan="129"></td>
 							</tr>	
 						</c:if>	
 						<c:set var="totalLorryCountPerCategory" value="${totalLorryCountPerCategory + 1}"></c:set>
+						<c:set var="capacityOfTerminal" value="${capacityOfTerminal + model.capacity}"></c:set>
 						<c:set var="sumTrip1" value="${sumTrip1 + model.gps1}"></c:set>
 						<c:set var="sumTrip2" value="${sumTrip2 + model.gps2}"></c:set>
 						<c:set var="sumTrip3" value="${sumTrip3 + model.gps3}"></c:set>
@@ -13539,7 +13978,7 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol31}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek5}" ></td>
-									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
+									<td align="center"><input type="text" size="8px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1+sumVolWeek2+sumVolWeek3+sumVolWeek4+sumVolWeek5}" ></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -13558,6 +13997,150 @@
 						<td></td>
 						<td></td>
 					</tr>
+					<!-- Committed Volume -->
+					<tr>
+						<td colspan="2" style="color:red; background-color:lightgreen;">COMMITED VOLUME</td>
+						<td style="color:red; background-color:lightgreen;">${committedVolume}</td>
+						<!-- Batangas Black is Single Shift only -->
+						<c:choose>
+							<c:when test="${category=='BATANGAS BLACK'}">
+								<td style="color:red; background-color:lightgreen;">${capacityOfTerminal*1000}</td>
+							</c:when>
+							<c:otherwise>
+								<td style="color:red; background-color:lightgreen;">${capacityOfTerminal*1000*2}</td>
+							</c:otherwise>
+						</c:choose>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol1-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol2-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol3-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol4-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol5-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol6-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol7-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol8-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol9-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol10-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol11-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol12-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol13-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol14-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol15-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol16-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol17-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol18-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol19-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol20-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol21-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol22-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol23-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol24-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol25-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol26-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol27-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol28-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol29-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol30-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"><input type="text" size="8px" style="text-align: center; font-weight: bold;" readonly="readonly" value="${sumVol31-committedVolume}" ></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>	
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+						<td style="background-color:lightgreen;"></td>
+					</tr>			
+					
 					<!-- Row for Daily Percentage Per category -->
 					<tr>
 						<td colspan="4" align="center"><span style="font-weight: bold;">Daily Percentages &nbsp; <c:out value="${category}"></c:out> &nbsp;</span></td>

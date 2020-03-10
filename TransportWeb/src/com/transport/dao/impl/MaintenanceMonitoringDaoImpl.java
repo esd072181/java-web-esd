@@ -73,6 +73,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 		  		qry.append(",createdon ");
 		  		qry.append(",version ");
 		  		qry.append(",active ");
+		  		qry.append(",committedvolume ");
 		  		qry.append(" ) ");
 		  		qry.append(" values ");
 		  		qry.append(" ( ");
@@ -88,6 +89,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 		  		qry.append(" ,? ");
 		  		qry.append(" ,1 ");
 		  		qry.append(" ,true ");
+		  		qry.append(" ,? ");
 		  		qry.append(" ) ");
 
 //		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
@@ -96,6 +98,17 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 			  conn = ServerContext.getJDBCHandle();
 			  conn.setAutoCommit(false);
 			  pstmt = conn.prepareStatement(qry.toString());
+			  
+			  //Get the Commiited Volume of the Category(Terminal) in ListValue table, field is Description, listtypeid = 10
+			  StringBuilder sbCv = new StringBuilder("select description from transport.list_value where listtypeid = 10 and listvalue = '" + model.getCategory() + "'");
+			  PreparedStatement pstmtCV = conn.prepareStatement(sbCv.toString());
+			  ResultSet rsCv = pstmtCV.executeQuery();
+			  int committedVol = 0;
+			  if (rsCv.next()) {
+				  committedVol = Integer.parseInt(rsCv.getString(1));
+			  }
+			  rsCv.close();
+			  pstmtCV.close();
 			   
 			  StringBuilder sb = new StringBuilder("select id from transport.tran_maintenance where plateno = ? and trailerno = ? and lorryno = ? and capacity = ? and year = ? and month = ?  and category = ? and transportid = ? ");
 			  pstmt2 = conn.prepareStatement(sb.toString());
@@ -165,6 +178,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					  pstmt.setInt(8, model.getTransportId());
 					  pstmt.setInt(9, model.getCreatedBy());
 					  pstmt.setTimestamp(10, model.getCreatedOn());
+					  pstmt.setInt(11, committedVol);
 					     
 					  int statusInt = pstmt.executeUpdate();
 					  if (statusInt == 1) {
@@ -1257,7 +1271,48 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 			 try {
 				 conn = ServerContext.getJDBCHandle();
 
-				 StringBuilder sql = new StringBuilder("select a.*,coalesce(cast(a.maintenance1 as int),0) + coalesce(cast(a.maintenance2 as int),0) + coalesce(cast(a.maintenance3 as int),0) + coalesce(cast(a.maintenance4 as int),0) + ");
+				 StringBuilder sql = new StringBuilder("select a.id, a.plateno, a.trailerno, a.lorryno, a.capacity, a.category, a.year, a.month, ");
+				 		sql.append("a.gpscolor1, a.gpsremarks1, a.maintenance1, a.maintenancecolor1, a.maintenanceremarks1, a.availablevolume1, ");
+				 		sql.append("a.gpscolor2, a.gpsremarks2, a.maintenance2, a.maintenancecolor2, a.maintenanceremarks2, a.availablevolume2, ");
+				 		sql.append("a.gpscolor3, a.gpsremarks3, a.maintenance3, a.maintenancecolor3, a.maintenanceremarks3, a.availablevolume3, ");
+				 		sql.append("a.gpscolor4, a.gpsremarks4, a.maintenance4, a.maintenancecolor4, a.maintenanceremarks4, a.availablevolume4, ");
+				 		sql.append("a.gpscolor5, a.gpsremarks5, a.maintenance5, a.maintenancecolor5, a.maintenanceremarks5, a.availablevolume5, ");
+				 		sql.append("a.gpscolor6, a.gpsremarks6, a.maintenance6, a.maintenancecolor6, a.maintenanceremarks6, a.availablevolume6, ");
+				 		sql.append("a.gpscolor7, a.gpsremarks7, a.maintenance7, a.maintenancecolor7, a.maintenanceremarks7, a.availablevolume7, ");
+				 		sql.append("a.gpscolor8, a.gpsremarks8, a.maintenance8, a.maintenancecolor8, a.maintenanceremarks8, a.availablevolume8, ");
+				 		sql.append("a.gpscolor9, a.gpsremarks9, a.maintenance9, a.maintenancecolor9, a.maintenanceremarks9, a.availablevolume9, ");
+				 		sql.append("a.gpscolor10, a.gpsremarks10, a.maintenance10, a.maintenancecolor10, a.maintenanceremarks10, a.availablevolume10, ");
+				 		sql.append("a.gpscolor11, a.gpsremarks11, a.maintenance11, a.maintenancecolor11, a.maintenanceremarks11, a.availablevolume11, ");
+				 		sql.append("a.gpscolor12, a.gpsremarks12, a.maintenance12, a.maintenancecolor12, a.maintenanceremarks12, a.availablevolume12, ");
+				 		sql.append("a.gpscolor13, a.gpsremarks13, a.maintenance13, a.maintenancecolor13, a.maintenanceremarks13, a.availablevolume13, ");
+				 		sql.append("a.gpscolor14, a.gpsremarks14, a.maintenance14, a.maintenancecolor14, a.maintenanceremarks14, a.availablevolume14, ");
+				 		sql.append("a.gpscolor15, a.gpsremarks15, a.maintenance15, a.maintenancecolor15, a.maintenanceremarks15, a.availablevolume15, ");
+				 		sql.append("a.gpscolor16, a.gpsremarks16, a.maintenance16, a.maintenancecolor16, a.maintenanceremarks16, a.availablevolume16, ");
+				 		sql.append("a.gpscolor17, a.gpsremarks17, a.maintenance17, a.maintenancecolor17, a.maintenanceremarks17, a.availablevolume17, ");
+				 		sql.append("a.gpscolor18, a.gpsremarks18, a.maintenance18, a.maintenancecolor18, a.maintenanceremarks18, a.availablevolume18, ");
+				 		sql.append("a.gpscolor19, a.gpsremarks19, a.maintenance19, a.maintenancecolor19, a.maintenanceremarks19, a.availablevolume19, ");
+				 		sql.append("a.gpscolor20, a.gpsremarks20, a.maintenance20, a.maintenancecolor20, a.maintenanceremarks20, a.availablevolume20, ");
+				 		sql.append("a.gpscolor21, a.gpsremarks21, a.maintenance21, a.maintenancecolor21, a.maintenanceremarks21, a.availablevolume21, ");
+				 		sql.append("a.gpscolor22, a.gpsremarks22, a.maintenance22, a.maintenancecolor22, a.maintenanceremarks22, a.availablevolume22, ");
+				 		sql.append("a.gpscolor23, a.gpsremarks23, a.maintenance23, a.maintenancecolor23, a.maintenanceremarks23, a.availablevolume23, ");
+				 		sql.append("a.gpscolor24, a.gpsremarks24, a.maintenance24, a.maintenancecolor24, a.maintenanceremarks24, a.availablevolume24, ");
+				 		sql.append("a.gpscolor25, a.gpsremarks25, a.maintenance25, a.maintenancecolor25, a.maintenanceremarks25, a.availablevolume25, ");
+				 		sql.append("a.gpscolor26, a.gpsremarks26, a.maintenance26, a.maintenancecolor26, a.maintenanceremarks26, a.availablevolume26, ");
+				 		sql.append("a.gpscolor27, a.gpsremarks27, a.maintenance27, a.maintenancecolor27, a.maintenanceremarks27, a.availablevolume27, ");
+				 		sql.append("a.gpscolor28, a.gpsremarks28, a.maintenance28, a.maintenancecolor28, a.maintenanceremarks28, a.availablevolume28, ");
+				 		sql.append("a.gpscolor29, a.gpsremarks29, a.maintenance29, a.maintenancecolor29, a.maintenanceremarks29, a.availablevolume29, ");
+				 		sql.append("a.gpscolor30, a.gpsremarks30, a.maintenance30, a.maintenancecolor30, a.maintenanceremarks30, a.availablevolume30, ");
+				 		sql.append("a.gpscolor31, a.gpsremarks31, a.maintenance31, a.maintenancecolor31, a.maintenanceremarks31, a.availablevolume31, ");
+				 		sql.append("a.createdby, a.createdon, a.modifiedby, a.modifiedon, a.version, a.active, a.transportid, a.gps1, a.gps2, a.gps3, ");
+				 		sql.append("a.gps4, a.gps5, a.gps6, a.gps7, a.gps8, a.gps9, a.gps10, a.gps11, a.gps12, a.gps13, a.gps14, a.gps15, a.gps16, ");
+				 		sql.append("a.gps17, a.gps18, a.gps19, a.gps20, a.gps21, a.gps22, a.gps23, a.gps24, a.gps25, a.gps26, a.gps27, a.gps28, a.gps29, ");
+				 		sql.append("a.gps30, a.gps31, a.gpstripissue1, a.gpstripissue2, a.gpstripissue3, a.gpstripissue4, a.gpstripissue5, ");
+				 		sql.append("a.gpstripissue6, a.gpstripissue7, a.gpstripissue8, a.gpstripissue9, a.gpstripissue10, a.gpstripissue11, ");
+				 		sql.append("a.gpstripissue12, a.gpstripissue13, a.gpstripissue14, a.gpstripissue15, a.gpstripissue16, a.gpstripissue17, ");
+				 		sql.append("a.gpstripissue18, a.gpstripissue19, a.gpstripissue20, a.gpstripissue21, a.gpstripissue22, a.gpstripissue23, ");
+				 		sql.append("a.gpstripissue24, a.gpstripissue25, a.gpstripissue26, a.gpstripissue27, a.gpstripissue28, a.gpstripissue29, ");
+				 		sql.append("a.gpstripissue30, a.gpstripissue31, ");
+				 		sql.append(" coalesce(cast(a.maintenance1 as int),0) + coalesce(cast(a.maintenance2 as int),0) + coalesce(cast(a.maintenance3 as int),0) + coalesce(cast(a.maintenance4 as int),0) + ");
 					 	sql.append(" coalesce(cast(a.maintenance5 as int),0) + coalesce(cast(a.maintenance6 as int),0) + coalesce(cast(a.maintenance7 as int),0) + coalesce(cast(a.maintenance8 as int),0) + ");
 					 	sql.append(" coalesce(cast(a.maintenance9 as int),0) + coalesce(cast(a.maintenance10 as int),0) + coalesce(cast(a.maintenance11 as int),0) + coalesce(cast(a.maintenance12 as int),0) + ");
 					 	sql.append(" coalesce(cast(a.maintenance13 as int),0) + coalesce(cast(a.maintenance14 as int),0) + coalesce(cast(a.maintenance15 as int),0) + coalesce(cast(a.maintenance16 as int),0) + ");
@@ -1573,6 +1628,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					 	sql.append(", (CAST(gps29 AS INTEGER)*1000*capacity) as gps29vol  ");
 					 	sql.append(", (CAST(gps30 AS INTEGER)*1000*capacity) as gps30vol  ");
 					 	sql.append(", (CAST(gps31 AS INTEGER)*1000*capacity) as gps31vol  ");
+					 	sql.append(", committedvolume ");
 					 	sql.append(" from transport.tran_maintenance a");
 					 	sql.append(" where a.month = ? ");
 					 	sql.append(" and a.year = ? ");
@@ -1938,6 +1994,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 		    		 model.setGps29Vol(rs.getInt(317));
 		    		 model.setGps30Vol(rs.getInt(318));
 		    		 model.setGps31Vol(rs.getInt(319));
+		    		 model.setCommittedVolume(rs.getInt(320));
 		    		 model.setGpsWeek1Vol(model.getGps1Vol()+model.getGps2Vol()+model.getGps3Vol()+model.getGps4Vol()+model.getGps5Vol()+model.getGps6Vol()+model.getGps7Vol());
 		    		 model.setGpsWeek2Vol(model.getGps8Vol()+model.getGps9Vol()+model.getGps10Vol()+model.getGps11Vol()+model.getGps12Vol()+model.getGps13Vol()+model.getGps14Vol());
 		    		 model.setGpsWeek3Vol(model.getGps15Vol()+model.getGps16Vol()+model.getGps17Vol()+model.getGps18Vol()+model.getGps19Vol()+model.getGps20Vol()+model.getGps21Vol());
