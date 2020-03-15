@@ -1092,7 +1092,7 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.gpsRemarks1}
+												Remarks: ${model.gpsRemarks1}<br>
 												Trip Issue: ${model.gpsTripIssue1Desc}
 											</span>
 										</div>										
@@ -1107,7 +1107,7 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.gpsRemarks1}
+												Remarks: ${model.gpsRemarks1}<br>
 												Trip Issue: ${model.gpsTripIssue1Desc}
 											</span>
 										</div>										
@@ -1122,7 +1122,7 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.gpsRemarks1}
+												Remarks: ${model.gpsRemarks1}<br>
 												Trip Issue: ${model.gpsTripIssue1Desc}
 											</span>
 										</div>										
@@ -1137,7 +1137,7 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.gpsRemarks1}
+												Remarks: ${model.gpsRemarks1}<br>
 												Trip Issue: ${model.gpsTripIssue1Desc}
 											</span>
 										</div>									
@@ -1154,7 +1154,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>	
 									</td>
@@ -1168,7 +1169,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -1182,7 +1184,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -1196,7 +1199,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -1210,7 +1214,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -1224,7 +1229,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -1238,7 +1244,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -1255,7 +1262,7 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.gpsRemarks2}
+												Remarks: ${model.gpsRemarks2}<br>
 												Trip Issue: ${model.gpsTripIssue2Desc}
 											</span>
 										</div>
@@ -1270,7 +1277,7 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.gpsRemarks2}
+												Remarks: ${model.gpsRemarks2}<br>
 												Trip Issue: ${model.gpsTripIssue2Desc}
 											</span>
 										</div>
@@ -1285,7 +1292,7 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.gpsRemarks2}
+												Remarks: ${model.gpsRemarks2}<br>
 												Trip Issue: ${model.gpsTripIssue2Desc}
 											</span>
 										</div>										
@@ -1300,7 +1307,7 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.gpsRemarks2}
+												Remarks: ${model.gpsRemarks2}<br>
 												Trip Issue: ${model.gpsTripIssue2Desc}
 											</span>
 										</div>										
@@ -1315,7 +1322,7 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.gpsRemarks2}
+												Remarks: ${model.gpsRemarks2}<br>
 												Trip Issue: ${model.gpsTripIssue2Desc}
 											</span>
 										</div>									
@@ -1332,7 +1339,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>									
 									</td>
@@ -1346,7 +1354,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -1360,7 +1369,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -1374,7 +1384,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -1388,7 +1399,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -1402,7 +1414,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -1416,7 +1429,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -1510,7 +1524,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -1524,7 +1539,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -1538,7 +1554,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -1552,7 +1569,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -1566,7 +1584,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -1580,7 +1599,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -1594,7 +1614,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -1688,7 +1709,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -1702,7 +1724,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -1716,7 +1739,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -1730,7 +1754,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -1744,7 +1769,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -1758,7 +1784,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -1772,7 +1799,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -1866,7 +1894,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -1880,7 +1909,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -1894,7 +1924,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -1908,7 +1939,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -1922,7 +1954,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -1936,7 +1969,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -1950,7 +1984,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -2044,7 +2079,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -2058,7 +2094,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -2072,7 +2109,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -2086,7 +2124,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -2100,7 +2139,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -2114,7 +2154,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -2128,7 +2169,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -2222,7 +2264,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -2236,7 +2279,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -2250,7 +2294,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -2264,7 +2309,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -2278,7 +2324,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -2292,7 +2339,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -2306,7 +2354,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -2404,7 +2453,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -2418,7 +2468,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -2432,7 +2483,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -2446,7 +2498,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -2460,7 +2513,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -2474,7 +2528,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -2488,7 +2543,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -2582,7 +2638,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -2596,7 +2653,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -2610,7 +2668,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -2624,7 +2683,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -2638,7 +2698,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -2652,7 +2713,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -2666,7 +2728,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -2760,7 +2823,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -2774,7 +2838,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -2788,7 +2853,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -2802,7 +2868,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -2816,7 +2883,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -2830,7 +2898,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -2844,7 +2913,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -2938,7 +3008,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -2952,7 +3023,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -2966,7 +3038,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -2980,7 +3053,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -2994,7 +3068,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -3008,7 +3083,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -3022,7 +3098,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -3116,7 +3193,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -3130,7 +3208,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -3144,7 +3223,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -3158,7 +3238,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -3172,7 +3253,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -3186,7 +3268,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -3200,7 +3283,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -3294,7 +3378,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -3308,7 +3393,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -3322,7 +3408,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -3336,7 +3423,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -3350,7 +3438,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -3364,7 +3453,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -3378,7 +3468,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -3472,7 +3563,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -3486,7 +3578,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -3500,7 +3593,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -3514,7 +3608,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -3528,7 +3623,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -3542,7 +3638,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -3556,7 +3653,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -3654,7 +3752,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -3668,7 +3767,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -3682,7 +3782,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -3696,7 +3797,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -3710,7 +3812,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -3724,7 +3827,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -3738,7 +3842,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -3832,7 +3937,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -3846,7 +3952,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -3860,7 +3967,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -3874,7 +3982,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -3888,7 +3997,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -3902,7 +4012,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -3916,7 +4027,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -4010,7 +4122,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -4024,7 +4137,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -4038,7 +4152,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -4052,7 +4167,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -4066,7 +4182,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -4080,7 +4197,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -4094,7 +4212,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -4188,7 +4307,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -4202,7 +4322,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -4216,7 +4337,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -4230,7 +4352,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -4244,7 +4367,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -4258,7 +4382,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -4272,7 +4397,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -4366,7 +4492,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -4380,7 +4507,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -4394,7 +4522,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -4408,7 +4537,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -4422,7 +4552,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -4436,7 +4567,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -4450,7 +4582,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -4544,7 +4677,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -4558,7 +4692,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -4572,7 +4707,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -4586,7 +4722,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -4600,7 +4737,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -4614,7 +4752,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -4628,7 +4767,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -4722,7 +4862,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -4736,7 +4877,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -4750,7 +4892,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -4764,7 +4907,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -4778,7 +4922,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -4792,7 +4937,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -4806,7 +4952,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -4904,7 +5051,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -4918,7 +5066,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -4932,7 +5081,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -4946,7 +5096,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -4960,7 +5111,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -4974,7 +5126,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -4988,7 +5141,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -5082,7 +5236,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -5096,7 +5251,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -5110,7 +5266,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -5124,7 +5281,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -5138,7 +5296,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -5152,7 +5311,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -5166,7 +5326,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -5260,7 +5421,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -5274,7 +5436,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -5288,7 +5451,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -5302,7 +5466,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -5316,7 +5481,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -5330,7 +5496,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -5344,7 +5511,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -5438,7 +5606,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -5452,7 +5621,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -5466,7 +5636,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -5480,7 +5651,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -5494,7 +5666,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -5508,7 +5681,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -5522,7 +5696,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -5616,7 +5791,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -5630,7 +5806,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -5644,7 +5821,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -5658,7 +5836,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -5672,7 +5851,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -5686,7 +5866,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -5700,7 +5881,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -5794,7 +5976,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -5808,7 +5991,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -5822,7 +6006,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -5836,7 +6021,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -5850,7 +6036,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -5864,7 +6051,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -5878,7 +6066,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -5972,7 +6161,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -5986,7 +6176,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -6000,7 +6191,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -6014,7 +6206,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -6028,7 +6221,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -6042,7 +6236,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -6056,7 +6251,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -6154,7 +6350,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -6168,7 +6365,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -6182,7 +6380,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -6196,7 +6395,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -6210,7 +6410,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -6224,7 +6425,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -6238,7 +6440,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -6332,7 +6535,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -6346,7 +6550,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -6360,7 +6565,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -6374,7 +6580,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -6388,7 +6595,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -6402,7 +6610,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -6416,7 +6625,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -6510,7 +6720,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -6524,7 +6735,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -6538,7 +6750,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -6552,7 +6765,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -6566,7 +6780,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -6580,7 +6795,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -6594,7 +6810,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -8312,7 +8529,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -8326,7 +8544,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -8340,7 +8559,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -8354,7 +8574,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -8368,7 +8589,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -8382,7 +8604,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -8396,7 +8619,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks1}
+												Remarks: ${model.maintenanceRemarks1}<br>
+												Category: ${model.maintenanceCategory1Desc}
 											</span>
 										</div>
 									</td>
@@ -8490,7 +8714,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -8504,7 +8729,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -8518,7 +8744,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -8532,7 +8759,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -8546,7 +8774,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -8560,7 +8789,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -8574,7 +8804,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks2}
+												Remarks: ${model.maintenanceRemarks2}<br>
+												Category: ${model.maintenanceCategory2Desc}
 											</span>
 										</div>
 									</td>
@@ -8668,7 +8899,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -8682,7 +8914,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -8696,7 +8929,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -8710,7 +8944,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -8724,7 +8959,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -8738,7 +8974,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -8752,7 +8989,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks3}
+												Remarks: ${model.maintenanceRemarks3}<br>
+												Category: ${model.maintenanceCategory3Desc}
 											</span>
 										</div>
 									</td>
@@ -8846,7 +9084,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -8860,7 +9099,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -8874,7 +9114,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -8888,7 +9129,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -8902,7 +9144,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -8916,7 +9159,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -8930,7 +9174,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks4}
+												Remarks: ${model.maintenanceRemarks4}<br>
+												Category: ${model.maintenanceCategory4Desc}
 											</span>
 										</div>
 									</td>
@@ -9024,7 +9269,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -9038,7 +9284,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -9052,7 +9299,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -9066,7 +9314,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -9080,7 +9329,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -9094,7 +9344,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -9108,7 +9359,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks5}
+												Remarks: ${model.maintenanceRemarks5}<br>
+												Category: ${model.maintenanceCategory5Desc}
 											</span>
 										</div>
 									</td>
@@ -9202,7 +9454,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -9216,7 +9469,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -9230,7 +9484,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -9244,7 +9499,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -9258,7 +9514,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -9272,7 +9529,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -9286,7 +9544,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks6}
+												Remarks: ${model.maintenanceRemarks6}<br>
+												Category: ${model.maintenanceCategory6Desc}
 											</span>
 										</div>
 									</td>
@@ -9380,7 +9639,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -9394,7 +9654,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -9408,7 +9669,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -9422,7 +9684,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -9436,7 +9699,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -9450,7 +9714,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -9464,7 +9729,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks7}
+												Remarks: ${model.maintenanceRemarks7}<br>
+												Category: ${model.maintenanceCategory7Desc}
 											</span>
 										</div>
 									</td>
@@ -9562,7 +9828,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -9576,7 +9843,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -9590,7 +9858,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -9604,7 +9873,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -9618,7 +9888,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -9632,7 +9903,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -9646,7 +9918,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks8}
+												Remarks: ${model.maintenanceRemarks8}<br>
+												Category: ${model.maintenanceCategory8Desc}
 											</span>
 										</div>
 									</td>
@@ -9740,7 +10013,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -9754,7 +10028,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -9768,7 +10043,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -9782,7 +10058,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -9796,7 +10073,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -9810,7 +10088,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -9824,7 +10103,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks9}
+												Remarks: ${model.maintenanceRemarks9}<br>
+												Category: ${model.maintenanceCategory9Desc}
 											</span>
 										</div>
 									</td>
@@ -9918,7 +10198,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -9932,7 +10213,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -9946,7 +10228,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -9960,7 +10243,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -9974,7 +10258,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -9988,7 +10273,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -10002,7 +10288,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks10}
+												Remarks: ${model.maintenanceRemarks10}<br>
+												Category: ${model.maintenanceCategory10Desc}
 											</span>
 										</div>
 									</td>
@@ -10096,7 +10383,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -10110,7 +10398,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -10124,7 +10413,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -10138,7 +10428,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -10152,7 +10443,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -10166,7 +10458,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -10180,7 +10473,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks11}
+												Remarks: ${model.maintenanceRemarks11}<br>
+												Category: ${model.maintenanceCategory11Desc}
 											</span>
 										</div>
 									</td>
@@ -10274,7 +10568,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -10288,7 +10583,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -10302,7 +10598,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -10316,7 +10613,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -10330,7 +10628,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -10344,7 +10643,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -10358,7 +10658,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks12}
+												Remarks: ${model.maintenanceRemarks12}<br>
+												Category: ${model.maintenanceCategory12Desc}
 											</span>
 										</div>
 									</td>
@@ -10452,7 +10753,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -10466,7 +10768,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -10480,7 +10783,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -10494,7 +10798,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -10508,7 +10813,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -10522,7 +10828,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -10536,7 +10843,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks13}
+												Remarks: ${model.maintenanceRemarks13}<br>
+												Category: ${model.maintenanceCategory13Desc}
 											</span>
 										</div>
 									</td>
@@ -10630,7 +10938,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -10644,7 +10953,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -10658,7 +10968,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -10672,7 +10983,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -10686,7 +10998,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -10700,7 +11013,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -10714,7 +11028,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks14}
+												Remarks: ${model.maintenanceRemarks14}<br>
+												Category: ${model.maintenanceCategory14Desc}
 											</span>
 										</div>
 									</td>
@@ -10812,7 +11127,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -10826,7 +11142,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -10840,7 +11157,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -10854,7 +11172,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -10868,7 +11187,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -10882,7 +11202,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -10896,7 +11217,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks15}
+												Remarks: ${model.maintenanceRemarks15}<br>
+												Category: ${model.maintenanceCategory15Desc}
 											</span>
 										</div>
 									</td>
@@ -10990,7 +11312,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -11004,7 +11327,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -11018,7 +11342,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -11032,7 +11357,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -11046,7 +11372,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -11060,7 +11387,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -11074,7 +11402,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks16}
+												Remarks: ${model.maintenanceRemarks16}<br>
+												Category: ${model.maintenanceCategory16Desc}
 											</span>
 										</div>
 									</td>
@@ -11168,7 +11497,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -11182,7 +11512,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -11196,7 +11527,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -11210,7 +11542,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -11224,7 +11557,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -11238,7 +11572,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -11252,7 +11587,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks17}
+												Remarks: ${model.maintenanceRemarks17}<br>
+												Category: ${model.maintenanceCategory17Desc}
 											</span>
 										</div>
 									</td>
@@ -11346,7 +11682,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -11360,7 +11697,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -11374,7 +11712,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -11388,7 +11727,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -11402,7 +11742,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -11416,7 +11757,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -11430,7 +11772,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks18}
+												Remarks: ${model.maintenanceRemarks18}<br>
+												Category: ${model.maintenanceCategory18Desc}
 											</span>
 										</div>
 									</td>
@@ -11524,7 +11867,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -11538,7 +11882,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -11552,7 +11897,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -11566,7 +11912,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -11580,7 +11927,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -11594,7 +11942,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -11608,7 +11957,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks19}
+												Remarks: ${model.maintenanceRemarks19}<br>
+												Category: ${model.maintenanceCategory19Desc}
 											</span>
 										</div>
 									</td>
@@ -11702,7 +12052,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -11716,7 +12067,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -11730,7 +12082,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -11744,7 +12097,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -11758,7 +12112,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -11772,7 +12127,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -11786,7 +12142,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks20}
+												Remarks: ${model.maintenanceRemarks20}<br>
+												Category: ${model.maintenanceCategory20Desc}
 											</span>
 										</div>
 									</td>
@@ -11880,7 +12237,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -11894,7 +12252,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -11908,7 +12267,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -11922,7 +12282,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -11936,7 +12297,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -11950,7 +12312,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -11964,7 +12327,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks21}
+												Remarks: ${model.maintenanceRemarks21}<br>
+												Category: ${model.maintenanceCategory21Desc}
 											</span>
 										</div>
 									</td>
@@ -12062,7 +12426,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -12076,7 +12441,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -12090,7 +12456,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -12104,7 +12471,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -12118,7 +12486,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -12132,7 +12501,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -12146,7 +12516,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks22}
+												Remarks: ${model.maintenanceRemarks22}<br>
+												Category: ${model.maintenanceCategory22Desc}
 											</span>
 										</div>
 									</td>
@@ -12240,7 +12611,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -12254,7 +12626,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -12268,7 +12641,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -12282,7 +12656,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -12296,7 +12671,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -12310,7 +12686,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -12324,7 +12701,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks23}
+												Remarks: ${model.maintenanceRemarks23}<br>
+												Category: ${model.maintenanceCategory23Desc}
 											</span>
 										</div>
 									</td>
@@ -12418,7 +12796,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -12432,7 +12811,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -12446,7 +12826,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -12460,7 +12841,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -12474,7 +12856,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -12488,7 +12871,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -12502,7 +12886,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks24}
+												Remarks: ${model.maintenanceRemarks24}<br>
+												Category: ${model.maintenanceCategory24Desc}
 											</span>
 										</div>
 									</td>
@@ -12596,7 +12981,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -12610,7 +12996,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -12624,7 +13011,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -12638,7 +13026,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -12652,7 +13041,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -12666,7 +13056,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -12680,7 +13071,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks25}
+												Remarks: ${model.maintenanceRemarks25}<br>
+												Category: ${model.maintenanceCategory25Desc}
 											</span>
 										</div>
 									</td>
@@ -12774,7 +13166,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -12788,7 +13181,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -12802,7 +13196,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -12816,7 +13211,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -12830,7 +13226,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -12844,7 +13241,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -12858,7 +13256,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks26}
+												Remarks: ${model.maintenanceRemarks26}<br>
+												Category: ${model.maintenanceCategory26Desc}
 											</span>
 										</div>
 									</td>
@@ -12952,7 +13351,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -12966,7 +13366,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -12980,7 +13381,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -13008,7 +13410,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -13022,7 +13425,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -13036,7 +13440,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks27}
+												Remarks: ${model.maintenanceRemarks27}<br>
+												Category: ${model.maintenanceCategory27Desc}
 											</span>
 										</div>
 									</td>
@@ -13130,7 +13535,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -13144,7 +13550,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -13158,7 +13565,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -13172,7 +13580,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -13186,7 +13595,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -13200,7 +13610,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -13214,7 +13625,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks28}
+												Remarks: ${model.maintenanceRemarks28}<br>
+												Category: ${model.maintenanceCategory28Desc}
 											</span>
 										</div>
 									</td>
@@ -13312,7 +13724,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -13326,7 +13739,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -13340,7 +13754,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -13354,7 +13769,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -13368,7 +13784,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -13382,7 +13799,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -13396,7 +13814,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks29}
+												Remarks: ${model.maintenanceRemarks29}<br>
+												Category: ${model.maintenanceCategory29Desc}
 											</span>
 										</div>
 									</td>
@@ -13490,7 +13909,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -13504,7 +13924,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -13518,7 +13939,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -13532,7 +13954,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -13546,7 +13969,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -13560,7 +13984,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -13574,7 +13999,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks30}
+												Remarks: ${model.maintenanceRemarks30}<br>
+												Category: ${model.maintenanceCategory30Desc}
 											</span>
 										</div>
 									</td>
@@ -13668,7 +14094,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -13682,7 +14109,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -13696,7 +14124,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -13710,7 +14139,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -13724,7 +14154,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -13738,7 +14169,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>
@@ -13752,7 +14184,8 @@
 												PlateNo: ${model.plateNo} <br>
 												TrailerNo: ${model.trailerNo} <br>
 												LorryNo: ${model.lorryNo} <br>
-												Remarks: ${model.maintenanceRemarks31}
+												Remarks: ${model.maintenanceRemarks31}<br>
+												Category: ${model.maintenanceCategory31Desc}
 											</span>
 										</div>
 									</td>

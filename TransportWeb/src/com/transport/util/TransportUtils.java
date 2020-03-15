@@ -28,13 +28,13 @@ import com.transport.model.ListValue;
 
 /**
  * @author Edward.David
- *
- * To change the template for this generated type comment go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
+ * @since 04Mar2015
+ * DateUpdated: 13Mar2020
  */
 public class TransportUtils {
 	
 	private static List<ListValue> gpsTripIssueCategoryLOV;
+	private static List<ListValue> maintenanceCategoryLOV;
 	
 	static String OS = System.getProperty("os.name").toLowerCase();
 	
@@ -249,6 +249,25 @@ public class TransportUtils {
 	public static String getGPSTripIssueCategoryById(int id) {
 		String desc = null;
 		for (ListValue item : getGpsTripIssueCategoryLOV()) {
+			if (id == item.getId()) {
+				desc = item.getListValue();
+				break;
+			}
+		}
+		return desc;
+	}
+
+	private static List<ListValue> getMaintenanceCategoryLOV() {
+		return maintenanceCategoryLOV;
+	}
+
+	public static void setMaintenanceCategoryLOV(List<ListValue> maintenanceCategoryLOV) {
+		TransportUtils.maintenanceCategoryLOV = maintenanceCategoryLOV;
+	}
+	
+	public static String getMaintenanceCategoryById(int id) {
+		String desc = null;
+		for (ListValue item : getMaintenanceCategoryLOV()) {
 			if (id == item.getId()) {
 				desc = item.getListValue();
 				break;

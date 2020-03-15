@@ -29,7 +29,7 @@ import com.transport.service.ServiceManagerImpl;
  * 
  * @author dward
  * @since 26Mar2019
- * DateUpdated: 25Oct2019
+ * DateUpdated: 14Mar2020
  */
 public class MaintenanceMonitoringFormBean extends TransportFormBean {
 
@@ -49,6 +49,7 @@ public class MaintenanceMonitoringFormBean extends TransportFormBean {
 	private String gpsTripIssue;
 	private String maintenance;
 	private String maintenanceColor;
+	private String maintenanceCategory;
 	private String maintenanceRemarks;
 	private String availableVolume;
 	private String year;
@@ -64,6 +65,7 @@ public class MaintenanceMonitoringFormBean extends TransportFormBean {
 	private List<ListValue> maintenancePersonnelOptionsLOV;
 	private List<ListValue> gpsPersonnelOptionsLOV;
 	private List<ListValue> gpsTripIssueCategoryLOV;
+	private List<ListValue> maintenanceCategoryLOV;
 	private List<Lorry> lorryList;
 	
 	private boolean transactionStatus;
@@ -368,186 +370,217 @@ public class MaintenanceMonitoringFormBean extends TransportFormBean {
 			case "1":
 				setMaintenance(model.getMaintenance1());
 				setMaintenanceColor(model.getMaintenanceColor1()>0 ? String.valueOf(model.getMaintenanceColor1()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory1()>0 ? String.valueOf(model.getMaintenanceCategory1()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks1());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume1()));
 				break;
 			case "2":
 				setMaintenance(model.getMaintenance2());
 				setMaintenanceColor(model.getMaintenanceColor2()>0 ? String.valueOf(model.getMaintenanceColor2()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory2()>0 ? String.valueOf(model.getMaintenanceCategory2()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks2());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume2()));
 				break;
 			case "3":
 				setMaintenance(model.getMaintenance3());
 				setMaintenanceColor(model.getMaintenanceColor3()>0 ? String.valueOf(model.getMaintenanceColor3()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory3()>0 ? String.valueOf(model.getMaintenanceCategory3()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks3());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume3()));
 				break;
 			case "4":
 				setMaintenance(model.getMaintenance4());
 				setMaintenanceColor(model.getMaintenanceColor4()>0 ? String.valueOf(model.getMaintenanceColor4()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory4()>0 ? String.valueOf(model.getMaintenanceCategory4()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks4());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume4()));
 				break;
 			case "5":
 				setMaintenance(model.getMaintenance5());
 				setMaintenanceColor(model.getMaintenanceColor5()>0 ? String.valueOf(model.getMaintenanceColor5()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory5()>0 ? String.valueOf(model.getMaintenanceCategory5()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks5());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume5()));
 				break;
 			case "6":
 				setMaintenance(model.getMaintenance6());
 				setMaintenanceColor(model.getMaintenanceColor6()>0 ? String.valueOf(model.getMaintenanceColor6()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory6()>0 ? String.valueOf(model.getMaintenanceCategory6()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks6());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume6()));
 				break;
 			case "7":
 				setMaintenance(model.getMaintenance7());
 				setMaintenanceColor(model.getMaintenanceColor7()>0 ? String.valueOf(model.getMaintenanceColor7()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory7()>0 ? String.valueOf(model.getMaintenanceCategory7()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks7());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume7()));
 				break;
 			case "8":
 				setMaintenance(model.getMaintenance8());
 				setMaintenanceColor(model.getMaintenanceColor8()>0 ? String.valueOf(model.getMaintenanceColor8()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory8()>0 ? String.valueOf(model.getMaintenanceCategory8()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks8());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume8()));
 				break;
 			case "9":
 				setMaintenance(model.getMaintenance9());
 				setMaintenanceColor(model.getMaintenanceColor9()>0 ? String.valueOf(model.getMaintenanceColor9()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory9()>0 ? String.valueOf(model.getMaintenanceCategory9()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks9());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume9()));
 				break;
 			case "10":
 				setMaintenance(model.getMaintenance10());
 				setMaintenanceColor(model.getMaintenanceColor10()>0 ? String.valueOf(model.getMaintenanceColor10()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory10()>0 ? String.valueOf(model.getMaintenanceCategory10()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks10());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume10()));
 				break;
 			case "11":
 				setMaintenance(model.getMaintenance11());
 				setMaintenanceColor(model.getMaintenanceColor11()>0 ? String.valueOf(model.getMaintenanceColor11()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory11()>0 ? String.valueOf(model.getMaintenanceCategory11()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks11());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume11()));
 				break;
 			case "12":
 				setMaintenance(model.getMaintenance12());
 				setMaintenanceColor(model.getMaintenanceColor12()>0 ? String.valueOf(model.getMaintenanceColor12()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory12()>0 ? String.valueOf(model.getMaintenanceCategory12()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks12());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume12()));
 				break;
 			case "13":
 				setMaintenance(model.getMaintenance13());
 				setMaintenanceColor(model.getMaintenanceColor13()>0 ? String.valueOf(model.getMaintenanceColor13()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory13()>0 ? String.valueOf(model.getMaintenanceCategory13()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks13());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume13()));
 				break;
 			case "14":
 				setMaintenance(model.getMaintenance14());
 				setMaintenanceColor(model.getMaintenanceColor14()>0 ? String.valueOf(model.getMaintenanceColor14()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory14()>0 ? String.valueOf(model.getMaintenanceCategory14()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks14());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume14()));
 				break;
 			case "15":
 				setMaintenance(model.getMaintenance15());
 				setMaintenanceColor(model.getMaintenanceColor15()>0 ? String.valueOf(model.getMaintenanceColor15()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory15()>0 ? String.valueOf(model.getMaintenanceCategory15()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks15());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume15()));
 				break;
 			case "16":
 				setMaintenance(model.getMaintenance16());
 				setMaintenanceColor(model.getMaintenanceColor16()>0 ? String.valueOf(model.getMaintenanceColor16()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory16()>0 ? String.valueOf(model.getMaintenanceCategory16()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks16());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume16()));
 				break;
 			case "17":
 				setMaintenance(model.getMaintenance17());
 				setMaintenanceColor(model.getMaintenanceColor17()>0 ? String.valueOf(model.getMaintenanceColor17()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory17()>0 ? String.valueOf(model.getMaintenanceCategory17()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks17());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume17()));
 				break;
 			case "18":
 				setMaintenance(model.getMaintenance18());
 				setMaintenanceColor(model.getMaintenanceColor18()>0 ? String.valueOf(model.getMaintenanceColor18()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory18()>0 ? String.valueOf(model.getMaintenanceCategory18()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks18());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume18()));
 				break;
 			case "19":
 				setMaintenance(model.getMaintenance19());
 				setMaintenanceColor(model.getMaintenanceColor19()>0 ? String.valueOf(model.getMaintenanceColor19()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory19()>0 ? String.valueOf(model.getMaintenanceCategory19()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks19());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume19()));
 				break;
 			case "20":
 				setMaintenance(model.getMaintenance20());
 				setMaintenanceColor(model.getMaintenanceColor20()>0 ? String.valueOf(model.getMaintenanceColor20()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory20()>0 ? String.valueOf(model.getMaintenanceCategory20()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks20());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume20()));
 				break;
 			case "21":
 				setMaintenance(model.getMaintenance21());
 				setMaintenanceColor(model.getMaintenanceColor21()>0 ? String.valueOf(model.getMaintenanceColor21()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory21()>0 ? String.valueOf(model.getMaintenanceCategory21()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks21());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume21()));
 				break;
 			case "22":
 				setMaintenance(model.getMaintenance22());
 				setMaintenanceColor(model.getMaintenanceColor22()>0 ? String.valueOf(model.getMaintenanceColor22()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory22()>0 ? String.valueOf(model.getMaintenanceCategory22()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks22());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume22()));
 				break;
 			case "23":
 				setMaintenance(model.getMaintenance23());
 				setMaintenanceColor(model.getMaintenanceColor23()>0 ? String.valueOf(model.getMaintenanceColor23()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory23()>0 ? String.valueOf(model.getMaintenanceCategory23()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks23());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume23()));
 				break;
 			case "24":
 				setMaintenance(model.getMaintenance24());
 				setMaintenanceColor(model.getMaintenanceColor24()>0 ? String.valueOf(model.getMaintenanceColor24()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory24()>0 ? String.valueOf(model.getMaintenanceCategory24()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks24());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume24()));
 				break;
 			case "25":
 				setMaintenance(model.getMaintenance25());
 				setMaintenanceColor(model.getMaintenanceColor25()>0 ? String.valueOf(model.getMaintenanceColor25()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory25()>0 ? String.valueOf(model.getMaintenanceCategory25()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks25());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume25()));
 				break;
 			case "26":
 				setMaintenance(model.getMaintenance26());
 				setMaintenanceColor(model.getMaintenanceColor26()>0 ? String.valueOf(model.getMaintenanceColor26()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory26()>0 ? String.valueOf(model.getMaintenanceCategory26()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks26());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume26()));
 				break;
 			case "27":
 				setMaintenance(model.getMaintenance27());
 				setMaintenanceColor(model.getMaintenanceColor27()>0 ? String.valueOf(model.getMaintenanceColor27()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory27()>0 ? String.valueOf(model.getMaintenanceCategory27()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks27());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume27()));
 				break;
 			case "28":
 				setMaintenance(model.getMaintenance28());
 				setMaintenanceColor(model.getMaintenanceColor28()>0 ? String.valueOf(model.getMaintenanceColor28()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory28()>0 ? String.valueOf(model.getMaintenanceCategory28()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks28());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume28()));
 				break;
 			case "29":
 				setMaintenance(model.getMaintenance29());
 				setMaintenanceColor(model.getMaintenanceColor29()>0 ? String.valueOf(model.getMaintenanceColor29()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory29()>0 ? String.valueOf(model.getMaintenanceCategory29()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks29());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume29()));
 				break;
 			case "30":
 				setMaintenance(model.getMaintenance30());
 				setMaintenanceColor(model.getMaintenanceColor30()>0 ? String.valueOf(model.getMaintenanceColor30()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory30()>0 ? String.valueOf(model.getMaintenanceCategory30()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks30());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume30()));
 				break;
 			case "31":
 				setMaintenance(model.getMaintenance31());
 				setMaintenanceColor(model.getMaintenanceColor31()>0 ? String.valueOf(model.getMaintenanceColor31()): "");
+				setMaintenanceCategory(model.getMaintenanceCategory31()>0 ? String.valueOf(model.getMaintenanceCategory31()) : "");
 				setMaintenanceRemarks(model.getMaintenanceRemarks31());
 				setAvailableVolume(String.valueOf(model.getAvailableVolume31()));
 				break;
@@ -770,186 +803,217 @@ public class MaintenanceMonitoringFormBean extends TransportFormBean {
 		case "1":
 			model.setMaintenance1(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor1(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory1(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks1(getMaintenanceRemarks());
 			model.setAvailableVolume1(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "2":
 			model.setMaintenance2(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor2(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory2(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks2(getMaintenanceRemarks());
 			model.setAvailableVolume2(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);			
 			break;
 		case "3":
 			model.setMaintenance3(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor3(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory3(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks3(getMaintenanceRemarks());
 			model.setAvailableVolume3(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "4":
 			model.setMaintenance4(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor4(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory4(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks4(getMaintenanceRemarks());
 			model.setAvailableVolume4(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "5":
 			model.setMaintenance5(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor5(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory5(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks5(getMaintenanceRemarks());
 			model.setAvailableVolume5(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "6":
 			model.setMaintenance6(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor6(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory6(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks6(getMaintenanceRemarks());
 			model.setAvailableVolume6(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "7":
 			model.setMaintenance7(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor7(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory7(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks7(getMaintenanceRemarks());
 			model.setAvailableVolume7(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "8":
 			model.setMaintenance8(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor8(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory8(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks8(getMaintenanceRemarks());
 			model.setAvailableVolume8(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "9":
 			model.setMaintenance9(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor9(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory9(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks9(getMaintenanceRemarks());
 			model.setAvailableVolume9(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "10":
 			model.setMaintenance10(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor10(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory10(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks10(getMaintenanceRemarks());
 			model.setAvailableVolume10(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "11":
 			model.setMaintenance11(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor11(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory11(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks11(getMaintenanceRemarks());
 			model.setAvailableVolume11(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "12":
 			model.setMaintenance12(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor12(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory12(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks12(getMaintenanceRemarks());
 			model.setAvailableVolume12(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "13":
 			model.setMaintenance13(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor13(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory13(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks13(getMaintenanceRemarks());
 			model.setAvailableVolume13(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "14":
 			model.setMaintenance14(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor14(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory14(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks14(getMaintenanceRemarks());
 			model.setAvailableVolume14(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "15":
 			model.setMaintenance15(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor15(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory15(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks15(getMaintenanceRemarks());
 			model.setAvailableVolume15(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "16":
 			model.setMaintenance16(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor16(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory16(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks16(getMaintenanceRemarks());
 			model.setAvailableVolume16(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "17":
 			model.setMaintenance17(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor17(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory17(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks17(getMaintenanceRemarks());
 			model.setAvailableVolume17(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "18":
 			model.setMaintenance18(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor18(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory18(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks18(getMaintenanceRemarks());
 			model.setAvailableVolume18(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "19":
 			model.setMaintenance19(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor19(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory19(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks19(getMaintenanceRemarks());
 			model.setAvailableVolume19(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "20":
 			model.setMaintenance20(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor20(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory20(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks20(getMaintenanceRemarks());
 			model.setAvailableVolume20(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "21":
 			model.setMaintenance21(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor21(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory21(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks21(getMaintenanceRemarks());
 			model.setAvailableVolume21(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "22":
 			model.setMaintenance22(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor22(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory22(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks22(getMaintenanceRemarks());
 			model.setAvailableVolume22(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "23":
 			model.setMaintenance23(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor23(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory23(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks23(getMaintenanceRemarks());
 			model.setAvailableVolume23(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "24":
 			model.setMaintenance24(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor24(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory24(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks24(getMaintenanceRemarks());
 			model.setAvailableVolume24(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "25":
 			model.setMaintenance25(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor25(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory25(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks25(getMaintenanceRemarks());
 			model.setAvailableVolume25(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "26":
 			model.setMaintenance26(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor26(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory26(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks26(getMaintenanceRemarks());
 			model.setAvailableVolume26(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "27":
 			model.setMaintenance27(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor27(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory27(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks27(getMaintenanceRemarks());
 			model.setAvailableVolume27(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "28":
 			model.setMaintenance28(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor28(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory28(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks28(getMaintenanceRemarks());
 			model.setAvailableVolume28(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "29":
 			model.setMaintenance29(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor29(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory29(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks29(getMaintenanceRemarks());
 			model.setAvailableVolume29(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "30":
 			model.setMaintenance30(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor30(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory30(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks30(getMaintenanceRemarks());
 			model.setAvailableVolume30(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
 		case "31":
 			model.setMaintenance31(getMaintenance().trim().equals("1") ? getMaintenance().trim() : null);
 			model.setMaintenanceColor31(!getMaintenanceColor().equals("") ? Integer.parseInt(getMaintenanceColor()): 0);
+			model.setMaintenanceCategory31(!getMaintenanceCategory().equals("") ? Integer.parseInt(getMaintenanceCategory()): 0);
 			model.setMaintenanceRemarks31(getMaintenanceRemarks());
 			model.setAvailableVolume31(getMaintenance()!=null && getMaintenance().trim().equals("1") ? Integer.parseInt(getCapacity()) * Integer.parseInt(getMaintenance()) : 0);
 			break;
@@ -963,6 +1027,7 @@ public class MaintenanceMonitoringFormBean extends TransportFormBean {
 		populateMaintenancePersonnelOptionsDropdownList(request);
 		populateGPSPersonnelDropdownList(request);
 		populateTripIssueCategoryDropdownList(request);
+		populateMaintenanceCategoryDropdownList(request);
 	}
 	
 	public void populateMaintenancePersonnelOptionsDropdownList(HttpServletRequest request) throws Exception{
@@ -986,6 +1051,14 @@ public class MaintenanceMonitoringFormBean extends TransportFormBean {
 		List<ListValue> lovList = (ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOV_TRIP_ISSUE_CATEGORY_SESSION);
     	if (lovList!=null) {
     		setGpsTripIssueCategoryLOV(lovList);
+    	}
+	}
+
+	public void populateMaintenanceCategoryDropdownList(HttpServletRequest request) throws Exception{
+        @SuppressWarnings("unchecked")
+		List<ListValue> lovList = (ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOV_MAINTENANCE_CATEGORY_SESSION);
+    	if (lovList!=null) {
+    		setMaintenanceCategoryLOV(lovList);
     	}
 	}
 	
@@ -2631,6 +2704,26 @@ public class MaintenanceMonitoringFormBean extends TransportFormBean {
 
 	public void setMonthStr(String monthStr) {
 		this.monthStr = monthStr;
+	}
+
+
+	public List<ListValue> getMaintenanceCategoryLOV() {
+		return maintenanceCategoryLOV;
+	}
+
+
+	public void setMaintenanceCategoryLOV(List<ListValue> maintenanceCategoryLOV) {
+		this.maintenanceCategoryLOV = maintenanceCategoryLOV;
+	}
+
+
+	public String getMaintenanceCategory() {
+		return maintenanceCategory;
+	}
+
+
+	public void setMaintenanceCategory(String maintenanceCategory) {
+		this.maintenanceCategory = maintenanceCategory;
 	}
 
 

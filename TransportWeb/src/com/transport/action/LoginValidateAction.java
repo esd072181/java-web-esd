@@ -356,7 +356,26 @@ public class LoginValidateAction extends Action{
 		request.getSession().setAttribute(MiscConstant.LOV_TRIP_ISSUE_CATEGORY_SESSION, lovList);	
 		//Store it to LOV of Maintenance Monitoring Model
 		TransportUtils.setGpsTripIssueCategoryLOV((List<ListValue>)lovList);
+
+		//Maintenance Category LOV
+		resultMap.clear();
+		lovList = null;
 		
+		lov.setListTypeId(MiscConstant.LOVTYPE_MAINTENANCE_CATEGORY);
+		
+		dataMap.clear();
+        dataMap.put(MapConstant.MODULE, ModuleConstant.LIST_VALUE);
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_LIST_TYPE);
+        dataMap.put(MapConstant.CLASS_DATA, lov);
+        
+        resultMap = service.executeRequest(dataMap);
+        
+        lovList = (ArrayList<?>) resultMap.get(MapConstant.CLASS_DATA);
+		request.getSession().setAttribute(MiscConstant.LOV_MAINTENANCE_CATEGORY_SESSION, lovList);	
+		//Store it to LOV of Maintenance Monitoring Model
+		TransportUtils.setMaintenanceCategoryLOV((List<ListValue>)lovList);
+
+				
 		//User Access LOV
 		resultMap.clear();
 		lovList = null;

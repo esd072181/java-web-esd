@@ -6567,42 +6567,201 @@ public class ReportUtils {
      * @return
      */
     private static String getMaintenanceRemarks(int counter, MaintenanceMonitoring item) {
-    	String val = null; //label can return "", comment cannot
+    	StringBuilder val = new StringBuilder(100); //label can return "", comment cannot
     	switch(counter){
-			case 1: val = item.getMaintenanceRemarks1() != null ? item.getMaintenanceRemarks1() : null; break;
-			case 2: val = item.getMaintenanceRemarks2() != null ? item.getMaintenanceRemarks2() : null; break;
-			case 3: val = item.getMaintenanceRemarks3() != null ? item.getMaintenanceRemarks3() : null; break;
-			case 4: val = item.getMaintenanceRemarks4() != null ? item.getMaintenanceRemarks4() : null; break;
-			case 5: val = item.getMaintenanceRemarks5() != null ? item.getMaintenanceRemarks5() : null; break;
-			case 6: val = item.getMaintenanceRemarks6() != null ? item.getMaintenanceRemarks6() : null; break;
-			case 7: val = item.getMaintenanceRemarks7() != null ? item.getMaintenanceRemarks7() : null; break;
-			case 8: val = item.getMaintenanceRemarks8() != null ? item.getMaintenanceRemarks8() : null; break;
-			case 9: val = item.getMaintenanceRemarks9() != null ? item.getMaintenanceRemarks9() : null; break;
-			case 10: val = item.getMaintenanceRemarks10() != null ? item.getMaintenanceRemarks10() : null; break;
-			case 11: val = item.getMaintenanceRemarks11() != null ? item.getMaintenanceRemarks11() : null; break;
-			case 12: val = item.getMaintenanceRemarks12() != null ? item.getMaintenanceRemarks12() : null; break;
-			case 13: val = item.getMaintenanceRemarks13() != null ? item.getMaintenanceRemarks13() : null; break;
-			case 14: val = item.getMaintenanceRemarks14() != null ? item.getMaintenanceRemarks14() : null; break;
-			case 15: val = item.getMaintenanceRemarks15() != null ? item.getMaintenanceRemarks15() : null; break;
-			case 16: val = item.getMaintenanceRemarks16() != null ? item.getMaintenanceRemarks16() : null; break;
-			case 17: val = item.getMaintenanceRemarks17() != null ? item.getMaintenanceRemarks17() : null; break;
-			case 18: val = item.getMaintenanceRemarks18() != null ? item.getMaintenanceRemarks18() : null; break;
-			case 19: val = item.getMaintenanceRemarks19() != null ? item.getMaintenanceRemarks19() : null; break;
-			case 20: val = item.getMaintenanceRemarks20() != null ? item.getMaintenanceRemarks20() : null; break;
-			case 21: val = item.getMaintenanceRemarks21() != null ? item.getMaintenanceRemarks21() : null; break;
-			case 22: val = item.getMaintenanceRemarks22() != null ? item.getMaintenanceRemarks22() : null; break;
-			case 23: val = item.getMaintenanceRemarks23() != null ? item.getMaintenanceRemarks23() : null; break;
-			case 24: val = item.getMaintenanceRemarks24() != null ? item.getMaintenanceRemarks24() : null; break;
-			case 25: val = item.getMaintenanceRemarks25() != null ? item.getMaintenanceRemarks25() : null; break;
-			case 26: val = item.getMaintenanceRemarks26() != null ? item.getMaintenanceRemarks26() : null; break;
-			case 27: val = item.getMaintenanceRemarks27() != null ? item.getMaintenanceRemarks27() : null; break;
-			case 28: val = item.getMaintenanceRemarks28() != null ? item.getMaintenanceRemarks28() : null; break;
-			case 29: val = item.getMaintenanceRemarks29() != null ? item.getMaintenanceRemarks29() : null; break;
-			case 30: val = item.getMaintenanceRemarks30() != null ? item.getMaintenanceRemarks30() : null; break;
-			case 31: val = item.getMaintenanceRemarks31() != null ? item.getMaintenanceRemarks31() : null; break;
+			case 1: val.append(item.getMaintenanceRemarks1() != null ? item.getMaintenanceRemarks1() : ""); break;
+			case 2: val.append(item.getMaintenanceRemarks2() != null ? item.getMaintenanceRemarks2() : ""); break;
+			case 3: val.append(item.getMaintenanceRemarks3() != null ? item.getMaintenanceRemarks3() : ""); break;
+			case 4: val.append(item.getMaintenanceRemarks4() != null ? item.getMaintenanceRemarks4() : ""); break;
+			case 5: val.append(item.getMaintenanceRemarks5() != null ? item.getMaintenanceRemarks5() : ""); break;
+			case 6: val.append(item.getMaintenanceRemarks6() != null ? item.getMaintenanceRemarks6() : ""); break;
+			case 7: val.append(item.getMaintenanceRemarks7() != null ? item.getMaintenanceRemarks7() : ""); break;
+			case 8: val.append(item.getMaintenanceRemarks8() != null ? item.getMaintenanceRemarks8() : ""); break;
+			case 9: val.append(item.getMaintenanceRemarks9() != null ? item.getMaintenanceRemarks9() : ""); break;
+			case 10: val.append(item.getMaintenanceRemarks10() != null ? item.getMaintenanceRemarks10() : ""); break;
+			case 11: val.append(item.getMaintenanceRemarks11() != null ? item.getMaintenanceRemarks11() : ""); break;
+			case 12: val.append(item.getMaintenanceRemarks12() != null ? item.getMaintenanceRemarks12() : ""); break;
+			case 13: val.append(item.getMaintenanceRemarks13() != null ? item.getMaintenanceRemarks13() : ""); break;
+			case 14: val.append(item.getMaintenanceRemarks14() != null ? item.getMaintenanceRemarks14() : ""); break;
+			case 15: val.append(item.getMaintenanceRemarks15() != null ? item.getMaintenanceRemarks15() : ""); break;
+			case 16: val.append(item.getMaintenanceRemarks16() != null ? item.getMaintenanceRemarks16() : ""); break;
+			case 17: val.append(item.getMaintenanceRemarks17() != null ? item.getMaintenanceRemarks17() : ""); break;
+			case 18: val.append(item.getMaintenanceRemarks18() != null ? item.getMaintenanceRemarks18() : ""); break;
+			case 19: val.append(item.getMaintenanceRemarks19() != null ? item.getMaintenanceRemarks19() : ""); break;
+			case 20: val.append(item.getMaintenanceRemarks20() != null ? item.getMaintenanceRemarks20() : ""); break;
+			case 21: val.append(item.getMaintenanceRemarks21() != null ? item.getMaintenanceRemarks21() : ""); break;
+			case 22: val.append(item.getMaintenanceRemarks22() != null ? item.getMaintenanceRemarks22() : ""); break;
+			case 23: val.append(item.getMaintenanceRemarks23() != null ? item.getMaintenanceRemarks23() : ""); break;
+			case 24: val.append(item.getMaintenanceRemarks24() != null ? item.getMaintenanceRemarks24() : ""); break;
+			case 25: val.append(item.getMaintenanceRemarks25() != null ? item.getMaintenanceRemarks25() : ""); break;
+			case 26: val.append(item.getMaintenanceRemarks26() != null ? item.getMaintenanceRemarks26() : ""); break;
+			case 27: val.append(item.getMaintenanceRemarks27() != null ? item.getMaintenanceRemarks27() : ""); break;
+			case 28: val.append(item.getMaintenanceRemarks28() != null ? item.getMaintenanceRemarks28() : ""); break;
+			case 29: val.append(item.getMaintenanceRemarks29() != null ? item.getMaintenanceRemarks29() : ""); break;
+			case 30: val.append(item.getMaintenanceRemarks30() != null ? item.getMaintenanceRemarks30() : ""); break;
+			case 31: val.append(item.getMaintenanceRemarks31() != null ? item.getMaintenanceRemarks31() : ""); break;
     		default: break;
     	}
-    	return val;
+    	switch(counter){
+			case 1: if (item.getMaintenanceCategory1() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory1()));
+					}
+					break;
+			case 2: if (item.getMaintenanceCategory2() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory2()));
+					}	
+					break; 
+			case 3: if (item.getMaintenanceCategory3() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory3()));
+					}	
+					break; 
+			case 4: if (item.getMaintenanceCategory4() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory4()));
+					}	
+					break;
+			case 5: if (item.getMaintenanceCategory5() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory5()));
+					}	
+					break;
+			case 6: if (item.getMaintenanceCategory6() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory6()));
+					}	
+					break;
+			case 7: if (item.getMaintenanceCategory7() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory7()));
+					}	
+					break;
+			case 8: if (item.getMaintenanceCategory8() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory8()));
+					}	
+					break;
+			case 9: if (item.getMaintenanceCategory9() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory9()));
+					}	
+					break;
+			case 10: if (item.getMaintenanceCategory10() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory10()));
+					}	
+					break; 
+			case 11: if (item.getMaintenanceCategory11() > 0)  {
+						val.append(" - Category ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory11()));
+					}	
+					break;
+			case 12: if (item.getMaintenanceCategory12() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory12()));
+					}	
+					break;
+			case 13: if (item.getMaintenanceCategory13() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory13()));
+					}	
+					break;
+			case 14: if (item.getMaintenanceCategory14() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory14()));
+					}	
+					break; 
+			case 15: if (item.getMaintenanceCategory15() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory15()));
+					}	
+					break;  
+			case 16: if (item.getMaintenanceCategory16() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory16()));
+					}	
+					break;  
+			case 17: if (item.getMaintenanceCategory17() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory17()));
+					}	
+					break;  
+			case 18: if (item.getMaintenanceCategory18() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory18()));
+					}	
+					break; 
+			case 19: if (item.getMaintenanceCategory19() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory19()));
+					}	
+					break;
+			case 20: if (item.getMaintenanceCategory20() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory20()));
+					}	
+					break; 
+			case 21: if (item.getMaintenanceCategory21() > 0)  {
+						val.append(" - Trip Issue: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory21()));
+					}	
+					break;  
+			case 22: if (item.getMaintenanceCategory22() > 0)  {
+						val.append(" - Trip Issue: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory22()));
+					}	
+					break; 
+			case 23: if (item.getMaintenanceCategory23() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory23()));
+					}	
+					break; 
+			case 24: if (item.getMaintenanceCategory24() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory24()));
+					}	
+					break; 
+			case 25: if (item.getMaintenanceCategory25() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory25()));
+					}	
+					break;  
+			case 26: if (item.getMaintenanceCategory26() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory26()));
+					}	
+					break; 
+			case 27: if (item.getMaintenanceCategory27() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory27()));
+					}	
+					break; 
+			case 28: if (item.getMaintenanceCategory28() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory28()));
+					}	
+					break; 
+			case 29: if (item.getMaintenanceCategory29() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory29()));
+					}	
+					break; 
+			case 30: if (item.getMaintenanceCategory30() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory30()));
+					}	
+					break;
+			case 31: if (item.getMaintenanceCategory31() > 0)  {
+						val.append(" - Category: ");
+						val.append(TransportUtils.getMaintenanceCategoryById(item.getMaintenanceCategory31()));
+					}	
+					break;
+			default: break;
+		}
+
+    	return val.toString();
     }
  
     /**

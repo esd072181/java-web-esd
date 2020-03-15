@@ -61,6 +61,7 @@ public class MiscConstant {
 	public static final String LOV_LORRY_CATEGORY_SESSION = "lov_lorry_category_session";
 	public static final String LOV_DRIVER_TRAINING_SESSION = "lov_driver_training_session";
 	public static final String LOV_TRIP_ISSUE_CATEGORY_SESSION = "lov_trip_issue_category_session";
+	public static final String LOV_MAINTENANCE_CATEGORY_SESSION = "lov_maintenance_category_session";
 	
 	//confirmation messages
 	public static final String TRANS_MESSSAGE_SAVED = "Record successfully saved!";
@@ -105,6 +106,7 @@ public class MiscConstant {
 	public static final int LOVTYPE_GPS_PERSONNEL = 12;
 	public static final int LOVTYPE_DRIVER_TRAINING = 13;
 	public static final int LOVTYPE_TRIP_ISSUE_CATEGORY = 14;//Added for Oct2019
+	public static final int LOVTYPE_MAINTENANCE_CATEGORY = 15;//Added for Apr2020
 	
 	//LOV for Employee Category
 	public static final String LOV_EMPCATEGORY_DRIVER = "Driver";

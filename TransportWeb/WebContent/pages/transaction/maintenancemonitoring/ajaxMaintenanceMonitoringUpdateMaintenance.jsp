@@ -61,9 +61,18 @@ $(function() {
 					<tr>
 						<td><label>Maintenance Color</label></td>
 						<td>
-							<html:select disabled="true" styleClass="" name="maintenanceMonitoringForm" property="maintenanceColor" styleId="maintenanceColorId">
+							<html:select disabled="true" styleClass="" style="width:250px;" name="maintenanceMonitoringForm" property="maintenanceColor" styleId="maintenanceColorId">
 								 <html:option value="">--Select--</html:option>
 								 <html:optionsCollection name="maintenanceMonitoringForm" property="maintenancePersonnelOptionsLOV" label="listValue" value="id"/>					 		
+							</html:select>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Maintenance Category</label></td>
+						<td>
+							<html:select disabled="true" styleClass="" style="width:250px;" name="maintenanceMonitoringForm" property="maintenanceCategory" styleId="maintenanceCategoryId">
+								 <html:option value="">--Select--</html:option>
+								 <html:optionsCollection name="maintenanceMonitoringForm" property="maintenanceCategoryLOV" label="listValue" value="id"/>					 		
 							</html:select>
 						</td>
 					</tr>
@@ -83,6 +92,7 @@ $(function() {
 	        							$('#maintenanceId').attr("disabled", false);
 	        							$('#maintenanceColorId').attr("disabled", false);
 	        							$('#maintenanceRemarksId').attr("disabled", false);
+	        							$('#maintenanceCategoryId').attr("disabled", false);
 	        						</script>
 	        						<input type="button" style="margin-left: 275px;" name="updateBtn" value="Update" onclick="updateMaintenanceMonitoring('242');" />
 	        					</c:if>

@@ -26,7 +26,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 25Mar2019
- * DateUpdated: 23Sep2019
+ * DateUpdated: 14Mar2020
  */
 public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 	
@@ -507,6 +507,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance1=? ");
 					qry.append(" ,maintenancecolor1=? ");
+					qry.append(" ,maintenancecategory1=? ");
 					qry.append(" ,maintenanceremarks1=? ");
 					qry.append(" ,availablevolume1=? ");
 					
@@ -515,6 +516,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance2=? ");
 					qry.append(" ,maintenancecolor2=? ");
+					qry.append(" ,maintenancecategory2=? ");
 					qry.append(" ,maintenanceremarks2=? ");
 					qry.append(" ,availablevolume2=? ");
 					
@@ -523,6 +525,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance3=? ");
 					qry.append(" ,maintenancecolor3=? ");
+					qry.append(" ,maintenancecategory3=? ");
 					qry.append(" ,maintenanceremarks3=? ");
 					qry.append(" ,availablevolume3=? ");
 					
@@ -531,6 +534,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance4=? ");
 					qry.append(" ,maintenancecolor4=? ");
+					qry.append(" ,maintenancecategory4=? ");
 					qry.append(" ,maintenanceremarks4=? ");
 					qry.append(" ,availablevolume4=? ");
 					
@@ -539,6 +543,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance5=? ");
 					qry.append(" ,maintenancecolor5=? ");
+					qry.append(" ,maintenancecategory5=? ");
 					qry.append(" ,maintenanceremarks5=? ");
 					qry.append(" ,availablevolume5=? ");
 					
@@ -547,6 +552,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance6=? ");
 					qry.append(" ,maintenancecolor6=? ");
+					qry.append(" ,maintenancecategory6=? ");
 					qry.append(" ,maintenanceremarks6=? ");
 					qry.append(" ,availablevolume6=? ");
 					
@@ -555,6 +561,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance7=? ");
 					qry.append(" ,maintenancecolor7=? ");
+					qry.append(" ,maintenancecategory7=? ");
 					qry.append(" ,maintenanceremarks7=? ");
 					qry.append(" ,availablevolume7=? ");
 					
@@ -563,6 +570,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance8=? ");
 					qry.append(" ,maintenancecolor8=? ");
+					qry.append(" ,maintenancecategory8=? ");
 					qry.append(" ,maintenanceremarks8=? ");
 					qry.append(" ,availablevolume8=? ");
 					
@@ -571,6 +579,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance9=? ");
 					qry.append(" ,maintenancecolor9=? ");
+					qry.append(" ,maintenancecategory9=? ");
 					qry.append(" ,maintenanceremarks9=? ");
 					qry.append(" ,availablevolume9=? ");
 					
@@ -579,6 +588,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance10=? ");
 					qry.append(" ,maintenancecolor10=? ");
+					qry.append(" ,maintenancecategory10=? ");
 					qry.append(" ,maintenanceremarks10=? ");
 					qry.append(" ,availablevolume10=? ");
 					
@@ -587,6 +597,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance11=? ");
 					qry.append(" ,maintenancecolor11=? ");
+					qry.append(" ,maintenancecategory11=? ");
 					qry.append(" ,maintenanceremarks11=? ");
 					qry.append(" ,availablevolume11=? ");
 					
@@ -595,6 +606,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance12=? ");
 					qry.append(" ,maintenancecolor12=? ");
+					qry.append(" ,maintenancecategory12=? ");
 					qry.append(" ,maintenanceremarks12=? ");
 					qry.append(" ,availablevolume12=? ");
 					
@@ -603,6 +615,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance13=? ");
 					qry.append(" ,maintenancecolor13=? ");
+					qry.append(" ,maintenancecategory13=? ");
 					qry.append(" ,maintenanceremarks13=? ");
 					qry.append(" ,availablevolume13=? ");
 					
@@ -611,6 +624,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance14=? ");
 					qry.append(" ,maintenancecolor14=? ");
+					qry.append(" ,maintenancecategory14=? ");
 					qry.append(" ,maintenanceremarks14=? ");
 					qry.append(" ,availablevolume14=? ");
 					
@@ -619,6 +633,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance15=? ");
 					qry.append(" ,maintenancecolor15=? ");
+					qry.append(" ,maintenancecategory15=? ");
 					qry.append(" ,maintenanceremarks15=? ");
 					qry.append(" ,availablevolume15=? ");
 					
@@ -627,6 +642,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance16=? ");
 					qry.append(" ,maintenancecolor16=? ");
+					qry.append(" ,maintenancecategory16=? ");
 					qry.append(" ,maintenanceremarks16=? ");
 					qry.append(" ,availablevolume16=? ");
 					
@@ -635,6 +651,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance17=? ");
 					qry.append(" ,maintenancecolor17=? ");
+					qry.append(" ,maintenancecategory17=? ");
 					qry.append(" ,maintenanceremarks17=? ");
 					qry.append(" ,availablevolume17=? ");
 					
@@ -643,6 +660,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance18=? ");
 					qry.append(" ,maintenancecolor18=? ");
+					qry.append(" ,maintenancecategory18=? ");
 					qry.append(" ,maintenanceremarks18=? ");
 					qry.append(" ,availablevolume18=? ");
 					
@@ -651,6 +669,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance19=? ");
 					qry.append(" ,maintenancecolor19=? ");
+					qry.append(" ,maintenancecategory19=? ");
 					qry.append(" ,maintenanceremarks19=? ");
 					qry.append(" ,availablevolume19=? ");
 					
@@ -659,6 +678,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance20=? ");
 					qry.append(" ,maintenancecolor20=? ");
+					qry.append(" ,maintenancecategory20=? ");
 					qry.append(" ,maintenanceremarks20=? ");
 					qry.append(" ,availablevolume20=? ");
 					
@@ -667,6 +687,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance21=? ");
 					qry.append(" ,maintenancecolor21=? ");
+					qry.append(" ,maintenancecategory21=? ");
 					qry.append(" ,maintenanceremarks21=? ");
 					qry.append(" ,availablevolume21=? ");
 					
@@ -675,6 +696,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance22=? ");
 					qry.append(" ,maintenancecolor22=? ");
+					qry.append(" ,maintenancecategory22=? ");
 					qry.append(" ,maintenanceremarks22=? ");
 					qry.append(" ,availablevolume22=? ");
 					
@@ -683,6 +705,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance23=? ");
 					qry.append(" ,maintenancecolor23=? ");
+					qry.append(" ,maintenancecategory23=? ");
 					qry.append(" ,maintenanceremarks23=? ");
 					qry.append(" ,availablevolume23=? ");
 					
@@ -691,6 +714,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance24=? ");
 					qry.append(" ,maintenancecolor24=? ");
+					qry.append(" ,maintenancecategory24=? ");
 					qry.append(" ,maintenanceremarks24=? ");
 					qry.append(" ,availablevolume24=? ");
 					
@@ -699,6 +723,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance25=? ");
 					qry.append(" ,maintenancecolor25=? ");
+					qry.append(" ,maintenancecategory25=? ");
 					qry.append(" ,maintenanceremarks25=? ");
 					qry.append(" ,availablevolume25=? ");
 					
@@ -707,6 +732,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance26=? ");
 					qry.append(" ,maintenancecolor26=? ");
+					qry.append(" ,maintenancecategory26=? ");
 					qry.append(" ,maintenanceremarks26=? ");
 					qry.append(" ,availablevolume26=? ");
 					
@@ -715,6 +741,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance27=? ");
 					qry.append(" ,maintenancecolor27=? ");
+					qry.append(" ,maintenancecategory27=? ");
 					qry.append(" ,maintenanceremarks27=? ");
 					qry.append(" ,availablevolume27=? ");
 					
@@ -723,6 +750,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance28=? ");
 					qry.append(" ,maintenancecolor28=? ");
+					qry.append(" ,maintenancecategory28=? ");
 					qry.append(" ,maintenanceremarks28=? ");
 					qry.append(" ,availablevolume28=? ");	
 					break;
@@ -730,6 +758,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance29=? ");
 					qry.append(" ,maintenancecolor29=? ");
+					qry.append(" ,maintenancecategory29=? ");
 					qry.append(" ,maintenanceremarks29=? ");
 					qry.append(" ,availablevolume29=? ");
 					break;
@@ -737,6 +766,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance30=? ");
 					qry.append(" ,maintenancecolor30=? ");
+					qry.append(" ,maintenancecategory30=? ");
 					qry.append(" ,maintenanceremarks30=? ");
 					qry.append(" ,availablevolume30=? ");
 					break;
@@ -744,6 +774,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					qry =  new StringBuffer("update transport.tran_maintenance set ");	
 					qry.append(" maintenance31=? ");
 					qry.append(" ,maintenancecolor31=? ");
+					qry.append(" ,maintenancecategory31=? ");
 					qry.append(" ,maintenanceremarks31=? ");
 					qry.append(" ,availablevolume31=? ");
 					break;
@@ -956,32 +987,37 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					case 1: 
 						pstmt.setString(1, model.getMaintenance1());
 						pstmt.setInt(2, model.getMaintenanceColor1());
-						pstmt.setString(3, model.getMaintenanceRemarks1());
-						pstmt.setInt(4, model.getAvailableVolume1());
+						pstmt.setInt(3, model.getMaintenanceCategory1());
+						pstmt.setString(4, model.getMaintenanceRemarks1());
+						pstmt.setInt(5, model.getAvailableVolume1());
 						break;
 					case 2: 
 						pstmt.setString(1, model.getMaintenance2());
 						pstmt.setInt(2, model.getMaintenanceColor2());
-						pstmt.setString(3, model.getMaintenanceRemarks2());
-						pstmt.setInt(4, model.getAvailableVolume2());
+						pstmt.setInt(3, model.getMaintenanceCategory2());
+						pstmt.setString(4, model.getMaintenanceRemarks2());
+						pstmt.setInt(5, model.getAvailableVolume2());
 						break;
 					case 3: 
 						pstmt.setString(1, model.getMaintenance3());
 						pstmt.setInt(2, model.getMaintenanceColor3());
-						pstmt.setString(3, model.getMaintenanceRemarks3());
-						pstmt.setInt(4, model.getAvailableVolume3());
+						pstmt.setInt(3, model.getMaintenanceCategory3());
+						pstmt.setString(4, model.getMaintenanceRemarks3());
+						pstmt.setInt(5, model.getAvailableVolume3());
 						break;
 					case 4: 
 						pstmt.setString(1, model.getMaintenance4());
 						pstmt.setInt(2, model.getMaintenanceColor4());
-						pstmt.setString(3, model.getMaintenanceRemarks4());
-						pstmt.setInt(4, model.getAvailableVolume4());
+						pstmt.setInt(3, model.getMaintenanceCategory4());
+						pstmt.setString(4, model.getMaintenanceRemarks4());
+						pstmt.setInt(5, model.getAvailableVolume4());
 						break;
 					case 5: 
 						pstmt.setString(1, model.getMaintenance5());
 						pstmt.setInt(2, model.getMaintenanceColor5());
-						pstmt.setString(3, model.getMaintenanceRemarks5());
-						pstmt.setInt(4, model.getAvailableVolume5());
+						pstmt.setInt(3, model.getMaintenanceCategory5());
+						pstmt.setString(4, model.getMaintenanceRemarks5());
+						pstmt.setInt(5, model.getAvailableVolume5());
 						break;
 					case 6: 
 						pstmt.setString(1, model.getMaintenance6());
@@ -992,74 +1028,86 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					case 7: 
 						pstmt.setString(1, model.getMaintenance7());
 						pstmt.setInt(2, model.getMaintenanceColor7());
-						pstmt.setString(3, model.getMaintenanceRemarks7());
-						pstmt.setInt(4, model.getAvailableVolume7());
+						pstmt.setInt(3, model.getMaintenanceCategory7());
+						pstmt.setString(4, model.getMaintenanceRemarks7());
+						pstmt.setInt(5, model.getAvailableVolume7());
 						break;
 					case 8: 
 						pstmt.setString(1, model.getMaintenance8());
 						pstmt.setInt(2, model.getMaintenanceColor8());
-						pstmt.setString(3, model.getMaintenanceRemarks8());
-						pstmt.setInt(4, model.getAvailableVolume8());
+						pstmt.setInt(3, model.getMaintenanceCategory8());
+						pstmt.setString(4, model.getMaintenanceRemarks8());
+						pstmt.setInt(5, model.getAvailableVolume8());
 						break;
 					case 9: 
 						pstmt.setString(1, model.getMaintenance9());
 						pstmt.setInt(2, model.getMaintenanceColor9());
-						pstmt.setString(3, model.getMaintenanceRemarks9());
-						pstmt.setInt(4, model.getAvailableVolume9());
+						pstmt.setInt(3, model.getMaintenanceCategory9());
+						pstmt.setString(4, model.getMaintenanceRemarks9());
+						pstmt.setInt(5, model.getAvailableVolume9());
 						break;
 					case 10: 
 						pstmt.setString(1, model.getMaintenance10());
 						pstmt.setInt(2, model.getMaintenanceColor10());
-						pstmt.setString(3, model.getMaintenanceRemarks10());
-						pstmt.setInt(4, model.getAvailableVolume10());
+						pstmt.setInt(3, model.getMaintenanceCategory10());
+						pstmt.setString(4, model.getMaintenanceRemarks10());
+						pstmt.setInt(5, model.getAvailableVolume10());
 						break;
 					case 11: 
 						pstmt.setString(1, model.getMaintenance11());
 						pstmt.setInt(2, model.getMaintenanceColor11());
-						pstmt.setString(3, model.getMaintenanceRemarks11());
-						pstmt.setInt(4, model.getAvailableVolume11());
+						pstmt.setInt(3, model.getMaintenanceCategory11());
+						pstmt.setString(4, model.getMaintenanceRemarks11());
+						pstmt.setInt(5, model.getAvailableVolume11());
 						break;
 					case 12: 
 						pstmt.setString(1, model.getMaintenance12());
 						pstmt.setInt(2, model.getMaintenanceColor12());
-						pstmt.setString(3, model.getMaintenanceRemarks12());
-						pstmt.setInt(4, model.getAvailableVolume12());
+						pstmt.setInt(3, model.getMaintenanceCategory12());
+						pstmt.setString(4, model.getMaintenanceRemarks12());
+						pstmt.setInt(5, model.getAvailableVolume12());
 						break;
 					case 13: 
 						pstmt.setString(1, model.getMaintenance13());
 						pstmt.setInt(2, model.getMaintenanceColor13());
-						pstmt.setString(3, model.getMaintenanceRemarks13());
-						pstmt.setInt(4, model.getAvailableVolume13());
+						pstmt.setInt(3, model.getMaintenanceCategory13());
+						pstmt.setString(4, model.getMaintenanceRemarks13());
+						pstmt.setInt(5, model.getAvailableVolume13());
 						break;
 					case 14: 
 						pstmt.setString(1, model.getMaintenance14());
 						pstmt.setInt(2, model.getMaintenanceColor14());
-						pstmt.setString(3, model.getMaintenanceRemarks14());
-						pstmt.setInt(4, model.getAvailableVolume14());
+						pstmt.setInt(3, model.getMaintenanceCategory14());
+						pstmt.setString(4, model.getMaintenanceRemarks14());
+						pstmt.setInt(5, model.getAvailableVolume14());
 						break;
 					case 15: 
 						pstmt.setString(1, model.getMaintenance15());
 						pstmt.setInt(2, model.getMaintenanceColor15());
-						pstmt.setString(3, model.getMaintenanceRemarks15());
-						pstmt.setInt(4, model.getAvailableVolume15());
+						pstmt.setInt(3, model.getMaintenanceCategory15());
+						pstmt.setString(4, model.getMaintenanceRemarks15());
+						pstmt.setInt(5, model.getAvailableVolume15());
 						break;
 					case 16: 
 						pstmt.setString(1, model.getMaintenance16());
 						pstmt.setInt(2, model.getMaintenanceColor16());
-						pstmt.setString(3, model.getMaintenanceRemarks16());
-						pstmt.setInt(4, model.getAvailableVolume16());
+						pstmt.setInt(3, model.getMaintenanceCategory16());
+						pstmt.setString(4, model.getMaintenanceRemarks16());
+						pstmt.setInt(5, model.getAvailableVolume16());
 						break;
 					case 17: 
 						pstmt.setString(1, model.getMaintenance17());
 						pstmt.setInt(2, model.getMaintenanceColor17());
-						pstmt.setString(3, model.getMaintenanceRemarks17());
-						pstmt.setInt(4, model.getAvailableVolume17());
+						pstmt.setInt(3, model.getMaintenanceCategory17());
+						pstmt.setString(4, model.getMaintenanceRemarks17());
+						pstmt.setInt(5, model.getAvailableVolume17());
 						break;
 					case 18: 
 						pstmt.setString(1, model.getMaintenance18());
 						pstmt.setInt(2, model.getMaintenanceColor18());
-						pstmt.setString(3, model.getMaintenanceRemarks18());
-						pstmt.setInt(4, model.getAvailableVolume18());
+						pstmt.setInt(3, model.getMaintenanceCategory18());
+						pstmt.setString(4, model.getMaintenanceRemarks18());
+						pstmt.setInt(5, model.getAvailableVolume18());
 						break;
 					case 19: 
 						pstmt.setString(1, model.getMaintenance19());
@@ -1070,26 +1118,30 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					case 20: 
 						pstmt.setString(1, model.getMaintenance20());
 						pstmt.setInt(2, model.getMaintenanceColor20());
-						pstmt.setString(3, model.getMaintenanceRemarks20());
-						pstmt.setInt(4, model.getAvailableVolume20());
+						pstmt.setInt(3, model.getMaintenanceCategory20());
+						pstmt.setString(4, model.getMaintenanceRemarks20());
+						pstmt.setInt(5, model.getAvailableVolume20());
 						break;
 					case 21: 
 						pstmt.setString(1, model.getMaintenance21());
 						pstmt.setInt(2, model.getMaintenanceColor21());
-						pstmt.setString(3, model.getMaintenanceRemarks21());
-						pstmt.setInt(4, model.getAvailableVolume21());
+						pstmt.setInt(3, model.getMaintenanceCategory21());
+						pstmt.setString(4, model.getMaintenanceRemarks21());
+						pstmt.setInt(5, model.getAvailableVolume21());
 						break;
 					case 22: 
 						pstmt.setString(1, model.getMaintenance22());
 						pstmt.setInt(2, model.getMaintenanceColor22());
-						pstmt.setString(3, model.getMaintenanceRemarks22());
-						pstmt.setInt(4, model.getAvailableVolume22());
+						pstmt.setInt(3, model.getMaintenanceCategory22());
+						pstmt.setString(4, model.getMaintenanceRemarks22());
+						pstmt.setInt(5, model.getAvailableVolume22());
 						break;
 					case 23: 
 						pstmt.setString(1, model.getMaintenance23());
 						pstmt.setInt(2, model.getMaintenanceColor23());
-						pstmt.setString(3, model.getMaintenanceRemarks23());
-						pstmt.setInt(4, model.getAvailableVolume23());
+						pstmt.setInt(3, model.getMaintenanceCategory23());
+						pstmt.setString(4, model.getMaintenanceRemarks23());
+						pstmt.setInt(5, model.getAvailableVolume23());
 						break;
 					case 24: 
 						pstmt.setString(1, model.getMaintenance24());
@@ -1100,44 +1152,51 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					case 25: 
 						pstmt.setString(1, model.getMaintenance25());
 						pstmt.setInt(2, model.getMaintenanceColor25());
-						pstmt.setString(3, model.getMaintenanceRemarks25());
-						pstmt.setInt(4, model.getAvailableVolume25());
+						pstmt.setInt(3, model.getMaintenanceCategory25());
+						pstmt.setString(4, model.getMaintenanceRemarks25());
+						pstmt.setInt(5, model.getAvailableVolume25());
 						break;
 					case 26: 
 						pstmt.setString(1, model.getMaintenance26());
 						pstmt.setInt(2, model.getMaintenanceColor26());
-						pstmt.setString(3, model.getMaintenanceRemarks26());
-						pstmt.setInt(4, model.getAvailableVolume26());
+						pstmt.setInt(3, model.getMaintenanceCategory26());
+						pstmt.setString(4, model.getMaintenanceRemarks26());
+						pstmt.setInt(5, model.getAvailableVolume26());
 						break;
 					case 27: 
 						pstmt.setString(1, model.getMaintenance27());
 						pstmt.setInt(2, model.getMaintenanceColor27());
-						pstmt.setString(3, model.getMaintenanceRemarks27());
-						pstmt.setInt(4, model.getAvailableVolume27());
+						pstmt.setInt(3, model.getMaintenanceCategory27());
+						pstmt.setString(4, model.getMaintenanceRemarks27());
+						pstmt.setInt(5, model.getAvailableVolume27());
 						break;
 					case 28: 
 						pstmt.setString(1, model.getMaintenance28());
 						pstmt.setInt(2, model.getMaintenanceColor28());
-						pstmt.setString(3, model.getMaintenanceRemarks28());
-						pstmt.setInt(4, model.getAvailableVolume28());
+						pstmt.setInt(3, model.getMaintenanceCategory28());
+						pstmt.setString(4, model.getMaintenanceRemarks28());
+						pstmt.setInt(5, model.getAvailableVolume28());
 						break;
 					case 29: 
 						pstmt.setString(1, model.getMaintenance29());
 						pstmt.setInt(2, model.getMaintenanceColor29());
-						pstmt.setString(3, model.getMaintenanceRemarks29());
-						pstmt.setInt(4, model.getAvailableVolume29());
+						pstmt.setInt(3, model.getMaintenanceCategory29());
+						pstmt.setString(4, model.getMaintenanceRemarks29());
+						pstmt.setInt(5, model.getAvailableVolume29());
 						break;
 					case 30: 
 						pstmt.setString(1, model.getMaintenance30());
 						pstmt.setInt(2, model.getMaintenanceColor30());
-						pstmt.setString(3, model.getMaintenanceRemarks30());
-						pstmt.setInt(4, model.getAvailableVolume30());
+						pstmt.setInt(3, model.getMaintenanceCategory30());
+						pstmt.setString(4, model.getMaintenanceRemarks30());
+						pstmt.setInt(5, model.getAvailableVolume30());
 						break;
 					case 31: 
 						pstmt.setString(1, model.getMaintenance31());
 						pstmt.setInt(2, model.getMaintenanceColor31());
-						pstmt.setString(3, model.getMaintenanceRemarks31());
-						pstmt.setInt(4, model.getAvailableVolume31());
+						pstmt.setInt(3, model.getMaintenanceCategory31());
+						pstmt.setString(4, model.getMaintenanceRemarks31());
+						pstmt.setInt(5, model.getAvailableVolume31());
 						break;
 				}				
 			}
@@ -1149,9 +1208,9 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 				pstmt.setLong(7, model.getId());
 			} else {
 				//Maintenance
-				pstmt.setInt(5, model.getModifiedBy());
-				pstmt.setTimestamp(6, model.getModifiedOn());
-				pstmt.setLong(7, model.getId());
+				pstmt.setInt(6, model.getModifiedBy());
+				pstmt.setTimestamp(7, model.getModifiedOn());
+				pstmt.setLong(8, model.getId());
 			}
 
 				     
@@ -1629,6 +1688,37 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					 	sql.append(", (CAST(gps30 AS INTEGER)*1000*capacity) as gps30vol  ");
 					 	sql.append(", (CAST(gps31 AS INTEGER)*1000*capacity) as gps31vol  ");
 					 	sql.append(", committedvolume ");
+					 	sql.append(", maintenancecategory1 ");
+					 	sql.append(", maintenancecategory2 ");
+					 	sql.append(", maintenancecategory3 ");
+					 	sql.append(", maintenancecategory4 ");
+					 	sql.append(", maintenancecategory5 ");
+					 	sql.append(", maintenancecategory6 ");
+					 	sql.append(", maintenancecategory7 ");
+					 	sql.append(", maintenancecategory8 ");
+					 	sql.append(", maintenancecategory9 ");
+					 	sql.append(", maintenancecategory10 ");
+					 	sql.append(", maintenancecategory11 ");
+					 	sql.append(", maintenancecategory12 ");
+					 	sql.append(", maintenancecategory13 ");
+					 	sql.append(", maintenancecategory14 ");
+					 	sql.append(", maintenancecategory15 ");
+					 	sql.append(", maintenancecategory16 ");
+					 	sql.append(", maintenancecategory17 ");
+					 	sql.append(", maintenancecategory18 ");
+					 	sql.append(", maintenancecategory19 ");
+					 	sql.append(", maintenancecategory20 ");
+					 	sql.append(", maintenancecategory21 ");
+					 	sql.append(", maintenancecategory22 ");
+					 	sql.append(", maintenancecategory23 ");
+					 	sql.append(", maintenancecategory24 ");
+					 	sql.append(", maintenancecategory25 ");
+					 	sql.append(", maintenancecategory26 ");
+					 	sql.append(", maintenancecategory27 ");
+					 	sql.append(", maintenancecategory28 ");
+					 	sql.append(", maintenancecategory29 ");
+					 	sql.append(", maintenancecategory30 ");
+					 	sql.append(", maintenancecategory31 ");
 					 	sql.append(" from transport.tran_maintenance a");
 					 	sql.append(" where a.month = ? ");
 					 	sql.append(" and a.year = ? ");
@@ -1995,6 +2085,37 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 		    		 model.setGps30Vol(rs.getInt(318));
 		    		 model.setGps31Vol(rs.getInt(319));
 		    		 model.setCommittedVolume(rs.getInt(320));
+		    		 model.setMaintenanceCategory1(rs.getInt(321));		    		 
+		    		 model.setMaintenanceCategory2(rs.getInt(322));
+		    		 model.setMaintenanceCategory3(rs.getInt(323));
+		    		 model.setMaintenanceCategory4(rs.getInt(324));
+		    		 model.setMaintenanceCategory5(rs.getInt(325));
+		    		 model.setMaintenanceCategory6(rs.getInt(326));
+		    		 model.setMaintenanceCategory7(rs.getInt(327));
+		    		 model.setMaintenanceCategory8(rs.getInt(328));
+		    		 model.setMaintenanceCategory9(rs.getInt(329));
+		    		 model.setMaintenanceCategory10(rs.getInt(330));
+		    		 model.setMaintenanceCategory11(rs.getInt(331));
+		    		 model.setMaintenanceCategory12(rs.getInt(332));
+		    		 model.setMaintenanceCategory13(rs.getInt(333));
+		    		 model.setMaintenanceCategory14(rs.getInt(334));
+		    		 model.setMaintenanceCategory15(rs.getInt(335));
+		    		 model.setMaintenanceCategory16(rs.getInt(336));
+		    		 model.setMaintenanceCategory17(rs.getInt(337));
+		    		 model.setMaintenanceCategory18(rs.getInt(338));
+		    		 model.setMaintenanceCategory19(rs.getInt(339));
+		    		 model.setMaintenanceCategory20(rs.getInt(340));
+		    		 model.setMaintenanceCategory21(rs.getInt(341));
+		    		 model.setMaintenanceCategory22(rs.getInt(342));
+		    		 model.setMaintenanceCategory23(rs.getInt(343));
+		    		 model.setMaintenanceCategory24(rs.getInt(344));
+		    		 model.setMaintenanceCategory25(rs.getInt(345));
+		    		 model.setMaintenanceCategory26(rs.getInt(346));
+		    		 model.setMaintenanceCategory27(rs.getInt(347));
+		    		 model.setMaintenanceCategory28(rs.getInt(348));
+		    		 model.setMaintenanceCategory29(rs.getInt(349));
+		    		 model.setMaintenanceCategory30(rs.getInt(350));
+		    		 model.setMaintenanceCategory31(rs.getInt(351));
 		    		 model.setGpsWeek1Vol(model.getGps1Vol()+model.getGps2Vol()+model.getGps3Vol()+model.getGps4Vol()+model.getGps5Vol()+model.getGps6Vol()+model.getGps7Vol());
 		    		 model.setGpsWeek2Vol(model.getGps8Vol()+model.getGps9Vol()+model.getGps10Vol()+model.getGps11Vol()+model.getGps12Vol()+model.getGps13Vol()+model.getGps14Vol());
 		    		 model.setGpsWeek3Vol(model.getGps15Vol()+model.getGps16Vol()+model.getGps17Vol()+model.getGps18Vol()+model.getGps19Vol()+model.getGps20Vol()+model.getGps21Vol());
@@ -2696,6 +2817,38 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 		    		 model.setGpsTripIssue29(rs.getInt(261));
 		    		 model.setGpsTripIssue30(rs.getInt(262));
 		    		 model.setGpsTripIssue31(rs.getInt(263));
+		    		 model.setCommittedVolume(rs.getInt(264));
+		    		 model.setMaintenanceCategory1(rs.getInt(265));
+		    		 model.setMaintenanceCategory2(rs.getInt(266));
+		    		 model.setMaintenanceCategory3(rs.getInt(267));
+		    		 model.setMaintenanceCategory4(rs.getInt(268));
+		    		 model.setMaintenanceCategory5(rs.getInt(269));
+		    		 model.setMaintenanceCategory6(rs.getInt(270));
+		    		 model.setMaintenanceCategory7(rs.getInt(271));
+		    		 model.setMaintenanceCategory8(rs.getInt(272));
+		    		 model.setMaintenanceCategory9(rs.getInt(273));
+		    		 model.setMaintenanceCategory10(rs.getInt(274));
+		    		 model.setMaintenanceCategory11(rs.getInt(275));
+		    		 model.setMaintenanceCategory12(rs.getInt(276));
+		    		 model.setMaintenanceCategory13(rs.getInt(277));
+		    		 model.setMaintenanceCategory14(rs.getInt(278));
+		    		 model.setMaintenanceCategory15(rs.getInt(279));
+		    		 model.setMaintenanceCategory16(rs.getInt(280));
+		    		 model.setMaintenanceCategory17(rs.getInt(281));
+		    		 model.setMaintenanceCategory18(rs.getInt(282));
+		    		 model.setMaintenanceCategory19(rs.getInt(283));
+		    		 model.setMaintenanceCategory20(rs.getInt(284));
+		    		 model.setMaintenanceCategory21(rs.getInt(285));
+		    		 model.setMaintenanceCategory22(rs.getInt(286));
+		    		 model.setMaintenanceCategory23(rs.getInt(287));
+		    		 model.setMaintenanceCategory24(rs.getInt(288));
+		    		 model.setMaintenanceCategory25(rs.getInt(289));
+		    		 model.setMaintenanceCategory26(rs.getInt(290));
+		    		 model.setMaintenanceCategory27(rs.getInt(291));
+		    		 model.setMaintenanceCategory28(rs.getInt(292));
+		    		 model.setMaintenanceCategory29(rs.getInt(293));
+		    		 model.setMaintenanceCategory30(rs.getInt(294));
+		    		 model.setMaintenanceCategory31(rs.getInt(295));
 				 }				 
 			 } catch (SQLException e) {
 				 throw e;

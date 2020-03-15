@@ -11,7 +11,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 25Mar2019
- * DateUpdated: 08Mar2020
+ * DateUpdated: 14Mar2020
  */
 public class MaintenanceMonitoring implements Serializable {
 
@@ -285,6 +285,37 @@ public class MaintenanceMonitoring implements Serializable {
 	private int gpsTripIssue30;
 	private int gpsTripIssue31;
 	private int committedVolume;
+	private int maintenanceCategory1;
+	private int maintenanceCategory2;
+	private int maintenanceCategory3;
+	private int maintenanceCategory4;
+	private int maintenanceCategory5;
+	private int maintenanceCategory6;
+	private int maintenanceCategory7;
+	private int maintenanceCategory8;
+	private int maintenanceCategory9;
+	private int maintenanceCategory10;
+	private int maintenanceCategory11;
+	private int maintenanceCategory12;
+	private int maintenanceCategory13;
+	private int maintenanceCategory14;
+	private int maintenanceCategory15;
+	private int maintenanceCategory16;
+	private int maintenanceCategory17;
+	private int maintenanceCategory18;
+	private int maintenanceCategory19;
+	private int maintenanceCategory20;
+	private int maintenanceCategory21;
+	private int maintenanceCategory22;
+	private int maintenanceCategory23;
+	private int maintenanceCategory24;
+	private int maintenanceCategory25;
+	private int maintenanceCategory26;
+	private int maintenanceCategory27;
+	private int maintenanceCategory28;
+	private int maintenanceCategory29;
+	private int maintenanceCategory30;
+	private int maintenanceCategory31;
 	
 	//non-persistent
 	private int day;
@@ -3207,7 +3238,438 @@ public class MaintenanceMonitoring implements Serializable {
 	public void setCommittedVolume(int committedVolume) {
 		this.committedVolume = committedVolume;
 	}
+
+
+	public int getMaintenanceCategory1() {
+		return maintenanceCategory1;
+	}
+
+
+	public void setMaintenanceCategory1(int maintenanceCategory1) {
+		this.maintenanceCategory1 = maintenanceCategory1;
+	}
+
+
+	public int getMaintenanceCategory2() {
+		return maintenanceCategory2;
+	}
+
+
+	public void setMaintenanceCategory2(int maintenanceCategory2) {
+		this.maintenanceCategory2 = maintenanceCategory2;
+	}
+
+
+	public int getMaintenanceCategory3() {
+		return maintenanceCategory3;
+	}
+
+
+	public void setMaintenanceCategory3(int maintenanceCategory3) {
+		this.maintenanceCategory3 = maintenanceCategory3;
+	}
+
+
+	public int getMaintenanceCategory4() {
+		return maintenanceCategory4;
+	}
+
+
+	public void setMaintenanceCategory4(int maintenanceCategory4) {
+		this.maintenanceCategory4 = maintenanceCategory4;
+	}
+
+
+	public int getMaintenanceCategory5() {
+		return maintenanceCategory5;
+	}
+
+
+	public void setMaintenanceCategory5(int maintenanceCategory5) {
+		this.maintenanceCategory5 = maintenanceCategory5;
+	}
+
+
+	public int getMaintenanceCategory6() {
+		return maintenanceCategory6;
+	}
+
+
+	public void setMaintenanceCategory6(int maintenanceCategory6) {
+		this.maintenanceCategory6 = maintenanceCategory6;
+	}
+
+
+	public int getMaintenanceCategory7() {
+		return maintenanceCategory7;
+	}
+
+
+	public void setMaintenanceCategory7(int maintenanceCategory7) {
+		this.maintenanceCategory7 = maintenanceCategory7;
+	}
+
+
+	public int getMaintenanceCategory8() {
+		return maintenanceCategory8;
+	}
+
+
+	public void setMaintenanceCategory8(int maintenanceCategory8) {
+		this.maintenanceCategory8 = maintenanceCategory8;
+	}
+
+
+	public int getMaintenanceCategory9() {
+		return maintenanceCategory9;
+	}
+
+
+	public void setMaintenanceCategory9(int maintenanceCategory9) {
+		this.maintenanceCategory9 = maintenanceCategory9;
+	}
+
+
+	public int getMaintenanceCategory10() {
+		return maintenanceCategory10;
+	}
+
+
+	public void setMaintenanceCategory10(int maintenanceCategory10) {
+		this.maintenanceCategory10 = maintenanceCategory10;
+	}
+
+
+	public int getMaintenanceCategory11() {
+		return maintenanceCategory11;
+	}
+
+
+	public void setMaintenanceCategory11(int maintenanceCategory11) {
+		this.maintenanceCategory11 = maintenanceCategory11;
+	}
+
+
+	public int getMaintenanceCategory12() {
+		return maintenanceCategory12;
+	}
+
+
+	public void setMaintenanceCategory12(int maintenanceCategory12) {
+		this.maintenanceCategory12 = maintenanceCategory12;
+	}
+
+
+	public int getMaintenanceCategory13() {
+		return maintenanceCategory13;
+	}
+
+
+	public void setMaintenanceCategory13(int maintenanceCategory13) {
+		this.maintenanceCategory13 = maintenanceCategory13;
+	}
+
+
+	public int getMaintenanceCategory14() {
+		return maintenanceCategory14;
+	}
+
+
+	public void setMaintenanceCategory14(int maintenanceCategory14) {
+		this.maintenanceCategory14 = maintenanceCategory14;
+	}
+
+
+	public int getMaintenanceCategory15() {
+		return maintenanceCategory15;
+	}
+
+
+	public void setMaintenanceCategory15(int maintenanceCategory15) {
+		this.maintenanceCategory15 = maintenanceCategory15;
+	}
+
+
+	public int getMaintenanceCategory16() {
+		return maintenanceCategory16;
+	}
+
+
+	public void setMaintenanceCategory16(int maintenanceCategory16) {
+		this.maintenanceCategory16 = maintenanceCategory16;
+	}
+
+
+	public int getMaintenanceCategory17() {
+		return maintenanceCategory17;
+	}
+
+
+	public void setMaintenanceCategory17(int maintenanceCategory17) {
+		this.maintenanceCategory17 = maintenanceCategory17;
+	}
+
+
+	public int getMaintenanceCategory18() {
+		return maintenanceCategory18;
+	}
+
+
+	public void setMaintenanceCategory18(int maintenanceCategory18) {
+		this.maintenanceCategory18 = maintenanceCategory18;
+	}
+
+
+	public int getMaintenanceCategory19() {
+		return maintenanceCategory19;
+	}
+
+
+	public void setMaintenanceCategory19(int maintenanceCategory19) {
+		this.maintenanceCategory19 = maintenanceCategory19;
+	}
+
+
+	public int getMaintenanceCategory20() {
+		return maintenanceCategory20;
+	}
+
+
+	public void setMaintenanceCategory20(int maintenanceCategory20) {
+		this.maintenanceCategory20 = maintenanceCategory20;
+	}
+
+
+	public int getMaintenanceCategory21() {
+		return maintenanceCategory21;
+	}
+
+
+	public void setMaintenanceCategory21(int maintenanceCategory21) {
+		this.maintenanceCategory21 = maintenanceCategory21;
+	}
+
+
+	public int getMaintenanceCategory22() {
+		return maintenanceCategory22;
+	}
+
+
+	public void setMaintenanceCategory22(int maintenanceCategory22) {
+		this.maintenanceCategory22 = maintenanceCategory22;
+	}
+
+
+	public int getMaintenanceCategory23() {
+		return maintenanceCategory23;
+	}
+
+
+	public void setMaintenanceCategory23(int maintenanceCategory23) {
+		this.maintenanceCategory23 = maintenanceCategory23;
+	}
+
+
+	public int getMaintenanceCategory24() {
+		return maintenanceCategory24;
+	}
+
+
+	public void setMaintenanceCategory24(int maintenanceCategory24) {
+		this.maintenanceCategory24 = maintenanceCategory24;
+	}
+
+
+	public int getMaintenanceCategory25() {
+		return maintenanceCategory25;
+	}
+
+
+	public void setMaintenanceCategory25(int maintenanceCategory25) {
+		this.maintenanceCategory25 = maintenanceCategory25;
+	}
+
+
+	public int getMaintenanceCategory26() {
+		return maintenanceCategory26;
+	}
+
+
+	public void setMaintenanceCategory26(int maintenanceCategory26) {
+		this.maintenanceCategory26 = maintenanceCategory26;
+	}
+
+
+	public int getMaintenanceCategory27() {
+		return maintenanceCategory27;
+	}
+
+
+	public void setMaintenanceCategory27(int maintenanceCategory27) {
+		this.maintenanceCategory27 = maintenanceCategory27;
+	}
+
+
+	public int getMaintenanceCategory28() {
+		return maintenanceCategory28;
+	}
+
+
+	public void setMaintenanceCategory28(int maintenanceCategory28) {
+		this.maintenanceCategory28 = maintenanceCategory28;
+	}
+
+
+	public int getMaintenanceCategory29() {
+		return maintenanceCategory29;
+	}
+
+
+	public void setMaintenanceCategory29(int maintenanceCategory29) {
+		this.maintenanceCategory29 = maintenanceCategory29;
+	}
+
+
+	public int getMaintenanceCategory30() {
+		return maintenanceCategory30;
+	}
+
+
+	public void setMaintenanceCategory30(int maintenanceCategory30) {
+		this.maintenanceCategory30 = maintenanceCategory30;
+	}
+
+
+	public int getMaintenanceCategory31() {
+		return maintenanceCategory31;
+	}
+
+
+	public void setMaintenanceCategory31(int maintenanceCategory31) {
+		this.maintenanceCategory31 = maintenanceCategory31;
+	}
+
+	public String getMaintenanceCategory1Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory1());
+	}	
+
+	public String getMaintenanceCategory2Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory2());
+	}
 	
+	public String getMaintenanceCategory3Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory3());
+	}	
 	
+	public String getMaintenanceCategory4Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory4());
+	}	
 	
+	public String getMaintenanceCategory5Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory5());
+	}	
+	
+	public String getMaintenanceCategory6Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory6());
+	}	
+	
+	public String getMaintenanceCategory7Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory7());
+	}	
+	
+	public String getMaintenanceCategory8Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory8());
+	}	
+	
+	public String getMaintenanceCategory9Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory9());
+	}	
+	
+	public String getMaintenanceCategory10Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory10());
+	}	
+	
+	public String getMaintenanceCategory11Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory11());
+	}	
+	
+	public String getMaintenanceCategory12Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory12());
+	}	
+	
+	public String getMaintenanceCategory13Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory13());
+	}	
+	
+	public String getMaintenanceCategory14Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory14());
+	}	
+	
+	public String getMaintenanceCategory15Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory15());
+	}
+	
+	public String getMaintenanceCategory16Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory16());
+	}
+	
+	public String getMaintenanceCategory17Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory17());
+	}
+	
+	public String getMaintenanceCategory18Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory18());
+	}
+	
+	public String getMaintenanceCategory19Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory19());
+	}
+	
+	public String getMaintenanceCategory20Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory20());
+	}
+	
+	public String getMaintenanceCategory21Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory21());
+	}
+	
+	public String getMaintenanceCategory22Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory22());
+	}
+	
+	public String getMaintenanceCategory23Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory23());
+	}
+	
+	public String getMaintenanceCategory24Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory24());
+	}
+	
+	public String getMaintenanceCategory25Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory25());
+	}
+	
+	public String getMaintenanceCategory26Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory26());
+	}
+	
+	public String getMaintenanceCategory27Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory27());
+	}
+	
+	public String getMaintenanceCategory28Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory28());
+	}
+	
+	public String getMaintenanceCategory29Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory29());
+	}
+	
+	public String getMaintenanceCategory30Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory30());
+	}
+	
+	public String getMaintenanceCategory31Desc() {
+		return TransportUtils.getMaintenanceCategoryById(getMaintenanceCategory31());
+	}
 }
