@@ -26,7 +26,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 25Mar2019
- * DateUpdated: 14Mar2020
+ * DateUpdated: 16Mar2020
  */
 public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 	
@@ -2865,6 +2865,67 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 	     
 	    System.out.println("getDataById() - Exit");
 		return returnMap;
+	}
+
+	@Override
+	public List<Integer> getMaintenanceCategoryData(HashMap<String, Object> criteriaMap) throws Exception {
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GET_ACTIVE_DATA);
+
+	 	//Connection using JNDI DBCP
+		 //get the year and month criteria
+	 	Integer year = Integer.parseInt((String)criteriaMap.get(MapConstant.YEAR_CRITERIA));
+		Integer month = Integer.parseInt((String)criteriaMap.get(MapConstant.MONTH_CRITERIA));
+		 
+		 Connection conn = null;
+		 ResultSet rs = null;
+		 PreparedStatement pstmt = null; 
+		 
+		 List<Integer> categoryList = new ArrayList<>();
+  
+		 try {
+			 conn = ServerContext.getJDBCHandle();
+
+			 StringBuilder sql = new StringBuilder("select maintenancecategory1,maintenancecategory2,maintenancecategory3, ");
+			 		sql.append("maintenancecategory4,maintenancecategory5,maintenancecategory6,maintenancecategory7, ");
+			 		sql.append("maintenancecategory8,maintenancecategory9,maintenancecategory10,maintenancecategory11, ");
+			 		sql.append("maintenancecategory12,maintenancecategory13,maintenancecategory14,maintenancecategory15, ");
+			 		sql.append("maintenancecategory16,maintenancecategory17,maintenancecategory18,maintenancecategory19, ");
+			 		sql.append("maintenancecategory20,maintenancecategory21,maintenancecategory22,maintenancecategory23, ");
+			 		sql.append("maintenancecategory24,maintenancecategory25,maintenancecategory26,maintenancecategory27, ");
+			 		sql.append("maintenancecategory28,maintenancecategory29,maintenancecategory30,maintenancecategory31 ");
+			 		sql.append("from transport.tran_maintenance where year = ? ");
+			 		if (month!=null) {
+			 			sql.append("and month = ? ");
+			 		}
+			 		sql.append("and active = true ");
+			 		
+			 pstmt = conn.prepareStatement(sql.toString());
+					 
+			 pstmt.setInt(1, year);
+			 if (month!=null) {
+				 pstmt.setInt(2, month);	
+			 }
+			 						 
+			rs = pstmt.executeQuery();
+					 			 
+			while(rs.next()) {
+				for(int i=1;i<=31;i++) {
+					if (rs.getInt(i)>0) {
+						categoryList.add(rs.getInt(i));
+					}
+				}
+			}
+			 		
+		 } catch (SQLException e) {
+			 throw e;
+		 } finally {
+			 TransportUtils.closeObjects(rs);
+			 TransportUtils.closeObjects(pstmt);
+			 TransportUtils.closeObjects(conn);
+		 }	 
+		
+		return categoryList;
 	}
 		
 }

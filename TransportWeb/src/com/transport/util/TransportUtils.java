@@ -257,7 +257,7 @@ public class TransportUtils {
 		return desc;
 	}
 
-	private static List<ListValue> getMaintenanceCategoryLOV() {
+	public static List<ListValue> getMaintenanceCategoryLOV() {
 		return maintenanceCategoryLOV;
 	}
 

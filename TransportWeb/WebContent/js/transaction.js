@@ -469,7 +469,10 @@ function getMaintenanceMonitoring(isGenerateExcelFile) {
 			if (isGenerateExcelFile == '0') {
 				$("#tablePresentationDIV").html(result);
 			} else {
-				$("#excelReportStatusDIV").html(result);
+				var popUpWindow = window.open('reports/maintenancemonitoring.xls','popUpWindow','height=100,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+				popUpWindow.document.title = 'Maintenance Monitoring Excel File';
+				alert('File (maintenancemonitoring.xls) successfully downloaded. \nPlease check your Downloads folder.');
+				setTimeout(function(){ popUpWindow.close(); }, 6000);
 			}
 	});
 	

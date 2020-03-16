@@ -58,6 +58,9 @@ public class ReportUtils {
 	 * @param localPath
 	 * @return
 	 * @throws Exception
+	 *  @author edwarddavid
+	 *  @since July2015
+	 *  @DateUpdated: 16Mar2020
 	 */
 	private static boolean generatePDFViaJasperReportsEngine(JasperReport jasperReport, Map<String, Object> parameters, JRBeanCollectionDataSource ds, String reportTitle, String destFile) throws Exception{
 		boolean isReportGenerated = false;
@@ -67,7 +70,7 @@ public class ReportUtils {
 		try {		 
 			// fills compiled report with parameters and a connection
 			jasperPrint = JasperFillManager.fillReport (jasperReport, parameters, ds);
-
+				
 			//create pdf file
 			JasperExportManager.exportReportToPdfFile(jasperPrint,destFile);
 			 
@@ -8019,6 +8022,6 @@ public class ReportUtils {
 		
 		
 	}
-
+	
 
 }

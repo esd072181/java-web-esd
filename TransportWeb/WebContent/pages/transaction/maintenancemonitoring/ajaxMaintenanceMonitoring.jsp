@@ -90,6 +90,20 @@ function lockMaintenanceMonitoringByYearMonth () {
 	}); 
 }
 
+function generateMaintenanceCategoryReport(year, month) {
+	//create the pdf first
+	$.ajax({
+			type: "POST",
+			url: "maintenanceMonitoring.do?command=ajaxReport&year="+year+"&month="+month,
+			data: $("#idForm").serialize()
+		})
+		.done(function(result) {
+			//then show the pdf report
+			window.open('reports/MaintenanceCategory.pdf','popUpWindow','height=1200,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+		});
+	return false;
+}
+
 </script>
 						
 	<div style="padding-left: 10px;">
@@ -126,13 +140,11 @@ function lockMaintenanceMonitoringByYearMonth () {
 							</html:select>
 							<label  class="control-label top-spacing" for="lorryNoCriteria">&nbsp;&nbsp;LorryNo&nbsp;</label>
 							<html:text property="lorryNoCriteria" styleId="idLorryNoCriteria" size="2"></html:text>&nbsp;
-							<html:button styleId="btnSearchFilter" property="command" onclick="getMaintenanceMonitoring('0');" value="Search/Refresh" styleClass="btn btn-primary"></html:button>
-	        				<label style="font-size: 8px;">Note: Click <span style="color: blue; font-style: italic;">Search/Refresh</span> to reflect changes.</label>		
-			        		<html:button styleId="btnGenerateExcel" property="command" onclick="getMaintenanceMonitoring('1');" value="Generate Excel file" styleClass="btn btn-primary"></html:button>
+							<html:button styleId="btnSearchFilter" property="command" onclick="getMaintenanceMonitoring('0');" value="Search/Refresh Data" styleClass="btn btn-primary"></html:button>
 							&nbsp;
-							<span id="excelReportStatusDIV">
-								<!-- ajax part of table data -->
-							</span>
+			        		<html:button styleId="btnGenerateExcel" property="command" onclick="getMaintenanceMonitoring('1');" value="Download Excel File" styleClass="btn btn-primary"></html:button>
+							&nbsp;
+							<html:button styleId="btnGenerateCategory" property="command" onclick="generateMaintenanceCategoryReport($('#idYearCriteria').val(),$('#idMonthCriteria').val());" value="Generate Category Report" styleClass="btn btn-primary"></html:button>
 						</div>
 					</div>
 				</div>			

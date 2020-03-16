@@ -29,6 +29,7 @@ public class ParamConstant {
 	public static final String AJAX_GO_TO = "ajaxGoTo";
 	public static final String AJAX_VIEW = "ajaxView";
 	public static final String AJAX_MOBILE_MAIN = "ajaxMobileMain";
+	public static final String AJAX_REPORT = "ajaxReport";
 	
 	//Verification and Validation Params
 	public static final String AJAX_POPULATE_FINDINGS_BY_ITEM = "ajaxPopulateFindingsByItem";

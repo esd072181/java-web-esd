@@ -18,6 +18,7 @@ public class ActionConstant {
 	public static final String UPDATE_USERNAME_PASSWORD = "update_username_password";
 	public static final String GET_DATA_BY_CRITERIA = "1";
 	public static final String GENERATE_EXCEL_FILE = "2";
+	public static final String GENERATE_MAINTENANCE_CATEGORY_PDF = "3";
 	
 	//common mapping forward action
 	public static final String SUCCESS = "success";

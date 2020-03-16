@@ -14,7 +14,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 25Mar2019
- * Date Updated: 25Mar2019
+ * Date Updated: 16Mar2020
  */
 public class MaintenanceMonitoringModule implements TransportModule {
 	
@@ -43,6 +43,8 @@ public class MaintenanceMonitoringModule implements TransportModule {
 					    break;
 				case ActionConstant.GENERATE_EXCEL_FILE: returnMap = bo.generateExcelFile(dataMap);
 			    		break;
+				case ActionConstant.GENERATE_MAINTENANCE_CATEGORY_PDF: returnMap = bo.generateMaintenanceCategoryPDF(dataMap);
+	    				break;
 				default: break;
 			};	
 		}catch (Exception e) {

@@ -544,7 +544,40 @@ public class MaintenanceMonitoringAction extends Action {
 			        		forwardAction = ActionConstant.AJAX_FAILED;
 			        	}
 			        }						
-			    } 
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_REPORT)) {
+					//Maintenance Category Report
+					
+					String year = null;
+					String month = null;
+					if (request.getParameter("year")!=null) {
+						year = (String) request.getParameter("year");
+					}
+					if (request.getParameter("month")!=null) {
+						month = (String) request.getParameter("month");
+					}
+	        							        		
+	        		//call the service to generate the excel file
+	        		HashMap<String, Object> dataMap = new HashMap<>();
+	        		dataMap.put(MapConstant.MODULE,  ModuleConstant.MAINTENANCE_MONITORING);
+	        		dataMap.put(MapConstant.YEAR_CRITERIA, year);
+	        		dataMap.put(MapConstant.MONTH_CRITERIA, month);
+	        		dataMap.put(MapConstant.REPORT_LOCALPATH, TransportUtils.getReportPath(request));
+	        		dataMap.put(MapConstant.ACTION, ActionConstant.GENERATE_MAINTENANCE_CATEGORY_PDF);
+	        		
+	        		ServiceManager service = new ServiceManagerImpl();
+	        		Map<String, Object>  resultMap = service.executeRequest(dataMap);
+		        	
+			        boolean isReportGenerated = (boolean) resultMap.get(MapConstant.BOOLEAN_DATA);
+
+		        	if (isReportGenerated) {
+		        		TransportUtils.writeLogInfo(logger, MiscConstant.RPT_MESSSAGE_GENERATED_SUCCESS + "-" + module);	
+		        	} else {
+		        		//need to add message here if report generation failed, make the message dynamic
+		        		TransportUtils.writeLogInfo(logger, MiscConstant.RPT_MESSSAGE_GENERATED_FAILED + "-" + module);
+		        	}	        	
+
+					forwardAction = ActionConstant.SHOW_AJAX_MAIN;
+				}
 			} else {
 				//show main screen
 				 forwardAction = ActionConstant.SHOW_AJAX_MAIN;
