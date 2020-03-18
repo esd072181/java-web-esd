@@ -26,7 +26,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 25Mar2019
- * DateUpdated: 16Mar2020
+ * DateUpdated: 18Mar2020
  */
 public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 	
@@ -2870,7 +2870,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 	@Override
 	public List<Integer> getMaintenanceCategoryData(HashMap<String, Object> criteriaMap) throws Exception {
 		// TODO Auto-generated method stub
-		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GET_ACTIVE_DATA);
+		TransportUtils.writeLogInfo(logger, "getMaintenanceCategoryData");
 
 	 	//Connection using JNDI DBCP
 		 //get the year and month criteria
@@ -2895,7 +2895,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 			 		sql.append("maintenancecategory24,maintenancecategory25,maintenancecategory26,maintenancecategory27, ");
 			 		sql.append("maintenancecategory28,maintenancecategory29,maintenancecategory30,maintenancecategory31 ");
 			 		sql.append("from transport.tran_maintenance where year = ? ");
-			 		if (month!=null) {
+			 		if (month!=null && month > 0) {
 			 			sql.append("and month = ? ");
 			 		}
 			 		sql.append("and active = true ");
@@ -2903,7 +2903,7 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 			 pstmt = conn.prepareStatement(sql.toString());
 					 
 			 pstmt.setInt(1, year);
-			 if (month!=null) {
+			 if (month!=null && month > 0) {
 				 pstmt.setInt(2, month);	
 			 }
 			 						 

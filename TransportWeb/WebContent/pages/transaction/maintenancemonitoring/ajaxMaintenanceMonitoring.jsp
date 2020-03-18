@@ -91,6 +91,13 @@ function lockMaintenanceMonitoringByYearMonth () {
 }
 
 function generateMaintenanceCategoryReport(year, month) {
+	
+	if ($('#idYearCriteria').val().trim() == '') {
+		alert('Enter the year.');
+		$('#idYearCriteria').focus();
+		return false;
+	}
+	
 	//create the pdf first
 	$.ajax({
 			type: "POST",
@@ -143,14 +150,20 @@ function generateMaintenanceCategoryReport(year, month) {
 							<html:button styleId="btnSearchFilter" property="command" onclick="getMaintenanceMonitoring('0');" value="Search/Refresh Data" styleClass="btn btn-primary"></html:button>
 							&nbsp;
 			        		<html:button styleId="btnGenerateExcel" property="command" onclick="getMaintenanceMonitoring('1');" value="Download Excel File" styleClass="btn btn-primary"></html:button>
-							&nbsp;
-							<html:button styleId="btnGenerateCategory" property="command" onclick="generateMaintenanceCategoryReport($('#idYearCriteria').val(),$('#idMonthCriteria').val());" value="Generate Category Report" styleClass="btn btn-primary"></html:button>
 						</div>
+					</div>
+					<div style="padding-top: 5px;">
+						<label  class="control-label top-spacing" for="yearCriteria">Report Type: </label>
+						<html:select  name="maintenanceMonitoringForm" property="reportType" styleId="idReportType" value="1">
+								<html:option value="1">Monthly</html:option>
+								<html:option value="2">Annually</html:option> 			 		
+							</html:select>
+						<html:button styleId="btnGenerateCategory" property="command" onclick="generateMaintenanceCategoryReport($('#idYearCriteria').val(),$('#idMonthCriteria').val());" value="Generate Category Report" styleClass="btn btn-primary"></html:button>
 					</div>
 				</div>			
 		</html:form>
 	</div>
-  	<br/>
+  	<hr>
 
 	<!-- results using logic iterate -->
 	<!-- using bootstrap -->
@@ -158,7 +171,6 @@ function generateMaintenanceCategoryReport(year, month) {
 		<!-- ajax part of table data -->
 	</div>
 
-	<br/>
 	<div style="padding-left: 20px;">
 		<table>
 			<tr>

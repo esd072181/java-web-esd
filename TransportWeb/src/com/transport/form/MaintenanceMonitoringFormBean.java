@@ -29,7 +29,7 @@ import com.transport.service.ServiceManagerImpl;
  * 
  * @author dward
  * @since 26Mar2019
- * DateUpdated: 14Mar2020
+ * DateUpdated: 18Mar2020
  */
 public class MaintenanceMonitoringFormBean extends TransportFormBean {
 
@@ -88,6 +88,9 @@ public class MaintenanceMonitoringFormBean extends TransportFormBean {
 	//for Total Pending Row
 	private int idTotalPending;
 	private String remarks;	
+	
+	//for Report
+	private int reportType;//1 for Monthly - 2 for Annually
 		
 	public MaintenanceMonitoringFormBean() {}
 
@@ -2724,6 +2727,16 @@ public class MaintenanceMonitoringFormBean extends TransportFormBean {
 
 	public void setMaintenanceCategory(String maintenanceCategory) {
 		this.maintenanceCategory = maintenanceCategory;
+	}
+
+
+	public int getReportType() {
+		return reportType;
+	}
+
+
+	public void setReportType(int reportType) {
+		this.reportType = reportType;
 	}
 
 

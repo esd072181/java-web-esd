@@ -32,7 +32,7 @@ import net.sf.jasperreports.renderers.JCommonDrawableRenderer;
  * 
  * @author dward
  * @since 25Mar2019
- * Date Updated: 16Mar2020
+ * Date Updated: 17Mar2020
  */
 public class MaintenanceMonitoringBoImpl implements MaintenanceMonitoringBo {
 
@@ -124,7 +124,17 @@ public class MaintenanceMonitoringBoImpl implements MaintenanceMonitoringBo {
 		String localPath = (String)criteriaMap.get(MapConstant.REPORT_LOCALPATH);
 		String year = (String) criteriaMap.get(MapConstant.YEAR_CRITERIA);
 		String month = (String) criteriaMap.get(MapConstant.MONTH_CRITERIA);
-		month = TransportUtils.getStrMonth(Integer.parseInt(month));
+		if (month!=null) {
+			month = TransportUtils.getStrMonth(Integer.parseInt(month));
+		}
+		
+		StringBuilder sbChartTitle = new StringBuilder(100);
+			sbChartTitle.append("Maintenance Category for ");
+			if (month!=null && month.trim().length()>0) {
+				sbChartTitle.append(month);
+				sbChartTitle.append(" ");
+			}
+			sbChartTitle.append(year);
 		
 		//Get the data
 		List<Integer> lovIdList = dao.getMaintenanceCategoryData(criteriaMap);
@@ -153,7 +163,7 @@ public class MaintenanceMonitoringBoImpl implements MaintenanceMonitoringBo {
 		}
 		
 		//Prepare the chart
-		JFreeChart chart = ChartFactory.createPieChart3D("Maintenance Category", dataset, true, true, false);
+		JFreeChart chart = ChartFactory.createPieChart3D(sbChartTitle.toString(), dataset, true, true, false);
 		  
 	    // Create the custom label generator to show the percentage
 	    final PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator("{0} = {2}");
@@ -166,8 +176,6 @@ public class MaintenanceMonitoringBoImpl implements MaintenanceMonitoringBo {
 
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("Chart", new JCommonDrawableRenderer(chart));
-		parameters.put("Year", year);
-		parameters.put("Month", month);
 		
 		criteriaMap.put(MapConstant.RPT_TITLE, MiscConstant.RPT_MAINTENANCE_CATEGORY_TITLE);
 		criteriaMap.put(MapConstant.RPT_PDF, MiscConstant.PDF_MAINTENANCE_CATEGORY_REPORT);

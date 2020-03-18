@@ -552,10 +552,14 @@ public class MaintenanceMonitoringAction extends Action {
 					if (request.getParameter("year")!=null) {
 						year = (String) request.getParameter("year");
 					}
-					if (request.getParameter("month")!=null) {
-						month = (String) request.getParameter("month");
+					if (formBean.getReportType()==1) { //1 for Monthly
+						if (request.getParameter("month")!=null) {
+							month = (String) request.getParameter("month");
+						}						
+					} else {
+						month = "0";
 					}
-	        							        		
+					        		
 	        		//call the service to generate the excel file
 	        		HashMap<String, Object> dataMap = new HashMap<>();
 	        		dataMap.put(MapConstant.MODULE,  ModuleConstant.MAINTENANCE_MONITORING);
