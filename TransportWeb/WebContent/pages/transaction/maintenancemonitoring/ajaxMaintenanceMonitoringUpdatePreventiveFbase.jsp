@@ -11,8 +11,13 @@
 <script>
 $(function() {
 
-	$('#preventiveId').focus();
 	
+	if ($('#preventiveRemarksId').val().trim() == '') {
+		$('#preventiveRemarksId').val('PM annual - \nPMQ - \nPM3P - ');
+	}
+	
+	$('#preventiveId').focus();
+		
   });
   
 </script>

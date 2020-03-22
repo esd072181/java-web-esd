@@ -11,6 +11,11 @@
 <script>
 $(function() {
 
+	
+	if ($('#preventiveRemarksId').val().trim() == '') {
+		$('#preventiveRemarksId').val('Batangas - \nLimay - \nNH- \n3rd Party - ');
+	}
+	 
 	$('#preventiveId').focus();
 	
   });
