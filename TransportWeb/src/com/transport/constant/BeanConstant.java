@@ -5,7 +5,7 @@ package com.transport.constant;
  * 
  * @author dward
  * @since 01Mar2015
- * Last Date Updated: 21Aug2016
+ * DateUpdated: 23Mar2020
  */
 public class BeanConstant {
 
@@ -27,6 +27,8 @@ public class BeanConstant {
 	private static final String TIRE_BRAND_BEAN_ID = "tireBrandBo";//Tire Brand - Website Enhancement 1 ESD 20Aug2016
 	private static final String TIRE_BEAN_ID = "tireBo";//Tire - Website Enhancement 1 ESD 20Aug2016
 	private static final String USER_ACCESS_BEAN_ID = "userAccessBo";//User Access
+	private static final String INSPECTION_BEAN_ID = "inspectionBo";//Inspection
+	private static final String MAINTENANCE_INSPECTION_HEADER_BEAN_ID = "maintenanceInspectionHeaderBo";//Maintenance Inspection
 	//Transactions
 	private static final String VERIFICATION_AND_VALIDATION_BEAN_ID = "verificationAndValidationBo";//Verification and Validation Compliance of Tracker
 	private static final String TIRE_MANAGEMENT_BEAN_ID = "tireManagementBo";//Tire Management - Website Enhancement 1 ESD 20Aug2016
@@ -124,6 +126,10 @@ public class BeanConstant {
 			case ModuleConstant.DRIVER_TRAINING_PROFILE_COMMENTS_INCIDENT: beanId = DRIVER_TRAINING_PROFILE_COMMENTS_INCIDENT_BEAN_ID;
 			  break;
 			case ModuleConstant.DRIVER_INCIDENT: beanId = DRIVER_INCIDENT_BEAN_ID;
+			  break;
+			case ModuleConstant.INSPECTION: beanId = INSPECTION_BEAN_ID;
+			  break;
+			case ModuleConstant.MAINTENANCE_INSPECTION: beanId = MAINTENANCE_INSPECTION_HEADER_BEAN_ID;
 			  break;
 			default: break;
 		} 

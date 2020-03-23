@@ -1190,3 +1190,124 @@ function viewDriverIncidentReport(id) {
 		  });
 
 }
+
+
+//Maintenance Inspection
+function goToMaintenanceInspection() {
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "maintenanceInspection.do?"
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
+		});
+}
+
+function goToAddMaintenanceInspection() {
+	$.ajax({
+		  type: "GET",
+		  url: "maintenanceInspection.do?",
+		  cache: false,
+		  data: { command: "add" }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			//$("#permitNoId").focus();
+			window.scrollTo(0,0);
+		});
+}
+
+function getMaintenanceInspection(pageCriteria, category, isDeleted) {
+
+	var searchCriteria = $('#searchCriteriaId').val();
+
+	$.ajax({
+		  type: "GET",
+		  url: "maintenanceInspection.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
+		  cache: false,
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#tablePresentationDIV").html(result);
+			if (isDeleted) {
+				$("#msgDeletedId").show();
+				setTimeout( "$('#msgDeletedId').hide();", 1500 );
+			}
+		});
+}
+
+function saveMaintenanceInspection() {
+	
+	if ($('#lorryNoId').val()=='') {
+		alert('Please select lorry no.');
+		$('#lorryNoId').focus();
+		return false;
+	}
+	
+	$.ajax({
+		  type: "POST",
+		  url: "saveMaintenanceInspection.do?command=ajaxSave",
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
+		});
+
+}
+
+function editMaintenanceInspection(id) {
+	$.ajax({
+		  type: "GET",
+		  url: "maintenanceInspection.do?",
+		  cache: false,
+		  data: { command: "ajaxEdit", id: id  }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
+		});
+
+}
+
+function updateMaintenanceInspection() {
+	
+	bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		 if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "updateMaintenanceInspection.do?command=ajaxUpdate",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIV").html(result);
+						window.scrollTo(0,0);
+				});
+		 } 
+	}); 
+
+}
+
+function deleteMaintenanceInspection(id, category, currentPage) {
+	
+	bootbox.confirm("Are you sure you want to delete this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		if (ans) {
+			$.ajax({
+				  type: "POST",
+				  url: "deleteMaintenanceInspection.do?",
+				  data: { command: "ajaxDelete", id: id  }
+				})
+				  .done(function( result ) {
+					 //$("#contentDIV").html(result);
+					getMaintenanceInspection(currentPage,category, true);//show the updated list after delete
+					window.scrollTo(0,0);
+				});		
+		} 
+	}); 
+
+}
+

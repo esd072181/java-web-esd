@@ -21,6 +21,7 @@ import com.transport.module.DriverTrainingProfileCommentsVnvModule;
 import com.transport.module.DriverTrainingProfileModule;
 import com.transport.module.FindingsModule;
 import com.transport.module.FollowUpModule;
+import com.transport.module.InspectionModule;
 import com.transport.module.ItemsModule;
 import com.transport.module.ListValueModule;
 import com.transport.module.LoginModule;
@@ -39,6 +40,7 @@ import com.transport.module.TireModule;
 import com.transport.module.TransportModule;
 import com.transport.module.EmployeeModule;
 import com.transport.module.LorryModule;
+import com.transport.module.MaintenanceInspectionModule;
 import com.transport.module.UserAccessModule;
 import com.transport.module.UserModule;
 import com.transport.module.VerificationAndValidationModule;
@@ -49,7 +51,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since July2016
- * DateUpdated: 25Oct2019
+ * DateUpdated: 23Mar2020
  */
 public class ServiceManagerImpl implements ServiceManager {
 	
@@ -201,6 +203,14 @@ public class ServiceManagerImpl implements ServiceManager {
 					break;
 				case ModuleConstant.DRIVER_INCIDENT : 
 					module = new DriverIncidentModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.INSPECTION : 
+					module = new InspectionModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.MAINTENANCE_INSPECTION : 
+					module = new MaintenanceInspectionModule();
 					returnMap = module.executeRequest(dataMap);
 					break;
 				default: 

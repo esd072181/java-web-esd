@@ -235,7 +235,21 @@
     <bean id="driverIncidentBo" class="com.transport.bo.impl.DriverIncidentBoImpl" scope="singleton">
         <property name="driverIncidentDao" ref="driverIncidentDao"></property>
     </bean>    
-                   
+
+ 	<!-- Inspection -->
+    <bean id="inspectionDao" class="com.transport.dao.impl.InspectionDaoImpl" scope="singleton"></bean>
+    <bean id="inspectionBo" class="com.transport.bo.impl.InspectionBoImpl" scope="singleton">
+        <property name="inspectionDao" ref="inspectionDao"></property>
+    </bean>
+    
+    <!-- Maintenance Inspection Header -->
+    <bean id="maintenanceInspectionHeaderDao" class="com.transport.dao.impl.MaintenanceInspectionHeaderDaoImpl" scope="singleton"></bean>
+    <bean id="maintenanceInspectionDetailsDao" class="com.transport.dao.impl.MaintenanceInspectionDetailsDaoImpl" scope="singleton"></bean>
+    <bean id="maintenanceInspectionHeaderBo" class="com.transport.bo.impl.MaintenanceInspectionHeaderBoImpl" scope="singleton">
+        <property name="maintenanceInspectionHeaderDao" ref="maintenanceInspectionHeaderDao"></property>
+        <property name="maintenanceInspectionDetailsDao" ref="maintenanceInspectionDetailsDao"></property>
+    </bean>
+                       
      <!-- START Added for Website Enhancement 1 20Aug2016 -->
     <!-- Tire Management -->
     <!--  

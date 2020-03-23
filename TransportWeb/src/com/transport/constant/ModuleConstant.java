@@ -4,7 +4,7 @@ package com.transport.constant;
  * 
  * @author dward
  * @since July2015
- * Last Date Updated: 09Dec2019
+ * DateUpdated: 22Mar2020
  */
 public class ModuleConstant {
 
@@ -26,6 +26,7 @@ public class ModuleConstant {
 	public static final int TIRE_BRAND = 18; //Update for Website Enhancement 1 20Aug2016
 	public static final int TIRE = 19; //Update for Website Enhancement 1 20Aug2016
 	public static final int USER_ACCESS = 23;
+	public static final int INSPECTION = 28;
 	//Transactions
 	public static final int VERIFICATION_AND_VALIDATION = 12;
 	public static final int TIRE_MANAGEMENT = 20; //Update for Website Enhancement 1 20Aug2016 -- development in progress
@@ -33,6 +34,7 @@ public class ModuleConstant {
 	public static final int MAINTENANCE_MONITORING = 24; //Updated for v1.5.2 25Mar2019 
 	public static final int DRIVER_TRAINING = 25; //Updated for v1.5.4 26Aug2019
 	public static final int DRIVER_INCIDENT = 26;
+	public static final int MAINTENANCE_INSPECTION = 27;
 	
 	//Reports
 	public static final int RPT_VERIFICATION = 13;
@@ -42,7 +44,7 @@ public class ModuleConstant {
 	//Others
 	public static final int CHANGE_USERNAME = 15;
 	
-	//Last number is 26
+	//Last number is 28
 	
 	//Module Inner
 	public static final int MAINTENANCE_MONITORING_GPS = 241;

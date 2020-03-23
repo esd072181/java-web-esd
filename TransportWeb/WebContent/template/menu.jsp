@@ -78,6 +78,9 @@
     			<c:if test="${item == 927}">
     				<li><a href="#"  onclick="javascript:goToDriverIncident();">Driver Incident</a></li>
     			</c:if>
+    			<c:if test="${item == 928}">
+    				<li><a href="#"  onclick="javascript:goToMaintenanceInspection();">Maintenance Inspection Checklist</a></li>
+    			</c:if>
 			</c:forEach>
         </ul>
       </li>

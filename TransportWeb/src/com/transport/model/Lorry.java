@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 /**
  * 
  * @author dward
- * DateUpdated: 24Mar2019
+ * DateUpdated: 22Mar2019
  */
 public class Lorry implements Serializable {
 
@@ -22,22 +22,6 @@ public class Lorry implements Serializable {
 	private int capacity;
 	private String category;
 	private int transportId;
-	public int getTransportId() {
-		return transportId;
-	}
-
-	public void setTransportId(int transportId) {
-		this.transportId = transportId;
-	}
-
-	public String getTransport() {
-		return transport;
-	}
-
-	public void setTransport(String transport) {
-		this.transport = transport;
-	}
-
 	private int createdBy;
 	private Timestamp createdOn;
 	private int modifiedBy;
@@ -147,6 +131,22 @@ public class Lorry implements Serializable {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public int getTransportId() {
+		return transportId;
+	}
+
+	public void setTransportId(int transportId) {
+		this.transportId = transportId;
+	}
+
+	public String getTransport() {
+		return transport;
+	}
+
+	public void setTransport(String transport) {
+		this.transport = transport;
 	}
 	
 	
