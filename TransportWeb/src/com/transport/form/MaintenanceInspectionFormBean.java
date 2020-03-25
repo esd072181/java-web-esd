@@ -29,7 +29,7 @@ import com.transport.util.DateUtils;
  * 
  * @author edwarddavid
  * @since 21Mar2020
- *  DateUpdated: 23Mar2020
+ *  DateUpdated: 25Mar2020
  */
 public class MaintenanceInspectionFormBean extends TransportFormBean {
 
@@ -42,8 +42,8 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 	private int id;
 	private String lorryNo;
 	private String plateNo;
-	private int odometer;
-	private int hubOdometer;
+	private String odometer;
+	private String hubOdometer;
 	private String inspectors;
 	private String forAnnual;
 	private String forPm;
@@ -79,14 +79,16 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 		setPlateNo(model.getPlateNo());
 		setOdometer(model.getOdometer());
 		setHubOdometer(model.getHubOdometer());
-		setInspectors(model.getInspectors());
-		setForAnnual(model.getForAnnual());
-		setForPm(model.getForPm());
+		setInspectors(model.getInspectors()!=null ? model.getInspectors().trim().toUpperCase() : null);
+		setForAnnual(model.getForAnnual()!=null ? model.getForAnnual(): "NO");
+		setForPm(model.getForPm()!=null ? model.getForPm(): "NO");
 		if (model.getInspectionDate()!=null) {
 			setInspectionDate(DateUtils.sqlDateToString(model.getInspectionDate()));	
 		}
-		setRemarks(model.getRemarks());
+		setRemarks(model.getRemarks()!=null ? model.getRemarks().trim().toUpperCase() : null);
 	}
+	
+	
 	
 	public void populateDetailsFormBean(List<InspectionDetails> detailsList) throws Exception {
 		this.setModelDetailsList(detailsList);
@@ -99,13 +101,13 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 		model.setPlateNo(getPlateNo());
 		model.setOdometer(getOdometer());
 		model.setHubOdometer(getHubOdometer());
-		model.setInspectors(getInspectors());
-		model.setForAnnual(getForAnnual());
-		model.setForPm(getForPm());
+		model.setInspectors(getInspectors()!=null && getInspectors().trim().length()>0 ? getInspectors().trim().toUpperCase() : null);
+		model.setForAnnual(getForAnnual()!=null ? getForAnnual(): "NO");
+		model.setForPm(getForPm()!=null ? getForPm() : "NO");
 		if (getInspectionDate()!=null && getInspectionDate().trim().length()>1) {
 			model.setInspectionDate(DateUtils.strToSQLDate(getInspectionDate()));	
 		}
-		model.setRemarks(getRemarks());		
+		model.setRemarks(getRemarks()!=null ? getRemarks().trim().toUpperCase() : null);		
 		return model;
 	}
 	
@@ -319,30 +321,21 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 	}
 
 
-
-	public int getOdometer() {
+	public String getOdometer() {
 		return odometer;
 	}
 
-
-
-	public void setOdometer(int odometer) {
+	public void setOdometer(String odometer) {
 		this.odometer = odometer;
 	}
 
-
-
-	public int getHubOdometer() {
+	public String getHubOdometer() {
 		return hubOdometer;
 	}
 
-
-
-	public void setHubOdometer(int hubOdometer) {
+	public void setHubOdometer(String hubOdometer) {
 		this.hubOdometer = hubOdometer;
 	}
-
-
 
 	public String getInspectors() {
 		return inspectors;
@@ -353,26 +346,6 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 	public void setInspectors(String inspectors) {
 		this.inspectors = inspectors;
 	}
-
-	public String getForAnnual() {
-		return forAnnual;
-	}
-
-
-	public void setForAnnual(String forAnnual) {
-		this.forAnnual = forAnnual;
-	}
-
-
-	public String getForPm() {
-		return forPm;
-	}
-
-
-	public void setForPm(String forPm) {
-		this.forPm = forPm;
-	}
-
 
 	public String getInspectionDate() {
 		return inspectionDate;
@@ -551,6 +524,24 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 	public void setCategoryList(List<Inspection> categoryList) {
 		this.categoryList = categoryList;
 	}
+
+	public String getForAnnual() {
+		return forAnnual;
+	}
+
+	public void setForAnnual(String forAnnual) {
+		this.forAnnual = forAnnual;
+	}
+
+	public String getForPm() {
+		return forPm;
+	}
+
+	public void setForPm(String forPm) {
+		this.forPm = forPm;
+	}
+
+
 
 
 

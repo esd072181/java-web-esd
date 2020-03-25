@@ -19,13 +19,12 @@ import com.transport.constant.MiscConstant;
 import com.transport.dao.MaintenanceInspectionHeaderDao;
 import com.transport.model.InspectionHeader;
 import com.transport.model.User;
-import com.transport.model.WorkPermit;
 import com.transport.util.TransportUtils;
 
 /**
  * 
  * @author edwarddavid
- * @since 23Mar2020
+ * @since 25Mar2020
  */
 public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspectionHeaderDao {
 	
@@ -94,8 +93,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 			     
 			  pstmt.setString(1, model.getLorryNo());
 			  pstmt.setString(2, model.getPlateNo());
-			  pstmt.setInt(3, model.getOdometer());
-			  pstmt.setInt(4, model.getHubOdometer());
+			  pstmt.setString(3, model.getOdometer());
+			  pstmt.setString(4, model.getHubOdometer());
 			  pstmt.setString(5, model.getInspectors());
 			  pstmt.setString(6, model.getForAnnual());
 			  pstmt.setString(7, model.getForPm());
@@ -182,8 +181,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 				     
 			pstmt.setString(1, model.getLorryNo());
 			pstmt.setString(2, model.getPlateNo());
-			pstmt.setInt(3, model.getOdometer());
-			pstmt.setInt(4, model.getHubOdometer());
+			pstmt.setString(3, model.getOdometer());
+			pstmt.setString(4, model.getHubOdometer());
 			pstmt.setString(5, model.getInspectors());
 			pstmt.setString(6, model.getForAnnual());
 			pstmt.setString(7, model.getForPm());
@@ -227,7 +226,7 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		boolean status = false;
 		
-		WorkPermit model = (WorkPermit) dataMap.get(MapConstant.CLASS_DATA);
+		InspectionHeader model = (InspectionHeader) dataMap.get(MapConstant.CLASS_DATA);
 		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
 		
 		if (user!=null) {
@@ -266,7 +265,7 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 				     
 			if (statusInt == 1) {
 				conn.commit();
-				System.out.println("Work Permit record (id: " +model.getId()+") deleted successfully..");
+				System.out.println("Inspection Header record (id: " +model.getId()+") deleted successfully..");
 				status = true;
 			}
 		} catch (Exception e) {
@@ -317,8 +316,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 		    		 model.setId(rs.getInt(1));
 		    		 model.setLorryNo(rs.getString(2));
 		    		 model.setPlateNo(rs.getString(3));
-		    		 model.setOdometer(rs.getInt(4));
-		    		 model.setHubOdometer(rs.getInt(5));
+		    		 model.setOdometer(rs.getString(4));
+		    		 model.setHubOdometer(rs.getString(5));
 		    		 model.setInspectors(rs.getString(6));
 		    		 model.setForAnnual(rs.getString(7));
 		    		 model.setForPm(rs.getString(8));
@@ -451,10 +450,10 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 					 	sql.append(" from transport.tran_inspection_header a ");
 					 	sql.append(" where a.active = true ");
 					 	 if (category.equals(ActionConstant.SEARCHBY)) {
-					 		sql.append(" and (a.lorryno like '%" + searchValue + "%' ");
-					 		sql.append(" or a.plateno like '%" + searchValue + "%' ");
-					 		sql.append(" or a.inspectors like '%" + searchValue + "%' ");
-					 		sql.append(" or a.remarks like '%" + searchValue + "%') ");
+					 		sql.append(" and (a.lorryno ilike '%" + searchValue + "%' ");
+					 		sql.append(" or a.plateno ilike '%" + searchValue + "%' ");
+					 		sql.append(" or a.inspectors ilike '%" + searchValue + "%' ");
+					 		sql.append(" or a.remarks ilike '%" + searchValue + "%') ");
 					 	 }
 					 	sql.append(" order by a.inspectiondate desc,a.lorryno ");
 					 	sql.append(" limit ? ");
@@ -475,8 +474,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 		    		 model.setId(rs.getInt(1));
 		    		 model.setLorryNo(rs.getString(2));
 		    		 model.setPlateNo(rs.getString(3));
-		    		 model.setOdometer(rs.getInt(4));
-		    		 model.setHubOdometer(rs.getInt(5));
+		    		 model.setOdometer(rs.getString(4));
+		    		 model.setHubOdometer(rs.getString(5));
 		    		 model.setInspectors(rs.getString(6));
 		    		 model.setForAnnual(rs.getString(7));
 		    		 model.setForPm(rs.getString(8));

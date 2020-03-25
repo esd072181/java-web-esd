@@ -15,6 +15,7 @@
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
+					<th>InspectionDate</th>
 					<th>LorryNo</th>
 					<th>PlateNo</th>
 					<th>Odometer</th>
@@ -22,7 +23,6 @@
 					<th>Inspectors</th>
 					<th>ForAnnual</th>
 					<th>ForPM</th>
-					<th>InspectionDate</th>
 					<th>Remarks</th>
 				</tr>
 				<logic:iterate name="maintenanceInspectionForm" property="modelList" type="com.transport.model.InspectionHeader" id="model">
@@ -31,15 +31,15 @@
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="deleteMaintenanceInspection('<bean:write name="model" property="id"/>', '${maintenanceInspectionForm.category}',${maintenanceInspectionForm.currentPage})">Delete</a></td>
 						</c:if>	
-						<td align="right"><bean:write name="model" property="lorryNo"/></td>
+						<td><bean:write name="model" property="inspectionDate" format='MM/dd/yyyy'/></td>
+						<td><bean:write name="model" property="lorryNo"/></td>
 						<td><bean:write name="model" property="plateNo"/></td>
-						
 						<td><bean:write name="model" property="odometer"/></td>
 						<td><bean:write name="model" property="hubOdometer"/></td>	
 						<td><bean:write name="model" property="inspectors"/></td>
 						<td><bean:write name="model" property="forAnnual"/></td>
 						<td><bean:write name="model" property="forPm"/></td>	
-						<td><bean:write name="model" property="inspectionDate" format='MM/dd/yyyy'/></td>
+						
 						<td><bean:write name="model" property="remarks"/></td>
 					</tr>
 				</logic:iterate>
@@ -51,7 +51,7 @@
 		</c:choose>
 	</div>
 	
-	<div style="height: 50px; width: 98%;">
+	<div style="height: 50px; width: 98%; padding-left: 10px;">
 		<div style="position: relative; top: -15px; float: left;">
 			<ul class="pager">
 				<c:if test="${maintenanceInspectionForm.currentPage != 1 && maintenanceInspectionForm.noOfPages > 0}">

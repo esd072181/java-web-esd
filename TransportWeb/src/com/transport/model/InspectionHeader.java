@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 /**
  * 
  * @author edwarddavid
- * @since 21Mar2020
+ * @since 24Mar2020
  */
 public class InspectionHeader implements Serializable {
 
@@ -19,8 +19,8 @@ public class InspectionHeader implements Serializable {
 	private int id;
 	private String lorryNo;
 	private String plateNo;
-	private int odometer;
-	private int hubOdometer;
+	private String odometer;
+	private String hubOdometer;
 	private String inspectors;
 	private String forAnnual;
 	private String forPm;
@@ -59,19 +59,21 @@ public class InspectionHeader implements Serializable {
 		this.plateNo = plateNo;
 	}
 
-	public int getOdometer() {
+
+
+	public String getOdometer() {
 		return odometer;
 	}
 
-	public void setOdometer(int odometer) {
+	public void setOdometer(String odometer) {
 		this.odometer = odometer;
 	}
 
-	public int getHubOdometer() {
+	public String getHubOdometer() {
 		return hubOdometer;
 	}
 
-	public void setHubOdometer(int hubOdometer) {
+	public void setHubOdometer(String hubOdometer) {
 		this.hubOdometer = hubOdometer;
 	}
 

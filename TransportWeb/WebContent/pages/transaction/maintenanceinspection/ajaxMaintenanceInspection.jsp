@@ -2,7 +2,14 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-						
+<script>
+$(function() {
+    $('#idSearchValue').focus();
+  });
+</script>
+
+
+					
 	<div style="padding-left: 10px;">
 		<h3 style="font-weight: bolder; padding-bottom: 10px;">Maintenance Inspection Checklist</h3>
 		<html:form action="/maintenanceInspection.do" styleId="idForm">							
