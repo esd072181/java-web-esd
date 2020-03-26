@@ -213,9 +213,9 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 	}
 	
 	public void populateCategoryList() {
-        //get the main category and category list        
+        //get the main category and add to category list        
         String mainCategName = null;
-        String categName = null;
+        int categNo = 0;
         List<String> mainCategList = new ArrayList<>();
         List<Inspection> categList = new ArrayList<>();
         if (this.getInspectionList()!=null && this.getInspectionList().size()>0) {
@@ -224,11 +224,12 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
             		mainCategName = item.getMainCategoryName();
             		mainCategList.add(item.getMainCategoryName());
             	}
-            	if (!item.getCategoryName().equalsIgnoreCase(categName)) {
-            		categName = item.getCategoryName();
+            	if (item.getCategoryNo() != categNo) {
+            		categNo = item.getCategoryNo();
             		Inspection itemModel = new Inspection();
             		itemModel.setCategoryNo(item.getCategoryNo());
             		itemModel.setCategoryName(item.getCategoryName());
+            		itemModel.setMainCategoryName(item.getMainCategoryName());
             		categList.add(itemModel);
             	}
             }        	
@@ -238,11 +239,12 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
             		mainCategName = item.getMainCategoryName();
             		mainCategList.add(item.getMainCategoryName());
             	}
-            	if (!item.getCategoryName().equalsIgnoreCase(categName)) {
-            		categName = item.getCategoryName();
+            	if (item.getCategoryNo() != categNo) {
+            		categNo = item.getCategoryNo();
             		Inspection itemModel = new Inspection();
             		itemModel.setCategoryNo(item.getCategoryNo());
             		itemModel.setCategoryName(item.getCategoryName());
+            		itemModel.setMainCategoryName(item.getMainCategoryName());
             		categList.add(itemModel);
             	}
             }

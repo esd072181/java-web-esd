@@ -142,6 +142,17 @@ function hideItems(index) {
 								 	<c:set var="categoryCounter" value=""></c:set>
 								 	<logic:iterate name="maintenanceInspectionForm" property="mainCategoryList" type="java.lang.String" id="mainCategoryModel">
 								 			
+								 			<c:if test="${mainCategoryModel == 'TRAILER TANK'}">
+												<tr>
+													<td colspan="4" align="left" width="410" class="title-background" style="font-weight: bold; font-style: italic;">SECURITY CHECK ITEMS</td>
+											 		<td align="center" class="title-background" style="font-weight: bold;" width="60">Good</td>
+											 		<td align="center" class="title-background" style="font-weight: bold;" width="60">Repair</td>
+											 		<td align="center" class="title-background" style="font-weight: bold;" width="60">Replace</td>
+											 		<td align="center" class="title-background" style="font-weight: bold;" width="60">N/A</td>
+											 		<td align="center" class="title-background" style="font-weight: bold;" width="350">Remarks</td>
+												</tr>
+											</c:if>
+											
 										 	<tr>
 										 		<td colspan="4" align="center" class="title-background" style="font-weight: bold;">${mainCategoryModel}</td>
 										 		<td class="title-background"></td>
@@ -153,7 +164,20 @@ function hideItems(index) {
 										 	
 										 	<logic:iterate name="maintenanceInspectionForm" property="categoryList" type="com.transport.model.Inspection" id="categoryModel">
 												
+												<c:if test="${categoryModel.mainCategoryName == mainCategoryModel}">
+												
 													<c:set var="categoryCounter" value="${categoryCounter+1}"></c:set>
+													
+													<c:if test="${categoryCounter == 21}">
+														<tr>
+															<td colspan="4" align="left" width="410" class="title-background" style="font-weight: bold; font-style: italic;">TRAILER SAFETY CHECK ITEMS</td>
+													 		<td align="center" class="title-background" width="60"></td>
+													 		<td align="center" class="title-background" width="60"></td>
+													 		<td align="center" class="title-background" width="60"></td>
+													 		<td align="center" class="title-background" width="60"></td>
+													 		<td align="center" class="title-background" width="350"></td>
+														</tr>
+													</c:if>
 													
 													<tr>
 														<td onclick="hideItems(${categoryCounter});" style="font-weight: bold;" width="30" align="center">${categoryModel.categoryNo}</td><!-- categoryno -->
@@ -166,18 +190,16 @@ function hideItems(index) {
 													</tr>
 													
 													<logic:iterate name="maintenanceInspectionForm" property="modelDetailsList" type="com.transport.model.InspectionDetails" id="innerModel">
-														<c:if test="${innerModel.categoryName == categoryModel.categoryName}">
+														<c:if test="${innerModel.categoryNo == categoryModel.categoryNo && innerModel.mainCategoryName == mainCategoryModel}">
 															<c:choose>
 																<c:when test="${innerModel.subItemNo == ''}">
 																	<tr class="category${categoryCounter}">
 																		<td>
-																			<c:if test="${innerModel.labelOnly == false}">
-																				<html:hidden property="inspectionId" value="${innerModel.id}"/><!-- use this details id -->
-																				<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
-																				<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
-																			</c:if>
+																			<html:hidden property="inspectionId" value="${innerModel.id}"/><!-- use this details id -->
+																			<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
+																			<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
 																		</td>
-																		<td colspan="3" style="padding: 0px 5px 0px 5px;">${innerModel.itemNo} ${innerModel.description}</td>
+																		<td colspan="3"  width="150" style="padding: 0px 5px 0px 5px;">${innerModel.itemNo} ${innerModel.description}</td>
 																		<c:choose>
 																			<c:when test="${innerModel.labelOnly == true}">
 																				<td></td>
@@ -228,13 +250,11 @@ function hideItems(index) {
 																	<tr class="category${categoryCounter}"></tr>
 																	<tr class="category${categoryCounter}">
 																		<td>
-																			<c:if test="${innerModel.labelOnly == false}">
-																				<html:hidden property="inspectionId" value="${innerModel.id}"/>
-																				<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
-																				<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
-																			</c:if>
+																			<html:hidden property="inspectionId" value="${innerModel.id}"/>
+																			<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
+																			<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
 																		</td>
-																		<td  colspan="3" style="padding: 0px 5px 0px 25px;">${innerModel.subItemNo} ${innerModel.description}</td>
+																		<td  colspan="3" width="150" style="padding: 0px 5px 0px 25px;">${innerModel.subItemNo} ${innerModel.description}</td>
 																		<c:choose>
 																			<c:when test="${innerModel.labelOnly == true}">
 																				<td></td>
@@ -285,8 +305,8 @@ function hideItems(index) {
 															</c:choose>																
 														</c:if>
 													</logic:iterate>												
-												
-												</logic:iterate>		
+												</c:if>
+											</logic:iterate>		
 	
 									</logic:iterate>
 								 
