@@ -181,8 +181,8 @@ function hideItems(index) {
 													</c:if>
 																		
 													<tr>
-														<td onclick="hideItems(${categoryCounter});" style="font-weight: bold;" width="30" align="center">${categoryModel.categoryNo}</td><!-- categoryno -->
-														<td onclick="hideItems(${categoryCounter});" style="font-weight: bold; padding-left: 5px;" colspan="3">${categoryModel.categoryName}</td><!-- category name -->
+														<td onclick="hideItems(${categoryCounter});" style="font-weight: bold; cursor: pointer;" width="30" align="center">${categoryModel.categoryNo}</td><!-- categoryno -->
+														<td onclick="hideItems(${categoryCounter});" style="font-weight: bold; padding-left: 5px; cursor: pointer;" colspan="3">${categoryModel.categoryName}</td><!-- category name -->
 														<td width="60"></td>
 														<td width="60"></td>
 														<td width="60"></td>
