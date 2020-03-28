@@ -8174,6 +8174,7 @@
 							<c:set var="sumVolWeek5" value="0"></c:set>
 							<c:set var="totalLorryCountPerCategory" value="0"></c:set>
 							<c:set var="category" value="${model.category}"></c:set>
+							<c:set var="committedVolume" value="${model.committedVolume}"></c:set>
 							<c:set var="capacityOfTerminal" value="0"></c:set>
 							<tr>
 								<td colspan="4" align="center"><span style="font-weight: bold;"><bean:write name="model" property="category"/></span></td>
