@@ -12,6 +12,7 @@
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
 				<tr>
 					<th></th>
+					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
@@ -26,7 +27,8 @@
 					<th>Remarks</th>
 				</tr>
 				<logic:iterate name="maintenanceInspectionForm" property="modelList" type="com.transport.model.InspectionHeader" id="model">
-					<tr>				 
+					<tr>
+						<td align="center"><a href="#" onclick="viewMaintenanceInspectionReport('<bean:write name="model" property="id"/>');">View</a></td>				 
 						<td align="center"><a href="#" onclick="editMaintenanceInspection('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="deleteMaintenanceInspection('<bean:write name="model" property="id"/>', '${maintenanceInspectionForm.category}',${maintenanceInspectionForm.currentPage})">Delete</a></td>

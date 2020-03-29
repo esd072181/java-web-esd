@@ -14,6 +14,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author edwarddavid
  * @since 23Mar2020
+ * DateUpdated: 27Mar2020
  */
 public class MaintenanceInspectionModule implements TransportModule {
 	
@@ -47,6 +48,8 @@ public class MaintenanceInspectionModule implements TransportModule {
 				case ActionConstant.GET_INACTIVE_DATA: returnMap = bo.getInActiveData(dataMap);
 						break;
 				case ActionConstant.RESTORE: returnMap = bo.restoreRecord(dataMap);
+						break;
+				case ActionConstant.GENERATE_REPORT: returnMap = bo.generateReport(dataMap);
 						break;
 				default: break;
 			};	

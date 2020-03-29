@@ -1,5 +1,6 @@
 package com.transport.action;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author edwarddavid
  * @since 21Mar2020
- * DateUpdated: 22Mar2020
+ * DateUpdated: 27Mar2020
  */
 public class MaintenanceInspectionAction extends Action {
 
@@ -250,7 +251,56 @@ public class MaintenanceInspectionAction extends Action {
 			        }
 			        
 			        forwardAction = ActionConstant.SHOW_AJAX_TABLE;
-				} 
+				}  else if (command.equalsIgnoreCase(ParamConstant.AJAX_VIEW)) {
+
+					// fetch the data
+					int id = Integer.parseInt(request.getParameter("id"));
+
+					InspectionHeader model = new InspectionHeader();
+					model.setId(id);
+
+					HashMap<String, Object> dataMap = new HashMap<String, Object>();
+					dataMap.put(MapConstant.MODULE, module);
+					dataMap.put(MapConstant.CLASS_DATA, model);
+					dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA);
+
+					ServiceManager service = new ServiceManagerImpl();
+					Map<String, Object> resultMap = service.executeRequest(dataMap);
+
+					if (resultMap != null && !resultMap.isEmpty()) {
+						model = (InspectionHeader) resultMap.get(MapConstant.CLASS_DATA);
+						//generate report
+			        	dataMap.clear();;
+			        	resultMap.clear();
+		
+						String path = TransportUtils.getReportPath(request);
+						
+						dataMap.put(MapConstant.CLASS_DATA, model);
+						dataMap.put(MapConstant.REPORT_LOCALPATH, path);
+				        dataMap.put(MapConstant.MODULE, module);
+					    dataMap.put(MapConstant.ACTION, ActionConstant.GENERATE_REPORT);
+					    dataMap.put(MapConstant.RPT_TITLE, MiscConstant.RPT_MAINTENANCE_INSPECTION_TITLE);
+					    dataMap.put(MapConstant.RPT_JASPER, MiscConstant.RPT_MAINTENANCE_INSPECTION_REPORT);
+					    dataMap.put(MapConstant.RPT_PDF, MiscConstant.PDF_MAINTENANCE_INSPECTION_REPORT);
+					    dataMap.put("ChkNo", TransportUtils.getResourcesPath(request) + File.separator + "chkNo.png");
+					    dataMap.put("ChkYes", TransportUtils.getResourcesPath(request) + File.separator + "chkYes.png");
+					    
+					    
+				        resultMap = service.executeRequest(dataMap);
+			        	
+				        boolean isReportGenerated = (boolean) resultMap.get(MapConstant.BOOLEAN_DATA);
+
+			        	if (isReportGenerated) {
+			        		response.getWriter().println(MiscConstant.PDF_MAINTENANCE_INSPECTION_REPORT);			        		
+			        		TransportUtils.writeLogInfo(logger, MiscConstant.RPT_MESSSAGE_GENERATED_SUCCESS + "-" + module);	
+			        	} else {
+			        		//need to add message here if report generation failed, make the message dynamic
+			        		TransportUtils.writeLogInfo(logger, MiscConstant.RPT_MESSSAGE_GENERATED_FAILED + "-" + module);
+			        	}	        	
+					
+					}
+				
+				}
 			} else {
 				//show main screen
 				 forwardAction = ActionConstant.SHOW_AJAX_MAIN;

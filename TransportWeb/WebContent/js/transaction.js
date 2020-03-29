@@ -1311,3 +1311,16 @@ function deleteMaintenanceInspection(id, category, currentPage) {
 
 }
 
+function viewMaintenanceInspectionReport(id) {
+	
+	$.ajax({
+		  type: "GET",
+		  url: "maintenanceInspection.do?",
+		  cache: false,
+		  data: { command: "ajaxView", id: id  }
+		})
+		  .done(function( report ) {
+			  window.open('/TransportWeb/reports/'+report,'popUpWindow','height=1700,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+		  });
+
+}
