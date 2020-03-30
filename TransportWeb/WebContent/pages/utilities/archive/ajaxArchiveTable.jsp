@@ -423,6 +423,41 @@
 				</logic:iterate>
 			</table>
 		  </c:if>
+		  
+		  <!-- Maintenance Inspection -->
+		  <c:if test="${archiveForm.inspectionHeaderList != null}">
+		  
+			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
+				<tr>
+					<th>InspectionDate</th>
+					<th>LorryNo</th>
+					<th>PlateNo</th>
+					<th>Odometer</th>
+					<th>HubOdometer</th>
+					<th>Inspectors</th>
+					<th>ForAnnual</th>
+					<th>ForPM</th>
+					<th>Remarks</th>
+					<th></th>
+				</tr>
+				<logic:iterate name="archiveForm" property="inspectionHeaderList" type="com.transport.model.InspectionHeader" id="model">
+					<tr>
+						<td><bean:write name="model" property="inspectionDate" format='MM/dd/yyyy'/></td>
+						<td><bean:write name="model" property="lorryNo"/></td>
+						<td><bean:write name="model" property="plateNo"/></td>
+						<td><bean:write name="model" property="odometer"/></td>
+						<td><bean:write name="model" property="hubOdometer"/></td>	
+						<td><bean:write name="model" property="inspectors"/></td>
+						<td><bean:write name="model" property="forAnnual"/></td>
+						<td><bean:write name="model" property="forPm"/></td>	
+						<td><bean:write name="model" property="remarks"/></td>
+						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
+					</tr>
+				</logic:iterate>
+			</table>
+		  </c:if>
+
+
 				
 	</div>
 	

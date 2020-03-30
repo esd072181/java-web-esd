@@ -25,6 +25,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author edwarddavid
  * @since 25Mar2020
+ * DateUpdated: 30Mar2020
  */
 public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspectionHeaderDao {
 	
@@ -349,7 +350,94 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 
 	@Override
 	public Map<String, Object> getInActiveData(HashMap<String, Object> criteriaMap) throws Exception {
-		return null;
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GET_INACTIVE_DATA);
+		 
+		 //get the pagination and offset
+		 int offset = (int) criteriaMap.get(MapConstant.PAGINATION_OFFSET);
+		 int limit = (int) criteriaMap.get(MapConstant.PAGINATION_LIMIT);
+		 
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = null;
+			 List<InspectionHeader> rsList = new ArrayList<InspectionHeader>();
+			  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer("select a.id,a.lorryno,a.plateno,a.odometer,a.hubodometer,a.inspectors,a.forannual,a.forpm,a.inspectiondate,a.remarks ");
+				 	sql.append(" from transport.tran_inspection_header a ");
+				 	sql.append(" where a.active = false ");
+				 	sql.append(" order by a.inspectiondate desc ");
+				 	sql.append(" limit ? ");
+				 	sql.append(" offset ? ");
+
+			
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 pstmt.setInt(1, limit);
+				 pstmt.setInt(2, offset);
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+					 InspectionHeader model=new InspectionHeader();  
+		    		 model.setId(rs.getInt(1));
+		    		 model.setLorryNo(rs.getString(2));
+		    		 model.setPlateNo(rs.getString(3));
+		    		 model.setOdometer(rs.getString(4));
+		    		 model.setHubOdometer(rs.getString(5));
+		    		 model.setInspectors(rs.getString(6));
+		    		 model.setForAnnual(rs.getString(7));
+		    		 model.setForPm(rs.getString(8));
+		    		 model.setInspectionDate(rs.getDate(9));
+		    		 model.setRemarks(rs.getString(10));
+		    		 rsList.add(model);
+				 }			 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+			 }	 
+		 		     
+		     //get the total of records
+		     int  totalNoOfRecords = 0;
+			 
+		     try {
+		    	 conn = ServerContext.getJDBCHandle();
+		    	 
+		    	 StringBuffer sqlCount = new StringBuffer("select count(*) from transport.tran_inspection_header where active = false");	 
+
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sqlCount.toString());
+				
+		    	 pstmt = conn.prepareStatement(sqlCount.toString());
+		    	 
+		    	 rs = pstmt.executeQuery();
+		    	 if (rs.next()) {
+		    		 totalNoOfRecords = rs.getInt(1);
+		    	 }
+		    			
+		     } catch (SQLException e) {
+		    	 throw e;
+		     } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+		     }
+		     
+		     if (rsList!=null && !rsList.isEmpty()) {
+		    	 returnMap = new HashMap<String, Object>();
+		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
+		    	 returnMap.put(MapConstant.PAGINATION_TOTALRECORDS, totalNoOfRecords);
+		     } 
+	     
+		return returnMap;
 	}
 	
 	@Override

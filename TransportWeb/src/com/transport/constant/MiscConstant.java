@@ -4,7 +4,7 @@ package com.transport.constant;
  * 
  * @author dward
  * @since July2015
- * DateUpdated: 27Mar2020
+ * DateUpdated: 30Mar2020
  */
 public class MiscConstant {
 
@@ -131,6 +131,7 @@ public class MiscConstant {
 	public static final int LOV_ENTITY_TYPE_WORK_PERMIT = 113;
 	public static final int LOV_ENTITY_TYPE_DRIVER_TRAINING = 114;
 	public static final int LOV_ENTITY_TYPE_DRIVER_INCIDENT = 115;
+	public static final int LOV_ENTITY_TYPE_MAINTENANCE_INSPECTION = 116;
 	
 	//LOV for UserRole
 	public static final String LOV_USER_ROLE_STAFF = "Staff";

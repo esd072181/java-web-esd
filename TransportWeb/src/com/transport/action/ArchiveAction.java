@@ -26,6 +26,7 @@ import com.transport.model.DriverTraining;
 import com.transport.model.Employee;
 import com.transport.model.Findings;
 import com.transport.model.FollowUp;
+import com.transport.model.InspectionHeader;
 import com.transport.model.Items;
 import com.transport.model.Lorry;
 import com.transport.model.Remarks;
@@ -38,6 +39,12 @@ import com.transport.service.ServiceManager;
 import com.transport.service.ServiceManagerImpl;
 import com.transport.util.TransportUtils;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since July2015
+ * DateUpdated: 30Mar2020
+ */
 public class ArchiveAction extends Action {
 
 	private final static Logger logger = Logger.getLogger(ArchiveAction.class);
@@ -164,6 +171,12 @@ public class ArchiveAction extends Action {
 								dataMap.put(MapConstant.CLASS_DATA, driverIncidentModel); 
 								module = ModuleConstant.DRIVER_INCIDENT;
 			        			break;
+			        		case MiscConstant.LOV_ENTITY_TYPE_MAINTENANCE_INSPECTION:
+								InspectionHeader inspectionHeaderModel = new InspectionHeader();
+								inspectionHeaderModel.setId(id);
+								dataMap.put(MapConstant.CLASS_DATA, inspectionHeaderModel); 
+								module = ModuleConstant.MAINTENANCE_INSPECTION;
+			        			break;
 			        		default:
 			        			break;
 			        	}				
@@ -259,6 +272,9 @@ public class ArchiveAction extends Action {
 		        		case MiscConstant.LOV_ENTITY_TYPE_DRIVER_INCIDENT:
 							module = ModuleConstant.DRIVER_INCIDENT;
 		        			break;
+		        		case MiscConstant.LOV_ENTITY_TYPE_MAINTENANCE_INSPECTION:
+							module = ModuleConstant.MAINTENANCE_INSPECTION;
+		        			break;
 		        		default:
 		        			break;
 					}
@@ -350,6 +366,11 @@ public class ArchiveAction extends Action {
 								@SuppressWarnings("unchecked")
 								List<DriverIncident> driverIncidentList =  (List<DriverIncident>) resultMap.get(MapConstant.CLASS_LIST);     		
 					        	formBean.setDriverIncidentList(driverIncidentList);
+			        			break;
+			        		case MiscConstant.LOV_ENTITY_TYPE_MAINTENANCE_INSPECTION:
+								@SuppressWarnings("unchecked")
+								List<InspectionHeader> inspectionHeaderList =  (List<InspectionHeader>) resultMap.get(MapConstant.CLASS_LIST);     		
+					        	formBean.setInspectionHeaderList(inspectionHeaderList);
 			        			break;
 			        		default:
 			        			break;

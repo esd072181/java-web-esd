@@ -19,6 +19,7 @@ import com.transport.model.Lorry;
 import com.transport.model.Items;
 import com.transport.model.Corrections;
 import com.transport.model.FollowUp;
+import com.transport.model.InspectionHeader;
 import com.transport.model.Remarks;
 import com.transport.model.RootCause;
 import com.transport.model.Terminal;
@@ -27,6 +28,12 @@ import com.transport.model.VerificationAndValidation;
 import com.transport.model.WorkPermit;
 
 
+/**
+ * 
+ * @author edwarddavid
+ * @since July2015
+ * DateUpdated: 30Mar2020
+ */
 public class ArchiveFormBean extends TransportFormBean {
 
 	/**
@@ -51,6 +58,7 @@ public class ArchiveFormBean extends TransportFormBean {
 	private List<WorkPermit> workPermitList;
 	private List<DriverTraining> driverTrainingList;
 	private List<DriverIncident> driverIncidentList;
+	private List<InspectionHeader> inspectionHeaderList;
 	
 	private int noOfPages;
 	private int currentPage;
@@ -295,6 +303,16 @@ public class ArchiveFormBean extends TransportFormBean {
 
 	public void setDriverIncidentList(List<DriverIncident> driverIncidentList) {
 		this.driverIncidentList = driverIncidentList;
+	}
+
+
+	public List<InspectionHeader> getInspectionHeaderList() {
+		return inspectionHeaderList;
+	}
+
+
+	public void setInspectionHeaderList(List<InspectionHeader> inspectionHeaderList) {
+		this.inspectionHeaderList = inspectionHeaderList;
 	}		
 	
 	
