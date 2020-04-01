@@ -93,6 +93,10 @@
 		function updateFee(consultId,fee) {
 			window.location.href = 'updateFee?consultId=' + consultId + '&fee=' + fee;	
 		}
+		
+		function showPatientHistory(patientId,page) {
+			window.open('/drmsweb/showPatientHistory?patientId=' + patientId + '&page=' + page,'popUpWindow','height=600,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+		}
 						
 	</script>
 </head>
@@ -252,6 +256,7 @@
 							<td>
 								<input class="btn btn-default" type="submit" value="Save/Update Consultation Details" >
 								<a style="padding-left: 20px;" id="reportId" href="./viewPrescriptionReport?consultId=${patientConsultation.id}" >Click here to view Prescription</a>
+								<a href="#" onclick="showPatientHistory(${patientConsultation.patient.id},1);" style="padding-left: 20px;">Show Patient History</a>
 							</td>
 						</tr>
 					</table>

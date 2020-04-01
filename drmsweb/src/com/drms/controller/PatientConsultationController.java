@@ -436,5 +436,41 @@ public class PatientConsultationController {
 		 
 
 	  }
+	 
+	 @RequestMapping("/showPatientHistory")
+	 public ModelAndView showPatientHistory(@RequestParam("patientId") Integer patientId, @RequestParam("page") String page, 
+			 @ModelAttribute("patientConsultation") PatientConsultation patientConsultation, BindingResult result, ModelMap model) throws Exception {
+			
+			if (!DRMSUtil.isUserSessionValid(model)) {
+				logger.info(DRMSConstant.USER_INVALID_SESSION);
+				return new ModelAndView("security/login", "userAccount", new UserAccount());	
+			}
+			
+			Map<Object,Object> mapCriteria = new HashMap<Object,Object>();
+			mapCriteria.put("record_start", DRMSUtil.getRecordStartIndex(page!=null ? Integer.parseInt(page) : 1));
+			mapCriteria.put("max_result", DRMSConstant.RECORDS_PER_PAGE);
+			mapCriteria.put("patient_system_id", patientId);
+			
+			//get the history
+			Map<Object,Object>  resultMap = patientConsultationBo.findByPatientSystemId(mapCriteria);
+			Integer noOfPages = (Integer) resultMap.get("noOfPages");
+			
+			@SuppressWarnings("unchecked")
+			List<PatientConsultation> resultList = (List<PatientConsultation>) resultMap.get("resultList");
+			
+			boolean gotRecords = resultList!=null && resultList.size() > 0 ? true : false;
+
+			model.addAttribute("resultList", resultList);
+			model.addAttribute("searchFlag", true);
+			model.addAttribute("gotRecords", gotRecords);
+			model.addAttribute("currentPage", page);
+			model.addAttribute("noOfPages", noOfPages);
+			
+			if (!resultList.isEmpty()) {
+				patientConsultation = resultList.get(0);
+			}
+		
+			return new ModelAndView("transaction/patientconsultation/viewPatientHistory", "patientConsultation", patientConsultation);
+	}
 
 }

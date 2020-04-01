@@ -17,7 +17,8 @@ import com.drms.model.PatientConsultation;
 /**
  * 
  * @author dward
- *
+ * @since Jan2019
+ * DateUpdated: 01Apr2020
  */
 @Service
 public class PatientConsultationBoImpl implements PatientConsultationBo {
@@ -86,6 +87,11 @@ public class PatientConsultationBoImpl implements PatientConsultationBo {
 		entity.setVersion(entity.getVersion() + 1);
 		
 		return patientConsultationDao.update(entity);
+	}
+
+	@Override
+	public Map<Object, Object> findByPatientSystemId(Map<Object, Object> mapCriteria) {
+		return patientConsultationDao.findByPatientSystemId(mapCriteria);
 	}
 
 

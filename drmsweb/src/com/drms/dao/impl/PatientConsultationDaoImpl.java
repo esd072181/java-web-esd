@@ -21,7 +21,8 @@ import com.drms.util.HibernateDaoUtil;
 /**
  * 
  * @author dward
- *
+ * @since Jan2019
+ * DateUpdated: 01Apr2020
  */
 @Repository
 public class PatientConsultationDaoImpl extends HibernateDaoUtil implements PatientConsultationDao{
@@ -177,6 +178,58 @@ public class PatientConsultationDaoImpl extends HibernateDaoUtil implements Pati
 			closeHibernateSession(session);
 		 }
 		 return txnIsSuccess;
+	}
+
+	/**
+	 * This method is used for Patient History Sub-module
+	 */
+	@Override
+	public Map<Object, Object> findByPatientSystemId(Map<Object, Object> mapCriteria) {
+		
+		int recordStart = (Integer) mapCriteria.get("record_start");
+		int maxResult = (Integer) mapCriteria.get("max_result");
+		int id = (Integer) mapCriteria.get("patient_system_id");
+		
+		Map<Object, Object> mapResult = new HashMap<Object, Object>();
+		beginHibernateTransaction();
+		try {
+						
+			//Hibernate 5 below...
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<PatientConsultation> query = builder.createQuery(PatientConsultation.class);
+			Root<PatientConsultation> root = query.from(PatientConsultation.class);
+			query.select(root);
+			List<Predicate> predicates = new ArrayList<>();
+			predicates.add(
+					builder.and(builder.equal(root.get("patient").get("id"), id)));
+			query.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+			query.orderBy(builder.desc(root.get("consultDate")));
+		
+			Query<PatientConsultation> q = session.createQuery(query);
+			q.setFirstResult(recordStart); //Index start at 0 (first record)
+			q.setMaxResults(maxResult);
+			List<PatientConsultation> resultList = q.list();
+			
+			//Get totalRecordsCount for pagination
+			CriteriaQuery<Long> queryCount = builder.createQuery(Long.class);
+			queryCount.select(builder.count(queryCount.from(PatientConsultation.class)));
+			queryCount.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+			Query<Long> qCount = session.createQuery(queryCount);
+			long totalNoOfRecords = qCount.getSingleResult();
+			
+			if (!resultList.isEmpty()) {
+				mapResult.put("resultList", resultList);
+			}
+			
+			mapResult.put("noOfPages", DRMSUtil.getTotalNoOfPages(totalNoOfRecords)); //need to query in hibernate total no of records / pagination size
+
+			
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 } finally {
+			closeHibernateSession(session);
+		 }
+		return mapResult;
 	}
 
 	
