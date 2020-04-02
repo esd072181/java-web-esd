@@ -39,7 +39,6 @@
 						<table class="table table-striped table-hover table-bordered table-responsive" style="font-size: 11px;">
 							<tr style="font-weight: bold;">
 								<td>No</td>
-								<td>ConsultationNo</td>
 								<td>ConsultationDate</td>
 								<td>ChiefComplaint/Request</td>
 								<td>Diagnosis</td>
@@ -50,12 +49,12 @@
 								<td>Age</td>
 								<td>Height</td>
 								<td>Weight</td>
+								<td>BP</td>
 							</tr>
 							<!-- loop here -->
 							<c:forEach items="${resultList}" var="model" varStatus = "row">
 							    <tr>
 							    	<td>${row.count + ((currentPage - 1) * 10)}</td>
-							    	<td>${model.consultNo}</td>
 							    	<td><fmt:formatDate pattern="MM/dd/yyyy" value="${model.consultDate}"/></td>
 									<td>${model.chiefComplaint}</td>
 									<td>${model.diagnosis}</td>
@@ -65,7 +64,8 @@
 									<td>${model.professional.fullName}</td>		
 									<td>${model.age}</td>
 									<td>${model.height}</td>
-									<td>${model.weight}</td>				
+									<td>${model.weight}</td>
+									<td>${model.bp}</td>				
 							    </tr>
 							</c:forEach>
 							

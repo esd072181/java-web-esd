@@ -133,6 +133,17 @@
 						<td width="33%"></td>
 						<td>
 							<div class="form-group">
+				    			<form:label path="bp" cssClass="col-sm-2 control-label">Blood Pressure:</form:label>
+								<div class="col-xs-3">
+				      				<form:input path="bp" cssClass="form-control input-sm" />
+				    			</div>
+				    		</div>
+						</td>
+					</tr>
+					<tr>
+						<td width="33%"></td>
+						<td>
+							<div class="form-group">
 				    			<form:label path="chiefComplaint" cssClass="col-sm-2 control-label">Chief Complaint:</form:label>
 								<div class="col-xs-3">
 				      				<form:textarea id="chiefComplaintId" path="chiefComplaint" cssClass="form-control input-sm" />

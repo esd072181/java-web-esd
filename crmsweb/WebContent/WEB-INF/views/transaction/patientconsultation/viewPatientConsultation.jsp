@@ -169,9 +169,9 @@
 							<div class="col-xs-3">
 			      				<form:input path="age" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
 			    			</div>
-			    			<form:label path="height" cssClass="col-sm-2 control-label">Height:</form:label>
+			    			<form:label path="consultDate" cssClass="col-sm-2 control-label">Consultation Date:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="height" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
+			      				<form:input path="consultDate" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
 			    			</div>
 						</div>					
 					</td>
@@ -184,8 +184,12 @@
 							<div class="col-xs-3">
 			      				<form:input path="professional.fullName" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
 			    			</div>
-			    			<form:label path="weight" cssClass="col-sm-2 control-label">Weight:</form:label>
-							<div class="col-xs-3">
+			    			<form:label path="height" cssClass="col-sm-2 control-label">Height:</form:label>
+							<div class="col-xs-1">
+			      				<form:input path="height" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
+			    			</div>
+			    			<form:label path="height" cssClass="col-sm-1 control-label">Weight:</form:label>
+			    			<div class="col-xs-1">
 			      				<form:input path="weight" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
 			    			</div>
 						</div>					
@@ -199,9 +203,9 @@
 							<div class="col-xs-3">
 			      				<form:textarea path="chiefComplaint" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
 			    			</div>
-			    			<form:label path="consultDate" cssClass="col-sm-2 control-label">Consultation Date:</form:label>
-							<div class="col-xs-3">
-			      				<form:input path="consultDate" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
+							<form:label path="bp" cssClass="col-sm-2 control-label">Blood Pressure:</form:label>
+							<div class="col-xs-1">
+			      				<form:input path="bp" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
 			    			</div>
 						</div>					
 					</td>
