@@ -25,7 +25,8 @@ import org.hibernate.annotations.Where;
 /**
  * 
  * @author dward
- *
+ * @since Jan2019
+ * DateUpdated: 02Apr2020
  */
 @Entity
 @Table(name = "patientconsultation", schema = "drms")
@@ -46,6 +47,8 @@ public class PatientConsultation implements Serializable {
 	private String medicationStatement;
 	private Date consultDate;
 	private Integer age;
+	private String height;
+	private String weight;
 	private String remarks;
 	private ListValue status;
 	private ListValue paymentStatus;
@@ -290,7 +293,7 @@ public class PatientConsultation implements Serializable {
 		//shorten this string because it can cause stackoverflow error
 		return "PatientConsultation [id=" + id + ", consultNo=" + consultNo
 				+ ", patient=" + (patient!=null ? String.valueOf(patient.getId()) : "null") + ", professional=" + (professional!=null ? String.valueOf(professional.getId()) : "null")
-				+ ", consultDate=" + consultDate + ", age=" + age + ", status="
+				+ ", consultDate=" + consultDate + ", age=" + age + ", height=" + height + ", weight=" + weight + ", status="
 				+ (status!=null ? String.valueOf(status.getId()) : "null") + ", paymentStatus=" + (paymentStatus!=null ? String.valueOf(paymentStatus.getId()) : "null") + ", createdBy="
 				+ createdBy + ", createdOn=" + createdOn + ", modifiedBy="
 				+ modifiedBy + ", modifiedOn=" + modifiedOn + ", version="
@@ -313,6 +316,24 @@ public class PatientConsultation implements Serializable {
 
 	public void setMedId(Integer medId) {
 		this.medId = medId;
+	}
+
+	@Column(name = "height")
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	@Column(name = "weight")
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
 	}	
 	
 	

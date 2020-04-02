@@ -111,6 +111,28 @@
 						<td width="33%"></td>
 						<td>
 							<div class="form-group">
+								<form:label path="height" cssClass="col-sm-2 control-label">Height:</form:label>
+								<div class="col-xs-3">
+				      				<form:input path="height" cssClass="form-control input-sm"/>
+				    			</div>
+							</div>			
+						</td>
+					</tr>
+					<tr>
+						<td width="33%"></td>
+						<td>
+							<div class="form-group">
+				    			<form:label path="weight" cssClass="col-sm-2 control-label">Weight:</form:label>
+								<div class="col-xs-3">
+				      				<form:input path="weight" cssClass="form-control input-sm" />
+				    			</div>
+				    		</div>
+						</td>
+					</tr>
+					<tr>
+						<td width="33%"></td>
+						<td>
+							<div class="form-group">
 				    			<form:label path="chiefComplaint" cssClass="col-sm-2 control-label">Chief Complaint/Request:</form:label>
 								<div class="col-xs-3">
 				      				<form:textarea id="chiefComplaintId" path="chiefComplaint" cssClass="form-control input-sm" />

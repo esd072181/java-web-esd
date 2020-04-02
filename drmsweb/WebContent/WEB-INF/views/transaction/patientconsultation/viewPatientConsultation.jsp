@@ -95,7 +95,7 @@
 		}
 		
 		function showPatientHistory(patientId,page) {
-			window.open('/drmsweb/showPatientHistory?patientId=' + patientId + '&page=' + page,'popUpWindow','height=600,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+			window.open('showPatientHistory?patientId=' + patientId + '&page=' + page,'popUpWindow','height=600,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
 		}
 						
 	</script>
@@ -163,6 +163,21 @@
 						</div>					
 					</td>
 				</tr>	
+				<tr>
+					<td width="2%"></td>
+					<td>
+						<div class="form-group">
+							<form:label path="height" cssClass="col-sm-2 control-label">Height:</form:label>
+							<div class="col-xs-3">
+			      				<form:input path="height" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
+			    			</div>
+			    			<form:label path="weight" cssClass="col-sm-2 control-label">Weight:</form:label>
+							<div class="col-xs-3">
+			      				<form:input path="weight" cssClass="form-control input-sm" readonly="true" cssStyle="color: blue;"/>
+			    			</div>
+						</div>					
+					</td>
+				</tr>
 				<tr>
 					<td width="2%"></td>
 					<td>
