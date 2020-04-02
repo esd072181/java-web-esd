@@ -54,6 +54,12 @@ import com.crms.propertyeditor.CustomSQLDateEditor;
 import com.crms.util.CRMSUtil;
 import com.crms.util.ReportUtils;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since Jan2019
+ * DateUpdated: 02Apr2020
+ */
 @Controller
 @SessionAttributes(value =  {"userid","roleid"})
 public class PatientConsultationController {
@@ -488,6 +494,50 @@ public class PatientConsultationController {
 		return new ModelAndView("transaction/patientconsultation/viewPatientConsultation", "patientConsultation", patientConsultation);
 	}
 
+	@RequestMapping("/updateFee")
+	public ModelAndView updateFee(@RequestParam("consultId") String consultId, @RequestParam("fee") String fee, @ModelAttribute("patientConsultation") PatientConsultation patientConsultation,
+    			BindingResult result, ModelMap model) throws Exception {
+		
+		if (!CRMSUtil.isUserSessionValid(model)) {
+			logger.info(CRMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		boolean transactStatus = false;
+		
+		PatientBill bill = patientBillBo.getPatientBill(Integer.parseInt(consultId));
+		bill.setConsultFee(new BigDecimal(fee));
+		if (bill.getTotalMedFee()!=null) {
+			bill.setTotalBill(new BigDecimal(bill.getConsultFee().doubleValue() + bill.getTotalMedFee().doubleValue()));
+		}else {
+			bill.setTotalBill(bill.getConsultFee());
+		}
+		bill.setModifiedBy(CRMSUtil.getUserIdFromSession(model));
+		
+		transactStatus = patientBillBo.update(bill);
+		
+		if (transactStatus) {
+			logger.info("Patient Bill updated for consultid: " + consultId);
+		}
+		
+		//update to the latest model of consultation
+		patientConsultation = patientConsultationBo.findById(Integer.parseInt(consultId));
+				
+		//get med list
+		List<Medicine> medList = medBo.getAllEntity();
+		model.addAttribute("medList", medList);
+		
+		model.addAttribute("isUpdated", transactStatus);
+	
+		bill = patientBillBo.getPatientBill(Integer.parseInt(consultId));
+		
+		//consult fee and total Bill
+		model.addAttribute("consultFee", bill.getConsultFee());
+		model.addAttribute("totalBill", bill.getTotalBill());
+		
+		return new ModelAndView("transaction/patientconsultation/viewPatientConsultation", "patientConsultation", patientConsultation);
+	}
+
 	
 	 @RequestMapping("/viewPrescriptionReport")
 	 public void viewPrescriptionReport(@RequestParam("consultId") String consultId, HttpServletResponse response) throws Exception {
@@ -526,7 +576,42 @@ public class PatientConsultationController {
 			
 		}
 		 
-
 	  }
+	 
+	 @RequestMapping("/showPatientHistory")
+	 public ModelAndView showPatientHistory(@RequestParam("patientId") Integer patientId, @RequestParam("page") String page, 
+			 @ModelAttribute("patientConsultation") PatientConsultation patientConsultation, BindingResult result, ModelMap model) throws Exception {
+			
+			if (!CRMSUtil.isUserSessionValid(model)) {
+				logger.info(CRMSConstant.USER_INVALID_SESSION);
+				return new ModelAndView("security/login", "userAccount", new UserAccount());	
+			}
+			
+			Map<Object,Object> mapCriteria = new HashMap<Object,Object>();
+			mapCriteria.put("record_start", CRMSUtil.getRecordStartIndex(page!=null ? Integer.parseInt(page) : 1));
+			mapCriteria.put("max_result", CRMSConstant.RECORDS_PER_PAGE);
+			mapCriteria.put("patient_system_id", patientId);
+			
+			//get the history
+			Map<Object,Object>  resultMap = patientConsultationBo.findByPatientSystemId(mapCriteria);
+			Integer noOfPages = (Integer) resultMap.get("noOfPages");
+			
+			@SuppressWarnings("unchecked")
+			List<PatientConsultation> resultList = (List<PatientConsultation>) resultMap.get("resultList");
+			
+			boolean gotRecords = resultList!=null && resultList.size() > 0 ? true : false;
+
+			model.addAttribute("resultList", resultList);
+			model.addAttribute("searchFlag", true);
+			model.addAttribute("gotRecords", gotRecords);
+			model.addAttribute("currentPage", page);
+			model.addAttribute("noOfPages", noOfPages);
+			
+			if (!resultList.isEmpty()) {
+				patientConsultation = resultList.get(0);
+			}
+		
+			return new ModelAndView("transaction/patientconsultation/viewPatientHistory", "patientConsultation", patientConsultation);
+	}
 
 }

@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.crms.bo.LabExamBo;
 import com.crms.bo.PatientBo;
 import com.crms.bo.PatientConsultationBo;
 import com.crms.bo.ProfessionalBo;
@@ -45,8 +44,6 @@ public class ConsultationController {
 	private PatientBo patientBo;
 	@Autowired
 	private ProfessionalBo professionalBo;
-	@Autowired
-	private LabExamBo labExamBo;
 	@Autowired
 	private PatientConsultationBo patientConsultationBo;
 	

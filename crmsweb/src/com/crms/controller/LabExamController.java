@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.crms.bo.LabExamBo;
-import com.crms.bo.ListValueBo;
 import com.crms.constant.CRMSConstant;
 import com.crms.model.LabExam;
 import com.crms.model.UserAccount;
@@ -33,7 +32,7 @@ import com.crms.validator.LabExamValidator;
 /**
  * 
  * @author dward
- *
+ * @since Jan2019
  */
 @Controller
 @SessionAttributes("userid")
@@ -43,8 +42,6 @@ public class LabExamController {
 	
 	@Autowired
 	private LabExamBo labExamBo;
-	@Autowired
-	private ListValueBo listValueBo;
 	
 	@Autowired
 	private LabExamValidator labExamValidator;
