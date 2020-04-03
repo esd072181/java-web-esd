@@ -13,19 +13,19 @@
 		        	<c:forEach items="${sessionScope.user_access_list}" var="item">
 		        	    <c:if test="${item == 901}">
 		        	    	<td align="center">
-		    					<img onclick="goToVerificationAndValidation();" src="resources/vnv.jpg" alt="Verification and Validation Compliance of Tracker" height="100" width="100">	
+		    					<img onclick="goToVerificationAndValidation();" src="resources/vnv.jpg" alt="Verification and Validation Compliance of Tracker" height="100" width="100" style="cursor: pointer;">	
 		    				</td>
 		    				<td width="30px"></td>	
 		    			</c:if>
 		        		<c:if test="${item == 902}">
 		    				<td align="center">
-		    					<img onclick="goToWorkPermit();" src="resources/workpermit.jpg" alt="Work Permit" height="100" width="100">	
+		    					<img onclick="goToWorkPermit();" src="resources/workpermit.jpg" alt="Work Permit" height="100" width="100" style="cursor: pointer;">	
 		    				</td>
 		    				<td width="30px"></td>		        		
 		        		</c:if>
 		      			<c:if test="${item == 922}">
 		      				<td align="center">
-		    					<img onclick="goToMaintenanceMonitoring();" src="resources/maintenance.jpg" alt="Maintenance Monitoring" height="100" width="100">	
+		    					<img onclick="goToMaintenanceMonitoring();" src="resources/maintenance.jpg" alt="Maintenance Monitoring" height="100" width="100" style="cursor: pointer;">	
 		    				</td>
 		    				<td width="30px"></td>	
 		    			</c:if>
@@ -33,13 +33,13 @@
 		    				<c:choose>
 		    					<c:when test="${sessionScope.user_role_session=='Driver'}">
 		  							<td align="center">
-										<img onclick="viewDriverTrainingSummaryForDriver('${sessionScope.user_emp_id_session}');" src="resources/driver.png" alt="Driver Training and Information" height="100" width="100">	
+										<img onclick="viewDriverTrainingSummaryForDriver('${sessionScope.user_emp_id_session}');" src="resources/driver.png" alt="Driver Training and Information" height="100" width="100" style="cursor: pointer;">	
 									</td>
 									<td width="30px"></td>	    					
 								</c:when>
 		    					<c:otherwise> 
 		    						<td align="center">
-		    							<img onclick="goToDriverTraining();" src="resources/driver.png" alt="Driver Training and Information" height="100" width="100">	
+		    							<img onclick="goToDriverTraining();" src="resources/driver.png" alt="Driver Training and Information" height="100" width="100" style="cursor: pointer;">	
 		    						</td>
 		    						<td width="30px"></td> 
 		    					</c:otherwise>
@@ -47,13 +47,13 @@
 		    			</c:if>
 		    			<c:if test="${item == 927}">
 		      				<td align="center">
-		    					<img onclick="goToDriverIncident();" src="resources/driver_incident.png" alt="Driver Incident" height="100" width="100">	
+		    					<img onclick="goToDriverIncident();" src="resources/driver_incident.png" alt="Driver Incident" height="100" width="100" style="cursor: pointer;">	
 		    				</td>
 		    				<td width="30px"></td>	
 		    			</c:if>
 		    			<c:if test="${item == 928}">
 		      				<td align="center">
-		    					<img onclick="goToMaintenanceInspection();" src="resources/inspection_checklist.png" alt="Maintenance Inspection Checklist" height="100" width="100">	
+		    					<img onclick="goToMaintenanceInspection();" src="resources/inspection_checklist.png" alt="Maintenance Inspection Checklist" height="100" width="100" style="cursor: pointer;">	
 		    				</td>
 		    				<td width="30px"></td>	
 		    			</c:if>
