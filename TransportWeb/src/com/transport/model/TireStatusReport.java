@@ -6,9 +6,9 @@ import java.io.Serializable;
  * 
  * @author dward
  * @since 20Aug2016
- * LastDateUpdated: 05March2019
+ * DateUpdated: 08Apr2020
  */
-public class TireStatus implements Serializable {
+public class TireStatusReport implements Serializable {
 
 	/**
 	 * 
@@ -20,11 +20,11 @@ public class TireStatus implements Serializable {
 	private int threadDepth1;
 	private int threadDepth2;
 	private int threadDepth3;
+	private String lorryNo;
 	private String plateno;
-	private String bodyNo;
 	private String wheelPosition;
 	
-	public TireStatus() {}
+	public TireStatusReport() {}
 
 	public String getSerialNo() {
 		return serialNo;
@@ -74,14 +74,6 @@ public class TireStatus implements Serializable {
 		this.plateno = plateno;
 	}
 
-	public String getBodyNo() {
-		return bodyNo;
-	}
-
-	public void setBodyNo(String bodyNo) {
-		this.bodyNo = bodyNo;
-	}
-
 	public String getWheelPosition() {
 		return wheelPosition;
 	}
@@ -90,4 +82,13 @@ public class TireStatus implements Serializable {
 		this.wheelPosition = wheelPosition;
 	}
 
+	public String getLorryNo() {
+		return lorryNo;
+	}
+
+	public void setLorryNo(String lorryNo) {
+		this.lorryNo = lorryNo;
+	}
+
+	
 }

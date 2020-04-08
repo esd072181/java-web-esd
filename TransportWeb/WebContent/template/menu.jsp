@@ -37,16 +37,23 @@
         			</c:if>	 
         			<c:if test="${item == 911}">
         				<li><a href="#" onclick="javascript:goToClosure();">Closure on Corrective Actions</a></li>
-        			</c:if>	 	       		 
-	       		 <!--<li><a href="#" onclick="javascript:goToTireBrand();">Tire Brand</a></li>-->
-	       		 <!--<li><a href="#" onclick="javascript:goToTire();">Tire</a></li>-->
-	       		    <c:if test="${item == 912}">
+        			</c:if>	 	
+        			<c:if test="${item == 929}">
+        				 <li><a href="#" onclick="goToTireBrand();">Tire Brand</a></li>
+        			</c:if>       		 
+	       			<c:if test="${item == 930}">
+        				 <li><a href="#" onclick="goToTire();">Tire</a></li>
+        			</c:if> 
+	             </c:forEach>
+	             <!-- After the divider -->
+	             <c:forEach items="${sessionScope.user_access_list}" var="item">
+	             	<c:if test="${item == 912}">
         				<li class="divider"></li>
 	             		<li><a href="#" onclick="javascript:goToUser();">User</a></li>
         			</c:if>	 
         			<c:if test="${item == 913}">
 	             		<li><a href="#" onclick="javascript:goToUserAccess();">User Access</a></li>
-        			</c:if>	 
+        			</c:if>	
 	             </c:forEach>
 	        </ul>
 	    </li>

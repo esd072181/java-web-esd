@@ -3,32 +3,13 @@
 
 <script>
 $(function() {
-    $( "#menu" ).menu({
-      items: "> :not(.ui-widget-header)"
-    });
+    $('#nameId').focus().val($('#nameId').val());
   });
   
  
 </script>
 
-
-
-<div class="row">
-	<div class="col-sm-2">
-	
-		<!-- Left Menu -->
-		<div style="padding-top: 15px; padding-left: 12px;">
-		  	<!-- jQuery ui -->
-		  	<ul id="menu" style="width: 150px;">
-			  <li class="ui-widget-header">Options</li>
-			  <li onclick="goToTireBrand();"><a href="#">Search Record</a></li>
-			  <li onclick="goToAddTireBrand();"><a href="#">Add New Record</a></li>
-			  <%@ include file="/template/menu_left_masterfile.jsp" %>
-			 </ul>
-		</div>
-	</div>
-	
- 	<div class="col-sm-10">
+<div style="padding-left:10px;">
 
 		<div style="height: 30%;">
 		<h3 style="font-weight: bolder;">Tire Brand - Edit Record</h3>
@@ -42,28 +23,20 @@ $(function() {
 					<h4 style="color: blue;"><c:out value="${tireBrandForm.transactionMessage}"></c:out></h4>
 				</div> 
 						<div>
-							<div class="control-group">
-								<label  class="control-label" for="id">Id:</label>	
-								 <div class="controls">
-								 		<html:hidden property="id" value="${tireBrandForm.id}"/><!-- need to add hidden because the the text property for id is disabled -->
-										<html:text property="id" styleClass="input-xlarge"  style="text-align: right;" size="2" value="${tireBrandForm.id}" disabled="true"></html:text><br>
-								 </div>						
-							</div>
-		
-							<div class="control-group">
-								<label  class="control-label top-spacing" for="name">Name:</label>	
-								 <div class="controls">
-										<html:text styleId="nameId" property="name" styleClass="input-xlarge"  size="50" maxlength="30" value="${tireBrandForm.name}" disabled="${tireBrandForm.transactionStatus}"></html:text><br>
-								 </div>						
-							</div>
-												
-							<div class="control-group">
-								<label  class="control-label top-spacing" for="description">Description:</label>	
-								 <div class="controls">
-										<html:text styleId="descriptionId" property="description" styleClass="input-xlarge"  size="100" maxlength="500" value="${tireBrandForm.description}" disabled="${tireBrandForm.transactionStatus}"></html:text><br>
-								 </div>						
-							</div>
-														
+							<html:hidden property="id" value="${tireBrandForm.id}"/><!-- need to add hidden because the the text property for id is disabled -->
+							<table>
+								<tr>
+									<td><label  class="control-label" for="name">Name:</label></td>
+									<td style="padding-left:5px;">
+										<div class="control-group">	
+									 		<div class="controls">
+												<html:text styleId="nameId" property="name" styleClass="input-xlarge"  size="50" maxlength="30" value="${tireBrandForm.name}" disabled="${tireBrandForm.transactionStatus}"></html:text><br>
+									 		</div>						
+										</div>
+									</td>
+								</tr>
+							</table>
+											
 							<br>
 							 <div class="control-group">
 							 	 <div class="controls">
@@ -83,9 +56,7 @@ $(function() {
 				</fieldset>				
 
 			</html:form>
-		</div>
 	
 	</div>
-	<script type="text/javascript">document.forms[0].elements['description'].focus();</script>
 </div>	
 	

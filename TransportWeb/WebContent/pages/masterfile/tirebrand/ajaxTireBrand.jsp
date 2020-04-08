@@ -10,21 +10,7 @@ $(function() {
     $('#idSearchCriteria').focus();
   });
 </script>
-<div class="row">
-  <div class="col-sm-2">
-	<!-- Left Menu -->
-	  <div style="padding-top: 15px; padding-left: 12px;">
-	  	<!-- jQuery ui -->
-	  	<ul id="menu" style="width: 150px;">
-		  <li class="ui-widget-header">Options</li>
-		  <li onclick="goToTireBrand();"><a href="#">Search Record</a></li>
-		  <li onclick="goToAddTireBrand();"><a href="#">Add New Record</a></li>
-		   <%@ include file="/template/menu_left_masterfile.jsp" %>
-		</ul>
-	 </div>
-  </div>
-    
-  <div class="col-sm-10">
+<div style="padding-left: 10px;">
 	
 	<div style="height: 30%;">
 		<div style="width: 50%;">
@@ -40,6 +26,7 @@ $(function() {
 						<html:text property="criteria" styleId="idSearchCriteria" size="25" onkeydown="executeSearch(event);"></html:text>
 						<html:button styleId="btnSearchFilter" property="command" onclick="getTireBrand(1,'filter');" value="Search" styleClass="btn btn-primary"></html:button>
 						<html:button property="command" onclick="getTireBrand(1,'showall');" value="Show All" styleClass="btn btn-primary"></html:button>
+						&nbsp;&nbsp;&nbsp;&nbsp;<html:button property="command" onclick="goToAddTireBrand();" value="Add New Record" styleClass="btn btn-primary"></html:button>
 						<span id="msgDeletedId" style="color: blue; padding-left: 100px; display: none;"><bean:message key="msg.deleted"/></span>
 					</div>
 					<div style="padding-left: 85px; float: left;">
@@ -58,8 +45,6 @@ $(function() {
 		<!-- ajax part of table data -->
 	</div>
 
-  
-  </div>
 
 </div>
 

@@ -25,6 +25,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
+ * DateUpdated: 08Apr2020
  */
 public class TireDaoImpl implements TireDao {
 	
@@ -55,10 +56,16 @@ public class TireDaoImpl implements TireDao {
 		  		qry.append(",serialno ");
 		  		qry.append(",recapno ");
 		  		qry.append(",sizeandply ");
+		  		qry.append(",price ");
 		  		qry.append(",datepurchased ");
+		  		qry.append(",datepurchasedforrecap1 ");
+		  		qry.append(",datepurchasedforrecap2 ");
+		  		qry.append(",invoiceno ");
+		  		qry.append(",analysis ");
+		  		qry.append(",comments ");
 		  		qry.append(",retired ");
 		  		qry.append(",dateretired ");
-		  		qry.append(",bodyno ");
+		  		//qry.append(",lorryno ");//not required here
 		  		qry.append(",createdby ");
 		  		qry.append(",createdon ");
 		  		qry.append(",version ");
@@ -76,50 +83,16 @@ public class TireDaoImpl implements TireDao {
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
 		  		qry.append(" ,1 ");
 		  		qry.append(" ,true ");
 		  		qry.append(" ) ");
-
-		StringBuffer qryLog =  new StringBuffer("insert into transport.file_tire (");
-				qryLog.append("brandid ");		
-				qryLog.append(",serialno ");
-				qryLog.append(",recapno ");
-				qryLog.append(",sizeandply ");
-				qryLog.append(",datepurchased ");
-				qryLog.append(",retired ");
-				qryLog.append(",dateretired ");
-				qryLog.append(",bodyno ");
-				qryLog.append(",createdby ");
-				qryLog.append(",createdon ");
-				qryLog.append(",version ");
-				qryLog.append(",active ");
-				qryLog.append(") ");
-				qryLog.append(" values ");
-				qryLog.append("( ");
-				qryLog.append(model.getBrandId());
-				qryLog.append(",");
-				qryLog.append(model.getSerialNo());
-				qryLog.append(",");
-				qryLog.append(model.getRecapNo());
-				qryLog.append(",");
-				qryLog.append(model.getSizeAndPly());
-				qryLog.append(",");
-				qryLog.append(model.getDatePurchased());
-				qryLog.append(",");
-				qryLog.append(model.getRetired());
-				qryLog.append(",");
-				qryLog.append(model.getDateRetired());
-				qryLog.append(",");
-				qryLog.append(model.getBodyNo());
-				qryLog.append(",");
-				qryLog.append(model.getCreatedBy());
-				qryLog.append(",");
-				qryLog.append(model.getCreatedOn());
-				qryLog.append(",1 ");
-				qryLog.append(",true ");
-				qryLog.append(") ");
 					
-		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
   		  		
 		  try {
 			  conn = ServerContext.getJDBCHandle();
@@ -130,12 +103,17 @@ public class TireDaoImpl implements TireDao {
 			  pstmt.setString(2, model.getSerialNo());
 			  pstmt.setString(3, model.getRecapNo());
 			  pstmt.setString(4, model.getSizeAndPly());
-			  pstmt.setDate(5, model.getDatePurchased());
-			  pstmt.setString(6, model.getRetired());
-			  pstmt.setDate(7, model.getDateRetired());
-			  pstmt.setString(8, model.getBodyNo());
-			  pstmt.setInt(9, model.getCreatedBy());
-			  pstmt.setTimestamp(10, model.getCreatedOn());
+			  pstmt.setBigDecimal(5, model.getPrice());
+			  pstmt.setDate(6, model.getDatePurchased());
+			  pstmt.setDate(7, model.getDatePurchasedForRecap1());
+			  pstmt.setDate(8, model.getDatePurchasedForRecap2());
+			  pstmt.setString(9, model.getInvoiceNo());
+			  pstmt.setString(10, model.getAnalysis());
+			  pstmt.setString(11, model.getComments());
+			  pstmt.setString(12, model.getRetired());
+			  pstmt.setDate(13, model.getDateRetired());
+			  pstmt.setInt(14, model.getCreatedBy());
+			  pstmt.setTimestamp(15, model.getCreatedOn());
 			     
 			  int statusInt = pstmt.executeUpdate();
 			     
@@ -183,43 +161,24 @@ public class TireDaoImpl implements TireDao {
 			qry.append(" ,serialno=? ");
 			qry.append(" ,recapno=? ");
 			qry.append(" ,sizeandply=? ");
+			qry.append(" ,price=? ");
 			qry.append(" ,datepurchased=? ");
+			qry.append(" ,datepurchasedforrecap1=? ");
+			qry.append(" ,datepurchasedforrecap2=? ");
+			qry.append(" ,invoiceno=? ");
+			qry.append(" ,analysis=? ");
+			qry.append(" ,comments=? ");
 			qry.append(" ,retired=? ");
 			qry.append(" ,dateretired=? ");
-			qry.append(" ,bodyno=? ");
+			//qry.append(" ,lorryno=? "); // this is not required here
 			qry.append(" ,modifiedby=? ");
 			qry.append(" ,modifiedon=? ");
 			qry.append(" ,version=(version+1) ");
 			qry.append(" where ");
 			qry.append(" id = ? ");
 
-		StringBuffer qryLog =  new StringBuffer("update transport.file_tire set ");	
-			qryLog.append(" brandid=");
-			qryLog.append(model.getBrandId());
-			qryLog.append(" ,serialno=");
-			qryLog.append(model.getSerialNo());
-			qryLog.append(" ,recapno=");
-			qryLog.append(model.getRecapNo());
-			qryLog.append(" ,sizeandply=");
-			qryLog.append(model.getSizeAndPly());
-			qryLog.append(" ,datepurchased=");
-			qryLog.append(model.getDatePurchased());
-			qryLog.append(" ,retired=");
-			qryLog.append(model.getRetired());
-			qryLog.append(" ,dateretired=");
-			qryLog.append(model.getDateRetired());
-			qryLog.append(" ,bodyno=");
-			qryLog.append(model.getBodyNo());
-			qryLog.append(" ,modifiedby=");
-			qryLog.append(model.getModifiedBy());
-			qryLog.append(" ,modifiedon=");
-			qryLog.append(model.getModifiedOn());
-			qryLog.append(" ,version=(version+1) ");
-			qryLog.append(" where ");
-			qryLog.append(" id = ");
-			qryLog.append(model.getId());
-			
-		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+				
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
 	
 		 try {
 			conn = ServerContext.getJDBCHandle();
@@ -230,13 +189,18 @@ public class TireDaoImpl implements TireDao {
 			pstmt.setString(2, model.getSerialNo());
 			pstmt.setString(3, model.getRecapNo());
 			pstmt.setString(4, model.getSizeAndPly());
-			pstmt.setDate(5, model.getDatePurchased());
-			pstmt.setString(6, model.getRetired());
-			pstmt.setDate(7, model.getDateRetired());
-			pstmt.setString(8, model.getBodyNo());
-			pstmt.setInt(9, model.getModifiedBy());
-			pstmt.setTimestamp(10, model.getModifiedOn());
-			pstmt.setLong(11, model.getId());
+			pstmt.setBigDecimal(5, model.getPrice());
+			pstmt.setDate(6, model.getDatePurchased());
+			pstmt.setDate(7, model.getDatePurchasedForRecap1());
+			pstmt.setDate(8, model.getDatePurchasedForRecap2());
+			pstmt.setString(9, model.getInvoiceNo());
+			pstmt.setString(10, model.getAnalysis());
+			pstmt.setString(11, model.getComments());
+			pstmt.setString(12, model.getRetired());
+			pstmt.setDate(13, model.getDateRetired());
+			pstmt.setInt(14, model.getModifiedBy());
+			pstmt.setTimestamp(15, model.getModifiedOn());
+			pstmt.setLong(16, model.getId());
 				     
 			int statusInt = pstmt.executeUpdate();
 				     
@@ -288,18 +252,7 @@ public class TireDaoImpl implements TireDao {
 			qry.append(" where ");
 			qry.append(" id = ? ");
 
-		StringBuffer qryLog =  new StringBuffer("update transport.file_tire set ");	
-			qryLog.append(" active=false ");
-			qryLog.append(" ,modifiedby=");
-			qryLog.append(model.getModifiedBy());
-			qryLog.append(" ,modifiedon=");
-			qryLog.append(model.getModifiedOn());
-			qryLog.append(" ,version=(version+1) ");
-			qryLog.append(" where ");
-			qryLog.append(" id = ");
-			qryLog.append(model.getId());
-			
-		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
 	
 		 try {
 			conn = ServerContext.getJDBCHandle();
@@ -356,74 +309,33 @@ public class TireDaoImpl implements TireDao {
 			 try {
 				 conn = ServerContext.getJDBCHandle();
 
-				 StringBuffer sql = null;
-				 if (category.equals(ActionConstant.SEARCHALL)) {
-					 sql = new StringBuffer("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
+				 StringBuffer  sql = new StringBuffer("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.price,t.datepurchased,");
+				 		sql.append(" t.datepurchasedforrecap1,t.datepurchasedforrecap2,t.invoiceno,t.analysis,t.comments,t.retired,t.dateretired,");
+				 		sql.append(" t.lorryno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
 					 	sql.append(" from transport.file_tire t");
-					 	sql.append(" inner join transport.file_tirebrand b");
+					 	sql.append(" inner join transport.file_tire_brand b");
 					 	sql.append(" on t.brandid = b.id ");
 					 	sql.append(" where t.active = true ");
+					 	 if (category.equals(ActionConstant.SEARCHBY)) {
+					 		sql.append(" and (t.serialno ilike ? or b.name ilike ? )");
+					 	 }
 					 	sql.append(" order by b.name,t.serialno ");
 					 	sql.append(" limit ? ");
 					 	sql.append(" offset ?");		 
-				 } else {
-					 sql = new StringBuffer("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
-					 	sql.append(" from transport.file_tire t");
-					 	sql.append(" inner join transport.file_tirebrand b");
-					 	sql.append(" on t.brandid = b.id ");
-					 	sql.append(" where ");
-					 	sql.append(" (t.serialno ilike ? or b.name ilike ? )");
-					 	sql.append(" and t.active = true ");
-					 	sql.append(" order by b.name,t.serialno ");
-					 	sql.append(" limit ? ");
-					 	sql.append(" offset ?");	
-				 }
-
-
-				StringBuffer sqlLog = null;
+				  
 						 
-				if (category.equals(ActionConstant.SEARCHALL)) {
-					sqlLog = new StringBuffer("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
-							 sqlLog.append(" from transport.file_tire t");
-							 sqlLog.append(" inner join transport.file_tirebrand b");
-							 sqlLog.append(" on t.brandid = b.id ");
-							 sqlLog.append(" where t.active = true ");
-							 sqlLog.append(" order by b.name,t.serialno ");
-							 sqlLog.append(" limit ");
-							 sqlLog.append(limit);
-							 sqlLog.append(" offset ");	
-							 sqlLog.append(offset);		 
-				} else {
-					sqlLog = new StringBuffer("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
-						sqlLog.append(" from transport.file_tire t");
-						sqlLog.append(" inner join transport.file_tirebrand b");
-						sqlLog.append(" on t.brandid = b.id ");
-						sqlLog.append(" where ");
-						sqlLog.append(" (t.serialno ilike '%");
-						sqlLog.append(criteria);
-						sqlLog.append("%' or b.name ilike '%");
-						sqlLog.append(criteria);
-						sqlLog.append("%'" );
-						sqlLog.append(" and t.active = true ");
-						sqlLog.append(" order by b.name,t.serialno ");
-						sqlLog.append(" limit ");
-						sqlLog.append(limit);
-						sqlLog.append(" offset ");	
-						sqlLog.append(offset);		
-				}
-						 
-				TransportUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+				TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 					
 				 pstmt = conn.prepareStatement(sql.toString());
 				 
-				 if (category.equals(ActionConstant.SEARCHALL)) {
-					 pstmt.setInt(1, limit);
-					 pstmt.setInt(2, offset);
-				 } else {
+				 if (category.equals(ActionConstant.SEARCHBY)) {
 					 pstmt.setString(1, "%"+criteria+"%");
 					 pstmt.setString(2, "%"+criteria+"%");
 					 pstmt.setInt(3, limit);
 					 pstmt.setInt(4, offset);
+				 } else {
+					 pstmt.setInt(1, limit);
+					 pstmt.setInt(2, offset);
 				 }
 
 				 
@@ -436,10 +348,16 @@ public class TireDaoImpl implements TireDao {
 		    		 model.setSerialNo(rs.getString(3));
 		    		 model.setRecapNo(rs.getString(4));
 		    		 model.setSizeAndPly(rs.getString(5));
-		    		 model.setDatePurchased(rs.getDate(6));
-		    		 model.setRetired(rs.getString(7));
-		    		 model.setDateRetired(rs.getDate(8));
-		    		 model.setBodyNo(rs.getString(9));
+		    		 model.setPrice(rs.getBigDecimal(6));
+		    		 model.setDatePurchased(rs.getDate(7));
+		    		 model.setDatePurchasedForRecap1(rs.getDate(8));
+		    		 model.setDatePurchasedForRecap2(rs.getDate(9));
+		    		 model.setInvoiceNo(rs.getString(10));
+		    		 model.setAnalysis(rs.getString(11));
+		    		 model.setComments(rs.getString(12));
+		    		 model.setRetired(rs.getString(13));
+		    		 model.setDateRetired(rs.getDate(14));
+		    		 model.setLorryNo(rs.getString(15));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {
@@ -460,17 +378,10 @@ public class TireDaoImpl implements TireDao {
 			     if (category.equals(ActionConstant.SEARCHALL)) {
 			    	 sqlCount = new StringBuffer("select count(*) from transport.file_tire where active = true");	 
 			     }else {
-			    	 sqlCount = new StringBuffer("select count(*) from transport.file_tire t inner join transport.file_tirebrand b on t.brandid = b.id where (b.name ilike '%"+criteria+"%' or t.serialno ilike '%"+criteria+"%') and t.active = true");	 
+			    	 sqlCount = new StringBuffer("select count(*) from transport.file_tire t inner join transport.file_tire_brand b on t.brandid = b.id where (b.name ilike '%"+criteria+"%' or t.serialno ilike '%"+criteria+"%') and t.active = true");	 
 			     } 
-
-				StringBuffer sqlCountLog = null;
-				if (category.equals(ActionConstant.SEARCHALL)) {
-					 sqlCountLog = new StringBuffer("select count(*) from transport.file_tire where active = true");	 
-				}else {
-					 sqlCountLog = new StringBuffer("select count(*) from transport.file_tire t inner join transport.file_tirebrand b on t.brandid = b.id where (b.name ilike '%"+criteria+"%' or t.serialno ilike '%"+criteria+"%') and t.active = true");	 
-				} 
 					
-				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCountLog.toString());
+				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCount.toString());
 				
 		    	 pstmt = conn.prepareStatement(sqlCount.toString());
 		    	 
@@ -514,19 +425,14 @@ public class TireDaoImpl implements TireDao {
 					  
 			 try {
 				 conn = ServerContext.getJDBCHandle();
-
-				 StringBuffer sql = new StringBuffer();				
-				 	 	sql.append("select t.id,t.brandid,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
-					 	sql.append(" from transport.file_tire t");
-					 	sql.append(" where t.id = ?");		 
-
-				 StringBuffer sqlLog = new StringBuffer();	
-				 	sqlLog.append("select t.id,t.brandid,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
-				 	sqlLog.append(" from transport.file_tire t");
-				 	sqlLog.append("where t.id = ");
-				 	sqlLog.append(model.getId());
+		
+				 StringBuffer  sql = new StringBuffer("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.price,t.datepurchased,");
+			 		sql.append(" t.datepurchasedforrecap1,t.datepurchasedforrecap2,t.invoiceno,t.analysis,t.comments,t.retired,t.dateretired,");
+			 		sql.append(" t.lorryno,t.brandid ");			 	
+				 	sql.append(" from transport.file_tire t inner join transport.file_tire_brand b on t.brandid = b.id ");
+					sql.append(" where t.id = ?");		 
 			
-				 TransportUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 			
 				 pstmt = conn.prepareStatement(sql.toString());
 				 
@@ -535,15 +441,22 @@ public class TireDaoImpl implements TireDao {
 				 rs = pstmt.executeQuery();
 
 				 while(rs.next()) {
-		    		 model.setId(rs.getInt(1));
-		    		 model.setBrandId(rs.getInt(2));
+					 model.setId(rs.getInt(1));
+		    		 model.setBrandName(rs.getString(2));
 		    		 model.setSerialNo(rs.getString(3));
 		    		 model.setRecapNo(rs.getString(4));
 		    		 model.setSizeAndPly(rs.getString(5));
-		    		 model.setDatePurchased(rs.getDate(6));
-		    		 model.setRetired(rs.getString(7));
-		    		 model.setDateRetired(rs.getDate(8));
-		    		 model.setBodyNo(rs.getString(9));
+		    		 model.setPrice(rs.getBigDecimal(6));
+		    		 model.setDatePurchased(rs.getDate(7));
+		    		 model.setDatePurchasedForRecap1(rs.getDate(8));
+		    		 model.setDatePurchasedForRecap2(rs.getDate(9));
+		    		 model.setInvoiceNo(rs.getString(10));
+		    		 model.setAnalysis(rs.getString(11));
+		    		 model.setComments(rs.getString(12));
+		    		 model.setRetired(rs.getString(13));
+		    		 model.setDateRetired(rs.getDate(14));
+		    		 model.setLorryNo(rs.getString(15));
+		    		 model.setBrandId(rs.getInt(16));
 				 }				 
 			 } catch (SQLException e) {
 				 throw e;
@@ -576,24 +489,15 @@ public class TireDaoImpl implements TireDao {
 			  
 			 try {
 				 conn = ServerContext.getJDBCHandle();
-
-				 StringBuffer sql = new StringBuffer();				
-				 	sql.append("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
-				 	sql.append(" from transport.file_tire t");
-				 	sql.append(" inner join transport.file_tirebrand b");
-				 	sql.append(" on t.brandid = b.id ");
+		
+				 StringBuffer  sql = new StringBuffer("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.price,t.datepurchased,");
+			 		sql.append(" t.datepurchasedforrecap1,t.datepurchasedforrecap2,t.invoiceno,t.analysis,t.comments,t.retired,t.dateretired,");
+			 		sql.append(" t.lorryno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");			 	
+				 	sql.append(" from transport.file_tire t inner join transport.file_tire_brand b on t.brandid = b.id ");
 				 	sql.append(" where t.active = true ");
 				 	sql.append(" order by b.name,t.serialno ");
 
-				 StringBuffer sqlLog = new StringBuffer();				
-				 	sqlLog.append("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
-				 	sqlLog.append(" from transport.file_tire t");
-				 	sqlLog.append(" inner join transport.file_tirebrand b");
-				 	sqlLog.append(" on t.brandid = b.id ");
-				 	sqlLog.append(" where t.active = true ");
-				 	sqlLog.append(" order by b.name,t.serialno ");
-			
-				 TransportUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 			
 				 pstmt = conn.prepareStatement(sql.toString());
 				 
@@ -607,10 +511,16 @@ public class TireDaoImpl implements TireDao {
 		    		 model.setSerialNo(rs.getString(3));
 		    		 model.setRecapNo(rs.getString(4));
 		    		 model.setSizeAndPly(rs.getString(5));
-		    		 model.setDatePurchased(rs.getDate(6));
-		    		 model.setRetired(rs.getString(7));
-		    		 model.setDateRetired(rs.getDate(8));
-		    		 model.setBodyNo(rs.getString(9));
+		    		 model.setPrice(rs.getBigDecimal(6));
+		    		 model.setDatePurchased(rs.getDate(7));
+		    		 model.setDatePurchasedForRecap1(rs.getDate(8));
+		    		 model.setDatePurchasedForRecap2(rs.getDate(9));
+		    		 model.setInvoiceNo(rs.getString(10));
+		    		 model.setAnalysis(rs.getString(11));
+		    		 model.setComments(rs.getString(12));
+		    		 model.setRetired(rs.getString(13));
+		    		 model.setDateRetired(rs.getDate(14));
+		    		 model.setLorryNo(rs.getString(15));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {
@@ -648,29 +558,16 @@ public class TireDaoImpl implements TireDao {
 			 try {
 				 conn = ServerContext.getJDBCHandle();
 
-				 StringBuffer sql = new StringBuffer();				
-				 	sql.append("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
-				 	sql.append(" from transport.file_tire t");
-				 	sql.append(" inner join transport.file_tirebrand b");
-				 	sql.append(" on t.brandid = b.id ");
+				 StringBuffer  sql = new StringBuffer("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.price,t.datepurchased,");
+			 		sql.append(" t.datepurchasedforrecap1,t.datepurchasedforrecap2,t.invoiceno,t.analysis,t.comments,t.retired,t.dateretired,");
+			 		sql.append(" t.lorryno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");			 	
+				 	sql.append(" from transport.file_tire t inner join transport.file_tire_brand b on t.brandid = b.id ");
 				 	sql.append(" where t.active = false ");
 				 	sql.append(" order by b.name,t.serialno ");
 				 	sql.append(" limit ? ");
 				 	sql.append(" offset ? ");
-
-				 StringBuffer sqlLog = new StringBuffer();				
-				 	sqlLog.append("select t.id,b.name as brand,t.serialno,t.recapno,t.sizeandply,t.datepurchased,t.retired,t.dateretired,t.bodyno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");
-				 	sqlLog.append(" from transport.file_tire t");
-				 	sqlLog.append(" inner join transport.file_tirebrand b");
-				 	sqlLog.append(" on t.brandid = b.id ");
-				 	sqlLog.append(" where t.active = false ");
-				 	sqlLog.append(" order by b.name,t.serialno ");
-				 	sqlLog.append(" limit ");
-				 	sqlLog.append(limit);
-				 	sqlLog.append(" offset ");
-				 	sqlLog.append(offset);
 			
-				 TransportUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 			
 				 pstmt = conn.prepareStatement(sql.toString());
 				 
@@ -687,10 +584,16 @@ public class TireDaoImpl implements TireDao {
 		    		 model.setSerialNo(rs.getString(3));
 		    		 model.setRecapNo(rs.getString(4));
 		    		 model.setSizeAndPly(rs.getString(5));
-		    		 model.setDatePurchased(rs.getDate(6));
-		    		 model.setRetired(rs.getString(7));
-		    		 model.setDateRetired(rs.getDate(8));
-		    		 model.setBodyNo(rs.getString(9));
+		    		 model.setPrice(rs.getBigDecimal(6));
+		    		 model.setDatePurchased(rs.getDate(7));
+		    		 model.setDatePurchasedForRecap1(rs.getDate(8));
+		    		 model.setDatePurchasedForRecap2(rs.getDate(9));
+		    		 model.setInvoiceNo(rs.getString(10));
+		    		 model.setAnalysis(rs.getString(11));
+		    		 model.setComments(rs.getString(12));
+		    		 model.setRetired(rs.getString(13));
+		    		 model.setDateRetired(rs.getDate(14));
+		    		 model.setLorryNo(rs.getString(15));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {
@@ -709,10 +612,8 @@ public class TireDaoImpl implements TireDao {
 		    	 conn = ServerContext.getJDBCHandle();
 		    	 
 			    sqlCount = new StringBuffer("select count(*) from transport.file_tire where active = false");	 
-				
-			    StringBuffer sqlCountLog = new StringBuffer("select count(*) from transport.file_tire where active = false");	 
 					
-				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCountLog.toString());
+				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCount.toString());
 				
 		    	 pstmt = conn.prepareStatement(sqlCount.toString());
 		    	 
@@ -767,16 +668,7 @@ public class TireDaoImpl implements TireDao {
 			qry.append(" where ");
 			qry.append(" id = ? ");
 
-		StringBuffer qryLog =  new StringBuffer("update transport.file_tire set ");	
-			qryLog.append(" active=true ");
-			qryLog.append(" ,modifiedby="+model.getModifiedBy());
-			qryLog.append(" ,modifiedon="+model.getModifiedOn());
-			qryLog.append(" ,version=(version+1) ");
-			qryLog.append(" where ");
-			qryLog.append(" id = ");
-			qryLog.append(model.getId());
-			
-		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
 	
 		 try {
 			conn = ServerContext.getJDBCHandle();
@@ -806,6 +698,68 @@ public class TireDaoImpl implements TireDao {
 		returnMap.put(MapConstant.TRANSACTION_STATUS, status);			
 		
 		return returnMap;
+	}
+
+	/**
+	 * This method will be used in Tire Management for Lorry
+	 */
+	@Override
+	public Boolean updateLorryNoBySerialNo(HashMap<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_UPDATE);
+		 
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean status = false;
+		
+		Tire model = (Tire) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("update transport.file_tire set ");	
+			qry.append(" ,lorryno=? "); 
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" serialno = ? ");
+
+				
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setString(1, model.getLorryNo());
+			pstmt.setInt(2, model.getModifiedBy());
+			pstmt.setTimestamp(3, model.getModifiedOn());
+			pstmt.setString(4, model.getSerialNo());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("Tire record (id: " +model.getId()+") updated successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			TransportUtils.closeObjects(rs);
+			TransportUtils.closeObjects(pstmt);
+			TransportUtils.closeObjects(conn);
+		}
+		
+		return status;
 	}
 	
 }

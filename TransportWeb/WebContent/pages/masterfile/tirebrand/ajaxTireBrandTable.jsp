@@ -10,20 +10,21 @@
 		  <c:when test="${tireBrandForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Name</th>
-					<th>Description</th>
 					<th></th>
-					<th></th>
+					<c:if test="${sessionScope.user_role_session=='Admin'}">
+						<th></th>
+					</c:if>
 				</tr>
-				<logic:iterate name="tireBrandForm" property="modelList" type="com.transport.model.TireBrand" id="model">
+				<logic:iterate name="tireBrandForm" property="modelList" type="com.transport.model.TireBrand" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
-						<td><bean:write name="model" property="name"/></td>
-						<td><bean:write name="model" property="description"/></td>
+						<td><c:out value="${index+1}"/></td>
+						<td><a href="#" onclick="javascript: editTireBrand('<bean:write name="model" property="id"/>');"><bean:write name="model" property="name"/></a></td>
 						<td align="center"><a href="#" onclick="javascript: editTireBrand('<bean:write name="model" property="id"/>');">Edit</a></td>
-						<td align="center"><a href="#" onclick="javascript: deleteTireBrand('<bean:write name="model" property="id"/>', '${tireBrandForm.category}',${tireBrandForm.currentPage})">Delete</a></td>
+						<c:if test="${sessionScope.user_role_session=='Admin'}">
+							<td align="center"><a href="#" onclick="javascript: deleteTireBrand('<bean:write name="model" property="id"/>', '${tireBrandForm.category}',${tireBrandForm.currentPage})">Delete</a></td>
+						</c:if>
 					</tr>
 				</logic:iterate>
 			</table>

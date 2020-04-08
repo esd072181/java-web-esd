@@ -1,5 +1,6 @@
 package com.transport.form;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import com.transport.util.DateUtils;
  * 
  * @author dward
  * @since 20Aug2016
+ * DateUpdated: 08Apr2020
  * 
  */
 public class TireFormBean extends TransportFormBean {
@@ -39,10 +41,16 @@ public class TireFormBean extends TransportFormBean {
 	private String serialNo;
 	private String recapNo;
 	private String sizeAndPly;
+	private String price;
 	private String datePurchased;
+	private String datePurchasedForRecap1;
+	private String datePurchasedForRecap2;
+	private String invoiceNo;
+	private String analysis;
+	private String comments;
 	private String retired;
 	private String dateRetired;
-	private String bodyNo;
+	private String lorryNo;
 	
 	private String criteria;
 	private String category;
@@ -114,14 +122,6 @@ public class TireFormBean extends TransportFormBean {
 
 	public void setDateRetired(String dateRetired) {
 		this.dateRetired = dateRetired;
-	}
-
-	public String getBodyNo() {
-		return bodyNo;
-	}
-
-	public void setBodyNo(String bodyNo) {
-		this.bodyNo = bodyNo;
 	}
 
 
@@ -212,13 +212,24 @@ public class TireFormBean extends TransportFormBean {
 		setSerialNo(model.getSerialNo());
 		setRecapNo(model.getRecapNo());
 		setSizeAndPly(model.getSizeAndPly());
+		setPrice(String.valueOf(model.getPrice()));
 		if (model.getDatePurchased()!=null) {
 			setDatePurchased(DateUtils.sqlDateToString(model.getDatePurchased()));
 		}
+		if (model.getDatePurchasedForRecap1()!=null) {
+			setDatePurchasedForRecap1(DateUtils.sqlDateToString(model.getDatePurchasedForRecap1()));
+		}
+		if (model.getDatePurchasedForRecap2()!=null) {
+			setDatePurchasedForRecap2(DateUtils.sqlDateToString(model.getDatePurchasedForRecap2()));
+		}
+		setInvoiceNo(model.getInvoiceNo());
+		setAnalysis(model.getAnalysis());
+		setComments(model.getComments());
 		setRetired(model.getRetired());
 		if (model.getDateRetired()!=null) {
 			setDateRetired(DateUtils.sqlDateToString(model.getDateRetired()));
 		}
+		//setLorryNo(model.getLorryNo());
 	}
 	
 	public Tire populateModel (TireFormBean formbean) throws Exception {
@@ -228,13 +239,26 @@ public class TireFormBean extends TransportFormBean {
 		model.setSerialNo(formbean.getSerialNo());
 		model.setRecapNo(formbean.getRecapNo());
 		model.setSizeAndPly(formbean.getSizeAndPly());
+		if (formbean.getPrice()!=null && formbean.getPrice().trim().length()>0) {
+			model.setPrice(BigDecimal.valueOf(Double.parseDouble(formbean.getPrice())));	
+		}
 		if (formbean.getDatePurchased()!=null && formbean.getDatePurchased().trim().length() > 0) {
 			model.setDatePurchased(DateUtils.strToSQLDate(formbean.getDatePurchased()));
 		}
+		if (formbean.getDatePurchasedForRecap1()!=null && formbean.getDatePurchasedForRecap1().trim().length() > 0) {
+			model.setDatePurchasedForRecap1(DateUtils.strToSQLDate(formbean.getDatePurchasedForRecap1()));
+		}
+		if (formbean.getDatePurchasedForRecap2()!=null && formbean.getDatePurchasedForRecap2().trim().length() > 0) {
+			model.setDatePurchasedForRecap2(DateUtils.strToSQLDate(formbean.getDatePurchasedForRecap2()));
+		}
+		model.setInvoiceNo(formbean.getInvoiceNo());
+		model.setAnalysis(formbean.getAnalysis());
+		model.setComments(formbean.getComments());
 		model.setRetired(formbean.getRetired());
 		if (formbean.getDateRetired()!=null && formbean.getDateRetired().trim().length() > 0) {
 			model.setDateRetired(DateUtils.strToSQLDate(formbean.getDateRetired()));
 		}
+		//model.setLorryNo(formbean.getLorryNo());
 		return model;
 	}
 
@@ -307,5 +331,62 @@ public class TireFormBean extends TransportFormBean {
 
 		return errors;
 	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getDatePurchasedForRecap1() {
+		return datePurchasedForRecap1;
+	}
+
+	public void setDatePurchasedForRecap1(String datePurchasedForRecap1) {
+		this.datePurchasedForRecap1 = datePurchasedForRecap1;
+	}
+
+	public String getDatePurchasedForRecap2() {
+		return datePurchasedForRecap2;
+	}
+
+	public void setDatePurchasedForRecap2(String datePurchasedForRecap2) {
+		this.datePurchasedForRecap2 = datePurchasedForRecap2;
+	}
+
+	public String getInvoiceNo() {
+		return invoiceNo;
+	}
+
+	public void setInvoiceNo(String invoiceNo) {
+		this.invoiceNo = invoiceNo;
+	}
+
+	public String getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getLorryNo() {
+		return lorryNo;
+	}
+
+	public void setLorryNo(String lorryNo) {
+		this.lorryNo = lorryNo;
+	}
+	
 	
 }

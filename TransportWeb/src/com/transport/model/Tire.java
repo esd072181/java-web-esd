@@ -1,6 +1,7 @@
 package com.transport.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -8,6 +9,7 @@ import java.sql.Timestamp;
  * 
  * @author dward
  * @since 20Aug2016
+ * DateUpdated: 08Apr2020
  */
 public class Tire implements Serializable {
 
@@ -21,10 +23,16 @@ public class Tire implements Serializable {
 	private String serialNo;
 	private String recapNo;
 	private String sizeAndPly;
+	private BigDecimal price;
 	private Date datePurchased;
+	private Date datePurchasedForRecap1;
+	private Date datePurchasedForRecap2;
+	private String invoiceNo;
+	private String analysis;
+	private String comments;
 	private String retired;
 	private Date dateRetired;
-	private String bodyNo;
+	private String lorryNo;
 	private int createdBy;
 	private Timestamp createdOn;
 	private int modifiedBy;
@@ -32,6 +40,7 @@ public class Tire implements Serializable {
 	private int version;
 	private boolean active;
 	
+	//non-persistent
 	private String brandName;
 	
 	
@@ -101,14 +110,6 @@ public class Tire implements Serializable {
 		this.dateRetired = dateRetired;
 	}
 
-	public String getBodyNo() {
-		return bodyNo;
-	}
-
-	public void setBodyNo(String bodyNo) {
-		this.bodyNo = bodyNo;
-	}
-
 	public int getCreatedBy() {
 		return createdBy;
 	}
@@ -163,6 +164,64 @@ public class Tire implements Serializable {
 
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Date getDatePurchasedForRecap1() {
+		return datePurchasedForRecap1;
+	}
+
+	public void setDatePurchasedForRecap1(Date datePurchasedForRecap1) {
+		this.datePurchasedForRecap1 = datePurchasedForRecap1;
+	}
+
+	public Date getDatePurchasedForRecap2() {
+		return datePurchasedForRecap2;
+	}
+
+	public void setDatePurchasedForRecap2(Date datePurchasedForRecap2) {
+		this.datePurchasedForRecap2 = datePurchasedForRecap2;
+	}
+
+	public String getInvoiceNo() {
+		return invoiceNo;
+	}
+
+	public void setInvoiceNo(String invoiceNo) {
+		this.invoiceNo = invoiceNo;
+	}
+
+	public String getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getLorryNo() {
+		return lorryNo;
+	}
+
+	public void setLorryNo(String lorryNo) {
+		this.lorryNo = lorryNo;
 	}	
+
+	
 	
 }

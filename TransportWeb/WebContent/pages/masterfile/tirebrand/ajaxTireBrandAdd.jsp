@@ -3,10 +3,6 @@
 
 <script>
 $(function() {
-    $( "#menu" ).menu({
-      items: "> :not(.ui-widget-header)"
-    });
-    
     $('#nameId').focus();
   });
   
@@ -20,23 +16,8 @@ $("#descriptionId").keyup(function(){
 
 </script>
 
-<div class="row">
-	<div class="col-sm-2">
+<div style="padding-left:10px;">
 	
-		<!-- Left Menu -->
-		<div style="padding-top: 15px; padding-left: 12px;">
-		  	<!-- jQuery ui -->
-		  	<ul id="menu" style="width: 150px;">
-			  <li class="ui-widget-header">Options</li>
-			  <li onclick="goToTireBrand();"><a href="#">Search Record</a></li>
-			  <li onclick="goToAddTireBrand();"><a href="#">Add New Record</a></li>
-			  <%@ include file="/template/menu_left_masterfile.jsp" %>
-			</ul>
-		</div>
-	</div>
-	
- 	<div class="col-sm-10">
-
 		<div style="height: 30%;">
 			<h3 style="font-weight: bolder;">Tire Brand - Add New Record</h3>
 			<html:form action="/tirebrand.do" styleId="idForm">
@@ -49,20 +30,22 @@ $("#descriptionId").keyup(function(){
 				<div>
 					<h4 style="color: blue;"><c:out value="${tireBrandForm.transactionMessage}"></c:out></h4>
 				</div> 
+						
+						<table>
+							<tr>
+								<td><label  class="control-label" for="name">Name:</label></td>
+								<td style="padding-left:5px;">
+									<div class="control-group">	
+								 		<div class="controls">
+											<html:text styleId="nameId" property="name" styleClass="input-xlarge"  size="50" maxlength="30" value="${tireBrandForm.name}" disabled="${tireBrandForm.transactionStatus}"></html:text><br>
+								 		</div>						
+									</div>
+								</td>
+							</tr>
+						</table>
+				
 						<div>
-							<div class="control-group">
-								<label  class="control-label" for="name">Name:</label>	
-								 <div class="controls">
-										<html:text styleId="nameId" property="name" styleClass="input-xlarge"  size="50" maxlength="30" value="${tireBrandForm.name}" disabled="${tireBrandForm.transactionStatus}"></html:text><br>
-								 </div>						
-							</div>
-							<div class="control-group">
-								<label  class="control-label" for="description">Description:</label>	
-								 <div class="controls">
-										<html:text styleId="descriptionId" property="description" styleClass="input-xlarge"  size="100" maxlength="500" value="${tireBrandForm.description}" disabled="${tireBrandForm.transactionStatus}"></html:text><br>
-								 </div>						
-							</div>
-															
+																	
 							<br>
 							 <div class="control-group">
 							 	 <div class="controls">
@@ -82,7 +65,6 @@ $("#descriptionId").keyup(function(){
 				</fieldset>	
 				
 			</html:form>
-		</div>
 	
 	</div>
 </div>	

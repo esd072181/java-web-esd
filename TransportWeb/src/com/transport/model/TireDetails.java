@@ -8,6 +8,7 @@ import java.sql.Timestamp;
  * 
  * @author dward
  * @since 20Aug2016
+ * DateUpdated: 08Apr2020
  */
 public class TireDetails implements Serializable {
 
@@ -21,7 +22,7 @@ public class TireDetails implements Serializable {
 	private String recapNo;
 	private Date dateUpdated;
 	private String plateno;
-	private String bodyNo;
+	private String lorryNo;
 	private String wheelPosition;
 	private Date dateFitted;
 	private int odometerFitted;
@@ -79,14 +80,6 @@ public class TireDetails implements Serializable {
 
 	public void setPlateno(String plateno) {
 		this.plateno = plateno;
-	}
-
-	public String getBodyNo() {
-		return bodyNo;
-	}
-
-	public void setBodyNo(String bodyNo) {
-		this.bodyNo = bodyNo;
 	}
 
 	public String getWheelPosition() {
@@ -215,6 +208,14 @@ public class TireDetails implements Serializable {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getLorryNo() {
+		return lorryNo;
+	}
+
+	public void setLorryNo(String lorryNo) {
+		this.lorryNo = lorryNo;
 	}
 	
 	

@@ -8,34 +8,49 @@
 	<div class="table-responsive" >
 		<c:choose>
 		  <c:when test="${tireForm.modelList != null}">
-			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
+			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: x-small;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Brand</th>
 					<th>Serial No</th>
 					<th>Recap No</th>
 					<th>Size and Ply</th>
+					<th>Price(Php)</th>
 					<th>Date Purchased</th>
+					<th>Date Purchased For Recap 1</th>
+					<th>Date Purchased For Recap 2</th>
+					<th>Invoice No</th>
+					<th>Analysis</th>
+					<th>Comments</th>
 					<th>Retired</th>
 					<th>Date Retired</th>
-					<th>Body No</th>
+					<th>Lorry No</th>
 					<th></th>
-					<th></th>
+					<c:if test="${sessionScope.user_role_session=='Admin'}">
+						<th></th>
+					</c:if>
 				</tr>
-				<logic:iterate name="tireForm" property="modelList" type="com.transport.model.Tire" id="model">
+				<logic:iterate name="tireForm" property="modelList" type="com.transport.model.Tire" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1}"/></td>
 						<td><bean:write name="model" property="brandName"/></td>
-						<td><bean:write name="model" property="serialNo"/></td>
+						<td><a href="#" onclick="editTire('<bean:write name="model" property="id"/>');"><bean:write name="model" property="serialNo"/></a></td>
 						<td><bean:write name="model" property="recapNo"/></td>
 						<td><bean:write name="model" property="sizeAndPly"/></td>
+						<td><bean:write name="model" property="price"/></td>
 						<td><bean:write name="model" property="datePurchased"/></td>
+						<td><bean:write name="model" property="datePurchasedForRecap1"/></td>
+						<td><bean:write name="model" property="datePurchasedForRecap2"/></td>
+						<td><bean:write name="model" property="invoiceNo"/></td>
+						<td><bean:write name="model" property="analysis"/></td>
+						<td><bean:write name="model" property="comments"/></td>
 						<td><bean:write name="model" property="retired"/></td>
 						<td><bean:write name="model" property="dateRetired"/></td>
-						<td><bean:write name="model" property="bodyNo"/></td>
-						<td align="center"><a href="#" onclick="javascript: editTire('<bean:write name="model" property="id"/>');">Edit</a></td>
-						<td align="center"><a href="#" onclick="javascript: deleteTire('<bean:write name="model" property="id"/>', '${tireForm.category}',${tireForm.currentPage})">Delete</a></td>
+						<td><bean:write name="model" property="lorryNo"/></td>
+						<td align="center"><a href="#" onclick="editTire('<bean:write name="model" property="id"/>');">Edit</a></td>
+						<c:if test="${sessionScope.user_role_session=='Admin'}">
+							<td align="center"><a href="#" onclick="deleteTire('<bean:write name="model" property="id"/>', '${tireForm.category}',${tireForm.currentPage})">Delete</a></td>
+						</c:if>
 					</tr>
 				</logic:iterate>
 			</table>

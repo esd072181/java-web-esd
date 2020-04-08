@@ -25,6 +25,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
+ * DateUpdated: 08Apr2020
  */
 public class TireBrandDaoImpl implements TireBrandDao {
 	
@@ -50,9 +51,8 @@ public class TireBrandDaoImpl implements TireBrandDao {
 		}
 		model.setCreatedOn(new Timestamp(new java.util.Date().getTime()));
 		
-		StringBuffer qry =  new StringBuffer("insert into transport.file_tirebrand (");
+		StringBuffer qry =  new StringBuffer("insert into transport.file_tire_brand (");
 				qry.append("name ");
-		  		qry.append(",description ");
 		  		qry.append(",createdby ");
 		  		qry.append(",createdon ");
 		  		qry.append(",version ");
@@ -63,33 +63,11 @@ public class TireBrandDaoImpl implements TireBrandDao {
 		  		qry.append(" ? ");
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
-		  		qry.append(" ,? ");
 		  		qry.append(" ,1 ");
 		  		qry.append(" ,true ");
 		  		qry.append(" ) ");
-
-		StringBuffer qryLog =  new StringBuffer("insert into transport.file_tirebrand (");
-				qryLog.append("name ");		
-				qryLog.append(",description ");
-				qryLog.append(",createdby ");
-				qryLog.append(",createdon ");
-				qryLog.append(",version ");
-				qryLog.append(",active ");
-				qryLog.append(") ");
-				qryLog.append(" values ");
-				qryLog.append("( ");
-				qryLog.append(model.getName());
-				qryLog.append(",");
-				qryLog.append(model.getDescription());
-				qryLog.append(",");
-				qryLog.append(model.getCreatedBy());
-				qryLog.append(",");
-				qryLog.append(model.getCreatedOn());
-				qryLog.append(",1 ");
-				qryLog.append(",true ");
-				qryLog.append(") ");
 					
-		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
   		  		
 		  try {
 			  conn = ServerContext.getJDBCHandle();
@@ -97,9 +75,8 @@ public class TireBrandDaoImpl implements TireBrandDao {
 			  pstmt = conn.prepareStatement(qry.toString());
 			     
 			  pstmt.setString(1, model.getName());
-			  pstmt.setString(2, model.getDescription());
-			  pstmt.setInt(3, model.getCreatedBy());
-			  pstmt.setTimestamp(4, model.getCreatedOn());
+			  pstmt.setInt(2, model.getCreatedBy());
+			  pstmt.setTimestamp(3, model.getCreatedOn());
 			     
 			  int statusInt = pstmt.executeUpdate();
 			     
@@ -142,29 +119,15 @@ public class TireBrandDaoImpl implements TireBrandDao {
 		}
 		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
 		
-		StringBuffer qry =  new StringBuffer("update transport.file_tirebrand set ");	
+		StringBuffer qry =  new StringBuffer("update transport.file_tire_brand set ");	
 			qry.append(" name=? ");
-			qry.append(" ,description=? ");
 			qry.append(" ,modifiedby=? ");
 			qry.append(" ,modifiedon=? ");
 			qry.append(" ,version=(version+1) ");
 			qry.append(" where ");
 			qry.append(" id = ? ");
-
-		StringBuffer qryLog =  new StringBuffer("update transport.file_tirebrand set ");	
-			qryLog.append(" name="+model.getName());
-			qryLog.append(" ,description=");
-			qryLog.append(model.getDescription());
-			qryLog.append(" ,modifiedby=");
-			qryLog.append(model.getModifiedBy());
-			qryLog.append(" ,modifiedon=");
-			qryLog.append(model.getModifiedOn());
-			qryLog.append(" ,version=(version+1) ");
-			qryLog.append(" where ");
-			qryLog.append(" id = ");
-			qryLog.append(model.getId());
 			
-		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
 	
 		 try {
 			conn = ServerContext.getJDBCHandle();
@@ -172,10 +135,9 @@ public class TireBrandDaoImpl implements TireBrandDao {
 			pstmt = conn.prepareStatement(qry.toString());
 				     
 			pstmt.setString(1, model.getName());
-			pstmt.setString(2, model.getDescription());
-			pstmt.setInt(3, model.getModifiedBy());
-			pstmt.setTimestamp(4, model.getModifiedOn());
-			pstmt.setLong(5, model.getId());
+			pstmt.setInt(2, model.getModifiedBy());
+			pstmt.setTimestamp(3, model.getModifiedOn());
+			pstmt.setLong(4, model.getId());
 				     
 			int statusInt = pstmt.executeUpdate();
 				     
@@ -219,7 +181,7 @@ public class TireBrandDaoImpl implements TireBrandDao {
 		}
 		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
 		
-		StringBuffer qry =  new StringBuffer("update transport.file_tirebrand set ");	
+		StringBuffer qry =  new StringBuffer("update transport.file_tire_brand set ");	
 			qry.append(" active=false ");
 			qry.append(" ,modifiedby=? ");
 			qry.append(" ,modifiedon=? ");
@@ -227,7 +189,7 @@ public class TireBrandDaoImpl implements TireBrandDao {
 			qry.append(" where ");
 			qry.append(" id = ? ");
 
-		StringBuffer qryLog =  new StringBuffer("update transport.file_tirebrand set ");	
+		StringBuffer qryLog =  new StringBuffer("update transport.file_tire_brand set ");	
 			qryLog.append(" active=false ");
 			qryLog.append(" ,modifiedby=");
 			qryLog.append(model.getModifiedBy());
@@ -297,15 +259,15 @@ public class TireBrandDaoImpl implements TireBrandDao {
 
 				 StringBuffer sql = null;
 				 if (category.equals(ActionConstant.SEARCHALL)) {
-					 sql = new StringBuffer("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-					 	sql.append(" from transport.file_tirebrand");
+					 sql = new StringBuffer("select id,name,createdby,createdon,modifiedby,modifiedon,version,active ");
+					 	sql.append(" from transport.file_tire_brand");
 					 	sql.append(" where active = true ");
 					 	sql.append(" order by name ");
 					 	sql.append(" limit ? ");
 					 	sql.append(" offset ?");		 
 				 } else {
-					 sql = new StringBuffer("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-					 	sql.append(" from transport.file_tirebrand ");
+					 sql = new StringBuffer("select id,name,createdby,createdon,modifiedby,modifiedon,version,active ");
+					 	sql.append(" from transport.file_tire_brand ");
 					 	sql.append(" where ");
 					 	sql.append(" (name ilike ?)" );
 					 	sql.append(" and active = true ");
@@ -313,33 +275,8 @@ public class TireBrandDaoImpl implements TireBrandDao {
 					 	sql.append(" limit ? ");
 					 	sql.append(" offset ?");	
 				 }
-
-
-				StringBuffer sqlLog = null;
 						 
-				if (category.equals(ActionConstant.SEARCHALL)) {
-							 sqlLog = new StringBuffer("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-							 sqlLog.append(" from transport.file_tirebrand ");
-							 sqlLog.append(" where active = true ");
-							 sqlLog.append(" order by name ");
-							 sqlLog.append(" limit ");
-							 sqlLog.append(limit);
-							 sqlLog.append(" offset ");	
-							 sqlLog.append(offset);		 
-				} else {
-							 sqlLog = new StringBuffer("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-							 sqlLog.append(" from transport.file_tirebrand ");
-							 sqlLog.append(" where ");
-							 sqlLog.append(" (name ilike '%");
-							 sqlLog.append(criteria);
-							 sqlLog.append("%')");
-							 sqlLog.append(" and active = true ");
-							 sqlLog.append(" order by name ");
-							 sqlLog.append(" offset ");	
-							 sqlLog.append(offset);	
-				}
-						 
-				TransportUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+				TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 					
 				 pstmt = conn.prepareStatement(sql.toString());
 				 
@@ -358,7 +295,6 @@ public class TireBrandDaoImpl implements TireBrandDao {
 					 TireBrand model=new TireBrand();  
 		    		 model.setId(rs.getInt(1));
 		    		 model.setName(rs.getString(2));
-		    		 model.setDescription(rs.getString(3));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {
@@ -377,19 +313,12 @@ public class TireBrandDaoImpl implements TireBrandDao {
 		    	 conn = ServerContext.getJDBCHandle();
 		    	 
 			     if (category.equals(ActionConstant.SEARCHALL)) {
-			    	 sqlCount = new StringBuffer("select count(*) from transport.file_tirebrand where active = true");	 
+			    	 sqlCount = new StringBuffer("select count(*) from transport.file_tire_brand where active = true");	 
 			     }else {
-			    	 sqlCount = new StringBuffer("select count(*) from transport.file_tirebrand where (name ilike '%"+criteria+"%') and active = true");	 
+			    	 sqlCount = new StringBuffer("select count(*) from transport.file_tire_brand where (name ilike '%"+criteria+"%') and active = true");	 
 			     } 
-
-				StringBuffer sqlCountLog = null;
-				if (category.equals(ActionConstant.SEARCHALL)) {
-					 sqlCountLog = new StringBuffer("select count(*) from transport.file_tirebrand where active = true");	 
-				}else {
-					 sqlCountLog = new StringBuffer("select count(*) from transport.file_tirebrand where (name ilike '%"+criteria+"%') and active = true");	 
-				} 
 					
-				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCountLog.toString());
+				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCount.toString());
 				
 		    	 pstmt = conn.prepareStatement(sqlCount.toString());
 		    	 
@@ -435,17 +364,11 @@ public class TireBrandDaoImpl implements TireBrandDao {
 				 conn = ServerContext.getJDBCHandle();
 
 				 StringBuffer sql = new StringBuffer();				
-				 	sql.append("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-				 	sql.append("from transport.file_tirebrand ");
+				 	sql.append("select id,name,createdby,createdon,modifiedby,modifiedon,version,active ");
+				 	sql.append("from transport.file_tire_brand ");
 				 	sql.append("where id = ?");
-
-				 StringBuffer sqlLog = new StringBuffer();				
-				 	sqlLog.append("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-				 	sqlLog.append("from transport.file_tirebrand ");
-				 	sqlLog.append("where id = ");
-				 	sqlLog.append(model.getId());
 			
-				 TransportUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 			
 				 pstmt = conn.prepareStatement(sql.toString());
 				 
@@ -456,7 +379,6 @@ public class TireBrandDaoImpl implements TireBrandDao {
 				 while(rs.next()) {
 		    		 model.setId(rs.getInt(1));
 		    		 model.setName(rs.getString(2));
-		    		 model.setDescription(rs.getString(3));
 				 }				 
 			 } catch (SQLException e) {
 				 throw e;
@@ -491,18 +413,12 @@ public class TireBrandDaoImpl implements TireBrandDao {
 				 conn = ServerContext.getJDBCHandle();
 
 				 StringBuffer sql = new StringBuffer();				
-				 	sql.append("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-				 	sql.append("from transport.file_tirebrand ");
+				 	sql.append("select id,name,createdby,createdon,modifiedby,modifiedon,version,active ");
+				 	sql.append("from transport.file_tire_brand ");
 				 	sql.append("where active = true ");
 				 	sql.append("order by name");
 
-				 StringBuffer sqlLog = new StringBuffer();				
-				 	sqlLog.append("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-				 	sqlLog.append("from transport.file_tirebrand ");
-				 	sqlLog.append("where active = true ");
-				 	sqlLog.append("order by name");
-			
-				 TransportUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 			
 				 pstmt = conn.prepareStatement(sql.toString());
 				 
@@ -513,7 +429,6 @@ public class TireBrandDaoImpl implements TireBrandDao {
 					 TireBrand model = new TireBrand();
 		    		 model.setId(rs.getInt(1));
 		    		 model.setName(rs.getString(2));
-		    		 model.setDescription(rs.getString(3));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {
@@ -552,24 +467,14 @@ public class TireBrandDaoImpl implements TireBrandDao {
 				 conn = ServerContext.getJDBCHandle();
 
 				 StringBuffer sql = new StringBuffer();				
-				 	sql.append("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-				 	sql.append("from transport.file_tirebrand ");
+				 	sql.append("select id,name,createdby,createdon,modifiedby,modifiedon,version,active ");
+				 	sql.append("from transport.file_tire_brand ");
 				 	sql.append("where active = false ");
 				 	sql.append("order by name ");
 				 	sql.append("limit ? ");
 				 	sql.append("offset ? ");
-
-				 StringBuffer sqlLog = new StringBuffer();				
-				 	sqlLog.append("select id,name,description,createdby,createdon,modifiedby,modifiedon,version,active ");
-				 	sqlLog.append("from transport.file_tirebrand ");
-				 	sqlLog.append("where active = false ");
-				 	sqlLog.append("order by name ");
-				 	sqlLog.append("limit ");
-				 	sqlLog.append(limit);
-				 	sqlLog.append("offset ");
-				 	sqlLog.append(offset);
 			
-				 TransportUtils.writeLogDebug(logger, "SQL: "+sqlLog.toString());
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 			
 				 pstmt = conn.prepareStatement(sql.toString());
 				 
@@ -583,7 +488,6 @@ public class TireBrandDaoImpl implements TireBrandDao {
 					 TireBrand model = new TireBrand();
 		    		 model.setId(rs.getInt(1));
 		    		 model.setName(rs.getString(2));
-		    		 model.setDescription(rs.getString(3));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {
@@ -601,11 +505,9 @@ public class TireBrandDaoImpl implements TireBrandDao {
 		     try {
 		    	 conn = ServerContext.getJDBCHandle();
 		    	 
-			    sqlCount = new StringBuffer("select count(*) from transport.file_tirebrand where active = false");	 
+			    sqlCount = new StringBuffer("select count(*) from transport.file_tire_brand where active = false");	 
 				
-			    StringBuffer sqlCountLog = new StringBuffer("select count(*) from transport.file_tirebrand where active = false");	 
-					
-				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCountLog.toString());
+				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCount.toString());
 				
 		    	 pstmt = conn.prepareStatement(sqlCount.toString());
 		    	 
@@ -652,24 +554,15 @@ public class TireBrandDaoImpl implements TireBrandDao {
 		}
 		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
 		
-		StringBuffer qry =  new StringBuffer("update transport.file_tirebrand set ");	
+		StringBuffer qry =  new StringBuffer("update transport.file_tire_brand set ");	
 			qry.append(" active=true ");
 			qry.append(" ,modifiedby=? ");
 			qry.append(" ,modifiedon=? ");
 			qry.append(" ,version=(version+1) ");
 			qry.append(" where ");
 			qry.append(" id = ? ");
-
-		StringBuffer qryLog =  new StringBuffer("update transport.file_tirebrand set ");	
-			qryLog.append(" active=true ");
-			qryLog.append(" ,modifiedby="+model.getModifiedBy());
-			qryLog.append(" ,modifiedon="+model.getModifiedOn());
-			qryLog.append(" ,version=(version+1) ");
-			qryLog.append(" where ");
-			qryLog.append(" id = ");
-			qryLog.append(model.getId());
 			
-		TransportUtils.writeLogDebug(logger, "SQL: "+qryLog.toString());
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
 	
 		 try {
 			conn = ServerContext.getJDBCHandle();

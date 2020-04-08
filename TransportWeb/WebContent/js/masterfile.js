@@ -1312,6 +1312,7 @@ function goToTireBrand() {
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
 		});
 }
 
@@ -1324,7 +1325,7 @@ function goToAddTireBrand() {
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);
-			$("#nameId").focus();
+			window.scrollTo(0,0);
 		});
 }
 
@@ -1336,6 +1337,7 @@ function getTireBrand(pageCriteria, category, isDeleted) {
 			$("#validationMessageId").show();
 			$("#idSearchCriteria").focus(); 
 			setTimeout( "$('#validationMessageId').hide();",1500 );
+			window.scrollTo(0,0);
 			return false;
 		}
 
@@ -1352,6 +1354,7 @@ function getTireBrand(pageCriteria, category, isDeleted) {
 			if (isDeleted) {
 				$("#msgDeletedId").show();
 				setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				window.scrollTo(0,0);
 			}
 		});
 }
@@ -1365,6 +1368,7 @@ function saveTireBrand() {
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
 		});
 
 }
@@ -1378,6 +1382,7 @@ function editTireBrand(id) {
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
 		});
 
 }
@@ -1394,6 +1399,7 @@ function updateTireBrand() {
 					})
 					  .done(function( result ) {
 						$("#contentDIV").html(result);
+						window.scrollTo(0,0);
 				});
 		 } 
 	}); 
@@ -1429,6 +1435,7 @@ function goToTire() {
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
 		});
 }
 
@@ -1441,7 +1448,7 @@ function goToAddTire() {
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);
-			$("#brandId").focus();
+			window.scrollTo(0,0);
 		});
 }
 
@@ -1469,6 +1476,7 @@ function getTire(pageCriteria, category, isDeleted) {
 			if (isDeleted) {
 				$("#msgDeletedId").show();
 				setTimeout( "$('#msgDeletedId').hide();", 1500 );
+				window.scrollTo(0,0);
 			}
 		});
 }
@@ -1482,6 +1490,7 @@ function saveTire() {
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
 		});
 
 }
@@ -1495,6 +1504,7 @@ function editTire(id) {
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
 		});
 
 }
@@ -1511,6 +1521,7 @@ function updateTire() {
 					})
 					  .done(function( result ) {
 						$("#contentDIV").html(result);
+						window.scrollTo(0,0);
 				});
 		 } 
 	}); 

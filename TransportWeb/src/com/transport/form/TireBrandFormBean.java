@@ -12,6 +12,7 @@ import com.transport.model.TireBrand;
  * 
  * @author dward
  * @since 20Aug2016
+ * DateUpdated: 08Apr2020
  */
 public class TireBrandFormBean extends TransportFormBean {
 
@@ -22,7 +23,6 @@ public class TireBrandFormBean extends TransportFormBean {
 	
 	private int id;
 	private String name;
-	private String description;
 	
 	private String criteria;
 	private String category;
@@ -41,14 +41,6 @@ public class TireBrandFormBean extends TransportFormBean {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getCriteria() {
@@ -120,15 +112,13 @@ public class TireBrandFormBean extends TransportFormBean {
 
 	public void populateFormBean(TireBrand model) {
 		setId(model.getId());
-		setName(model.getName());
-		setDescription(model.getDescription());
+		setName(model.getName().toUpperCase());
 	}
 	
 	public TireBrand populateModel (TireBrandFormBean formbean) {
 		TireBrand model = new TireBrand();
 		model.setId(formbean.getId());
-		model.setName(formbean.getName());
-		model.setDescription(formbean.getDescription());
+		model.setName(formbean.getName().toUpperCase());
 		return model;
 	}
 		

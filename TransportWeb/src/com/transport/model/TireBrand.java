@@ -7,6 +7,7 @@ import java.sql.Timestamp;
  * 
  * @author dward
  * @since 20Aug2016
+ * DateUpdated: 08Apr2020
  */
 public class TireBrand implements Serializable {
 
@@ -17,7 +18,6 @@ public class TireBrand implements Serializable {
 
 	private int id;
 	private String name;
-	private String description;
 	private int createdBy;
 	private Timestamp createdOn;
 	private int modifiedBy;
@@ -42,15 +42,7 @@ public class TireBrand implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+	
 	public int getCreatedBy() {
 		return createdBy;
 	}
