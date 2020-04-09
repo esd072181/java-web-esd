@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.transport.bo.TireBo;
+import com.transport.constant.MapConstant;
 import com.transport.dao.TireDao;
 
 /**
  * 
  * @author dward
  * @since 21Aug2016
+ * DateUpdated: 09Apr2020
  */
 public class TireBoImpl implements TireBo {
 
@@ -32,8 +34,13 @@ public class TireBoImpl implements TireBo {
 
 	@Override
 	public Map<String, Object> updateRecord(HashMap<String, Object> dataMap) throws Exception{
-		// TODO Auto-generated method stub
-		return dao.update(dataMap);
+		
+		Object recap =  dataMap.get(MapConstant.BOOLEAN_DATA);
+		if (recap!=null) {
+			return dao.updateRecapNo(dataMap);//for recap
+		} else {
+			return dao.update(dataMap);
+		}
 	}
 
 	@Override

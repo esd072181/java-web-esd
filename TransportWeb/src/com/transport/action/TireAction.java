@@ -29,6 +29,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
+ * DateUpdated: 09Apr2020
  */
 public class TireAction extends Action {
 
@@ -63,6 +64,7 @@ public class TireAction extends Action {
 					//fetch the data
 					
 					int id = Integer.parseInt(request.getParameter("id"));
+					Object recap = request.getParameter("recap");
 					
 					Tire model = new Tire();
 					model.setId(id);
@@ -86,10 +88,16 @@ public class TireAction extends Action {
 					formBean.setTransactionStatus(false);
 					formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_RESET);
 					
-					forwardAction = ActionConstant.SHOW_AJAX_EDIT;
+					if (recap!=null) {
+						forwardAction = ActionConstant.SHOW_AJAX_EDIT_2;
+					} else {
+						forwardAction = ActionConstant.SHOW_AJAX_EDIT;
+					}
+					
 				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) || command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE)) {
 					//populateModel
 					Tire model = (Tire) formBean.populateModel(formBean);
+					Object recap = request.getParameter("recap");
 					
 					User user = (User) request.getSession().getAttribute(MiscConstant.USER_SESSION);
 					
@@ -102,6 +110,7 @@ public class TireAction extends Action {
 				        dataMap.put(MapConstant.ACTION, ActionConstant.SAVE);
 			        } else {
 			        	dataMap.put(MapConstant.ACTION, ActionConstant.UPDATE);
+			        	dataMap.put(MapConstant.BOOLEAN_DATA, recap);
 			        }
 			        
 			        ServiceManager service = new ServiceManagerImpl();
@@ -130,12 +139,22 @@ public class TireAction extends Action {
 			        			TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_UPDATED+" - "+module);
 			        			//logger.info(MiscConstant.TRANS_MESSSAGE_UPDATED);
 			        		}
-			        		forwardAction = ActionConstant.AJAX_SUCCESS;
+			        		if (recap!=null) {
+			        			forwardAction = ActionConstant.AJAX_SUCCESS_2;//show recap page
+			        		} else {
+			        			forwardAction = ActionConstant.AJAX_SUCCESS;
+			        		}
+			        		
 			        	} else {
 			        		formBean.setTransactionMessage(MiscConstant.TRANS_MESSSAGE_ERROR);
 			        		//logger.info(MiscConstant.TRANS_MESSSAGE_ERROR);
 			        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_ERROR+" - "+module);
-			        		forwardAction = ActionConstant.AJAX_FAILED;
+			        		if (recap!=null) {
+			        			forwardAction = ActionConstant.AJAX_FAILED_2;
+			        		} else {
+			        			forwardAction = ActionConstant.AJAX_FAILED;
+			        		}
+			        		
 			        	}
 			        }
 				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_DELETE)) {
@@ -199,17 +218,11 @@ public class TireAction extends Action {
 							 category = ActionConstant.SEARCHALL;
 						 }
 					} 
-					  
-					String criteria = null;
-					if(formBean.getCriteria()!=null && formBean.getCriteria().trim().length() > 0) {
-						criteria = formBean.getCriteria();
-					}
-				     
 
 					HashMap<String,Object> dataMap = new HashMap<String, Object>();
 			        dataMap.put(MapConstant.MODULE, module);
 				    dataMap.put(MapConstant.ACTION, category);
-				    dataMap.put(MapConstant.SEARCH_CRITERIA, criteria);
+				    dataMap.put(MapConstant.SEARCH_CRITERIA, formBean.getCriteria());
 				    dataMap.put(MapConstant.PAGINATION_LIMIT, MiscConstant.RECORDS_PER_PAGE);
 				    dataMap.put(MapConstant.PAGINATION_OFFSET, offset);
 

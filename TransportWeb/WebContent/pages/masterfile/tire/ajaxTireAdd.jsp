@@ -5,8 +5,6 @@
 $(function() {
     
     $('#datePurchasedDatePicker').datepicker({}); 
-    $('#datePurchasedForRecap1DatePicker').datepicker({});
-    $('#datePurchasedForRecap2DatePicker').datepicker({});
     $('#dateRetiredDatePicker').datepicker({}); 
     
     $('#brandId').focus();
@@ -103,26 +101,6 @@ $(function() {
 										<div class="control-group">
 											 <div class="controls">
 											 	<html:text property="datePurchased" styleId="datePurchasedDatePicker" value="${tireForm.datePurchased}"></html:text>							 			
-											 </div>						
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td><label class="control-label top-spacing" for="datePurchasedForRecap1">Date Purchased For Recap 1:</label></td>
-									<td style="padding-left: 5px;">
-										<div class="control-group">
-											 <div class="controls">
-											 	<html:text property="datePurchasedForRecap1" styleId="datePurchasedForRecap1DatePicker" value="${tireForm.datePurchasedForRecap1}"></html:text>							 			
-											 </div>						
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td><label class="control-label top-spacing" for="datePurchasedForRecap2">Date Purchased For Recap 2:</label></td>
-									<td style="padding-left: 5px;">
-										<div class="control-group">
-											 <div class="controls">
-											 	<html:text property="datePurchasedForRecap2" styleId="datePurchasedForRecap2DatePicker" value="${tireForm.datePurchasedForRecap2}"></html:text>							 			
 											 </div>						
 										</div>
 									</td>

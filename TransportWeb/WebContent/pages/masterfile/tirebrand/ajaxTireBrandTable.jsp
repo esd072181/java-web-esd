@@ -8,7 +8,7 @@
 	<div class="table-responsive" >
 		<c:choose>
 		  <c:when test="${tireBrandForm.modelList != null}">
-			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
+			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;  font-size: x-small;">  
 				<tr>
 					<th>No</th>
 					<th>Name</th>

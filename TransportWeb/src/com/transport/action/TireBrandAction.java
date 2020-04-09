@@ -190,16 +190,10 @@ public class TireBrandAction extends Action {
 						 }
 					} 
 					  
-					String criteria = null;
-					if(formBean.getCriteria()!=null && formBean.getCriteria().trim().length() > 0) {
-						criteria = formBean.getCriteria();
-					}
-				     
-
 					HashMap<String,Object> dataMap = new HashMap<String, Object>();
 			        dataMap.put(MapConstant.MODULE, module);
 				    dataMap.put(MapConstant.ACTION, category);
-				    dataMap.put(MapConstant.SEARCH_CRITERIA, criteria);
+				    dataMap.put(MapConstant.SEARCH_CRITERIA, formBean.getCriteria());
 				    dataMap.put(MapConstant.PAGINATION_LIMIT, MiscConstant.RECORDS_PER_PAGE);
 				    dataMap.put(MapConstant.PAGINATION_OFFSET, offset);
 

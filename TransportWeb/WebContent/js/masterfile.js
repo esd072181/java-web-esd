@@ -1331,18 +1331,6 @@ function goToAddTireBrand() {
 
 function getTireBrand(pageCriteria, category, isDeleted) {
 
-	//validation for search criteria
-	if (category == 'filter') {
-		if ( $("#idSearchCriteria").val().trim() == '') {
-			$("#validationMessageId").show();
-			$("#idSearchCriteria").focus(); 
-			setTimeout( "$('#validationMessageId').hide();",1500 );
-			window.scrollTo(0,0);
-			return false;
-		}
-
-	}
-
 	$.ajax({
 		  type: "GET",
 		  url: "tirebrand.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
@@ -1454,17 +1442,6 @@ function goToAddTire() {
 
 function getTire(pageCriteria, category, isDeleted) {
 
-	//validation for search criteria
-	if (category == 'filter') {
-		if ( $("#idSearchCriteria").val().trim() == '') {
-			$("#validationMessageId").show();
-			$("#idSearchCriteria").focus(); 
-			setTimeout( "$('#validationMessageId').hide();",1500 );
-			return false;
-		}
-
-	}
-
 	$.ajax({
 		  type: "GET",
 		  url: "tire.do?command=ajaxSearch&page="+pageCriteria+"&category="+category,
@@ -1506,6 +1483,19 @@ function editTire(id) {
 			$("#contentDIV").html(result);
 			window.scrollTo(0,0);
 		});
+}
+
+function recapTire(id) {
+	$.ajax({
+		  type: "GET",
+		  url: "tire.do?",
+		  cache: false,
+		  data: { command: "ajaxEdit", id: id, recap: true  }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
+		});
 
 }
 
@@ -1517,6 +1507,25 @@ function updateTire() {
 				$.ajax({
 					  type: "POST",
 					  url: "updateTire.do?command=ajaxUpdate",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIV").html(result);
+						window.scrollTo(0,0);
+				});
+		 } 
+	}); 
+
+}
+
+function updateTireRecap() {
+	
+	bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		 if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "updateTire.do?command=ajaxUpdate&recap=true",
 					  data: $("#idForm").serialize() 
 					})
 					  .done(function( result ) {

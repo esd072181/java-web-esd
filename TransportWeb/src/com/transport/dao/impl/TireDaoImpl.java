@@ -25,7 +25,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
- * DateUpdated: 08Apr2020
+ * DateUpdated: 09Apr2020
  */
 public class TireDaoImpl implements TireDao {
 	
@@ -57,9 +57,13 @@ public class TireDaoImpl implements TireDao {
 		  		qry.append(",recapno ");
 		  		qry.append(",sizeandply ");
 		  		qry.append(",price ");
-		  		qry.append(",datepurchased ");
-		  		qry.append(",datepurchasedforrecap1 ");
-		  		qry.append(",datepurchasedforrecap2 ");
+		  		if (model.getRecapNo().equals("N/A")) {
+					qry.append(" ,datepurchased ");
+				} else if (model.getRecapNo().equals("1")) {
+					qry.append(" ,datepurchasedforrecap1 ");
+				} else if (model.getRecapNo().equals("2")) {
+					qry.append(" ,datepurchasedforrecap2 ");
+				}
 		  		qry.append(",invoiceno ");
 		  		qry.append(",analysis ");
 		  		qry.append(",comments ");
@@ -74,8 +78,6 @@ public class TireDaoImpl implements TireDao {
 		  		qry.append(" values ");
 		  		qry.append(" ( ");
 		  		qry.append(" ? ");
-		  		qry.append(" ,? ");
-		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
@@ -104,16 +106,20 @@ public class TireDaoImpl implements TireDao {
 			  pstmt.setString(3, model.getRecapNo());
 			  pstmt.setString(4, model.getSizeAndPly());
 			  pstmt.setBigDecimal(5, model.getPrice());
-			  pstmt.setDate(6, model.getDatePurchased());
-			  pstmt.setDate(7, model.getDatePurchasedForRecap1());
-			  pstmt.setDate(8, model.getDatePurchasedForRecap2());
-			  pstmt.setString(9, model.getInvoiceNo());
-			  pstmt.setString(10, model.getAnalysis());
-			  pstmt.setString(11, model.getComments());
-			  pstmt.setString(12, model.getRetired());
-			  pstmt.setDate(13, model.getDateRetired());
-			  pstmt.setInt(14, model.getCreatedBy());
-			  pstmt.setTimestamp(15, model.getCreatedOn());
+			  if (model.getRecapNo().equals("N/A")) {
+				    pstmt.setDate(6, model.getDatePurchased());
+				} else if (model.getRecapNo().equals("1")) {
+					pstmt.setDate(6, model.getDatePurchasedForRecap1());
+				} else if (model.getRecapNo().equals("2")) {
+					pstmt.setDate(6, model.getDatePurchasedForRecap2());
+				}
+			  pstmt.setString(7, model.getInvoiceNo());
+			  pstmt.setString(8, model.getAnalysis());
+			  pstmt.setString(9, model.getComments());
+			  pstmt.setString(10, model.getRetired());
+			  pstmt.setDate(11, model.getDateRetired());
+			  pstmt.setInt(12, model.getCreatedBy());
+			  pstmt.setTimestamp(13, model.getCreatedOn());
 			     
 			  int statusInt = pstmt.executeUpdate();
 			     
@@ -162,9 +168,13 @@ public class TireDaoImpl implements TireDao {
 			qry.append(" ,recapno=? ");
 			qry.append(" ,sizeandply=? ");
 			qry.append(" ,price=? ");
-			qry.append(" ,datepurchased=? ");
-			qry.append(" ,datepurchasedforrecap1=? ");
-			qry.append(" ,datepurchasedforrecap2=? ");
+			if (model.getRecapNo().equals("N/A")) {
+				qry.append(" ,datepurchased=? ");
+			} else if (model.getRecapNo().equals("1")) {
+				qry.append(" ,datepurchasedforrecap1=? ");
+			} else if (model.getRecapNo().equals("2")) {
+				qry.append(" ,datepurchasedforrecap2=? ");
+			}
 			qry.append(" ,invoiceno=? ");
 			qry.append(" ,analysis=? ");
 			qry.append(" ,comments=? ");
@@ -190,17 +200,21 @@ public class TireDaoImpl implements TireDao {
 			pstmt.setString(3, model.getRecapNo());
 			pstmt.setString(4, model.getSizeAndPly());
 			pstmt.setBigDecimal(5, model.getPrice());
-			pstmt.setDate(6, model.getDatePurchased());
-			pstmt.setDate(7, model.getDatePurchasedForRecap1());
-			pstmt.setDate(8, model.getDatePurchasedForRecap2());
-			pstmt.setString(9, model.getInvoiceNo());
-			pstmt.setString(10, model.getAnalysis());
-			pstmt.setString(11, model.getComments());
-			pstmt.setString(12, model.getRetired());
-			pstmt.setDate(13, model.getDateRetired());
-			pstmt.setInt(14, model.getModifiedBy());
-			pstmt.setTimestamp(15, model.getModifiedOn());
-			pstmt.setLong(16, model.getId());
+			if (model.getRecapNo().equals("N/A")) {
+				pstmt.setDate(6, model.getDatePurchased());
+			} else if (model.getRecapNo().equals("1")) {
+				pstmt.setDate(6, model.getDatePurchasedForRecap1());
+			} else if (model.getRecapNo().equals("2")) {
+				pstmt.setDate(6, model.getDatePurchasedForRecap2());
+			}
+			pstmt.setString(7, model.getInvoiceNo());
+			pstmt.setString(8, model.getAnalysis());
+			pstmt.setString(9, model.getComments());
+			pstmt.setString(10, model.getRetired());
+			pstmt.setDate(11, model.getDateRetired());
+			pstmt.setInt(12, model.getModifiedBy());
+			pstmt.setTimestamp(13, model.getModifiedOn());
+			pstmt.setLong(14, model.getId());
 				     
 			int statusInt = pstmt.executeUpdate();
 				     
@@ -760,6 +774,81 @@ public class TireDaoImpl implements TireDao {
 		}
 		
 		return status;
+	}
+
+	@Override
+	public Map<String, Object> updateRecapNo(HashMap<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_UPDATE);
+		 
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		Tire model = (Tire) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("update transport.file_tire set ");	
+			qry.append(" recapno=? ");
+			if (model.getRecapNo().equals("N/A")) {
+				qry.append(" ,datepurchased=? ");
+			} else if (model.getRecapNo().equals("1")) {
+				qry.append(" ,datepurchasedforrecap1=? ");
+			} else if (model.getRecapNo().equals("2")) {
+				qry.append(" ,datepurchasedforrecap2=? ");
+			}
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" id = ? ");
+
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setString(1, model.getRecapNo());
+			if (model.getRecapNo().equals("N/A")) {
+				pstmt.setDate(2, model.getDatePurchased());
+			} else if (model.getRecapNo().equals("1")) {
+				pstmt.setDate(2, model.getDatePurchasedForRecap1());
+			} else if (model.getRecapNo().equals("2")) {
+				pstmt.setDate(2, model.getDatePurchasedForRecap2());
+			}
+			pstmt.setInt(3, model.getModifiedBy());
+			pstmt.setTimestamp(4, model.getModifiedOn());
+			pstmt.setLong(5, model.getId());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("Tire record (recap) (id: " +model.getId()+") updated successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			TransportUtils.closeObjects(rs);
+			TransportUtils.closeObjects(pstmt);
+			TransportUtils.closeObjects(conn);
+		}
+			 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);	
+		
+		return returnMap;
 	}
 	
 }

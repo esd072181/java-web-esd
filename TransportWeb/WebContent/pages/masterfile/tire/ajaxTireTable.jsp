@@ -12,18 +12,18 @@
 				<tr>
 					<th>No</th>
 					<th>Brand</th>
-					<th>Serial No</th>
-					<th>Recap No</th>
-					<th>Size and Ply</th>
+					<th>SerialNo</th>
+					<th>RecapNo</th>
+					<th>SizeAndPly</th>
 					<th>Price(Php)</th>
-					<th>Date Purchased</th>
-					<th>Date Purchased For Recap 1</th>
-					<th>Date Purchased For Recap 2</th>
-					<th>Invoice No</th>
+					<th>DatePurchased</th>
+					<th>DatePurchasedRecap1</th>
+					<th>DatePurchasedRecap2</th>
+					<th>InvoiceNo</th>
 					<th>Analysis</th>
 					<th>Comments</th>
 					<th>Retired</th>
-					<th>Date Retired</th>
+					<th>DateRetired</th>
 					<th>Lorry No</th>
 					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
@@ -34,10 +34,10 @@
 					<tr>				 
 						<td><c:out value="${index+1}"/></td>
 						<td><bean:write name="model" property="brandName"/></td>
-						<td><a href="#" onclick="editTire('<bean:write name="model" property="id"/>');"><bean:write name="model" property="serialNo"/></a></td>
-						<td><bean:write name="model" property="recapNo"/></td>
+						<td><a href="#" onclick="viewTireDetails('<bean:write name="model" property="id"/>');"><bean:write name="model" property="serialNo"/></a></td>
+						<td><a href="#" onclick="recapTire('<bean:write name="model" property="id"/>');"><bean:write name="model" property="recapNo"/></a></td>
 						<td><bean:write name="model" property="sizeAndPly"/></td>
-						<td><bean:write name="model" property="price"/></td>
+						<td><bean:write name="model" property="price" format="Php #,###.00"/></td>
 						<td><bean:write name="model" property="datePurchased"/></td>
 						<td><bean:write name="model" property="datePurchasedForRecap1"/></td>
 						<td><bean:write name="model" property="datePurchasedForRecap2"/></td>
@@ -96,9 +96,3 @@
 			</ul>
 		</div>
 	</div>
-
-<!-- 
-	<div id="msgDeletedId" align="center">
-		<span style="color: blue;"><c:out value="${roomCategoryForm.transactionMessage}"></c:out></span>
-	</div> 
-	 -->

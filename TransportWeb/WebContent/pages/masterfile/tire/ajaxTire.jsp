@@ -26,9 +26,6 @@ $(function() {
 						&nbsp;&nbsp;&nbsp;&nbsp;<html:button property="command" onclick="goToAddTire();" value="Add New Record" styleClass="btn btn-primary"></html:button>
 						<span id="msgDeletedId" style="color: blue; padding-left: 100px; display: none;"><bean:message key="msg.deleted"/></span>
 					</div>
-					<div style="padding-left: 85px; float: left;">
-						<span id="validationMessageId" style="color: blue; display: none;">Enter search criteria.</span>
-					</div>
 				</div>			
 		</html:form>
 	</div>

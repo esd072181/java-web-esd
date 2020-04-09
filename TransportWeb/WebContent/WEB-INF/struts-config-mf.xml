@@ -678,6 +678,7 @@
 			<forward name="ajaxAdd" path="/pages/masterfile/tire/ajaxTireAdd.jsp"/>
 			<forward name="ajaxSuccess" path="/pages/masterfile/tire/ajaxTire.jsp"/>
 			<forward name="ajaxEdit" path="/pages/masterfile/tire/ajaxTireEdit.jsp"/>
+			<forward name="ajaxEdit2" path="/pages/masterfile/tire/ajaxTireRecap.jsp"/>
 	   		<forward name="expired" path="/template/expired_page.jsp"/>
 	   </action>
 	   
@@ -701,7 +702,9 @@
 			input="/pages/masterfile/tire/ajaxTireEdit.jsp"
 			validate="true">
 			<forward name="ajaxSuccess" path="/pages/masterfile/tire/ajaxTireEdit.jsp"/>
+			<forward name="ajaxSuccess2" path="/pages/masterfile/tire/ajaxTireRecap.jsp"/>
 			<forward name="ajaxFailed" path="/pages/masterfile/tire/ajaxTireEdit.jsp"/>
+			<forward name="ajaxFailed2" path="/pages/masterfile/tire/ajaxTireRecap.jsp"/>
 	   		<forward name="expired" path="/template/expired_page.jsp"/>
 	   </action>
 	   

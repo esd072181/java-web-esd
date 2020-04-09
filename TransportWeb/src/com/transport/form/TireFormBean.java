@@ -26,7 +26,7 @@ import com.transport.util.DateUtils;
  * 
  * @author dward
  * @since 20Aug2016
- * DateUpdated: 08Apr2020
+ * DateUpdated: 09Apr2020
  * 
  */
 public class TireFormBean extends TransportFormBean {
@@ -43,8 +43,6 @@ public class TireFormBean extends TransportFormBean {
 	private String sizeAndPly;
 	private String price;
 	private String datePurchased;
-	private String datePurchasedForRecap1;
-	private String datePurchasedForRecap2;
 	private String invoiceNo;
 	private String analysis;
 	private String comments;
@@ -209,18 +207,18 @@ public class TireFormBean extends TransportFormBean {
 		setId(model.getId());
 		setBrandId(model.getBrandId());
 		setBrandName(model.getBrandName());
-		setSerialNo(model.getSerialNo());
+		setSerialNo(model.getSerialNo().toUpperCase());
 		setRecapNo(model.getRecapNo());
 		setSizeAndPly(model.getSizeAndPly());
 		setPrice(String.valueOf(model.getPrice()));
-		if (model.getDatePurchased()!=null) {
-			setDatePurchased(DateUtils.sqlDateToString(model.getDatePurchased()));
+		if (model.getRecapNo()!=null && model.getRecapNo().trim().equals("N/A")) {
+			setDatePurchased(model.getDatePurchased()!=null ? DateUtils.sqlDateToString(model.getDatePurchased()) : "");
 		}
-		if (model.getDatePurchasedForRecap1()!=null) {
-			setDatePurchasedForRecap1(DateUtils.sqlDateToString(model.getDatePurchasedForRecap1()));
+		if (model.getRecapNo()!=null && model.getRecapNo().trim().equals("1")) {
+			setDatePurchased(model.getDatePurchasedForRecap1()!=null ? DateUtils.sqlDateToString(model.getDatePurchasedForRecap1()) : "");
 		}
-		if (model.getDatePurchasedForRecap2()!=null) {
-			setDatePurchasedForRecap2(DateUtils.sqlDateToString(model.getDatePurchasedForRecap2()));
+		if (model.getRecapNo()!=null && model.getRecapNo().trim().equals("2")) {
+			setDatePurchased(model.getDatePurchasedForRecap2()!=null ? DateUtils.sqlDateToString(model.getDatePurchasedForRecap2()) : "");
 		}
 		setInvoiceNo(model.getInvoiceNo());
 		setAnalysis(model.getAnalysis());
@@ -236,20 +234,20 @@ public class TireFormBean extends TransportFormBean {
 		Tire model = new Tire();
 		model.setId(formbean.getId());
 		model.setBrandId(formbean.getBrandId());
-		model.setSerialNo(formbean.getSerialNo());
+		model.setSerialNo(formbean.getSerialNo().trim().toUpperCase());
 		model.setRecapNo(formbean.getRecapNo());
 		model.setSizeAndPly(formbean.getSizeAndPly());
 		if (formbean.getPrice()!=null && formbean.getPrice().trim().length()>0) {
 			model.setPrice(BigDecimal.valueOf(Double.parseDouble(formbean.getPrice())));	
 		}
-		if (formbean.getDatePurchased()!=null && formbean.getDatePurchased().trim().length() > 0) {
-			model.setDatePurchased(DateUtils.strToSQLDate(formbean.getDatePurchased()));
+		if (formbean.getRecapNo()!=null && formbean.getRecapNo().trim().equals("N/A")) {
+			model.setDatePurchased(formbean.getDatePurchased()!=null ? DateUtils.strToSQLDate(formbean.getDatePurchased()) : null);
 		}
-		if (formbean.getDatePurchasedForRecap1()!=null && formbean.getDatePurchasedForRecap1().trim().length() > 0) {
-			model.setDatePurchasedForRecap1(DateUtils.strToSQLDate(formbean.getDatePurchasedForRecap1()));
+		if (formbean.getRecapNo()!=null && formbean.getRecapNo().trim().equals("1")) {
+			model.setDatePurchasedForRecap1(formbean.getDatePurchased()!=null ? DateUtils.strToSQLDate(formbean.getDatePurchased()) : null);
 		}
-		if (formbean.getDatePurchasedForRecap2()!=null && formbean.getDatePurchasedForRecap2().trim().length() > 0) {
-			model.setDatePurchasedForRecap2(DateUtils.strToSQLDate(formbean.getDatePurchasedForRecap2()));
+		if (formbean.getRecapNo()!=null && formbean.getRecapNo().trim().equals("2")) {
+			model.setDatePurchasedForRecap2(formbean.getDatePurchased()!=null ? DateUtils.strToSQLDate(formbean.getDatePurchased()) : null);
 		}
 		model.setInvoiceNo(formbean.getInvoiceNo());
 		model.setAnalysis(formbean.getAnalysis());
@@ -338,22 +336,6 @@ public class TireFormBean extends TransportFormBean {
 
 	public void setPrice(String price) {
 		this.price = price;
-	}
-
-	public String getDatePurchasedForRecap1() {
-		return datePurchasedForRecap1;
-	}
-
-	public void setDatePurchasedForRecap1(String datePurchasedForRecap1) {
-		this.datePurchasedForRecap1 = datePurchasedForRecap1;
-	}
-
-	public String getDatePurchasedForRecap2() {
-		return datePurchasedForRecap2;
-	}
-
-	public void setDatePurchasedForRecap2(String datePurchasedForRecap2) {
-		this.datePurchasedForRecap2 = datePurchasedForRecap2;
 	}
 
 	public String getInvoiceNo() {
