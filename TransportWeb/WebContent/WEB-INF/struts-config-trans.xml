@@ -15,6 +15,7 @@
 		<form-bean name="driverTrainingForm" type="com.transport.form.DriverTrainingFormBean" />
 		<form-bean name="driverIncidentForm" type="com.transport.form.DriverIncidentFormBean" />
 		<form-bean name="maintenanceInspectionForm" type="com.transport.form.MaintenanceInspectionFormBean" />
+		<form-bean name="tireManagementForm" type="com.transport.form.TireManagementFormBean" />
 
 	</form-beans>
  
@@ -573,6 +574,23 @@
 	   </action>
 	   <!-- Maintenance Inspection (END) -->
 	   
+	   <!-- Tire Management (START) -->
+ 		<action 
+	   		path="/tireManagement" 
+	   		type="com.transport.action.TireManagementAction"
+			name="tireManagementForm"
+			scope="request"
+			input="/pages/transaction/tiremanagement/ajaxTireManagement.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/transaction/tiremanagement/ajaxTireManagement.jsp"/>
+			<forward name="ajaxTable" path="/pages/transaction/tiremanagement/ajaxTireManagementTable.jsp"/>
+			<forward name="ajaxAdd" path="/pages/transaction/tiremanagement/ajaxTireManagementAssign.jsp"/>
+			<forward name="ajaxSuccess" path="/pages/transaction/tiremanagement/ajaxTireManagement.jsp"/>
+			<forward name="ajaxEdit" path="/pages/transaction/tiremanagement/ajaxTireManagementEdit.jsp"/>
+			<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	  <!-- Tire Management (END) -->
 	   	   	   	   
 	</action-mappings>
 	

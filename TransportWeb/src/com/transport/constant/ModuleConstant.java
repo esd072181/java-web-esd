@@ -29,7 +29,7 @@ public class ModuleConstant {
 	public static final int INSPECTION = 28;
 	//Transactions
 	public static final int VERIFICATION_AND_VALIDATION = 12;
-	public static final int TIRE_MANAGEMENT = 20; //Update for Website Enhancement 1 20Aug2016 -- development in progress
+	public static final int TIRE_MANAGEMENT = 20; //Update for Website Enhancement 1 20Aug2016
 	public static final int WORK_PERMIT = 21;
 	public static final int MAINTENANCE_MONITORING = 24; //Updated for v1.5.2 25Mar2019 
 	public static final int DRIVER_TRAINING = 25; //Updated for v1.5.4 26Aug2019

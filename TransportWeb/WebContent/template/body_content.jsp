@@ -57,6 +57,12 @@
 		    				</td>
 		    				<td width="30px"></td>	
 		    			</c:if>
+		    			<c:if test="${item == 931}">
+		      				<td align="center">
+		    					<img onclick="goToTireManagement();" src="resources/tire.jpg" alt="Tire Management" height="100" width="100" style="cursor: pointer;">	
+		    				</td>
+		    				<td width="30px"></td>	
+		    			</c:if>
 					</c:forEach>				
 				</tr>
 				<tr>
@@ -91,6 +97,10 @@
 		    			</c:if>
 		    			<c:if test="${item == 928}">
 		    				<td align="center"><a href="#" onclick="goToMaintenanceInspection();">Maintenance Inspection Checklist</a></td>
+							<td width="30px"></td>	
+		    			</c:if>
+		    			<c:if test="${item == 931}">
+		    				<td align="center"><a href="#" onclick="goToTireManagement();">Tire Management</a></td>
 							<td width="30px"></td>	
 		    			</c:if>
 					</c:forEach>					

@@ -250,6 +250,12 @@
         <property name="maintenanceInspectionHeaderDao" ref="maintenanceInspectionHeaderDao"></property>
         <property name="maintenanceInspectionDetailsDao" ref="maintenanceInspectionDetailsDao"></property>
     </bean>
+    
+    <!-- Tire Management -->
+    <bean id="tireManagementDao" class="com.transport.dao.impl.TireManagementDaoImpl" scope="singleton"></bean>
+    <bean id="tireManagementBo" class="com.transport.bo.impl.TireManagementBoImpl" scope="singleton">
+        <property name="tireManagementDao" ref="tireManagementDao"></property>
+    </bean>
                        
      <!-- START Added for Website Enhancement 1 20Aug2016 -->
     <!-- Tire Management -->

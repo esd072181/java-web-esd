@@ -1324,3 +1324,57 @@ function viewMaintenanceInspectionReport(id) {
 		  });
 
 }
+
+
+//Tire Management
+function goToTireManagement() {
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "tireManagement.do?"
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
+		});
+}
+
+function getTireDetailsByLorryNo() {
+
+	var lorryNo = $('#lorryNoid').val();
+
+	$.ajax({
+		  type: "GET",
+		  url: "tireManagement.do?command=ajaxSearchByCriteria&lorryNo="+lorryNo,
+		  cache: false,
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#tablePresentationDIV").html(result);
+		});
+}
+
+function goToTireManagementAssign() {
+	
+	window.open('/TransportWeb/tireManagement.do?command=add','popUpWindow','height=550,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+}
+
+function saveTireManagementAssign() {
+	
+	if ($('#serialNoId').val()=='') {
+		alert('Please select Tire.');
+		$('#serialNoId').focus();
+		return false;
+	}
+	
+	$.ajax({
+		  type: "POST",
+		  url: "saveMaintenanceInspection.do?command=ajaxSave",
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
+		});
+}
+

@@ -25,8 +25,8 @@
 					<th>Retired</th>
 					<th>DateRetired</th>
 					<th>Lorry No</th>
-					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
+						<th></th>
 						<th></th>
 					</c:if>
 				</tr>
@@ -47,8 +47,8 @@
 						<td><bean:write name="model" property="retired"/></td>
 						<td><bean:write name="model" property="dateRetired"/></td>
 						<td><bean:write name="model" property="lorryNo"/></td>
-						<td align="center"><a href="#" onclick="editTire('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
+							<td align="center"><a href="#" onclick="editTire('<bean:write name="model" property="id"/>');">Edit</a></td>
 							<td align="center"><a href="#" onclick="deleteTire('<bean:write name="model" property="id"/>', '${tireForm.category}',${tireForm.currentPage})">Delete</a></td>
 						</c:if>
 					</tr>

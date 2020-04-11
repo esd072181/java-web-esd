@@ -15,14 +15,15 @@
 					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
+						<th></th>
 					</c:if>
 				</tr>
 				<logic:iterate name="tireBrandForm" property="modelList" type="com.transport.model.TireBrand" id="model" indexId="index">
 					<tr>				 
 						<td><c:out value="${index+1}"/></td>
-						<td><a href="#" onclick="javascript: editTireBrand('<bean:write name="model" property="id"/>');"><bean:write name="model" property="name"/></a></td>
-						<td align="center"><a href="#" onclick="javascript: editTireBrand('<bean:write name="model" property="id"/>');">Edit</a></td>
+						<td><bean:write name="model" property="name"/></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
+							<td align="center"><a href="#" onclick="javascript: editTireBrand('<bean:write name="model" property="id"/>');">Edit</a></td>
 							<td align="center"><a href="#" onclick="javascript: deleteTireBrand('<bean:write name="model" property="id"/>', '${tireBrandForm.category}',${tireBrandForm.currentPage})">Delete</a></td>
 						</c:if>
 					</tr>

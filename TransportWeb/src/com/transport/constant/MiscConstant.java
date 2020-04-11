@@ -4,7 +4,7 @@ package com.transport.constant;
  * 
  * @author dward
  * @since July2015
- * DateUpdated: 30Mar2020
+ * DateUpdated: 11Apr2020
  */
 public class MiscConstant {
 
@@ -40,6 +40,7 @@ public class MiscConstant {
 	public static final String TRANS_ROOT_CAUSE_LIST = "trans_root_cause_list";
 	public static final String TRANS_CLOSURE_LIST = "trans_closure_list";
 	public static final String TRANS_INSPECTION_LIST = "trans_inspection_list";
+	public static final String TRANS_TIRE_LIST = "trans_tire_list";
 	public static final String UTILS_ENTITY_TYPE_CRITERIA = "entity_type_criteria";
 	public static final String RPT_SEARCH_CRITERIA = "rpt_search_criteria";//Verification and Validation
 	public static final String WORK_PERMIT_SEARCH_CRITERIA = "work_permit_search_criteria";
