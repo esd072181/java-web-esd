@@ -557,7 +557,7 @@
 			input="/pages/transaction/maintenanceinspection/ajaxMaintenanceInspectionEdit.jsp"
 			validate="true">
 			<forward name="ajaxSuccess" path="/pages/transaction/maintenanceinspection/ajaxMaintenanceInspectionEdit.jsp"/>
-			<forward name="ajaxFailed" path="/pages/transaction/dmaintenanceinspection/ajaxMaintenanceInspectionEdit.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/maintenanceinspection/ajaxMaintenanceInspectionEdit.jsp"/>
 	   		<forward name="expired" path="/template/expired_page.jsp"/>
 	   </action>
 	   
@@ -586,8 +586,33 @@
 			<forward name="ajaxTable" path="/pages/transaction/tiremanagement/ajaxTireManagementTable.jsp"/>
 			<forward name="ajaxAdd" path="/pages/transaction/tiremanagement/ajaxTireManagementAssign.jsp"/>
 			<forward name="ajaxSuccess" path="/pages/transaction/tiremanagement/ajaxTireManagement.jsp"/>
-			<forward name="ajaxEdit" path="/pages/transaction/tiremanagement/ajaxTireManagementEdit.jsp"/>
+			<forward name="ajaxEdit" path="/pages/transaction/tiremanagement/ajaxTireManagementRemove.jsp"/>
+			<forward name="ajaxView" path="/pages/transaction/tiremanagement/ajaxTireDetailsTable.jsp"/>
 			<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/saveTireManagementAssign" 
+	   		type="com.transport.action.TireManagementAction"
+			name="tireManagementForm"
+			scope="request"
+			input="/pages/transaction/tiremanagement/ajaxTireManagementAssign.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/tiremanagement/ajaxTireManagementAssign.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/tiremanagement/ajaxTireManagementAssign.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   
+	   <action 
+	   		path="/updateTireManagementRemove" 
+	   		type="com.transport.action.TireManagementAction"
+			name="tireManagementForm"
+			scope="request"
+			input="/pages/transaction/tiremanagement/ajaxTireManagementRemove.jsp"
+			validate="true">
+			<forward name="ajaxSuccess" path="/pages/transaction/tiremanagement/ajaxTireManagementRemove.jsp"/>
+			<forward name="ajaxFailed" path="/pages/transaction/tiremanagement/ajaxTireManagementRemove.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
 	   </action>
 	   
 	  <!-- Tire Management (END) -->

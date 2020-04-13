@@ -38,14 +38,14 @@
 						<td><a href="#" onclick="recapTire('<bean:write name="model" property="id"/>');"><bean:write name="model" property="recapNo"/></a></td>
 						<td><bean:write name="model" property="sizeAndPly"/></td>
 						<td><bean:write name="model" property="price" format="Php #,###.00"/></td>
-						<td><bean:write name="model" property="datePurchased"/></td>
-						<td><bean:write name="model" property="datePurchasedForRecap1"/></td>
-						<td><bean:write name="model" property="datePurchasedForRecap2"/></td>
+						<td><bean:write name="model" property="datePurchased" format='MM/dd/yyyy'/></td>
+						<td><bean:write name="model" property="datePurchasedForRecap1" format='MM/dd/yyyy'/></td>
+						<td><bean:write name="model" property="datePurchasedForRecap2" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="invoiceNo"/></td>
 						<td><bean:write name="model" property="analysis"/></td>
 						<td><bean:write name="model" property="comments"/></td>
 						<td><bean:write name="model" property="retired"/></td>
-						<td><bean:write name="model" property="dateRetired"/></td>
+						<td><bean:write name="model" property="dateRetired" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="lorryNo"/></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="editTire('<bean:write name="model" property="id"/>');">Edit</a></td>

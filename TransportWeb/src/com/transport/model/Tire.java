@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  * 
  * @author dward
  * @since 20Aug2016
- * DateUpdated: 08Apr2020
+ * DateUpdated: 12Apr2020
  */
 public class Tire implements Serializable {
 
@@ -222,6 +222,8 @@ public class Tire implements Serializable {
 		this.lorryNo = lorryNo;
 	}	
 
-	
+	public String getSerialNoRecapNo() {
+		return this.getSerialNo() + " (" + this.getRecapNo() + ")";
+	}
 	
 }

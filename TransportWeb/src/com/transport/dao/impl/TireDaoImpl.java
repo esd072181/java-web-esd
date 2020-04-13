@@ -489,6 +489,9 @@ public class TireDaoImpl implements TireDao {
 		return returnMap;
 	}
 	
+	/**
+	 * this method is used to get the available tires
+	 */
 	@Override
 	public Map<String, Object> getActiveData() throws Exception {
 		// TODO Auto-generated method stub
@@ -509,6 +512,7 @@ public class TireDaoImpl implements TireDao {
 			 		sql.append(" t.lorryno,t.createdby,t.createdon,t.modifiedby,t.modifiedon,t.version,t.active ");			 	
 				 	sql.append(" from transport.file_tire t inner join transport.file_tire_brand b on t.brandid = b.id ");
 				 	sql.append(" where t.active = true ");
+				 	sql.append(" and (t.lorryno is null or t.lorryno = '') ");//available tires
 				 	sql.append(" order by b.name,t.serialno ");
 
 				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
@@ -737,7 +741,7 @@ public class TireDaoImpl implements TireDao {
 		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
 		
 		StringBuffer qry =  new StringBuffer("update transport.file_tire set ");	
-			qry.append(" ,lorryno=? "); 
+			qry.append(" lorryno=? "); 
 			qry.append(" ,modifiedby=? ");
 			qry.append(" ,modifiedon=? ");
 			qry.append(" ,version=(version+1) ");

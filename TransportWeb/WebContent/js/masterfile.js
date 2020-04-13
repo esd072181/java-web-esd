@@ -7,6 +7,7 @@ var remarksLength = 50;
 //functions
 function goToMain(){
 	 window.location = '/transportweb/main.do';
+	 window.scrollTo(0,0);
 }
 
 function goToMainByAjax(){
@@ -17,6 +18,7 @@ function goToMainByAjax(){
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
 		});
 }
 

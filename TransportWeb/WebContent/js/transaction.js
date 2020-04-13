@@ -1339,9 +1339,7 @@ function goToTireManagement() {
 		});
 }
 
-function getTireDetailsByLorryNo() {
-
-	var lorryNo = $('#lorryNoid').val();
+function getTireDetailsByLorryNo(lorryNo) {
 
 	$.ajax({
 		  type: "GET",
@@ -1352,29 +1350,62 @@ function getTireDetailsByLorryNo() {
 		  .done(function( result ) {
 			$("#tablePresentationDIV").html(result);
 		});
+	
+	$('#btnAssignTireId').attr('disabled',true);
+	$('#btnRemoveTireId').attr('disabled',true);
 }
 
-function goToTireManagementAssign() {
+function goToTireManagementAssign(lorryNo,wheelPosition) {
 	
-	window.open('/TransportWeb/tireManagement.do?command=add','popUpWindow','height=550,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+	 if ($('#lorryNoId').val() == '') {
+		 alert('Please select lorry.');
+		 $('#lorryNoId').focus();
+		 return false;
+	 }
+	
+	window.open('/TransportWeb/tireManagement.do?command=add&lorryNo='+lorryNo+'&wheelPosition='+wheelPosition,'popUpWindow','height=550,width=550,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
 }
+
+function toggleOptionPlateNo(option) {
+	if (option == 1) {
+		$('#tractorPlateNoId').attr("checked", true);
+		$('#trailerPlateNoId').attr("checked", false);
+	} else {
+		$('#tractorPlateNoId').attr("checked", false);
+		$('#trailerPlateNoId').attr("checked", true);
+	}
+}
+
 
 function saveTireManagementAssign() {
 	
-	if ($('#serialNoId').val()=='') {
-		alert('Please select Tire.');
-		$('#serialNoId').focus();
-		return false;
-	}
+	let isTractor = false;
+	
+	if ($('#tractorPlateNoId').is(':checked') == true) {
+		isTractor = true;
+	} 
 	
 	$.ajax({
 		  type: "POST",
-		  url: "saveMaintenanceInspection.do?command=ajaxSave",
+		  url: "saveTireManagementAssign.do?command=ajaxSave&isTractor="+isTractor,
 		  data: $("#idForm").serialize() 
 		})
 		  .done(function( result ) {
-			$("#contentDIV").html(result);
+			$("#contentDIVAssign").html(result);
 			window.scrollTo(0,0);
 		});
 }
+
+function goToTireManagementRemove(lorryNo,wheelPosition,serialNo,recapNo) {
+	
+	 if ($('#lorryNoId').val() == '') {
+		 alert('Please select lorry.');
+		 $('#lorryNoId').focus();
+		 return false;
+	 }
+	
+	window.open('/TransportWeb/tireManagement.do?command=ajaxEdit&lorryNo='+lorryNo+'&wheelPosition='+wheelPosition+'&serialNo='+serialNo+'&recapNo='+recapNo,'popUpWindow','height=550,width=550,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+}
+
+
 

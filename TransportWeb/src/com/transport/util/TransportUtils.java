@@ -29,7 +29,7 @@ import com.transport.model.ListValue;
 /**
  * @author Edward.David
  * @since 04Mar2015
- * DateUpdated: 13Mar2020
+ * DateUpdated: 13Apr2020
  */
 public class TransportUtils {
 	
@@ -296,4 +296,29 @@ public class TransportUtils {
 		}
 		return ans;
 	}
+	/**
+	 * 
+	 * @param a
+	 * @param total
+	 * @return
+	 */
+	public static int getLowestNum(int[] a, int totalCount){  
+		int temp;  
+		for (int i = 0; i < totalCount; i++)   
+		        {  
+		            for (int j = i + 1; j < totalCount; j++)   
+		            {  
+		                if (a[i] > a[j])   
+		                {  
+		                    temp = a[i];  
+		                    a[i] = a[j];  
+		                    a[j] = temp;  
+		                }  
+		            }  
+		        }  
+		       return a[0];  
+	} 
+	
 }
+	
+ 

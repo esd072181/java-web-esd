@@ -28,6 +28,9 @@ function showDateCriteria(searchCriteria) {
 	}
 }
 
+function closeWindow(){
+	window.close();
+}
 
 //Change Username and Password
 function goToChangeUsername() {
