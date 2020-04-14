@@ -25,7 +25,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
- * DateUpdated: 09Apr2020
+ * DateUpdated: 14Apr2020
  */
 public class TireDaoImpl implements TireDao {
 	
@@ -853,6 +853,67 @@ public class TireDaoImpl implements TireDao {
 		returnMap.put(MapConstant.TRANSACTION_STATUS, status);	
 		
 		return returnMap;
+	}
+
+	@Override
+	public Boolean updateRetiredBySerialNo(HashMap<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_UPDATE);
+		 
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean status = false;
+		
+		Tire model = (Tire) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		model.setDateRetired(new java.sql.Date(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("update transport.file_tire set ");	
+			qry.append(" retired=? "); 
+			qry.append(" ,dateretired=? "); 
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" serialno = ? ");
+
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setString(1, model.getRetired());
+			pstmt.setDate(2, model.getDateRetired());
+			pstmt.setInt(3, model.getModifiedBy());
+			pstmt.setTimestamp(4, model.getModifiedOn());
+			pstmt.setString(5, model.getSerialNo());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("Tire record (id: " +model.getId()+") updated successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			TransportUtils.closeObjects(rs);
+			TransportUtils.closeObjects(pstmt);
+			TransportUtils.closeObjects(conn);
+		}
+		
+		return status;
 	}
 	
 }

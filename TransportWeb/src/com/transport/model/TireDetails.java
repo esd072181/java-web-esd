@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * 
  * @author dward
  * @since 20Aug2016
- * DateUpdated: 13Apr2020
+ * DateUpdated: 14Apr2020
  */
 public class TireDetails implements Serializable {
 
@@ -42,6 +42,7 @@ public class TireDetails implements Serializable {
 	
 	//non persistent
 	private String brandName;
+	private String retired;
 	
 	public TireDetails(){}
 
@@ -227,6 +228,14 @@ public class TireDetails implements Serializable {
 
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+
+	public String getRetired() {
+		return retired;
+	}
+
+	public void setRetired(String retired) {
+		this.retired = retired;
 	}	
 	
 }

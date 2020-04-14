@@ -1351,8 +1351,7 @@ function getTireDetailsByLorryNo(lorryNo) {
 			$("#tablePresentationDIV").html(result);
 		});
 	
-	$('#btnAssignTireId').attr('disabled',true);
-	$('#btnRemoveTireId').attr('disabled',true);
+	
 }
 
 function goToTireManagementAssign(lorryNo,wheelPosition) {
@@ -1362,6 +1361,8 @@ function goToTireManagementAssign(lorryNo,wheelPosition) {
 		 $('#lorryNoId').focus();
 		 return false;
 	 }
+	 
+	 
 	
 	window.open('/TransportWeb/tireManagement.do?command=add&lorryNo='+lorryNo+'&wheelPosition='+wheelPosition,'popUpWindow','height=550,width=550,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
 }
@@ -1407,5 +1408,24 @@ function goToTireManagementRemove(lorryNo,wheelPosition,serialNo,recapNo) {
 	window.open('/TransportWeb/tireManagement.do?command=ajaxEdit&lorryNo='+lorryNo+'&wheelPosition='+wheelPosition+'&serialNo='+serialNo+'&recapNo='+recapNo,'popUpWindow','height=550,width=550,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
 }
 
+
+function updateTireManagementRemove() {
+	
+	bootbox.confirm("Are you sure you want to remove this tire?", function(ans) {
+
+		 if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "updateTireManagementRemove.do?command=ajaxUpdate",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIVAssign").html(result);
+						window.scrollTo(0,0);
+				});
+		 } 
+	}); 
+
+}
 
 
