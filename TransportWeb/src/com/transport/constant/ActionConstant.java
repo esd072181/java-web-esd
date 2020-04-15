@@ -6,6 +6,7 @@ public class ActionConstant {
 	public static final String SAVE = "save";
 	public static final String GET_DATA = "getData";
 	public static final String UPDATE = "update";
+	public static final String UPDATE_2 = "update2";
 	public static final String DELETE = "delete";
 	public static final String SEARCHBY = "searchby";
 	public static final String SEARCHALL = "searchall";

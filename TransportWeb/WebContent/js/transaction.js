@@ -1340,6 +1340,12 @@ function goToTireManagement() {
 }
 
 function getTireDetailsByLorryNo(lorryNo) {
+	
+	 if ($('#lorryNoId').val() == '') {
+		 alert('Please select lorry.');
+		 $('#lorryNoId').focus();
+		 return false;
+	 }
 
 	$.ajax({
 		  type: "GET",
@@ -1362,8 +1368,6 @@ function goToTireManagementAssign(lorryNo,wheelPosition) {
 		 return false;
 	 }
 	 
-	 
-	
 	window.open('/TransportWeb/tireManagement.do?command=add&lorryNo='+lorryNo+'&wheelPosition='+wheelPosition,'popUpWindow','height=550,width=550,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
 }
 
@@ -1379,16 +1383,10 @@ function toggleOptionPlateNo(option) {
 
 
 function saveTireManagementAssign() {
-	
-	let isTractor = false;
-	
-	if ($('#tractorPlateNoId').is(':checked') == true) {
-		isTractor = true;
-	} 
-	
+		
 	$.ajax({
 		  type: "POST",
-		  url: "saveTireManagementAssign.do?command=ajaxSave&isTractor="+isTractor,
+		  url: "saveTireManagementAssign.do?command=ajaxSave",
 		  data: $("#idForm").serialize() 
 		})
 		  .done(function( result ) {
@@ -1428,4 +1426,106 @@ function updateTireManagementRemove() {
 
 }
 
+function getRecapNo(){
+	let tire = $('#serialNoId option:selected').text();
+	let arr = tire.split('(');
+	$('#recapNoId').val(arr[1].replace(')',''));
+	$('#odometerId').focus();
+	return false;
+}
+
+function checkIfLorryIsTractor() {
+	
+	let wheelPosition = $('#wheelPositionId').val()
+
+	if (wheelPosition === 'F' || wheelPosition === 'FR' || wheelPosition === 'DLO' || wheelPosition === 'DLI' 
+			|| wheelPosition === 'R2' || wheelPosition === 'DRI' || wheelPosition === 'DRO' || wheelPosition === 'RLO'
+			|| wheelPosition === 'RLI' || wheelPosition === 'RRI' || wheelPosition === 'RRO') {
+		
+		$('#tractorPlateNoId').attr('checked',true);
+		$('#trailerPlateNoId').attr('checked',false);
+	} else {
+		$('#tractorPlateNoId').attr('checked',false);
+		$('#trailerPlateNoId').attr('checked',true); 
+	}
+}
+
+function getLatestOdometerReadingBySerialNo(chkOdo,serialNo) {
+	
+	if (serialNo === '') {
+		alert('Select tire.');
+		$('#serialNoId').focus();
+		$('#odometer2Id').attr('checked',false);
+		return false;
+	}
+	
+	if (chkOdo.checked == false) {
+		$('#odometerId').val('');
+		$('#odometerId').focus();
+		return false;
+	} else {
+		$('#odometerStartId').focus();
+	}
+	
+	$.ajax({
+		  type: "POST",
+		  url: "tireManagement.do?command=ajaxSearchInner&serialNo="+serialNo,
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#ContentDIVOdometer").html(result);
+			
+		});
+	
+}
+
+function saveTireManagementAddDetails() {
+
+	$.ajax({
+		  type: "POST",
+		  url: "saveTireManagementDetails.do?command=ajaxSaveInner",
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#contentDIVAssign").html(result);
+			window.scrollTo(0,0);
+		});
+}
+
+function goToTireManagementAddDetails(lorryNo,wheelPosition,serialNo,recapNo) {
+	
+	 if ($('#lorryNoId').val() == '') {
+		 alert('Please select lorry.');
+		 $('#lorryNoId').focus();
+		 return false;
+	 }
+	 
+	 window.open('/TransportWeb/tireManagement.do?command=AddInner&lorryNo='+lorryNo+'&wheelPosition='+wheelPosition+'&serialNo='+serialNo+'&recapNo='+recapNo,'popUpWindow','height=550,width=550,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+	
+}
+
+function goToTireManagementEdit(id) {
+	 
+	 window.open('/TransportWeb/tireManagement.do?command=ajaxEditInner&id='+id,'popUpWindow','height=400,width=550,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+	
+}
+
+function updateTireManagementEdit() {
+	
+	bootbox.confirm("Are you sure you want to edit this record?", function(ans) {
+
+		 if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "updateTireManagementEdit.do?command=ajaxUpdateInner",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIVAssign").html(result);
+						window.scrollTo(0,0);
+				});
+		 } 
+	}); 
+
+}
 
