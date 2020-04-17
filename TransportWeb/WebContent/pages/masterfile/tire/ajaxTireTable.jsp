@@ -34,8 +34,16 @@
 					<tr>				 
 						<td><c:out value="${index+1}"/></td>
 						<td><bean:write name="model" property="brandName"/></td>
-						<td><a href="#" onclick="viewTireDetails('<bean:write name="model" property="id"/>');"><bean:write name="model" property="serialNo"/></a></td>
-						<td><a href="#" onclick="recapTire('<bean:write name="model" property="id"/>');"><bean:write name="model" property="recapNo"/></a></td>
+						<c:choose>
+							<c:when test="${model.retired == 'Yes'}">
+								<td><a href="#" style="color: red;" onclick="viewTireDetails('<bean:write name="model" property="id"/>');"><bean:write name="model" property="serialNo"/></a></td>
+								<td><a href="#" style="color: red;" onclick="recapTire('<bean:write name="model" property="id"/>');"><bean:write name="model" property="recapNo"/></a></td>
+							</c:when>
+							<c:otherwise>
+								<td><a href="#" onclick="viewTireDetails('<bean:write name="model" property="id"/>');"><bean:write name="model" property="serialNo"/></a></td>
+								<td><a href="#" onclick="recapTire('<bean:write name="model" property="id"/>');"><bean:write name="model" property="recapNo"/></a></td>
+							</c:otherwise>	
+						</c:choose>		
 						<td><bean:write name="model" property="sizeAndPly"/></td>
 						<td><bean:write name="model" property="price" format="Php #,###.00"/></td>
 						<td><bean:write name="model" property="datePurchased" format='MM/dd/yyyy'/></td>
@@ -44,7 +52,14 @@
 						<td><bean:write name="model" property="invoiceNo"/></td>
 						<td><bean:write name="model" property="analysis"/></td>
 						<td><bean:write name="model" property="comments"/></td>
-						<td><bean:write name="model" property="retired"/></td>
+						<c:choose>
+							<c:when test="${model.retired == 'Yes'}">
+								<td style="color: red;"><bean:write name="model" property="retired"/></td>
+							</c:when>
+							<c:otherwise>
+								<td><bean:write name="model" property="retired"/></td>
+							</c:otherwise>
+						</c:choose>		
 						<td><bean:write name="model" property="dateRetired" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="lorryNo"/></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">

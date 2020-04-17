@@ -45,7 +45,6 @@ function selectWheelPosition(position) {
 	} else if (position === 'FR') {
 		serialNo = $('#lblSerialNoIdFR').text();
 	} else if (position === 'DLO') {
-		if ($('#lblSerialNoIdDLO').text() === '') 
 		serialNo = $('#lblSerialNoIdDLO').text();
 	} else if (position === 'DLI') {
 		serialNo = $('#lblSerialNoIdDLI').text();

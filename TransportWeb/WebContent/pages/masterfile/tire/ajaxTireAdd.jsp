@@ -27,14 +27,6 @@ $(function() {
 					<h4 style="color: blue;"><c:out value="${tireForm.transactionMessage}"></c:out></h4>
 				</div> 
 				
-				 <div class="control-group">
-					<div class="controls">
-						<c:if test="${tireForm.transactionStatus == true}">
-							<html:button property="btnClose" styleClass="btn btn-primary" onclick="goToTire();" value="Close"></html:button>
-						</c:if>							 	 
-					</div>
-				</div>
-				
 						<div>
 						
 							<table>
