@@ -267,6 +267,7 @@ public class TireManagementFormBean extends TransportFormBean {
 		boolean flag = false;
 		
 		if (command!=null && (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE) 
+				|| command.equalsIgnoreCase(ParamConstant.AJAX_SAVE_INNER)
 				|| command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE)
 				|| command.equalsIgnoreCase(ParamConstant.AJAX_UPDATE_INNER))) {
 			
