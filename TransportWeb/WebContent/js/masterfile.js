@@ -1539,6 +1539,40 @@ function updateTireRecap() {
 
 }
 
+function editTireAnalysisComments(id) {
+	
+	$.ajax({
+		  type: "GET",
+		  url: "tire.do?",
+		  cache: false,
+		  data: { command: "ajaxEdit", id: id, analysis: true  }
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+			window.scrollTo(0,0);
+		});
+
+}
+
+function updateTireAnalysisComments() {
+	
+	bootbox.confirm("Are you sure you want to update this record?", function(ans) {
+		  //Example.show("Confirm result: "+result);
+		 if (ans) {
+				$.ajax({
+					  type: "POST",
+					  url: "updateTire.do?command=ajaxUpdate&analysisComments=true",
+					  data: $("#idForm").serialize() 
+					})
+					  .done(function( result ) {
+						$("#contentDIV").html(result);
+						window.scrollTo(0,0);
+				});
+		 } 
+	}); 
+
+}
+
 function deleteTire(id, category, currentPage) {
 	
 	bootbox.confirm("Are you sure you want to delete this record?", function(ans) {

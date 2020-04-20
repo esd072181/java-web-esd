@@ -7,7 +7,7 @@ import java.util.Map;
  * 
  * @author dward
  * @since 20Aug2016
- * DateUpdated: 14Apr2020
+ * DateUpdated: 20Apr2020
  */
 public interface TireDao {
 
@@ -19,6 +19,7 @@ public interface TireDao {
 	Map<String, Object> getActiveData() throws Exception;
 	Map<String, Object> getInActiveData(HashMap<String, Object> criteriaMap) throws Exception;
 	Map<String, Object> updateRecapNo(HashMap<String, Object> dataMap) throws Exception;
+	Map<String, Object> updateAnalysisComments(HashMap<String, Object> dataMap) throws Exception;
 	Map<String, Object> restore(HashMap<String, Object> dataMap) throws Exception;
 	Boolean updateLorryNoBySerialNo(HashMap<String, Object> dataMap) throws Exception;
 	Boolean updateRetiredBySerialNo(HashMap<String, Object> dataMap) throws Exception;

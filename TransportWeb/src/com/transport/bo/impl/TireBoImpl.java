@@ -11,7 +11,7 @@ import com.transport.dao.TireDao;
  * 
  * @author dward
  * @since 21Aug2016
- * DateUpdated: 09Apr2020
+ * DateUpdated: 20Apr2020
  */
 public class TireBoImpl implements TireBo {
 
@@ -36,8 +36,11 @@ public class TireBoImpl implements TireBo {
 	public Map<String, Object> updateRecord(HashMap<String, Object> dataMap) throws Exception{
 		
 		Object recap =  dataMap.get(MapConstant.BOOLEAN_DATA);
+		Object analysis =  dataMap.get(MapConstant.BOOLEAN_DATA_2);
 		if (recap!=null) {
 			return dao.updateRecapNo(dataMap);//for recap
+		} else if (analysis!=null) {
+			return dao.updateAnalysisComments(dataMap);//for analysis and comments
 		} else {
 			return dao.update(dataMap);
 		}

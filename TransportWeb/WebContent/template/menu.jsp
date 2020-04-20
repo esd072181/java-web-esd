@@ -106,6 +106,9 @@
         		<c:if test="${item == 915}">
         		    <li><a href="#"  onclick="javascript:goToRptWorkPermit();">Work Permit Report</a></li>
         		</c:if>
+        		<c:if test="${item == 932}">
+        		    <li><a href="#"  onclick="goToRptTireStatusSummary();">Tire Status Summary</a></li>
+        		</c:if>
         	</c:forEach>
         </ul>
        </li>

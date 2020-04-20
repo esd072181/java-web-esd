@@ -29,7 +29,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
- * DateUpdated: 09Apr2020
+ * DateUpdated: 20Apr2020
  */
 public class TireAction extends Action {
 
@@ -65,6 +65,7 @@ public class TireAction extends Action {
 					
 					int id = Integer.parseInt(request.getParameter("id"));
 					Object recap = request.getParameter("recap");
+					Object analysis = request.getParameter("analysis");
 					
 					Tire model = new Tire();
 					model.setId(id);
@@ -90,6 +91,8 @@ public class TireAction extends Action {
 					
 					if (recap!=null) {
 						forwardAction = ActionConstant.SHOW_AJAX_EDIT_2;
+					} else if (analysis!=null) {
+						forwardAction = ActionConstant.SHOW_AJAX_EDIT_3;
 					} else {
 						forwardAction = ActionConstant.SHOW_AJAX_EDIT;
 					}
@@ -98,6 +101,7 @@ public class TireAction extends Action {
 					//populateModel
 					Tire model = (Tire) formBean.populateModel(formBean);
 					Object recap = request.getParameter("recap");
+					Object analysis = request.getParameter("analysisComments");//cannot use analysis as parameter name, conflict with analysis formbean variable
 					
 					User user = (User) request.getSession().getAttribute(MiscConstant.USER_SESSION);
 					
@@ -111,6 +115,7 @@ public class TireAction extends Action {
 			        } else {
 			        	dataMap.put(MapConstant.ACTION, ActionConstant.UPDATE);
 			        	dataMap.put(MapConstant.BOOLEAN_DATA, recap);
+			        	dataMap.put(MapConstant.BOOLEAN_DATA_2, analysis);
 			        }
 			        
 			        ServiceManager service = new ServiceManagerImpl();
@@ -141,6 +146,8 @@ public class TireAction extends Action {
 			        		}
 			        		if (recap!=null) {
 			        			forwardAction = ActionConstant.AJAX_SUCCESS_2;//show recap page
+			        		} else if (analysis!=null) {
+			        			forwardAction = ActionConstant.AJAX_SUCCESS_3;//show analysis/comments page
 			        		} else {
 			        			forwardAction = ActionConstant.AJAX_SUCCESS;
 			        		}
@@ -151,6 +158,8 @@ public class TireAction extends Action {
 			        		TransportUtils.writeLogInfo(logger, MiscConstant.TRANS_MESSSAGE_ERROR+" - "+module);
 			        		if (recap!=null) {
 			        			forwardAction = ActionConstant.AJAX_FAILED_2;
+			        		} else if (analysis!=null) {
+			        			forwardAction = ActionConstant.AJAX_FAILED_3;
 			        		} else {
 			        			forwardAction = ActionConstant.AJAX_FAILED;
 			        		}

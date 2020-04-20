@@ -50,8 +50,22 @@
 						<td><bean:write name="model" property="datePurchasedForRecap1" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="datePurchasedForRecap2" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="invoiceNo"/></td>
-						<td><bean:write name="model" property="analysis"/></td>
-						<td><bean:write name="model" property="comments"/></td>
+						<c:choose>
+							<c:when test="${model.analysis == null || model.analysis == ''}">
+								<td><a href="#" style="color: blue;" onclick="editTireAnalysisComments('<bean:write name="model" property="id"/>');">[Add Analysis]</a></td>
+							</c:when>
+							<c:otherwise>
+								<td><a href="#" onclick="editTireAnalysisComments('<bean:write name="model" property="id"/>');"><bean:write name="model" property="analysis"/></a></td>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${model.comments == null || model.comments == ''}">
+								<td><a href="#"  style="color: blue;" onclick="editTireAnalysisComments('<bean:write name="model" property="id"/>');">[Add Comments]</a></td>
+							</c:when>
+							<c:otherwise>
+								<td><a href="#" onclick="editTireAnalysisComments('<bean:write name="model" property="id"/>');"><bean:write name="model" property="comments"/></a></td>
+							</c:otherwise>
+						</c:choose>
 						<c:choose>
 							<c:when test="${model.retired == 'Yes'}">
 								<td style="color: red;"><bean:write name="model" property="retired"/></td>

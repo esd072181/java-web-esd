@@ -59,8 +59,10 @@ public class ActionConstant {
 	
 	public static final String AJAX_SUCCESS = "ajaxSuccess";
 	public static final String AJAX_SUCCESS_2 = "ajaxSuccess2";
+	public static final String AJAX_SUCCESS_3 = "ajaxSuccess3";
 	public static final String AJAX_FAILED = "ajaxFailed";
 	public static final String AJAX_FAILED_2 = "ajaxFailed2";
+	public static final String AJAX_FAILED_3 = "ajaxFailed3";
 	
 	//Verification and Validation 
 	public static final String SHOW_AJAX_POPULATE_FINDINGS_BY_ITEM = "ajaxPopulateFindingsByItem";

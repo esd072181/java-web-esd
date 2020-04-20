@@ -9,52 +9,7 @@ $(function() {
 });
 
 </script>
-<style>
-	.threadRowBig {
-		width: 300px; 
-		border-top: 1px solid black; 
-		border-left: 1px solid black; 
-		border-right: 1px solid black; 
-		background-color: yellow;
-		font-size: 30px; 
-	}
-	.colorRowBig{
-		width: 300px; 
-		border: 1px solid black; 
-		cursor: pointer;
-		font-size: 80px; 
-	}
-	.serialNoRowBig{
-		width: 300px; 
-		border-bottom: 1px solid black; 
-		border-left: 1px solid black; 
-		border-right: 1px solid black;
-		font-size: 30px; 
-	}
-	.BLUE{
-		color: white;
-		background-color: #2545F8;
-	}
-	.LIME{
-		background-color: #44FA13;
-	}
-	.YELLOW{
-		background-color: yellow;
-	}
-	.ORANGE{
-		background-color: orange;
-	}
-	.RED{
-		background-color: red;
-	}
-	.GRAY{
-		background-color: gray;
-	}
-	.BLACK{
-		color: white;
-		background-color: black;
-	}
-</style>
+
 <table>
 	<tr>
 		<td>Brand:</td> 

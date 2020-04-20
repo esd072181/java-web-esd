@@ -23,6 +23,8 @@ import com.transport.model.InspectionHeader;
 import com.transport.model.Remarks;
 import com.transport.model.RootCause;
 import com.transport.model.Terminal;
+import com.transport.model.Tire;
+import com.transport.model.TireBrand;
 import com.transport.model.User;
 import com.transport.model.VerificationAndValidation;
 import com.transport.model.WorkPermit;
@@ -32,7 +34,7 @@ import com.transport.model.WorkPermit;
  * 
  * @author edwarddavid
  * @since July2015
- * DateUpdated: 30Mar2020
+ * DateUpdated: 20Apr2020
  */
 public class ArchiveFormBean extends TransportFormBean {
 
@@ -59,6 +61,8 @@ public class ArchiveFormBean extends TransportFormBean {
 	private List<DriverTraining> driverTrainingList;
 	private List<DriverIncident> driverIncidentList;
 	private List<InspectionHeader> inspectionHeaderList;
+	private List<TireBrand> tireBrandList;
+	private List<Tire> tireList;
 	
 	private int noOfPages;
 	private int currentPage;
@@ -313,8 +317,27 @@ public class ArchiveFormBean extends TransportFormBean {
 
 	public void setInspectionHeaderList(List<InspectionHeader> inspectionHeaderList) {
 		this.inspectionHeaderList = inspectionHeaderList;
-	}		
-	
-	
+	}
+
+
+	public List<TireBrand> getTireBrandList() {
+		return tireBrandList;
+	}
+
+
+	public void setTireBrandList(List<TireBrand> tireBrandList) {
+		this.tireBrandList = tireBrandList;
+	}
+
+
+	public List<Tire> getTireList() {
+		return tireList;
+	}
+
+
+	public void setTireList(List<Tire> tireList) {
+		this.tireList = tireList;
+	}
+
 
 }

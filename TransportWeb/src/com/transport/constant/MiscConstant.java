@@ -133,6 +133,9 @@ public class MiscConstant {
 	public static final int LOV_ENTITY_TYPE_DRIVER_TRAINING = 114;
 	public static final int LOV_ENTITY_TYPE_DRIVER_INCIDENT = 115;
 	public static final int LOV_ENTITY_TYPE_MAINTENANCE_INSPECTION = 116;
+	public static final int LOV_ENTITY_TYPE_TIRE_BRAND = 117;
+	public static final int LOV_ENTITY_TYPE_TIRE = 118;
+	public static final int LOV_ENTITY_TYPE_TIRE_MANAGEMENT = 119; //not used in Archive as of now
 	
 	//LOV for UserRole
 	public static final String LOV_USER_ROLE_STAFF = "Staff";

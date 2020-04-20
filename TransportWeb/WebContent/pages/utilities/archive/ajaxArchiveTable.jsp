@@ -457,8 +457,70 @@
 			</table>
 		  </c:if>
 
-
-				
+		<!-- Tire Brand -->
+		 <c:if test="${archiveForm.tireBrandList != null}">
+			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;  font-size: x-small;">  
+				<tr>
+					<th>No</th>
+					<th>Name</th>
+					<th></th>
+				</tr>
+				<logic:iterate name="archiveForm" property="tireBrandList" type="com.transport.model.TireBrand" id="model" indexId="index">
+					<tr>				 
+						<td><c:out value="${index+1}"/></td>
+						<td><bean:write name="model" property="name"/></td>
+						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
+					</tr>
+				</logic:iterate>
+			</table>
+		  </c:if>
+		
+		 <!-- Tire -->
+		<c:if test="${archiveForm.tireList != null}">
+			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: x-small;">  
+				<tr>
+					<th>No</th>
+					<th>Brand</th>
+					<th>SerialNo</th>
+					<th>RecapNo</th>
+					<th>SizeAndPly</th>
+					<th>Price(Php)</th>
+					<th>DatePurchased</th>
+					<th>DatePurchasedRecap1</th>
+					<th>DatePurchasedRecap2</th>
+					<th>InvoiceNo</th>
+					<th>Analysis</th>
+					<th>Comments</th>
+					<th>Retired</th>
+					<th>DateRetired</th>
+					<th>Lorry No</th>
+					<th></th>
+				</tr>
+				<logic:iterate name="archiveForm" property="tireList" type="com.transport.model.Tire" id="model" indexId="index">
+					<tr>				 
+						<td><c:out value="${index+1}"/></td>
+						<td><bean:write name="model" property="brandName"/></td>
+						<td><bean:write name="model" property="serialNo"/></td>
+						<td><bean:write name="model" property="recapNo"/></td>	
+						<td><bean:write name="model" property="sizeAndPly"/></td>
+						<td><bean:write name="model" property="price" format="Php #,###.00"/></td>
+						<td><bean:write name="model" property="datePurchased" format='MM/dd/yyyy'/></td>
+						<td><bean:write name="model" property="datePurchasedForRecap1" format='MM/dd/yyyy'/></td>
+						<td><bean:write name="model" property="datePurchasedForRecap2" format='MM/dd/yyyy'/></td>
+						<td><bean:write name="model" property="invoiceNo"/></td>
+						<td><bean:write name="model" property="analysis"/></td>
+						<td><bean:write name="model" property="comments"/></td>
+						<td><bean:write name="model" property="retired"/></td>	
+						<td><bean:write name="model" property="dateRetired" format='MM/dd/yyyy'/></td>
+						<td><bean:write name="model" property="lorryNo"/></td>
+						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
+					</tr>
+				</logic:iterate>
+			</table>
+		  </c:if>
+		  
+		  
+		    				
 	</div>
 	
 	<div style="height: 50px; width: 98%;">

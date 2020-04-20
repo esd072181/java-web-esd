@@ -113,7 +113,7 @@ $(function() {
 									<td style="padding-left: 5px;">
 										<div class="control-group">
 											 <div class="controls">
-											 	<html:text styleId="analysisId" property="analysis" styleClass="input-xlarge"  size="50" maxlength="40" value="${tireForm.analysis}" disabled="${tireForm.transactionStatus}"></html:text><br>							 			
+											 	<html:text styleId="analysisId" property="analysis" styleClass="input-xlarge"  size="50" maxlength="200" value="${tireForm.analysis}" disabled="${tireForm.transactionStatus}"></html:text><br>							 			
 											 </div>						
 										</div>
 									</td>
@@ -123,7 +123,7 @@ $(function() {
 									<td style="padding-left: 5px;">
 										<div class="control-group">
 											 <div class="controls">
-											 	<html:text styleId="commentsId" property="comments" styleClass="input-xlarge"  size="50" maxlength="40" value="${tireForm.comments}" disabled="${tireForm.transactionStatus}"></html:text><br>							 			
+											 	<html:text styleId="commentsId" property="comments" styleClass="input-xlarge"  size="50" maxlength="200" value="${tireForm.comments}" disabled="${tireForm.transactionStatus}"></html:text><br>							 			
 											 </div>						
 										</div>
 									</td>

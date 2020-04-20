@@ -1529,3 +1529,71 @@ function updateTireManagementEdit() {
 
 }
 
+function selectWheelPosition(position) {
+	
+	$('#wheelPositionId').val(position);
+	
+	let serialNo = '';	
+		
+	if (position === 'FL') {
+		serialNo = $('#lblSerialNoIdFL').text();
+	} else if (position === 'FR') {
+		serialNo = $('#lblSerialNoIdFR').text();
+	} else if (position === 'DLO') {
+		serialNo = $('#lblSerialNoIdDLO').text();
+	} else if (position === 'DLI') {
+		serialNo = $('#lblSerialNoIdDLI').text();
+	} else if (position === 'R2') {
+		serialNo = $('#lblSerialNoIdR2').text();
+	} else if (position === 'DRI') {
+		serialNo = $('#lblSerialNoIdDRI').text();
+	} else if (position === 'DRO') {
+		serialNo = $('#lblSerialNoIdDRO').text();
+	} else if (position === 'RLO') {
+		serialNo = $('#lblSerialNoIdRLO').text();
+	} else if (position === 'RLI') {
+		serialNo = $('#lblSerialNoIdRLI').text();
+	} else if (position === 'RRI') {
+		serialNo = $('#lblSerialNoIdRRI').text();
+	} else if (position === 'RRO') {
+		serialNo = $('#lblSerialNoIdRRO').text();
+	} else if (position === 'FLO') {
+		serialNo = $('#lblSerialNoIdFLO').text();
+	} else if (position === 'FLI') {
+		serialNo = $('#lblSerialNoIdFLI').text();
+	} else if (position === 'FRI') {
+		serialNo = $('#lblSerialNoIdFRI').text();
+	} else if (position === 'FRO') {
+		serialNo = $('#lblSerialNoIdFRO').text();
+	} else if (position === 'SLO') {
+		serialNo = $('#lblSerialNoIdSLO').text();
+	} else if (position === 'SLI') {
+		serialNo = $('#lblSerialNoIdSLI').text();
+	} else if (position === 'SRI') {
+		serialNo = $('#lblSerialNoIdSRI').text();
+	} else if (position === 'SRO') {
+		serialNo = $('#lblSerialNoIdSRO').text();
+	} else if (position === 'TLO') {
+		serialNo = $('#lblSerialNoIdTLO').text();
+	} else if (position === 'TLI') {
+		serialNo = $('#lblSerialNoIdTLI').text();
+	} else if (position === 'R') {
+		serialNo = $('#lblSerialNoIdR').text();
+	} else if (position === 'TRI') {
+		serialNo = $('#lblSerialNoIdTRI').text();
+	} else if (position === 'TRO') {
+		serialNo = $('#lblSerialNoIdTRO').text();
+	}
+	
+	$.ajax({
+		  type: "GET",
+		  url: "tireManagement.do?command=ajaxSearch&serialNo="+serialNo,
+		  cache: false,
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( result ) {
+			$("#tablePresentationDIVDetails").html(result);
+		});
+		
+	return false;
+}

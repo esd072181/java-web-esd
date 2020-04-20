@@ -12,7 +12,6 @@
 				<tr>
 					<th>No</th>
 					<th>Name</th>
-					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 						<th></th>

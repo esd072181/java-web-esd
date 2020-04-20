@@ -4,7 +4,7 @@ package com.transport.constant;
  * 
  * @author dward
  * @since July2015
- * DateUpdated: 22Mar2020
+ * DateUpdated: 20Apr2020
  */
 public class ModuleConstant {
 
@@ -39,12 +39,13 @@ public class ModuleConstant {
 	//Reports
 	public static final int RPT_VERIFICATION = 13;
 	public static final int RPT_WORK_PERMIT = 22;
+	public static final int RPT_TIRE_STATUS_SUMMARY = 29;
 	//Utilities
 	public static final int ARCHIVE = 14;
 	//Others
 	public static final int CHANGE_USERNAME = 15;
 	
-	//Last number is 28
+	//Last number is 29
 	
 	//Module Inner
 	public static final int MAINTENANCE_MONITORING_GPS = 241;

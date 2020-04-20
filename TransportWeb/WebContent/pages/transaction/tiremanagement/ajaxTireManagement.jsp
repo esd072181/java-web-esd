@@ -11,14 +11,7 @@ $(function() {
     $('#lorryNoId').focus();
   });
 </script>
-<style>
-.legendBox {
-		width: 30px; 
-		height: 30px; 
-		border: 1px solid black; 
-	}
-</style>
-		
+	
 	<div style="padding-left: 10px;">
 		<h3 style="font-weight: bolder; padding-bottom: 10px;">Tire Management</h3>
 		<html:form action="/tireManagement.do" styleId="idForm">							

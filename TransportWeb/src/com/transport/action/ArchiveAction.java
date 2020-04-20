@@ -32,6 +32,8 @@ import com.transport.model.Lorry;
 import com.transport.model.Remarks;
 import com.transport.model.RootCause;
 import com.transport.model.Terminal;
+import com.transport.model.Tire;
+import com.transport.model.TireBrand;
 import com.transport.model.User;
 import com.transport.model.VerificationAndValidation;
 import com.transport.model.WorkPermit;
@@ -43,7 +45,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author edwarddavid
  * @since July2015
- * DateUpdated: 30Mar2020
+ * DateUpdated: 20Apr2020
  */
 public class ArchiveAction extends Action {
 
@@ -177,6 +179,18 @@ public class ArchiveAction extends Action {
 								dataMap.put(MapConstant.CLASS_DATA, inspectionHeaderModel); 
 								module = ModuleConstant.MAINTENANCE_INSPECTION;
 			        			break;
+			        		case MiscConstant.LOV_ENTITY_TYPE_TIRE_BRAND:
+								TireBrand tireBrandModel = new TireBrand();
+								tireBrandModel.setId(id);
+								dataMap.put(MapConstant.CLASS_DATA, tireBrandModel); 
+								module = ModuleConstant.TIRE_BRAND;
+			        			break;
+			        		case MiscConstant.LOV_ENTITY_TYPE_TIRE:
+								Tire tireModel = new Tire();
+								tireModel.setId(id);
+								dataMap.put(MapConstant.CLASS_DATA, tireModel); 
+								module = ModuleConstant.TIRE;
+			        			break;
 			        		default:
 			        			break;
 			        	}				
@@ -275,6 +289,12 @@ public class ArchiveAction extends Action {
 		        		case MiscConstant.LOV_ENTITY_TYPE_MAINTENANCE_INSPECTION:
 							module = ModuleConstant.MAINTENANCE_INSPECTION;
 		        			break;
+		        		case MiscConstant.LOV_ENTITY_TYPE_TIRE_BRAND:
+							module = ModuleConstant.TIRE_BRAND;
+		        			break;
+		        		case MiscConstant.LOV_ENTITY_TYPE_TIRE:
+							module = ModuleConstant.TIRE;
+		        			break;
 		        		default:
 		        			break;
 					}
@@ -371,6 +391,16 @@ public class ArchiveAction extends Action {
 								@SuppressWarnings("unchecked")
 								List<InspectionHeader> inspectionHeaderList =  (List<InspectionHeader>) resultMap.get(MapConstant.CLASS_LIST);     		
 					        	formBean.setInspectionHeaderList(inspectionHeaderList);
+			        			break;
+			        		case MiscConstant.LOV_ENTITY_TYPE_TIRE_BRAND:
+								@SuppressWarnings("unchecked")
+								List<TireBrand> tireBrandList =  (List<TireBrand>) resultMap.get(MapConstant.CLASS_LIST);     		
+					        	formBean.setTireBrandList(tireBrandList);
+			        			break;
+			        		case MiscConstant.LOV_ENTITY_TYPE_TIRE:
+								@SuppressWarnings("unchecked")
+								List<Tire> tireList =  (List<Tire>) resultMap.get(MapConstant.CLASS_LIST);     		
+					        	formBean.setTireList(tireList);
 			        			break;
 			        		default:
 			        			break;

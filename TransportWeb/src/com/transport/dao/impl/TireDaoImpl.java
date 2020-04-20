@@ -25,7 +25,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
- * DateUpdated: 14Apr2020
+ * DateUpdated: 20Apr2020
  */
 public class TireDaoImpl implements TireDao {
 	
@@ -914,6 +914,69 @@ public class TireDaoImpl implements TireDao {
 		}
 		
 		return status;
+	}
+
+	@Override
+	public Map<String, Object> updateAnalysisComments(HashMap<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_UPDATE);
+		 
+		//DBCP JNDI
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		boolean status = false;
+		
+		Tire model = (Tire) dataMap.get(MapConstant.CLASS_DATA);
+		User user = (User) dataMap.get(MapConstant.USER_SESSION_DATA);
+		
+		if (user!=null) {
+			model.setModifiedBy((int) user.getId());	
+		}
+		model.setModifiedOn(new Timestamp(new java.util.Date().getTime()));
+		
+		StringBuffer qry =  new StringBuffer("update transport.file_tire set ");	
+			qry.append(" analysis=? ");
+			qry.append(" ,comments=? ");
+			qry.append(" ,modifiedby=? ");
+			qry.append(" ,modifiedon=? ");
+			qry.append(" ,version=(version+1) ");
+			qry.append(" where ");
+			qry.append(" id = ? ");
+
+		TransportUtils.writeLogDebug(logger, "SQL: "+qry.toString());
+	
+		 try {
+			conn = ServerContext.getJDBCHandle();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(qry.toString());
+				     
+			pstmt.setString(1, model.getAnalysis());
+			pstmt.setString(2, model.getComments());
+			pstmt.setInt(3, model.getModifiedBy());
+			pstmt.setTimestamp(4, model.getModifiedOn());
+			pstmt.setLong(5, model.getId());
+				     
+			int statusInt = pstmt.executeUpdate();
+				     
+			if (statusInt == 1) {
+				conn.commit();
+				System.out.println("Tire record (analysis/comments) (id: " +model.getId()+") updated successfully..");
+				status = true;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			TransportUtils.closeObjects(rs);
+			TransportUtils.closeObjects(pstmt);
+			TransportUtils.closeObjects(conn);
+		}
+			 		
+		returnMap.put(MapConstant.TRANSACTION_STATUS, status);	
+		
+		return returnMap;
 	}
 	
 }

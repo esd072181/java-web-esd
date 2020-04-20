@@ -23,6 +23,7 @@ public class MapConstant {
 	public static final String CLASS_LIST_6 = "class_list_6";
 	public static final String CLASS_LIST_7 = "class_list_7";
 	public static final String BOOLEAN_DATA = "boolean_data";
+	public static final String BOOLEAN_DATA_2 = "boolean_data_2";
 	public static final String USER_SESSION_DATA = "user_session_data";
 	public static final String TRANSACTION_STATUS = "transaction_status";
 	public static final String ENTITY = "entity";//for master file in Archive
