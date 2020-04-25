@@ -36,6 +36,10 @@ $(function() {
 							<td>
 								<html:button property="command" styleId="btnRefreshId" onclick="getTireDetailsByLorryNo($('#lorryNoId').val());" value="Refresh" styleClass="btn btn-primary"></html:button>
 							</td>
+							<td width="5"></td>
+							<td>
+								<html:button property="command" styleId="btnViewLorryHistoryId" onclick="getLorryHistory($('#lorryNoId').val());" value="View Lorry History" styleClass="btn btn-primary"></html:button>
+							</td>
 							<td width="50"></td>
 							<td>Legend:</td>
 							<td width="5"></td>
@@ -59,7 +63,7 @@ $(function() {
 					</table>
 					<table>
 						<tr>
-							<td width="330"></td>
+							<td width="475"></td>
 							<td>Good -------------------------------------- Bad</td>
 							<td width="27"></td>
 							<td>No Tire</td>

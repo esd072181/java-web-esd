@@ -999,14 +999,13 @@ public class TireDaoImpl implements TireDao {
 		
 				 StringBuffer  sql = new StringBuffer("select t.serialno,t.recapno,d.threaddepth1,d.threaddepth2,d.threaddepth3,");
 			 		sql.append(" t.lorryno,d.plateno,d.wheelposition, ROW_NUMBER () OVER (ORDER BY t.serialno) ");			 	
-				 	sql.append(" from transport.file_tire t, transport.tran_tire_details d ");
-				 	sql.append(" where t.serialno = d.serialno ");
-				 	sql.append(" and (t.retired <> 'Yes' or t.retired is null) ");
-				 	sql.append(" and d.active = true ");
+				 	sql.append(" from transport.file_tire t left join transport.tran_tire_details d ");
+				 	sql.append(" on t.serialno = d.serialno ");
+				 	sql.append(" where (t.retired <> 'Yes' or t.retired is null) ");
+				 	sql.append(" and (d.active = true or d.active is null) ");
 				 	if (searchValue!=null && searchValue.trim().length()>0) {
 				 		sql.append(" and (t.serialno ilike '%" + searchValue +  "%' or t.lorryno ilike '%" + searchValue +  "%')");
 				 	}
-				 	sql.append(" order by t.serialno ");
 
 				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 			
