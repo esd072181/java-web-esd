@@ -92,3 +92,26 @@ function getRptWorkPermit() {
 		});
 }
 
+//Tire Status Summary
+function goToRptTireStatusSummary() {
+	$.ajax({
+		  type: "GET",
+		  cache: false,
+		  url: "rptTireStatusSummary.do?"
+		})
+		  .done(function( result ) {
+			$("#contentDIV").html(result);
+		});
+}
+
+function getRptTireStatusSummary() {
+	  $.ajax({
+		  type: "GET",
+		  url: "rptTireStatusSummary.do?command=ajaxSearch",
+		  cache: false,
+		  data: $("#idForm").serialize() 
+		})
+		  .done(function( report ) {
+			  window.open('/TransportWeb/reports/'+report,'popUpWindow','height=1700,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+		  });
+}

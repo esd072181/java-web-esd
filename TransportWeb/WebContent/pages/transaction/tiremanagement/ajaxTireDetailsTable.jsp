@@ -93,7 +93,14 @@ $(function() {
 						<td><bean:write name="model" property="reasonForRemoval"/></td>
 						<td><bean:write name="model" property="dateUpdated"/></td>
 						-->
-						<td><bean:write name="model" property="active"/></td>
+						<c:choose>
+							<c:when test="${model.active == true}">
+								<td>Yes</td>
+							</c:when>
+							<c:otherwise>
+								<td></td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 				</logic:iterate>
 	</table>

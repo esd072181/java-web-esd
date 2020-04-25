@@ -5,7 +5,7 @@ package com.transport.constant;
  * 
  * @author dward
  * @since 01Mar2015
- * DateUpdated: 23Mar2020
+ * DateUpdated: 24Apr2020
  */
 public class BeanConstant {
 
@@ -48,6 +48,7 @@ public class BeanConstant {
 	//Reports
 	private static final String RPT_VERIFICATION_BEAN_ID = "rptVerificationBo";//Report Verification
 	private static final String RPT_WORK_PERMIT_BEAN_ID = "rptWorkPermitBo";//Report Work Permit
+	private static final String RPT_TIRE_STATUS_SUMMARY_BEAN_ID = "rptTireStatusSummaryBo";//Tire Status Summary
 	//Utilities
 	private static final String ARCHIVE_BEAN_ID = "archiveBo";//Archive
 	//Others
@@ -130,6 +131,8 @@ public class BeanConstant {
 			case ModuleConstant.INSPECTION: beanId = INSPECTION_BEAN_ID;
 			  break;
 			case ModuleConstant.MAINTENANCE_INSPECTION: beanId = MAINTENANCE_INSPECTION_HEADER_BEAN_ID;
+			  break;
+			case ModuleConstant.RPT_TIRE_STATUS_SUMMARY: beanId = RPT_TIRE_STATUS_SUMMARY_BEAN_ID;
 			  break;
 			default: break;
 		} 

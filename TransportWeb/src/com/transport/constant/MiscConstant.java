@@ -199,6 +199,8 @@ public class MiscConstant {
 	public static final String RPT_MAINTENANCE_CATEGORY_REPORT = "MaintenanceCategory.jasper";
 	public static final String RPT_MAINTENANCE_INSPECTION_TITLE = "Inspection Checklist Report";
 	public static final String RPT_MAINTENANCE_INSPECTION_REPORT = "InspectionChecklist.jasper";
+	public static final String RPT_TIRE_STATUS_SUMMARY_TITLE = "Tire Status Sumary";
+	public static final String RPT_TIRE_STATUS_SUMMARY_REPORT = "TireStatusSummary.jasper";
 
 	//Reports - pdf
 	public static final String PDF_VERIFICATION_AND_VALIDATION_REPORT = "verification.pdf";
@@ -209,5 +211,6 @@ public class MiscConstant {
 	public static final String PDF_DRIVER_INCIDENT_REPORT = "DriverIncident.pdf";
 	public static final String PDF_MAINTENANCE_CATEGORY_REPORT = "MaintenanceCategory.pdf";
 	public static final String PDF_MAINTENANCE_INSPECTION_REPORT = "InspectionChecklist.pdf";
+	public static final String PDF_TIRE_STATUS_SUMMARY_REPORT = "TireStatusSummary.pdf";
 	
 }

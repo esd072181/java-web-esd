@@ -31,6 +31,7 @@ import com.transport.module.MaintenanceMonitoringSecurityModule;
 import com.transport.module.MaintenanceMonitoringTotalPendingModule;
 import com.transport.module.RemarksModule;
 import com.transport.module.RootCauseModule;
+import com.transport.module.RptTireStatusSummaryModule;
 import com.transport.module.RptVerificationModule;
 import com.transport.module.RptWorkPermitModule;
 import com.transport.module.TerminalModule;
@@ -51,7 +52,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since July2016
- * DateUpdated: 23Mar2020
+ * DateUpdated: 24Apr2020
  */
 public class ServiceManagerImpl implements ServiceManager {
 	
@@ -211,6 +212,10 @@ public class ServiceManagerImpl implements ServiceManager {
 					break;
 				case ModuleConstant.MAINTENANCE_INSPECTION : 
 					module = new MaintenanceInspectionModule();
+					returnMap = module.executeRequest(dataMap);
+					break;
+				case ModuleConstant.RPT_TIRE_STATUS_SUMMARY : 
+					module = new RptTireStatusSummaryModule();
 					returnMap = module.executeRequest(dataMap);
 					break;
 				default: 

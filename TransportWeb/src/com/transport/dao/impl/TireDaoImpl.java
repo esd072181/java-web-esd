@@ -18,6 +18,7 @@ import com.transport.constant.MapConstant;
 import com.transport.constant.MiscConstant;
 import com.transport.dao.TireDao;
 import com.transport.model.Tire;
+import com.transport.model.TireStatusReport;
 import com.transport.model.User;
 import com.transport.util.TransportUtils;
 
@@ -25,7 +26,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
- * DateUpdated: 20Apr2020
+ * DateUpdated: 24Apr2020
  */
 public class TireDaoImpl implements TireDao {
 	
@@ -976,6 +977,72 @@ public class TireDaoImpl implements TireDao {
 			 		
 		returnMap.put(MapConstant.TRANSACTION_STATUS, status);	
 		
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getTireStatusSummary(HashMap<String, Object> criteriaMap) throws Exception {
+
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_GET_ACTIVE_DATA);
+		 
+		 	//Connection using JNDI DBCP
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+		     Map<String, Object> returnMap = new HashMap<String, Object>();
+			 List<TireStatusReport> rsList = new ArrayList<TireStatusReport>();
+			 
+			 String searchValue = criteriaMap.get(MapConstant.SEARCH_VALUE)!=null ? (String) criteriaMap.get(MapConstant.SEARCH_VALUE) : null ;
+			  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+		
+				 StringBuffer  sql = new StringBuffer("select t.serialno,t.recapno,d.threaddepth1,d.threaddepth2,d.threaddepth3,");
+			 		sql.append(" t.lorryno,d.plateno,d.wheelposition, ROW_NUMBER () OVER (ORDER BY t.serialno) ");			 	
+				 	sql.append(" from transport.file_tire t, transport.tran_tire_details d ");
+				 	sql.append(" where t.serialno = d.serialno ");
+				 	sql.append(" and t.retired <> 'Yes' ");
+				 	sql.append(" and d.active = true ");
+				 	if (searchValue!=null && searchValue.trim().length()>0) {
+				 		sql.append(" and (t.serialno ilike '%" + searchValue +  "%' or t.lorryno ilike '%" + searchValue +  "%')");
+				 	}
+				 	sql.append(" order by t.serialno ");
+
+				 TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+			
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()) {
+					 //get the model criteria
+					 TireStatusReport model = new TireStatusReport();
+					 model.setSerialNo(rs.getString(1));
+		    		 model.setRecapNo(rs.getString(2));
+		    		 model.setThreadDepth1(rs.getInt(3));
+		    		 model.setThreadDepth2(rs.getInt(4));
+		    		 model.setThreadDepth3(rs.getInt(5));
+		    		 model.setLorryNo(rs.getString(6));
+		    		 model.setPlateNo(rs.getString(7));
+		    		 model.setWheelPosition(rs.getString(8));
+		    		 model.setRowNo(rs.getInt(9));
+		    		 rsList.add(model);
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+			 }	 
+		 		     
+		     if (rsList.isEmpty()) {
+		    	 TireStatusReport model = new TireStatusReport();
+		    	 rsList.add(model);
+		     } 
+		     
+		     returnMap.put(MapConstant.CLASS_LIST, rsList);
+	     
 		return returnMap;
 	}
 	

@@ -23,5 +23,6 @@ public interface TireDao {
 	Map<String, Object> restore(HashMap<String, Object> dataMap) throws Exception;
 	Boolean updateLorryNoBySerialNo(HashMap<String, Object> dataMap) throws Exception;
 	Boolean updateRetiredBySerialNo(HashMap<String, Object> dataMap) throws Exception;
+	Map<String, Object> getTireStatusSummary(HashMap<String, Object> criteriaMap) throws Exception;
 	
 }

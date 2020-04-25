@@ -11,6 +11,7 @@
 
 		<form-bean name="rptVerificationForm" type="com.transport.form.RptVerificationFormBean" />
 		<form-bean name="rptWorkPermitForm" type="com.transport.form.RptWorkPermitFormBean" />
+		<form-bean name="rptTireStatusSummaryForm" type="com.transport.form.RptTireStatusSummaryFormBean" />
 
 	</form-beans>
  
@@ -40,6 +41,19 @@
 			validate="true">
 			<forward name="ajaxMain" path="/pages/reports/workpermit/ajaxRptWorkPermit.jsp"/>
 			<forward name="ajaxSearchStatus" path="/pages/reports/workpermit/ajaxRptWorkPermitStatus.jsp"/>
+	   		<forward name="expired" path="/template/expired_page.jsp"/>
+	   </action>
+	   <!-- Work Permit Report (END) -->
+	   
+	   <!-- Tire Status Summary (START) -->
+	   <action 
+	   		path="/rptTireStatusSummary" 
+	   		type="com.transport.action.RptTireStatusSummaryAction"
+			name="rptTireStatusSummaryForm"
+			scope="request"
+			input="/pages/reports/tirestatussummary/ajaxRptTireStatusSummary.jsp"
+			validate="true">
+			<forward name="ajaxMain" path="/pages/reports/tirestatussummary/ajaxRptTireStatusSummary.jsp"/>
 	   		<forward name="expired" path="/template/expired_page.jsp"/>
 	   </action>
 	   <!-- Work Permit Report (END) -->

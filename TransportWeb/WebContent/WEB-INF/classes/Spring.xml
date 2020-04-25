@@ -289,6 +289,11 @@
     	<bean id="rptWorkPermitBo" class="com.transport.bo.impl.RptWorkPermitBoImpl" scope="singleton">
         <property name="rptWorkPermitDao" ref="rptWorkPermitDao"></property>
     </bean> 
+    
+    <!-- Tire Status Summary -->
+    	<bean id="rptTireStatusSummaryBo" class="com.transport.bo.impl.RptTireStatusSummaryBoImpl" scope="singleton">
+        <property name="tireDao" ref="tireDao"></property>
+    </bean> 
    	
    	<!-- Reports END -->
    	
