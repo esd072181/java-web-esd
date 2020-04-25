@@ -1001,7 +1001,7 @@ public class TireDaoImpl implements TireDao {
 			 		sql.append(" t.lorryno,d.plateno,d.wheelposition, ROW_NUMBER () OVER (ORDER BY t.serialno) ");			 	
 				 	sql.append(" from transport.file_tire t, transport.tran_tire_details d ");
 				 	sql.append(" where t.serialno = d.serialno ");
-				 	sql.append(" and t.retired <> 'Yes' ");
+				 	sql.append(" and (t.retired <> 'Yes' or t.retired is null) ");
 				 	sql.append(" and d.active = true ");
 				 	if (searchValue!=null && searchValue.trim().length()>0) {
 				 		sql.append(" and (t.serialno ilike '%" + searchValue +  "%' or t.lorryno ilike '%" + searchValue +  "%')");
