@@ -7,7 +7,7 @@ import java.util.Map;
  * 
  * @author dward
  * @since 20Aug2016
- * DateUpdated: 15Apr2020
+ * DateUpdated: 25Apr2020
  */
 public interface TireManagementDao {
 
@@ -18,4 +18,5 @@ public interface TireManagementDao {
 	Map<String, Object> searchLatestRecordBySerialNo(HashMap<String, Object> dataMap) throws Exception;
 	Map<String, Object> getLatestOdometerBySerialNo(HashMap<String, Object> dataMap) throws Exception;
 	Map<String, Object> getDataById(HashMap<String, Object> dataMap) throws Exception;
+	Map<String, Object> getLorryHistory(HashMap<String, Object> dataMap) throws Exception;
 }

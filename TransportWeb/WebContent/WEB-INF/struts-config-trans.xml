@@ -591,6 +591,7 @@
 			<forward name="ajaxEdit2" path="/pages/transaction/tiremanagement/ajaxTireManagementEdit.jsp"/>
 			<forward name="ajaxView" path="/pages/transaction/tiremanagement/ajaxTireDetailsTable.jsp"/>
 			<forward name="ajaxView2" path="/pages/transaction/tiremanagement/ajaxTireOdometer.jsp"/>
+			<forward name="ajaxView3" path="/pages/transaction/tiremanagement/ajaxTireLorryHistory.jsp"/>
 			<forward name="expired" path="/template/expired_page.jsp"/>
 	   </action>
 	   

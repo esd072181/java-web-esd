@@ -295,9 +295,28 @@ public class TireManagementAction extends Action {
 			        
 			        forwardAction = ActionConstant.SHOW_AJAX_VIEW_2;
 				
-				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_DELETE)) {
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_VIEW)) {
+					//Lorry History
+					String lorryNo = (String) request.getParameter("lorryNo");
+					formBean.setLorryNo(lorryNo);
+
+					HashMap<String,Object> dataMap = new HashMap<String, Object>();
+			        dataMap.put(MapConstant.MODULE, module);
+			        dataMap.put(MapConstant.ACTION, ActionConstant.GET_ACTIVE_DATA);
+				    dataMap.put(MapConstant.SEARCH_CRITERIA, lorryNo);
+
+			        ServiceManager service = new ServiceManagerImpl();
+			        Map<String, Object> resultMap = service.executeRequest(dataMap);
+			        
+			        if (resultMap!=null && !resultMap.isEmpty()) {
+						@SuppressWarnings("unchecked")
+						List<TireDetails> qryList =  (List<TireDetails>) resultMap.get(MapConstant.CLASS_LIST);	
+						formBean.setTireDetailsList(qryList);
+			        } else {
+			        	formBean.setTireDetailsList(null);
+			        }
 				
-				
+					forwardAction = ActionConstant.SHOW_AJAX_VIEW_3;
 				}	
 			} else {
 				//show main screen

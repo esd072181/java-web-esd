@@ -17,7 +17,7 @@ import com.transport.model.User;
  * 
  * @author edwarddavid
  * @since 12Apr2020
- * DateUpdated: 15Apr2020
+ * DateUpdated: 26Apr2020
  */
 public class TireManagementBoImpl implements TireManagementBo {
 
@@ -176,6 +176,11 @@ public class TireManagementBoImpl implements TireManagementBo {
 	@Override
 	public Map<String, Object> editTire(HashMap<String, Object> dataMap) throws Exception {
 		return dao.updateTireDetails(dataMap);
+	}
+
+	@Override
+	public Map<String, Object> getLorryHistory(HashMap<String, Object> dataMap) throws Exception {
+		return dao.getLorryHistory(dataMap);
 	}
 
 

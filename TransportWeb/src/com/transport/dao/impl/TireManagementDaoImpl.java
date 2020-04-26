@@ -24,7 +24,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author edwarddavid
  * @since 12Apr2020
- * DateUpdated: 15Apr2020
+ * DateUpdated: 26Apr2020
  */
 public class TireManagementDaoImpl implements TireManagementDao {
 
@@ -528,6 +528,58 @@ public class TireManagementDaoImpl implements TireManagementDao {
 		returnMap.put(MapConstant.CLASS_DATA, model);
 		     
 	    System.out.println("getDataById() - Exit");
+		return returnMap;
+	}
+
+
+	@Override
+	public Map<String, Object> getLorryHistory(HashMap<String, Object> dataMap) throws Exception {
+		 
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = new HashMap<String, Object>();
+			
+		 	String criteria = String.valueOf(dataMap.get(MapConstant.SEARCH_CRITERIA));
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+			 List<TireDetails> qryList = new ArrayList<>();
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer  sql = new StringBuffer("select distinct(serialno),active ");
+			 		sql.append(" from transport.tran_tire_details ");
+				 	sql.append(" where lorryno = ? ");
+				 	sql.append(" order by active desc,serialno ");
+				 	
+				TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				pstmt = conn.prepareStatement(sql.toString());
+				 
+				pstmt.setString(1, criteria);
+				 
+				rs = pstmt.executeQuery();
+				 
+				int i = 0;
+				while (rs.next()) {
+					TireDetails model = new TireDetails();
+		    		 model.setSerialNo(rs.getString(1));
+		    		 model.setActive(rs.getBoolean(2));
+		    		 model.setRowNo(++i);
+		    		 qryList.add(model);
+				}				 			 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+			 }
+			 
+		returnMap.put(MapConstant.CLASS_LIST, qryList);
+		     
+	    System.out.println("getLorryHistory() - Exit");
 		return returnMap;
 	}
 

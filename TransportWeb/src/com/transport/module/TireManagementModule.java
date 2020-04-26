@@ -14,7 +14,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 20Aug2016
- * DateUpdated: 15Apr2020
+ * DateUpdated: 26Apr2020
  */
 public class TireManagementModule implements TransportModule {
 	
@@ -44,6 +44,8 @@ public class TireManagementModule implements TransportModule {
 				case ActionConstant.GET_DATA: returnMap = bo.getDataById(dataMap);
 					break;
 				case ActionConstant.UPDATE_2: returnMap = bo.editTire(dataMap);
+					break;
+				case ActionConstant.GET_ACTIVE_DATA: returnMap = bo.getLorryHistory(dataMap);
 					break;
 				default: break;
 			};	

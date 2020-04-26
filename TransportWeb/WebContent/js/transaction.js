@@ -1597,3 +1597,15 @@ function selectWheelPosition(position) {
 		
 	return false;
 }
+
+function getLorryHistory(lorryNo) {
+	
+	 if ($('#lorryNoId').val() == '') {
+		 alert('Please select lorry.');
+		 $('#lorryNoId').focus();
+		 return false;
+	 }
+	 
+	 window.open('/TransportWeb/tireManagement.do?command=ajaxView&lorryNo='+lorryNo,'popUpWindow','height=550,width=550,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+	
+}
