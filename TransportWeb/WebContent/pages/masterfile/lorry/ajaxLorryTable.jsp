@@ -10,7 +10,7 @@
 		  <c:when test="${lorryForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Plate No</th>
 					<th>Lorry No</th>
 					<th>Trailer No</th>
@@ -20,10 +20,9 @@
 					<th></th>
 					<th></th>
 				</tr>
-				<logic:iterate name="lorryForm" property="modelList" type="com.transport.model.Lorry" id="model">
+				<logic:iterate name="lorryForm" property="modelList" type="com.transport.model.Lorry" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (lorryForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="plateNo"/></td>
 						<td><bean:write name="model" property="lorryNo"/></td>
 						<td><bean:write name="model" property="trailerNo"/></td>

@@ -10,6 +10,7 @@
 		  <c:when test="${workPermitForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
 				<tr>
+					<th>No</th>
 					<th>Permit No</th>
 					<th>Plate No</th>
 					<th>Lorry No</th>
@@ -32,9 +33,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="workPermitForm" property="modelList" type="com.transport.model.WorkPermit" id="model">
+				<logic:iterate name="workPermitForm" property="modelList" type="com.transport.model.WorkPermit" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td><c:out value="${index+1 + (workPermitForm.currentPage * 10 - 10)}"/></td>
 						<td align="right"><bean:write name="model" property="permitNo"/></td>
 						<td><bean:write name="model" property="plateNo"/></td>
 						<td align="right"><bean:write name="model" property="lorryNo"/></td>

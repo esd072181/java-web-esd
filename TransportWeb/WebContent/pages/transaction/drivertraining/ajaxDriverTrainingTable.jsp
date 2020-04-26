@@ -17,6 +17,7 @@
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
+					<th>No</th>
 					<th>Full Name</th>
 					<th>Picture</th>
 					<th>Date Hired</th>
@@ -33,7 +34,7 @@
 					<th>Terminal</th>
 					<th>Articulated</th>
 				</tr>
-				<logic:iterate name="driverTrainingForm" property="modelList" type="com.transport.model.DriverTraining" id="model">
+				<logic:iterate name="driverTrainingForm" property="modelList" type="com.transport.model.DriverTraining" id="model" indexId="index">
 					<tr>	
 						<td align="center"><a href="#" onclick="goToDriverTrainingInfo('<bean:write name="model" property="id"/>','<bean:write name="model" property="fullName"/>');">Driver Training</a></td>
 						<td align="center"><a href="#" onclick="goToDriverTrainingProfile('<bean:write name="model" property="id"/>','<bean:write name="model" property="fullName"/>');">Driver Profile</a></td>	
@@ -42,6 +43,7 @@
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="deleteDriverTraining('<bean:write name="model" property="id"/>', '${driverTrainingForm.category}',${driverTrainingForm.currentPage},'${driverTrainingForm.driverName}')">Delete</a></td>
 						</c:if>
+						<td><c:out value="${index+1 + (driverTrainingForm.currentPage * 10 - 10)}"/></td>
 						<td><span style="font-weight: bold;"><bean:write name="model" property="fullName"/></span></td>
 						<td align="center"><html:image src="data:image/jpeg;base64,${model.picStr}" alt="" style="width: 50px; height: 60px; pointer-events: none;"></html:image></td>
 						<td align="right"><bean:write name="model" property="dateHired" format='MM/dd/yyyy'/></td>

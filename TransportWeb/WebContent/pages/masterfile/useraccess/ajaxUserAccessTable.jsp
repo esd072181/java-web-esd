@@ -16,12 +16,13 @@
 		  	<br>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Module</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="userAccessForm" property="modelList" type="com.transport.model.UserAccess" id="model">
+				<logic:iterate name="userAccessForm" property="modelList" type="com.transport.model.UserAccess" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td><c:out value="${index+1 + (userAccessForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="moduleName"/></td>
 						<c:choose>
 							<c:when test="${sessionScope.user_session.role == 'Admin'}">

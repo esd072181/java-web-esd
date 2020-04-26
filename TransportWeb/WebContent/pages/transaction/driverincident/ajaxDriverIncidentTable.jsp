@@ -15,6 +15,7 @@
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
+					<th>No</th>
 					<th>Incident Date</th>
 					<th>Driver</th>
 					<th>Safety Officer</th>
@@ -35,13 +36,14 @@
 					<th>With Investigating..</th>
 					<th>Prior to..</th>
 				</tr>
-				<logic:iterate name="driverIncidentForm" property="modelList" type="com.transport.model.DriverIncident" id="model">
+				<logic:iterate name="driverIncidentForm" property="modelList" type="com.transport.model.DriverIncident" id="model" indexId="index">
 					<tr>
 						<td align="center"><a href="#" onclick="viewDriverIncidentReport('<bean:write name="model" property="id"/>');">View</a></td>			 
 						<td align="center"><a href="#" onclick="editDriverIncident('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="deleteDriverIncident('<bean:write name="model" property="id"/>', '${driverIncidentForm.category}',${driverIncidentForm.currentPage})">Delete</a></td>
 						</c:if>
+						<td><c:out value="${index+1 + (driverIncidentForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="incidentDate" format='MM/dd/yyyy'/></td>
 						<td style="font-weight: bolder;"><bean:write name="model" property="nameOne"/></td>
 						<td><bean:write name="model" property="nameTwo"/></td>

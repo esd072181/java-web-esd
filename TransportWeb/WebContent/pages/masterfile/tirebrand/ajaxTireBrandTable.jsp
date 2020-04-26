@@ -19,7 +19,7 @@
 				</tr>
 				<logic:iterate name="tireBrandForm" property="modelList" type="com.transport.model.TireBrand" id="model" indexId="index">
 					<tr>				 
-						<td><c:out value="${index+1}"/></td>
+						<td><c:out value="${index+1 + (tireBrandForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="name"/></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="javascript: editTireBrand('<bean:write name="model" property="id"/>');">Edit</a></td>

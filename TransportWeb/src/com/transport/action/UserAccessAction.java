@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.transport.comparator.UserAccessComparator;
 import com.transport.constant.ActionConstant;
 import com.transport.constant.MapConstant;
 import com.transport.constant.MiscConstant;
@@ -149,7 +150,7 @@ public class UserAccessAction extends Action {
 				        
 						@SuppressWarnings("unchecked")
 						List<UserAccess> qryList =  (List<UserAccess>) resultMap.get(MapConstant.CLASS_LIST);		        		
-
+						qryList.sort(new UserAccessComparator());
 			        	formBean.setModelList(qryList);
 			        	
 			        	int totalNoOfRecords = (int) resultMap.get(MapConstant.PAGINATION_TOTALRECORDS);

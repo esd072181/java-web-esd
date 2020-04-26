@@ -10,16 +10,15 @@
 		  <c:when test="${closureForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Closure Description</th>
 					<th>Corrective Actions</th>
 					<th></th>
 					<th></th>
 				</tr>
-				<logic:iterate name="closureForm" property="modelList" type="com.transport.model.Closure" id="model">
+				<logic:iterate name="closureForm" property="modelList" type="com.transport.model.Closure" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (closureForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td><bean:write name="model" property="corrections"/></td>
 						<td align="center"><a href="#" onclick="javascript: editClosure('<bean:write name="model" property="id"/>');">Edit</a></td>

@@ -16,6 +16,7 @@
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
+					<th>No</th>
 					<th>InspectionDate</th>
 					<th>LorryNo</th>
 					<th>PlateNo</th>
@@ -26,13 +27,14 @@
 					<th>ForPM</th>
 					<th>Remarks</th>
 				</tr>
-				<logic:iterate name="maintenanceInspectionForm" property="modelList" type="com.transport.model.InspectionHeader" id="model">
+				<logic:iterate name="maintenanceInspectionForm" property="modelList" type="com.transport.model.InspectionHeader" id="model" indexId="index">
 					<tr>
 						<td align="center"><a href="#" onclick="viewMaintenanceInspectionReport('<bean:write name="model" property="id"/>');">View</a></td>				 
 						<td align="center"><a href="#" onclick="editMaintenanceInspection('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="deleteMaintenanceInspection('<bean:write name="model" property="id"/>', '${maintenanceInspectionForm.category}',${maintenanceInspectionForm.currentPage})">Delete</a></td>
 						</c:if>	
+						<td><c:out value="${index+1 + (maintenanceInspectionForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="inspectionDate" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="lorryNo"/></td>
 						<td><bean:write name="model" property="plateNo"/></td>
@@ -41,7 +43,6 @@
 						<td><bean:write name="model" property="inspectors"/></td>
 						<td><bean:write name="model" property="forAnnual"/></td>
 						<td><bean:write name="model" property="forPm"/></td>	
-						
 						<td><bean:write name="model" property="remarks"/></td>
 					</tr>
 				</logic:iterate>

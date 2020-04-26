@@ -10,16 +10,15 @@
 		  <c:when test="${correctionsForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Description</th>
 					<th>RootCause</th>
 					<th></th>
 					<th></th>
 				</tr>
-				<logic:iterate name="correctionsForm" property="modelList" type="com.transport.model.Corrections" id="model">
+				<logic:iterate name="correctionsForm" property="modelList" type="com.transport.model.Corrections" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (correctionsForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td><bean:write name="model" property="rootCause"/></td>
 						<td align="center"><a href="#" onclick="javascript: editCorrections('<bean:write name="model" property="id"/>');">Edit</a></td>

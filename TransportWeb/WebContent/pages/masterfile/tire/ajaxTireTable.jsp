@@ -31,8 +31,8 @@
 					</c:if>
 				</tr>
 				<logic:iterate name="tireForm" property="modelList" type="com.transport.model.Tire" id="model" indexId="index">
-					<tr>				 
-						<td><c:out value="${index+1}"/></td>
+					<tr>			
+						<td><c:out value="${index+1 + (tireForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="brandName"/></td>
 						<c:choose>
 							<c:when test="${model.retired == 'Yes'}">

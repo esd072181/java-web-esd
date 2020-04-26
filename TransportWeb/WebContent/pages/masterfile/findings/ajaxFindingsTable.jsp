@@ -10,17 +10,16 @@
 		  <c:when test="${findingsForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Item</th>
 					<th>Findings</th>
 					<th>Type</th>
 					<th></th>
 					<th></th>
 				</tr>
-				<logic:iterate name="findingsForm" property="modelList" type="com.transport.model.Findings" id="model">
+				<logic:iterate name="findingsForm" property="modelList" type="com.transport.model.Findings" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (findingsForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="item"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td><bean:write name="model" property="type"/></td>

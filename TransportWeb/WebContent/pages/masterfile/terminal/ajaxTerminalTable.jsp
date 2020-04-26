@@ -10,15 +10,14 @@
 		  <c:when test="${terminalForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Name</th>
 					<th></th>
 					<th></th>
 				</tr>
-				<logic:iterate name="terminalForm" property="modelList" type="com.transport.model.Terminal" id="model">
+				<logic:iterate name="terminalForm" property="modelList" type="com.transport.model.Terminal" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (terminalForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="name"/></td>
 						<td align="center"><a href="#" onclick="javascript: editTerminal('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<td align="center"><a href="#" onclick="javascript: deleteTerminal('<bean:write name="model" property="id"/>', '${terminalForm.category}',${terminalForm.currentPage})">Delete</a></td>

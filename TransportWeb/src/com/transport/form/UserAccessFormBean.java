@@ -11,6 +11,8 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.transport.comparator.ListValueComparator;
+import com.transport.comparator.UserAccessComparator;
 import com.transport.constant.ActionConstant;
 import com.transport.constant.MapConstant;
 import com.transport.constant.MiscConstant;
@@ -207,6 +209,7 @@ public class UserAccessFormBean extends TransportFormBean {
 	public void populateUserAccessDropdownList(HttpServletRequest request) throws Exception{
         @SuppressWarnings("unchecked")
 		List<ListValue> lovList = (ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOV_USER_ACCESS_SESSION);
+        lovList.sort(new ListValueComparator());
     	if (lovList!=null) {
     		setUserAccessLOV(lovList);
     	}

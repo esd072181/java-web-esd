@@ -148,8 +148,8 @@ public class LorryFormBean extends TransportFormBean {
 		Lorry model = new Lorry();
 		model.setId(formbean.getId());
 		model.setLorryNo(formbean.getLorryNo());
-		model.setPlateNo(formbean.getPlateNo());
-		model.setTrailerNo(formbean.getTrailerNo());
+		model.setPlateNo(formbean.getPlateNo()!=null && formbean.getPlateNo().trim().length() > 0 ? formbean.getPlateNo().trim().toUpperCase() : "");
+		model.setTrailerNo(formbean.getTrailerNo()!=null && formbean.getTrailerNo().trim().length() > 0 ? formbean.getTrailerNo().trim().toUpperCase() : "");
 		model.setCapacity(Integer.parseInt(formbean.getCapacity()));
 		model.setCategory(formbean.getLorryCategory());
 		model.setTransportId(Integer.parseInt(formbean.getTransportId()));

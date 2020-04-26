@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 
+import com.transport.comparator.ListValueComparator;
 import com.transport.constant.MiscConstant;
 import com.transport.model.Closure;
 import com.transport.model.DriverIncident;
@@ -34,7 +35,7 @@ import com.transport.model.WorkPermit;
  * 
  * @author edwarddavid
  * @since July2015
- * DateUpdated: 20Apr2020
+ * DateUpdated: 26Apr2020
  */
 public class ArchiveFormBean extends TransportFormBean {
 
@@ -275,6 +276,7 @@ public class ArchiveFormBean extends TransportFormBean {
 	public void populateEntityTypeDropdownList(HttpServletRequest request, ArchiveFormBean formBean) throws Exception{
         @SuppressWarnings("unchecked")
 		List<ListValue> lovList = (ArrayList<ListValue>) request.getSession().getAttribute(MiscConstant.LOV_ENTITY_TYPE_SESSION);
+        lovList.sort(new ListValueComparator());
     	if (lovList!=null) {
     		formBean.setEntityTypeLOV(lovList);
     	}

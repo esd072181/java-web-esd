@@ -7,20 +7,21 @@
 
 	<div class="table-responsive" style="padding-left: 10px;">
 		<!-- Employee -->
+		<c:set var="recordsFlag" value="false"></c:set>
 		<c:if test="${archiveForm.employeeList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Last Name</th>
 					<th>First Name</th>
 					<th>Middle Name</th>
 					<th>Category</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="employeeList" type="com.transport.model.Employee" id="model">
+				<logic:iterate name="archiveForm" property="employeeList" type="com.transport.model.Employee" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="lastName"/></td>	
 						<td><bean:write name="model" property="firstName"/></td>
 						<td><bean:write name="model" property="middleName"/></td>
@@ -32,18 +33,18 @@
 		</c:if>
 		<!-- Lorry -->
 		<c:if test="${archiveForm.lorryList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>					
-					<th>Id</th>
+					<th>No</th>
 					<th>Lorry No</th>
 					<th>Plate No</th>
 					<th>Trailer No</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="lorryList" type="com.transport.model.Lorry" id="model">
+				<logic:iterate name="archiveForm" property="lorryList" type="com.transport.model.Lorry" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="lorryNo"/></td>	
 						<td><bean:write name="model" property="plateNo"/></td>
 						<td><bean:write name="model" property="trailerNo"/></td>
@@ -54,16 +55,16 @@
 		</c:if>
 		<!-- Items -->
 		<c:if test="${archiveForm.itemsList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Description</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="itemsList" type="com.transport.model.Items" id="model">
+				<logic:iterate name="archiveForm" property="itemsList" type="com.transport.model.Items" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
 					</tr>
@@ -72,16 +73,16 @@
 		</c:if>
 		<!-- Corrective Actions -->
 		<c:if test="${archiveForm.correctionsList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Description</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="correctionsList" type="com.transport.model.Corrections" id="model">
+				<logic:iterate name="archiveForm" property="correctionsList" type="com.transport.model.Corrections" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
 					</tr>
@@ -90,16 +91,16 @@
 		</c:if>	
 		<!-- Follow Up -->
 		<c:if test="${archiveForm.followUpList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Description</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="followUpList" type="com.transport.model.FollowUp" id="model">
+				<logic:iterate name="archiveForm" property="followUpList" type="com.transport.model.FollowUp" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
 					</tr>
@@ -109,16 +110,16 @@
 	
 			<!-- Remarks -->
 		<c:if test="${archiveForm.remarksList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Description</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="remarksList" type="com.transport.model.Remarks" id="model">
+				<logic:iterate name="archiveForm" property="remarksList" type="com.transport.model.Remarks" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
 					</tr>
@@ -128,16 +129,16 @@
 
 		<!-- Terminal -->
 		<c:if test="${archiveForm.terminalList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Name</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="terminalList" type="com.transport.model.Terminal" id="model">
+				<logic:iterate name="archiveForm" property="terminalList" type="com.transport.model.Terminal" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="name"/></td>
 						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
 					</tr>
@@ -147,18 +148,18 @@
 				
 		<!-- User -->
 		<c:if test="${archiveForm.userList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Employee Name</th>
 					<th>Role</th>
 					<th>User Name</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="userList" type="com.transport.model.User" id="model">
+				<logic:iterate name="archiveForm" property="userList" type="com.transport.model.User" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="name"/></td>
 						<td><bean:write name="model" property="role"/></td>
 						<td><bean:write name="model" property="userName"/></td>
@@ -170,16 +171,16 @@
 		
 		<!-- Findings -->
 		<c:if test="${archiveForm.findingsList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Description</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="findingsList" type="com.transport.model.Findings" id="model">
+				<logic:iterate name="archiveForm" property="findingsList" type="com.transport.model.Findings" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
 					</tr>
@@ -189,6 +190,7 @@
 						
 		<!-- Verification and Validation Compliance Tracker -->
 		<c:if test="${archiveForm.verificationList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
 				<tr>
 					<th colspan="10" ><div align="center">VERIFICATION</div></th>
@@ -197,7 +199,7 @@
 					<th></th>
 				</tr>
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Item</th>
 					<th>Findings</th>
 					<th>Driver</th>
@@ -218,10 +220,9 @@
 					<th>RootCause</th>
 					<th></th>	
 				</tr>
-				<logic:iterate name="archiveForm" property="verificationList" type="com.transport.model.VerificationAndValidation" id="model">
+				<logic:iterate name="archiveForm" property="verificationList" type="com.transport.model.VerificationAndValidation" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="item"/></td>
 						<td><bean:write name="model" property="findings"/></td>
 						<td><bean:write name="model" property="driver"/></td>	
@@ -248,16 +249,16 @@
 		
 		<!-- Root Cause -->
 		<c:if test="${archiveForm.rootCauseList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Description</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="rootCauseList" type="com.transport.model.RootCause" id="model">
+				<logic:iterate name="archiveForm" property="rootCauseList" type="com.transport.model.RootCause" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
 						</tr>
@@ -267,17 +268,17 @@
 		
 		<!-- Closure -->
 		<c:if test="${archiveForm.closureList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Closure Description</th>
 					<th>Corrective Actions</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="closureList" type="com.transport.model.Closure" id="model">
+				<logic:iterate name="archiveForm" property="closureList" type="com.transport.model.Closure" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td><bean:write name="model" property="corrections"/></td>
 						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
@@ -288,8 +289,10 @@
 
 		<!-- Work Permit -->
 		<c:if test="${archiveForm.workPermitList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
 				<tr>
+					<th>No</th>
 					<th>Permit No</th>
 					<th>Plate No</th>
 					<th>Lorry No</th>
@@ -309,9 +312,9 @@
 					<th>Transport</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="workPermitList" type="com.transport.model.WorkPermit" id="model">
+				<logic:iterate name="archiveForm" property="workPermitList" type="com.transport.model.WorkPermit" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td align="right"><bean:write name="model" property="permitNo"/></td>
 						<td><bean:write name="model" property="plateNo"/></td>
 						<td align="right"><bean:write name="model" property="lorryNo"/></td>
@@ -337,8 +340,10 @@
 				
 		<!--Driver Training and Information  -->
 		  <c:if test="${archiveForm.driverTrainingList != null}">
+		  	<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
 				<tr>
+					<th>No</th>
 					<th>Full Name</th>
 					<th>SSS No</th>
 					<th>Pagibig No</th>
@@ -349,8 +354,9 @@
 					<th>Age</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="driverTrainingList" type="com.transport.model.DriverTraining" id="model">
+				<logic:iterate name="archiveForm" property="driverTrainingList" type="com.transport.model.DriverTraining" id="model" indexId="index">
 					<tr>				 
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="fullName"/></td>
 						<td align="right"><bean:write name="model" property="sss" format='MM/dd/yyyy'/></td>
 						<td align="right"><bean:write name="model" property="pagibig" format='MM/dd/yyyy'/></td>
@@ -374,8 +380,10 @@
 		  
 		  <!--Driver Incident  -->
 		  <c:if test="${archiveForm.driverIncidentList != null}">
+		  	<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
 				<tr>
+					<th>No</th>
 					<th>Incident Date</th>
 					<th>Name (Position)</th>
 					<th>Name (Position)</th>
@@ -397,8 +405,9 @@
 					<th>Prior to..</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="driverIncidentList" type="com.transport.model.DriverIncident" id="model">
+				<logic:iterate name="archiveForm" property="driverIncidentList" type="com.transport.model.DriverIncident" id="model" indexId="index">
 					<tr>			 
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="incidentDate" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="nameOne"/> (<bean:write name="model" property="positionOne" />)</td>
 						<td><bean:write name="model" property="nameTwo"/> (<bean:write name="model" property="positionTwo" />)</td>
@@ -426,9 +435,10 @@
 		  
 		  <!-- Maintenance Inspection -->
 		  <c:if test="${archiveForm.inspectionHeaderList != null}">
-		  
+		  	<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
 				<tr>
+					<th>No</th>
 					<th>InspectionDate</th>
 					<th>LorryNo</th>
 					<th>PlateNo</th>
@@ -440,8 +450,9 @@
 					<th>Remarks</th>
 					<th></th>
 				</tr>
-				<logic:iterate name="archiveForm" property="inspectionHeaderList" type="com.transport.model.InspectionHeader" id="model">
+				<logic:iterate name="archiveForm" property="inspectionHeaderList" type="com.transport.model.InspectionHeader" id="model" indexId="index">
 					<tr>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="inspectionDate" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="lorryNo"/></td>
 						<td><bean:write name="model" property="plateNo"/></td>
@@ -459,6 +470,7 @@
 
 		<!-- Tire Brand -->
 		 <c:if test="${archiveForm.tireBrandList != null}">
+		 	<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;  font-size: x-small;">  
 				<tr>
 					<th>No</th>
@@ -467,7 +479,7 @@
 				</tr>
 				<logic:iterate name="archiveForm" property="tireBrandList" type="com.transport.model.TireBrand" id="model" indexId="index">
 					<tr>				 
-						<td><c:out value="${index+1}"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="name"/></td>
 						<td align="center"><a href="#" onclick="javascript: restoreEntity('<bean:write name="model" property="id"/>',${archiveForm.currentPage})">Restore</a></td>
 					</tr>
@@ -477,6 +489,7 @@
 		
 		 <!-- Tire -->
 		<c:if test="${archiveForm.tireList != null}">
+			<c:set var="recordsFlag" value="true"></c:set>
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: x-small;">  
 				<tr>
 					<th>No</th>
@@ -498,7 +511,7 @@
 				</tr>
 				<logic:iterate name="archiveForm" property="tireList" type="com.transport.model.Tire" id="model" indexId="index">
 					<tr>				 
-						<td><c:out value="${index+1}"/></td>
+						<td><c:out value="${index+1 + (archiveForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="brandName"/></td>
 						<td><bean:write name="model" property="serialNo"/></td>
 						<td><bean:write name="model" property="recapNo"/></td>	
@@ -519,6 +532,9 @@
 			</table>
 		  </c:if>
 		  
+		  <c:if test="${recordsFlag == false}">
+		  		<div style="color: blue;">No record found!</div>
+		  </c:if>
 		  
 		    				
 	</div>

@@ -10,15 +10,14 @@
 		  <c:when test="${rootcauseForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Description</th>
 					<th></th>
 					<th></th>
 				</tr>
-				<logic:iterate name="rootcauseForm" property="modelList" type="com.transport.model.RootCause" id="model">
+				<logic:iterate name="rootcauseForm" property="modelList" type="com.transport.model.RootCause" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (rootcauseForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td align="center"><a href="#" onclick="javascript: editRootCause('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<td align="center"><a href="#" onclick="javascript: deleteRootCause('<bean:write name="model" property="id"/>', '${rootcauseForm.category}',${rootcauseForm.currentPage})">Delete</a></td>

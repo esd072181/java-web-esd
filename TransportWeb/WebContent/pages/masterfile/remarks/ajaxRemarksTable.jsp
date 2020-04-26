@@ -10,15 +10,14 @@
 		  <c:when test="${remarksForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Description</th>
 					<th></th>
 					<th></th>
 				</tr>
-				<logic:iterate name="remarksForm" property="modelList" type="com.transport.model.Remarks" id="model">
+				<logic:iterate name="remarksForm" property="modelList" type="com.transport.model.Remarks" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (remarksForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td align="center"><a href="#" onclick="javascript: editRemarks('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<td align="center"><a href="#" onclick="javascript: deleteRemarks('<bean:write name="model" property="id"/>', '${remarksForm.category}',${remarksForm.currentPage})">Delete</a></td>

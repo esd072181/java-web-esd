@@ -18,7 +18,7 @@
 					</c:if>
 				</tr>
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Item</th>
 					<th>Findings</th>
 					<th>Driver</th>
@@ -29,13 +29,6 @@
 					<th>RootCause</th>
 					<th>CorrectiveAction</th>
 					<th>VerifiedBy</th>
-					<!--  
-					<th>FollowUp</th>
-					<th>Driver</th>
-					<th>Terminal</th>
-					<th>LorryNo</th>
-					<th>TrailerNo</th>
-					-->
 					<th>Closure</th>
 					<th>ClosureDate</th>
 					<th>CheckedBy</th>
@@ -46,10 +39,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="verificationAndValidationForm" property="modelList" type="com.transport.model.VerificationAndValidation" id="model">
+				<logic:iterate name="verificationAndValidationForm" property="modelList" type="com.transport.model.VerificationAndValidation" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="id"/></td>
+						<td><c:out value="${index+1 + (verificationAndValidationForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="item"/></td>
 						<td><bean:write name="model" property="findings"/></td>
 						<td><bean:write name="model" property="driver"/></td>	
@@ -60,13 +52,6 @@
 						<td><bean:write name="model" property="rootCause"/></td>
 						<td><bean:write name="model" property="corrections"/></td>	
 						<td><bean:write name="model" property="verificationCheckedBy"/></td>
-						<!--  	
-						<td><bean:write name="model" property="followUp"/></td>
-						<td><bean:write name="model" property="driverValidation"/></td>	
-						<td><bean:write name="model" property="terminalValidation"/></td>
-						<td><bean:write name="model" property="lorryValidation"/></td>
-						<td><bean:write name="model" property="trailerValidation"/></td>
-						-->
 						<td><bean:write name="model" property="closure"/></td>
 						<td><bean:write name="model" property="validationDateStr"/></td>
 						<td><bean:write name="model" property="validationCheckedBy"/></td>
