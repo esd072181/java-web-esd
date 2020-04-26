@@ -20,6 +20,7 @@ import com.transport.constant.ModuleConstant;
 import com.transport.constant.ParamConstant;
 import com.transport.form.TireFormBean;
 import com.transport.model.Tire;
+import com.transport.model.TireDetails;
 import com.transport.model.User;
 import com.transport.service.ServiceManager;
 import com.transport.service.ServiceManagerImpl;
@@ -29,7 +30,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
- * DateUpdated: 20Apr2020
+ * DateUpdated: 26Apr2020
  */
 public class TireAction extends Action {
 
@@ -258,8 +259,30 @@ public class TireAction extends Action {
 			        }
 			        
 			        forwardAction = ActionConstant.SHOW_AJAX_TABLE;
-				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_SEARCH_BY_CRITERIA)) {
-					
+				} else if (command.equalsIgnoreCase(ParamConstant.AJAX_VIEW)) {
+					//Tire Details
+					String serialNo = (String) request.getParameter("serialNo");
+					String brandName = (String) request.getParameter("brandName");
+					formBean.setSerialNo(serialNo);
+					formBean.setBrandName(brandName);
+
+					HashMap<String,Object> dataMap = new HashMap<String, Object>();
+			        dataMap.put(MapConstant.MODULE, module);
+			        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_CRITERIA);
+				    dataMap.put(MapConstant.SEARCH_CRITERIA, serialNo);
+
+			        ServiceManager service = new ServiceManagerImpl();
+			        Map<String, Object> resultMap = service.executeRequest(dataMap);
+			        
+			        if (resultMap!=null && !resultMap.isEmpty()) {
+						@SuppressWarnings("unchecked")
+						List<TireDetails> qryList =  (List<TireDetails>) resultMap.get(MapConstant.CLASS_LIST);	
+						formBean.setTireDetailsList(qryList);
+			        } else {
+			        	formBean.setTireDetailsList(null);
+			        }
+				
+					forwardAction = ActionConstant.SHOW_AJAX_VIEW;
 				}
 			} else {
 				//show main screen

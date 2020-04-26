@@ -680,6 +680,7 @@
 			<forward name="ajaxEdit" path="/pages/masterfile/tire/ajaxTireEdit.jsp"/>
 			<forward name="ajaxEdit2" path="/pages/masterfile/tire/ajaxTireRecap.jsp"/>
 			<forward name="ajaxEdit3" path="/pages/masterfile/tire/ajaxTireAnalysisComments.jsp"/>
+			<forward name="ajaxView" path="/pages/masterfile/tire/ajaxTireDetails.jsp"/>
 	   		<forward name="expired" path="/template/expired_page.jsp"/>
 	   </action>
 	   

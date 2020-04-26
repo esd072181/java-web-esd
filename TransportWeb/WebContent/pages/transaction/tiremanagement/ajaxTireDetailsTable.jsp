@@ -66,12 +66,6 @@ $(function() {
 					<th>OdoFitted</th>
 					<th>DateFitted</th>
 					<th>DistTraveled</th>
-					<!--  
-					<th>DateRemoved</th>
-					<th>OdometerRemoved</th>
-					<th>ReasonForRemoval</th>
-					<th>DateUpdated</th>
-					-->
 					<th>Active</th>	
 				</tr>
 				<logic:iterate name="tireManagementForm" property="tireDetailsList" type="com.transport.model.TireDetails" id="model" indexId="index">
@@ -87,12 +81,6 @@ $(function() {
 						<td><bean:write name="model" property="odometerFitted"/></td>
 						<td><bean:write name="model" property="dateFitted" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="distanceTraveled"/></td>
-						<!--  
-						<td><bean:write name="model" property="dateRemoved"/></td>
-						<td><bean:write name="model" property="odometerRemoved"/></td>
-						<td><bean:write name="model" property="reasonForRemoval"/></td>
-						<td><bean:write name="model" property="dateUpdated"/></td>
-						-->
 						<c:choose>
 							<c:when test="${model.active == true}">
 								<td>Yes</td>

@@ -19,4 +19,5 @@ public interface TireBo {
 	Map<String, Object> getActiveData() throws Exception;
 	Map<String, Object> getInActiveData(HashMap<String, Object> criteriaMap) throws Exception;
 	Map<String, Object> restoreRecord(HashMap<String, Object> dataMap) throws Exception;
+	Map<String, Object> getTireDetails(HashMap<String, Object> dataMap) throws Exception;
 }

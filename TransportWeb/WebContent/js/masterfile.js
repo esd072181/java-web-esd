@@ -1593,6 +1593,11 @@ function deleteTire(id, category, currentPage) {
 
 }
 
+function getTireDetails(serialNo,brandName) {
+		 
+	 window.open('/TransportWeb/tire.do?command=ajaxView&serialNo='+serialNo+'&brandName='+brandName,'popUpWindow','height=550,width=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');	
+}
+
 //END Added for Website Enhancement 1 21Aug2016
 
 //User Access

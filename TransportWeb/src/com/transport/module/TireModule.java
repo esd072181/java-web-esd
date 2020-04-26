@@ -12,6 +12,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author dward
  * @since 21Aug2016
+ * DateUpdated: 26Apr2020
  */
 public class TireModule implements TransportModule {
 	
@@ -45,6 +46,8 @@ public class TireModule implements TransportModule {
 				case ActionConstant.GET_INACTIVE_DATA: returnMap = bo.getInActiveData(dataMap);
 						break;
 				case ActionConstant.RESTORE: returnMap = bo.restoreRecord(dataMap);
+						break;
+				case ActionConstant.GET_DATA_BY_CRITERIA: returnMap = bo.getTireDetails(dataMap);
 						break;
 				default: break;
 			};	

@@ -18,6 +18,7 @@ import com.transport.constant.ModuleConstant;
 import com.transport.constant.ParamConstant;
 import com.transport.model.Tire;
 import com.transport.model.TireBrand;
+import com.transport.model.TireDetails;
 import com.transport.service.ServiceManager;
 import com.transport.service.ServiceManagerImpl;
 import com.transport.util.DateUtils;
@@ -26,7 +27,7 @@ import com.transport.util.DateUtils;
  * 
  * @author dward
  * @since 20Aug2016
- * DateUpdated: 09Apr2020
+ * DateUpdated: 26Apr2020
  * 
  */
 public class TireFormBean extends TransportFormBean {
@@ -60,6 +61,7 @@ public class TireFormBean extends TransportFormBean {
 	private String transactionMessage;
 	
 	private List<TireBrand> brandList;
+	private List<TireDetails> tireDetailsList;
 	
 	private String brandName;
 	
@@ -368,6 +370,14 @@ public class TireFormBean extends TransportFormBean {
 
 	public void setLorryNo(String lorryNo) {
 		this.lorryNo = lorryNo;
+	}
+
+	public List<TireDetails> getTireDetailsList() {
+		return tireDetailsList;
+	}
+
+	public void setTireDetailsList(List<TireDetails> tireDetailsList) {
+		this.tireDetailsList = tireDetailsList;
 	}
 	
 	

@@ -6,16 +6,18 @@ import java.util.Map;
 import com.transport.bo.TireBo;
 import com.transport.constant.MapConstant;
 import com.transport.dao.TireDao;
+import com.transport.dao.TireManagementDao;
 
 /**
  * 
  * @author dward
  * @since 21Aug2016
- * DateUpdated: 20Apr2020
+ * DateUpdated: 26Apr2020
  */
 public class TireBoImpl implements TireBo {
 
 	private TireDao dao;
+	private TireManagementDao tireManagementDao;
 	
 	public TireDao getTireDao() {
 		return dao;
@@ -23,6 +25,14 @@ public class TireBoImpl implements TireBo {
 
 	public void setTireDao(TireDao dao) {
 		this.dao = dao;
+	}
+	
+	public TireManagementDao getTireManagementDao() {
+		return tireManagementDao;
+	}
+
+	public void setTireManagementDao(TireManagementDao tireManagementDao) {
+		this.tireManagementDao = tireManagementDao;
 	}
 
 	@Override
@@ -81,6 +91,12 @@ public class TireBoImpl implements TireBo {
 	public Map<String, Object> restoreRecord(HashMap<String, Object> dataMap) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.restore(dataMap);
+	}
+
+	@Override
+	public Map<String, Object> getTireDetails(HashMap<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		return tireManagementDao.searchTireDetailsBySerialNo(dataMap);
 	}
 
 }

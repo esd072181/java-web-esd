@@ -36,11 +36,11 @@
 						<td><bean:write name="model" property="brandName"/></td>
 						<c:choose>
 							<c:when test="${model.retired == 'Yes'}">
-								<td><a href="#" style="color: red;" onclick="viewTireDetails('<bean:write name="model" property="id"/>');"><bean:write name="model" property="serialNo"/></a></td>
+								<td><a href="#" style="color: red;" onclick="getTireDetails('<bean:write name="model" property="serialNo"/>','<bean:write name="model" property="brandName"/>');"><bean:write name="model" property="serialNo"/></a></td>
 								<td><a href="#" style="color: red;" onclick="recapTire('<bean:write name="model" property="id"/>');"><bean:write name="model" property="recapNo"/></a></td>
 							</c:when>
 							<c:otherwise>
-								<td><a href="#" onclick="viewTireDetails('<bean:write name="model" property="id"/>');"><bean:write name="model" property="serialNo"/></a></td>
+								<td><a href="#" onclick="getTireDetails('<bean:write name="model" property="serialNo"/>','<bean:write name="model" property="brandName"/>');"><bean:write name="model" property="serialNo"/></a></td>
 								<td><a href="#" onclick="recapTire('<bean:write name="model" property="id"/>');"><bean:write name="model" property="recapNo"/></a></td>
 							</c:otherwise>	
 						</c:choose>		

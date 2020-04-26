@@ -583,4 +583,70 @@ public class TireManagementDaoImpl implements TireManagementDao {
 		return returnMap;
 	}
 
+
+	@Override
+	public Map<String, Object> searchTireDetailsBySerialNo(HashMap<String, Object> dataMap) throws Exception {
+		 
+		TransportUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = new HashMap<String, Object>();
+			
+		 	String criteria = String.valueOf(dataMap.get(MapConstant.SEARCH_CRITERIA));
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+			 List<TireDetails> qryList = new ArrayList<>();
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer  sql = new StringBuffer("select serialno,recapno,lorryno,plateno,threaddepth1,threaddepth2,threaddepth3, ");
+				 	sql.append(" wheelposition,odometerfitted,odometerremoved,distancetraveled,datefitted,dateremoved,reasonforremoval, ");
+				 	sql.append(" dateupdated,active, ROW_NUMBER() OVER (ORDER BY id desc) ");
+				 	sql.append(" from transport.tran_tire_details ");
+				 	sql.append(" where serialno = ? ");
+				 	
+				TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				pstmt = conn.prepareStatement(sql.toString());
+				 
+				pstmt.setString(1, criteria);
+				 
+				rs = pstmt.executeQuery();
+				 
+				while (rs.next()) {
+					TireDetails model = new TireDetails();
+		    		 model.setSerialNo(rs.getString(1));
+		    		 model.setRecapNo(rs.getString(2));
+		    		 model.setLorryNo(rs.getString(3));
+		    		 model.setPlateNo(rs.getString(4));
+		    		 model.setThreadDepth1(rs.getInt(5));
+		    		 model.setThreadDepth2(rs.getInt(6));
+		    		 model.setThreadDepth3(rs.getInt(7));
+		    		 model.setWheelPosition(rs.getString(8));
+		    		 model.setOdometerFitted(rs.getInt(9));
+		    		 model.setOdometerRemoved(rs.getInt(10));
+		    		 model.setDistanceTraveled(rs.getInt(11));
+		    		 model.setDateFitted(rs.getDate(12));
+		    		 model.setDateRemoved(rs.getDate(13));
+		    		 model.setReasonForRemoval(rs.getString(14));
+		    		 model.setDateUpdated(rs.getDate(15));
+		    		 model.setActive(rs.getBoolean(16));
+		    		 model.setRowNo(rs.getInt(17));
+		    		 qryList.add(model);
+				}				 			 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 TransportUtils.closeObjects(rs);
+				 TransportUtils.closeObjects(pstmt);
+				 TransportUtils.closeObjects(conn);
+			 }
+			 
+		returnMap.put(MapConstant.CLASS_LIST, qryList);
+		     
+	    System.out.println("searchTireDetailsBySerialNo() - Exit");
+		return returnMap;
+	}
+
 }

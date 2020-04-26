@@ -140,6 +140,7 @@
     <bean id="tireDao" class="com.transport.dao.impl.TireDaoImpl" scope="singleton"></bean>
     <bean id="tireBo" class="com.transport.bo.impl.TireBoImpl" scope="singleton">
         <property name="tireDao" ref="tireDao"></property>
+         <property name="tireManagementDao" ref="tireManagementDao"></property>
     </bean>
     <!-- END Added for Website Enhancement 1 20Aug2016 --> 
     
