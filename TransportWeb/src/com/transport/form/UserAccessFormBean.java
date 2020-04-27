@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import com.transport.comparator.ListValueComparator;
-import com.transport.comparator.UserAccessComparator;
 import com.transport.constant.ActionConstant;
 import com.transport.constant.MapConstant;
 import com.transport.constant.MiscConstant;
