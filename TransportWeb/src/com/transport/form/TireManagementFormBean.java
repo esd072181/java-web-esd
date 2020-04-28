@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
-import com.transport.comparator.LorryComparator;
 import com.transport.constant.ActionConstant;
 import com.transport.constant.MapConstant;
 import com.transport.constant.MiscConstant;
@@ -196,7 +195,8 @@ public class TireManagementFormBean extends TransportFormBean {
         if (resultMap!=null && !resultMap.isEmpty()) {
 			@SuppressWarnings("unchecked")
 			List<Lorry> qryList =  (ArrayList<Lorry>) resultMap.get(MapConstant.CLASS_LIST);
-			qryList.sort(new LorryComparator());//filter by lorryNo
+			//qryList.sort(new LorryComparator());//filter by lorryNo
+			qryList.sort((obj1,obj2) -> obj1.getLorryNo().compareTo(obj2.getLorryNo()));// filter using lambda expression (functional interface)
 			setLorryList(qryList);
         	if (request.getSession().getAttribute(MiscConstant.TRANS_LORRY_LIST)!=null) {
         		request.getSession().removeAttribute(MiscConstant.TRANS_LORRY_LIST);

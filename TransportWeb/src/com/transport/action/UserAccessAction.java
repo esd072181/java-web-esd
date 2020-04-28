@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.transport.comparator.UserAccessComparator;
 import com.transport.constant.ActionConstant;
 import com.transport.constant.MapConstant;
 import com.transport.constant.MiscConstant;
@@ -26,6 +25,12 @@ import com.transport.service.ServiceManager;
 import com.transport.service.ServiceManagerImpl;
 import com.transport.util.TransportUtils;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since July2015
+ * DateUpdated: 28Apr2020
+ */
 public class UserAccessAction extends Action {
 
 	private final static Logger logger = Logger.getLogger(UserAccessAction.class);
@@ -150,7 +155,7 @@ public class UserAccessAction extends Action {
 				        
 						@SuppressWarnings("unchecked")
 						List<UserAccess> qryList =  (List<UserAccess>) resultMap.get(MapConstant.CLASS_LIST);		        		
-						qryList.sort(new UserAccessComparator());
+						qryList.sort((obj1,obj2) -> obj1.getModuleName().compareTo(obj2.getModuleName()));//lambda, functional interface for the comparator
 			        	formBean.setModelList(qryList);
 			        	
 			        	int totalNoOfRecords = (int) resultMap.get(MapConstant.PAGINATION_TOTALRECORDS);
