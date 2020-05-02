@@ -137,14 +137,13 @@
 		<div id="detailsDIV">
 
 			<c:if test="${isUpdated == true}">
-				<br>
 				<div align="center">
 					<h4 style="color: blue;">Record successfully updated!</h4>
 				</div>
 			</c:if>
 				
-						
 			<table style="width: 100%;">
+				<tr height="5"></tr>
 				<tr>
 					<td width="2%"></td>
 					<td>
