@@ -49,6 +49,7 @@
 								<td>Age</td>
 								<td>Height</td>
 								<td>Weight</td>
+								<td></td>
 							</tr>
 							<!-- loop here -->
 							<c:forEach items="${resultList}" var="model" varStatus = "row">
@@ -63,7 +64,8 @@
 									<td>${model.professional.fullName}</td>		
 									<td>${model.age}</td>
 									<td>${model.height}</td>
-									<td>${model.weight}</td>				
+									<td>${model.weight}</td>	
+									<td><a href="#" onclick="printPatientConsultation(${model.id})">Print Preview</a></td>			
 							    </tr>
 							</c:forEach>
 							
