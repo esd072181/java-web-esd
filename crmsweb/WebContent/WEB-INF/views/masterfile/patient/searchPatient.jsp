@@ -36,6 +36,9 @@
 			}); 
 			
 		}
+		function viewPatientHistory(patientId,page) {
+			window.open('showPatientHistory?patientId=' + patientId + '&page=' + page,'popUpWindow','height=600,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+		}
 	</script>
 </head>
 <body>
@@ -108,6 +111,7 @@
 								<td>ContactNo</td>
 								<td>PatientNo</td>
 								<td>DateRegistered</td>
+								<td></td>
 							</tr>
 							<!-- loop here -->
 							<c:forEach items="${resultList}" var="model" varStatus = "row">
@@ -130,6 +134,7 @@
 									<td>${model.contactPersonNo}</td>	
 									<td>${model.patientNo}</td>	
 									<td><fmt:formatDate type="date" dateStyle="short" pattern="MM/dd/yyyy" value="${model.dateRegistered}"/></td>	
+									<td><a href="#" onclick="viewPatientHistory(${model.id},1);">View History</a></td>
 							    </tr>
 							</c:forEach>
 							
