@@ -102,37 +102,34 @@
 </head>
 <body>
 
-	<div style="width: 100%;">
+	<form:form action="/drmsweb/saveUpdateConsultation" method="post" modelAttribute="patientConsultation" cssClass="form-horizontal">
 
-		<form:form action="/drmsweb/saveUpdateConsultation" method="post" modelAttribute="patientConsultation" cssClass="form-horizontal">
-		
-			<div style="overflow:hidden;">
+		<form:hidden path="id"/>
+		<form:hidden path="patient.id"/>
+			
+		<div align="center" style="position: sticky; top: 0; background-color: white; z-index: 1;">
 				<div style="float:left; padding: 5px 0px 0px 10px;">
 					<a href="./goToMain" >Back to Home</a><br>					
 				</div>
 				<div style="float:right; padding: 5px 10px 0px 0px;">
 					<a href="./goToSearchPatientConsultation" >Back to Search</a>
-				</div>			
-			</div>
-		
-			<div align="center">
-				<img src="resources/img/browse_consult01.jpg" alt="PatientConsultation" height="50" width="50">
+				</div>	
+			<div align="center" style="padding-top: 10px;">
+			  	<img src="resources/img/browse_consult01.jpg" alt="PatientConsultation" height="50" width="50">
 				<label style="font-size: 24px;">Patient Consultation Details</label>		
-			</div>
+			</div>	
+			<hr>
+		</div>	
 				
+		<div id="detailsDIV">
 			<c:if test="${isUpdated == true}">
-				<br>
 				<div align="center">
 					<h4 style="color: blue;">Record successfully updated!</h4>
 				</div>
 			</c:if>
 			
-			<br>
-			
-			<form:hidden path="id"/>
-			<form:hidden path="patient.id"/>
-			
 			<table style="width: 100%;">
+				<tr height="5"></tr>
 				<tr>
 					<td width="2%"></td>
 					<td>
@@ -434,10 +431,9 @@
 					<input class="btn btn-default" type="button" value="Pay Now" onclick="goToPayNow(${patientConsultation.id});">
 				</c:if>
 			</div>	
-			
-		</form:form>
+		</div>
+	</form:form>
 
-	</div>
 	
 </body>
 </html>
