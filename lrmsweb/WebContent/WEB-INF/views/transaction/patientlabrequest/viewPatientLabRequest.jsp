@@ -74,23 +74,25 @@
 </head>
 <body>
 
-	<div style="width: 100%;">
+	<form:form action="/lrmsweb/releaseLabExamResult" method="post" modelAttribute="patientLabRequest" cssClass="form-horizontal">
 
-		<form:form action="/lrmsweb/releaseLabExamResult" method="post" modelAttribute="patientLabRequest" cssClass="form-horizontal">
+		<form:hidden path="patient.id"/>
 
-			<div style="overflow:hidden;">
-				<div style="float:left; padding: 5px 0px 0px 10px;">
-					<a href="./goToMain" >Back to Home</a><br>					
-				</div>
-				<div style="float:right; padding: 5px 10px 0px 0px;">
-					<a href="./goToSearchPatientLabRequest" >Back to Search</a>
-				</div>			
+		<div align="center" style="position: sticky; top: 0; background-color: white; z-index: 1;">
+			<div style="float:left; padding: 5px 0px 0px 10px;">
+				<a href="./goToMain" >Back to Home</a><br>					
 			</div>
-			
-			<div align="center">
-				<img src="resources/img/browse_labreq.jpg" alt="PatientLabRequest" height="50" width="50">
-				<label style="font-size: 24px;">Patient Laboratory Examination Request Details</label>		
-			</div>
+			<div style="float:right; padding: 5px 10px 0px 0px;">
+				<a href="./goToSearchPatientLabRequest" >Back to Search</a>
+			</div>	
+			<div align="center" style="padding-top: 20px;">
+			  	<img src="resources/img/browse_labreq.jpg" alt="PatientLabRequest" height="50" width="50">
+				<label style="font-size: 24px;">Patient Laboratory Examination Request Details</label>					
+			</div>	
+			<hr>
+		</div>
+		
+		<div id="detailsDIV">
 				
 			<c:if test="${isUpdated == true}">
 				<br>
@@ -101,7 +103,7 @@
 			
 			<br>
 			
-			<form:hidden path="patient.id"/>
+			
 			
 			<table style="width: 100%;">
 				<tr>
@@ -238,10 +240,8 @@
 					</div>
 				</div>
 			</c:if>
-				
-		</form:form>
-
-	</div>
 	
+		</div>			
+	</form:form>	
 </body>
 </html>

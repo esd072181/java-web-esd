@@ -14,7 +14,7 @@
 		    return false;
 		  });
 		function viewReport(labReqNo, patientLabExamIdParam) {
-			window.location.href = 'showLabExamReport?templateId=504&labReqNo=' + labReqNo + "&patientLabExamIdParam=" + patientLabExamIdParam;	
+			window.open('showLabExamReport?templateId=504&labReqNo=' + labReqNo + "&patientLabExamIdParam=" + patientLabExamIdParam,'popUpWindow','height=700,width=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
 		}
 	</script>
 	<style>
