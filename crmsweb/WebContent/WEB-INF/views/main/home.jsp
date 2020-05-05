@@ -46,11 +46,11 @@
 			</tr>
 			<tr>
 				<td align="center">
-					<img onclick="goToSearchPatientForConsultation();" src="resources/img/consult01.png" alt="Consultation" height="100" width="100">	
+					<img onclick="goToSearchPatientForConsultation();" src="resources/img/consult01.png" style="cursor: pointer;" alt="Consultation" height="100" width="100">	
 				</td>
 				<td width="40px"></td>
 				<td align="center">
-					<img onclick="goToSearchPatientConsultation();" src="resources/img/browse_consult01.jpg" alt="Browse Consultation" height="100" width="100">
+					<img onclick="goToSearchPatientConsultation();" src="resources/img/browse_consult01.jpg" style="cursor: pointer;" alt="Browse Consultation" height="100" width="100">
 				</td>
 			</tr>
 			<tr>
@@ -75,25 +75,25 @@
 				</tr>
 				<tr>
 					<td align="center">
-						<img onclick="goToSearchPatient();" src="resources/img/patient_reg.png" alt="Patient Master File" height="100" width="100">	
+						<img onclick="goToSearchPatient();" src="resources/img/patient_reg.png" style="cursor: pointer;" alt="Patient Master File" height="100" width="100">	
 					</td>
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchProfessional();" src="resources/img/prof03.jpg" alt="Professional Master File" height="100" width="100">	
+						<img onclick="goToSearchProfessional();" src="resources/img/prof03.jpg" style="cursor: pointer;" alt="Professional Master File" height="100" width="100">	
 					</td>	
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchMed();" src="resources/img/med05.png" alt="Medicine Master File" height="100" width="100">	
+						<img onclick="goToSearchMed();" src="resources/img/med05.png" style="cursor: pointer;" alt="Medicine Master File" height="100" width="100">	
 					</td>	
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchLabExam();" src="resources/img/lab01.png" alt="Lab Exam Master File" height="100" width="100">	
+						<img onclick="goToSearchLabExam();" src="resources/img/lab01.png" style="cursor: pointer;" alt="Lab Exam Master File" height="100" width="100">	
 					</td>
 					<!-- Below for Admin only -->
 					<c:if test="${roleid == 601}">
 						<td width="50px"></td>
 						<td align="center">
-							<img onclick="goToSearchUserAccount();" src="resources/img/login.jpg" alt="User Account Master File" height="100" width="100">	
+							<img onclick="goToSearchUserAccount();" src="resources/img/login.jpg" style="cursor: pointer;" alt="User Account Master File" height="100" width="100">	
 						</td>						
 					</c:if>
 				</tr>
