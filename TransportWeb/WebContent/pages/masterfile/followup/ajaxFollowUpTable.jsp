@@ -49,16 +49,34 @@
 					<li><a href="#" onclick="getFollowUp(${followUpForm.currentPage - 1},'${followUpForm.category}');">&laquo;</a></li>
 				</c:if>
 					
-				<c:forEach begin="1" end="${followUpForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${followUpForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getFollowUp(${i},'${followUpForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${followUpForm.currentPage lt followUpForm.noOfPages && followUpForm.noOfPages > 10}">
+						<c:forEach begin="${followUpForm.currentPage}" end="${followUpForm.currentPage+9}" var="i">
+			                <c:choose>
+			                    <c:when test="${followUpForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getFollowUp(${i},'${followUpForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>						
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${followUpForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${followUpForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getFollowUp(${i},'${followUpForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
 	           	<c:if test="${followUpForm.currentPage lt followUpForm.noOfPages}">
 	               	<li><a href="#" onclick="getFollowUp(${followUpForm.currentPage + 1},'${followUpForm.category}');">&raquo;</a></li>
 	            </c:if>

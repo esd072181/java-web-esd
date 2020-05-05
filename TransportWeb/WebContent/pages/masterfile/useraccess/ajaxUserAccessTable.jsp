@@ -61,16 +61,34 @@
 					<li><a href="#" onclick="getUserAccess(${userAccessForm.currentPage - 1},'${userAccessForm.category}');">&laquo;</a></li>
 				</c:if>
 					
-				<c:forEach begin="1" end="${userAccessForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${userAccessForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getUserAccess(${i},'${userAccessForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${userAccessForm.currentPage lt userAccessForm.noOfPages && userAccessForm.noOfPages > 10}">
+						<c:forEach begin="${userAccessForm.currentPage}" end="${userAccessForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${userAccessForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getUserAccess(${i},'${userAccessForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${userAccessForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${userAccessForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getUserAccess(${i},'${userAccessForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
 	           	<c:if test="${userAccessForm.currentPage lt userAccessForm.noOfPages}">
 	               	<li><a href="#" onclick="getUserAccess(${userAccessForm.currentPage + 1},'${userAccessForm.category}');">&raquo;</a></li>
 	            </c:if>

@@ -90,24 +90,35 @@
 				<c:if test="${driverIncidentForm.currentPage != 1 && driverIncidentForm.noOfPages > 0}">
 					<li><a href="#" onclick="getDriverIncident(${driverIncidentForm.currentPage - 1},'${driverIncidentForm.category}');">&laquo;</a></li>
 				</c:if>
-					
-				<c:forEach begin="1" end="${driverIncidentForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${driverIncidentForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	 <c:choose>
-	                          <c:when test="${driverIncidentForm.currentPage < i && i < driverIncidentForm.currentPage+10}">
-	                          		<li><a href="#" onclick="getDriverIncident(${i},'${driverIncidentForm.category}');">${i}</a></li>
-	                          </c:when>
-	                           <c:otherwise>
-	                           		<!-- none -->
-	                           </c:otherwise>
-	                         </c:choose>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${driverIncidentForm.currentPage lt driverIncidentForm.noOfPages && driverIncidentForm.noOfPages > 10}">
+						<c:forEach begin="${driverIncidentForm.currentPage}" end="${driverIncidentForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${driverIncidentForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getDriverIncident(${i},'${driverIncidentForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${driverIncidentForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${driverIncidentForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getDriverIncident(${i},'${driverIncidentForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
+				
 	           	<c:if test="${driverTrainingForm.currentPage lt driverIncidentForm.noOfPages}">
 	               	<li><a href="#" onclick="getDriverIncident(${driverIncidentForm.currentPage + 1},'${driverIncidentForm.category}');">&raquo;</a></li>
 	            </c:if>

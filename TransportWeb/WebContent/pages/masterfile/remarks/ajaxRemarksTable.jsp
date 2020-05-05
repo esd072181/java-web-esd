@@ -49,16 +49,34 @@
 					<li><a href="#" onclick="getRemarks(${remarksForm.currentPage - 1},'${remarksForm.category}');">&laquo;</a></li>
 				</c:if>
 					
-				<c:forEach begin="1" end="${remarksForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${remarksForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getRemarks(${i},'${remarksForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${remarksForm.currentPage lt remarksForm.noOfPages && remarksForm.noOfPages > 10}">
+						<c:forEach begin="${remarksForm.currentPage}" end="${remarksForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${remarksForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getRemarks(${i},'${remarksForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${remarksForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${remarksForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getRemarks(${i},'${remarksForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>					
+					</c:otherwise>
+				</c:choose>
+
 	           	<c:if test="${remarksForm.currentPage lt remarksForm.noOfPages}">
 	               	<li><a href="#" onclick="getRemarks(${remarksForm.currentPage + 1},'${remarksForm.category}');">&raquo;</a></li>
 	            </c:if>

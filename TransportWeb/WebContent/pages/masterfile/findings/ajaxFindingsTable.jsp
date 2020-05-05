@@ -52,17 +52,35 @@
 				<c:if test="${findingsForm.currentPage != 1 && findingsForm.noOfPages > 0}">
 					<li><a href="#" onclick="getFindings(${findingsForm.currentPage - 1},'${findingsForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${findingsForm.currentPage lt findingsForm.noOfPages && findingsForm.noOfPages > 10}">
+						<c:forEach begin="${findingsForm.currentPage}" end="${findingsForm.currentPage+9}" var="i">
+							 <c:choose>
+			                    <c:when test="${findingsForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getFindings(${i},'${findingsForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${findingsForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${findingsForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getFindings(${i},'${findingsForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>
 					
-				<c:forEach begin="1" end="${findingsForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${findingsForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getFindings(${i},'${findingsForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${findingsForm.currentPage lt findingsForm.noOfPages}">
 	               	<li><a href="#" onclick="getFindings(${findingsForm.currentPage + 1},'${findingsForm.category}');">&raquo;</a></li>
 	            </c:if>

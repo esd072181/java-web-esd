@@ -85,24 +85,34 @@
 					<li><a href="#" onclick="getWorkPermit(${workPermitForm.currentPage - 1},'${workPermitForm.category}');">&laquo;</a></li>
 				</c:if>
 					
-				<c:forEach begin="1" end="${workPermitForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${workPermitForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<!--<li><a href="#" onclick="getWorkPermit(${i},'${workPermitForm.category}');">${i}</a></li>-->
-	                    	 <c:choose>
-	                          <c:when test="${workPermitForm.currentPage < i && i < workPermitForm.currentPage+10}">
-	                          		<li><a href="#" onclick="getWorkPermit(${i},'${workPermitForm.category}');">${i}</a></li>
-	                          </c:when>
-	                           <c:otherwise>
-	                           		<!-- none -->
-	                           </c:otherwise>
-	                         </c:choose>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${workPermitForm.currentPage lt workPermitForm.noOfPages && workPermitForm.noOfPages > 10}">
+						<c:forEach begin="${workPermitForm.currentPage}" end="${workPermitForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${workPermitForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getWorkPermit(${i},'${workPermitForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${workPermitForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${workPermitForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getWorkPermit(${i},'${workPermitForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>					
+					</c:otherwise>
+				</c:choose>
+				
 	           	<c:if test="${workPermitForm.currentPage lt workPermitForm.noOfPages}">
 	               	<li><a href="#" onclick="getWorkPermit(${workPermitForm.currentPage + 1},'${workPermitForm.category}');">&raquo;</a></li>
 	            </c:if>

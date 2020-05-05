@@ -71,25 +71,35 @@
 				<c:if test="${maintenanceInspectionForm.currentPage != 1 && maintenanceInspectionForm.noOfPages > 0}">
 					<li><a href="#" onclick="getMaintenanceInspection(${maintenanceInspectionForm.currentPage - 1},'${maintenanceInspectionForm.category}');">&laquo;</a></li>
 				</c:if>
-					
-				<c:forEach begin="1" end="${maintenanceInspectionForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${maintenanceInspectionForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<!--<li><a href="#" onclick="getMaintenanceInspection(${i},'${maintenanceInspectionForm.category}');">${i}</a></li>-->
-	                    	 <c:choose>
-	                          <c:when test="${maintenanceInspectionForm.currentPage < i && i < maintenanceInspectionForm.currentPage+10}">
-	                          		<li><a href="#" onclick="getMaintenanceInspection(${i},'${maintenanceInspectionForm.category}');">${i}</a></li>
-	                          </c:when>
-	                           <c:otherwise>
-	                           		<!-- none -->
-	                           </c:otherwise>
-	                         </c:choose>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${maintenanceInspectionForm.currentPage lt maintenanceInspectionForm.noOfPages && maintenanceInspectionForm.noOfPages > 10}">
+						<c:forEach begin="${maintenanceInspectionForm.currentPage}" end="${maintenanceInspectionForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${maintenanceInspectionForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                        <li><a href="#" onclick="getMaintenanceInspection(${i},'${maintenanceInspectionForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${maintenanceInspectionForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${maintenanceInspectionForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                        <li><a href="#" onclick="getMaintenanceInspection(${i},'${maintenanceInspectionForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
+				
 	           	<c:if test="${maintenanceInspectionForm.currentPage lt maintenanceInspectionForm.noOfPages}">
 	               	<li><a href="#" onclick="getMaintenanceInspection(${maintenanceInspectionForm.currentPage + 1},'${maintenanceInspectionForm.category}');">&raquo;</a></li>
 	            </c:if>

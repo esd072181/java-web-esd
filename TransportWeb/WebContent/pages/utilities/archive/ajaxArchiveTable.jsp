@@ -535,8 +535,7 @@
 		  <c:if test="${recordsFlag == false}">
 		  		<div style="color: blue;">No record found!</div>
 		  </c:if>
-		  
-		    				
+		   				
 	</div>
 	
 	<div style="height: 50px; width: 98%;">
@@ -556,17 +555,35 @@
 				<c:if test="${archiveForm.currentPage != 1 && archiveForm.noOfPages > 0}">
 					<li><a href="#" onclick="getArchive(${archiveForm.currentPage - 1});">&laquo;</a></li>
 				</c:if>
-					
-				<c:forEach begin="1" end="${archiveForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${archiveForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getArchive(${i});">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${archiveForm.currentPage lt archiveForm.noOfPages && archiveForm.noOfPages > 10}">
+						<c:forEach begin="${archiveForm.currentPage}" end="${archiveForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${archiveForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getArchive(${i});">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${archiveForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${archiveForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getArchive(${i});">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
 	           	<c:if test="${archiveForm.currentPage lt archiveForm.noOfPages}">
 	               	<li><a href="#" onclick="getArchive(${archiveForm.currentPage + 1});">&raquo;</a></li>
 	            </c:if>

@@ -76,17 +76,36 @@
 				<c:if test="${userForm.currentPage != 1 && userForm.noOfPages > 0}">
 					<li><a href="#" onclick="getUser(${userForm.currentPage - 1},'${userForm.category}');">&laquo;</a></li>
 				</c:if>
-					
-				<c:forEach begin="1" end="${userForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${userForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getUser(${i},'${userForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${userForm.currentPage lt userForm.noOfPages && userForm.noOfPages > 10}">
+						<c:forEach begin="${userForm.currentPage}" end="${userForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${userForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getUser(${i},'${userForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${userForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${userForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getUser(${i},'${userForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>
+						
+				
 	           	<c:if test="${userForm.currentPage lt userForm.noOfPages}">
 	               	<li><a href="#" onclick="getUser(${userForm.currentPage + 1},'${userForm.category}');">&raquo;</a></li>
 	            </c:if>

@@ -48,17 +48,35 @@
 				<c:if test="${itemsForm.currentPage != 1 && itemsForm.noOfPages > 0}">
 					<li><a href="#" onclick="getItems(${itemsForm.currentPage - 1},'${itemsForm.category}');">&laquo;</a></li>
 				</c:if>
-					
-				<c:forEach begin="1" end="${itemsForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${itemsForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getItems(${i},'${itemsForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${itemsForm.currentPage lt itemsForm.noOfPages && itemsForm.noOfPages > 10}">
+						<c:forEach begin="${itemsForm.currentPage}" end="${itemsForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${itemsForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getItems(${i},'${itemsForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${itemsForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${itemsForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getItems(${i},'${itemsForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>					
+					</c:otherwise>
+				</c:choose>
+
 	           	<c:if test="${itemsForm.currentPage lt itemsForm.noOfPages}">
 	               	<li><a href="#" onclick="getItems(${itemsForm.currentPage + 1},'${itemsForm.category}');">&raquo;</a></li>
 	            </c:if>

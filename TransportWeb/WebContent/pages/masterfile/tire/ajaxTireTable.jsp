@@ -107,17 +107,36 @@
 				<c:if test="${tireForm.currentPage != 1 && tireForm.noOfPages > 0}">
 					<li><a href="#" onclick="getTire(${tireForm.currentPage - 1},'${tireForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${tireForm.currentPage lt tireForm.noOfPages && tireForm.noOfPages > 10}">
+						<c:forEach begin="${tireForm.currentPage}" end="${tireForm.currentPage+9}" var="i">
+			                <c:choose>
+			                    <c:when test="${tireForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getTire(${i},'${tireForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>					
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${tireForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${tireForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getTire(${i},'${tireForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>				
+					</c:otherwise>
+				</c:choose>
 					
-				<c:forEach begin="1" end="${tireForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${tireForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getTire(${i},'${tireForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+
 	           	<c:if test="${tireForm.currentPage lt tireForm.noOfPages}">
 	               	<li><a href="#" onclick="getTire(${tireForm.currentPage + 1},'${tireForm.category}');">&raquo;</a></li>
 	            </c:if>

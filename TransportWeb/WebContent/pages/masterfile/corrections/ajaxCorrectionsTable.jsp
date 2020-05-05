@@ -51,16 +51,34 @@
 					<li><a href="#" onclick="getCorrections(${correctionsForm.currentPage - 1},'${correctionsForm.category}');">&laquo;</a></li>
 				</c:if>
 					
-				<c:forEach begin="1" end="${correctionsForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${correctionsForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getCorrections(${i},'${correctionsForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${correctionsForm.currentPage lt correctionsForm.noOfPages && correctionsForm.noOfPages > 10}">
+						<c:forEach begin="${correctionsForm.currentPage}" end="${correctionsForm.currentPage+9}" var="i">
+						 	<c:choose>
+			                    <c:when test="${correctionsForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getCorrections(${i},'${correctionsForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${correctionsForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${correctionsForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getCorrections(${i},'${correctionsForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>					
+					</c:otherwise>
+				</c:choose>
+				
 	           	<c:if test="${correctionsForm.currentPage lt correctionsForm.noOfPages}">
 	               	<li><a href="#" onclick="getCorrections(${correctionsForm.currentPage + 1},'${correctionsForm.category}');">&raquo;</a></li>
 	            </c:if>

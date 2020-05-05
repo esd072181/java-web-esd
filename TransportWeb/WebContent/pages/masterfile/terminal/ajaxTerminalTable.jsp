@@ -48,17 +48,35 @@
 				<c:if test="${terminalForm.currentPage != 1 && terminalForm.noOfPages > 0}">
 					<li><a href="#" onclick="getTerminal(${terminalForm.currentPage - 1},'${terminalForm.category}');">&laquo;</a></li>
 				</c:if>
-					
-				<c:forEach begin="1" end="${terminalForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${terminalForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getTerminal(${i},'${terminalForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${terminalForm.currentPage lt terminalForm.noOfPages && terminalForm.noOfPages > 10}">
+						<c:forEach begin="${terminalForm.currentPage}" end="${terminalForm.currentPage+9}" var="i">
+			                <c:choose>
+			                    <c:when test="${terminalForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getTerminal(${i},'${terminalForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${terminalForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${terminalForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getTerminal(${i},'${terminalForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>					
+					</c:otherwise>
+				</c:choose>			
+
 	           	<c:if test="${terminalForm.currentPage lt terminalForm.noOfPages}">
 	               	<li><a href="#" onclick="getTerminal(${terminalForm.currentPage + 1},'${terminalForm.category}');">&raquo;</a></li>
 	            </c:if>

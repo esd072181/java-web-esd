@@ -57,16 +57,34 @@
 					<li><a href="#" onclick="getEmployee(${employeeForm.currentPage - 1},'${employeeForm.category}');">&laquo;</a></li>
 				</c:if>
 					
-				<c:forEach begin="1" end="${employeeForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${employeeForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getEmployee(${i},'${employeeForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${employeeForm.currentPage lt employeeForm.noOfPages && employeeForm.noOfPages > 10}">
+						<c:forEach begin="${employeeForm.currentPage}" end="${employeeForm.currentPage+9}" var="i">
+			                <c:choose>
+			                    <c:when test="${employeeForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getEmployee(${i},'${employeeForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>						
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${employeeForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${employeeForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getEmployee(${i},'${employeeForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>	
+			        </c:otherwise>				
+				</c:choose>
+
 	           	<c:if test="${employeeForm.currentPage lt employeeForm.noOfPages}">
 	               	<li><a href="#" onclick="getEmployee(${employeeForm.currentPage + 1},'${employeeForm.category}');">&raquo;</a></li>
 	            </c:if>
