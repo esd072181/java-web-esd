@@ -43,11 +43,11 @@
 			</tr>
 			<tr>
 				<td align="center">
-					<img onclick="goToNewLabRequest();" src="resources/img/new_labreq.png" alt="New Lab Request" height="100" width="100">	
+					<img onclick="goToNewLabRequest();" src="resources/img/new_labreq.png" style="cursor: pointer;" alt="New Lab Request" height="100" width="100">	
 				</td>
 				<td width="40px"></td>
 				<td align="center">
-					<img onclick="goToSearchPatientLabRequest();" src="resources/img/browse_labreq.jpg" alt="Browse Lab Request" height="100" width="100">
+					<img onclick="goToSearchPatientLabRequest();" src="resources/img/browse_labreq.jpg" style="cursor: pointer;" alt="Browse Lab Request" height="100" width="100">
 				</td>
 			</tr>
 			<tr>
@@ -72,21 +72,21 @@
 				</tr>
 				<tr>
 					<td align="center">
-						<img onclick="goToSearchPatient();" src="resources/img/patient_reg.png" alt="Patient Master File" height="100" width="100">	
+						<img onclick="goToSearchPatient();" src="resources/img/patient_reg.png" style="cursor: pointer;" alt="Patient Master File" height="100" width="100">	
 					</td>
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchProfessional();" src="resources/img/prof.png" alt="Professional Master File" height="100" width="100">	
+						<img onclick="goToSearchProfessional();" src="resources/img/prof.png" style="cursor: pointer;" alt="Professional Master File" height="100" width="100">	
 					</td>	
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchLabExam();" src="resources/img/lab01.jpg" alt="Lab Exam Master File" height="100" width="100">	
+						<img onclick="goToSearchLabExam();" src="resources/img/lab01.jpg" style="cursor: pointer;" alt="Lab Exam Master File" height="100" width="100">	
 					</td>	
 					<!-- Below for Admin only -->
 					<c:if test="${roleid == 601}">
 						<td width="50px"></td>
 						<td align="center">
-							<img onclick="goToSearchUserAccount();" src="resources/img/login.jpg" alt="User Account Master File" height="100" width="100">	
+							<img onclick="goToSearchUserAccount();" src="resources/img/login.jpg" style="cursor: pointer;" alt="User Account Master File" height="100" width="100">	
 						</td>
 					</c:if>		
 				</tr>
