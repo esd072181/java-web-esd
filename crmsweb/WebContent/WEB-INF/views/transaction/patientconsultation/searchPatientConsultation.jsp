@@ -148,24 +148,35 @@
 								<c:if test="${currentPage != 1 && noOfPages > 0}">
 									<li><a href="#" onclick="searchPatientConsultation(${currentPage - 1}, document.getElementById('lastNameId').value);">&laquo;</a></li>
 								</c:if>
-									
-								<c:forEach begin="1" end="${noOfPages}" var="i">
-					                <c:choose>
-					                    <c:when test="${currentPage eq i}">
-					                        <li class="active"><a href="#">${i}</a></li>
-					                    </c:when>
-					                    <c:otherwise>	                
-					                      	 <c:choose>
-					                          	<c:when test="${currentPage < i && i < currentPage+10}">
-					                          		<li><a href="#" onclick="searchPatientConsultation(${i}, document.getElementById('lastNameId').value);">${i}</a></li>
-					                          	</c:when>
-					                           	<c:otherwise>
-					                           		<!-- none -->
-					                           	</c:otherwise>
-					                         </c:choose>
-					                    </c:otherwise>
-					                </c:choose>
-					            </c:forEach>
+								
+								<!-- pagination limit to 10 -->
+								<c:choose>
+									<c:when test="${currentPage lt noOfPages && noOfPages > 10}">
+										<c:forEach begin="${currentPage}" end="${currentPage+9}" var="i">
+											<c:choose>
+							                    <c:when test="${currentPage eq i}">
+							                        <li class="active"><a href="#">${i}</a></li>
+							                    </c:when>
+							                    <c:otherwise>	                
+							                        <li><a href="#" onclick="searchPatientConsultation(${i}, document.getElementById('lastNameId').value);">${i}</a></li>
+							                    </c:otherwise>
+							                </c:choose>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<c:forEach begin="1" end="${noOfPages}" var="i">
+							                <c:choose>
+							                    <c:when test="${currentPage eq i}">
+							                        <li class="active"><a href="#">${i}</a></li>
+							                    </c:when>
+							                    <c:otherwise>	                
+							                        <li><a href="#" onclick="searchPatientConsultation(${i}, document.getElementById('lastNameId').value);">${i}</a></li>
+							                    </c:otherwise>
+							                </c:choose>
+							            </c:forEach>
+									</c:otherwise>
+								</c:choose>	
+								
 					           	<c:if test="${currentPage lt noOfPages}">
 					               	<li><a href="#" onclick="searchPatientConsultation(${currentPage + 1}, document.getElementById('lastNameId').value);">&raquo;</a></li>
 					            </c:if>
