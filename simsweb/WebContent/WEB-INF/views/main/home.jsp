@@ -58,19 +58,19 @@
 			</tr>
 			<tr>
 				<td align="center">
-					<img onclick="goToRetailPOS();" src="resources/img/consult01.png" alt="Retail POS" height="100" width="100">	
+					<img onclick="goToRetailPOS();" src="resources/img/consult01.png" style="cursor: pointer;" alt="Retail POS" height="100" width="100">	
 				</td>
 				<td width="40px"></td>
 				<td align="center">
-					<img onclick="goToSearchPO();" src="resources/img/browse_consult01.jpg" alt="Purchase Order" height="100" width="100">
+					<img onclick="goToSearchPO();" src="resources/img/browse_consult01.jpg" style="cursor: pointer;" alt="Purchase Order" height="100" width="100">
 				</td>
 				<td width="40px"></td>
 				<td align="center">
-					<img onclick="goToSearchPOInRO();" src="resources/img/browse_consult01.jpg" alt="Receive Order" height="100" width="100">
+					<img onclick="goToSearchPOInRO();" src="resources/img/browse_consult01.jpg" style="cursor: pointer;" alt="Receive Order" height="100" width="100">
 				</td>
 				<td width="40px"></td>
 				<td align="center">
-					<img onclick="goToSearchPhysicalInventory();" src="resources/img/browse_consult01.jpg" alt="Physical Inventory" height="100" width="100">
+					<img onclick="goToSearchPhysicalInventory();" src="resources/img/browse_consult01.jpg" style="cursor: pointer;" alt="Physical Inventory" height="100" width="100">
 				</td>
 			</tr>
 			<tr>
@@ -98,33 +98,33 @@
 				</tr>
 				<tr>
 					<td align="center">
-						<img onclick="goToSearchItem();" src="resources/img/patient_reg.png" alt="Item Master File" height="100" width="100">	
+						<img onclick="goToSearchItem();" src="resources/img/patient_reg.png" style="cursor: pointer;" alt="Item Master File" height="100" width="100">	
 					</td>
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchEmployee();" src="resources/img/prof03.jpg" alt="Employee Master File" height="100" width="100">	
+						<img onclick="goToSearchEmployee();" src="resources/img/prof03.jpg" style="cursor: pointer;" alt="Employee Master File" height="100" width="100">	
 					</td>	
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchCategory();" src="resources/img/med05.png" alt="Category Master File" height="100" width="100">	
+						<img onclick="goToSearchCategory();" src="resources/img/med05.png" style="cursor: pointer;" alt="Category Master File" height="100" width="100">	
 					</td>
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchSubCategory();" src="resources/img/med05.png" alt="SubCategory Master File" height="100" width="100">	
+						<img onclick="goToSearchSubCategory();" src="resources/img/med05.png" style="cursor: pointer;" alt="SubCategory Master File" height="100" width="100">	
 					</td>		
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchBrand();" src="resources/img/lab01.png" alt="Brand Master File" height="100" width="100">	
+						<img onclick="goToSearchBrand();" src="resources/img/lab01.png" style="cursor: pointer;" alt="Brand Master File" height="100" width="100">	
 					</td>
 					<td width="50px"></td>
 					<td align="center">
-						<img onclick="goToSearchSupplier();" src="resources/img/lab01.png" alt="Supplier Master File" height="100" width="100">	
+						<img onclick="goToSearchSupplier();" src="resources/img/lab01.png" style="cursor: pointer;" alt="Supplier Master File" height="100" width="100">	
 					</td>
 					<!-- Below for Admin only -->
 					<c:if test="${roleid == 501}">
 						<td width="50px"></td>
 						<td align="center">
-							<img onclick="goToSearchUserAccount();" src="resources/img/login.jpg" alt="User Account Master File" height="100" width="100">	
+							<img onclick="goToSearchUserAccount();" src="resources/img/login.jpg" style="cursor: pointer;" alt="User Account Master File" height="100" width="100">	
 						</td>						
 					</c:if>
 				</tr>

@@ -207,6 +207,11 @@ public class Employee implements Serializable {
 		this.fullName = fullName;
 	}
 	
+	@Transient
+	public String getFullName2() {
+		return this.lastName + ", " + this.firstName + " " +  (this.middleName!=null ? this.middleName : "");
+	}
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "emp")
 	@Where(clause = "active = true")
 	public List<UserAccount> getUserAccountList() {
