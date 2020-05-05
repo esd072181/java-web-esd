@@ -1022,8 +1022,9 @@ public class MaintenanceMonitoringDaoImpl implements MaintenanceMonitoringDao {
 					case 6: 
 						pstmt.setString(1, model.getMaintenance6());
 						pstmt.setInt(2, model.getMaintenanceColor6());
-						pstmt.setString(3, model.getMaintenanceRemarks6());
-						pstmt.setInt(4, model.getAvailableVolume6());
+						pstmt.setInt(3, model.getMaintenanceCategory6());
+						pstmt.setString(4, model.getMaintenanceRemarks6());
+						pstmt.setInt(5, model.getAvailableVolume6());
 						break;
 					case 7: 
 						pstmt.setString(1, model.getMaintenance7());
