@@ -11,5 +11,6 @@ public interface ProfessionalTypeDao {
 	public Map<String, Object> search(HashMap<String, Object> criteriaMap) throws Exception;
 	public Map<String, Object> getDataById(HashMap<String, Object> criteriaMap) throws Exception;
 	public Map<String, Object> getActiveData() throws Exception;
+	public Map<String, Object> getProfessionalTypeId(HashMap<String, Object> criteriaMap) throws Exception;
 
 }

@@ -83,8 +83,6 @@ $(document).ready(function () {
 
 	<tiles:insert attribute="header"/>
 	
-	<tiles:insert attribute="menu"/>
-	
 	<tiles:insert attribute="body"/> 
 	 
 	<tiles:insert attribute="footer"/> 

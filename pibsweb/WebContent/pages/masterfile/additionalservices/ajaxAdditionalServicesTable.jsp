@@ -10,19 +10,19 @@
 		<c:when test="${additionalServicesForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Description</th>
 					<th>Remarks</th>
 					<th>Category</th>
 					<th>Fee</th>
-					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="additionalServicesForm" property="modelList" type="com.pibs.model.AdditionalServices" id="model">
+				<logic:iterate name="additionalServicesForm" property="modelList" type="com.pibs.model.AdditionalServices" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="description"/></td>
+						<td><c:out value="${index+1 + (additionalServicesForm.currentPage * 10 - 10)}"/></td>
+						<td><a href="#" onclick="javascript: editAdditionalServices('<bean:write name="model" property="id"/>');">${model.description}</a></td>
 						<td><bean:write name="model" property="remarks"/></td>
 						<td><bean:write name="model" property="additionalServicesCategory"/></td>
 						<logic:equal name="model" property="fee" value="0">
@@ -31,7 +31,6 @@
 						<logic:notEqual name="model" property="fee" value="0">
 							<td align="right"><bean:write name="model" property="fee" format="Php #,###.00"/></td>
 						</logic:notEqual>
-						<td align="center"><a href="#" onclick="javascript: editAdditionalServices('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="javascript: deleteAdditionalServices('<bean:write name="model" property="id"/>', '${additionalServicesForm.category}',${additionalServicesForm.currentPage})">Delete</a></td>
 						</c:if>
@@ -62,17 +61,35 @@
 				<c:if test="${additionalServicesForm.currentPage != 1 && additionalServicesForm.noOfPages > 0}">
 					<li><a href="#" onclick="getAdditionalServices(${additionalServicesForm.currentPage - 1},'${additionalServicesForm.category}');">&laquo;</a></li>
 				</c:if>
-					
-				<c:forEach begin="1" end="${additionalServicesForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${additionalServicesForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getAdditionalServices(${i},'${additionalServicesForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${additionalServicesForm.currentPage lt additionalServicesForm.noOfPages && additionalServicesForm.noOfPages > 10}">
+						<c:forEach begin="${additionalServicesForm.currentPage}" end="${additionalServicesForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${additionalServicesForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getAdditionalServices(${i},'${additionalServicesForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${additionalServicesForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${additionalServicesForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getAdditionalServices(${i},'${additionalServicesForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
+				
 	           	<c:if test="${additionalServicesForm.currentPage lt additionalServicesForm.noOfPages}">
 	               	<li><a href="#" onclick="getAdditionalServices(${additionalServicesForm.currentPage + 1},'${additionalServicesForm.category}');">&raquo;</a></li>
 	            </c:if>

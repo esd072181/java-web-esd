@@ -1,7 +1,7 @@
 <%@taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div id="contentDIVLogin" style="width: 100%; height: 100%;" align="center">
+<div align="center">
 
 	<html:form action="/loginValidate.do" >
 	
@@ -38,6 +38,6 @@
 
 		</table>
 
-</html:form>
+	</html:form>
 
 </div>

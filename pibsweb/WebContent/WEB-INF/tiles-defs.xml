@@ -10,7 +10,6 @@
  
    <definition name="pibs-template" path="/template/common_layout.jsp">
 	 <put name="header" value="/template/header.jsp" />
-	 <put name="menu" value="/template/menu.jsp" />
 	 <put name="footer" value="/template/footer.jsp" />
    </definition>
  

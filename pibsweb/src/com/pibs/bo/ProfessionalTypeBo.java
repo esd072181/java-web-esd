@@ -3,6 +3,12 @@ package com.pibs.bo;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since June2015
+ * DateUpdated: 08May2020
+ */
 public interface ProfessionalTypeBo {
 	
 	public Map<String, Object> addNewRecord(HashMap<String, Object> dataMap) throws Exception;
@@ -11,5 +17,6 @@ public interface ProfessionalTypeBo {
 	public Map<String, Object> getRecords(HashMap<String, Object> criteriaMap) throws Exception;
 	public Map<String, Object> getDataById(HashMap<String, Object> criteriaMap) throws Exception;
 	public Map<String, Object> getActiveData() throws Exception;
+	public Map<String, Object> getProfessionalTypeId(HashMap<String, Object> criteriaMap) throws Exception;
 
 }

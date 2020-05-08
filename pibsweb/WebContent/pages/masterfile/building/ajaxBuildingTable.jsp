@@ -10,21 +10,21 @@
 		<c:when test="${buildingForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Description</th>
 					<th>No of Floor</th>
 					<th>Remarks</th>
-					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="buildingForm" property="modelList" type="com.pibs.model.Building" id="model">
+				<logic:iterate name="buildingForm" property="modelList" type="com.pibs.model.Building" id="model" indexId="index">
 					<tr>				 
 						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="description"/></td>
+						<td><c:out value="${index+1 + (buildingForm.currentPage * 10 - 10)}"/></td>
+						<td><a href="#" onclick="javascript: editBuilding('<bean:write name="model" property="id"/>');">${model.description}</a></td>
 						<td><bean:write name="model" property="noOfFloor"/></td>
 						<td><bean:write name="model" property="remarks"/></td>
-						<td align="center"><a href="#" onclick="javascript: editBuilding('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="javascript: deleteBuilding('<bean:write name="model" property="id"/>', '${buildingForm.category}',${buildingForm.currentPage})">Delete</a></td>
 						</c:if>
@@ -56,16 +56,34 @@
 					<li><a href="#" onclick="getBuilding(${buildingForm.currentPage - 1},'${buildingForm.category}');">&laquo;</a></li>
 				</c:if>
 					
-				<c:forEach begin="1" end="${buildingForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${buildingForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getBuilding(${i},'${buildingForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${buildingForm.currentPage lt buildingForm.noOfPages && buildingForm.noOfPages > 10}">
+						<c:forEach begin="${buildingForm.currentPage}" end="${buildingForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${buildingForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getBuilding(${i},'${buildingForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${buildingForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${buildingForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getBuilding(${i},'${buildingForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
 	           	<c:if test="${buildingForm.currentPage lt buildingForm.noOfPages}">
 	               	<li><a href="#" onclick="getBuilding(${buildingForm.currentPage + 1},'${buildingForm.category}');">&raquo;</a></li>
 	            </c:if>

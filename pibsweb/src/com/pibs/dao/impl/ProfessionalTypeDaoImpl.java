@@ -21,6 +21,12 @@ import com.pibs.model.ProfessionalType;
 import com.pibs.model.User;
 import com.pibs.util.PIBSUtils;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since June2015
+ * DateUpdated: 08May2020
+ */
 public class ProfessionalTypeDaoImpl implements ProfessionalTypeDao {
 	
 	private final static Logger logger = Logger.getLogger(ProfessionalTypeDaoImpl.class);
@@ -476,6 +482,52 @@ public class ProfessionalTypeDaoImpl implements ProfessionalTypeDao {
 		    	 returnMap.put(MapConstant.CLASS_LIST, rsList);
 		     } 
 	     
+		return returnMap;
+	}
+
+	@Override
+	public Map<String, Object> getProfessionalTypeId(HashMap<String, Object> criteriaMap) throws Exception {
+		 
+		PIBSUtils.writeLogInfo(logger, MiscConstant.LOGGING_MESSSAGE_SEARCH);
+		 
+		 	Map<String, Object> returnMap = new HashMap<String, Object>();
+
+			String criteria = (String) criteriaMap.get(MapConstant.SEARCH_CRITERIA);
+			 
+			 Connection conn = null;
+			 ResultSet rs = null;;
+			 PreparedStatement pstmt = null;
+			 
+			 ProfessionalType model = new ProfessionalType();  
+					  
+			 try {
+				 conn = ServerContext.getJDBCHandle();
+
+				 StringBuffer sql = new StringBuffer("select id from pibs.file_professional_type ");
+					 	sql.append(" where ");
+					 	sql.append(" description ilike '%"+criteria+"%' " );
+					 	sql.append(" and active = true ");
+						 
+				PIBSUtils.writeLogDebug(logger, "SQL: "+sql.toString());
+					
+				 pstmt = conn.prepareStatement(sql.toString());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 if(rs.next()) { 
+		    		 model.setId(rs.getInt(1));
+				 }				 
+			 } catch (SQLException e) {
+				 throw e;
+			 } finally {
+				 PIBSUtils.closeObjects(rs);
+				 PIBSUtils.closeObjects(pstmt);
+				 PIBSUtils.closeObjects(conn);
+			 }
+
+		returnMap.put(MapConstant.CLASS_DATA, model);
+	     
+	    System.out.println("getProfessionalTypeId() - Exit");
 		return returnMap;
 	}
 

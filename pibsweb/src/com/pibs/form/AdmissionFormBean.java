@@ -23,6 +23,7 @@ import com.pibs.dao.impl.AdmissionDaoImpl;
 import com.pibs.model.Admission;
 import com.pibs.model.Patient;
 import com.pibs.model.Professional;
+import com.pibs.model.ProfessionalType;
 import com.pibs.model.Room;
 import com.pibs.service.ServiceManager;
 import com.pibs.service.ServiceManagerImpl;
@@ -422,13 +423,27 @@ public class AdmissionFormBean extends PIBSFormBean {
         	setRoomList(new ArrayList<Room>());
         }
         
-        dataMap = null;
-        resultMap = null;
+        dataMap.clear();
+        resultMap.clear();
         		
-        //get the doctor list
+        //First, get the professional typeid of Doctor of Medical Doctor
+        dataMap.put(MapConstant.MODULE, ModuleConstant.PROFESSIONAL_TYPE);
+        dataMap.put(MapConstant.SEARCH_CRITERIA, "Doctor");
+        dataMap.put(MapConstant.ACTION, ActionConstant.GET_DATA_BY_CRITERIA);
+
+        resultMap = service.executeRequest(dataMap);
+        
+        ProfessionalType modelType = null;
+        if (resultMap!=null && !resultMap.isEmpty()) {
+        	modelType =  (ProfessionalType) resultMap.get(MapConstant.CLASS_DATA);
+        }
+        
+        dataMap.clear();
+        resultMap.clear();
+        
+        //Second, get the Doctor List using typeid of Doctor
         Professional modelCriteria = new Professional(); 
-        modelCriteria.setProfessionalTypeId(1);//1 for Medical Doctor
-        dataMap = new HashMap<String, Object>();
+        modelCriteria.setProfessionalTypeId(modelType.getId());
         dataMap.put(MapConstant.MODULE, ModuleConstant.PROFESSIONAL);
         dataMap.put(MapConstant.CLASS_DATA, modelCriteria);
         dataMap.put(MapConstant.ACTION, ActionConstant.GET_ACTIVE_DATA_BY_ID_TYPE);

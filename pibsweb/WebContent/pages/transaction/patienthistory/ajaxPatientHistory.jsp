@@ -14,29 +14,21 @@ function showPatientHistory(divId) {
 }
 </script>
 
-<div class="row">
-	 
+<div style="padding-left: 10px;">
 	
- 	<div class="col-sm-10" style="padding-left: 40px;">
-
-		<div style="height: 30%; padding-top: 0px;" align="left">
-			<h3 style="font-style: bold;">Patient History</h3>
-		
-				<div>
-                     <table>
-                         <tr>
-                             <td>Name:</td>
-                             <td><span style="color: blue;">${patientHistoryForm.fullName}</span></td>
-   						 </tr>
-   					 </table>
-   				</div>
-   				<br>			
-   				<div>
-   					<logic:iterate name="patientHistoryForm" property="modelList" type="com.pibs.model.Patient" id="model">
+	<div style="position: sticky; top: 150px; background-color: white;">
+		<h3 style="font-style: bold;">Patient History</h3>
+        <label>Name:</label>
+        <span style="color: blue;">${patientHistoryForm.fullName}</span>
+        <hr>
+   	</div>
+   								
+   	<div>
+   		<logic:iterate name="patientHistoryForm" property="modelList" type="com.pibs.model.Patient" id="model">
 						<table>
     	                	<tr>
         	                     <td>CASE NO:</td>
-            	                 <td><a href="#" onclick="showPatientHistory('<bean:write name="model" property="caseNo"/>');">  <bean:write name="model" property="caseNo"/></a></td>
+            	                 <td style="padding-left: 5px;"><a href="#" onclick="showPatientHistory('<bean:write name="model" property="caseNo"/>');">  <bean:write name="model" property="caseNo"/></a></td>
    							</tr>
    							<tr style="height: 5px;"></tr>
    						</table>
@@ -55,7 +47,7 @@ function showPatientHistory(divId) {
    								</tr>
    								<tr style="height: 5px;"></tr>
    								<tr>
-        	                		<td>Remarks(Diagnosis):  <span style="color: blue;"><bean:write name="model" property="diagnosisRemarks"/></span></td>
+        	                		<td style="padding-left: 20px;">Remarks:  <span style="color: blue;"><bean:write name="model" property="diagnosisRemarks"/></span></td>
    								</tr>
    								<tr style="height: 5px;"></tr>
    								<tr>
@@ -67,7 +59,7 @@ function showPatientHistory(divId) {
    								</tr>
    								<tr style="height: 5px;"></tr>
    								<tr>
-        	                		<td>Remarks (Medication Statement):  <span style="color: blue;"><bean:write name="model" property="medicationStatementRemarks"/></span></td>
+        	                		<td style="padding-left: 20px;">Remarks:  <span style="color: blue;"><bean:write name="model" property="medicationStatementRemarks"/></span></td>
    								</tr>
    								<tr style="height: 5px;"></tr>
    								<tr>
@@ -79,7 +71,7 @@ function showPatientHistory(divId) {
    								</tr>
    								<tr style="height: 5px;"></tr>
    								<tr>
-        	                		<td>Remarks (Prognosis):  <span style="color: blue;"><bean:write name="model" property="prognosisRemarks"/></span></td>
+        	                		<td style="padding-left: 20px;">Remarks:  <span style="color: blue;"><bean:write name="model" property="prognosisRemarks"/></span></td>
    								</tr>
    								<tr style="height: 5px;"></tr>
    								<tr>
@@ -97,27 +89,15 @@ function showPatientHistory(divId) {
    								<tr>
         	                		<td>Date Discharged:  <span style="color: blue;"><bean:write name="model" property="dateDischarged"/></span></td>
    								</tr>
-   								<tr style="height: 15px;"></tr>
-   						 	</table>	 
+   						 	</table>
+   						 	<hr>	 
 						</div>
-					</logic:iterate>	
-   				</div>	
-   						
-   				<br>		
-   				<div>		
-   					<table>
-                        <tr>
-                           <td colspan="2">
-								<html:button property="btnClose" styleClass="btn btn-primary btnCancelClose" onclick="closePatientHistory();" value="Close"></html:button>	
-								<html:button property="btnBack" styleClass="btn btn-primary btnBackToSearch" onclick="backToPatientHistorySearch();" value="Back to Search"></html:button>	
-		                    </td>
-                        </tr>
-                        <tr style="height: 15px;"></tr>
-                    </table>     
-				</div>
-
-		</div>
-	
+		</logic:iterate>	
+   	</div>	
+   							
+   	<div style="padding-top: 10px;">		
+		<html:button property="btnClose" styleClass="btn btn-primary btnCancelClose" onclick="closePatientHistory();" value="Close"></html:button>	
+		<html:button property="btnBack" styleClass="btn btn-primary btnBackToSearch" onclick="backToPatientHistorySearch();" value="Back to Search"></html:button>	
 	</div>
 	
 </div>	

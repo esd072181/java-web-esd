@@ -10,20 +10,20 @@
 		<c:when test="${discountForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Description</th>
 					<th>Remarks</th>
 					<th>Date Approved</th>
 					<th>Standard Amount</th>
 					<th>Standard Percentage (%)</th>
-					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="discountForm" property="modelList" type="com.pibs.model.Discount" id="model">
+				<logic:iterate name="discountForm" property="modelList" type="com.pibs.model.Discount" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
-						<td><bean:write name="model" property="description"/></td>
+						<td><c:out value="${index+1 + (discountForm.currentPage * 10 - 10)}"/></td>
+						<td><a href="#" onclick="javascript: editDiscount('<bean:write name="model" property="id"/>');"><bean:write name="model" property="description"/></a></td>
 						<td><bean:write name="model" property="remarks"/></td>
 						<td><bean:write name="model" property="dateApproved"/></td>
 						<logic:equal name="model" property="standardAmount" value="0">
@@ -38,7 +38,6 @@
 						<logic:notEqual name="model" property="standardPercentage" value="0">
 							<td align="right"><bean:write name="model" property="standardPercentage" format="#,###.00"/></td>
 						</logic:notEqual>
-						<td align="center"><a href="#" onclick="javascript: editDiscount('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="javascript: deleteDiscount('<bean:write name="model" property="id"/>', '${discountForm.category}',${discountForm.currentPage})">Delete</a></td>
 						</c:if>
@@ -69,17 +68,35 @@
 				<c:if test="${discountForm.currentPage != 1 && discountForm.noOfPages > 0}">
 					<li><a href="#" onclick="getDiscount(${discountForm.currentPage - 1},'${discountForm.category}');">&laquo;</a></li>
 				</c:if>
-					
-				<c:forEach begin="1" end="${discountForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${discountForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getDiscount(${i},'${discountForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${discountForm.currentPage lt discountForm.noOfPages && discountForm.noOfPages > 10}">
+						<c:forEach begin="${discountForm.currentPage}" end="${discountForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${discountForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getDiscount(${i},'${discountForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${discountForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${discountForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getDiscount(${i},'${discountForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
+				
 	           	<c:if test="${discountForm.currentPage lt discountForm.noOfPages}">
 	               	<li><a href="#" onclick="getDiscount(${discountForm.currentPage + 1},'${discountForm.category}');">&raquo;</a></li>
 	            </c:if>

@@ -10,13 +10,18 @@ import com.pibs.constant.ActionConstant;
 import com.pibs.constant.MapConstant;
 import com.pibs.util.PIBSUtils;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since June2015
+ * DateUpdated: 08May2020
+ */
 public class ProfessionalTypeModule implements PIBSModule {
 
 	private final static Logger logger = Logger.getLogger(ProfessionalTypeModule.class);
 
 	@Override
-	public Map<String, Object> executeRequest(HashMap<String, Object> dataMap)
-			throws Exception {
+	public Map<String, Object> executeRequest(HashMap<String, Object> dataMap) throws Exception {
 		
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
@@ -39,17 +44,16 @@ public class ProfessionalTypeModule implements PIBSModule {
 						break;
 				case ActionConstant.DELETE: returnMap = bo.deleteRecord(dataMap);
 					    break;
+				case ActionConstant.GET_DATA_BY_CRITERIA: returnMap = bo.getProfessionalTypeId(dataMap);
+			    		break;
 				default: break;
 			};	
 		}catch (Exception e) {
 			PIBSUtils.writeLogInfo(logger, e.getMessage());
 			e.printStackTrace();
-		} finally {
-			
-		}
+		} 
 
 		return returnMap;
 	}
-
 
 }
