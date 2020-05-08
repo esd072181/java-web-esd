@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +45,8 @@ import com.pibs.service.ServiceManagerImpl;
 
 /**
  * @author Edward.David
- * LastDateUpdated: 09Apr2018
+ * @since June2015
+ * DateUpdated: 08May2020
  */
 public class PIBSUtils {
 	
@@ -379,6 +382,30 @@ public class PIBSUtils {
 	public static int getAge(java.time.LocalDate dob) {
 		java.time.LocalDate curDate = java.time.LocalDate.now();
 		return Period.between(dob, curDate).getYears();
+	}
+	
+	/**
+	 * 
+	 * @param numStr
+	 * @return
+	 * @throws ParseException 
+	 * @throws Exception
+	 */
+	public static Double convertNumStrWithCommaToDouble(String numStr) throws ParseException{
+		NumberFormat format = NumberFormat.getInstance();
+		Number num = format.parse(numStr);
+		return num.doubleValue();
+	}
+	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 * @throws Exception
+	 */
+	public static String convertBigDecimalToStrWithComma(BigDecimal num) throws NumberFormatException{
+		NumberFormat numfFormat = NumberFormat.getInstance();
+		return numfFormat.format(num.doubleValue());
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.pibs.form;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,14 @@ import com.pibs.model.Specialization;
 import com.pibs.service.ServiceManager;
 import com.pibs.service.ServiceManagerImpl;
 import com.pibs.util.DateUtils;
+import com.pibs.util.PIBSUtils;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since June2015
+ * DateUpdated: 08May2020
+ */
 public class ProfessionalFormBean extends PIBSFormBean{
 
 	private static final long serialVersionUID = 1L;
@@ -75,9 +83,6 @@ public class ProfessionalFormBean extends PIBSFormBean{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
-
 
 	public int getProfessionalTypeId() {
 		return professionalTypeId;
@@ -257,8 +262,8 @@ public class ProfessionalFormBean extends PIBSFormBean{
 		}
 		setLicenseNo(model.getLicenseNo());
 		setProfessionalStatusId(model.getProfessionalStatusId());
-		setStandardConsultationFee(model.getStandardConsultationFee()!=null ? model.getStandardConsultationFee().toPlainString() : "0.00");
-		setStandardAdmissionFee(model.getStandardAdmissionFee()!=null ? model.getStandardAdmissionFee().toPlainString() : "0.00");
+		setStandardConsultationFee(model.getStandardConsultationFee()!=null && model.getStandardConsultationFee().doubleValue()>0 ? PIBSUtils.convertBigDecimalToStrWithComma(model.getStandardConsultationFee()) : "");
+		setStandardAdmissionFee(model.getStandardAdmissionFee()!=null && model.getStandardAdmissionFee().doubleValue()>0 ? PIBSUtils.convertBigDecimalToStrWithComma(model.getStandardAdmissionFee()) : "");
 	}
 	
 	public Professional populateModel (ProfessionalFormBean formbean) throws Exception{
@@ -279,10 +284,12 @@ public class ProfessionalFormBean extends PIBSFormBean{
 		}
 		model.setLicenseNo(formbean.getLicenseNo());
 		model.setProfessionalStatusId(formbean.getProfessionalStatusId());
-		model.setStandardConsultationFee(formbean.getStandardConsultationFee()!=null && formbean.getStandardConsultationFee().trim().length()>0  ? new BigDecimal(formbean.getStandardConsultationFee()).setScale(2, BigDecimal.ROUND_HALF_UP) : new BigDecimal("0.00"));//2 decimal place
-		formbean.setStandardConsultationFee(model.getStandardConsultationFee().toPlainString());
-		model.setStandardAdmissionFee(formbean.getStandardAdmissionFee()!=null && formbean.getStandardAdmissionFee().trim().length()>0  ? new BigDecimal(formbean.getStandardAdmissionFee()).setScale(2, BigDecimal.ROUND_HALF_UP) : new BigDecimal("0.00"));//2 decimal place
-		formbean.setStandardAdmissionFee(model.getStandardAdmissionFee().toPlainString());
+		model.setStandardConsultationFee(BigDecimal.valueOf(PIBSUtils.convertNumStrWithCommaToDouble(formbean.getStandardConsultationFee())).setScale(2, BigDecimal.ROUND_HALF_UP));
+		model.setStandardAdmissionFee(BigDecimal.valueOf(PIBSUtils.convertNumStrWithCommaToDouble(formbean.getStandardAdmissionFee())).setScale(2, BigDecimal.ROUND_HALF_UP));
+//		model.setStandardConsultationFee(formbean.getStandardConsultationFee()!=null && formbean.getStandardConsultationFee().trim().length()>0  ? new BigDecimal(formbean.getStandardConsultationFee()).setScale(2, BigDecimal.ROUND_HALF_UP) : new BigDecimal("0.00"));//2 decimal place
+//		formbean.setStandardConsultationFee(model.getStandardConsultationFee().toPlainString());
+//		model.setStandardAdmissionFee(formbean.getStandardAdmissionFee()!=null && formbean.getStandardAdmissionFee().trim().length()>0  ? new BigDecimal(formbean.getStandardAdmissionFee()).setScale(2, BigDecimal.ROUND_HALF_UP) : new BigDecimal("0.00"));//2 decimal place
+//		formbean.setStandardAdmissionFee(model.getStandardAdmissionFee().toPlainString());
 		return model;
 	}
 	
@@ -324,9 +331,14 @@ public class ProfessionalFormBean extends PIBSFormBean{
 			
 			//check if fee is numeric
 			try {
-				Double.parseDouble(this.getStandardConsultationFee()!=null && this.getStandardConsultationFee().trim().length()>0 ? this.getStandardConsultationFee() : "0.00");
-				Double.parseDouble(this.getStandardAdmissionFee()!=null && this.getStandardAdmissionFee().trim().length()>0 ? this.getStandardAdmissionFee() : "0.00");
+				//Double.parseDouble(this.getStandardConsultationFee()!=null && this.getStandardConsultationFee().trim().length()>0 ? this.getStandardConsultationFee() : "");
+				//Double.parseDouble(this.getStandardAdmissionFee()!=null && this.getStandardAdmissionFee().trim().length()>0 ? this.getStandardAdmissionFee() : "");
+				PIBSUtils.convertNumStrWithCommaToDouble(this.getStandardAdmissionFee());
+				PIBSUtils.convertNumStrWithCommaToDouble(this.getStandardConsultationFee());
 			} catch (NumberFormatException e) {
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("mf.fee.num"));
+				flag = true;
+			} catch (ParseException e) {
 				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("mf.fee.num"));
 				flag = true;
 			}
