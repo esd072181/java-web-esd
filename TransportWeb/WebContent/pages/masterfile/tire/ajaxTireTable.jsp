@@ -45,7 +45,15 @@
 							</c:otherwise>	
 						</c:choose>		
 						<td><bean:write name="model" property="sizeAndPly"/></td>
-						<td><bean:write name="model" property="price" format="Php #,###.00"/></td>
+						<c:choose>
+							<c:when test="${model.price > 0}">
+								<td><bean:write name="model" property="price" format="Php #,###.00"/></td>
+							</c:when>
+							<c:otherwise>
+								<td></td>
+							</c:otherwise>
+						</c:choose>
+						
 						<td><bean:write name="model" property="datePurchased" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="datePurchasedForRecap1" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="datePurchasedForRecap2" format='MM/dd/yyyy'/></td>

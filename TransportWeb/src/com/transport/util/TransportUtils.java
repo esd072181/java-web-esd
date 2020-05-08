@@ -9,9 +9,11 @@ package com.transport.util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Base64;
@@ -29,7 +31,7 @@ import com.transport.model.ListValue;
 /**
  * @author Edward.David
  * @since 04Mar2015
- * DateUpdated: 13Apr2020
+ * DateUpdated: 08May2020
  */
 public class TransportUtils {
 	
@@ -318,6 +320,29 @@ public class TransportUtils {
 		        }  
 		       return a[0];  
 	} 
+	
+	/**
+	 * 
+	 * @param numStr
+	 * @return
+	 * @throws Exception
+	 */
+	public static Double convertToDoubleValue(String numStr) throws Exception{
+		NumberFormat format = NumberFormat.getInstance();
+		Number num = format.parse(numStr);
+		return num.doubleValue();
+	}
+	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 * @throws Exception
+	 */
+	public static String convertToDoubleStr(BigDecimal num) throws Exception{
+		NumberFormat numfFormat = NumberFormat.getInstance();
+		return numfFormat.format(num.doubleValue());
+	}
 	
 }
 	
