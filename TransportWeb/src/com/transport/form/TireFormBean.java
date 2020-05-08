@@ -213,7 +213,7 @@ public class TireFormBean extends TransportFormBean {
 		setSerialNo(model.getSerialNo().toUpperCase());
 		setRecapNo(model.getRecapNo());
 		setSizeAndPly(model.getSizeAndPly());
-		setPrice(model.getPrice()!=null &&  model.getPrice().doubleValue() > 0 ? TransportUtils.convertToDoubleStr(model.getPrice()) : "");
+		setPrice(model.getPrice()!=null &&  model.getPrice().doubleValue() > 0 ? TransportUtils.convertBigDecimalToStrWithComma(model.getPrice()) : "");
 		if (model.getRecapNo()!=null && model.getRecapNo().trim().equals("N/A")) {
 			setDatePurchased(model.getDatePurchased()!=null ? DateUtils.sqlDateToString(model.getDatePurchased()) : "");
 		}
@@ -241,7 +241,8 @@ public class TireFormBean extends TransportFormBean {
 		model.setRecapNo(formbean.getRecapNo());
 		model.setSizeAndPly(formbean.getSizeAndPly());
 		if (formbean.getPrice()!=null && formbean.getPrice().trim().length()>0) {
-			model.setPrice(BigDecimal.valueOf(TransportUtils.convertToDoubleValue(formbean.getPrice())));	
+			model.setPrice(BigDecimal.valueOf(TransportUtils.convertNumStrWithCommaToDouble(formbean.getPrice())));	
+			formbean.setPrice(TransportUtils.convertBigDecimalToStrWithComma(model.getPrice()));
 		}
 		if (formbean.getRecapNo()!=null && formbean.getRecapNo().trim().equals("N/A")) {
 			model.setDatePurchased(formbean.getDatePurchased()!=null && !formbean.getDatePurchased().trim().equals("") ? DateUtils.strToSQLDate(formbean.getDatePurchased()) : null);

@@ -13,7 +13,9 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Base64;
@@ -321,13 +323,15 @@ public class TransportUtils {
 		       return a[0];  
 	} 
 	
+	
 	/**
 	 * 
 	 * @param numStr
 	 * @return
+	 * @throws ParseException 
 	 * @throws Exception
 	 */
-	public static Double convertToDoubleValue(String numStr) throws Exception{
+	public static Double convertNumStrWithCommaToDouble(String numStr) throws ParseException{
 		NumberFormat format = NumberFormat.getInstance();
 		Number num = format.parse(numStr);
 		return num.doubleValue();
@@ -339,9 +343,20 @@ public class TransportUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String convertToDoubleStr(BigDecimal num) throws Exception{
-		NumberFormat numfFormat = NumberFormat.getInstance();
+	public static String convertBigDecimalToStrWithComma(BigDecimal num) throws NumberFormatException{
+		//NumberFormat numfFormat = NumberFormat.getInstance(); or use DecimalFormat --> the concrete class of NumberFormat
+		DecimalFormat numfFormat = new DecimalFormat("###,###.00");
 		return numfFormat.format(num.doubleValue());
+	}
+	
+	/**
+	 * 
+	 * @param amount
+	 * @return
+	 */
+	public static String convertDoubleToStr(Double amount) {
+		DecimalFormat f = new DecimalFormat("###,###.00");
+		return f.format(BigDecimal.valueOf(amount).setScale(2, BigDecimal.ROUND_HALF_UP));
 	}
 	
 }
