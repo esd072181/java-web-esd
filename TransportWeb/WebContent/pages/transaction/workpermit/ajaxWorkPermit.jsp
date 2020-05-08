@@ -3,9 +3,6 @@
 
 <script>
 $(function() {
-    $( "#menu" ).menu({
-      items: "> :not(.ui-widget-header)"
-    });
     
     $('#dateFromDatePicker').datepicker({}); 
     $('#dateToDatePicker').datepicker({}); 
@@ -24,8 +21,10 @@ $(function() {
 
 </script>
 
-<div style="height: 30%; padding-left: 10px;">
+<div style="padding-left: 10px;" >
+
 		<h3 style="font-weight: bolder;">Work Permit</h3>
+		
 		<html:form action="/workPermit.do" styleId="idForm">
 				<div>
 					<html:errors/>

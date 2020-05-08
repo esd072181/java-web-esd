@@ -2,12 +2,9 @@
 
 <div id="contentDIV">
 	<!-- ajax powered content DIV -->
-	<div  align="left" style=" height: 5px;">
-		<!-- space only -->
-	</div>
-	
+
 	<!-- Menu Transaction Icons -->
-  		<div style="padding-left: 15px; padding-top: 15px;">
+  		<div style="padding-left: 15px; padding-top: 15px; position: fixed; top: 150px; background-color: white;">
 			<table>
 				<tr style="padding: 10px 10px 10px 10px;">
 		        	<c:forEach items="${sessionScope.user_access_list}" var="item">
@@ -21,7 +18,7 @@
 		    				<td align="center">
 		    					<img onclick="goToWorkPermit();" src="resources/workpermit.jpg" alt="Work Permit" height="100" width="100" style="cursor: pointer;">	
 		    				</td>
-		    				<td width="30px"></td>		        		
+		    				<td width="50px"></td>		        		
 		        		</c:if>
 		      			<c:if test="${item == 922}">
 		      				<td align="center">
@@ -108,7 +105,6 @@
 			</table> 
   		</div>
 
-
 		<div align="center">
 			<div id="tablePresentationDIV">
 			<!-- ajax part of table data -->
@@ -116,11 +112,13 @@
 		</div>
 		
 		<!-- Reminder from Verification and Validation -->
+		 
 		<c:if test="${sessionScope.user_role_session!='Driver'}">
 			  <script>
-				getReminders(1);
+				//getReminders(1);
 			</script>		
-		</c:if>	
+		</c:if>
+		
 
 	
 </div>

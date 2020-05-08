@@ -113,8 +113,10 @@ function generateMaintenanceCategoryReport(year, month) {
 
 </script>
 						
-	<div style="padding-left: 10px;">
-		<h3 style="font-weight: bolder; padding-bottom: 10px;">Maintenance Monitoring</h3>
+	<div style="padding-left: 10px; position: sticky; top: 145px; background-color: white; z-index: 2" >
+	
+		<h3 style="font-weight: bolder; padding-top: 10px;">Maintenance Monitoring</h3>
+		
 		<html:form action="/maintenanceMonitoring.do" styleId="idForm">							
 				<div>
 					<html:errors/>
@@ -162,8 +164,9 @@ function generateMaintenanceCategoryReport(year, month) {
 					</div>
 				</div>			
 		</html:form>
+		<hr>
 	</div>
-  	<hr>
+  	
 
 	<!-- results using logic iterate -->
 	<!-- using bootstrap -->

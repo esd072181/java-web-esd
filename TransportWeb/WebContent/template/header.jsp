@@ -1,4 +1,4 @@
-<div id="headerDIV" style="height: 10%; position: fixed; top: 0; z-index: 1; background-color: white;">
+<div id="headerDIV" style="height: 10%; position: fixed; top: 0; z-index: 3; background-color: white;">
 
 	<!-- <div  style="height: 100%; width: 100%; padding-left: 0px; padding-top: 5px;" align="left">-->
 	<div  style="width: 100%; padding-left: 5px; padding-top: 15px; background-color: white;" align="left" >

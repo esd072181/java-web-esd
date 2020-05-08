@@ -12,8 +12,10 @@ $(function() {
   });
 </script>
 	
-	<div style="padding-left: 10px;">
+<div style="padding-left: 10px; position: sticky; top: 145px; background-color: white; z-index: 2" >
+
 		<h3 style="font-weight: bolder; padding-bottom: 10px;">Tire Management</h3>
+		
 		<html:form action="/tireManagement.do" styleId="idForm">							
 				<div>
 					<html:errors/>
@@ -71,9 +73,9 @@ $(function() {
 					</table>
 				</div>			
 		</html:form>
+		<hr>
 	</div>
 	
-  	<hr>
 
 	<!-- results using logic iterate -->
 	<!-- using bootstrap -->
