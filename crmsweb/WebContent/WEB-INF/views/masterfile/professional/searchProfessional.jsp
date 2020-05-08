@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -95,7 +96,7 @@
 										    	<td>${row.count + ((currentPage - 1) * 10)}</td>
 												<td><a href="#" onclick="goToEdit(${model.id});" >${model.fullName}</a></td>
 												<td>${model.gender}</td>
-												<td>${model.fee}</td>		
+												<td align="right"><fmt:formatNumber type="number" minFractionDigits="2" pattern="###,###.##" value="${model.fee}" /></td>		
 												<td>${model.professionalType.listValue}</td>
 												<!-- Below for Admin only -->
 												<c:if test="${roleid == 601}">

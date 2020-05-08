@@ -11,8 +11,8 @@ import com.crms.model.Professional;
 public class ProfessionalValidator implements Validator {
 
 	@Override
-	public boolean supports(Class<?> arg0) {
-		return Professional.class.equals(arg0);
+	public boolean supports(Class<?> profModel) {
+		return Professional.class.equals(profModel);
 	}
 
 	@Override

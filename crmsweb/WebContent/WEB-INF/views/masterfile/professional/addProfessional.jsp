@@ -18,7 +18,27 @@
 	</style>
 	<script>
 		$(function() {
-		  // Handler for .ready() called.
+		  
+			 $("#feeId").keydown(function (e) {
+			        // Allow: backspace, delete, tab, escape, enter, comma and .
+			        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 188, 190]) !== -1 ||
+			             // Allow: Ctrl/cmd+A
+			            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+			             // Allow: Ctrl/cmd+C
+			            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+			             // Allow: Ctrl/cmd+X
+			            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+			             // Allow: home, end, left, right
+			            (e.keyCode >= 35 && e.keyCode <= 39)) {
+			                 // let it happen, don't do anything
+			                 return;
+			        }
+			        // Ensure that it is a number and stop the keypress
+			        if ( (e.shiftKey || (e.keyCode < 44 || e.keyCode > 57)) && (e.keyCode < 96 || (e.keyCode > 105)) ) {
+			            e.preventDefault();
+			        }   
+			    });
+			 
 			$('#professionalTypeListId').focus();
 		});
 	</script>
@@ -134,7 +154,7 @@
 							<div class="form-group">
 								<form:label path="fee" cssClass="col-sm-2 control-label">Fee:</form:label>
 								<div class="col-xs-3">
-				      				<form:input path="fee" cssClass="form-control input-sm"/>
+				      				<form:input id="feeId" path="fee" cssClass="form-control input-sm" style="text-align: right;" />
 				    			</div>
 							</div>							
 						</td>

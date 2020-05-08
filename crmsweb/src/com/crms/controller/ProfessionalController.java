@@ -1,6 +1,8 @@
 package com.crms.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +57,18 @@ public class ProfessionalController {
 			        this.setValue(new ListValue(Integer.parseInt(id)));
 			}
         });
- 
+        
+        binder.registerCustomEditor(BigDecimal.class, new PropertyEditorSupport() {
+        	@Override
+			public void setAsText(String numStr) throws IllegalArgumentException {
+			    try {
+					this.setValue(CRMSUtil.convertNumStrWithCommaToDouble(numStr));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+        });
+        
         if (binder.getObjectName().equals("professional")) {
         	binder.addValidators(professionalValidator);	
         }

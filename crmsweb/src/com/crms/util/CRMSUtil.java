@@ -1,5 +1,9 @@
 package com.crms.util;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.Period;
 
 import org.springframework.ui.ModelMap;
@@ -28,6 +32,31 @@ public class CRMSUtil {
 	public static Integer getUserIdFromSession(ModelMap model) {
 		return model.get("userid")!=null ? Integer.parseInt(model.get("userid").toString()) : 0;
 	}
+
+	/**
+	 * 
+	 * @param numStr
+	 * @return
+	 * @throws ParseException 
+	 * @throws Exception
+	 */
+	public static Double convertNumStrWithCommaToDouble(String numStr) throws ParseException{
+		NumberFormat format = NumberFormat.getInstance();
+		Number num = format.parse(numStr);
+		return num.doubleValue();
+	}
+	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 * @throws Exception
+	 */
+	public static String convertBigDecimalToStrWithComma(BigDecimal num) throws NumberFormatException{
+		DecimalFormat df = new DecimalFormat("###,###.00");
+		return df.format(num.doubleValue());
+	}
+	
 	
 	//public static String getReportPath(HttpServletRequest request) {
 	//	String path = null;
