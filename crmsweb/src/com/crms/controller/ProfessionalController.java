@@ -2,7 +2,6 @@ package com.crms.controller;
 
 import java.beans.PropertyEditorSupport;
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,9 +28,16 @@ import com.crms.constant.CRMSConstant;
 import com.crms.model.ListValue;
 import com.crms.model.Professional;
 import com.crms.model.UserAccount;
+import com.crms.propertyeditor.NumericDoubleEditor;
 import com.crms.util.CRMSUtil;
 import com.crms.validator.ProfessionalValidator;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since Feb2019
+ * DateUpdated: 09May2020
+ */
 @Controller
 @SessionAttributes("userid")
 public class ProfessionalController {
@@ -58,16 +64,7 @@ public class ProfessionalController {
 			}
         });
         
-        binder.registerCustomEditor(BigDecimal.class, new PropertyEditorSupport() {
-        	@Override
-			public void setAsText(String numStr) throws IllegalArgumentException {
-			    try {
-					this.setValue(CRMSUtil.convertNumStrWithCommaToDouble(numStr));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}
-        });
+        binder.registerCustomEditor(BigDecimal.class, new NumericDoubleEditor());
         
         if (binder.getObjectName().equals("professional")) {
         	binder.addValidators(professionalValidator);	

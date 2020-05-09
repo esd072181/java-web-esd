@@ -1,5 +1,6 @@
 package com.crms.controller;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,13 +26,15 @@ import com.crms.constant.CRMSConstant;
 import com.crms.model.Medicine;
 import com.crms.model.UserAccount;
 import com.crms.propertyeditor.CustomSQLDateEditor;
+import com.crms.propertyeditor.NumericDoubleEditor;
 import com.crms.util.CRMSUtil;
 import com.crms.validator.MedicineValidator;
 
 /**
  * 
  * @author dward
- *
+ * @since Feb2019
+ * DateUpdated: 09May2020
  */
 @Controller
 @SessionAttributes("userid")
@@ -50,7 +53,8 @@ public class MedicineController {
 		
         CustomSQLDateEditor dateEditor = new CustomSQLDateEditor(null, true);
         binder.registerCustomEditor(Date.class, dateEditor);
-	    
+        binder.registerCustomEditor(BigDecimal.class, new NumericDoubleEditor());
+        
         if (binder.getObjectName().equals("medicine")) {
     		binder.addValidators(medicineValidator);       	
         }
