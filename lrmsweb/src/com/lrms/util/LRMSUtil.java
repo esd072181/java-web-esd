@@ -1,11 +1,21 @@
 package com.lrms.util;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.Period;
 
 import org.springframework.ui.ModelMap;
 
 import com.lrms.constant.LRMSConstant;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since Dec2018
+ * DateUpdated: 09May2020
+ */
 public class LRMSUtil {
 		
 	public static int getRecordStartIndex(int page) {
@@ -29,47 +39,36 @@ public class LRMSUtil {
 		return model.get("userid")!=null ? Integer.parseInt(model.get("userid").toString()) : 0;
 	}
 	
-//	public static String getReportPath(HttpServletRequest request) {
-//		String path = null;
-//		if (OS.indexOf("win") >= 0) {
-//			//Windows
-//			//Not same behavior as TransportWeb, need to add File separator for PIBSWeb for Windows, need to check Why?
-//			path = request.getSession().getServletContext().getRealPath("/") + File.separator + "reports";//for local testing - Windows
-//		} else {
-//			path = request.getSession().getServletContext().getRealPath("/") + "/reports";//for production - /reports - UNIX
-//		}
-//        // Note: path when debugging
-//		//C:\eclipse\workspace_pibsweb\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\pibsweb\reports
-//		return path;
-//	}
-//	
-//	private static String getConfigFilePath(HttpServletRequest request) {
-//		String path = null;
-//		if (OS.indexOf("win") >= 0) {
-//			//Windows
-//			//Not same behavior as TransportWeb, need to add File separator for PIBSWeb for Windows, need to check Why?
-//			path = request.getSession().getServletContext().getRealPath("/") + File.separator + "config/pibsconfig.txt";//for local testing - Windows
-//		} else {
-//			path = request.getSession().getServletContext().getRealPath("/") + "/config/pibsconfig.txt";//for production - /reports - UNIX
-//		}
-//        // Note: path when debugging
-//		//C:\eclipse\workspace_pibsweb\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\pibsweb\reports
-//		return path;
-//	}
-//	
-//	public static String[] readConfigFile(HttpServletRequest request) throws Exception {
-//		String[] configArr = null;
-//		try (BufferedReader br = new BufferedReader(new FileReader(getConfigFilePath(request)))) {
-//			String line = null;
-//			while ((line = br.readLine()) != null) {
-//				configArr = line.split(",");
-//			}
-//		} catch (Exception e) {
-//			throw e;
-//		} finally {
-////			br.close(); //no need to close if user try-resources
-//		}
-//		return configArr;
-//	}
-
+	/**
+	 * 
+	 * @param numStr
+	 * @return
+	 * @throws ParseException
+	 */
+	public static Double convertNumStrWithCommaToDouble(String numStr) throws ParseException{
+		NumberFormat format = NumberFormat.getInstance();
+		Number num = format.parse(numStr);
+		return num.doubleValue();
+	}
+	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 * @throws Exception
+	 */
+	public static String convertBigDecimalToStrWithComma(BigDecimal num) throws NumberFormatException{
+		NumberFormat numfFormat = NumberFormat.getInstance();
+		return numfFormat.format(num.doubleValue());
+	}
+	
+	/**
+	 * 
+	 * @param amount
+	 * @return
+	 */
+	public static String convertDoubleToStr(Double amount) {
+		DecimalFormat f = new DecimalFormat("###,###.00");
+		return f.format(BigDecimal.valueOf(amount).setScale(2, BigDecimal.ROUND_HALF_UP));
+	}
 }

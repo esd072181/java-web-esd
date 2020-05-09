@@ -1,5 +1,6 @@
 package com.lrms.controller;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,13 +30,15 @@ import com.lrms.constant.LRMSConstant;
 import com.lrms.model.LabExam;
 import com.lrms.model.ListValue;
 import com.lrms.model.UserAccount;
+import com.lrms.propertyeditor.NumericDoubleEditor;
 import com.lrms.util.LRMSUtil;
 import com.lrms.validator.LabExamValidator;
 
 /**
  * 
  * @author dward
- *
+ * @since Dec2018
+ * DateUpdated: 09May2020
  */
 @Controller
 @SessionAttributes("userid")
@@ -59,6 +62,7 @@ public class LabExamController {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	        dateFormat.setLenient(false);
 	        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	        binder.registerCustomEditor(BigDecimal.class, new NumericDoubleEditor());
 		
 	    if (binder.getObjectName().equals("labExam")) {
 			binder.addValidators(labExamValidator);			
