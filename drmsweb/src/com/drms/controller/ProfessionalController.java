@@ -1,6 +1,7 @@
 package com.drms.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +28,16 @@ import com.drms.constant.DRMSConstant;
 import com.drms.model.ListValue;
 import com.drms.model.Professional;
 import com.drms.model.UserAccount;
+import com.drms.propertyeditor.NumericDoubleEditor;
 import com.drms.util.DRMSUtil;
 import com.drms.validator.ProfessionalValidator;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since Feb2019
+ * DateUpdated: 09May2020
+ */
 @Controller
 @SessionAttributes("userid")
 public class ProfessionalController {
@@ -55,6 +63,8 @@ public class ProfessionalController {
 			        this.setValue(new ListValue(Integer.parseInt(id)));
 			}
         });
+        
+        binder.registerCustomEditor(BigDecimal.class, new NumericDoubleEditor());
  
         if (binder.getObjectName().equals("professional")) {
         	binder.addValidators(professionalValidator);	

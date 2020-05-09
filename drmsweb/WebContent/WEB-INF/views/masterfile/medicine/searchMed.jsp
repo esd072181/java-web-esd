@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -104,7 +105,7 @@
 										<td>${model.lotNo}</td>	
 										<td>${model.dateManufactured}</td>	
 										<td>${model.expirationDate}</td>	
-										<td>${model.retailSellingPrice}</td>	
+										<td align="right"><fmt:formatNumber type="number" minFractionDigits="2" pattern="###,###.##" value="${model.retailSellingPrice}" /></td>
 										<!-- Below for Admin only -->
 										<c:if test="${roleid == 501}">
 											<td align="center"><a href="#" onclick="deleteMed(${model.id});" >Delete</a></td>

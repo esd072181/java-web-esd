@@ -1,5 +1,6 @@
 package com.drms.controller;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,13 +26,15 @@ import com.drms.constant.DRMSConstant;
 import com.drms.model.Medicine;
 import com.drms.model.UserAccount;
 import com.drms.propertyeditor.CustomSQLDateEditor;
+import com.drms.propertyeditor.NumericDoubleEditor;
 import com.drms.util.DRMSUtil;
 import com.drms.validator.MedicineValidator;
 
 /**
  * 
  * @author dward
- *
+ * @since Feb2019
+ * DateUpdated: 09May2020
  */
 @Controller
 @SessionAttributes("userid")
@@ -50,6 +53,7 @@ public class MedicineController {
 		
         CustomSQLDateEditor dateEditor = new CustomSQLDateEditor(null, true);
         binder.registerCustomEditor(Date.class, dateEditor);
+        binder.registerCustomEditor(BigDecimal.class, new NumericDoubleEditor());
 	    
         if (binder.getObjectName().equals("medicine")) {
     		binder.addValidators(medicineValidator);       	
