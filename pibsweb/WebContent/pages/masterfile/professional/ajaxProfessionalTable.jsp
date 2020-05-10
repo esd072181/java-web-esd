@@ -10,6 +10,7 @@
 		  <c:when test="${professionalForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Name</th>
 					<th>Type</th>
 					<th>Specialization</th>
@@ -25,8 +26,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="professionalForm" property="modelList" type="com.pibs.model.Professional" id="model">
-					<tr>				 
+				<logic:iterate name="professionalForm" property="modelList" type="com.pibs.model.Professional" id="model" indexId="index">
+					<tr>			
+						<td><c:out value="${index+1 + (professionalForm.currentPage * 10 - 10)}"/></td>	 
 						<td><bean:write name="model" property="fullName"/></td>
 						<td><bean:write name="model" property="professionalType"/></td>
 						<td><bean:write name="model" property="specialization"/></td>
@@ -76,17 +78,35 @@
 				<c:if test="${professionalForm.currentPage != 1 && professionalForm.noOfPages > 0}">
 					<li><a href="#" onclick="getProfessional(${professionalForm.currentPage - 1},'${professionalForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${professionalForm.currentPage lt professionalForm.noOfPages && professionalForm.noOfPages > 10}">
+						<c:forEach begin="${professionalForm.currentPage}" end="${professionalForm.currentPage+9}" var="i">
+							 <c:choose>
+			                    <c:when test="${professionalForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getProfessional(${i},'${professionalForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${professionalForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${professionalForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getProfessional(${i},'${professionalForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+							</c:otherwise>
+				</c:choose>	
 					
-				<c:forEach begin="1" end="${professionalForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${professionalForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getProfessional(${i},'${professionalForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${professionalForm.currentPage lt professionalForm.noOfPages}">
 	               	<li><a href="#" onclick="getProfessional(${professionalForm.currentPage + 1},'${professionalForm.category}');">&raquo;</a></li>
 	            </c:if>

@@ -10,6 +10,7 @@
 		<c:when test="${specializationForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Name</th>
 					<th>Description</th>
 					<th></th>
@@ -17,9 +18,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="specializationForm" property="modelList" type="com.pibs.model.Specialization" id="model">
+				<logic:iterate name="specializationForm" property="modelList" type="com.pibs.model.Specialization" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td><c:out value="${index+1 + (roomCategoryForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="entityName"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td align="center"><a href="#" onclick="javascript: editSpecialization('<bean:write name="model" property="id"/>');">Edit</a></td>
@@ -53,17 +54,35 @@
 				<c:if test="${specializationForm.currentPage != 1 && specializationForm.noOfPages > 0}">
 					<li><a href="#" onclick="getSpecialization(${specializationForm.currentPage - 1},'${specializationForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${specializationForm.currentPage lt specializationForm.noOfPages && specializationForm.noOfPages > 10}">
+						<c:forEach begin="${specializationForm.currentPage}" end="${specializationForm.currentPage+9}" var="i">
+							 <c:choose>
+			                    <c:when test="${specializationForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getSpecialization(${i},'${specializationForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${specializationForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${specializationForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getSpecialization(${i},'${specializationForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
 					
-				<c:forEach begin="1" end="${specializationForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${specializationForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getSpecialization(${i},'${specializationForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${specializationForm.currentPage lt specializationForm.noOfPages}">
 	               	<li><a href="#" onclick="getSpecialization(${specializationForm.currentPage + 1},'${specializationForm.category}');">&raquo;</a></li>
 	            </c:if>

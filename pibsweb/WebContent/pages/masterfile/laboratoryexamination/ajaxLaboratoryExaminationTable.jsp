@@ -10,6 +10,7 @@
 		<c:when test="${laboratoryExaminationForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Description</th>
 					<th>Remarks</th>
 					<th>Fee</th>
@@ -18,9 +19,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="laboratoryExaminationForm" property="modelList" type="com.pibs.model.LaboratoryExamination" id="model">
+				<logic:iterate name="laboratoryExaminationForm" property="modelList" type="com.pibs.model.LaboratoryExamination" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td><c:out value="${index+1 + (laboratoryExaminationForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td><bean:write name="model" property="remarks"/></td>
 						<logic:equal name="model" property="fee" value="0">
@@ -60,17 +61,35 @@
 				<c:if test="${laboratoryExaminationForm.currentPage != 1 && laboratoryExaminationForm.noOfPages > 0}">
 					<li><a href="#" onclick="getLaboratoryExamination(${laboratoryExaminationForm.currentPage - 1},'${laboratoryExaminationForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${laboratoryExaminationForm.currentPage lt laboratoryExaminationForm.noOfPages && laboratoryExaminationForm.noOfPages > 10}">
+						<c:forEach begin="${laboratoryExaminationForm.currentPage}" end="${laboratoryExaminationForm.currentPage+9}" var="i">
+							 <c:choose>
+			                    <c:when test="${laboratoryExaminationForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getLaboratoryExamination(${i},'${laboratoryExaminationForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${laboratoryExaminationForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${laboratoryExaminationForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getLaboratoryExamination(${i},'${laboratoryExaminationForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
 					
-				<c:forEach begin="1" end="${laboratoryExaminationForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${laboratoryExaminationForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getLaboratoryExamination(${i},'${laboratoryExaminationForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${laboratoryExaminationForm.currentPage lt laboratoryExaminationForm.noOfPages}">
 	               	<li><a href="#" onclick="getLaboratoryExamination(${laboratoryExaminationForm.currentPage + 1},'${laboratoryExaminationForm.category}');">&raquo;</a></li>
 	            </c:if>

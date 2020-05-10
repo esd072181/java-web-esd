@@ -10,6 +10,7 @@
 		<c:when test="${equipmentForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Name</th>
 					<th>Description</th>
 					<th>Fee</th>
@@ -18,9 +19,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="equipmentForm" property="modelList" type="com.pibs.model.Equipment" id="model">
+				<logic:iterate name="equipmentForm" property="modelList" type="com.pibs.model.Equipment" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td><c:out value="${index+1 + (equipmentForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="entityName"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<logic:equal name="model" property="fee" value="0">
@@ -60,17 +61,35 @@
 				<c:if test="${equipmentForm.currentPage != 1 && equipmentForm.noOfPages > 0}">
 					<li><a href="#" onclick="getEquipment(${equipmentForm.currentPage - 1},'${equipmentForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${equipmentForm.currentPage lt equipmentForm.noOfPages && equipmentForm.noOfPages > 10}">
+						<c:forEach begin="${equipmentForm.currentPage}" end="${equipmentForm.currentPage+9}" var="i">
+							<c:choose>
+			                    <c:when test="${equipmentForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getEquipment(${i},'${equipmentForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${equipmentForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${equipmentForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getEquipment(${i},'${equipmentForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
 					
-				<c:forEach begin="1" end="${equipmentForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${equipmentForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getEquipment(${i},'${equipmentForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${equipmentForm.currentPage lt equipmentForm.noOfPages}">
 	               	<li><a href="#" onclick="getEquipment(${equipmentForm.currentPage + 1},'${equipmentForm.category}');">&raquo;</a></li>
 	            </c:if>

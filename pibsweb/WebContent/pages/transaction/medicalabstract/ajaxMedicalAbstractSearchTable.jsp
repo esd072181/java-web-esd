@@ -5,15 +5,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-			<script>
-		    
-			$("#tableId tr").mouseover(function(){ 
-				$('#selectedId').val( $(this).find(".classId").html());
-			});
+<script> 
+	$("#tableId tr").mouseover(function(){ 
+		$('#selectedId').val( $(this).find(".classId").html());
+	});
 			
-			$('#categoryId').val('${medicalAbstractForm.category}');
-			$('#currentPageId').val('${medicalAbstractForm.currentPage}');
-			</script>
+	$('#categoryId').val('${medicalAbstractForm.category}');
+	$('#currentPageId').val('${medicalAbstractForm.currentPage}');
+</script>
 						
 						
 	<div class="table-responsive" align="left" >
@@ -65,17 +64,35 @@
 				<c:if test="${medicalAbstractForm.currentPage != 1 && medicalAbstractForm.noOfPages > 0}">
 					<li><a href="#" onclick="getPatientForMedicalAbstract(${medicalAbstractForm.currentPage - 1},'${medicalAbstractForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${medicalAbstractForm.currentPage lt medicalAbstractForm.noOfPages && medicalAbstractForm.noOfPages > 10}">
+						<c:forEach begin="${medicalAbstractForm.currentPage}" end="${medicalAbstractForm.currentPage+9}" var="i">
+							  <c:choose>
+			                    <c:when test="${medicalAbstractForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getPatientForMedicalAbstract(${i},'${medicalAbstractForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${medicalAbstractForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${medicalAbstractForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getPatientForMedicalAbstract(${i},'${medicalAbstractForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
 					
-				<c:forEach begin="1" end="${medicalAbstractForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${medicalAbstractForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getPatientForMedicalAbstract(${i},'${medicalAbstractForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${medicalAbstractForm.currentPage lt medicalAbstractForm.noOfPages}">
 	               	<li><a href="#" onclick="getPatientForMedicalAbstract(${medicalAbstractForm.currentPage + 1},'${medicalAbstractForm.category}');">&raquo;</a></li>
 	            </c:if>

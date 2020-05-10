@@ -5,17 +5,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-			<script>
+<script>
+	$("#tableId tr").mouseover(function(){ 
+		$('#selectedId').val( $(this).find(".classId").html());
+	});
 			
-		   
-		    
-			$("#tableId tr").mouseover(function(){ 
-				$('#selectedId').val( $(this).find(".classId").html());
-			});
-			
-			$('#categoryId').val('${billingForm.category}');
-			$('#currentPageId').val('${billingForm.currentPage}');
-			</script>
+	$('#categoryId').val('${billingForm.category}');
+	$('#currentPageId').val('${billingForm.currentPage}');
+</script>
 						
 						
 	<div class="table-responsive" align="left" >
@@ -73,17 +70,35 @@
 				<c:if test="${billingForm.currentPage != 1 && billingForm.noOfPages > 0}">
 					<li><a href="#" onclick="getPatientForMonitorPatient(${billingForm.currentPage - 1},'${billingForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${billingForm.currentPage lt billingForm.noOfPages && billingForm.noOfPages > 10}">
+						<c:forEach begin="${billingForm.currentPage}" end="${billingForm.currentPage+9}" var="i">
+							 <c:choose>
+			                    <c:when test="${billingForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getPatientForMonitorPatient(${i},'${billingForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${billingForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${billingForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getPatientForMonitorPatient(${i},'${billingForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
 					
-				<c:forEach begin="1" end="${billingForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${billingForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getPatientForMonitorPatient(${i},'${billingForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${billingForm.currentPage lt billingForm.noOfPages}">
 	               	<li><a href="#" onclick="getPatientForMonitorPatient(${billingForm.currentPage + 1},'${billingForm.category}');">&raquo;</a></li>
 	            </c:if>

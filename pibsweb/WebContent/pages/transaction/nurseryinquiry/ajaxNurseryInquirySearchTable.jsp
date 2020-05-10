@@ -5,15 +5,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-			<script>
+<script>
 		    
-			$("#tableId tr").mouseover(function(){ 
-				$('#selectedId').val( $(this).find(".classId").html());
-			});
+	$("#tableId tr").mouseover(function(){ 
+		$('#selectedId').val( $(this).find(".classId").html());
+	});
 			
-			$('#categoryId').val('${nurseryInquiryForm.category}');
-			$('#currentPageId').val('${nurseryInquiryForm.currentPage}');
-			</script>
+	$('#categoryId').val('${nurseryInquiryForm.category}');
+	$('#currentPageId').val('${nurseryInquiryForm.currentPage}');
+</script>
 						
 						
 	<div class="table-responsive" align="left" >
@@ -21,6 +21,7 @@
 			<c:when test="${nurseryInquiryForm.modelList != null}">
 			<table  id="tableId" class="table table-bordered table-striped table-condensed table-hover context-menu-table" style="width: 98%;">  
 				<tr>
+					<th></th>
 					<th>Last Name</th>
 					<th>First Name</th>
 					<th>Date Of Birth</th>
@@ -33,8 +34,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="nurseryInquiryForm" property="modelList" type="com.pibs.model.MonitorNursery" id="model">
+				<logic:iterate name="nurseryInquiryForm" property="modelList" type="com.pibs.model.MonitorNursery" id="model" indexId="index">
 					<tr>
+						<td><c:out value="${index+1 + (nurseryInquiryForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="lastName"/></td>				 
 						<td><bean:write name="model" property="firstName"/></td>
 						<td><bean:write name="model" property="dateOfBirth"/></td>
@@ -74,16 +76,34 @@
 					<li><a href="#" onclick="getBabyForNurseryInquiry(${nurseryInquiryForm.currentPage - 1},'${nurseryInquiryForm.category}');">&laquo;</a></li>
 				</c:if>
 					
-				<c:forEach begin="1" end="${nurseryInquiryForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${nurseryInquiryForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getBabyForNurseryInquiry(${i},'${nurseryInquiryForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${nurseryInquiryForm.currentPage lt nurseryInquiryForm.noOfPages && nurseryInquiryForm.noOfPages > 10}">
+						<c:forEach begin="${nurseryInquiryForm.currentPage}" end="${nurseryInquiryForm.currentPage+9}" var="i">
+							   <c:choose>
+			                    <c:when test="${nurseryInquiryForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getBabyForNurseryInquiry(${i},'${nurseryInquiryForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${nurseryInquiryForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${nurseryInquiryForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getBabyForNurseryInquiry(${i},'${nurseryInquiryForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
+				
 	           	<c:if test="${nurseryInquiryForm.currentPage lt nurseryInquiryForm.noOfPages}">
 	               	<li><a href="#" onclick="getBabyForNurseryInquiry(${nurseryInquiryForm.currentPage + 1},'${nurseryInquiryForm.category}');">&raquo;</a></li>
 	            </c:if>

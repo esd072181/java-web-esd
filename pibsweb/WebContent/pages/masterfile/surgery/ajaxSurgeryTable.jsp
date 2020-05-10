@@ -10,6 +10,7 @@
 		<c:when test="${surgeryForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Description</th>
 					<th>Remarks</th>
 					<th>Type</th>
@@ -19,9 +20,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="surgeryForm" property="modelList" type="com.pibs.model.Surgery" id="model">
+				<logic:iterate name="surgeryForm" property="modelList" type="com.pibs.model.Surgery" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td><c:out value="${index+1 + (surgeryForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="description"/></td>
 						<td><bean:write name="model" property="remarks"/></td>
 						<td><bean:write name="model" property="surgeryTypeName"/></td>
@@ -62,17 +63,35 @@
 				<c:if test="${surgeryForm.currentPage != 1 && surgeryForm.noOfPages > 0}">
 					<li><a href="#" onclick="getSurgery(${surgeryForm.currentPage - 1},'${surgeryForm.category}');">&laquo;</a></li>
 				</c:if>
-					
-				<c:forEach begin="1" end="${surgeryForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${surgeryForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getSurgery(${i},'${surgeryForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${surgeryForm.currentPage lt surgeryForm.noOfPages && surgeryForm.noOfPages > 10}">
+						<c:forEach begin="${surgeryForm.currentPage}" end="${surgeryForm.currentPage+9}" var="i">
+							 <c:choose>
+			                    <c:when test="${surgeryForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getSurgery(${i},'${surgeryForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${surgeryForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${surgeryForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getSurgery(${i},'${surgeryForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
+				
 	           	<c:if test="${surgeryForm.currentPage lt surgeryForm.noOfPages}">
 	               	<li><a href="#" onclick="getSurgery(${surgeryForm.currentPage + 1},'${surgeryForm.category}');">&raquo;</a></li>
 	            </c:if>

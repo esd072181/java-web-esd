@@ -10,6 +10,7 @@
 		  <c:when test="${userForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Employee Name</th>
 					<th>Role</th>
 					<th>User Name</th>
@@ -18,9 +19,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="userForm" property="modelList" type="com.pibs.model.User" id="model">
+				<logic:iterate name="userForm" property="modelList" type="com.pibs.model.User" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td><c:out value="${index+1 + (userForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="name"/></td>
 						<td><bean:write name="model" property="role"/></td>
 						<c:choose>
@@ -74,17 +75,35 @@
 				<c:if test="${userForm.currentPage != 1 && userForm.noOfPages > 0}">
 					<li><a href="#" onclick="getUser(${userForm.currentPage - 1},'${userForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${userForm.currentPage lt userForm.noOfPages && userForm.noOfPages > 10}">
+						<c:forEach begin="${userForm.currentPage}" end="${userForm.currentPage+9}" var="i">
+							 <c:choose>
+			                    <c:when test="${userForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getUser(${i},'${userForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${userForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${userForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getUser(${i},'${userForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
 					
-				<c:forEach begin="1" end="${userForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${userForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getUser(${i},'${userForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${userForm.currentPage lt userForm.noOfPages}">
 	               	<li><a href="#" onclick="getUser(${userForm.currentPage + 1},'${userForm.category}');">&raquo;</a></li>
 	            </c:if>

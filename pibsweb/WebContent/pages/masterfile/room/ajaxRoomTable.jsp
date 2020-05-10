@@ -10,6 +10,7 @@
 		<c:when test="${roomForm.modelList != null}">
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Room No</th>
 					<th>Room Category</th>
 					<th>Building</th>
@@ -23,9 +24,9 @@
 						<th></th>
 					</c:if>
 				</tr>
-				<logic:iterate name="roomForm" property="modelList" type="com.pibs.model.Room" id="model">
+				<logic:iterate name="roomForm" property="modelList" type="com.pibs.model.Room" id="model" indexId="index">
 					<tr>				 
-						<%--<td><bean:write name="resultsId" property="id"/><bean:message key="Building.Id"/></td>--%>
+						<td><c:out value="${index+1 + (roomForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="roomNo"/></td>
 						<td><bean:write name="model" property="roomCategory"/></td>
 						<td><bean:write name="model" property="building"/></td>
@@ -65,17 +66,35 @@
 				<c:if test="${roomForm.currentPage != 1 && roomForm.noOfPages > 0}">
 					<li><a href="#" onclick="getRoom(${roomForm.currentPage - 1},'${roomForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${roomForm.currentPage lt roomForm.noOfPages && roomForm.noOfPages > 10}">
+						<c:forEach begin="${roomForm.currentPage}" end="${roomForm.currentPage+9}" var="i">
+							  <c:choose>
+			                    <c:when test="${roomForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getRoom(${i},'${roomForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${roomForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${roomForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getRoom(${i},'${roomForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
 					
-				<c:forEach begin="1" end="${roomForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${roomForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getRoom(${i},'${roomForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${roomForm.currentPage lt roomForm.noOfPages}">
 	               	<li><a href="#" onclick="getRoom(${roomForm.currentPage + 1},'${roomForm.category}');">&raquo;</a></li>
 	            </c:if>

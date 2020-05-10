@@ -10,6 +10,7 @@
 			<c:when test="${medicalSupplyForm.modelList != null}">
 				<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%;">  
 					<tr>
+						<th>No</th>
 						<th>Description</th>
 						<th>Generic Name</th>
 						<th>Item Code</th>
@@ -24,8 +25,9 @@
 							<th></th>
 						</c:if>
 					</tr>
-					<logic:iterate name="medicalSupplyForm" property="modelList" type="com.pibs.model.MedicalSupply" id="model">
+					<logic:iterate name="medicalSupplyForm" property="modelList" type="com.pibs.model.MedicalSupply" id="model" indexId="index">
 						<tr>				 
+							<td><c:out value="${index+1 + (medicalSupplyForm.currentPage * 10 - 10)}"/></td>
 							<td><bean:write name="model" property="description"/></td>
 							<td><bean:write name="model" property="genericName"/></td>
 							<td><bean:write name="model" property="itemCode"/></td>
@@ -69,17 +71,35 @@
 				<c:if test="${medicalSupplyForm.currentPage != 1 && medicalSupplyForm.noOfPages > 0}">
 					<li><a href="#" onclick="getMedicalSupply(${medicalSupplyForm.currentPage - 1},'${medicalSupplyForm.category}');">&laquo;</a></li>
 				</c:if>
+				
+				<!-- pagination limit to 10 -->
+				<c:choose>
+					<c:when test="${medicalSupplyForm.currentPage lt medicalSupplyForm.noOfPages && medicalSupplyForm.noOfPages > 10}">
+						<c:forEach begin="${medicalSupplyForm.currentPage}" end="${medicalSupplyForm.currentPage+9}" var="i">
+							 <c:choose>
+			                    <c:when test="${medicalSupplyForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getMedicalSupply(${i},'${medicalSupplyForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="1" end="${medicalSupplyForm.noOfPages}" var="i">
+			                <c:choose>
+			                    <c:when test="${medicalSupplyForm.currentPage eq i}">
+			                        <li class="active"><a href="#">${i}</a></li>
+			                    </c:when>
+			                    <c:otherwise>
+			                         <li><a href="#" onclick="getMedicalSupply(${i},'${medicalSupplyForm.category}');">${i}</a></li>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+					</c:otherwise>
+				</c:choose>	
 					
-				<c:forEach begin="1" end="${medicalSupplyForm.noOfPages}" var="i">
-	                <c:choose>
-	                    <c:when test="${medicalSupplyForm.currentPage eq i}">
-	                        <li class="active"><a href="#">${i}</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                         <li><a href="#" onclick="getMedicalSupply(${i},'${medicalSupplyForm.category}');">${i}</a></li>
-	                    </c:otherwise>
-	                </c:choose>
-	            </c:forEach>
 	           	<c:if test="${medicalSupplyForm.currentPage lt medicalSupplyForm.noOfPages}">
 	               	<li><a href="#" onclick="getMedicalSupply(${medicalSupplyForm.currentPage + 1},'${medicalSupplyForm.category}');">&raquo;</a></li>
 	            </c:if>
