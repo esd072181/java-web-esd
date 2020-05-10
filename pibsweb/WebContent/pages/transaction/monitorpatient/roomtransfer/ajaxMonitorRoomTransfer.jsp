@@ -21,62 +21,47 @@ $(function() {
     
   });
 </script>
-<div class="row">
 
-  <div class="col-sm-10 divSpace" >
-
-	<div style="height: 30%; padding-top: 0px;" align="left">
-	
 	  <div>
-	  	<table>
-	  		<tr class="hMargin10"></tr>
-	  		<tr>
-	  			<td><h3>Room Transfer</h3></td>
-	  			<td class="padLeft5">
-	  				<html:button property="btnAdd" styleClass="btn btn-primary btnMonitoringSmall" onclick="goToMonitorRoomTransferSearch('${monitorRoomTransferForm.patientCaseSystemId}');" value="Add New"></html:button>
-	  			</td>
-	  			<td>
-	  				<span id="msgId" style="color: blue; padding-left: 100px; display: none;"><bean:message key="msg.updated"/></span>
-	  			</td>
-	  		</tr>	
-	  	</table>	  
+	  	<label style="font-weight: bold; font-size: 20px;">Room Transfer</label>	
+	  	<html:button property="btnAdd" styleClass="btn btn-primary btnMonitoringSmallest" onclick="goToMonitorRoomTransferSearch('${monitorRoomTransferForm.patientCaseSystemId}');" value="Add New"></html:button>
+	  	<span id="msgId" style="color: blue; padding-left: 100px; display: none;"><bean:message key="msg.updated"/></span>	  
 	  </div>
 
-	  <div class="table-responsive" align="left" >
+	  <div class="table-responsive" style="padding-top: 10px; width: 700px;" >
 		<c:choose>
-		<c:when test="${monitorRoomTransferForm.entityList != null}">
-			<table  id="tableId" class="table table-bordered table-striped table-condensed table-hover context-menu-table" style="width: 98%;">  
-				<tr>
-					<th>Old RoomNo</th>
-					<th>Date Admitted</th>
-					<th>New RoomNo</th>
-					<th>Date Transferred</th>
-					<th></th>
-				</tr>
-				<logic:iterate name="monitorRoomTransferForm" property="entityList" type="com.pibs.model.MonitorRoomTransfer" id="model" indexId="counter">
+			<c:when test="${monitorRoomTransferForm.entityList != null}">
+				<table  id="tableId" class="table table-bordered table-striped table-condensed table-hover context-menu-table" style="width: 98%;">  
 					<tr>
-						<td><bean:write name="model" property="roomNo"/></td>				 
-						<td><bean:write name="model" property="dateAdmitted"/></td>
-						<td><bean:write name="model" property="roomNoTransfer"/></td>				 
-						<td><bean:write name="model" property="dateTransferred"/></td>
-						<logic:lessThan name="counter" value="${monitorRoomTransferForm.entityList.size()-1}">
-							<td></td>
-						</logic:lessThan>
-						<logic:equal name="counter" value="${monitorRoomTransferForm.entityList.size()-1}" >
-							<td align="center"><a href="#" onclick="javascript: deleteMonitorRoomTransfer('<bean:write name="model" property="id"/>','${monitorRoomTransferForm.patientCaseSystemId}');">Remove</a></td>
-						</logic:equal>
+						<th>No</th>
+						<th>Old RoomNo</th>
+						<th>Date Admitted</th>
+						<th>New RoomNo</th>
+						<th>Date Transferred</th>
+						<th></th>
 					</tr>
-				</logic:iterate>
-			</table>
-		</c:when>
-		<c:otherwise>
-		 	<div style="color: blue;">No Record found!</div>
-		</c:otherwise>
+					<logic:iterate name="monitorRoomTransferForm" property="entityList" type="com.pibs.model.MonitorRoomTransfer" id="model" indexId="counter">
+						<tr>
+							<td><c:out value="${counter+1}"></c:out></td>
+							<td><bean:write name="model" property="roomNo"/></td>				 
+							<td><bean:write name="model" property="dateAdmitted"/></td>
+							<td><bean:write name="model" property="roomNoTransfer"/></td>				 
+							<td><bean:write name="model" property="dateTransferred"/></td>
+							<logic:lessThan name="counter" value="${monitorRoomTransferForm.entityList.size()-1}">
+								<td></td>
+							</logic:lessThan>
+							<logic:equal name="counter" value="${monitorRoomTransferForm.entityList.size()-1}" >
+								<td align="center"><a href="#" onclick="javascript: deleteMonitorRoomTransfer('<bean:write name="model" property="id"/>','${monitorRoomTransferForm.patientCaseSystemId}');">Remove</a></td>
+							</logic:equal>
+						</tr>
+					</logic:iterate>
+				</table>
+			</c:when>
+			<c:otherwise>
+			 	<div style="color: blue;">No Record found!</div>
+			</c:otherwise>
 		</c:choose>
 	  </div>
-	</div>
 		
-  </div>
 
-</div>
 

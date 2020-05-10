@@ -5,15 +5,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-			<script>
+<script>
 		 
-			$("#tableId tr").mouseover(function(){ 
-				$('#selectedId').val( $(this).find(".classId").html());
-			});
+	$("#tableId tr").mouseover(function(){ 
+		$('#selectedId').val( $(this).find(".classId").html());
+	});
 			
-			$('#categoryId').val('${monitorLaboratoryExaminationForm.category}');
-			$('#currentPageId').val('${monitorLaboratoryExaminationForm.currentPage}');
-			</script>
+	$('#categoryId').val('${monitorLaboratoryExaminationForm.category}');
+	$('#currentPageId').val('${monitorLaboratoryExaminationForm.currentPage}');
+</script>
 						
 						
 	<div class="table-responsive" align="left" >

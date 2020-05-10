@@ -21,39 +21,27 @@ $(function() {
     
   });
 </script>
-<div class="row">
 
-  <div class="col-sm-10 divSpace" >
-
-	<div style="height: 30%; padding-top: 0px;" align="left">
-	
-	   <div>
-	  	<table>
-	  		<tr class="hMargin10"></tr>
-	  		<tr>
-	  			<td><h3>Discount</h3></td>
-	  			<td class="padLeft5">
-	  				<html:button property="btnAdd" styleClass="btn btn-primary btnMonitoringSmall" onclick="goToBillingDiscountSearch('${billingDiscountForm.patientCaseSystemId}');" value="Add New"></html:button>
-	  			</td>
-	  			<td>
-	  				<span id="msgId" style="color: blue; padding-left: 100px; display: none;"><bean:message key="msg.updated"/></span>
-	  			</td>
-	  		</tr>	
-	  	</table>	  
+	  <div>
+	  	<label style="font-weight: bold; font-size: 20px;">Discount</label>	
+	  	<html:button property="btnAdd" styleClass="btn btn-primary btnMonitoringSmallest" onclick="goToBillingDiscountSearch('${billingDiscountForm.patientCaseSystemId}');" value="Add New"></html:button>
+	  	<span id="msgId" style="color: blue; padding-left: 100px; display: none;"><bean:message key="msg.updated"/></span>	  
 	  </div>
-
-	  <div class="table-responsive" align="left" >
+	  
+	  <div class="table-responsive" style="padding-top: 10px; width: 800px;">
 		<c:choose>
 		<c:when test="${billingDiscountForm.entityList != null}">
 			<table  id="tableId" class="table table-bordered table-striped table-condensed table-hover context-menu-table" style="width: 98%;">  
 				<tr>
+					<th>No</th>
 					<th>Description</th>
 					<th>Amount</th>
 					<th></th>
 					<th></th>
 				</tr>
-				<logic:iterate name="billingDiscountForm" property="entityList" type="com.pibs.model.BillingDiscount" id="model">
+				<logic:iterate name="billingDiscountForm" property="entityList" type="com.pibs.model.BillingDiscount" id="model" indexId="index">
 					<tr>		 
+						<td>${index+1}</td>
 						<td><bean:write name="model" property="discountDescription"/></td>
 						<td align="right"><bean:write name="model" property="amount" format="Php #,###.00"/></td>
 						<td align="center"><a href="#" onclick="javascript: editBillingDiscount('<bean:write name="model" property="id"/>');">Edit</a></td>
@@ -67,9 +55,5 @@ $(function() {
 		</c:otherwise>
 		</c:choose>
 	  </div>
-	</div>
-	
-  </div>
 
-</div>
 

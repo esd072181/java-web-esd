@@ -25,10 +25,10 @@
 					<th>Gender</th>
 					<th>Birthday</th>
 					<th>Date Admitted</th>
-					<th>Case No</th>
-					<th>Patient Id</th>
 					<th>Room No</th>
 					<th>Doctor</th>
+					<th>Case No</th>
+					<th>Patient Id</th>
 				</tr>
 				<logic:iterate name="monitorPatientForm" property="modelList" type="com.pibs.model.Patient" id="model">
 					<tr>				 
@@ -39,10 +39,10 @@
 						<td><bean:write name="model" property="gender"/></td>
 						<td><bean:write name="model" property="birthday"/></td>
 						<td><bean:write name="model" property="dateAdmitted"/></td>
-						<td><bean:write name="model" property="caseNo"/></td>
-						<td><bean:write name="model" property="patientId"/></td>
 						<td><bean:write name="model" property="roomNo"/></td>
 						<td><bean:write name="model" property="doctor"/></td>
+						<td><bean:write name="model" property="caseNo"/></td>
+						<td><bean:write name="model" property="patientId"/></td>
 					</tr>
 				</logic:iterate>
 			</table>

@@ -10,18 +10,8 @@ $(function() {
     
   });
 </script>
-<div class="row">
 
-  <div class="col-sm-10 divSpace" >
-
-	<div style="height: 30%; padding-top: 0px;" align="left">
-
-	  <div>
-	  	<br>
-		 <fieldset>
-			<legend>Bill Details</legend>
-	  	 </fieldset>
-	  </div>
+	<h3>Bill Details</h3>
 
 	 <!-- Billing report -->
 	<div>
@@ -351,10 +341,5 @@ $(function() {
 			</table>
 		</c:if>
 	   </div>
-	   <br>		  
-	</div>
-
-  </div>
-
-</div>
+	 
 

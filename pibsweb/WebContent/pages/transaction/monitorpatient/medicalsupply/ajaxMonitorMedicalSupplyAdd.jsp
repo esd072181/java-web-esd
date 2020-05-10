@@ -5,7 +5,7 @@
 $(function() {
     
     $('#dtDateTakenPicker').datepicker({}); 
-    $('#qtyId').val('');
+    $('#qtyId').val('1');
     $('#qtyId').focus();
     
   });

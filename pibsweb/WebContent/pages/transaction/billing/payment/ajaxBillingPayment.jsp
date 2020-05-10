@@ -10,18 +10,9 @@ $(function() {
     
   });
 </script>
-<div class="row">
 
-  <div class="col-sm-10 divSpace" >
 
-	<div style="height: 30%; padding-top: 0px;" align="left">
-
-	  <div>
-	  	<br>
-		 <fieldset>
-			<legend>Payment</legend>
-	  	 </fieldset>
-	  </div>
+	<h3>Payment</h3>
 
 	  <div>
 		<html:errors/>
@@ -35,17 +26,17 @@ $(function() {
 			<tr>
 				<html:hidden property="billingId" value="${billingPaymentForm.billingId}"/>
 				<td><span style="margin-left:10px;">Amount Due:</span></td>
-		        <td><input style="text-align: right; width: 110px;" type="text"  name="totalAmtDue" value="${billingPaymentForm.totalAmtDue}" readonly="readonly"></td>
+		        <td style="padding-left: 5px;"><input style="text-align: right; width: 110px;" type="text"  name="totalAmtDue" value="${billingPaymentForm.totalAmtDue}" readonly="readonly"></td>
 			</tr>
 			<tr height="5px;">
 			<tr>	
 				<td><span style="margin-left:10px;">Cash Payment:</span></td>
 				<c:choose>
 					<c:when test="${billingPaymentForm.transactionStatus == false}">
-						<td><input style="text-align: right; width: 110px;" type="text" name="totalAmtCash" value="${billingPaymentForm.totalAmtCash}" id="totalAmtCashId"></td>
+						<td style="padding-left: 5px;"><input style="text-align: right; width: 110px;" type="text" name="totalAmtCash" value="${billingPaymentForm.totalAmtCash}" id="totalAmtCashId"></td>
 					</c:when>
 					<c:otherwise>
-						<td><input style="text-align: right; width: 110px;" type="text" name="totalAmtCash" value="${billingPaymentForm.totalAmtCash}" id="totalAmtCashId" readonly="readonly"></td>
+						<td style="padding-left: 5px;"><input style="text-align: right; width: 110px;" type="text" name="totalAmtCash" value="${billingPaymentForm.totalAmtCash}" id="totalAmtCashId" readonly="readonly"></td>
 					</c:otherwise>
 				</c:choose>
 			</tr>
@@ -53,7 +44,7 @@ $(function() {
 				<tr height="5px;">
 				<tr>
 					<td><span style="margin-left:10px;">Change:</span></td>
-		        	<td><input style="text-align: right; width: 110px;" type="text" name="totalAmtChange" value="${billingPaymentForm.totalAmtChange}" readonly="readonly"></td>
+		        	<td style="padding-left: 5px;"><input style="text-align: right; width: 110px;" type="text" name="totalAmtChange" value="${billingPaymentForm.totalAmtChange}" readonly="readonly"></td>
 				</tr>	
 			</c:if>
 		</table>
@@ -80,17 +71,5 @@ $(function() {
 	<div id="childDIV">
 		
 	</div>
-	 <!-- Change field should show after submission of Payment 
-	 		<tr height="5px;">
-			<tr>
-				<td><span style="margin-left:10px;">Change:</span></td>
-		        <td><input style="text-align: right; width: 110px;" type="text" value="${billingPaymentForm.totalAmtChange}" readonly="readonly"></td>
-			</tr>
-	     -->
-	 
-	</div>
 
-  </div>
-
-</div>
 

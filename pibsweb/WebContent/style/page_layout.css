@@ -147,7 +147,7 @@ div.footerLabel {
 }
 
 .btnCancelClose {
-	margin-left: 20px;
+	margin-left: 5px;
 	width: 100px;
 	height: 40px;
 }
@@ -157,9 +157,15 @@ div.footerLabel {
 }
 
 .btnBackToSearch {
-	margin-left: 20px;
+	margin-left: 5px;
 	width: 147px;
 	height: 40px;
+}
+
+.btnMonitoringSmallest {
+	margin-left: 10px;
+	width: 85px;
+	height: 35px;
 }
 
 .btnMonitoringSmall {
