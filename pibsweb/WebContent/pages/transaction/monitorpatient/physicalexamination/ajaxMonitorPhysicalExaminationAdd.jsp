@@ -10,16 +10,17 @@ $(function() {
   });
 </script>
 
-<div>
-	<h3 style="font-style: bold;">Physical Examination </h3>
+	<label style="font-weight: bold; font-size: 20px;">Physical Examination</label>
+	<br>
 	<div>
 		<html:errors/>
 	</div>
 	<div>
 		<h5 style="color: blue;"><c:out value="${monitorPhysicalExaminationForm.transactionMessage}"></c:out></h5>
 	</div> 
+	
 	<html:form action="/saveMonitorPhysicalExamination.do" styleId="idFormChild">
-		<table>
+		<table style="height: 100px;">
 			<html:hidden property="patientCaseSystemId" value="${monitorPhysicalExaminationForm.patientCaseSystemId}"/>
 			<tr>
  				<td>BP</td>
@@ -28,7 +29,8 @@ $(function() {
         		<td class="padLeft5"><input type="text" name="temp" value="${monitorPhysicalExaminationForm.temp}"></td>
         		<td class="padLeft5">Cardiac Rate</td>
         		<td class="padLeft5"><input type="text" name="cr" value="${monitorPhysicalExaminationForm.cr}"></td>
-        		
+        		<td >Date Recorded</td>
+				<td class="padLeft5"><input type="text" style="text-align: right;" name="dateRecorded" id="dtDateRecordedPicker" value="${monitorPhysicalExaminationForm.dateRecorded}" placeholder="mm/dd/yyyy"></td>
 			</tr>
 			<tr class="hMargin5"></tr>
 			<tr>
@@ -38,6 +40,8 @@ $(function() {
         		<td class="padLeft5"><input style="text-align: right;" type="text" name="weight" value="${monitorPhysicalExaminationForm.weight}"></td>
 				<td class="padLeft5">HEENT</td>
         		<td class="padLeft5"><input style="text-align: right;" type="text" name="heent" value="${monitorPhysicalExaminationForm.heent}"></td>
+        		<td class="padLeft5">Time Taken</td>
+        		<td class="padLeft5"><input type="text" style="text-align: right;" name="timeRecorded" value="${monitorPhysicalExaminationForm.timeRecorded}"></td>
 			</tr>
 			<tr class="hMargin5"></tr>
 			<tr>
@@ -56,17 +60,7 @@ $(function() {
         		<td class="padLeft5"><input style="text-align: right;" type="text" name="skin" value="${monitorPhysicalExaminationForm.skin}"></td>
 				<td class="padLeft5">Remarks</td>
         		<td class="padLeft5"><input style="text-align: right;" type="text" name="remarks" value="${monitorPhysicalExaminationForm.remarks}"></td>
-			</tr>
-			<tr class="hMargin5"></tr>
-			<tr>
-				<td >Date Recorded</td>
-				<td class="padLeft5"><input type="text" style="text-align: right;" name="dateRecorded" id="dtDateRecordedPicker" value="${monitorPhysicalExaminationForm.dateRecorded}" placeholder="mm/dd/yyyy"></td>
-				<td class="padLeft5">Time Taken</td>
-        		<td class="padLeft5"><input type="text" style="text-align: right;" name="timeRecorded" value="${monitorPhysicalExaminationForm.timeRecorded}"></td>
-			</tr>
-			<tr class="hMargin10"></tr>
-			<tr>
-				<td colspan="2">
+				<td colspan="2" style="padding-left: 15px;">
 					<c:choose>
 						<c:when test="${monitorPhysicalExaminationForm.transactionStatus == true}">
 							<html:button property="btnClose" styleClass="btn btn-primary btnCancelClose" onclick="closeMonitorPhysicalExamination();" value="Close"></html:button>		
@@ -76,10 +70,10 @@ $(function() {
 							<html:button property="btnCancel" styleClass="btn btn-primary btnCancelClose" onclick="cancelMonitorPhysicalExamination('${monitorPhysicalExaminationForm.patientCaseSystemId}');" value="Cancel"></html:button>	
 						</c:otherwise>
 					</c:choose>	
-				</td>			
+				</td>
 			</tr>
 		</table>	
 	</html:form>
 
-</div>
+
 

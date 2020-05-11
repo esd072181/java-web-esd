@@ -11,8 +11,9 @@ $(function() {
   });
 </script>
 
-<div>
-	<h3 style="font-style: bold;">Radiology Request</h3>
+	
+	<label style="font-weight: bold; font-size: 20px;">Radiology Request</label>
+	
 	<div>
 		<html:errors/>
 	</div>
@@ -57,5 +58,4 @@ $(function() {
 		</table>	
 	</html:form>
 
-</div>
 

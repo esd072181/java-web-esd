@@ -10,8 +10,8 @@ $(function() {
   });
 </script>
 
-<div>
-	<h3 style="font-style: bold;">Physical Examination - Edit Record</h3>
+	<label style="font-weight: bold; font-size: 20px;">Physical Examination - Edit Record</label>
+	
 	<div>
 		<html:errors/>
 	</div>
@@ -82,5 +82,4 @@ $(function() {
 		</table>	
 	</html:form>
 
-</div>
 

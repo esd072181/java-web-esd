@@ -10,14 +10,13 @@ $(function() {
   });
 </script>
 
-<div>
-	<h3 style="font-style: bold;">Room Transfer</h3>
+	<label style="font-weight: bold; font-size: 20px;">Room Transfer</label>
+	
 	<div>
 		<html:errors/>
 	</div>
 	<div>
 		<h5 style="color: blue;"><c:out value="${monitorRoomTransferForm.transactionMessage}"></c:out></h5>
-		<br>
 	</div> 
 	<html:form action="/saveMonitorRoomTransfer.do" styleId="idForm">
 		<table>
@@ -49,5 +48,4 @@ $(function() {
 		</table>	
 	</html:form>
 
-</div>
 

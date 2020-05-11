@@ -19,14 +19,10 @@ $(function() {
     
   });
 </script>
-<div class="row">
 
-  <div class="col-sm-10 divSpace" >
+
+		<label style="font-weight: bold; font-size: 20px;">Search for Medical Supply</label>
 	
-	<div style="height: 30%; padding-top: 0px;" align="left">
-		<div style="width: 50%;">
-			<h3>Search for Medical Supply</h3>
-		</div>
 		<html:form action="/monitorMedicalSupply.do" styleId="idForm">
 				<div>
 					<html:errors/>
@@ -45,7 +41,7 @@ $(function() {
 				</div>			
 				<html:hidden property="id" styleId="selectedId"/>	
 		</html:form>
-	</div>
+
 	
 	<br>
 
@@ -55,7 +51,5 @@ $(function() {
 		<!-- ajax part of table data -->
 	</div>
 
-  </div>
 
-</div>
 
