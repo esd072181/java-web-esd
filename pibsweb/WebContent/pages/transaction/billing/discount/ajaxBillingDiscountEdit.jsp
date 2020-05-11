@@ -9,8 +9,8 @@ $(function() {
   });
 </script>
 
-<div>
-	<h3 style="font-style: bold;">Discount Request - Edit Record</h3>
+	<label style="font-weight: bold; font-size: 20px;">Discount Request - Edit Record</label>
+	
 	<div>
 		<html:errors/>
 	</div>
@@ -47,6 +47,4 @@ $(function() {
 			</tr>
 		</table>	
 	</html:form>
-
-</div>
 
