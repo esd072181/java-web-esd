@@ -58,16 +58,18 @@ $(function() {
 							<td class="legendBox" style="background-color: gray;"></td>
 							<td width="5"></td>
 							<td class="legendBox" style="background-color: black;"></td>
-							<td width="50"></td>
+							<td width="30"></td>
 							<td class="legendBox" style="background-color: white;"></td>
 						</tr>
 					
 					</table>
 					<table>
 						<tr>
-							<td width="475"></td>
-							<td>Good -------------------------------------- Bad</td>
-							<td width="27"></td>
+							<td width="495"></td>
+							<td>Good</td>
+							<td width="180"></td>
+							<td>Bad</td>
+							<td width="25"></td>
 							<td>No Tire</td>
 						</tr>
 					</table>
