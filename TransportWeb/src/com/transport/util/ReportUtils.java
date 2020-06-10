@@ -571,6 +571,14 @@ public class ReportUtils {
            int sumVolWeek3 = 0;
            int sumVolWeek4 = 0;
            int sumVolWeek5 = 0;
+           int sumAvailabilityWeek1 = 0;
+           int sumAvailabilityWeek2 = 0;
+           int sumAvailabilityWeek3 = 0;
+           int sumAvailabilityWeek4 = 0;
+           double sumPercentageWeek1 = 0;
+           double sumPercentageWeek2 = 0;
+           double sumPercentageWeek3 = 0;
+           double sumPercentageWeek4 = 0;
            int totalLorryCountPerCategory = 0;
            int grandTotalPending1 = 0;
            int grandTotalPending2 = 0;
@@ -663,9 +671,9 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(26, i+4, String.valueOf(sumVolWeek1), wcfYellow);
                            excelSheet.addCell(label);
-                           label = new Label(27, i+4, "", wcfOrange);
+                           label = new Label(27, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
                            excelSheet.addCell(label);
-                           label = new Label(28, i+4, "", wcfOrange);
+                           label = new Label(28, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                            excelSheet.addCell(label);
                            label = new Label(29, i+4, String.valueOf(sumTrip8), wcfBorder);
                            excelSheet.addCell(label);
@@ -713,9 +721,9 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(51, i+4, String.valueOf(sumVolWeek2), wcfYellow);
                            excelSheet.addCell(label);
-                           label = new Label(52, i+4, "", wcfOrange);
+                           label = new Label(52, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
                            excelSheet.addCell(label);
-                           label = new Label(53, i+4, "", wcfOrange);
+                           label = new Label(53, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                            excelSheet.addCell(label);
                            label = new Label(54, i+4, String.valueOf(sumTrip15), wcfBorder);
                            excelSheet.addCell(label);
@@ -763,9 +771,9 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(76, i+4, String.valueOf(sumVolWeek3), wcfYellow);
                            excelSheet.addCell(label);
-                           label = new Label(77, i+4, "", wcfOrange);
+                           label = new Label(77, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
                            excelSheet.addCell(label);
-                           label = new Label(78, i+4, "", wcfOrange);
+                           label = new Label(78, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                            excelSheet.addCell(label);
                            label = new Label(79, i+4, String.valueOf(sumTrip22), wcfBorder);
                            excelSheet.addCell(label);
@@ -813,9 +821,9 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(101, i+4, String.valueOf(sumVolWeek4), wcfYellow);
                            excelSheet.addCell(label);
-                           label = new Label(102, i+4, "", wcfOrange);
+                           label = new Label(102, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
                            excelSheet.addCell(label);
-                           label = new Label(103, i+4, "", wcfOrange);
+                           label = new Label(103, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                            excelSheet.addCell(label);
                            label = new Label(104, i+4, String.valueOf(sumTrip29), wcfBorder);
                            excelSheet.addCell(label);
@@ -1155,43 +1163,43 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(4, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(5, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(5, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(6, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(7, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(8, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(8, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(9, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(10, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(11, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(11, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(12, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(13, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(14, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(14, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(15, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(16, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(17, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(17, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(18, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(19, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(20, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(20, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(21, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(22, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(23, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(23, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(24, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -1199,49 +1207,57 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(26, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
-                           label = new Label(27, i+4, "", wcfBorder);
+                           label = new Label(27, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+                        		   						.add(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                        		   						.add(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                        		   						.add(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                        		   						.add(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                        		   						.add(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                        		   						.add(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                        		   						.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+                        		   						.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(28, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
                            label = new Label(29, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(30, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(30, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(31, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(32, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(33, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(33, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(34, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(35, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(36, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(36, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(37, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(38, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(39, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(39, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(40, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(41, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(42, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(42, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(43, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(44, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(45, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(45, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(46, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(47, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(48, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(48, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(49, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -1249,49 +1265,57 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(51, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
-                           label = new Label(52, i+4, "", wcfBorder);
+                           label = new Label(52, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+   		   						.add(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+   		   						.add(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+   		   						.add(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+   		   						.add(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+   		   						.add(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+   		   						.add(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+   		   						.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+   		   						.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(53, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
                            label = new Label(54, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(55, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(55, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(56, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(57, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(58, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(58, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(59, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(60, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(61, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(61, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(62, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(63, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(64, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(64, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(65, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(66, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(67, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(67, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(68, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(69, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(70, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(70, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(71, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(72, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(73, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(73, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(74, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -1299,49 +1323,57 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(76, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
-                           label = new Label(77, i+4, "", wcfBorder);
+                           label = new Label(77, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+      		   						.add(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+      		   						.add(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+      		   						.add(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+      		   						.add(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+      		   						.add(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+      		   						.add(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+      		   						.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+      		   						.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(78, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
                            label = new Label(79, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(80, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(80, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(81, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(82, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(83, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(83, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(84, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(85, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(86, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(86, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(87, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(88, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(89, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(89, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(90, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(91, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(92, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(92, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(93, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(94, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(95, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(95, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(96, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(97, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(98, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(98, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(99, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -1349,25 +1381,33 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(101, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
-                           label = new Label(102, i+4, "", wcfBorder);
+                           label = new Label(102, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+     		   						.add(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+     		   						.add(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+     		   						.add(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+     		   						.add(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+     		   						.add(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+     		   						.add(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+     		   						.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+     		   						.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(103, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
                            label = new Label(104, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(105, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance29).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(105, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance29).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(106, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(107, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(108, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance30).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(108, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance30).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(109, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(110, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(111, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance31).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(111, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance31).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(112, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -1518,6 +1558,14 @@ public class ReportUtils {
                        sumVolWeek3 = 0;
                        sumVolWeek4 = 0;
                        sumVolWeek5 = 0;
+                       sumAvailabilityWeek1 = 0;
+                       sumAvailabilityWeek2 = 0;
+                       sumAvailabilityWeek3 = 0;
+                       sumAvailabilityWeek4 = 0;
+                       sumPercentageWeek1 = 0;
+                       sumPercentageWeek2 = 0;
+                       sumPercentageWeek3 = 0;
+                       sumPercentageWeek4 = 0;
                        totalLorryCountPerCategory = 0;
                        capacityOfTerminal = 0;
                    }
@@ -1683,6 +1731,14 @@ public class ReportUtils {
                    sumVolWeek3 = sumVolWeek3 + item.getGpsWeek3Vol();
                    sumVolWeek4 = sumVolWeek4 + item.getGpsWeek4Vol();
                    sumVolWeek5 = sumVolWeek5 + item.getGpsWeek5Vol();
+                   sumAvailabilityWeek1 = sumAvailabilityWeek1 + item.getTotalAvailabilityWeek1();
+                   sumAvailabilityWeek2 = sumAvailabilityWeek2 + item.getTotalAvailabilityWeek2();
+                   sumAvailabilityWeek3 = sumAvailabilityWeek3 + item.getTotalAvailabilityWeek3();
+                   sumAvailabilityWeek4 = sumAvailabilityWeek4 + item.getTotalAvailabilityWeek4();
+                   sumPercentageWeek1 = sumPercentageWeek1 + item.getPercentageWeek1();
+                   sumPercentageWeek2 = sumPercentageWeek2 + item.getPercentageWeek2();
+                   sumPercentageWeek3 = sumPercentageWeek3 + item.getPercentageWeek3();
+                   sumPercentageWeek4 = sumPercentageWeek4 + item.getPercentageWeek4();
                    //total pending
                    if (item.getMaintenanceColor1() > 0 && item.getMaintenanceColor1() == 1105) {
                 	   grandTotalPending1 += 1;
@@ -1824,7 +1880,7 @@ public class ReportUtils {
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+9, i+4, String.valueOf(item.getTotalAvailabilityWeek1()), wcfOrange);
                     	   excelSheet.addCell(label);
-                    	   label = new Label(z+10, i+4, String.valueOf(item.getPercentageWeek1()) , wcfOrange);
+                    	   label = new Label(z+10, i+4, String.valueOf(BigDecimal.valueOf(item.getPercentageWeek1()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfOrange);
                     	   excelSheet.addCell(label);
                     	   z += 4;
                        }
@@ -1835,7 +1891,7 @@ public class ReportUtils {
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+9, i+4, String.valueOf(item.getTotalAvailabilityWeek2()), wcfOrange);
                     	   excelSheet.addCell(label);
-                    	   label = new Label(z+10, i+4, String.valueOf(item.getPercentageWeek2()), wcfOrange);
+                    	   label = new Label(z+10, i+4, String.valueOf(BigDecimal.valueOf(item.getPercentageWeek2()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                     	   excelSheet.addCell(label);
                     	   z += 4;
                        }
@@ -1846,7 +1902,7 @@ public class ReportUtils {
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+9, i+4, String.valueOf(item.getTotalAvailabilityWeek3()), wcfOrange);
                     	   excelSheet.addCell(label);
-                    	   label = new Label(z+10, i+4, String.valueOf(item.getPercentageWeek3()), wcfOrange);
+                    	   label = new Label(z+10, i+4, String.valueOf(BigDecimal.valueOf(item.getPercentageWeek3()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                     	   excelSheet.addCell(label);
                     	   z += 4;
                        }
@@ -1857,7 +1913,7 @@ public class ReportUtils {
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+9, i+4, String.valueOf(item.getTotalAvailabilityWeek4()), wcfOrange);
                     	   excelSheet.addCell(label);
-                    	   label = new Label(z+10, i+4, String.valueOf(item.getPercentageWeek4()), wcfOrange);
+                    	   label = new Label(z+10, i+4, String.valueOf(BigDecimal.valueOf(item.getPercentageWeek4()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                     	   excelSheet.addCell(label);
                     	   z += 4;
                        }
@@ -1885,7 +1941,7 @@ public class ReportUtils {
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+17, i+4, String.valueOf(item.getTotalTripsGPS()), wcfOrange);
                     	   excelSheet.addCell(label);
-                    	   label = new Label(z+18, i+4, String.valueOf(item.getTotalPercentage()), wcfOrange);
+                    	   label = new Label(z+18, i+4, String.valueOf(BigDecimal.valueOf(item.getTotalPercentage()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+19, i+4, String.valueOf(item.getTotalGpsTripIssueTI()), wcfOrange);
                     	   excelSheet.addCell(label);
@@ -1960,9 +2016,9 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(26, i+4, String.valueOf(sumVolWeek1), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(27, i+4, "", wcfOrange);
+           label = new Label(27, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
            excelSheet.addCell(label);
-           label = new Label(28, i+4, "", wcfOrange);
+           label = new Label(28, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
            excelSheet.addCell(label);
            label = new Label(29, i+4, String.valueOf(sumTrip8), wcfBorder);
            excelSheet.addCell(label);
@@ -2010,9 +2066,9 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(51, i+4, String.valueOf(sumVolWeek2), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(52, i+4, "", wcfOrange);
+           label = new Label(52, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
            excelSheet.addCell(label);
-           label = new Label(53, i+4, "", wcfOrange);
+           label = new Label(53, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
            excelSheet.addCell(label);
            label = new Label(54, i+4, String.valueOf(sumTrip15), wcfBorder);
            excelSheet.addCell(label);
@@ -2060,9 +2116,9 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(76, i+4, String.valueOf(sumVolWeek3), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(77, i+4, "", wcfOrange);
+           label = new Label(77, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
            excelSheet.addCell(label);
-           label = new Label(78, i+4, "", wcfOrange);
+           label = new Label(78, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
            excelSheet.addCell(label);
            label = new Label(79, i+4, String.valueOf(sumTrip22), wcfBorder);
            excelSheet.addCell(label);
@@ -2110,9 +2166,9 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(101, i+4, String.valueOf(sumVolWeek4), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(102, i+4, "", wcfOrange);
+           label = new Label(102, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
            excelSheet.addCell(label);
-           label = new Label(103, i+4, "", wcfOrange);
+           label = new Label(103, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
            excelSheet.addCell(label);
            label = new Label(104, i+4, String.valueOf(sumTrip29), wcfBorder);
            excelSheet.addCell(label);
@@ -2453,43 +2509,43 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(4, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(5, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(5, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(6, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(7, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(8, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(8, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(9, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(10, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(11, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(11, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(12, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(13, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(14, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(14, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(15, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(16, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(17, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(17, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(18, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(19, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(20, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(20, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(21, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(22, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(23, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(23, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(24, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
@@ -2497,49 +2553,57 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(26, i+4, "", wcfBorder);
            excelSheet.addCell(label);
-           label = new Label(27, i+4, "", wcfBorder);
+           label = new Label(27, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+						.add(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+						.add(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+						.add(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+						.add(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+						.add(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+						.add(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+						.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+						.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(28, i+4, "", wcfBorder);
            excelSheet.addCell(label);
            label = new Label(29, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(30, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(30, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(31, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(32, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(33, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(33, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(34, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(35, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(36, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(36, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(37, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(38, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(39, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(39, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(40, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(41, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(42, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(42, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(43, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(44, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(45, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(45, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(46, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(47, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(48, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(48, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(49, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
@@ -2547,49 +2611,57 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(51, i+4, "", wcfBorder);
            excelSheet.addCell(label);
-           label = new Label(52, i+4, "", wcfBorder);
+           label = new Label(52, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+					.add(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(53, i+4, "", wcfBorder);
            excelSheet.addCell(label);
            label = new Label(54, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(55, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(55, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(56, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(57, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(58, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(58, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(59, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(60, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(61, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(61, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(62, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(63, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(64, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(64, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(65, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(66, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(67, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(67, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(68, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(69, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(70, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(70, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(71, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(72, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(73, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(73, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(74, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
@@ -2597,49 +2669,57 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(76, i+4, "", wcfBorder);
            excelSheet.addCell(label);
-           label = new Label(77, i+4, "", wcfBorder);
+           label = new Label(77, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+					.add(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(78, i+4, "", wcfBorder);
            excelSheet.addCell(label);
            label = new Label(79, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(80, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(80, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(81, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(82, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(83, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(83, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(84, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(85, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(86, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(86, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(87, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(88, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(89, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(89, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(90, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(91, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(92, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(92, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(93, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(94, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(95, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(95, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(96, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(97, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(98, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(98, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(99, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
@@ -2647,25 +2727,33 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(101, i+4, "", wcfBorder);
            excelSheet.addCell(label);
-           label = new Label(102, i+4, "", wcfBorder);
+           label = new Label(102, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+					.add(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(103, i+4, "", wcfBorder);
            excelSheet.addCell(label);
            label = new Label(104, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(105, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance29).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(105, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance29).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(106, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(107, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(108, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance30).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(108, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance30).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(109, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(110, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(111, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance31).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(111, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance31).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(112, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
@@ -3586,43 +3674,43 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(4, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(5, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(5, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(6, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(7, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(8, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(8, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(9, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(10, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(11, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(11, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(12, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(13, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(14, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(14, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(15, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(16, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(17, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(17, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(18, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(19, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(20, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(20, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(21, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(22, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(23, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(23, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(24, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -3630,49 +3718,57 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(26, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
-                           label = new Label(27, i+4, "", wcfBorder);
+                           label = new Label(27, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+               					.add(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+               					.add(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+               					.add(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+               					.add(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+               					.add(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+               					.add(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+               					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+               					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(28, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
                            label = new Label(29, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(30, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(30, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(31, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(32, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(33, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(33, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(34, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(35, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(36, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(36, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(37, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(38, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(39, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(39, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(40, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(41, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(42, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(42, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(43, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(44, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(45, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(45, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(46, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(47, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(48, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(48, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(49, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -3680,49 +3776,57 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(51, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
-                           label = new Label(52, i+4, "", wcfBorder);
+                           label = new Label(52, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+                  					.add(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                  					.add(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                  					.add(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                  					.add(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                  					.add(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                  					.add(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                  					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+                  					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(53, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
                            label = new Label(54, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(55, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(55, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(56, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(57, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(58, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(58, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(59, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(60, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(61, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(61, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(62, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(63, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(64, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(64, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(65, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(66, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(67, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(67, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(68, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(69, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(70, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(70, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(71, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(72, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(73, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(73, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(74, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -3730,49 +3834,57 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(76, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
-                           label = new Label(77, i+4, "", wcfBorder);
+                           label = new Label(77, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+                 					.add(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                 					.add(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                 					.add(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                 					.add(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                 					.add(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                 					.add(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                 					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+                 					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(78, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
                            label = new Label(79, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(80, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(80, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(81, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(82, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(83, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(83, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(84, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(85, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(86, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(86, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(87, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(88, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(89, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(89, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(90, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(91, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(92, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(92, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(93, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(94, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(95, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(95, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(96, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(97, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(98, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(98, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(99, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -3780,25 +3892,33 @@ public class ReportUtils {
                            excelSheet.addCell(label);
                            label = new Label(101, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
-                           label = new Label(102, i+4, "", wcfBorder);
+                           label = new Label(102, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+                					.add(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                					.add(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                					.add(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                					.add(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                					.add(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                					.add(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+                					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+                					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(103, i+4, "", wcfBorder);
                            excelSheet.addCell(label);
                            label = new Label(104, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(105, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance29).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(105, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance29).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(106, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(107, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(108, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance30).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(108, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance30).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(109, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(110, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
-                           label = new Label(111, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance31).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+                           label = new Label(111, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance31).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
                            excelSheet.addCell(label);
                            label = new Label(112, i+4, "", wcfLimeGreen);
                            excelSheet.addCell(label);
@@ -3949,6 +4069,14 @@ public class ReportUtils {
                        sumVolWeek3 = 0;
                        sumVolWeek4 = 0;
                        sumVolWeek5 = 0;
+                       sumAvailabilityWeek1 = 0;
+                       sumAvailabilityWeek2 = 0;
+                       sumAvailabilityWeek3 = 0;
+                       sumAvailabilityWeek4 = 0;
+                       sumPercentageWeek1 = 0;
+                       sumPercentageWeek2 = 0;
+                       sumPercentageWeek3 = 0;
+                       sumPercentageWeek4 = 0;
                        totalLorryCountPerCategory = 0;
                        capacityOfTerminal = 0;
                    }
@@ -4114,6 +4242,14 @@ public class ReportUtils {
                    sumVolWeek3 = sumVolWeek3 + item.getGpsWeek3Vol();
                    sumVolWeek4 = sumVolWeek4 + item.getGpsWeek4Vol();
                    sumVolWeek5 = sumVolWeek5 + item.getGpsWeek5Vol();
+                   sumAvailabilityWeek1 = sumAvailabilityWeek1 + item.getTotalAvailabilityWeek1();
+                   sumAvailabilityWeek2 = sumAvailabilityWeek2 + item.getTotalAvailabilityWeek2();
+                   sumAvailabilityWeek3 = sumAvailabilityWeek3 + item.getTotalAvailabilityWeek3();
+                   sumAvailabilityWeek4 = sumAvailabilityWeek4 + item.getTotalAvailabilityWeek4();
+                   sumPercentageWeek1 = sumPercentageWeek1 + item.getPercentageWeek1();
+                   sumPercentageWeek2 = sumPercentageWeek2 + item.getPercentageWeek2();
+                   sumPercentageWeek3 = sumPercentageWeek3 + item.getPercentageWeek3();
+                   sumPercentageWeek4 = sumPercentageWeek4 + item.getPercentageWeek4();
                    //total pending
                    if (item.getMaintenanceColor1() > 0 && item.getMaintenanceColor1() == 1105) {
                 	   grandTotalPending1 += 1;
@@ -4256,7 +4392,7 @@ public class ReportUtils {
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+9, i+4, String.valueOf(item.getTotalAvailabilityWeek1()), wcfOrange);
                     	   excelSheet.addCell(label);
-                    	   label = new Label(z+10, i+4, String.valueOf(item.getPercentageWeek1()), wcfOrange);
+                    	   label = new Label(z+10, i+4, String.valueOf(BigDecimal.valueOf(item.getPercentageWeek1()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                     	   excelSheet.addCell(label);
                     	   z += 4;
                        }
@@ -4267,7 +4403,7 @@ public class ReportUtils {
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+9, i+4, String.valueOf(item.getTotalAvailabilityWeek2()), wcfOrange);
                     	   excelSheet.addCell(label);
-                    	   label = new Label(z+10, i+4, String.valueOf(item.getPercentageWeek2()), wcfOrange);
+                    	   label = new Label(z+10, i+4, String.valueOf(BigDecimal.valueOf(item.getPercentageWeek2()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                     	   excelSheet.addCell(label);
                     	   z += 4;
                        }
@@ -4278,7 +4414,7 @@ public class ReportUtils {
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+9, i+4, String.valueOf(item.getTotalAvailabilityWeek3()), wcfOrange);
                     	   excelSheet.addCell(label);
-                    	   label = new Label(z+10, i+4, String.valueOf(item.getPercentageWeek3()), wcfOrange);
+                    	   label = new Label(z+10, i+4, String.valueOf(BigDecimal.valueOf(item.getPercentageWeek3()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                     	   excelSheet.addCell(label);
                     	   z += 4;
                        }
@@ -4289,7 +4425,7 @@ public class ReportUtils {
                     	   excelSheet.addCell(label);
                     	   label = new Label(z+9, i+4, String.valueOf(item.getTotalAvailabilityWeek4()), wcfOrange);
                     	   excelSheet.addCell(label);
-                    	   label = new Label(z+10, i+4, String.valueOf(item.getPercentageWeek4()), wcfOrange);
+                    	   label = new Label(z+10, i+4, String.valueOf(BigDecimal.valueOf(item.getPercentageWeek4()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
                     	   excelSheet.addCell(label);
                     	   z += 4;
                        }
@@ -4317,7 +4453,7 @@ public class ReportUtils {
     	               	   excelSheet.addCell(label);
     	               	   label = new Label(z+17, i+4, String.valueOf(item.getTotalTripsGPS()), wcfOrange);
     	               	   excelSheet.addCell(label);
-    	               	   label = new Label(z+18, i+4, String.valueOf(item.getTotalPercentage()), wcfOrange);
+    	               	   label = new Label(z+18, i+4, String.valueOf(BigDecimal.valueOf(item.getTotalPercentage()).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
     	               	   excelSheet.addCell(label);
     	               	   label = new Label(z+19, i+4, String.valueOf(item.getTotalGpsTripIssueTI()), wcfOrange);
     	               	   excelSheet.addCell(label);
@@ -4341,6 +4477,16 @@ public class ReportUtils {
                    i += 1;
         	   }
            }
+           
+           Map<String, Object> paramMap = new HashMap<>();
+           paramMap.put("sumAvailabilityWeek1", sumAvailabilityWeek1);
+           paramMap.put("sumAvailabilityWeek2", sumAvailabilityWeek2);
+           paramMap.put("sumAvailabilityWeek3", sumAvailabilityWeek3);
+           paramMap.put("sumAvailabilityWeek4", sumAvailabilityWeek4);
+           paramMap.put("sumPercentageWeek1", sumPercentageWeek1);
+           paramMap.put("sumPercentageWeek2", sumPercentageWeek2);
+           paramMap.put("sumPercentageWeek3", sumPercentageWeek3);
+           paramMap.put("sumPercentageWeek4", sumPercentageWeek4);
 
            //Total Available and Daily Percentage of the Last Category of Caltex
            createTotalAvailableAndDailyPercentageOfLastCategoryOfCaltex(i, excelSheet, category, label, sumTrip1, wcf2, wcfBorder, wcfOrange, wcfYellow, wcfRed,
@@ -4353,7 +4499,7 @@ public class ReportUtils {
         		   sumMaintenance20, sumMaintenance21, sumMaintenance22, sumMaintenance23, sumMaintenance24, sumMaintenance25, sumMaintenance26, sumMaintenance27,
         		   sumMaintenance28, sumMaintenance29, sumMaintenance30, sumMaintenance31, sumVol8, sumVol9, sumVol10, sumVol11, sumVol12, sumVol13, sumVol14,
         		   sumVol15, sumVol16, sumVol17, sumVol18,sumVol19, sumVol20, sumVol21, sumVol22, sumVol23, sumVol24, sumVol25, sumVol26, sumVol27, sumVol28, sumVol29,
-        		   sumVol30, sumVol31, committedVolume, capacityOfTerminal, totalLorryCountPerCategory);
+        		   sumVol30, sumVol31, committedVolume, capacityOfTerminal, totalLorryCountPerCategory, paramMap);
         		   
            /**
             * NOTE:
@@ -4473,8 +4619,18 @@ public class ReportUtils {
 			int sumMaintenance24, int sumMaintenance25, int sumMaintenance26, int sumMaintenance27, int sumMaintenance28, int sumMaintenance29, int sumMaintenance30,
 			int sumMaintenance31, int sumVol8, int sumVol9, int sumVol10, int sumVol11, int sumVol12, int sumVol13, int sumVol14, int sumVol15, int sumVol16,
 			int sumVol17, int sumVol18, int sumVol19, int sumVol20, int sumVol21, int sumVol22, int sumVol23, int sumVol24, int sumVol25, int sumVol26, int sumVol27,
-			int sumVol28, int sumVol29, int sumVol30, int sumVol31, int committedVolume, int capacityOfTerminal, int totalLorryCountPerCategory) throws RowsExceededException, WriteException {
+			int sumVol28, int sumVol29, int sumVol30, int sumVol31, int committedVolume, int capacityOfTerminal, int totalLorryCountPerCategory, Map<String, Object> paramMap) throws RowsExceededException, WriteException {
 		
+		   int sumAvailabilityWeek1 = paramMap.get("sumAvailabilityWeek1")!=null ? (int) paramMap.get("sumAvailabilityWeek1") : 0;
+		   int sumAvailabilityWeek2 = paramMap.get("sumAvailabilityWeek2")!=null ? (int) paramMap.get("sumAvailabilityWeek2") : 0;
+		   int sumAvailabilityWeek3 = paramMap.get("sumAvailabilityWeek3")!=null ? (int) paramMap.get("sumAvailabilityWeek3") : 0;
+		   int sumAvailabilityWeek4 = paramMap.get("sumAvailabilityWeek4")!=null ? (int) paramMap.get("sumAvailabilityWeek4") : 0;
+		
+		   double sumPercentageWeek1 = paramMap.get("sumPercentageWeek1")!=null ? (double) paramMap.get("sumPercentageWeek1") : 0;
+		   double sumPercentageWeek2 = paramMap.get("sumPercentageWeek2")!=null ? (double) paramMap.get("sumPercentageWeek2") : 0;
+		   double sumPercentageWeek3 = paramMap.get("sumPercentageWeek3")!=null ? (double) paramMap.get("sumPercentageWeek3") : 0;
+		   double sumPercentageWeek4 = paramMap.get("sumPercentageWeek4")!=null ? (double) paramMap.get("sumPercentageWeek4") : 0;
+		   
 		   excelSheet.mergeCells(0, i+4, 3, i+4);
            label = new Label(0, i+4, "Total Available " + category + " in Maintenance", wcf2);
            excelSheet.addCell(label);
@@ -4524,9 +4680,9 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(26, i+4, String.valueOf(sumVolWeek1), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(27, i+4, "", wcfOrange);
+           label = new Label(27, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
            excelSheet.addCell(label);
-           label = new Label(28, i+4, "", wcfOrange);
+           label = new Label(28, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
            excelSheet.addCell(label);
            label = new Label(29, i+4, String.valueOf(sumTrip8), wcfBorder);
            excelSheet.addCell(label);
@@ -4574,9 +4730,9 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(51, i+4, String.valueOf(sumVolWeek2), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(52, i+4, "", wcfOrange);
+           label = new Label(52, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
            excelSheet.addCell(label);
-           label = new Label(53, i+4, "", wcfOrange);
+           label = new Label(53, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
            excelSheet.addCell(label);
            label = new Label(54, i+4, String.valueOf(sumTrip15), wcfBorder);
            excelSheet.addCell(label);
@@ -4624,9 +4780,9 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(76, i+4, String.valueOf(sumVolWeek3), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(77, i+4, "", wcfOrange);
+           label = new Label(77, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
            excelSheet.addCell(label);
-           label = new Label(78, i+4, "", wcfOrange);
+           label = new Label(78, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
            excelSheet.addCell(label);
            label = new Label(79, i+4, String.valueOf(sumTrip22), wcfBorder);
            excelSheet.addCell(label);
@@ -4674,9 +4830,9 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(101, i+4, String.valueOf(sumVolWeek4), wcfYellow);
            excelSheet.addCell(label);
-           label = new Label(102, i+4, "", wcfOrange);
+           label = new Label(102, i+4, String.valueOf(BigDecimal.valueOf(sumAvailabilityWeek4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)), wcfOrange);
            excelSheet.addCell(label);
-           label = new Label(103, i+4, "", wcfOrange);
+           label = new Label(103, i+4, String.valueOf(BigDecimal.valueOf(sumPercentageWeek4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%"), wcfOrange);
            excelSheet.addCell(label);
            label = new Label(104, i+4, String.valueOf(sumTrip29), wcfBorder);
            excelSheet.addCell(label);
@@ -5017,43 +5173,43 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(4, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(5, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(5, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(6, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(7, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(8, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(8, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(9, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(10, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(11, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(11, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(12, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(13, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(14, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(14, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(15, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(16, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(17, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(17, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(18, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(19, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(20, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(20, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(21, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(22, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(23, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(23, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(24, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
@@ -5061,49 +5217,57 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(26, i+4, "", wcfBorder);
            excelSheet.addCell(label);
-           label = new Label(27, i+4, "", wcfBorder);
+           label = new Label(27, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance1).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+					.add(BigDecimal.valueOf(sumMaintenance2).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance3).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance4).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance5).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance6).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance7).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(28, i+4, "", wcfBorder);
            excelSheet.addCell(label);
            label = new Label(29, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(30, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(30, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(31, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(32, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(33, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(33, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(34, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(35, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(36, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(36, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(37, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(38, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(39, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(39, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(40, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(41, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(42, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(42, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(43, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(44, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(45, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(45, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(46, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(47, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(48, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(48, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(49, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
@@ -5111,49 +5275,57 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(51, i+4, "", wcfBorder);
            excelSheet.addCell(label);
-           label = new Label(52, i+4, "", wcfBorder);
+           label = new Label(52, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance8).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+					.add(BigDecimal.valueOf(sumMaintenance9).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance10).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance11).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance12).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance13).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance14).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(53, i+4, "", wcfBorder);
            excelSheet.addCell(label);
            label = new Label(54, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(55, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(55, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(56, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(57, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(58, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(58, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(59, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(60, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(61, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(61, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(62, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(63, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(64, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(64, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(65, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(66, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(67, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(67, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(68, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(69, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(70, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(70, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(71, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(72, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(73, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(73, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(74, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
@@ -5161,49 +5333,57 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(76, i+4, "", wcfBorder);
            excelSheet.addCell(label);
-           label = new Label(77, i+4, "", wcfBorder);
+           label = new Label(77, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance15).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+					.add(BigDecimal.valueOf(sumMaintenance16).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance17).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance18).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance19).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance20).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance21).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(78, i+4, "", wcfBorder);
            excelSheet.addCell(label);
            label = new Label(79, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(80, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(80, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(81, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(82, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(83, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(83, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(84, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(85, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(86, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(86, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(87, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(88, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(89, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(89, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(90, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(91, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(92, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(92, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(93, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(94, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(95, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(95, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(96, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(97, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(98, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(98, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(99, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
@@ -5211,25 +5391,33 @@ public class ReportUtils {
            excelSheet.addCell(label);
            label = new Label(101, i+4, "", wcfBorder);
            excelSheet.addCell(label);
-           label = new Label(102, i+4, "", wcfBorder);
+           label = new Label(102, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance22).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP)
+					.add(BigDecimal.valueOf(sumMaintenance23).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance24).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance25).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance26).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance27).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.add(BigDecimal.valueOf(sumMaintenance28).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP))
+					.divide(new BigDecimal(7), 2, RoundingMode.HALF_UP)
+					.multiply(new BigDecimal(100)).setScale(0) + "%"), wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(103, i+4, "", wcfBorder);
            excelSheet.addCell(label);
            label = new Label(104, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(105, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance29).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(105, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance29).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(106, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(107, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(108, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance30).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(108, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance30).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(109, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(110, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);
-           label = new Label(111, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance31).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)) + "%") , wcfLimeGreen);
+           label = new Label(111, i+4, String.valueOf(BigDecimal.valueOf(sumMaintenance31).divide(BigDecimal.valueOf(totalLorryCountPerCategory), 2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).setScale(0) + "%") , wcfLimeGreen);
            excelSheet.addCell(label);
            label = new Label(112, i+4, "", wcfLimeGreen);
            excelSheet.addCell(label);

@@ -281,6 +281,16 @@
 				<c:set var="sumVolWeek3" value="0"></c:set>
 				<c:set var="sumVolWeek4" value="0"></c:set>
 				<c:set var="sumVolWeek5" value="0"></c:set>
+				
+				<c:set var="sumAvailabilityWeek1" value="0"></c:set>
+				<c:set var="sumAvailabilityWeek2" value="0"></c:set>
+				<c:set var="sumAvailabilityWeek3" value="0"></c:set>
+				<c:set var="sumAvailabilityWeek4" value="0"></c:set>
+				
+				<c:set var="sumPercentageWeek1" value="0"></c:set>
+				<c:set var="sumPercentageWeek2" value="0"></c:set>
+				<c:set var="sumPercentageWeek3" value="0"></c:set>
+				<c:set var="sumPercentageWeek4" value="0"></c:set>
 
 				<c:set var="totalLorryCountPerCategory" value="0"></c:set>
 				<c:set var="grandTotalPending1" value="0"></c:set>
@@ -343,9 +353,9 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance7}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol7}" ></td>
 									<td></td>
-									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00;" value="${sumVolWeek1}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek1/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumPercentageWeek1/totalLorryCountPerCategory}" />" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip8}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance8}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol8}" ></td>
@@ -369,8 +379,8 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol14}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek2/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumPercentageWeek2/totalLorryCountPerCategory}" />" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip15}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance15}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol15}" ></td>
@@ -394,8 +404,8 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol21}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek3/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumPercentageWeek3/totalLorryCountPerCategory}" />" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip22}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance22}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol22}" ></td>
@@ -419,8 +429,8 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol28}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek4/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumPercentageWeek4/totalLorryCountPerCategory}" />" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip29}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance29}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol29}" ></td>
@@ -613,7 +623,7 @@
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance7/totalLorryCountPerCategory}" />" ></td> 
 									<td style="background-color: #32CD32;"></td><td></td>
 									<td></td>
-									<td></td>
+									<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance1/totalLorryCountPerCategory)+(sumMaintenance2/totalLorryCountPerCategory)+(sumMaintenance3/totalLorryCountPerCategory)+(sumMaintenance4/totalLorryCountPerCategory)+(sumMaintenance5/totalLorryCountPerCategory)+(sumMaintenance6/totalLorryCountPerCategory)+(sumMaintenance7/totalLorryCountPerCategory))/7}" />" ></td>
 									<td></td>
 									<td style="background-color: #32CD32;"></td>
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance8/totalLorryCountPerCategory}" />" ></td> 
@@ -631,7 +641,7 @@
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance14/totalLorryCountPerCategory}" />" ></td> 
 									<td style="background-color: #32CD32;"></td><td></td>
 									<td></td>
-									<td></td>
+									<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance8/totalLorryCountPerCategory)+(sumMaintenance9/totalLorryCountPerCategory)+(sumMaintenance10/totalLorryCountPerCategory)+(sumMaintenance11/totalLorryCountPerCategory)+(sumMaintenance12/totalLorryCountPerCategory)+(sumMaintenance13/totalLorryCountPerCategory)+(sumMaintenance14/totalLorryCountPerCategory))/7}" />" ></td>
 									<td></td>
 									<td style="background-color: #32CD32;"></td>
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance15/totalLorryCountPerCategory}" />" ></td> 
@@ -649,7 +659,7 @@
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance21/totalLorryCountPerCategory}" />" ></td> 
 									<td style="background-color: #32CD32;"></td><td></td>
 									<td></td>
-									<td></td>
+									<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance15/totalLorryCountPerCategory)+(sumMaintenance16/totalLorryCountPerCategory)+(sumMaintenance17/totalLorryCountPerCategory)+(sumMaintenance18/totalLorryCountPerCategory)+(sumMaintenance19/totalLorryCountPerCategory)+(sumMaintenance20/totalLorryCountPerCategory)+(sumMaintenance21/totalLorryCountPerCategory))/7}" />" ></td>
 									<td></td>
 									<td style="background-color: #32CD32;"></td>
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance22/totalLorryCountPerCategory}" />" ></td> 
@@ -667,7 +677,7 @@
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance28/totalLorryCountPerCategory}" />" ></td> 
 									<td style="background-color: #32CD32;"></td><td></td>
 									<td></td>
-									<td></td>
+									<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance22/totalLorryCountPerCategory)+(sumMaintenance23/totalLorryCountPerCategory)+(sumMaintenance24/totalLorryCountPerCategory)+(sumMaintenance25/totalLorryCountPerCategory)+(sumMaintenance26/totalLorryCountPerCategory)+(sumMaintenance27/totalLorryCountPerCategory)+(sumMaintenance28/totalLorryCountPerCategory))/7}" />" ></td>
 									<td></td>
 									<td style="background-color: #32CD32;"></td>
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance29/totalLorryCountPerCategory}" />" ></td> 
@@ -795,6 +805,16 @@
 							<c:set var="sumVolWeek3" value="0"></c:set>
 							<c:set var="sumVolWeek4" value="0"></c:set>
 							<c:set var="sumVolWeek5" value="0"></c:set>
+							
+							<c:set var="sumAvailabilityWeek1" value="0"></c:set>
+							<c:set var="sumAvailabilityWeek2" value="0"></c:set>
+							<c:set var="sumAvailabilityWeek3" value="0"></c:set>
+							<c:set var="sumAvailabilityWeek4" value="0"></c:set>
+							
+							<c:set var="sumPercentageWeek1" value="0"></c:set>
+							<c:set var="sumPercentageWeek2" value="0"></c:set>
+							<c:set var="sumPercentageWeek3" value="0"></c:set>
+							<c:set var="sumPercentageWeek4" value="0"></c:set>
 							
 							<c:set var="totalLorryCountPerCategory" value="0"></c:set>
 							<c:set var="category" value="${model.category}"></c:set>
@@ -967,7 +987,17 @@
 						<c:set var="sumVolWeek2" value="${sumVolWeek2 + model.gpsWeek2Vol}"></c:set>
 						<c:set var="sumVolWeek3" value="${sumVolWeek3 + model.gpsWeek3Vol}"></c:set>
 						<c:set var="sumVolWeek4" value="${sumVolWeek4 + model.gpsWeek4Vol}"></c:set>
-						<c:set var="sumVolWeek5" value="${sumVolWeek5 + model.gpsWeek5Vol}"></c:set>		
+						<c:set var="sumVolWeek5" value="${sumVolWeek5 + model.gpsWeek5Vol}"></c:set>	
+						
+						<c:set var="sumAvailabilityWeek1" value="${sumAvailabilityWeek1 + model.totalAvailabilityWeek1}"></c:set>	
+						<c:set var="sumAvailabilityWeek2" value="${sumAvailabilityWeek2 + model.totalAvailabilityWeek2}"></c:set>	
+						<c:set var="sumAvailabilityWeek3" value="${sumAvailabilityWeek3 + model.totalAvailabilityWeek3}"></c:set>	
+						<c:set var="sumAvailabilityWeek4" value="${sumAvailabilityWeek4 + model.totalAvailabilityWeek4}"></c:set>	
+						
+						<c:set var="sumPercentageWeek1" value="${sumPercentageWeek1 + model.percentageWeek1}"></c:set>
+						<c:set var="sumPercentageWeek2" value="${sumPercentageWeek2 + model.percentageWeek2}"></c:set>
+						<c:set var="sumPercentageWeek3" value="${sumPercentageWeek3 + model.percentageWeek3}"></c:set>
+						<c:set var="sumPercentageWeek4" value="${sumPercentageWeek4 + model.percentageWeek4}"></c:set>	
 										
 						<c:if test="${model.maintenanceColor1 == '1105'}">
 							<c:set var="grandTotalPending1" value="${grandTotalPending1 + 1}"></c:set>
@@ -2365,7 +2395,7 @@
 							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center; " type="text" size="1px" value="<bean:write name="model" property="totalTripsGPSWeek1"/>"></td>
 							<td align="center"><input type="text" style="text-align: center; background-color: #FFFF00;" size="5px" value="${model.gpsWeek1Vol}" readonly="readonly"/></td>
 							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalAvailabilityWeek1"/>"></td>
-							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="percentageWeek1"/>"></td>
+							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.percentageWeek1}" />"></td>
 							<c:choose>
 								<c:when test="${model.gpsColor8 == 1201}"><!-- orange -->
 									<td>
@@ -3664,7 +3694,7 @@
 							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalTripsGPSWeek2"/>"></td>
 							<td align="center"><input type="text" style="text-align: center; background-color: #FFFF00;" size="5px" value="${model.gpsWeek2Vol}" readonly="readonly"/></td>
 							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalAvailabilityWeek2"/>"></td>
-							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="percentageWeek2"/>"></td>
+							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.percentageWeek2}" />"></td>
 							<c:choose>
 								<c:when test="${model.gpsColor15 == 1201}"><!-- orange -->
 									<td>
@@ -4963,7 +4993,7 @@
 							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalTripsGPSWeek3"/>"></td>
 							<td align="center"><input type="text" style="text-align: center; background-color: #FFFF00;" size="5px" value="${model.gpsWeek3Vol}" readonly="readonly"/></td>
 							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalAvailabilityWeek3"/>"></td>
-							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="percentageWeek3"/>"></td>
+							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.percentageWeek3}" />"></td>
 							<c:choose>
 								<c:when test="${model.gpsColor22 == 1201}"><!-- orange -->
 									<td>
@@ -6262,7 +6292,7 @@
 							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalTripsGPSWeek4"/>"></td>
 							<td align="center"><input type="text" style="text-align: center; background-color: #FFFF00;" size="5px" value="${model.gpsWeek4Vol}" readonly="readonly"/></td>
 							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalAvailabilityWeek4"/>"></td>
-							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="percentageWeek4"/>"></td>
+							<td align="center" style="text-align: center; background-color: #FF8C00;"><input style="text-align: center;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.percentageWeek4}" />"></td>
 							<c:choose>
 								<c:when test="${model.gpsColor29 == 1201}"><!-- orange -->
 									<td>
@@ -6829,7 +6859,7 @@
 							<td align="center" style="background-color: #000000;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalExtended"/>"></td>	<!-- color BLACK (Extended) -->
 							<td align="center" style="background-color: #EE82EE;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalEarlyDone"/>"></td>	<!-- color VIOLET (Early Done) -->
 							<td align="center" style="background-color: #FF8C00;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalTripsGPS"/>"></td>	<!-- Orange Background color, BLACK GPS total trips per month -->
-							<td align="center" style="background-color: #FF8C00;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalPercentage"/>"></td>	<!-- Orange (Percentages) formulated in GPS total trips/month and total available in maintenance/month -->
+							<td align="center" style="background-color: #FF8C00;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.totalPercentage}" />"></td>	<!-- Orange (Percentages) formulated in GPS total trips/month and total available in maintenance/month -->
 							<td align="center" style="background-color: #FF8C00;">
 								<div class="tooltip1">
 									<input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalGpsTripIssueTI"/>"><!-- GPS Trip Issue: Terminal Issue (TI) -->
@@ -6948,9 +6978,9 @@
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance7}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol7}" ></td>
 						<td></td>
-						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
-						<td></td>
-						<td></td>
+						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00;" value="${sumVolWeek1}" ></td>
+						<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek1/totalLorryCountPerCategory}" ></td>
+						<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumPercentageWeek1/totalLorryCountPerCategory}" />" ></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip8}" ></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance8}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol8}" ></td>
@@ -6974,8 +7004,8 @@
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol14}" ></td>
 						<td></td>
 						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
-						<td></td>
-						<td></td>
+						<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek2/totalLorryCountPerCategory}" ></td>
+						<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumPercentageWeek2/totalLorryCountPerCategory}" />" ></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip15}" ></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance15}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol15}" ></td>
@@ -6999,8 +7029,8 @@
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol21}" ></td>
 						<td></td>
 						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
-						<td></td>
-						<td></td>
+						<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek3/totalLorryCountPerCategory}" ></td>
+						<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumPercentageWeek3/totalLorryCountPerCategory}" />" ></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip22}" ></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance22}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol22}" ></td>
@@ -7024,8 +7054,8 @@
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol28}" ></td>
 						<td></td>
 						<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
-						<td></td>
-						<td></td>
+						<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek4/totalLorryCountPerCategory}" ></td>
+						<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumPercentageWeek4/totalLorryCountPerCategory}" />" ></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip29}" ></td>
 						<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance29}" ></td>
 						<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol29}" ></td>
@@ -7218,7 +7248,7 @@
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance7/totalLorryCountPerCategory}" />" ></td> 
 						<td style="background-color: #32CD32;"></td><td></td>
 						<td></td>
-						<td></td>
+						<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance1/totalLorryCountPerCategory)+(sumMaintenance2/totalLorryCountPerCategory)+(sumMaintenance3/totalLorryCountPerCategory)+(sumMaintenance4/totalLorryCountPerCategory)+(sumMaintenance5/totalLorryCountPerCategory)+(sumMaintenance6/totalLorryCountPerCategory)+(sumMaintenance7/totalLorryCountPerCategory))/7}" />" ></td>
 						<td></td>
 						<td style="background-color: #32CD32;"></td>
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance8/totalLorryCountPerCategory}" />" ></td> 
@@ -7236,7 +7266,7 @@
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance14/totalLorryCountPerCategory}" />" ></td> 
 						<td style="background-color: #32CD32;"></td><td></td>
 						<td></td>
-						<td></td>
+						<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance8/totalLorryCountPerCategory)+(sumMaintenance9/totalLorryCountPerCategory)+(sumMaintenance10/totalLorryCountPerCategory)+(sumMaintenance11/totalLorryCountPerCategory)+(sumMaintenance12/totalLorryCountPerCategory)+(sumMaintenance13/totalLorryCountPerCategory)+(sumMaintenance14/totalLorryCountPerCategory))/7}" />" ></td>
 						<td></td>
 						<td style="background-color: #32CD32;"></td>
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance15/totalLorryCountPerCategory}" />" ></td> 
@@ -7254,7 +7284,7 @@
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance21/totalLorryCountPerCategory}" />" ></td> 
 						<td style="background-color: #32CD32;"></td><td></td>
 						<td></td>
-						<td></td>
+						<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance15/totalLorryCountPerCategory)+(sumMaintenance16/totalLorryCountPerCategory)+(sumMaintenance17/totalLorryCountPerCategory)+(sumMaintenance18/totalLorryCountPerCategory)+(sumMaintenance19/totalLorryCountPerCategory)+(sumMaintenance20/totalLorryCountPerCategory)+(sumMaintenance21/totalLorryCountPerCategory))/7}" />" ></td>
 						<td></td>
 						<td style="background-color: #32CD32;"></td>
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance22/totalLorryCountPerCategory}" />" ></td> 
@@ -7272,7 +7302,7 @@
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance28/totalLorryCountPerCategory}" />" ></td> 
 						<td style="background-color: #32CD32;"></td><td></td>
 						<td></td>
-						<td></td>
+						<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance22/totalLorryCountPerCategory)+(sumMaintenance23/totalLorryCountPerCategory)+(sumMaintenance24/totalLorryCountPerCategory)+(sumMaintenance25/totalLorryCountPerCategory)+(sumMaintenance26/totalLorryCountPerCategory)+(sumMaintenance27/totalLorryCountPerCategory)+(sumMaintenance28/totalLorryCountPerCategory))/7}" />" ></td>
 						<td></td>
 						<td style="background-color: #32CD32;"></td>
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance29/totalLorryCountPerCategory}" />" ></td> 
@@ -7692,6 +7722,17 @@
 				<c:set var="sumVolWeek3" value="0"></c:set>
 				<c:set var="sumVolWeek4" value="0"></c:set>
 				<c:set var="sumVolWeek5" value="0"></c:set>
+				
+				<c:set var="sumAvailabilityWeek1" value="0"></c:set>
+				<c:set var="sumAvailabilityWeek2" value="0"></c:set>
+				<c:set var="sumAvailabilityWeek3" value="0"></c:set>
+				<c:set var="sumAvailabilityWeek4" value="0"></c:set>
+				
+				<c:set var="sumPercentageWeek1" value="0"></c:set>
+				<c:set var="sumPercentageWeek2" value="0"></c:set>
+				<c:set var="sumPercentageWeek3" value="0"></c:set>
+				<c:set var="sumPercentageWeek4" value="0"></c:set>
+				
 				<c:set var="totalLorryCountPerCategory" value="0"></c:set>
 				<c:set var="capacityOfTerminal" value="0"></c:set>
 				<logic:iterate name="maintenanceMonitoringForm" property="modelList" type="com.transport.model.MaintenanceMonitoring" id="model">
@@ -7723,9 +7764,9 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance7}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol7}" ></td>
 									<td></td>
-									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00;" value="${sumVolWeek1}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek1/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumPercentageWeek1/totalLorryCountPerCategory}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip8}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance8}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol8}" ></td>
@@ -7749,8 +7790,8 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol14}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek2/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumPercentageWeek2/totalLorryCountPerCategory}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip15}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance15}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol15}" ></td>
@@ -7774,8 +7815,8 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol21}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek3/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumPercentageWeek3/totalLorryCountPerCategory}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip22}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance22}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol22}" ></td>
@@ -7799,8 +7840,8 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol28}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek4/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumPercentageWeek4/totalLorryCountPerCategory}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip29}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance29}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol29}" ></td>
@@ -7992,7 +8033,7 @@
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance7/totalLorryCountPerCategory}" />" ></td> 
 									<td style="background-color: #32CD32;"></td><td></td>
 									<td></td>
-									<td></td>
+									<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance1/totalLorryCountPerCategory)+(sumMaintenance2/totalLorryCountPerCategory)+(sumMaintenance3/totalLorryCountPerCategory)+(sumMaintenance4/totalLorryCountPerCategory)+(sumMaintenance5/totalLorryCountPerCategory)+(sumMaintenance6/totalLorryCountPerCategory)+(sumMaintenance7/totalLorryCountPerCategory))/7}" />" ></td>
 									<td></td>
 									<td style="background-color: #32CD32;"></td>
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance8/totalLorryCountPerCategory}" />" ></td> 
@@ -8010,7 +8051,7 @@
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance14/totalLorryCountPerCategory}" />" ></td> 
 									<td style="background-color: #32CD32;"></td><td></td>
 									<td></td>
-									<td></td>
+									<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance8/totalLorryCountPerCategory)+(sumMaintenance9/totalLorryCountPerCategory)+(sumMaintenance10/totalLorryCountPerCategory)+(sumMaintenance11/totalLorryCountPerCategory)+(sumMaintenance12/totalLorryCountPerCategory)+(sumMaintenance13/totalLorryCountPerCategory)+(sumMaintenance14/totalLorryCountPerCategory))/7}" />" ></td>
 									<td></td>
 									<td style="background-color: #32CD32;"></td>
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance15/totalLorryCountPerCategory}" />" ></td> 
@@ -8028,7 +8069,7 @@
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance21/totalLorryCountPerCategory}" />" ></td> 
 									<td style="background-color: #32CD32;"></td><td></td>
 									<td></td>
-									<td></td>
+									<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance15/totalLorryCountPerCategory)+(sumMaintenance16/totalLorryCountPerCategory)+(sumMaintenance17/totalLorryCountPerCategory)+(sumMaintenance18/totalLorryCountPerCategory)+(sumMaintenance19/totalLorryCountPerCategory)+(sumMaintenance20/totalLorryCountPerCategory)+(sumMaintenance21/totalLorryCountPerCategory))/7}" />" ></td>
 									<td></td>
 									<td style="background-color: #32CD32;"></td>
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance22/totalLorryCountPerCategory}" />" ></td> 
@@ -8046,7 +8087,7 @@
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance28/totalLorryCountPerCategory}" />" ></td> 
 									<td style="background-color: #32CD32;"></td><td></td>
 									<td></td>
-									<td></td>
+									<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance22/totalLorryCountPerCategory)+(sumMaintenance23/totalLorryCountPerCategory)+(sumMaintenance24/totalLorryCountPerCategory)+(sumMaintenance25/totalLorryCountPerCategory)+(sumMaintenance26/totalLorryCountPerCategory)+(sumMaintenance27/totalLorryCountPerCategory)+(sumMaintenance28/totalLorryCountPerCategory))/7}" />" ></td>
 									<td></td>
 									<td style="background-color: #32CD32;"></td>
         							<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance29/totalLorryCountPerCategory}" />" ></td> 
@@ -8172,6 +8213,17 @@
 							<c:set var="sumVolWeek3" value="0"></c:set>
 							<c:set var="sumVolWeek4" value="0"></c:set>
 							<c:set var="sumVolWeek5" value="0"></c:set>
+							
+							<c:set var="sumAvailabilityWeek1" value="0"></c:set>
+							<c:set var="sumAvailabilityWeek2" value="0"></c:set>
+							<c:set var="sumAvailabilityWeek3" value="0"></c:set>
+							<c:set var="sumAvailabilityWeek4" value="0"></c:set>
+							
+							<c:set var="sumPercentageWeek1" value="0"></c:set>
+							<c:set var="sumPercentageWeek2" value="0"></c:set>
+							<c:set var="sumPercentageWeek3" value="0"></c:set>
+							<c:set var="sumPercentageWeek4" value="0"></c:set>
+							
 							<c:set var="totalLorryCountPerCategory" value="0"></c:set>
 							<c:set var="category" value="${model.category}"></c:set>
 							<c:set var="committedVolume" value="${model.committedVolume}"></c:set>
@@ -8343,7 +8395,17 @@
 						<c:set var="sumVolWeek2" value="${sumVolWeek2 + model.gpsWeek2Vol}"></c:set>
 						<c:set var="sumVolWeek3" value="${sumVolWeek3 + model.gpsWeek3Vol}"></c:set>
 						<c:set var="sumVolWeek4" value="${sumVolWeek4 + model.gpsWeek4Vol}"></c:set>
-						<c:set var="sumVolWeek5" value="${sumVolWeek5 + model.gpsWeek5Vol}"></c:set>		
+						<c:set var="sumVolWeek5" value="${sumVolWeek5 + model.gpsWeek5Vol}"></c:set>
+						
+						<c:set var="sumAvailabilityWeek1" value="${sumAvailabilityWeek1 + model.totalAvailabilityWeek1}"></c:set>	
+						<c:set var="sumAvailabilityWeek2" value="${sumAvailabilityWeek2 + model.totalAvailabilityWeek2}"></c:set>	
+						<c:set var="sumAvailabilityWeek3" value="${sumAvailabilityWeek3 + model.totalAvailabilityWeek3}"></c:set>	
+						<c:set var="sumAvailabilityWeek4" value="${sumAvailabilityWeek4 + model.totalAvailabilityWeek4}"></c:set>		
+						
+						<c:set var="sumPercentageWeek1" value="${sumPercentageWeek1 + model.percentageWeek1}"></c:set>
+						<c:set var="sumPercentageWeek2" value="${sumPercentageWeek2 + model.percentageWeek2}"></c:set>
+						<c:set var="sumPercentageWeek3" value="${sumPercentageWeek3 + model.percentageWeek3}"></c:set>
+						<c:set var="sumPercentageWeek4" value="${sumPercentageWeek4 + model.percentageWeek4}"></c:set>	
 						
 						<c:if test="${model.maintenanceColor1 == '1105'}">
 							<c:set var="grandTotalPending1" value="${grandTotalPending1 + 1}"></c:set>
@@ -9741,7 +9803,7 @@
 							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalTripsGPSWeek1"/>"></td>
 							<td align="center"><input type="text" style="text-align: center; background-color: #FFFF00;" size="5px" value="${model.gpsWeek1Vol}" readonly="readonly"/></td>
 							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalAvailabilityWeek1"/>"></td>
-							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="percentageWeek1"/>"></td>
+							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.percentageWeek1}" />"></td>
 							<c:choose>
 								<c:when test="${model.gpsColor8 == 1201}"><!-- orange -->
 									<td>
@@ -11040,7 +11102,7 @@
 							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalTripsGPSWeek2"/>"></td>
 							<td align="center"><input type="text" style="text-align: center; background-color: #FFFF00;" size="5px" value="${model.gpsWeek2Vol}" readonly="readonly"/></td>
 							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalAvailabilityWeek2"/>"></td>
-							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="percentageWeek2"/>"></td>
+							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.percentageWeek2}" />"></td>
 							<c:choose>
 								<c:when test="${model.gpsColor15 == 1201}"><!-- orange -->
 									<td>
@@ -12339,7 +12401,7 @@
 							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalTripsGPSWeek3"/>"></td>
 							<td align="center"><input type="text" style="text-align: center; background-color: #FFFF00;" size="5px" value="${model.gpsWeek3Vol}" readonly="readonly"/></td>
 							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalAvailabilityWeek3"/>"></td>
-							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="percentageWeek3"/>"></td>
+							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.percentageWeek3}" />"></td>
 							<c:choose>
 								<c:when test="${model.gpsColor22 == 1201}"><!-- orange -->
 									<td>
@@ -13637,7 +13699,7 @@
 							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalTripsGPSWeek4"/>"></td>
 							<td align="center"><input type="text" style="text-align: center; background-color: #FFFF00;" size="5px" value="${model.gpsWeek4Vol}" readonly="readonly"/></td>
 							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="totalAvailabilityWeek4"/>"></td>
-							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<bean:write name="model" property="percentageWeek4"/>"></td>
+							<td align="center" style="text-align: center; background-color: #FFA500;"><input style="text-align: center;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.percentageWeek4}" />"></td>
 							<c:choose>
 								<c:when test="${model.gpsColor29 == 1201}"><!-- orange -->
 									<td>
@@ -14204,7 +14266,7 @@
 							<td align="center" style="background-color: #000000;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalExtended"/>"></td>	<!-- color BLACK (Extended) -->
 							<td align="center" style="background-color: #EE82EE;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalEarlyDone"/>"></td>	<!-- color VIOLET (Early Done) -->
 							<td align="center" style="background-color: #FF8C00;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalTripsGPS"/>"></td>	<!-- Orange Background BLACK GPS total trips per month -->
-							<td align="center" style="background-color: #FF8C00;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalPercentage"/>"></td> <!-- Orange (Percentages) formulated in GPS total trips/month and total available in maintenance/month -->
+							<td align="center" style="background-color: #FF8C00;"><input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${model.totalPercentage}" />"></td> <!-- Orange (Percentages) formulated in GPS total trips/month and total available in maintenance/month -->
 							<td align="center" style="background-color: #FF8C00;">
 								<div class="tooltip1">
 									<input readonly="readonly" style="text-align: center; font-weight: bold;" type="text" size="1px" value="<bean:write name="model" property="totalGpsTripIssueTI"/>"><!-- GPS Trip Issue: Terminal Issue (TI) -->
@@ -14323,9 +14385,9 @@
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance7}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol7}" ></td>
 									<td></td>
-									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek1}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00;" value="${sumVolWeek1}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek1/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumPercentageWeek1/totalLorryCountPerCategory}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip8}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance8}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol8}" ></td>
@@ -14349,8 +14411,8 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol14}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek2}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek2/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumPercentageWeek2/totalLorryCountPerCategory}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip15}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance15}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol15}" ></td>
@@ -14374,8 +14436,8 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol21}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek3}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek3/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumPercentageWeek3/totalLorryCountPerCategory}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip22}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance22}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol22}" ></td>
@@ -14399,8 +14461,8 @@
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol28}" ></td>
 									<td></td>
 									<td align="center"><input type="text" size="5px" style="text-align: center; font-weight: bold; background-color: #FFFF00; "value="${sumVolWeek4}" ></td>
-									<td></td>
-									<td></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumAvailabilityWeek4/totalLorryCountPerCategory}" ></td>
+									<td align="center" style="background-color: #FF8C00;"><input type="text" size="5px" style="text-align: center; font-weight: bold;" value="${sumPercentageWeek4/totalLorryCountPerCategory}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumTrip29}" ></td>
 									<td><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="${sumMaintenance29}" ></td>
 									<td><input type="text" size="5px" style="text-align: center; font-weight: bold;"value="${sumVol29}" ></td>
@@ -14594,7 +14656,7 @@
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance7/totalLorryCountPerCategory}" />" ></td> 
 						<td style="background-color: #32CD32;"></td><td></td>
 						<td></td>
-						<td></td>
+						<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance1/totalLorryCountPerCategory)+(sumMaintenance2/totalLorryCountPerCategory)+(sumMaintenance3/totalLorryCountPerCategory)+(sumMaintenance4/totalLorryCountPerCategory)+(sumMaintenance5/totalLorryCountPerCategory)+(sumMaintenance6/totalLorryCountPerCategory)+(sumMaintenance7/totalLorryCountPerCategory))/7}" />" ></td>
 						<td></td>
 						<td style="background-color: #32CD32;"></td>
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance8/totalLorryCountPerCategory}" />" ></td> 
@@ -14612,7 +14674,7 @@
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance14/totalLorryCountPerCategory}" />" ></td> 
 						<td style="background-color: #32CD32;"></td><td></td>
 						<td></td>
-						<td></td>
+						<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance8/totalLorryCountPerCategory)+(sumMaintenance9/totalLorryCountPerCategory)+(sumMaintenance10/totalLorryCountPerCategory)+(sumMaintenance11/totalLorryCountPerCategory)+(sumMaintenance12/totalLorryCountPerCategory)+(sumMaintenance13/totalLorryCountPerCategory)+(sumMaintenance14/totalLorryCountPerCategory))/7}" />" ></td>
 						<td></td>
 						<td style="background-color: #32CD32;"></td>
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance15/totalLorryCountPerCategory}" />" ></td> 
@@ -14630,7 +14692,7 @@
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance21/totalLorryCountPerCategory}" />" ></td> 
 						<td style="background-color: #32CD32;"></td><td></td>
 						<td></td>
-						<td></td>
+						<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance15/totalLorryCountPerCategory)+(sumMaintenance16/totalLorryCountPerCategory)+(sumMaintenance17/totalLorryCountPerCategory)+(sumMaintenance18/totalLorryCountPerCategory)+(sumMaintenance19/totalLorryCountPerCategory)+(sumMaintenance20/totalLorryCountPerCategory)+(sumMaintenance21/totalLorryCountPerCategory))/7}" />" ></td>
 						<td></td>
 						<td style="background-color: #32CD32;"></td>
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance22/totalLorryCountPerCategory}" />" ></td> 
@@ -14648,7 +14710,7 @@
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance28/totalLorryCountPerCategory}" />" ></td> 
 						<td style="background-color: #32CD32;"></td><td></td>
 						<td></td>
-						<td></td>
+						<td style="background-color: #32CD32;" align="center"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${((sumMaintenance22/totalLorryCountPerCategory)+(sumMaintenance23/totalLorryCountPerCategory)+(sumMaintenance24/totalLorryCountPerCategory)+(sumMaintenance25/totalLorryCountPerCategory)+(sumMaintenance26/totalLorryCountPerCategory)+(sumMaintenance27/totalLorryCountPerCategory)+(sumMaintenance28/totalLorryCountPerCategory))/7}" />" ></td>
 						<td></td>
 						<td style="background-color: #32CD32;"></td>
         				<td style="background-color: #32CD32;"><input type="text" size="1px" style="text-align: center; font-weight: bold;"value="<fmt:formatNumber type = "percent" minFractionDigits = "0" value = "${sumMaintenance29/totalLorryCountPerCategory}" />" ></td> 
