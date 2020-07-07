@@ -137,7 +137,7 @@
 							</form:select>
 						</div>
 						<div class="col-xs-2">
-							<input class="btn btn-default" type="button" value="Select Item for Inventory" onclick="selectItem(document.getElementById('itemSelectedId').value);">
+							<input class="btn btn-default" type="button" value="Get Item System Qty" onclick="selectItem(document.getElementById('itemSelectedId').value);">
 						</div>	
 						<div id="ItemSystemQtyDIV" class="col-xs-1" style="width: 170px;">
 							<label>System Qty</label>

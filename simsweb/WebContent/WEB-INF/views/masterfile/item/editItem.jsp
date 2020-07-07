@@ -10,6 +10,7 @@
  	<script type="text/javascript" src="resources/js/jquery-ui.min.js" ></script>
 	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/js/bootbox.js"></script>
+	<script type="text/javascript" src="resources/js/global.js"></script>
 	<link rel="stylesheet" href="resources/style/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="resources/style/jquery-ui.css">
 	<style type="text/css">
@@ -19,11 +20,17 @@
 	</style>
 	<script>
 		$(function() {
-		  // Handler for .ready() called.
-		 $('#dtManufacturedDatePicker').datepicker({});
-		 $('#dtExpiryDatePicker').datepicker({});
-			  
-		 $('#descriptionId').focus();
+			 // Handler for .ready() called.
+			$("form").bind("keypress", function (e) {  
+				if (e.keyCode == 13) {  
+					return false;  
+				}  
+			});
+			
+			$('#dtManufacturedDatePicker').datepicker({});
+			$('#dtExpiryDatePicker').datepicker({});
+				  
+			$('#descriptionId').focus();
 		});
 	</script>
 </head>
@@ -52,7 +59,26 @@
 				</div>
 			</c:if>
 			
-			<br>
+			<table style="width: 100%;">
+				<tr>
+					<td width="12%"></td>
+					<td>
+						<div class="form-group">
+							<div class="col-xs-10" align="right">
+							<c:choose>
+								<c:when test="${isSuccess == true}">
+									<input class="btn btn-default" type="button" value="Close" onclick="window.location.href = '/simsweb/goToSearchItem';">
+								</c:when>
+								<c:otherwise>
+									<input class="btn btn-default" type="submit" value="Submit/Update">
+									<input class="btn btn-default" type="button" value="Cancel" onclick="window.location.href = '/simsweb/goToSearchItem';">
+								</c:otherwise>
+							</c:choose>
+							</div>
+						</div>				
+					</td>
+				</tr>
+			</table>
 			
 			<table style="width: 100%;">
 				<tr>
@@ -93,14 +119,14 @@
 					<td width="12%"></td>
 					<td>
 						<div class="form-group">
+							<form:label path="brand.id" cssClass="col-sm-2 control-label">Brand:</form:label>
+							<div class="col-xs-3">
+								<form:select id="brandId" path="brand.id"  items="${brandList}"  itemValue="id"   itemLabel="name" cssClass="form-control input-sm">
+								</form:select>
+			    			</div>
 			    			<form:label path="category.id" cssClass="col-sm-2 control-label">Category:</form:label>
 							<div class="col-xs-3">
 								<form:select id="categoryId" path="category.id"  items="${categoryList}"  itemValue="id"   itemLabel="name" cssClass="form-control input-sm">
-								</form:select>
-			    			</div>
-			    			<form:label path="brand.id" cssClass="col-sm-2 control-label">Brand:</form:label>
-							<div class="col-xs-3">
-								<form:select id="brandId" path="brand.id"  items="${brandList}"  itemValue="id"   itemLabel="name" cssClass="form-control input-sm">
 								</form:select>
 			    			</div>
 						</div>					
@@ -110,6 +136,8 @@
 					<td width="12%"></td>
 					<td>
 						<div class="form-group">
+							<form:label path="" cssClass="col-sm-2 control-label"></form:label>
+							<div class="col-xs-3"></div>
 			    			<form:label path="subCategory.id" cssClass="col-sm-2 control-label">SubCategory:</form:label>
 							<div class="col-xs-3">
 								<form:select id="subCategoryId" path="subCategory.id"  items="${subCategoryList}"  itemValue="id"   itemLabel="name" cssClass="form-control input-sm">
@@ -124,11 +152,11 @@
 						<div class="form-group">
 							<form:label path="retailOrigPrice" cssClass="col-sm-2 control-label">Retail Original Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="retailOrigPrice" cssClass="form-control input-sm"/>
+			      				<form:input path="retailOrigPrice" id="retailOrigPriceId" onkeyup="computeRetailSellingPrice();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="retailMarkupPercent" cssClass="col-sm-2 control-label">Retail Markup Percent:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="retailMarkupPercent" cssClass="form-control input-sm"/>
+			      				<form:input path="retailMarkupPercent" id="retailMarkupPercentId" onkeypress="return isNumberKey(event);" onkeyup="computeRetailSellingPriceByMarkupPercent();" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -139,11 +167,11 @@
 						<div class="form-group">
 			    			<form:label path="retailMarkupPrice" cssClass="col-sm-2 control-label">Retail Markup Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="retailMarkupPrice" cssClass="form-control input-sm"/>
+			      				<form:input path="retailMarkupPrice" id="retailMarkupPriceId" onkeypress="return isNumberKey(event);" onkeyup="computeRetailSellingPriceByMarkupPrice();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="retailSellingPrice" cssClass="col-sm-2 control-label">Retail Selling Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="retailSellingPrice" cssClass="form-control input-sm"/>
+			      				<form:input path="retailSellingPrice" id="retailSellingPriceId" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -154,11 +182,11 @@
 						<div class="form-group">
 							<form:label path="wholesaleOrigPrice" cssClass="col-sm-2 control-label">Wholesale Original Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="wholesaleOrigPrice" cssClass="form-control input-sm"/>
+			      				<form:input path="wholesaleOrigPrice" id="wholesaleOrigPriceId" onkeyup="computeWholesaleSellingPrice();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="wholesaleMarkupPercent" cssClass="col-sm-2 control-label">Wholesale Markup Percent:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="wholesaleMarkupPercent" cssClass="form-control input-sm"/>
+			      				<form:input path="wholesaleMarkupPercent" id="wholesaleMarkupPercentId" onkeypress="return isNumberKey(event);" onkeyup="computeWholesaleSellingPriceByMarkupPercent();" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -169,11 +197,11 @@
 						<div class="form-group">
 							<form:label path="wholesaleMarkupPrice" cssClass="col-sm-2 control-label">Wholesale Markup Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="wholesaleMarkupPrice" cssClass="form-control input-sm"/>
+			      				<form:input path="wholesaleMarkupPrice" id="wholesaleMarkupPriceId" onkeypress="return isNumberKey(event);" onkeyup="computeWholesaleSellingPriceByMarkupPrice();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="wholesaleSellingPrice" cssClass="col-sm-2 control-label">Wholesale Selling Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="wholesaleSellingPrice" cssClass="form-control input-sm"/>
+			      				<form:input path="wholesaleSellingPrice" id="wholesaleSellingPriceId" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -184,11 +212,11 @@
 						<div class="form-group">
 							<form:label path="discountPercent" cssClass="col-sm-2 control-label">Discount Percent:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="discountPercent" cssClass="form-control input-sm"/>
+			      				<form:input path="discountPercent" id="discountPercentId" onkeypress="return isNumberKey(event);" onkeyup="computeDiscountAmtByPercent();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="discountAmount" cssClass="col-sm-2 control-label">Discount Amount:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="discountAmount" cssClass="form-control input-sm"/>
+			      				<form:input path="discountAmount" id="discountAmountId" onkeypress="return isNumberKey(event);"  cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -238,7 +266,7 @@
 					<td width="12%"></td>
 					<td>
 						<div class="form-group">
-							<div class="col-xs-5" align="right">
+							<div class="col-xs-10" align="right">
 							<c:choose>
 								<c:when test="${isSuccess == true}">
 									<input class="btn btn-default" type="button" value="Close" onclick="window.location.href = '/simsweb/goToSearchItem';">

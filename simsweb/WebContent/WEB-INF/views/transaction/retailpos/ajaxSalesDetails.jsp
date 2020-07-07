@@ -7,14 +7,14 @@
 		<td>			
 			<input type="hidden" id="salesHeaderIdId" name="salesHeaderId" value="${salesHeaderId}">			
 			<div class="table-responsive" style="width: 100%; padding: 10px 0px 10px 10px;">
-				<table class="table table-striped table-hover table-bordered table-responsive" style="font-size: 9px;">
+				<table class="table table-striped table-hover table-bordered table-responsive" style="font-size: 14px;">
 					<tr style="font-weight: bold;">
-						<td width="40px">No</td>
-						<td width="1500px">Item</td>
+						<td width="40px">Item</td>
+						<td width="1500px">Description</td>
 						<td width="50px">Qty</td>
 						<td width="150px">Price</td>
 						<td width="50px">Discount</td>
-						<td width="50px">TotalSales</td>
+						<td width="50px">TotalAmount</td>
 						<td width="50px">TotalDiscount</td>
 						<td width="150px">AmountDue</td>
 						<c:if test="${tenderedAmount == null}">
@@ -22,9 +22,10 @@
 						</c:if>
 					</tr>
 					<!-- loop here -->
-					<c:forEach items="${salesDetails}" var="model" varStatus = "row">
+					<c:set var="itemSize" value="${salesDetails.size()}"></c:set>
+					<c:forEach items="${salesDetails}" var="model" varStatus = "row" >
 						<tr height="30px">
-							<td align="right">${row.count}</td>
+							<td align="right"><c:out value="${itemSize}"></c:out> </td>
 							<td>${model.item}</td>
 							<td align="right">${model.qty}</td>
 							<td align="right"><fmt:formatNumber type="currency" currencySymbol="" value="${model.price}"  maxFractionDigits="2"></fmt:formatNumber></td>
@@ -36,6 +37,7 @@
 								<td align="center"><input type="button" value="Delete" onclick="deleteItem(${model.id},document.getElementById('salesHeaderIdId').value);"></td>
 							</c:if>
 						</tr>
+						<c:set var="itemSize" value="${itemSize-1}"></c:set>
 					</c:forEach>
 					<!-- extra rows for design -->
 					<c:forEach var = "i" begin = "${salesDetailsSize}" end = "10">
@@ -62,17 +64,17 @@
 		<td style="padding-left: 10px; vertical-align: top; padding-top: 10px;">
 			<table>
 				<tr>
-					<td width="600px"><label style="font-size: 15px;">Total Sales:</label></td>
+					<td width="600px"><label style="font-size: 15px;">Total:</label></td>
 					<td><input type="text" readonly="readonly" id="totalSalesId" name="totalSales" style="height: 35px; width: 150px; font-size: 25px; text-align: right; color: blue;" value="<fmt:formatNumber type="currency" currencySymbol="" value="${totalSales}"  maxFractionDigits="2"></fmt:formatNumber>" ></td>
 				</tr>
 				<tr height="10px;"></tr>
 				<tr>
-					<td><label style="font-size: 15px;">Total Discount:</label></td>
+					<td><label style="font-size: 15px;">Discount:</label></td>
 					<td><input type="text" readonly="readonly" id="totalDiscountId" name="totalDiscount" style="height: 35px; width: 150px; font-size: 25px; text-align: right; color: blue;" value="<fmt:formatNumber type="currency" currencySymbol="" value="${totalDiscount}"  maxFractionDigits="2"></fmt:formatNumber>" ></td>
 				</tr>
 				<tr height="10px;"></tr>
 				<tr>
-					<td><label style="font-size: 15px;">Total Amount Due:</label></td>
+					<td><label style="font-size: 15px;">Total Due:</label></td>
 					<td><input type="text" readonly="readonly" id="totalAmountDueId" name="totalAmountDue" style="height: 35px; width: 150px; font-size: 25px; text-align: right; color: blue;" value="<fmt:formatNumber type="currency" currencySymbol="" value="${totalAmountDue}"  maxFractionDigits="2"></fmt:formatNumber>" ></td>
 				</tr>		
 			</table>												

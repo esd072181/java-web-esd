@@ -87,6 +87,7 @@ public class SalesDetailsDaoImpl extends HibernateDaoUtil implements SalesDetail
 			predicates.add(
 					builder.equal(root.get("salesHeader"), salesHeader));
 			query.where(predicates.toArray(new Predicate[predicates.size()]));
+			query.orderBy(builder.desc(root.get("id")));
 
 			Query<SalesDetails> q = session.createQuery(query);
 		    list = q.list();
