@@ -6,7 +6,9 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -222,6 +224,30 @@ public class RetailPOSController {
 		model.addAttribute("totalAmountDue", totalAmountDue);
 		
 		return new ModelAndView("transaction/retailpos/ajaxSalesDetails");
+	}
+	
+	
+	@RequestMapping("/searchItemByDescription")
+	public ModelAndView searchItemByDescription(@RequestParam("itemDescription") String itemDescription, ModelMap model) {
+		
+		if (!SIMSUtil.isUserSessionValid(model)) {
+			logger.info(SIMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		Map<Object, Object> mapCriteria = new HashMap<>();
+		mapCriteria.put("search_criteria", itemDescription);
+		mapCriteria.put("record_start", 0);
+		mapCriteria.put("max_result", 20);
+		
+		Map<Object, Object> returnMap = itemBo.findByDescription(mapCriteria);
+		
+		@SuppressWarnings("unchecked")
+		List<Item> resultList = (ArrayList<Item>) returnMap.get("resultList");
+		
+		model.addAttribute("resultList", resultList);
+		
+		return new ModelAndView("transaction/retailpos/resultList");
 	}
 
 	@RequestMapping("/deleteSalesDetails")

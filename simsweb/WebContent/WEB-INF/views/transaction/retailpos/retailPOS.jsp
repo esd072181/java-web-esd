@@ -22,6 +22,7 @@
 		$(function() {
 		  // Handler for .ready() called.
 		    $('#itemCodeId').prop('disabled', true);
+		    $('#itemDescriptionId').prop('disabled', true);
 		    $('#qtyId').prop('disabled', true);
 		    $('#paymentId').hide();
 		    $('#paymentDIV').hide();
@@ -55,6 +56,7 @@
 			  .done(function( result ) {
 				$("#salesDetailDIV").html(result);
 				$('#itemCodeId').prop('disabled', false);
+				$('#itemDescriptionId').prop('disabled', false);
 				$('#qtyId').prop('disabled', false);
 				$('#qtyId').val('1');	
 				$('#paymentId').show();
@@ -64,6 +66,7 @@
 			  });
 		}
 
+		//search by ItemCode
 		function searchItem(e, itemCode, qty, salesHeaderId) {
 			var code = e.keyCode ? e.keyCode : e.which;
 			if (code == 13) {
@@ -83,6 +86,41 @@
 				//window.location.href = 'saveSalesDetail?itemCode=' + itemCode + '&isNewTransaction=' + $('#isNewTransactionId').val() ;
 				//$('#qtyId').val(1);	
 			}
+		}
+		
+		function searchItemByDescription(e, itemDescription) {
+			var code = e.keyCode ? e.keyCode : e.which;
+			if (code == 13) {
+				//ajaxCall
+				$.ajax({
+				  type: "GET",
+				  url: "searchItemByDescription",
+				  cache: false,
+				  data: { itemDescription:itemDescription }
+				})
+				  .done(function( result ) {
+					$("#resultListDIV").html(result);
+				  });
+				
+			}
+		}
+		
+		//search by ItemCode
+		function saveSalesDetail(itemCode, qty, salesHeaderId) {
+				//ajaxCall
+				$.ajax({
+				  type: "GET",
+				  url: "saveSalesDetail",
+				  cache: false,
+				  data: { itemCode:itemCode, qty:qty, salesHeaderId:salesHeaderId }
+				})
+				  .done(function( result ) {
+					$("#resultListDIV").html('');
+					$("#salesDetailDIV").html(result);
+					$('#qtyId').val('1');
+					$('#itemDescriptionId').val('');
+					$('#itemCodeId').val('').focus();
+				  });
 		}
 		
 		function deleteItem(salesDetailsId,salesHeaderId) {
@@ -160,6 +198,7 @@
 						$("#salesDetailDIV").html(result);
 						$('#paymentDIV').hide();
 						$('#itemCodeId').prop('disabled', true);
+						$('#itemDescriptionId').prop('disabled', false);
 						$('#qtyId').prop('disabled', true);
 						$('#qtyId').val('');
 						$('#paymentId').hide();
@@ -218,13 +257,19 @@
 			<div>	
 				&nbsp;&nbsp;
 				<label>Qty:</label>
-		      	<input type="text" id="qtyId" name="qty" style="width: 50px;" onkeydown="focusItemCode(event);"/>	
+		      	<input type="text" id="qtyId" name="qty" style="width: 35px; text-align: right;" onkeydown="focusItemCode(event);"/>	
 		      	&nbsp;&nbsp;
 				<label>Item Code:</label>
 		      	<input type="text" id="itemCodeId" name="itemCode" onkeydown="focusQty(event);" onkeypress="searchItem(event, this.value, document.getElementById('qtyId').value, document.getElementById('salesHeaderIdId').value);"/>	
+				&nbsp;&nbsp;
+				<label>Item Description:</label>
+		      	<input type="text" id="itemDescriptionId" name="itemDescription" onkeydown="focusQty(event);" onkeypress="searchItemByDescription(event, this.value);"/>	
+
 	    	</div>
 		</div>
 		
+		<br>
+		<div id="resultListDIV"></div>
 		<br>
 	
 		<div id="salesDetailDIV"  style="width: 90%;">
