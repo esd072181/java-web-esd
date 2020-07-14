@@ -30,10 +30,9 @@
 		   $('#dtManufacturedDatePicker').datepicker({});
 		   $('#dtExpiryDatePicker').datepicker({});
 		  
-		   $('#descriptionId').focus();
+		   $('#itemCodeId').focus();
 		});
 		
-
 	</script>
 </head>
 <body>
@@ -125,7 +124,7 @@
 			    			</div>
 			    			<form:label path="category.id" cssClass="col-sm-2 control-label">Category:</form:label>
 							<div class="col-xs-3">
-								<form:select id="categoryId" path="category.id"  items="${categoryList}"  itemValue="id"   itemLabel="name" cssClass="form-control input-sm">
+								<form:select id="categoryId" path="category.id"  items="${categoryList}"  itemValue="id"   itemLabel="name" onchange="filterSubCategory(this);" cssClass="form-control input-sm">
 								</form:select>
 			    			</div>
 						</div>					
@@ -138,7 +137,7 @@
 							<form:label path="" cssClass="col-sm-2 control-label"></form:label>
 							<div class="col-xs-3"></div>
 			    			<form:label path="subCategory.id" cssClass="col-sm-2 control-label">SubCategory:</form:label>
-							<div class="col-xs-3">
+							<div class="col-xs-3" id="subCategoryDIVId">
 								<form:select id="subCategoryId" path="subCategory.id"  items="${subCategoryList}"  itemValue="id"   itemLabel="name" cssClass="form-control input-sm">
 								</form:select>
 			    			</div>
@@ -151,11 +150,11 @@
 						<div class="form-group">
 							<form:label path="retailOrigPrice" cssClass="col-sm-2 control-label">Retail Original Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="retailOrigPrice" id="retailOrigPriceId" onkeyup="computeRetailSellingPrice();" cssClass="form-control input-sm"/>
+			      				<form:input path="retailOrigPrice" style="text-align: right;" id="retailOrigPriceId" onkeyup="computeRetailSellingPrice();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="retailMarkupPercent" cssClass="col-sm-2 control-label">Retail Markup Percent:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="retailMarkupPercent" id="retailMarkupPercentId" onkeypress="return isNumberKey(event);" onkeyup="computeRetailSellingPriceByMarkupPercent();" cssClass="form-control input-sm"/>
+			      				<form:input path="retailMarkupPercent" style="text-align: right;" id="retailMarkupPercentId" onkeypress="return isNumberKey(event);" onkeyup="computeRetailSellingPriceByMarkupPercent();" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -166,11 +165,11 @@
 						<div class="form-group">
 			    			<form:label path="retailMarkupPrice" cssClass="col-sm-2 control-label">Retail Markup Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="retailMarkupPrice" id="retailMarkupPriceId" onkeypress="return isNumberKey(event);" onkeyup="computeRetailSellingPriceByMarkupPrice();" cssClass="form-control input-sm"/>
+			      				<form:input path="retailMarkupPrice" style="text-align: right;" id="retailMarkupPriceId" onkeypress="return isNumberKey(event);" onkeyup="computeRetailSellingPriceByMarkupPrice();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="retailSellingPrice" cssClass="col-sm-2 control-label">Retail Selling Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="retailSellingPrice" id="retailSellingPriceId" cssClass="form-control input-sm"/>
+			      				<form:input path="retailSellingPrice" style="text-align: right;" id="retailSellingPriceId" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -181,11 +180,11 @@
 						<div class="form-group">
 							<form:label path="wholesaleOrigPrice" cssClass="col-sm-2 control-label">Wholesale Original Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="wholesaleOrigPrice" id="wholesaleOrigPriceId" onkeyup="computeWholesaleSellingPrice();" cssClass="form-control input-sm"/>
+			      				<form:input path="wholesaleOrigPrice" style="text-align: right;" id="wholesaleOrigPriceId" onkeyup="computeWholesaleSellingPrice();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="wholesaleMarkupPercent" cssClass="col-sm-2 control-label">Wholesale Markup Percent:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="wholesaleMarkupPercent" id="wholesaleMarkupPercentId" onkeypress="return isNumberKey(event);" onkeyup="computeWholesaleSellingPriceByMarkupPercent();" cssClass="form-control input-sm"/>
+			      				<form:input path="wholesaleMarkupPercent" style="text-align: right;" id="wholesaleMarkupPercentId" onkeypress="return isNumberKey(event);" onkeyup="computeWholesaleSellingPriceByMarkupPercent();" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -196,11 +195,11 @@
 						<div class="form-group">
 							<form:label path="wholesaleMarkupPrice" cssClass="col-sm-2 control-label">Wholesale Markup Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="wholesaleMarkupPrice" id="wholesaleMarkupPriceId" onkeypress="return isNumberKey(event);" onkeyup="computeWholesaleSellingPriceByMarkupPrice();" cssClass="form-control input-sm"/>
+			      				<form:input path="wholesaleMarkupPrice" style="text-align: right;" id="wholesaleMarkupPriceId" onkeypress="return isNumberKey(event);" onkeyup="computeWholesaleSellingPriceByMarkupPrice();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="wholesaleSellingPrice" cssClass="col-sm-2 control-label">Wholesale Selling Price:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="wholesaleSellingPrice" id="wholesaleSellingPriceId" cssClass="form-control input-sm"/>
+			      				<form:input path="wholesaleSellingPrice" style="text-align: right;" id="wholesaleSellingPriceId" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -211,11 +210,11 @@
 						<div class="form-group">
 							<form:label path="discountPercent" cssClass="col-sm-2 control-label">Discount Percent:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="discountPercent" id="discountPercentId" onkeypress="return isNumberKey(event);" onkeyup="computeDiscountAmtByPercent();" cssClass="form-control input-sm"/>
+			      				<form:input path="discountPercent" style="text-align: right;" id="discountPercentId" onkeypress="return isNumberKey(event);" onkeyup="computeDiscountAmtByPercent();" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="discountAmount" cssClass="col-sm-2 control-label">Discount Amount:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="discountAmount" id="discountAmountId" onkeypress="return isNumberKey(event);"  cssClass="form-control input-sm"/>
+			      				<form:input path="discountAmount" style="text-align: right;" id="discountAmountId" onkeypress="return isNumberKey(event);"  cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>
@@ -241,11 +240,11 @@
 						<div class="form-group">
 							<form:label path="criticalLevel" cssClass="col-sm-2 control-label">Critical Level:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="criticalLevel" cssClass="form-control input-sm"/>
+			      				<form:input path="criticalLevel" style="text-align: right;" cssClass="form-control input-sm"/>
 			    			</div>
 			    			<form:label path="optimumLevel" cssClass="col-sm-2 control-label">Optimum Level:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="optimumLevel" cssClass="form-control input-sm"/>
+			      				<form:input path="optimumLevel" style="text-align: right;" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>					
 					</td>
@@ -256,7 +255,7 @@
 						<div class="form-group">
 							<form:label path="maximumLevel" cssClass="col-sm-2 control-label">Maximum Level:</form:label>
 							<div class="col-xs-3">
-			      				<form:input path="maximumLevel" cssClass="form-control input-sm"/>
+			      				<form:input path="maximumLevel" style="text-align: right;" cssClass="form-control input-sm"/>
 			    			</div>
 						</div>						
 					</td>

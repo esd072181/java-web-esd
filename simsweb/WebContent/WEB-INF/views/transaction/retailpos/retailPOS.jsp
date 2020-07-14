@@ -56,6 +56,7 @@
 				$("#salesDetailDIV").html(result);
 				$('#itemCodeId').prop('disabled', false);
 				$('#qtyId').prop('disabled', false);
+				$('#qtyId').val('1');	
 				$('#paymentId').show();
 				$('#cancelTransactionId').show();
 				$('#newTransactionId').hide();
@@ -75,7 +76,7 @@
 				})
 				  .done(function( result ) {
 					$("#salesDetailDIV").html(result);
-					$('#qtyId').val('');	
+					$('#qtyId').val('1');	
 					$('#itemCodeId').val('').focus();
 				  });
 				
@@ -94,7 +95,7 @@
 				})
 				  .done(function( result ) {
 					$("#salesDetailDIV").html(result);
-					$('#qtyId').val('');	
+					$('#qtyId').val('1');	
 					$('#itemCodeId').val('').focus();
 				  });
 			
@@ -131,6 +132,7 @@
 							$('#paymentDIV').show();
 							$('#itemCodeId').prop('disabled', true);
 							$('#qtyId').prop('disabled', true);
+							$('#qtyId').val('');
 							$('#tenderedAmountId').prop('disabled', true);
 							$('#qtyId').prop('disabled', true);
 							$('#paymentId').hide();
@@ -159,6 +161,7 @@
 						$('#paymentDIV').hide();
 						$('#itemCodeId').prop('disabled', true);
 						$('#qtyId').prop('disabled', true);
+						$('#qtyId').val('');
 						$('#paymentId').hide();
 						$('#cancelTransactionId').hide();
 						$('#newTransactionId').show();
@@ -213,10 +216,12 @@
 	
 		<div align="left" style="padding-left: 10px;">
 			<div>	
+				&nbsp;&nbsp;
+				<label>Qty:</label>
+		      	<input type="text" id="qtyId" name="qty" style="width: 50px;" onkeydown="focusItemCode(event);"/>	
+		      	&nbsp;&nbsp;
 				<label>Item Code:</label>
-		      	<input type="text" id="itemCodeId" name="itemCode" onkeydown="focusQty(event);" onkeypress="searchItem(event, this.value, document.getElementById('qtyId').value, document.getElementById('salesHeaderIdId').value);"/>
-		      	<label>Qty:</label>
-		      	<input type="text" id="qtyId" name="qty" style="width: 50px;" onkeydown="focusItemCode(event);"/>	 	
+		      	<input type="text" id="itemCodeId" name="itemCode" onkeydown="focusQty(event);" onkeypress="searchItem(event, this.value, document.getElementById('qtyId').value, document.getElementById('salesHeaderIdId').value);"/>	
 	    	</div>
 		</div>
 		

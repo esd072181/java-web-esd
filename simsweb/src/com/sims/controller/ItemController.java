@@ -106,7 +106,7 @@ public class ItemController {
 		model.addAttribute("uomList",uomList);
 		model.addAttribute("brandList",brandList);
 		model.addAttribute("categoryList",categoryList);
-		model.addAttribute("subCategoryList",subCategoryList);
+		model.addAttribute("subCategoryList",getFilteredSubCategoryList(categoryList.get(0).getId()));
 
 		return new ModelAndView("masterfile/item/addItem", "item", new Item());
 	}
@@ -154,12 +154,6 @@ public class ItemController {
 			logger.info(SIMSConstant.USER_INVALID_SESSION);
 			return new ModelAndView("security/login", "userAccount", new UserAccount());	
 		}
-
-		model.addAttribute("typeList",typeList);
-		model.addAttribute("uomList",uomList);
-		model.addAttribute("brandList",brandList);
-		model.addAttribute("categoryList",categoryList);
-		model.addAttribute("subCategoryList",subCategoryList);
 		
 		if (result.hasErrors()) {
 			return new ModelAndView("masterfile/item/addItem", "item", item);
@@ -170,6 +164,12 @@ public class ItemController {
 		boolean isSuccess = itemBo.save(item);
 		
 		model.addAttribute("isSuccess", isSuccess);
+		
+		model.addAttribute("typeList",typeList);
+		model.addAttribute("uomList",uomList);
+		model.addAttribute("brandList",brandList);
+		model.addAttribute("categoryList",categoryList);
+		model.addAttribute("subCategoryList",getFilteredSubCategoryList(item.getCategory().getId()));
 		
 		return new ModelAndView("masterfile/item/addItem", "item", item);
 	}
@@ -186,9 +186,11 @@ public class ItemController {
 		model.addAttribute("uomList",uomList);
 		model.addAttribute("brandList",brandList);
 		model.addAttribute("categoryList",categoryList);
-		model.addAttribute("subCategoryList",subCategoryList);
-		
+				
 		Item resultEntity = itemBo.findById(itemiId);
+		
+		model.addAttribute("subCategoryList",getFilteredSubCategoryList(resultEntity.getCategory().getId()));
+
 		return new ModelAndView("masterfile/item/editItem", "item", resultEntity);
 	}
 	
@@ -244,6 +246,19 @@ public class ItemController {
 		return new ModelAndView("masterfile/item/searchItem", "item", new Item());
 	}
 	
+	@RequestMapping("/filterSubCategoryList")
+	public ModelAndView filterSubCategoryList(@RequestParam("categoryId") int categoryId, ModelMap model) {
+		
+		if (!SIMSUtil.isUserSessionValid(model)) {
+			logger.info(SIMSConstant.USER_INVALID_SESSION);
+			return new ModelAndView("security/login", "userAccount", new UserAccount());	
+		}
+		
+		model.addAttribute("subCategoryList",getFilteredSubCategoryList(categoryId));
+
+		return new ModelAndView("masterfile/item/filteredSubCategory", "item", new Item());
+	}
+	
 	private void getLOVList() {
 		
 		List<ListValue> typelist = new ArrayList<>();
@@ -283,4 +298,15 @@ public class ItemController {
 		List<SubCategory> list = subCategoryBo.getAllEntity();
 		return list;
 	}
+	
+	private List<SubCategory> getFilteredSubCategoryList(Integer categoryId) {
+		List<SubCategory> filteredSubCategList = new ArrayList<>();
+		for (SubCategory item: subCategoryList) {
+			if (item.getCategory().getId() == categoryId) {
+				filteredSubCategList.add(item);
+			}
+		}
+		return filteredSubCategList;
+	}
+	
 }

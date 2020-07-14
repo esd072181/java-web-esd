@@ -131,7 +131,7 @@ public class BrandDaoImpl extends HibernateDaoUtil implements BrandDao{
 		List<Brand> list = null;
 		beginHibernateTransaction();
 		try {
-			list = session.createQuery("from Brand where active = true").list();
+			list = session.createQuery("from Brand where active = true order by name").list();
 		 } catch (Exception e) {
 			 e.printStackTrace();
 		 } finally {

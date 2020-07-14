@@ -131,7 +131,7 @@ public class SubCategoryDaoImpl extends HibernateDaoUtil implements SubCategoryD
 		List<SubCategory> list = null;
 		beginHibernateTransaction();
 		try {
-			list = session.createQuery("from SubCategory where active = true").list();
+			list = session.createQuery("from SubCategory where active = true  order by name").list();
 		 } catch (Exception e) {
 			 e.printStackTrace();
 		 } finally {

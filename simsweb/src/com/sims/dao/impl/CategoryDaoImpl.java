@@ -131,7 +131,7 @@ public class CategoryDaoImpl extends HibernateDaoUtil implements CategoryDao{
 		List<Category> list = null;
 		beginHibernateTransaction();
 		try {
-			list = session.createQuery("from Category where active = true").list();
+			list = session.createQuery("from Category where active = true order by name").list();
 		 } catch (Exception e) {
 			 e.printStackTrace();
 		 } finally {

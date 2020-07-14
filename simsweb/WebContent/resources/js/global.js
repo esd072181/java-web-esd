@@ -75,3 +75,16 @@
 	        	 return false;
 	         } 
 	    }
+		
+		function filterSubCategory(category) {
+			
+			$.ajax({
+					type: "GET",
+					url: "/simsweb/filterSubCategoryList?categoryId=" + category.value,
+					cache: false
+				})
+			  .done(function( result ) {
+				$("#subCategoryDIVId").html(result);
+			});
+			
+		}

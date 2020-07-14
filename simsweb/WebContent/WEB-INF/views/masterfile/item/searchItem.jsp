@@ -82,12 +82,12 @@
 									<tr>
 										<th>No</th>
 										<th>Description</th>
-										<th>ItemCode</th>
-										<th>UOM</th>
-										<th>Type</th>
 										<th>Brand</th>
 										<th>Category</th>
 										<th>SubCategory</th>
+										<th>ItemCode</th>
+										<th>Type</th>
+										<th>UOM</th>
 										<th>RetailOrigPrice</th>
 										<th>RetailMarkupPercent</th>
 										<th>RetailMarkupPrice</th>
@@ -113,22 +113,43 @@
 									    <tr>
 									    	<td>${row.count + ((currentPage - 1) * 10)}</td>
 									    	<td><a href="#" onclick="goToEdit(${model.id});" >${model.description}</a></td>
-											<td>${model.itemCode}</td>
-											<td>${model.uom.listValue}</td>
-											<td>${model.type.listValue}</td>
-											<td>${model.brand.name}</td>	
+									    	<td>${model.brand.name}</td>	
 											<td>${model.category.name}</td>	
-											<td>${model.subCategory.name}</td>		
-											<td>${model.retailOrigPrice}</td>		
-											<td>${model.retailMarkupPercent}</td>
-											<td>${model.retailMarkupPrice}</td>
-											<td>${model.retailSellingPrice}</td>	
-											<td>${model.wholesaleOrigPrice}</td>	
-											<td>${model.wholesaleMarkupPercent}</td>	
-											<td>${model.wholesaleMarkupPrice}</td>
-											<td>${model.wholesaleSellingPrice}</td>
-											<td>${model.discountPercent}</td>
-											<td>${model.discountAmount}</td>
+											<td>${model.subCategory.name}</td>
+											<td>${model.itemCode}</td>
+											<td>${model.type.listValue}</td>
+											<td>${model.uom.listValue}</td>	
+											<td align="right">${model.retailOrigPrice}</td>	
+											<c:choose>
+												<c:when test="${model.retailMarkupPercent > 0}">
+													<td align="right">${model.retailMarkupPercent}%</td>
+												</c:when>
+												<c:otherwise>
+													<td></td>
+												</c:otherwise>
+											</c:choose>	
+											<td align="right">${model.retailMarkupPrice}</td>
+											<td align="right">${model.retailSellingPrice}</td>	
+											<td align="right">${model.wholesaleOrigPrice}</td>
+											<c:choose>
+												<c:when test="${model.wholesaleMarkupPercent > 0}">
+													<td align="right">${model.wholesaleMarkupPercent}%</td>
+												</c:when>
+												<c:otherwise>
+													<td></td>
+												</c:otherwise>
+											</c:choose>		
+											<td align="right">${model.wholesaleMarkupPrice}</td>
+											<td align="right">${model.wholesaleSellingPrice}</td>
+											<c:choose>
+												<c:when test="${model.discountPercent > 0}">
+													<td align="right">${model.discountPercent}%</td>
+												</c:when>
+												<c:otherwise>
+													<td></td>
+												</c:otherwise>
+											</c:choose>	
+											<td align="right">${model.discountAmount}</td>
 											<td><fmt:formatDate type="date" dateStyle="short" pattern="MM/dd/yyyy" value="${model.manufacturedDate}"/></td>
 											<td><fmt:formatDate type="date" dateStyle="short" pattern="MM/dd/yyyy" value="${model.expiryDate}"/></td>	
 											<td>${model.criticalLevel}</td>
