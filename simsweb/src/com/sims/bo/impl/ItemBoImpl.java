@@ -12,6 +12,12 @@ import com.sims.bo.ItemBo;
 import com.sims.dao.ItemDao;
 import com.sims.model.Item;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since Sep2017
+ * DateUpdated: 15Jul2020
+ */
 @Service
 public class ItemBoImpl implements ItemBo {
 	
@@ -60,14 +66,13 @@ public class ItemBoImpl implements ItemBo {
 		 model.setWholesaleSellingPrice(entity.getWholesaleSellingPrice());
 		 model.setDiscountPercent(entity.getDiscountPercent());
 		 model.setDiscountAmount(entity.getDiscountAmount());
-		 model.setManufacturedDate(entity.getManufacturedDate());
-		 model.setExpiryDate(entity.getExpiryDate());
 		 model.setCriticalLevel(entity.getCriticalLevel());
 		 model.setOptimumLevel(entity.getOptimumLevel());
 		 model.setMaximumLevel(entity.getMaximumLevel());
 		 model.setModifiedBy(entity.getModifiedBy());
 		 model.setModifiedOn(new java.sql.Timestamp(System.currentTimeMillis()));
 		 model.setVersion(model.getVersion() + 1);
+		 model.setVat(entity.isVat());
 		 
 		 logger.info("Update: " + model.toString());
 		 

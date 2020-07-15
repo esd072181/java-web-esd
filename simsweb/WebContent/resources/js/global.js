@@ -11,6 +11,12 @@
 					markupAmt = Number($('#retailMarkupPriceId').val());
 				}				
 				$('#retailSellingPriceId').val(Number($('#retailOrigPriceId').val())+markupAmt);
+				//check if item is VATable
+				if ($('#vatId').prop('checked') == true) {
+					let vatAmt = Number($('#retailSellingPriceId').val()) * (12/100);
+					$('#retailSellingPriceId').val(Number($('#retailSellingPriceId').val())+vatAmt);
+				}
+				$('#retailSellingPriceId').val(Math.round((Number($('#retailSellingPriceId').val()) + Number.EPSILON) * 100) / 100);
 			}
 		}
 		
@@ -28,6 +34,11 @@
 			computeRetailSellingPrice();
 		}
 		
+		function computeSellingPrice() {
+			computeRetailSellingPrice();
+			computeWholesaleSellingPrice();
+		}
+		
 		function computeWholesaleSellingPrice(){
 			
 			if (Number($('#wholesaleOrigPriceId').val()) > 0) {
@@ -39,6 +50,12 @@
 					markupAmt = Number($('#wholesaleMarkupPriceId').val());
 				}				
 				$('#wholesaleSellingPriceId').val(Number($('#wholesaleOrigPriceId').val())+markupAmt);
+				//check if item is VATable
+				if ($('#vatId').prop('checked') == true) {
+					let vatAmt = Number($('#wholesaleSellingPriceId').val()) * (12/100);
+					$('#wholesaleSellingPriceId').val(Number($('#wholesaleSellingPriceId').val())+vatAmt);
+				}
+				$('#wholesaleSellingPriceId').val(Math.round((Number($('#wholesaleSellingPriceId').val()) + Number.EPSILON) * 100) / 100);
 			}
 		}
 		

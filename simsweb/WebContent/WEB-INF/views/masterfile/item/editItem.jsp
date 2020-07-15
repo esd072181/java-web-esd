@@ -138,7 +138,9 @@
 					<td>
 						<div class="form-group">
 							<form:label path="" cssClass="col-sm-2 control-label"></form:label>
-							<div class="col-xs-3"></div>
+							<div class="col-xs-3">
+								<form:checkbox id="vatId" path="vat" onchange="computeSellingPrice();" /> VAT(12%)
+							</div>
 			    			<form:label path="subCategory.id" cssClass="col-sm-2 control-label">SubCategory:</form:label>
 							<div class="col-xs-3" id="subCategoryDIVId">
 								<form:select id="subCategoryId" path="subCategory.id"  items="${subCategoryList}"  itemValue="id"   itemLabel="name" cssClass="form-control input-sm">
@@ -222,21 +224,6 @@
 						</div>						
 					</td>
 				</tr>				
-				<tr>
-					<td width="12%"></td>
-					<td>
-						<div class="form-group">
-							<form:label path="manufacturedDate" cssClass="col-sm-2 control-label">Manufactured Date:</form:label>
-							<div class="col-xs-3">
-			      				<form:input id="dtManufacturedDatePicker" placeholder="MM/dd/yyyy" path="manufacturedDate" cssClass="form-control input-sm"/>
-			    			</div>
-			    			<form:label path="expiryDate" cssClass="col-sm-2 control-label">Expiry Date:</form:label>
-							<div class="col-xs-3">
-			      				<form:input id="dtExpiryDatePicker" placeholder="MM/dd/yyyy" path="expiryDate" cssClass="form-control input-sm"/>
-			    			</div>
-						</div>						
-					</td>
-				</tr>
 				<tr>
 					<td width="12%"></td>
 					<td>

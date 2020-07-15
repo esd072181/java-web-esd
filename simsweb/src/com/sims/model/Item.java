@@ -2,7 +2,6 @@ package com.sims.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -21,7 +20,8 @@ import javax.persistence.Table;
 /**
  * 
  * @author dward
- *
+ * @since Sep2017
+ * DateUpdated: 15Jul2020
  */
 @NamedNativeQueries({
 	@NamedNativeQuery(
@@ -58,8 +58,7 @@ public class Item implements Serializable {
 	private BigDecimal wholesaleSellingPrice;
 	private BigDecimal discountPercent;
 	private BigDecimal discountAmount;
-	private Date manufacturedDate;
-	private Date expiryDate;
+	private boolean vat;
 	private Integer criticalLevel;
 	private Integer optimumLevel;
 	private Integer maximumLevel;
@@ -235,22 +234,13 @@ public class Item implements Serializable {
 		this.discountAmount = discountAmount;
 	}
 	
-	@Column(name = "manufactureddate")
-	public Date getManufacturedDate() {
-		return manufacturedDate;
+	@Column(name = "vat")
+	public boolean isVat() {
+		return vat;
 	}
 
-	public void setManufacturedDate(Date manufacturedDate) {
-		this.manufacturedDate = manufacturedDate;
-	}
-	
-	@Column(name = "expirydate")
-	public Date getExpiryDate() {
-		return expiryDate;
-	}
-
-	public void setExpiryDate(Date expiryDate) {
-		this.expiryDate = expiryDate;
+	public void setVat(boolean vat) {
+		this.vat = vat;
 	}
 
 	@Column(name = "criticallevel")
@@ -347,8 +337,7 @@ public class Item implements Serializable {
 				+ ", wholesaleMarkupPercent=" + wholesaleMarkupPercent
 				+ ", wholesaleMarkupPrice=" + wholesaleMarkupPrice
 				+ ", wholesaleSellingPrice=" + wholesaleSellingPrice
-				+ ", manufacturedDate=" + manufacturedDate + ", expiryDate="
-				+ expiryDate + ", criticalLevel=" + criticalLevel
+				+ ", vat=" + vat + ", criticalLevel=" + criticalLevel
 				+ ", optimumLevel=" + optimumLevel + ", maximumLevel="
 				+ maximumLevel + ", createdBy=" + createdBy + ", createdOn="
 				+ createdOn + ", modifiedBy=" + modifiedBy + ", modifiedOn="

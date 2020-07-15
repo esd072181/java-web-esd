@@ -88,6 +88,7 @@
 										<th>ItemCode</th>
 										<th>Type</th>
 										<th>UOM</th>
+										<th>VAT(12%)</th>
 										<th>RetailOrigPrice</th>
 										<th>RetailMarkupPercent</th>
 										<th>RetailMarkupPrice</th>
@@ -98,8 +99,6 @@
 										<th>WholesaleSellingPrice</th>
 										<th>DiscountPercent</th>
 										<th>DiscountAmount</th>
-										<th>ManufacturedDate</th>
-										<th>ExpiryDate</th>
 										<th>CriticalLevelQty</th>
 										<th>OptimumLevelQty</th>
 										<th>MaximumLevelQty</th>
@@ -118,7 +117,16 @@
 											<td>${model.subCategory.name}</td>
 											<td>${model.itemCode}</td>
 											<td>${model.type.listValue}</td>
-											<td>${model.uom.listValue}</td>	
+											<td>${model.uom.listValue}</td>
+											<c:choose>
+												<c:when test="${model.vat}">
+													<td>Yes</td>
+												</c:when>
+												<c:otherwise>
+													<td>No</td>
+												</c:otherwise>
+											</c:choose>
+											
 											<td align="right">${model.retailOrigPrice}</td>	
 											<c:choose>
 												<c:when test="${model.retailMarkupPercent > 0}">
@@ -150,8 +158,6 @@
 												</c:otherwise>
 											</c:choose>	
 											<td align="right">${model.discountAmount}</td>
-											<td><fmt:formatDate type="date" dateStyle="short" pattern="MM/dd/yyyy" value="${model.manufacturedDate}"/></td>
-											<td><fmt:formatDate type="date" dateStyle="short" pattern="MM/dd/yyyy" value="${model.expiryDate}"/></td>	
 											<td>${model.criticalLevel}</td>
 											<td>${model.optimumLevel}</td>
 											<td>${model.maximumLevel}</td>
