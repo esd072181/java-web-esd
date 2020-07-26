@@ -14,6 +14,12 @@ import com.transport.constant.ParamConstant;
 import com.transport.model.ListValue;
 import com.transport.model.Lorry;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since June2015
+ * DateUpdated: 26Jul2020
+ */
 public class LorryFormBean extends TransportFormBean {
 
 	/**
@@ -28,6 +34,10 @@ public class LorryFormBean extends TransportFormBean {
 	private String capacity;
 	private String lorryCategory;
 	private String transportId;
+	private String tractorModel;
+	private String tractorYear;
+	private String trailerModel;
+	private String trailerYear;
 	
 	private List<ListValue> transportProgramLOV;
 	private List<ListValue> categoryLOV;
@@ -142,6 +152,10 @@ public class LorryFormBean extends TransportFormBean {
 		setCapacity(String.valueOf(model.getCapacity()));
 		setLorryCategory(model.getCategory());
 		setTransportId(String.valueOf(model.getTransportId()));
+		setTractorModel(model.getTractorModel());
+		setTractorYear(model.getTractorYear());
+		setTrailerModel(model.getTrailerModel());
+		setTrailerYear(model.getTrailerYear());
 	}
 	
 	public Lorry populateModel (LorryFormBean formbean) {
@@ -153,6 +167,10 @@ public class LorryFormBean extends TransportFormBean {
 		model.setCapacity(Integer.parseInt(formbean.getCapacity()));
 		model.setCategory(formbean.getLorryCategory());
 		model.setTransportId(Integer.parseInt(formbean.getTransportId()));
+		model.setTractorModel(formbean.getTractorModel());
+		model.setTractorYear(formbean.getTractorYear());
+		model.setTrailerModel(formbean.getTrailerModel());
+		model.setTrailerYear(formbean.getTrailerYear());
 		return model;
 	}
 	
@@ -247,6 +265,46 @@ public class LorryFormBean extends TransportFormBean {
 
 	public void setTransportId(String transportId) {
 		this.transportId = transportId;
+	}
+
+
+	public String getTractorModel() {
+		return tractorModel;
+	}
+
+
+	public void setTractorModel(String tractorModel) {
+		this.tractorModel = tractorModel;
+	}
+
+
+	public String getTractorYear() {
+		return tractorYear;
+	}
+
+
+	public void setTractorYear(String tractorYear) {
+		this.tractorYear = tractorYear;
+	}
+
+
+	public String getTrailerModel() {
+		return trailerModel;
+	}
+
+
+	public void setTrailerModel(String trailerModel) {
+		this.trailerModel = trailerModel;
+	}
+
+
+	public String getTrailerYear() {
+		return trailerYear;
+	}
+
+
+	public void setTrailerYear(String trailerYear) {
+		this.trailerYear = trailerYear;
 	}
 
 	

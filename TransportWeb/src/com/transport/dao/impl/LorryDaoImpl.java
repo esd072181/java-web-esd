@@ -21,6 +21,12 @@ import com.transport.model.Lorry;
 import com.transport.model.User;
 import com.transport.util.TransportUtils;
 
+/**
+ * 
+ * @author edwarddavid
+ * @since June2015
+ * DateUpdated: 26Jul2020
+ */
 public class LorryDaoImpl implements LorryDao {
 	
 	private final static Logger logger = Logger.getLogger(LorryDaoImpl.class);
@@ -52,6 +58,10 @@ public class LorryDaoImpl implements LorryDao {
 		  		qry.append(",capacity ");
 		  		qry.append(",category ");
 		  		qry.append(",transportid ");
+		  		qry.append(",tractormodel ");
+		  		qry.append(",trailermodel ");
+		  		qry.append(",tractoryear ");
+		  		qry.append(",traileryear ");
 		  		qry.append(",createdby ");
 		  		qry.append(",createdon ");
 		  		qry.append(",version ");
@@ -60,6 +70,10 @@ public class LorryDaoImpl implements LorryDao {
 		  		qry.append(" values ");
 		  		qry.append(" ( ");
 		  		qry.append(" ? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
@@ -78,6 +92,10 @@ public class LorryDaoImpl implements LorryDao {
 				qryLog.append(",capacity ");
 				qryLog.append(",category ");
 				qryLog.append(",transportid ");
+				qryLog.append(",tractormodel ");
+				qryLog.append(",trailermodel ");
+				qryLog.append(",tractoryear ");
+				qryLog.append(",traileryear ");
 				qryLog.append(",createdby ");
 				qryLog.append(",createdon ");
 				qryLog.append(",version ");
@@ -91,6 +109,10 @@ public class LorryDaoImpl implements LorryDao {
 				qryLog.append(" ,"+model.getCapacity());
 				qryLog.append(" ,"+model.getCategory());
 				qryLog.append(" ,"+model.getTransportId());
+				qryLog.append(" ,"+model.getTractorModel());
+				qryLog.append(" ,"+model.getTrailerModel());
+				qryLog.append(" ,"+model.getTractorYear());
+				qryLog.append(" ,"+model.getTrailerYear());
 				qryLog.append(" ,"+model.getCreatedBy());
 				qryLog.append(" ,"+model.getCreatedOn());
 				qryLog.append(" ,1 ");
@@ -110,8 +132,12 @@ public class LorryDaoImpl implements LorryDao {
 			  pstmt.setInt(4, model.getCapacity());
 			  pstmt.setString(5, model.getCategory());
 			  pstmt.setInt(6, model.getTransportId());
-			  pstmt.setInt(7, model.getCreatedBy());
-			  pstmt.setTimestamp(8, model.getCreatedOn());
+			  pstmt.setString(7, model.getTractorModel());
+			  pstmt.setString(8, model.getTrailerModel());
+			  pstmt.setString(9, model.getTractorYear());
+			  pstmt.setString(10, model.getTrailerYear());
+			  pstmt.setInt(11, model.getCreatedBy());
+			  pstmt.setTimestamp(12, model.getCreatedOn());
 			     
 			  int statusInt = pstmt.executeUpdate();
 			     
@@ -161,6 +187,10 @@ public class LorryDaoImpl implements LorryDao {
 			qry.append(" ,capacity=? ");
 			qry.append(" ,category=? ");
 			qry.append(" ,transportid=? ");
+			qry.append(" ,tractormodel=? ");
+			qry.append(" ,trailermodel=? ");
+			qry.append(" ,tractoryear=? ");
+			qry.append(" ,traileryear=? ");
 			qry.append(" ,modifiedby=? ");
 			qry.append(" ,modifiedon=? ");
 			qry.append(" ,version=(version+1) ");
@@ -174,6 +204,10 @@ public class LorryDaoImpl implements LorryDao {
 			qryLog.append(" ,capacity="+model.getCapacity());
 			qryLog.append(" ,category="+model.getCategory());
 			qryLog.append(" ,transportid="+model.getTransportId());
+			qryLog.append(" ,tractormodel="+model.getTractorModel());
+			qryLog.append(" ,trailermodel="+model.getTrailerModel());
+			qryLog.append(" ,tractoryear="+model.getTractorYear());
+			qryLog.append(" ,traileryear="+model.getTrailerYear());
 			qryLog.append(" ,modifiedby="+model.getModifiedBy());
 			qryLog.append(" ,modifiedon="+model.getModifiedOn());
 			qryLog.append(" ,version=(version+1) ");
@@ -193,9 +227,13 @@ public class LorryDaoImpl implements LorryDao {
 			pstmt.setInt(4, model.getCapacity());
 			pstmt.setString(5, model.getCategory());
 			pstmt.setInt(6, model.getTransportId());
-			pstmt.setInt(7, model.getModifiedBy());
-			pstmt.setTimestamp(8, model.getModifiedOn());
-			pstmt.setLong(9, model.getId());
+			pstmt.setString(7, model.getTractorModel());
+			pstmt.setString(8, model.getTrailerModel());
+			pstmt.setString(9, model.getTractorYear());
+			pstmt.setString(10, model.getTrailerYear());
+			pstmt.setInt(11, model.getModifiedBy());
+			pstmt.setTimestamp(12, model.getModifiedOn());
+			pstmt.setLong(13, model.getId());
 				     
 			int statusInt = pstmt.executeUpdate();
 				     
@@ -381,27 +419,17 @@ public class LorryDaoImpl implements LorryDao {
 			 try {
 				 conn = ServerContext.getJDBCHandle();
 
-				 StringBuffer sql = null;
-				 if (category.equals(ActionConstant.SEARCHALL)) {
-					 sql = new StringBuffer("select a.id,a.lorryno,a.plateno,a.trailerno,a.capacity,a.category,b.listvalue as transport,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 StringBuffer sql =  new StringBuffer("select a.id,a.lorryno,a.plateno,a.trailerno,a.capacity,a.category,b.listvalue as transport,a.tractormodel,a.trailermodel,a.tractoryear,a.traileryear,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
 					 	sql.append(" from transport.file_lorry a, transport.list_value b ");
 					 	sql.append(" where a.transportid = b.id ");
 					 	sql.append(" and a.active = true ");
+					 	if (!category.equals(ActionConstant.SEARCHALL)) {
+					 		sql.append(" and (a.lorryno ilike '%"+criteria+"%' or a.plateno ilike '%"+criteria+"%'  or a.trailerno ilike '%"+criteria+"%'  or a.tractormodel ilike '%"+criteria+"%'  or a.trailermodel ilike '%"+criteria+"%')" );
+					 	}
 					 	sql.append(" order by a.plateno ");
 					 	sql.append(" limit ? ");
 					 	sql.append(" offset ?");		 
-				 } else {
-					 sql = new StringBuffer("select a.id,a.lorryno,a.plateno,a.trailerno,a.capacity,a.category,b.listvalue as transport,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
-					 	sql.append(" from transport.file_lorry a, transport.list_value b");
-					 	sql.append(" where a.transportid = b.id ");
-					 	sql.append(" and (a.lorryno ilike '%"+criteria+"%' or a.plateno ilike '%"+criteria+"%'  or a.trailerno ilike '%"+criteria+"%')" );
-					 	sql.append(" and a.active = true ");
-					 	sql.append(" order by a.plateno ");
-					 	sql.append(" limit ? ");
-					 	sql.append(" offset ?");	
-				 }
-
-	 
+		
 				TransportUtils.writeLogDebug(logger, "SQL: "+sql.toString());
 					
 				 pstmt = conn.prepareStatement(sql.toString());
@@ -420,6 +448,10 @@ public class LorryDaoImpl implements LorryDao {
 		    		 model.setCapacity(rs.getInt(5));
 		    		 model.setCategory(rs.getString(6));
 		    		 model.setTransport(rs.getString(7));
+		    		 model.setTractorModel(rs.getString(8));
+		    		 model.setTrailerModel(rs.getString(9));
+		    		 model.setTractorYear(rs.getString(10));
+		    		 model.setTrailerYear(rs.getString(11));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {
@@ -440,14 +472,14 @@ public class LorryDaoImpl implements LorryDao {
 			     if (category.equals(ActionConstant.SEARCHALL)) {
 			    	 sqlCount = new StringBuffer("select count(*) from transport.file_lorry where active = true");	 
 			     }else {
-			    	 sqlCount = new StringBuffer("select count(*) from transport.file_lorry where  (lorryno ilike '%"+criteria+"%' or plateno ilike '%"+criteria+"%'  or trailerno ilike '%"+criteria+"%') and active = true");	 
+			    	 sqlCount = new StringBuffer("select count(*) from transport.file_lorry where  (lorryno ilike '%"+criteria+"%' or plateno ilike '%"+criteria+"%'  or trailerno ilike '%"+criteria+"%' or tractormodel ilike '%"+criteria+"%'  or trailermodel ilike '%"+criteria+"%') and active = true");	 
 			     } 
 
 				StringBuffer sqlCountLog = null;
 				if (category.equals(ActionConstant.SEARCHALL)) {
 					 sqlCountLog = new StringBuffer("select count(*) from transport.file_lorry where active = true");	 
 				}else {
-					 sqlCountLog = new StringBuffer("select count(*) from transport.file_lorry where  (lorryno ilike '%"+criteria+"%' or plateno ilike '%"+criteria+"%'  or trailerno ilike '%"+criteria+"%') and active = true");	 
+					 sqlCountLog = new StringBuffer("select count(*) from transport.file_lorry where  (lorryno ilike '%"+criteria+"%' or plateno ilike '%"+criteria+"%'  or trailerno ilike '%"+criteria+"%' or tractormodel ilike '%"+criteria+"%'  or trailermodel ilike '%"+criteria+"%') and active = true");	 
 				} 
 					
 				TransportUtils.writeLogDebug(logger, "SQL: "+sqlCountLog.toString());
@@ -496,7 +528,7 @@ public class LorryDaoImpl implements LorryDao {
 				 conn = ServerContext.getJDBCHandle();
 
 				 StringBuffer sql = new StringBuffer();				
-				 	sql.append("select id,lorryno,plateno,trailerno,capacity,category,transportid,createdby,createdon,modifiedby,modifiedon,version,active ");
+				 	sql.append("select id,lorryno,plateno,trailerno,capacity,category,transportid,tractormodel,trailermodel,tractoryear,traileryear,createdby,createdon,modifiedby,modifiedon,version,active ");
 				 	sql.append("from transport.file_lorry ");
 				 	sql.append("where id = ?");
 			
@@ -516,6 +548,10 @@ public class LorryDaoImpl implements LorryDao {
 		    		 model.setCapacity(rs.getInt(5));
 		    		 model.setCategory(rs.getString(6));
 		    		 model.setTransportId(rs.getInt(7));
+		    		 model.setTractorModel(rs.getString(8));
+		    		 model.setTrailerModel(rs.getString(9));
+		    		 model.setTractorYear(rs.getString(10));
+		    		 model.setTrailerYear(rs.getString(11));
 				 }				 
 			 } catch (SQLException e) {
 				 throw e;
@@ -550,7 +586,7 @@ public class LorryDaoImpl implements LorryDao {
 				 conn = ServerContext.getJDBCHandle();
 
 				 StringBuffer sql = new StringBuffer();				
-				 	sql.append("select a.id,a.lorryno,a.plateno,a.trailerno,a.capacity,a.category,b.listvalue as transport,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sql.append("select a.id,a.lorryno,a.plateno,a.trailerno,a.capacity,a.category,b.listvalue as transport,a.tractormodel,a.trailermodel,a.tractoryear,a.traileryear,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
 				 	sql.append("from transport.file_lorry a, transport.list_value b ");
 				 	sql.append("where a.transportid = b.id ");
 				 	sql.append("and a.active = true ");
@@ -573,6 +609,10 @@ public class LorryDaoImpl implements LorryDao {
 		    		 model.setCapacity(rs.getInt(5));
 		    		 model.setCategory(rs.getString(6));
 		    		 model.setTransport(rs.getString(7));
+		    		 model.setTractorModel(rs.getString(8));
+		    		 model.setTrailerModel(rs.getString(9));
+		    		 model.setTractorYear(rs.getString(10));
+		    		 model.setTrailerYear(rs.getString(11));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {
@@ -611,7 +651,7 @@ public class LorryDaoImpl implements LorryDao {
 				 conn = ServerContext.getJDBCHandle();
 
 				 StringBuffer sql = new StringBuffer();				
-				 	sql.append("select a.id,a.lorryno,a.plateno,a.trailerno,a.capacity,a.category,b.listvalue as transport,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
+				 	sql.append("select a.id,a.lorryno,a.plateno,a.trailerno,a.capacity,a.category,b.listvalue as transport,a.tractormodel,a.trailermodel,a.tractoryear,a.traileryear,a.createdby,a.createdon,a.modifiedby,a.modifiedon,a.version,a.active ");
 				 	sql.append("from transport.file_lorry a, transport.list_value b ");
 				 	sql.append("where a.transportid = b.id ");
 				 	sql.append("and a.active = false ");
@@ -635,6 +675,13 @@ public class LorryDaoImpl implements LorryDao {
 		    		 model.setLorryNo(rs.getString(2));
 		    		 model.setPlateNo(rs.getString(3));
 		    		 model.setTrailerNo(rs.getString(4));
+		    		 model.setCapacity(rs.getInt(5));
+		    		 model.setCategory(rs.getString(6));
+		    		 model.setTransport(rs.getString(7));
+		    		 model.setTractorModel(rs.getString(8));
+		    		 model.setTrailerModel(rs.getString(9));
+		    		 model.setTractorYear(rs.getString(10));
+		    		 model.setTrailerYear(rs.getString(11));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {
@@ -706,7 +753,7 @@ public class LorryDaoImpl implements LorryDao {
 				 conn = ServerContext.getJDBCHandle();
 
 				 StringBuffer sql = new StringBuffer();				
-				 	sql.append("select id,lorryno,plateno,trailerno,capacity,category,transportid ");
+				 	sql.append("select id,lorryno,plateno,trailerno,capacity,category,transportid,tractormodel,trailermodel,tractoryear,traileryear ");
 				 	sql.append("from transport.file_lorry ");
 				 	sql.append("where plateNo = ? ");
 				 	sql.append("and lorryNo = ? ");
@@ -729,6 +776,10 @@ public class LorryDaoImpl implements LorryDao {
 					 model.setCapacity(rs.getInt(5));
 					 model.setCategory(rs.getString(6));
 					 model.setTransportId(rs.getInt(7));
+					 model.setTractorModel(rs.getString(8));
+		    		 model.setTrailerModel(rs.getString(9));
+		    		 model.setTractorYear(rs.getString(10));
+		    		 model.setTrailerYear(rs.getString(11));
 				 }				 
 			 } catch (SQLException e) {
 				 throw e;

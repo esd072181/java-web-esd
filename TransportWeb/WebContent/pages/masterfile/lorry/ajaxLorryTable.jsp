@@ -14,7 +14,9 @@
 					<th>Plate No</th>
 					<th>Lorry No</th>
 					<th>Trailer No</th>
-					<th>Capacity</th>
+					<th>Capacity(KL)</th>
+					<th>Make/Model/Year (Tractor)</th>
+					<th>Make/Model/Year (Trailer)</th>
 					<th>Category</th>
 					<th>Transport</th>
 					<th></th>
@@ -27,6 +29,8 @@
 						<td><bean:write name="model" property="lorryNo"/></td>
 						<td><bean:write name="model" property="trailerNo"/></td>
 						<td><bean:write name="model" property="capacity"/></td>
+						<td><bean:write name="model" property="tractorModel"/> <bean:write name="model" property="tractorYear"/></td>
+						<td><bean:write name="model" property="trailerModel"/> <bean:write name="model" property="trailerYear"/></td>
 						<td><bean:write name="model" property="category"/></td>
 						<td><bean:write name="model" property="transport"/></td>
 						<td align="center"><a href="#" onclick="javascript: editLorry('<bean:write name="model" property="id"/>');">Edit</a></td>

@@ -14,7 +14,15 @@ $(function() {
 	$('#gpsId').focus();
 	
   });
-  
+
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if ((charCode > 47 && charCode < 58) || charCode == 127) {
+   	return true;
+    } else {
+   	 return false;
+    } 
+}
 </script>
 
 <html>
@@ -58,7 +66,7 @@ $(function() {
 					</tr>
 					<tr>
 						<td><label>GPS Trips</label></td>
-						<td><input type="text" disabled="disabled" name="gps" value="${maintenanceMonitoringForm.gps}" id="gpsId"/></td>
+						<td><input type="text" disabled="disabled" name="gps" value="${maintenanceMonitoringForm.gps}" id="gpsId" onkeypress="return isNumberKey(event);"/></td>
 					</tr>
 					<tr>
 						<td><label>GPS Color</label></td>

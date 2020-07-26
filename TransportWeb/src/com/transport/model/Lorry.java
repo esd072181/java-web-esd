@@ -6,7 +6,8 @@ import java.sql.Timestamp;
 /**
  * 
  * @author dward
- * DateUpdated: 22Mar2019
+ * @since June2015
+ * DateUpdated: 26Jul2020
  */
 public class Lorry implements Serializable {
 
@@ -22,6 +23,10 @@ public class Lorry implements Serializable {
 	private int capacity;
 	private String category;
 	private int transportId;
+	private String tractorModel;
+	private String trailerModel;
+	private String tractorYear;
+	private String trailerYear;
 	private int createdBy;
 	private Timestamp createdOn;
 	private int modifiedBy;
@@ -151,6 +156,38 @@ public class Lorry implements Serializable {
 
 	public void setTransport(String transport) {
 		this.transport = transport;
+	}
+
+	public String getTractorModel() {
+		return tractorModel;
+	}
+
+	public void setTractorModel(String tractorModel) {
+		this.tractorModel = tractorModel;
+	}
+
+	public String getTrailerModel() {
+		return trailerModel;
+	}
+
+	public void setTrailerModel(String trailerModel) {
+		this.trailerModel = trailerModel;
+	}
+
+	public String getTractorYear() {
+		return tractorYear;
+	}
+
+	public void setTractorYear(String tractorYear) {
+		this.tractorYear = tractorYear;
+	}
+
+	public String getTrailerYear() {
+		return trailerYear;
+	}
+
+	public void setTrailerYear(String trailerYear) {
+		this.trailerYear = trailerYear;
 	}
 	
 	
