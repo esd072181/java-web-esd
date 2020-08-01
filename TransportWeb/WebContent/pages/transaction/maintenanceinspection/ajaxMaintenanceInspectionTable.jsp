@@ -11,17 +11,19 @@
 		  
 			<table  class="table table-bordered table-striped table-condensed table-hover" style="width: 98%; font-size: xx-small;">  
 				<tr>
+					<th>No</th>
 					<th></th>
 					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
-					<th>No</th>
 					<th>InspectionDate</th>
 					<th>LorryNo</th>
 					<th>PlateNo</th>
+					<th>Make/Model/Year</th>
 					<th>Odometer</th>
 					<th>HubOdometer</th>
+					<th>KmRun</th>
 					<th>Inspectors</th>
 					<th>ForAnnual</th>
 					<th>ForPM</th>
@@ -29,17 +31,19 @@
 				</tr>
 				<logic:iterate name="maintenanceInspectionForm" property="modelList" type="com.transport.model.InspectionHeader" id="model" indexId="index">
 					<tr>
+						<td><c:out value="${index+1 + (maintenanceInspectionForm.currentPage * 10 - 10)}"/></td>
 						<td align="center"><a href="#" onclick="viewMaintenanceInspectionReport('<bean:write name="model" property="id"/>');">View</a></td>				 
 						<td align="center"><a href="#" onclick="editMaintenanceInspection('<bean:write name="model" property="id"/>');">Edit</a></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="deleteMaintenanceInspection('<bean:write name="model" property="id"/>', '${maintenanceInspectionForm.category}',${maintenanceInspectionForm.currentPage})">Delete</a></td>
 						</c:if>	
-						<td><c:out value="${index+1 + (maintenanceInspectionForm.currentPage * 10 - 10)}"/></td>
 						<td><bean:write name="model" property="inspectionDate" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="lorryNo"/></td>
 						<td><bean:write name="model" property="plateNo"/></td>
-						<td><bean:write name="model" property="odometer"/></td>
-						<td><bean:write name="model" property="hubOdometer"/></td>	
+						<td><bean:write name="model" property="modelYear"/></td>
+						<td align="right"><bean:write name="model" property="odometer"/></td>
+						<td align="right"><bean:write name="model" property="hubOdometer"/></td>
+						<td align="right"><bean:write name="model" property="kmRun"/></td>	
 						<td><bean:write name="model" property="inspectors"/></td>
 						<td><bean:write name="model" property="forAnnual"/></td>
 						<td><bean:write name="model" property="forPm"/></td>	

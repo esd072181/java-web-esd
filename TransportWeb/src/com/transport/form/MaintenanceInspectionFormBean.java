@@ -1,5 +1,6 @@
 package com.transport.form;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,7 @@ import com.transport.util.DateUtils;
  * 
  * @author edwarddavid
  * @since 21Mar2020
- *  DateUpdated: 28Apr2020
+ *  DateUpdated: 01Aug2020
  */
 public class MaintenanceInspectionFormBean extends TransportFormBean {
 
@@ -49,11 +50,15 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 	private String forPm;
 	private String inspectionDate;
 	private String remarks;
+	private String modelYear;
+	private String kmRun;
 	
 	//Inspection Details
 	private Integer[] inspectionId;
 	private Integer[] inspectionStatusId;
 	private String[] inspectionRemarks;
+	private String[] planDate;
+	private String[] actualDate;
 	
 	private String searchValue;
 	private String category;
@@ -86,6 +91,8 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 			setInspectionDate(DateUtils.sqlDateToString(model.getInspectionDate()));	
 		}
 		setRemarks(model.getRemarks()!=null ? model.getRemarks().trim().toUpperCase() : null);
+		setModelYear(model.getModelYear()!=null ? model.getModelYear().trim().toUpperCase() : null);
+		setKmRun(model.getKmRun());
 	}
 	
 	
@@ -107,11 +114,13 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 		if (getInspectionDate()!=null && getInspectionDate().trim().length()>1) {
 			model.setInspectionDate(DateUtils.strToSQLDate(getInspectionDate()));	
 		}
-		model.setRemarks(getRemarks()!=null ? getRemarks().trim().toUpperCase() : null);		
+		model.setRemarks(getRemarks()!=null ? getRemarks().trim().toUpperCase() : null);	
+		model.setModelYear(getModelYear()!=null ? getModelYear().trim().toUpperCase() : null);
+		model.setKmRun(getKmRun());
 		return model;
 	}
 	
-	public void populateInspectionDetailsList(Integer[] arrId, Integer[] arrStatusId, String[] arrRemarks, Boolean isUpdate) {
+	public void populateInspectionDetailsList(Integer[] arrId, Integer[] arrStatusId, String[] arrRemarks, String[] arrPlanDate, String[] arrActualDate, Boolean isUpdate) throws Exception {
 	
 		List<InspectionDetails> dtolist = new ArrayList<>();
 		
@@ -124,6 +133,8 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 			}
 			dto.setStatusId(getInspectionStatus(arrId[i],arrStatusId));
 			dto.setRemarks(getInspectionRemarks(arrId[i],arrRemarks));
+			dto.setPlanDate(getPlanDate(arrId[i],arrPlanDate));
+			dto.setActualDate(getActualDate(arrId[i],arrActualDate));
 			dtolist.add(dto);
 		}
 				
@@ -154,6 +165,31 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 		return remarks;
 	}
 	
+	private Date getPlanDate(Integer itemId, String[] arrPlanDate) throws Exception {
+		Date planDate = null;
+		for (int i=0;i<arrPlanDate.length;i++) {
+			if (arrPlanDate[i]!=null && !arrPlanDate[i].equals("") && StringUtils.isNumeric(arrPlanDate[i])) {
+				if (Integer.parseInt(arrPlanDate[i]) == itemId && (i+1 < arrPlanDate.length) && (arrPlanDate[i+1].trim().length()==10)) {
+					planDate = DateUtils.strToSQLDate(arrPlanDate[i+1]);
+					break;
+				}
+			}
+		}
+		return planDate;
+	}
+
+	private Date getActualDate(Integer itemId, String[] arrActualDate) throws Exception {
+		Date actualDate = null;
+		for (int i=0;i<arrActualDate.length;i++) {
+			if (arrActualDate[i]!=null && !arrActualDate[i].equals("") && StringUtils.isNumeric(arrActualDate[i])) {
+				if (Integer.parseInt(arrActualDate[i]) == itemId && (i+1 < arrActualDate.length)  && (arrActualDate[i+1].trim().length()==10)) {
+					actualDate = DateUtils.strToSQLDate(arrActualDate[i+1]);
+					break;
+				}
+			}
+		}
+		return actualDate;
+	}
 	
 	public void populateDropdownList(HttpServletRequest request, boolean isEdit) throws Exception{
 		populateLorryList(request); 
@@ -545,9 +581,37 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 		this.forPm = forPm;
 	}
 
+	public String getModelYear() {
+		return modelYear;
+	}
 
+	public void setModelYear(String modelYear) {
+		this.modelYear = modelYear;
+	}
 
+	public String getKmRun() {
+		return kmRun;
+	}
 
+	public void setKmRun(String kmRun) {
+		this.kmRun = kmRun;
+	}
+
+	public String[] getPlanDate() {
+		return planDate;
+	}
+
+	public void setPlanDate(String[] planDate) {
+		this.planDate = planDate;
+	}
+
+	public String[] getActualDate() {
+		return actualDate;
+	}
+
+	public void setActualDate(String[] actualDate) {
+		this.actualDate = actualDate;
+	}
 
 	
 	

@@ -25,7 +25,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author edwarddavid
  * @since 25Mar2020
- * DateUpdated: 30Mar2020
+ * DateUpdated: 01Aug2020
  */
 public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspectionHeaderDao {
 	
@@ -62,6 +62,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 		  		qry.append(",forpm ");
 		  		qry.append(",inspectiondate ");
 		  		qry.append(",remarks ");
+		  		qry.append(",modelyear ");
+		  		qry.append(",kmrun ");
 		  		qry.append(",createdby ");
 		  		qry.append(",createdon ");
 		  		qry.append(",version ");
@@ -72,6 +74,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 		  		qry.append(" ? ");
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");	
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");	
 		  		qry.append(" ,? ");
@@ -101,8 +105,10 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 			  pstmt.setString(7, model.getForPm());
 			  pstmt.setDate(8, model.getInspectionDate());
 			  pstmt.setString(9, model.getRemarks()); 
-			  pstmt.setInt(10, model.getCreatedBy());
-			  pstmt.setTimestamp(11, model.getCreatedOn());
+			  pstmt.setString(10, model.getModelYear()); 
+			  pstmt.setString(11, model.getKmRun()); 
+			  pstmt.setInt(12, model.getCreatedBy());
+			  pstmt.setTimestamp(13, model.getCreatedOn());
 			     
 			  int statusInt = pstmt.executeUpdate();
 			     
@@ -167,6 +173,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 			qry.append(" ,forpm=? ");
 			qry.append(" ,inspectiondate=? ");
 			qry.append(" ,remarks=? ");
+			qry.append(" ,modelyear=? ");
+			qry.append(" ,kmrun=? ");
 			qry.append(" ,modifiedby=? ");
 			qry.append(" ,modifiedon=? ");
 			qry.append(" ,version=(version+1) ");
@@ -188,10 +196,12 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 			pstmt.setString(6, model.getForAnnual());
 			pstmt.setString(7, model.getForPm());
 			pstmt.setDate(8, model.getInspectionDate());
-			pstmt.setString(9, model.getRemarks());		
-			pstmt.setInt(10, model.getModifiedBy());
-			pstmt.setTimestamp(11, model.getModifiedOn());
-			pstmt.setLong(12, model.getId());
+			pstmt.setString(9, model.getRemarks());	
+			pstmt.setString(10, model.getModelYear());	
+			pstmt.setString(11, model.getKmRun());	
+			pstmt.setInt(12, model.getModifiedBy());
+			pstmt.setTimestamp(13, model.getModifiedOn());
+			pstmt.setLong(14, model.getId());
 				     
 			int statusInt = pstmt.executeUpdate();
 				     
@@ -301,7 +311,7 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 			 try {
 				 conn = ServerContext.getJDBCHandle();
 
-				 StringBuffer sql = new StringBuffer("select a.id,a.lorryno,a.plateno,a.odometer,a.hubodometer,a.inspectors,a.forannual,a.forpm,a.inspectiondate,a.remarks ");
+				 StringBuffer sql = new StringBuffer("select a.id,a.lorryno,a.plateno,a.odometer,a.hubodometer,a.inspectors,a.forannual,a.forpm,a.inspectiondate,a.remarks,a.modelyear,a.kmrun ");
 				 	sql.append(" from transport.tran_inspection_header a ");
 				 	sql.append(" where a.id = ?");
 
@@ -324,6 +334,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 		    		 model.setForPm(rs.getString(8));
 		    		 model.setInspectionDate(rs.getDate(9));
 		    		 model.setRemarks(rs.getString(10));
+		    		 model.setModelYear(rs.getString(11));
+		    		 model.setKmRun(rs.getString(12));
 				 }				 
 				 
 			 } catch (SQLException e) {
@@ -367,7 +379,7 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 			 try {
 				 conn = ServerContext.getJDBCHandle();
 
-				 StringBuffer sql = new StringBuffer("select a.id,a.lorryno,a.plateno,a.odometer,a.hubodometer,a.inspectors,a.forannual,a.forpm,a.inspectiondate,a.remarks ");
+				 StringBuffer sql = new StringBuffer("select a.id,a.lorryno,a.plateno,a.odometer,a.hubodometer,a.inspectors,a.forannual,a.forpm,a.inspectiondate,a.remarks,a.modelyear,a.kmrun ");
 				 	sql.append(" from transport.tran_inspection_header a ");
 				 	sql.append(" where a.active = false ");
 				 	sql.append(" order by a.inspectiondate desc ");
@@ -396,6 +408,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 		    		 model.setForPm(rs.getString(8));
 		    		 model.setInspectionDate(rs.getDate(9));
 		    		 model.setRemarks(rs.getString(10));
+		    		 model.setModelYear(rs.getString(11));
+		    		 model.setKmRun(rs.getString(12));
 		    		 rsList.add(model);
 				 }			 
 			 } catch (SQLException e) {
@@ -534,7 +548,7 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 			 try {
 				 conn = ServerContext.getJDBCHandle();
 
-				 StringBuffer sql = new StringBuffer("select a.id,a.lorryno,a.plateno,a.odometer,a.hubodometer,a.inspectors,a.forannual,a.forpm,a.inspectiondate,a.remarks ");
+				 StringBuffer sql = new StringBuffer("select a.id,a.lorryno,a.plateno,a.odometer,a.hubodometer,a.inspectors,a.forannual,a.forpm,a.inspectiondate,a.remarks,a.modelyear,a.kmrun ");
 					 	sql.append(" from transport.tran_inspection_header a ");
 					 	sql.append(" where a.active = true ");
 					 	 if (category.equals(ActionConstant.SEARCHBY)) {
@@ -569,6 +583,8 @@ public class MaintenanceInspectionHeaderDaoImpl implements MaintenanceInspection
 		    		 model.setForPm(rs.getString(8));
 		    		 model.setInspectionDate(rs.getDate(9));
 		    		 model.setRemarks(rs.getString(10));
+		    		 model.setModelYear(rs.getString(11));
+		    		 model.setKmRun(rs.getString(12));
 		    		 rsList.add(model);
 				 }				 
 			 } catch (SQLException e) {

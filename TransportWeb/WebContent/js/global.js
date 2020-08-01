@@ -140,3 +140,12 @@ function getDriverTrainingInfo2(driverId) {
 		});
 
 }
+
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if ((charCode > 47 && charCode < 58) || charCode == 46 || charCode == 127) {
+   	return true;
+    } else {
+   	 return false;
+    } 
+}

@@ -125,6 +125,10 @@ public class Lorry implements Serializable {
 	public String getLorryNoWithPlateNo() {
 		return getLorryNo() + " (" + getPlateNo()+")";
 	}
+	
+	public String getLorryNoWithPlateNoModel() {
+		return getLorryNo() + " (" + getPlateNo()+")" + " (" + getTractorModel()+ " " + getTractorYear() + ")";
+	}
 
 	public int getCapacity() {
 		return capacity;

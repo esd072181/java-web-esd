@@ -8,6 +8,7 @@ import java.sql.Timestamp;
  * 
  * @author edwarddavid
  * @since 24Mar2020
+ * DateUpdated: 01Aug2020
  */
 public class InspectionHeader implements Serializable {
 
@@ -21,6 +22,8 @@ public class InspectionHeader implements Serializable {
 	private String plateNo;
 	private String odometer;
 	private String hubOdometer;
+	private String modelYear;
+	private String kmRun;
 	private String inspectors;
 	private String forAnnual;
 	private String forPm;
@@ -165,6 +168,22 @@ public class InspectionHeader implements Serializable {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getModelYear() {
+		return modelYear;
+	}
+
+	public void setModelYear(String modelYear) {
+		this.modelYear = modelYear;
+	}
+
+	public String getKmRun() {
+		return kmRun;
+	}
+
+	public void setKmRun(String kmRun) {
+		this.kmRun = kmRun;
 	}
 
 	

@@ -8,24 +8,6 @@ $(function() {
     $('#dtInspectionDate').attr('placeholder','mm/dd/yyyy'); 
     $('#lorryNoId').focus();
   });
-function getLorryNoAndPlateNo() {
-	var res = $('#lorryNoId option:selected').text().split("(");
-	$('#plateNoId').val(res[1].replace(")",""));
-}
-function hideItems(index) {	
-	var className = "category" + index;
-	var x = document.getElementsByClassName(className);
-	var i;
-	for (i = 0; i < x.length; i++) {
-	  if (x[i].style.display == "none") {
-		  $('.' + className).show();
-	  } else {
-		  $('.' + className).hide();
-	  }
-	  break;
-	}
-	return false; 
-}
 </script>
 <style>
 	.title-background {
@@ -67,13 +49,23 @@ function hideItems(index) {
 								 			</html:select>
 								 		</td>	
 								 		<td style="font-weight: bold; padding-left: 10px;">PLATE NUMBER:</td>
-								 		<td style="padding-left: 5px;"><html:text styleId="plateNoId" property="plateNo" style="width: 100px; height: 22px;" readonly="readonly"></</html:text></td>	
+								 		<td style="padding-left: 5px;"><html:text styleId="plateNoId" property="plateNo" style="width: 100px; height: 22px;" readonly="true"></</html:text></td>	
 								 		<td style="font-weight: bold; padding-left: 10px;">ODOMETER:</td>
-								 		<td style="padding-left: 5px;"><html:text property="odometer" style="width: 100px; height: 22px;"></html:text></td>
+								 		<td style="padding-left: 5px;"><html:text styleId="odometerId" property="odometer" style="width: 100px; height: 22px; text-align: right;" onkeypress="return isNumberKey(event);" onkeyup="computeKmRun();"></html:text></td>
 								 		<td style="font-weight: bold; padding-left: 10px;">HUB ODOMETER:</td>
-								 		<td style="padding-left: 5px;"><html:text property="hubOdometer" style="width: 100px; height: 22px;"></html:text></td>	
+								 		<td style="padding-left: 5px;"><html:text styleId="hubOdometerId" property="hubOdometer" style="width: 100px; height: 22px; text-align: right;" onkeypress="return isNumberKey(event);" onkeyup="computeKmRun();"></html:text></td>	
 								 	</tr>                              	
-								 	<tr height="15px;"></tr>	                              									 	
+								 	<tr height="8px;"></tr>	                              									 	
+								</table>
+								
+								<table>
+								 	<tr>
+								 		<td style="font-weight: bold; padding-left: 5px;">MAKE/MODEL/YEAR:</td>
+								 		<td style="padding-left: 5px;"><html:text styleId="modelYearId" property="modelYear" style="width: 242px; height: 22px;" readonly="true"></</html:text></td>	
+								 		<td style="font-weight: bold; padding-left: 10px;">KILOMETER RUN:</td>
+								 		<td style="padding-left: 5px;"><html:text styleId="kmRunId" property="kmRun" style="width: 138px; height: 22px; text-align: right;" readonly="true"></html:text></td>
+								 	</tr>  	
+								 	<tr height="15px;"></tr>						
 								</table>
 								
 								<table>

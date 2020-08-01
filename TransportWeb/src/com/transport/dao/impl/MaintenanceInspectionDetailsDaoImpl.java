@@ -25,6 +25,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author edwarddavid
  * @since 23Mar2020
+ * DateUpdated: 01Aug2020
  */
 public class MaintenanceInspectionDetailsDaoImpl implements MaintenanceInspectionDetailsDao {
 	
@@ -59,6 +60,8 @@ public class MaintenanceInspectionDetailsDaoImpl implements MaintenanceInspectio
 		  		qry.append(",inspectionid ");
 		  		qry.append(",statusid ");
 		  		qry.append(",remarks ");
+		  		qry.append(",plandate ");
+		  		qry.append(",actualdate ");
 		  		qry.append(",createdby ");
 		  		qry.append(",createdon ");
 		  		qry.append(",version ");
@@ -67,6 +70,8 @@ public class MaintenanceInspectionDetailsDaoImpl implements MaintenanceInspectio
 		  		qry.append(" values ");
 		  		qry.append(" ( ");
 		  		qry.append(" ? ");
+		  		qry.append(" ,? ");
+		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
 		  		qry.append(" ,? ");
@@ -89,8 +94,10 @@ public class MaintenanceInspectionDetailsDaoImpl implements MaintenanceInspectio
 				  pstmt.setInt(2, item.getInspectionId());
 				  pstmt.setInt(3, item.getStatusId());
 				  pstmt.setString(4, item.getRemarks());
-				  pstmt.setInt(5, userId);
-				  pstmt.setTimestamp(6, new Timestamp(new java.util.Date().getTime()));
+				  pstmt.setDate(5, item.getPlanDate());
+				  pstmt.setDate(6, item.getActualDate());
+				  pstmt.setInt(7, userId);
+				  pstmt.setTimestamp(8, new Timestamp(new java.util.Date().getTime()));
 				     
 				  int statusInt = pstmt.executeUpdate();
 				     
@@ -143,6 +150,8 @@ public class MaintenanceInspectionDetailsDaoImpl implements MaintenanceInspectio
 		StringBuffer qry =  new StringBuffer("update transport.tran_inspection_details set ");	
 			qry.append(" statusid=? ");
 			qry.append(" ,remarks=? ");
+			qry.append(" ,plandate=? ");
+			qry.append(" ,actualdate=? ");
 			qry.append(" ,modifiedby=? ");
 			qry.append(" ,modifiedon=? ");
 			qry.append(" ,version=(version+1) ");
@@ -159,9 +168,11 @@ public class MaintenanceInspectionDetailsDaoImpl implements MaintenanceInspectio
 			for (InspectionDetails item: modelDetailsList) {
 				  pstmt.setInt(1, item.getStatusId());
 				  pstmt.setString(2, item.getRemarks());
-				  pstmt.setInt(3, userId);
-				  pstmt.setTimestamp(4, new Timestamp(new java.util.Date().getTime()));
-				  pstmt.setInt(5, item.getId());
+				  pstmt.setDate(3, item.getPlanDate());
+				  pstmt.setDate(4, item.getActualDate());
+				  pstmt.setInt(5, userId);
+				  pstmt.setTimestamp(6, new Timestamp(new java.util.Date().getTime()));
+				  pstmt.setInt(7, item.getId());
 				     
 				  int statusInt = pstmt.executeUpdate();
 				     
@@ -269,7 +280,7 @@ public class MaintenanceInspectionDetailsDaoImpl implements MaintenanceInspectio
 
 				 StringBuffer sql = new StringBuffer("select a.id,a.headerid,a.statusid,a.remarks, ");
 				 	sql.append(" c.listvalue as maincategoryname,d.listvalue as categoryname, b.categoryno,b.itemno, ");
-				 	sql.append(" b.subitemno,b.description,b.labelonly,b.sequenceorder ");
+				 	sql.append(" b.subitemno,b.description,b.labelonly,b.sequenceorder,a.plandate,a.actualdate ");
 				 	sql.append(" from transport.tran_inspection_details a, transport.file_inspection b, transport.list_value c, transport.list_value d ");
 				 	sql.append(" where a.inspectionid = b.id ");
 				 	sql.append(" and b.maincategoryid = c.id ");
@@ -300,6 +311,8 @@ public class MaintenanceInspectionDetailsDaoImpl implements MaintenanceInspectio
 		    		 modelDetail.setDescription(rs.getString(10));
 		    		 modelDetail.setLabelOnly(rs.getBoolean(11));
 		    		 modelDetail.setSequenceOrder(rs.getInt(12));
+		    		 modelDetail.setPlanDate(rs.getDate(13));
+		    		 modelDetail.setActualDate(rs.getDate(14));
 		    		 modelDetailsList.add(modelDetail);
 				 }				 
 				 

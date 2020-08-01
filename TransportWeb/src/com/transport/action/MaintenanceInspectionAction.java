@@ -102,9 +102,9 @@ public class MaintenanceInspectionAction extends Action {
 					InspectionHeader model = formBean.populateInspectionHeader();
 					
 					if (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE)) {
-						formBean.populateInspectionDetailsList(formBean.getInspectionId(),formBean.getInspectionStatusId(),formBean.getInspectionRemarks(), Boolean.FALSE);
+						formBean.populateInspectionDetailsList(formBean.getInspectionId(),formBean.getInspectionStatusId(),formBean.getInspectionRemarks(), formBean.getPlanDate(), formBean.getActualDate(), Boolean.FALSE);
 					} else {
-						formBean.populateInspectionDetailsList(formBean.getInspectionId(),formBean.getInspectionStatusId(),formBean.getInspectionRemarks(), Boolean.TRUE);
+						formBean.populateInspectionDetailsList(formBean.getInspectionId(),formBean.getInspectionStatusId(),formBean.getInspectionRemarks(), formBean.getPlanDate(), formBean.getActualDate(), Boolean.TRUE);
 					}
 										
 					HashMap<String,Object> dataMap = new HashMap<String, Object>();

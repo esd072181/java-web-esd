@@ -6,27 +6,14 @@
 $(function() {
     
     $('#dtInspectionDate').datepicker({}); 
+    $('input[name="planDate"]').datepicker({}); 
+    $('input[name="actualDate"]').datepicker({}); 
     $('#dtInspectionDate').attr('placeholder','mm/dd/yyyy'); 
+    $('input[name="planDate"]').attr('placeholder','mm/dd/yyyy'); 
+    $('input[name="actualDate"]').attr('placeholder','mm/dd/yyyy'); 
     $('#lorryNoId').focus();
   });
-function getLorryNoAndPlateNo() {
-	var res = $('#lorryNoId option:selected').text().split("(");
-	$('#plateNoId').val(res[1].replace(")",""));
-}
-function hideItems(index) {	
-	var className = "category" + index;
-	var x = document.getElementsByClassName(className);
-	var i;
-	for (i = 0; i < x.length; i++) {
-	  if (x[i].style.display == "none") {
-		  $('.' + className).show();
-	  } else {
-		  $('.' + className).hide();
-	  }
-	  break;
-	}
-	return false; 
-}
+
 </script>
 <style>
 	.title-background {
@@ -62,17 +49,27 @@ function hideItems(index) {
   								 		<td colspan="5" style="padding-left: 5px;">
   								 			<html:select  styleId="lorryNoId" style="width: 100px; height: 22px;"  name="maintenanceInspectionForm" property="lorryNo" onchange="getLorryNoAndPlateNo();" disabled="${maintenanceInspectionForm.transactionStatus}" >
 								 				<html:option value="">--Select--</html:option>
-								 				<html:optionsCollection name="maintenanceInspectionForm" property="lorryList" label="lorryNoWithPlateNo" value="lorryNo"/>				 		
+								 				<html:optionsCollection name="maintenanceInspectionForm" property="lorryList" label="lorryNoWithPlateNoModel" value="lorryNo"/>				 		
 								 			</html:select>
 								 		</td>
 								 		<td style="font-weight: bold; padding-left: 10px;">PLATE NUMBER:</td>
-								 		<td style="padding-left: 5px;"><html:text styleId="plateNoId" property="plateNo" style="width: 100px; height: 22px;" readonly="readonly"></</html:text></td>	
-								 		<td style="font-weight: bold; padding-left: 10px;">ODOMETER:</td>
-								 		<td style="padding-left: 5px;"><html:text property="odometer" style="width: 100px; height: 22px;"></html:text></td>
-								 		<td style="font-weight: bold; padding-left: 10px;">HUB ODOMETER:</td>
-								 		<td style="padding-left: 5px;"><html:text property="hubOdometer" style="width: 100px; height: 22px;"></html:text></td>	
+								 		<td style="padding-left: 5px;"><html:text styleId="plateNoId" property="plateNo" style="width: 108px; height: 22px;" readonly="true"></</html:text></td>	
+								 		<td style="font-weight: bold; padding-left: 10px;">PREVIOUS ODOMETER:</td>
+								 		<td style="padding-left: 5px;"><html:text styleId="odometerId" property="odometer" style="width: 100px; height: 22px; text-align: right;" onkeypress="return isNumberKey(event);" onkeyup="computeKmRun();"></html:text></td>
+								 		<td style="font-weight: bold; padding-left: 10px;">CURRENT ODOMETER:</td>
+								 		<td style="padding-left: 5px;"><html:text styleId="hubOdometerId" property="hubOdometer" style="width: 100px; height: 22px; text-align: right;" onkeypress="return isNumberKey(event);" onkeyup="computeKmRun();"></html:text></td>	
 								 	</tr>                              	
-								 	<tr height="15px;"></tr>
+								 	<tr height="8px;"></tr>
+								</table>
+	     
+								<table>
+								 	<tr>
+								 		<td style="font-weight: bold; padding-left: 5px;">MAKE/MODEL/YEAR:</td>
+								 		<td style="padding-left: 5px;"><html:text styleId="modelYearId" property="modelYear" style="width: 242px; height: 22px;" readonly="true"></</html:text></td>	
+								 		<td style="font-weight: bold; padding-left: 10px;">KILOMETER RUN:</td>
+								 		<td style="padding-left: 5px;"><html:text styleId="kmRunId" property="kmRun" style="width: 138px; height: 22px; text-align: right;" readonly="true"></html:text></td>
+								 	</tr>  	
+								 	<tr height="15px;"></tr>						
 								</table>
 									
 								<table>
@@ -128,9 +125,13 @@ function hideItems(index) {
 								 		<td align="center" style="font-weight: bold;" width="60">Replace</td>
 								 		<td align="center" style="font-weight: bold;" width="60">N/A</td>
 								 		<td align="center" style="font-weight: bold;" width="350">Remarks</td>
+								 		<td align="center" style="font-weight: bold;" width="120">Plan Date</td>
+								 		<td align="center" style="font-weight: bold;" width="120">Actual Date</td>
 								 	</tr>
 								 	<tr>
 								 		<td colspan="4" align="left" class="title-background" style="padding-left: 5px;font-weight: bold; font-style: italic;">SAFETY CHECK ITEMS</td>
+								 		<td class="title-background"></td>
+								 		<td class="title-background"></td>
 								 		<td class="title-background"></td>
 								 		<td class="title-background"></td>
 								 		<td class="title-background"></td>
@@ -151,11 +152,15 @@ function hideItems(index) {
 											 		<td align="center" class="title-background" style="font-weight: bold;" width="60">Replace</td>
 											 		<td align="center" class="title-background" style="font-weight: bold;" width="60">N/A</td>
 											 		<td align="center" class="title-background" style="font-weight: bold;" width="350">Remarks</td>
+											 		<td align="center" class="title-background" style="font-weight: bold;" width="120">Plan Date</td>
+											 		<td align="center" class="title-background" style="font-weight: bold;" width="120">Actual Date</td>
 												</tr>
 											</c:if>
 								 	
 										 	<tr>
 										 		<td colspan="4" align="center" class="title-background" style="font-weight: bold;">${mainCategoryModel}</td>
+										 		<td class="title-background"></td>
+										 		<td class="title-background"></td>
 										 		<td class="title-background"></td>
 										 		<td class="title-background"></td>
 										 		<td class="title-background"></td>
@@ -177,6 +182,8 @@ function hideItems(index) {
 													 		<td align="center" class="title-background" width="60"></td>
 													 		<td align="center" class="title-background" width="60"></td>
 													 		<td align="center" class="title-background" width="350"></td>
+													 		<td align="center" class="title-background" width="120"></td>
+													 		<td align="center" class="title-background" width="120"></td>
 														</tr>
 													</c:if>
 																		
@@ -188,6 +195,8 @@ function hideItems(index) {
 														<td width="60"></td>
 														<td width="60"></td>
 														<td width="350"></td>
+														<td width="120"></td>
+														<td width="120"></td>
 													</tr>
 													<c:choose>
 														<c:when test="${maintenanceInspectionForm.transactionStatus == false}">
@@ -201,11 +210,15 @@ function hideItems(index) {
 																				<td>
 																					<html:hidden property="inspectionId" value="${innerModel.id}"/>
 																					<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
-																					<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
+																					<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->
+																					<html:hidden property="planDate" value="${innerModel.id}"/><!-- key-value technique in array -->
+																					<html:hidden property="actualDate" value="${innerModel.id}"/><!-- key-value technique in array -->																			
 																				</td>
 																				<td colspan="3" width="150" style="padding: 0px 5px 0px 5px;">${innerModel.itemNo} ${innerModel.description}</td>
 																				<c:choose>
 																					<c:when test="${innerModel.labelOnly == true}">
+																						<td></td>
+																						<td></td>
 																						<td></td>
 																						<td></td>
 																						<td></td>
@@ -217,7 +230,9 @@ function hideItems(index) {
 																						<td width="60" align="center"><html:checkbox property="inspectionStatusId" value="1602"></html:checkbox></td>
 																						<td width="60" align="center"><html:checkbox property="inspectionStatusId" value="1603"></html:checkbox></td>
 																						<td width="60" align="center"><html:checkbox property="inspectionStatusId" value="1604"></html:checkbox></td>
-																						<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;"></html:text></td>																																				
+																						<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;"></html:text></td>
+																						<td width="125" align="center"><html:text property="planDate" style="width: 120px;"></html:text></td>
+																						<td width="125" align="center"><html:text property="actualDate" style="width: 120px;"></html:text></td>																																				
 																					</c:otherwise>																	
 																				</c:choose>
 																			</tr>
@@ -228,11 +243,15 @@ function hideItems(index) {
 																				<td>
 																					<html:hidden property="inspectionId" value="${innerModel.id}"/>
 																					<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
-																					<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
+																					<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->
+																					<html:hidden property="planDate" value="${innerModel.id}"/><!-- key-value technique in array -->
+																					<html:hidden property="actualDate" value="${innerModel.id}"/><!-- key-value technique in array -->																			
 																				</td>
 																				<td  colspan="3" width="150" style="padding: 0px 5px 0px 25px;">${innerModel.subItemNo} ${innerModel.description}</td>
 																				<c:choose>
 																					<c:when test="${innerModel.labelOnly == true}">
+																						<td></td>
+																						<td></td>
 																						<td></td>
 																						<td></td>
 																						<td></td>
@@ -244,7 +263,9 @@ function hideItems(index) {
 																						<td width="60" align="center"><html:checkbox property="inspectionStatusId" value="1602"></html:checkbox></td>
 																						<td width="60" align="center"><html:checkbox property="inspectionStatusId" value="1603"></html:checkbox></td>
 																						<td width="60" align="center"><html:checkbox property="inspectionStatusId" value="1604"></html:checkbox></td>
-																						<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;"></html:text></td>				
+																						<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;"></html:text></td>
+																						<td width="125" align="center"><html:text property="planDate" style="width: 120px;"></html:text></td>
+																						<td width="125" align="center"><html:text property="actualDate" style="width: 120px;"></html:text></td>					
 																					</c:otherwise>
 																				</c:choose>
 																			</tr>
@@ -263,11 +284,15 @@ function hideItems(index) {
 																				<td>
 																					<html:hidden property="inspectionId" value="${innerModel.id}"/><!-- use this details id -->
 																					<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
-																					<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
+																					<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->	
+																					<html:hidden property="planDate" value="${innerModel.id}"/><!-- key-value technique in array -->
+																					<html:hidden property="actualDate" value="${innerModel.id}"/><!-- key-value technique in array -->																		
 																				</td>
 																				<td colspan="3" width="150" style="padding: 0px 5px 0px 5px;">${innerModel.itemNo} ${innerModel.description}</td>
 																				<c:choose>
 																					<c:when test="${innerModel.labelOnly == true}">
+																						<td></td>
+																						<td></td>
 																						<td></td>
 																						<td></td>
 																						<td></td>
@@ -307,7 +332,9 @@ function hideItems(index) {
 																								<td width="60" align="center"><html:checkbox property="inspectionStatusId" value="1604"></html:checkbox></td>
 																							</c:otherwise>
 																						</c:choose>
-																						<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;" value="${innerModel.remarks}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>																																				
+																						<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;" value="${innerModel.remarks}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
+																						<td width="125" align="center"><html:text property="planDate" style="width: 120px;" value="${innerModel.planDate}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
+																						<td width="125" align="center"><html:text property="actualDate" style="width: 120px;" value="${innerModel.actualDate}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>																																				
 																					</c:otherwise>																	
 																				</c:choose>
 																			</tr>
@@ -319,12 +346,16 @@ function hideItems(index) {
 																					<c:if test="${innerModel.labelOnly == false}">
 																						<html:hidden property="inspectionId" value="${innerModel.id}"/>
 																						<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
-																						<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
+																						<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->
+																						<html:hidden property="planDate" value="${innerModel.id}"/><!-- key-value technique in array -->
+																						<html:hidden property="actualDate" value="${innerModel.id}"/><!-- key-value technique in array -->																			
 																					</c:if>
 																				</td>
 																				<td  colspan="3" width="150" style="padding: 0px 5px 0px 25px;">${innerModel.subItemNo} ${innerModel.description}</td>
 																				<c:choose>
 																					<c:when test="${innerModel.labelOnly == true}">
+																						<td></td>
+																						<td></td>
 																						<td></td>
 																						<td></td>
 																						<td></td>
@@ -365,7 +396,8 @@ function hideItems(index) {
 																							</c:otherwise>
 																						</c:choose>											
 																						<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;" value="${innerModel.remarks}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>				
-																						
+																						<td width="125" align="center"><html:text property="planDate" style="width: 120px;" value="${innerModel.planDate}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
+																						<td width="125" align="center"><html:text property="actualDate" style="width: 120px;" value="${innerModel.actualDate}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
 																					</c:otherwise>
 																				</c:choose>
 																			</tr>

@@ -1325,6 +1325,32 @@ function viewMaintenanceInspectionReport(id) {
 
 }
 
+function getLorryNoAndPlateNo() {
+	var res = $('#lorryNoId option:selected').text().split("(");
+	$('#plateNoId').val(res[1].replace(")",""));
+	$('#modelYearId').val(res[2].replace(")",""));
+	 $('#odometerId').focus();
+}
+function hideItems(index) {	
+	var className = "category" + index;
+	var x = document.getElementsByClassName(className);
+	var i;
+	for (i = 0; i < x.length; i++) {
+	  if (x[i].style.display == "none") {
+		  $('.' + className).show();
+	  } else {
+		  $('.' + className).hide();
+	  }
+	  break;
+	}
+	return false; 
+}
+function computeKmRun() {
+	let prevOdo = Number($('#odometerId').val());
+	let curOdo = Number($('#hubOdometerId').val());
+	$('#kmRunId').val(curOdo-prevOdo);
+}
+
 
 //Tire Management
 function goToTireManagement() {

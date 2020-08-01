@@ -1,12 +1,14 @@
 package com.transport.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
  * 
  * @author edwarddavid
  * @since 21Mar2020
+ * DateUpdated: 01Aug2020
  */
 public class InspectionDetails implements Serializable {
 
@@ -20,6 +22,8 @@ public class InspectionDetails implements Serializable {
 	private int inspectionId;
 	private int statusId;
 	private String remarks;
+	private Date planDate;
+	private Date actualDate;
 	private int createdBy;
 	private Timestamp createdOn;
 	private int modifiedBy;
@@ -189,6 +193,22 @@ public class InspectionDetails implements Serializable {
 
 	public void setSequenceOrder(Integer sequenceOrder) {
 		this.sequenceOrder = sequenceOrder;
+	}
+
+	public Date getPlanDate() {
+		return planDate;
+	}
+
+	public void setPlanDate(Date planDate) {
+		this.planDate = planDate;
+	}
+
+	public Date getActualDate() {
+		return actualDate;
+	}
+
+	public void setActualDate(Date actualDate) {
+		this.actualDate = actualDate;
 	}
 	
 	
