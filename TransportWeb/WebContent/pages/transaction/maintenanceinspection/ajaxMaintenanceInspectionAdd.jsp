@@ -68,8 +68,7 @@ $(function() {
 								 		<td style="padding-left: 5px;"><html:text styleId="modelYearId" property="modelYear" style="width: 242px; height: 22px;" readonly="true"></</html:text></td>	
 								 		<td style="font-weight: bold; padding-left: 10px;">KILOMETER RUN:</td>
 								 		<td style="padding-left: 5px;"><html:text styleId="kmRunId" property="kmRun" style="width: 138px; height: 22px; text-align: right;" readonly="true"></html:text></td>
-								 	</tr>  	
-								 	<tr height="15px;"></tr>						
+								 	</tr>  					
 								</table>
 									
 								<table>
@@ -333,8 +332,8 @@ $(function() {
 																							</c:otherwise>
 																						</c:choose>
 																						<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;" value="${innerModel.remarks}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
-																						<td width="125" align="center"><html:text property="planDate" style="width: 120px;" value="${innerModel.planDate}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
-																						<td width="125" align="center"><html:text property="actualDate" style="width: 120px;" value="${innerModel.actualDate}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>																																				
+																						<td width="125" align="center"><html:text property="planDate" style="width: 120px;" value="${innerModel.planDateStr}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
+																						<td width="125" align="center"><html:text property="actualDate" style="width: 120px;" value="${innerModel.actualDateStr}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>																																				
 																					</c:otherwise>																	
 																				</c:choose>
 																			</tr>
@@ -396,8 +395,8 @@ $(function() {
 																							</c:otherwise>
 																						</c:choose>											
 																						<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;" value="${innerModel.remarks}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>				
-																						<td width="125" align="center"><html:text property="planDate" style="width: 120px;" value="${innerModel.planDate}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
-																						<td width="125" align="center"><html:text property="actualDate" style="width: 120px;" value="${innerModel.actualDate}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
+																						<td width="125" align="center"><html:text property="planDate" style="width: 120px;" value="${innerModel.planDateStr}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
+																						<td width="125" align="center"><html:text property="actualDate" style="width: 120px;" value="${innerModel.actualDateStr}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
 																					</c:otherwise>
 																				</c:choose>
 																			</tr>

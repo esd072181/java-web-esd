@@ -5,7 +5,11 @@
 <script>
 $(function() {
     $('#dtInspectionDate').datepicker({}); 
+    $('input[name="planDate"]').datepicker({}); 
+    $('input[name="actualDate"]').datepicker({}); 
     $('#dtInspectionDate').attr('placeholder','mm/dd/yyyy'); 
+    $('input[name="planDate"]').attr('placeholder','mm/dd/yyyy'); 
+    $('input[name="actualDate"]').attr('placeholder','mm/dd/yyyy'); 
     $('#lorryNoId').focus();
   });
 </script>
@@ -64,8 +68,7 @@ $(function() {
 								 		<td style="padding-left: 5px;"><html:text styleId="modelYearId" property="modelYear" style="width: 242px; height: 22px;" readonly="true"></</html:text></td>	
 								 		<td style="font-weight: bold; padding-left: 10px;">KILOMETER RUN:</td>
 								 		<td style="padding-left: 5px;"><html:text styleId="kmRunId" property="kmRun" style="width: 138px; height: 22px; text-align: right;" readonly="true"></html:text></td>
-								 	</tr>  	
-								 	<tr height="15px;"></tr>						
+								 	</tr>  					
 								</table>
 								
 								<table>
@@ -120,9 +123,13 @@ $(function() {
 								 		<td align="center" style="font-weight: bold;" width="60">Replace</td>
 								 		<td align="center" style="font-weight: bold;" width="60">N/A</td>
 								 		<td align="center" style="font-weight: bold;" width="350">Remarks</td>
+								 		<td align="center" style="font-weight: bold;" width="120">Plan Date</td>
+								 		<td align="center" style="font-weight: bold;" width="120">Actual Date</td>
 								 	</tr>
 								 	<tr>
 								 		<td colspan="4" align="left" class="title-background" style="padding-left: 5px;font-weight: bold; font-style: italic;">SAFETY CHECK ITEMS</td>
+								 		<td class="title-background"></td>
+								 		<td class="title-background"></td>
 								 		<td class="title-background"></td>
 								 		<td class="title-background"></td>
 								 		<td class="title-background"></td>
@@ -142,11 +149,15 @@ $(function() {
 											 		<td align="center" class="title-background" style="font-weight: bold;" width="60">Replace</td>
 											 		<td align="center" class="title-background" style="font-weight: bold;" width="60">N/A</td>
 											 		<td align="center" class="title-background" style="font-weight: bold;" width="350">Remarks</td>
+											 		<td align="center" class="title-background" style="font-weight: bold;" width="120">Plan Date</td>
+								 					<td align="center" class="title-background" style="font-weight: bold;" width="120">Actual Date</td>
 												</tr>
 											</c:if>
 											
 										 	<tr>
 										 		<td colspan="4" align="center" class="title-background" style="font-weight: bold;">${mainCategoryModel}</td>
+										 		<td class="title-background"></td>
+										 		<td class="title-background"></td>
 										 		<td class="title-background"></td>
 										 		<td class="title-background"></td>
 										 		<td class="title-background"></td>
@@ -168,6 +179,8 @@ $(function() {
 													 		<td align="center" class="title-background" width="60"></td>
 													 		<td align="center" class="title-background" width="60"></td>
 													 		<td align="center" class="title-background" width="350"></td>
+													 		<td align="center" class="title-background" width="120"></td>
+													 		<td align="center" class="title-background" width="120"></td>
 														</tr>
 													</c:if>
 													
@@ -179,6 +192,8 @@ $(function() {
 														<td width="60"></td>
 														<td width="60"></td>
 														<td width="350"></td>
+														<td width="120"></td>
+														<td width="120"></td>
 													</tr>
 													
 													<logic:iterate name="maintenanceInspectionForm" property="modelDetailsList" type="com.transport.model.InspectionDetails" id="innerModel">
@@ -190,10 +205,14 @@ $(function() {
 																			<html:hidden property="inspectionId" value="${innerModel.id}"/><!-- use this details id -->
 																			<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
 																			<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
+																			<html:hidden property="planDate" value="${innerModel.id}"/><!-- key-value technique in array -->
+																			<html:hidden property="actualDate" value="${innerModel.id}"/><!-- key-value technique in array -->
 																		</td>
 																		<td colspan="3"  width="150" style="padding: 0px 5px 0px 5px;">${innerModel.itemNo} ${innerModel.description}</td>
 																		<c:choose>
 																			<c:when test="${innerModel.labelOnly == true}">
+																				<td></td>
+																				<td></td>
 																				<td></td>
 																				<td></td>
 																				<td></td>
@@ -234,6 +253,8 @@ $(function() {
 																					</c:otherwise>
 																				</c:choose>
 																				<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;" value="${innerModel.remarks}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>																																				
+																				<td width="125" align="center"><html:text property="planDate" style="width: 120px;" value="${innerModel.planDateStr}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
+																				<td width="125" align="center"><html:text property="actualDate" style="width: 120px;" value="${innerModel.actualDateStr}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
 																			</c:otherwise>																	
 																		</c:choose>
 																	</tr>
@@ -244,11 +265,15 @@ $(function() {
 																		<td>
 																			<html:hidden property="inspectionId" value="${innerModel.id}"/>
 																			<html:hidden property="inspectionStatusId" value="${innerModel.id}"/><!-- key-value technique in array -->
-																			<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->																			
+																			<html:hidden property="inspectionRemarks" value="${innerModel.id}"/><!-- key-value technique in array -->
+																			<html:hidden property="planDate" value="${innerModel.id}"/><!-- key-value technique in array -->
+																			<html:hidden property="actualDate" value="${innerModel.id}"/><!-- key-value technique in array -->																			
 																		</td>
 																		<td  colspan="3" width="150" style="padding: 0px 5px 0px 25px;">${innerModel.subItemNo} ${innerModel.description}</td>
 																		<c:choose>
 																			<c:when test="${innerModel.labelOnly == true}">
+																				<td></td>
+																				<td></td>
 																				<td></td>
 																				<td></td>
 																				<td></td>
@@ -289,7 +314,8 @@ $(function() {
 																					</c:otherwise>
 																				</c:choose>											
 																				<td width="350" align="center"><html:text property="inspectionRemarks" style="width: 345px;" value="${innerModel.remarks}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>				
-																				
+																				<td width="125" align="center"><html:text property="planDate" style="width: 120px;" value="${innerModel.planDateStr}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
+																				<td width="125" align="center"><html:text property="actualDate" style="width: 120px;" value="${innerModel.actualDateStr}" disabled="${maintenanceInspectionForm.transactionStatus}"></html:text></td>
 																			</c:otherwise>
 																		</c:choose>
 																	</tr>
