@@ -14,6 +14,7 @@
 					<th>No</th>
 					<th></th>
 					<th></th>
+					<th></th>
 					<c:if test="${sessionScope.user_role_session=='Admin'}">
 						<th></th>
 					</c:if>
@@ -33,7 +34,8 @@
 					<tr>
 						<td><c:out value="${index+1 + (maintenanceInspectionForm.currentPage * 10 - 10)}"/></td>
 						<td align="center"><a href="#" onclick="viewMaintenanceInspectionReport('<bean:write name="model" property="id"/>');">View</a></td>				 
-						<td align="center"><a href="#" onclick="editMaintenanceInspection('<bean:write name="model" property="id"/>');">Edit</a></td>
+						<td align="center"><a href="#" onclick="editMaintenanceInspection('<bean:write name="model" property="id"/>', true);">Edit Summary</a></td>
+						<td align="center"><a href="#" onclick="editMaintenanceInspection('<bean:write name="model" property="id"/>', false);">Edit</a></td>
 						<c:if test="${sessionScope.user_role_session=='Admin'}">
 							<td align="center"><a href="#" onclick="deleteMaintenanceInspection('<bean:write name="model" property="id"/>', '${maintenanceInspectionForm.category}',${maintenanceInspectionForm.currentPage})">Delete</a></td>
 						</c:if>	

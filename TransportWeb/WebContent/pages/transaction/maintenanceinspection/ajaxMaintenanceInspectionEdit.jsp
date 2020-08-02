@@ -38,6 +38,7 @@ $(function() {
 				
 	                        	<!-- ID -->
 	                        	<html:hidden property="id" value="${maintenanceInspectionForm.id}"/>
+	                        	<html:hidden property="isSummary" value="${maintenanceInspectionForm.isSummary}"/>
                             		
                             	<table> 
                             		<tr>

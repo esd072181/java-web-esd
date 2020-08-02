@@ -1,6 +1,7 @@
 package com.transport.action;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +68,8 @@ public class MaintenanceInspectionAction extends Action {
 					//fetch the data
 					
 					int id = Integer.parseInt(request.getParameter("id"));
+					boolean isSummary = Boolean.parseBoolean(request.getParameter("isSummary"));
+					formBean.setIsSummary(isSummary);
 					
 					InspectionHeader model = new InspectionHeader();
 					model.setId(id);
@@ -83,8 +86,19 @@ public class MaintenanceInspectionAction extends Action {
 				        model =  (InspectionHeader) resultMap.get(MapConstant.CLASS_DATA);		        		
 			        	formBean.populateFormBean(model);
 			        	@SuppressWarnings("unchecked")
-						List<InspectionDetails> detailsList = (List<InspectionDetails> )resultMap.get(MapConstant.CLASS_LIST);	
-			        	formBean.populateDetailsFormBean(detailsList);
+						List<InspectionDetails> detailsList = (List<InspectionDetails> )resultMap.get(MapConstant.CLASS_LIST);
+			        	if (!isSummary) {
+			        		formBean.populateDetailsFormBean(detailsList);	
+			        	} else {
+			        		//filter the list with Repair and Replace status only
+			        		List<InspectionDetails> filteredList = new ArrayList<>();
+			        		for (InspectionDetails item: detailsList) {
+			        			if (item.getStatusId() == 1602 || item.getStatusId() == 1603) {
+			        				filteredList.add(item);
+			        			}
+			        		}
+			        		formBean.populateDetailsFormBean(filteredList);
+			        	}
 			        	formBean.populateCategoryList();
 			        }
 			        
@@ -125,9 +139,24 @@ public class MaintenanceInspectionAction extends Action {
 			        if (resultMap!=null && !resultMap.isEmpty()) {
 			        	
 					    @SuppressWarnings("unchecked")
-						List<InspectionDetails> detailsList = (List<InspectionDetails>)resultMap.get(MapConstant.CLASS_LIST);	
-					    formBean.populateDetailsFormBean(detailsList);
-			       
+						List<InspectionDetails> detailsList = (List<InspectionDetails>)resultMap.get(MapConstant.CLASS_LIST);
+					    if (command.equalsIgnoreCase(ParamConstant.AJAX_SAVE)) {
+					    	 formBean.populateDetailsFormBean(detailsList);
+					    } else {
+					    	if (!formBean.getIsSummary()) {
+					    		formBean.populateDetailsFormBean(detailsList);
+					    	} else {
+					    		//filter the list with Repair and Replace status only
+				        		List<InspectionDetails> filteredList = new ArrayList<>();
+				        		for (InspectionDetails item: detailsList) {
+				        			if (item.getStatusId() == 1602 || item.getStatusId() == 1603) {
+				        				filteredList.add(item);
+				        			}
+				        		}
+				        		formBean.populateDetailsFormBean(filteredList);
+					    	} 
+					    }
+					   
 			        	//check resultmap action status
 			        	boolean tranctionStatus = (boolean) resultMap.get(MapConstant.TRANSACTION_STATUS);
 	

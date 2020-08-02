@@ -1258,12 +1258,12 @@ function saveMaintenanceInspection() {
 
 }
 
-function editMaintenanceInspection(id) {
+function editMaintenanceInspection(id,isSummary) {
 	$.ajax({
 		  type: "GET",
 		  url: "maintenanceInspection.do?",
 		  cache: false,
-		  data: { command: "ajaxEdit", id: id  }
+		  data: { command: "ajaxEdit", id: id, isSummary: isSummary  }
 		})
 		  .done(function( result ) {
 			$("#contentDIV").html(result);

@@ -76,6 +76,8 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 	private boolean transactionStatus;
 	private String transactionMessage;
 	
+	private boolean isSummary;
+	
 	public MaintenanceInspectionFormBean() {}
 	
 	public void populateFormBean(InspectionHeader model) throws Exception {
@@ -613,6 +615,13 @@ public class MaintenanceInspectionFormBean extends TransportFormBean {
 		this.actualDate = actualDate;
 	}
 
+	public boolean getIsSummary() {
+		return isSummary;
+	}
+
+	public void setIsSummary(boolean isSummary) {
+		this.isSummary = isSummary;
+	}
 	
 	
 }
