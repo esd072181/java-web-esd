@@ -1348,7 +1348,11 @@ function hideItems(index) {
 function computeKmRun() {
 	let prevOdo = Number($('#odometerId').val());
 	let curOdo = Number($('#hubOdometerId').val());
-	$('#kmRunId').val(curOdo-prevOdo);
+	if (prevOdo>0 && curOdo>0) {
+		$('#kmRunId').val(curOdo-prevOdo);
+	} else {
+		$('#kmRunId').val('0');
+	}	
 }
 
 

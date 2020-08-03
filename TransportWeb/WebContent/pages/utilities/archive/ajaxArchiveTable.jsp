@@ -442,8 +442,10 @@
 					<th>InspectionDate</th>
 					<th>LorryNo</th>
 					<th>PlateNo</th>
-					<th>Odometer</th>
-					<th>HubOdometer</th>
+					<th>Make/Model/Year</th>
+					<th>PrevOdometer</th>
+					<th>CurrOdometer</th>
+					<th>KmRun</th>
 					<th>Inspectors</th>
 					<th>ForAnnual</th>
 					<th>ForPM</th>
@@ -456,8 +458,10 @@
 						<td><bean:write name="model" property="inspectionDate" format='MM/dd/yyyy'/></td>
 						<td><bean:write name="model" property="lorryNo"/></td>
 						<td><bean:write name="model" property="plateNo"/></td>
-						<td><bean:write name="model" property="odometer"/></td>
-						<td><bean:write name="model" property="hubOdometer"/></td>	
+						<td><bean:write name="model" property="modelYear"/></td>
+						<td align="right"><bean:write name="model" property="odometer"/></td>
+						<td align="right"><bean:write name="model" property="hubOdometer"/></td>
+						<td align="right"><bean:write name="model" property="kmRun"/></td>	
 						<td><bean:write name="model" property="inspectors"/></td>
 						<td><bean:write name="model" property="forAnnual"/></td>
 						<td><bean:write name="model" property="forPm"/></td>	

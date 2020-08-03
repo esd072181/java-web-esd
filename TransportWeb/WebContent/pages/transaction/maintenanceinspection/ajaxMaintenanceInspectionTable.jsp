@@ -22,8 +22,8 @@
 					<th>LorryNo</th>
 					<th>PlateNo</th>
 					<th>Make/Model/Year</th>
-					<th>Odometer</th>
-					<th>HubOdometer</th>
+					<th>PrevOdometer</th>
+					<th>CurrOdometer</th>
 					<th>KmRun</th>
 					<th>Inspectors</th>
 					<th>ForAnnual</th>
