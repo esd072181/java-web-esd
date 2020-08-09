@@ -4,7 +4,7 @@ package com.transport.constant;
  * 
  * @author dward
  * @since July2015
- * DateUpdated: 11Apr2020
+ * DateUpdated: 09Aug2020
  */
 public class MiscConstant {
 
@@ -199,6 +199,8 @@ public class MiscConstant {
 	public static final String RPT_MAINTENANCE_CATEGORY_REPORT = "MaintenanceCategory.jasper";
 	public static final String RPT_MAINTENANCE_INSPECTION_TITLE = "Inspection Checklist Report";
 	public static final String RPT_MAINTENANCE_INSPECTION_REPORT = "InspectionChecklist.jasper";
+	public static final String RPT_MAINTENANCE_INSPECTION_SUMMARY_TITLE = "Inspection Checklist Summary Report";
+	public static final String RPT_MAINTENANCE_INSPECTION_SUMMARY_REPORT = "InspectionChecklistSummary.jasper";
 	public static final String RPT_TIRE_STATUS_SUMMARY_TITLE = "Tire Status Sumary";
 	public static final String RPT_TIRE_STATUS_SUMMARY_REPORT = "TireStatusSummary.jasper";
 
@@ -211,6 +213,7 @@ public class MiscConstant {
 	public static final String PDF_DRIVER_INCIDENT_REPORT = "DriverIncident.pdf";
 	public static final String PDF_MAINTENANCE_CATEGORY_REPORT = "MaintenanceCategory.pdf";
 	public static final String PDF_MAINTENANCE_INSPECTION_REPORT = "InspectionChecklist.pdf";
+	public static final String PDF_MAINTENANCE_INSPECTION_SUMMARY_REPORT = "InspectionChecklistSummary.pdf";
 	public static final String PDF_TIRE_STATUS_SUMMARY_REPORT = "TireStatusSummary.pdf";
 	
 }

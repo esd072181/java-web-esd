@@ -32,7 +32,7 @@ import com.transport.util.TransportUtils;
  * 
  * @author edwarddavid
  * @since 21Mar2020
- * DateUpdated: 03Aug2020
+ * DateUpdated: 09Aug2020
  */
 public class MaintenanceInspectionAction extends Action {
 
@@ -297,6 +297,7 @@ public class MaintenanceInspectionAction extends Action {
 
 					// fetch the data
 					int id = Integer.parseInt(request.getParameter("id"));
+					boolean isSummary = Boolean.valueOf(request.getParameter("isSummary"));
 
 					InspectionHeader model = new InspectionHeader();
 					model.setId(id);
@@ -317,13 +318,22 @@ public class MaintenanceInspectionAction extends Action {
 		
 						String path = TransportUtils.getReportPath(request);
 						
+						dataMap.put("isSummary", isSummary);
 						dataMap.put(MapConstant.CLASS_DATA, model);
 						dataMap.put(MapConstant.REPORT_LOCALPATH, path);
-				        dataMap.put(MapConstant.MODULE, module);
+						dataMap.put(MapConstant.MODULE, module);
 					    dataMap.put(MapConstant.ACTION, ActionConstant.GENERATE_REPORT);
-					    dataMap.put(MapConstant.RPT_TITLE, MiscConstant.RPT_MAINTENANCE_INSPECTION_TITLE);
-					    dataMap.put(MapConstant.RPT_JASPER, MiscConstant.RPT_MAINTENANCE_INSPECTION_REPORT);
-					    dataMap.put(MapConstant.RPT_PDF, MiscConstant.PDF_MAINTENANCE_INSPECTION_REPORT);
+						if (isSummary) {
+							dataMap.put(MapConstant.RPT_TITLE, MiscConstant.RPT_MAINTENANCE_INSPECTION_SUMMARY_TITLE);
+						    dataMap.put(MapConstant.RPT_JASPER, MiscConstant.RPT_MAINTENANCE_INSPECTION_SUMMARY_REPORT);
+						    dataMap.put(MapConstant.RPT_PDF, MiscConstant.PDF_MAINTENANCE_INSPECTION_SUMMARY_REPORT);
+						} else {
+							dataMap.put(MapConstant.RPT_TITLE, MiscConstant.RPT_MAINTENANCE_INSPECTION_TITLE);
+						    dataMap.put(MapConstant.RPT_JASPER, MiscConstant.RPT_MAINTENANCE_INSPECTION_REPORT);
+						    dataMap.put(MapConstant.RPT_PDF, MiscConstant.PDF_MAINTENANCE_INSPECTION_REPORT);
+						}
+				        
+					    
 					    dataMap.put("ChkNo", TransportUtils.getResourcesPath(request) + File.separator + "chkNo.png");
 					    dataMap.put("ChkYes", TransportUtils.getResourcesPath(request) + File.separator + "chkYes.png");
 					    
@@ -333,7 +343,11 @@ public class MaintenanceInspectionAction extends Action {
 				        boolean isReportGenerated = (boolean) resultMap.get(MapConstant.BOOLEAN_DATA);
 
 			        	if (isReportGenerated) {
-			        		response.getWriter().println(MiscConstant.PDF_MAINTENANCE_INSPECTION_REPORT);			        		
+			        		if (isSummary) {
+			        			response.getWriter().println(MiscConstant.PDF_MAINTENANCE_INSPECTION_SUMMARY_REPORT);
+			        		} else {
+			        			response.getWriter().println(MiscConstant.PDF_MAINTENANCE_INSPECTION_REPORT);	
+			        		}			        		
 			        		TransportUtils.writeLogInfo(logger, MiscConstant.RPT_MESSSAGE_GENERATED_SUCCESS + "-" + module);	
 			        	} else {
 			        		//need to add message here if report generation failed, make the message dynamic

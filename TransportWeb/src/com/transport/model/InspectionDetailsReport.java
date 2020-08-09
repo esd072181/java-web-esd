@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 
  * @author edwarddavid
  * @since 28Mar2020
- * DateUpdated: 29Mar2020
+ * DateUpdated: 09Aug2020
  */
 public class InspectionDetailsReport implements Serializable {
 
@@ -32,6 +32,10 @@ public class InspectionDetailsReport implements Serializable {
 	private String imgNAForSubItem;
 	private String remarksForItem;
 	private String remarksForSubItem;
+	private String planDateStrForItem;
+	private String actualDateStrForItem;
+	private String planDateStrForSubItem;
+	private String actualDateStrForSubItem;
 	
 	public InspectionDetailsReport() {}
 
@@ -195,6 +199,45 @@ public class InspectionDetailsReport implements Serializable {
 		this.mainCategory = mainCategory;
 	}
 
+
+	public String getPlanDateStrForItem() {
+		return planDateStrForItem;
+	}
+
+
+	public void setPlanDateStrForItem(String planDateStrForItem) {
+		this.planDateStrForItem = planDateStrForItem;
+	}
+
+
+	public String getActualDateStrForItem() {
+		return actualDateStrForItem;
+	}
+
+
+	public void setActualDateStrForItem(String actualDateStrForItem) {
+		this.actualDateStrForItem = actualDateStrForItem;
+	}
+
+
+	public String getPlanDateStrForSubItem() {
+		return planDateStrForSubItem;
+	}
+
+
+	public void setPlanDateStrForSubItem(String planDateStrForSubItem) {
+		this.planDateStrForSubItem = planDateStrForSubItem;
+	}
+
+
+	public String getActualDateStrForSubItem() {
+		return actualDateStrForSubItem;
+	}
+
+
+	public void setActualDateStrForSubItem(String actualDateStrForSubItem) {
+		this.actualDateStrForSubItem = actualDateStrForSubItem;
+	}
 
 
 

@@ -19,7 +19,7 @@ import com.transport.util.ReportUtils;
  * 
  * @author edwarddavid
  * @since 23Mar2020
- * DateUpdated: 28Mar2020
+ * DateUpdated: 09Aug2020
  */
 public class MaintenanceInspectionHeaderBoImpl implements MaintenaceInspectionHeaderBo {
 
@@ -126,12 +126,25 @@ public class MaintenanceInspectionHeaderBoImpl implements MaintenaceInspectionHe
 	@Override
 	public Map<String, Object> generateReport(HashMap<String, Object> criteriaMap) throws Exception {
 
+		Boolean isSummary = Boolean.valueOf((boolean) criteriaMap.get("isSummary"));
+		
 		InspectionHeader model = (InspectionHeader) criteriaMap.get(MapConstant.CLASS_DATA);
 		//get the details
 		Map<String, Object> detailsMap = detailsDao.getDataById(criteriaMap);		
 		@SuppressWarnings("unchecked")
 		List<InspectionDetails> modelList = (ArrayList<InspectionDetails>) detailsMap.get(MapConstant.CLASS_LIST);
-		
+		if (isSummary) {
+			//filter the list with Repair and Replace status only
+			List<InspectionDetails> filteredList = new ArrayList<>();
+			for (InspectionDetails item: modelList) {
+				if (item.getStatusId() == 1602 || item.getStatusId() == 1603) {
+					filteredList.add(item);
+				}
+			}
+			modelList.clear();
+			modelList = filteredList;
+		}
+
 		//get the main category first
 		List<String> mainCategList = new ArrayList<>();
 		String mainCateg = null;
@@ -179,6 +192,8 @@ public class MaintenanceInspectionHeaderBoImpl implements MaintenaceInspectionHe
 							b.setImgRepairForSubItem(item.getStatusId() == 1602 ? (String) criteriaMap.get("ChkYes") : (String) criteriaMap.get("ChkNo"));
 							b.setImgReplaceForSubItem(item.getStatusId() == 1603 ? (String) criteriaMap.get("ChkYes") : (String) criteriaMap.get("ChkNo"));
 							b.setImgNAForSubItem(item.getStatusId() == 1604 ? (String) criteriaMap.get("ChkYes") : (String) criteriaMap.get("ChkNo"));
+							b.setPlanDateStrForSubItem(item.getPlanDateStr()!=null ? item.getPlanDateStr() : "");
+							b.setActualDateStrForSubItem(item.getActualDateStr()!=null ? item.getActualDateStr() : "");
 						} else {
 							b.setItemNo(item.getItemNo());
 							b.setItemDescription(item.getDescription());
@@ -187,6 +202,8 @@ public class MaintenanceInspectionHeaderBoImpl implements MaintenaceInspectionHe
 							b.setImgRepairForItem(item.getStatusId() == 1602 ? (String) criteriaMap.get("ChkYes") : (String) criteriaMap.get("ChkNo"));
 							b.setImgReplaceForItem(item.getStatusId() == 1603 ? (String) criteriaMap.get("ChkYes") : (String) criteriaMap.get("ChkNo"));
 							b.setImgNAForItem(item.getStatusId() == 1604 ? (String) criteriaMap.get("ChkYes") : (String) criteriaMap.get("ChkNo"));
+							b.setPlanDateStrForItem(item.getPlanDateStr()!=null ? item.getPlanDateStr() : "");
+							b.setActualDateStrForItem(item.getActualDateStr()!=null ? item.getActualDateStr() : "");
 						}
 						b.setLabelOnly(item.getLabelOnly());
 						detailsList.add(b);
@@ -197,10 +214,7 @@ public class MaintenanceInspectionHeaderBoImpl implements MaintenaceInspectionHe
 			
 		}
 		
-		
-		
 
-		
 		String localPath = (String)criteriaMap.get(MapConstant.REPORT_LOCALPATH);
 		
 		Map<String, Object> parameters = new HashMap<String, Object>();
@@ -222,6 +236,8 @@ public class MaintenanceInspectionHeaderBoImpl implements MaintenaceInspectionHe
 		} else {
 			parameters.put("ChkImgForPm", criteriaMap.get("ChkNo"));
 		}
+		parameters.put("ModelYear", model.getModelYear());
+		parameters.put("KmRun", model.getKmRun());
 		
 		//Note: list is compulsary for the bean data source of the report
 

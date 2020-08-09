@@ -46,7 +46,7 @@ $(function() {
                             		</tr>
                             		<tr height="15px;"></tr>
                                     <tr>
-                                    	<td id="selectLorryLabelId" style="padding-left: 5px; font-weight: bold;">Lorry</td>
+                                    	<td id="selectLorryLabelId" style="padding-left: 5px; font-weight: bold;">LORRY	</td>
   								 		<td colspan="5" style="padding-left: 5px;">
   								 			<html:select  styleId="lorryNoId" style="width: 100px; height: 22px;"  name="maintenanceInspectionForm" property="lorryNo" onchange="getLorryNoAndPlateNo();" disabled="${maintenanceInspectionForm.transactionStatus}" >
 								 				<html:option value="">--Select--</html:option>
@@ -54,10 +54,10 @@ $(function() {
 								 			</html:select>
 								 		</td>	
 								 		<td style="font-weight: bold; padding-left: 10px;">PLATE NUMBER:</td>
-								 		<td style="padding-left: 5px;"><html:text styleId="plateNoId" property="plateNo" style="width: 100px; height: 22px;" readonly="true"></</html:text></td>	
-								 		<td style="font-weight: bold; padding-left: 10px;">ODOMETER:</td>
+								 		<td style="padding-left: 5px;"><html:text styleId="plateNoId" property="plateNo" style="width: 110px; height: 22px;" readonly="true"></</html:text></td>	
+								 		<td style="font-weight: bold; padding-left: 10px;">PREVIOUS ODOMETER:</td>
 								 		<td style="padding-left: 5px;"><html:text styleId="odometerId" property="odometer" style="width: 100px; height: 22px; text-align: right;" onkeypress="return isNumberKey(event);" onkeyup="computeKmRun();"></html:text></td>
-								 		<td style="font-weight: bold; padding-left: 10px;">HUB ODOMETER:</td>
+								 		<td style="font-weight: bold; padding-left: 10px;">CURRENT ODOMETER:</td>
 								 		<td style="padding-left: 5px;"><html:text styleId="hubOdometerId" property="hubOdometer" style="width: 100px; height: 22px; text-align: right;" onkeypress="return isNumberKey(event);" onkeyup="computeKmRun();"></html:text></td>	
 								 	</tr>                              	
 								 	<tr height="8px;"></tr>	                              									 	
