@@ -1326,10 +1326,10 @@ function viewMaintenanceInspectionReport(id, isSummary) {
 }
 
 function getLorryNoAndPlateNo() {
-	var res = $('#lorryNoId option:selected').text().split("(");
-	$('#plateNoId').val(res[1].replace(")",""));
-	$('#modelYearId').val(res[2].replace(")",""));
-	 $('#odometerId').focus();
+	let arrData = $('#lorryNoId option:selected').text().split("|");
+	$('#plateNoId').val(arrData[1].trim());
+	$('#modelYearId').val(arrData[2].trim());
+	$('#odometerId').focus();
 }
 function hideItems(index) {	
 	var className = "category" + index;

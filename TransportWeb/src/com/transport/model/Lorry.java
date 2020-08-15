@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  * 
  * @author dward
  * @since June2015
- * DateUpdated: 26Jul2020
+ * DateUpdated: 15Aug2020
  */
 public class Lorry implements Serializable {
 
@@ -127,7 +127,7 @@ public class Lorry implements Serializable {
 	}
 	
 	public String getLorryNoWithPlateNoModel() {
-		return getLorryNo() + " (" + getPlateNo()+")" + " (" + getTractorModel()+ " " + getTractorYear() + ")";
+		return getLorryNo() + " | " + getPlateNo() + " | " + getTractorModel()+ " " + getTractorYear();
 	}
 
 	public int getCapacity() {

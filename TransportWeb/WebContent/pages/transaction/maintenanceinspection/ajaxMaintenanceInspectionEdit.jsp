@@ -50,7 +50,7 @@ $(function() {
   								 		<td colspan="5" style="padding-left: 5px;">
   								 			<html:select  styleId="lorryNoId" style="width: 100px; height: 22px;"  name="maintenanceInspectionForm" property="lorryNo" onchange="getLorryNoAndPlateNo();" disabled="${maintenanceInspectionForm.transactionStatus}" >
 								 				<html:option value="">--Select--</html:option>
-								 				<html:optionsCollection name="maintenanceInspectionForm" property="lorryList" label="lorryNoWithPlateNo" value="lorryNo"/>				 		
+								 				<html:optionsCollection name="maintenanceInspectionForm" property="lorryList" label="lorryNoWithPlateNoModel" value="lorryNo"/>				 		
 								 			</html:select>
 								 		</td>	
 								 		<td style="font-weight: bold; padding-left: 10px;">PLATE NUMBER:</td>
